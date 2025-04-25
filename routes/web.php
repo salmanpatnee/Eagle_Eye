@@ -98,6 +98,7 @@ use App\Http\Controllers\KPICategoryController;
 use App\Http\Controllers\KPIStandardController;
 use App\Http\Controllers\KPIStandardReportController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ObjectivesController;
 use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\PatchController;
 use App\Http\Controllers\PenTestController;
@@ -1741,3 +1742,6 @@ Route::post('/upload-custodians', [DataUploaderController::class, 'uploadCustodi
 // Artifact Data Uploader
 Route::get('/upload-artifacts', [DataUploaderController::class, 'createArtifact'])->name('upload.artifact.create');
 Route::post('/upload-artifacts', [DataUploaderController::class, 'uploadArtifact'])->name('upload.artifact.store');
+
+Route::resource('objectives', ObjectivesController::class)->except(['destroy']);
+Route::delete('/objectives/delete', [ObjectivesController::class, 'destroy'])->name('objectives.destroy');
