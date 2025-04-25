@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200;300;400;500;600;700;800;900&display=swap");
+
+/* font-family: 'Roboto', sans-serif;
+font-family: 'Noto Sans Arabic', sans-serif; */
+
+.report-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.report-container a {
+    text-decoration: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    margin-right: 10px;
+}
+
+.contentsection {
+    margin-top: 80px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.arabichead {
+    font-family: "Noto Sans Arabic", sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 35px;
+    color: black;
+    top: 30%;
+}
+
+.enghead {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 25px;
+    color: black;
+}
+
+.domainSubdomain {
+    /* background-color: rgb(43, 58, 150); */
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.maindomain {
+    font-family: "Noto Sans Arabic", sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    text-align: right;
+    border-bottom: 2px solid black;
+    line-height: 40px;
+}
+
+.maindomaintext {
+    font-family: "Noto Sans Arabic", sans-serif;
+    font-size: 14px;
+    text-align: right;
+    font-weight: 500;
+    line-height: 40px;
+}
+
+.tableheadarabic {
+    font-family: "Noto Sans Arabic", sans-serif;
+    font-size: 15px;
+    line-height: 15px;
+    padding-bottom: 10px;
+}
+
+.tableheadeng {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    line-height: 10px;
+}
+
+/* --------------Table------------------- */
+.customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 1500px;
+}
+
+.summaryreport {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 1220px;
+}
+
+.summaryreport th {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.tablebody {
+    overflow: scroll;
+    height: 200px;
+}
+
+.customers td,
+.customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+td.control-description-cell {
+    min-width: 800px;
+    white-space: inherit;
+    max-width: 600px;
+    text-align: left;
+    line-height: 1.8;
+    padding: 1em;
+    direction: ltr;
+}
+html,
+body {
+    overflow-x: auto;
+    /* Ensure scrollbars are visible */
+}
+
+.table-responsive {
+    direction: rtl;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* overflow-x: auto; */
+    /* Enable horizontal scrolling */
+}
+
+th,
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    /* Prevent text wrapping */
+}

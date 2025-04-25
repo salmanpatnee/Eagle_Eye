@@ -1,0 +1,396 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root {
+    /* Colors */
+    --black: #000000;
+    --light-gray: #636363;
+    --green: #94c11f;
+    --white: #ffffff;
+    --light-blue: #0d75b2;
+    --dark-green: #597a01;
+    --dark-blue: #0056b3;
+    --dim-blue: #e6f2f2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: rgb(#243, #245, #249);
+}
+
+.IndiTable {
+    padding-top: 80px;
+    margin-left: 30px;
+    padding-bottom: 60px;
+}
+
+.DBOneIndiTable {
+    padding-top: 80px;
+    margin-left: 30px;
+    padding-bottom: 25px;
+}
+
+.MainBoxes {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+}
+
+.MainBoxes a {
+    color: black;
+    margin: 0px;
+}
+
+.UpperBoxContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+}
+
+.UpperBoxContainer a {
+    color: black;
+}
+
+.DBOneBox {
+    background-color: white;
+    width: 300px;
+    height: 200px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.5);
+    padding-inline: 20px;
+    padding-top: 80px;
+    transition-duration: 0.3s;
+    margin-top: 140px;
+    margin-left: 100px;
+    text-align: center;
+}
+
+.DBOneBox:first-child {
+    margin-left: 250px;
+}
+
+.DBOneBox:hover {
+    background-color: #2e74b6;
+    box-shadow: none;
+}
+
+.DBOneBox p {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.DBOneBox:hover p {
+    color: white;
+}
+
+.UpperBox {
+    background-color: white;
+    width: 200px;
+    height: 100px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.5);
+    padding-inline: 20px;
+    padding-block: 10px;
+    transition-duration: 0.3s;
+    margin-left: 50px;
+}
+
+.UpperBox:first-child {
+    margin-left: 0px;
+}
+
+.UpperBox p {
+    font-size: 12px;
+}
+
+.UpperBox .bx {
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+.UpperBox:hover {
+    background-color: #2e74b6;
+    color: white;
+}
+
+.RightSideBar {
+    background-color: rgb(215, 232, 255);
+    width: 220px;
+    height: 450px;
+    border: none;
+    border-radius: 20px;
+    padding-inline: 20px;
+    padding-block: 10px;
+    transition-duration: 0.3s;
+    margin-right: 30px;
+    margin-top: -100px;
+    float: right;
+}
+
+.RightSideBar h3 {
+    padding-bottom: 15px;
+}
+
+.RightSideBar .Heading {
+    font-weight: 600;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.RightSideBar p {
+    font-size: 12px;
+}
+
+.OrgLogo {
+    background-color: #000000;
+    padding-inline: 20px;
+    padding-block: 10px;
+    width: 220px;
+    height: 60px;
+    margin-left: -20px;
+    margin-top: -10px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.FirstGraphBox {
+    background-color: white;
+    width: 450px;
+    height: 320px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.5);
+    padding-inline: 20px;
+    padding-block: 10px;
+    transition-duration: 0.3s;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.FirstGraphBox h3 {
+    text-align: center;
+}
+
+.FirstGraphBox:first-child {
+    margin-left: 0px;
+}
+
+.row {
+    display: flex; /* Use flexbox for horizontal alignment */
+}
+
+.GaugeBox {
+    flex: 1; /* Allow each GaugeBox to take an equal portion of the row */
+    margin: 5px; /* Add spacing between the GaugeBoxes if needed */
+}
+
+.TableBox {
+    background-color: white;
+    width: 1200px;
+    height: 320px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.5);
+    padding-inline: 20px;
+    padding-block: 10px;
+    transition-duration: 0.3s;
+    margin-top: 30px;
+}
+
+.TableBox h3 {
+    text-align: center;
+}
+
+.AppetiteBox {
+    background-color: white;
+    width: 1200px;
+    height: 220px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.5);
+    padding-inline: 0px;
+    padding-block: 10px;
+    transition-duration: 0.3s;
+    margin-top: 15px;
+}
+
+.AppetiteBox h3 {
+    text-align: center;
+}
+
+.SecondGraphBox {
+    background-color: white;
+    width: 575px;
+    height: 250px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.5);
+    padding-inline: 20px;
+    padding-block: 10px;
+    transition-duration: 0.3s;
+    margin-top: 0px;
+    margin-left: 50px;
+}
+
+.SecondGraphBox h3 {
+    text-align: center;
+}
+
+.SecondGraphBox:first-child {
+    margin-left: 0px;
+}
+
+.UpdateBox {
+    background-color: rgb(215, 232, 255);
+    width: 1200px;
+    height: 100px;
+    border: none;
+    border-radius: 20px;
+    padding-inline: 20px;
+    padding-block: 10px;
+    transition-duration: 0.3s;
+    margin-top: 30px;
+}
+
+.barchart {
+    width: 100%;
+    max-width: 600px;
+    height: 50px;
+    margin-top: 20px;
+}
+
+.piechart {
+    margin-top: -70px;
+    padding: 70px;
+}
+
+#piechart .chartjs-title {
+    font-size: 30px;
+}
+
+.gauge {
+    width: 200px;
+    height: 200px;
+    border: 10px solid #e0e0e0;
+    border-radius: 50%;
+}
+
+.RiskGraphs {
+    width: 100%;
+    max-width: 600px;
+    margin-top: -170px;
+    padding: 170px;
+}
+
+.piechart .chartjs-datalabels-label {
+    font-size: 300px;
+}
+
+.ListTable {
+    overflow-x: auto;
+    margin-top: 40px;
+    margin-right: 20px;
+    border: 2px solid #6e6e6e;
+    border-radius: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+th {
+    text-align: left;
+    padding: 8px;
+    background: #2e74b6;
+}
+
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+td a {
+    text-decoration: none;
+    color: black;
+}
+
+tr {
+    border: solid 1px gray;
+}
+
+.RiskScore {
+    border: solid 2px black;
+    border-radius: 200px;
+    text-align: center;
+    margin-inline: 220px;
+    padding-block: 50px;
+    font-size: 30px;
+    background-color: greenyellow;
+}
+
+.RiskScoreBarChar {
+    width: 100%;
+    max-width: 600px;
+    height: 150px;
+    margin-top: -15px;
+}
+
+.GaugeBox h4 {
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+/* ------------------ */
+
+/* New Dashboard Sub-Header */
+
+.subheader {
+    top: 69px;
+    padding-block: 10px;
+    position: relative;
+    background-color: #d1e8ff;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.subheadertext {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    flex: 1;
+    background-color: #343434;
+    padding-inline: 20px;
+    padding-block: 10px;
+    border-radius: 20px;
+    margin-inline: 100px;
+    transition-duration: 0.3s;
+}
+
+.subheadertext:hover {
+    color: black;
+    background-color: #ffffff;
+    box-shadow: 10px 10px lightblue;
+}
+
+.subheaderactive {
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+    flex: 1;
+    background-color: #ffffff;
+    padding-inline: 20px;
+    padding-block: 10px;
+    border-radius: 20px;
+    margin-inline: 100px;
+    transition-duration: 0.3s;
+    box-shadow: 10px 10px lightblue;
+}

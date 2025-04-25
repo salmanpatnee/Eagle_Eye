@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    /* Colors */
+    --black: #000000;
+    --light-gray: #636363;
+    --green: #94c11f;
+    --white: #ffffff;
+    --light-blue: #0d75b2;
+    --dark-green: #597a01;
+    --dark-blue: #0056b3;
+    --dim-blue: #e6f2f2;
+}
+
+.BackButton {
+    position: absolute;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    float: right;
+    width: 80px;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    margin-left: 30px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 1;
+}
+
+.BackButton:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+
+.BackButton a {
+    text-decoration: none;
+    color: white;
+}
+
+.BackButton:hover a {
+    color: black;
+}
+
+.GrcBackSection {
+    position: relative;
+}
+
+.GrcBackImg img {
+    position: relative;
+    width: 100%;
+    height: 589px;
+    /* margin-top: -59px; */
+    z-index: -1;
+}
+
+.DescriptionSection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* padding: 20px; */
+    height: 392px;
+    width: 350px;
+    color: white;
+    padding-top: 200px;
+    padding-left: 30px;
+    padding-right: 150px;
+    background: linear-gradient(
+        to bottom right,
+        rgba(32, 56, 100, 0.9),
+        rgba(46, 116, 182, 0.9)
+    );
+}
+
+.DescriptionSection h1 {
+    padding-bottom: 20px;
+}
+
+.DescriptionSection p {
+    line-height: 25px;
+    text-align: justify;
+}
+
+.GrcBackSection {
+    position: relative;
+}
+
+.OverlayBox {
+    position: absolute;
+    top: 100px;
+    left: 450px;
+    width: 550px;
+    height: 400px;
+    background: rgba(255, 255, 255, 1);
+    color: #000000;
+    border-radius: 20px;
+    display: flex;
+    padding-top: 50px;
+    padding-left: 100px;
+}
+
+.OverlayItems {
+    display: inline-block;
+    width: 50%;
+}
+
+.OverlaySection {
+    margin-right: 20px;
+    margin-bottom: 60px;
+}
+
+.OverlaySection i {
+    font-size: 80px;
+    color: #0056b3;
+}
+
+.OverlaySection img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 5px;
+}
+
+.OverlaySection a {
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,745 @@
+* {
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+}
+
+:root {
+    /* Colors */
+    --black: #000000;
+    --light-gray: #636363;
+    --green: #94c11f;
+    --white: #ffffff;
+    --light-blue: #0d75b2;
+    --dark-green: #597a01;
+    --dark-blue: #0056b3;
+    --dim-blue: #e6f2f2;
+}
+
+.HeadingTxt {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: -18px;CisoEdudomainbox
+}
+.FieldHeadEngTxt {
+    color: black;
+    font-size: 15px !important;
+    font-weight: bold;
+    mb
+}
+.FieldHeadArbTxt {
+    color: black;
+    font-size: 15px !important;
+    font-weight: bold;
+    letter-spacing: 0px;
+    text-align: right;
+}
+.sidefiled {
+    margin-block: 1em;
+}
+.HeadingTxt .ArbTxt {
+    font-size: 25px;
+}
+
+.HeadingTxt .EngTxt {
+    font-size: 15px;
+}
+
+/* ----------------- Three Ps Page ------------------ */
+
+.threepsbody {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    background-image: url("/Images/2-ThreePsBackground.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5%;
+}
+
+.firstbox {
+    background-color: #ff9d00;
+    padding: 20px;
+    border-radius: 20px;
+    width: 200px;
+    height: 100px;
+}
+.vertline {
+    border: solid 2px white;
+    height: 50px;
+    margin-inline: 146px;
+}
+.horiline {
+    width: 592px;
+    border: solid 2px white;
+}
+.threelines {
+    display: flex;
+    justify-content: space-between;
+}
+.threeboxes {
+    display: flex;
+    justify-content: center;
+}
+.secondbox {
+    background-color: #0080ff;
+    padding: 10px 20px 55px 20px;
+    border-radius: 20px;
+    width: 200px;
+    height: 80px;
+    transition: 0.3s;
+    text-align: center;
+}
+.thirdbox {
+    background-color: #94c11f;
+    padding: 10px 20px 55px 20px;
+    border-radius: 20px;
+    margin-inline: 50px;
+    width: 200px;
+    height: 80px;
+    transition: 0.3s;
+    text-align: center;
+}
+.fourthbox {
+    background-color: #c033df;
+    padding: 10px 20px 55px 20px;
+    border-radius: 20px;
+    width: 200px;
+    height: 80px;
+    transition: 0.3s;
+    text-align: center;
+}
+.secondbox:hover,
+.thirdbox:hover,
+.fourthbox:hover {
+    transform: scale(1.1);
+}
+.threepspara {
+    font-size: 20px;
+    font-weight: 800;
+    color: black;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+.threeboxes i {
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+/* ------------- Header ------------- */
+
+header {
+    background: linear-gradient(to right, #203864, #2e74b6);
+    color: var(--white);
+    padding: 10px;
+    padding-left: 10px;
+    text-align: left;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.header-content {
+    display: flex;
+    align-items: end;
+    justify-content: left;
+}
+
+.bold-arbtext {
+    font-weight: 500;
+    margin-left: 50px;
+    margin-top: -48px;
+    line-height: 40px;
+    font-size: 25px;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.bold-text {
+    font-weight: 500;
+    margin-left: 50px;
+    margin-top: -20px;
+    padding-top: 15px;
+    font-size: 15px;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.bx-home {
+    color: var(--white);
+    font-size: 40px;
+}
+
+.bx-right-arrow-alt {
+    font-size: 25px;
+    padding-left: 5px;
+}
+
+.BackButton {
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: right;
+}
+
+.BackButton a {
+    width: 100px;
+    height: 30px;
+    background-color: white;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.5s;
+}
+
+.BackButton a:hover {
+    background-color: black;
+    color: white;
+}
+
+.header-content#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.RightButton {
+    background-color: #000000;
+    color: white;
+    width: 140px;
+    height: 60px;
+    border: solid 1px black;
+    border-radius: 20px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    margin-right: 2em;
+}
+
+.RightButton .RightButtonArbTxt {
+    font-size: 20px;
+    margin-top: -5px;
+    font-family: calibri inherit;
+}
+
+.RightButton:hover {
+    background-color: white;
+    color: black;
+}
+
+.PeopleHeaderTitle {
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+/* ------------- Process Page ------------ */
+
+.processpage {
+    background-color: #ebebeb;
+}
+
+.sectionhead {
+    display: flex;
+    justify-content: space-between;
+    background-color: #99bbe0;
+    padding-inline: 30px;
+    padding-block: 10px;
+    border: solid 1px black;
+    border-radius: 10px;
+    margin-inline: 10px;
+}
+.sectionhead p {
+    font-size: 20px;
+    font-weight: 800;
+    margin-block: 0em;
+    letter-spacing: 0px;
+}
+.processes {
+    display: flex;
+    justify-content: space-between;
+    margin-block: 20px;
+    margin-inline: 30px;
+}
+.singleitemprocess {
+    display: flex;
+    justify-content: center;
+    margin-block: 20px;
+    margin-inline: 30px;
+}
+.itemprocesses {
+    background-color: white;
+    width: 300px;
+    height: 60px;
+    padding-inline: 0px;
+    border: solid 2px black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.itemprocesses:hover {
+    background-color: #99bbe0;
+}
+.spacebox {
+    background-color: transparent;
+    width: 300px;
+    height: 60px;
+}
+.boxhyperlink {
+    text-decoration: none;
+    color: black;
+}
+.boxicon {
+    flex: 0 0 auto;
+    margin-right: 0px;
+    background-color: #203864;
+    padding-inline: 20px;
+    padding-block: 22px;
+    color: white;
+    font-size: 15px;
+    border-radius: 8px;
+}
+.boxname {
+    flex: 1;
+}
+.boxarbtext {
+    text-align: right;
+    padding-right: 20px;
+    margin-block: 0em;
+    padding-bottom: 5px;
+    font-weight: 800;
+    letter-spacing: 0px;
+}
+.boxengtext {
+    text-align: left;
+    padding-left: 20px;
+    margin-block: 0em;
+    padding-top: 5px;
+    font-weight: 800;
+    font-size: 15px;
+}
+.boxengtexttwo {
+    text-align: left;
+    padding-left: 20px;
+    margin-block: 0em;
+    padding-top: 5px;
+    font-weight: 800;
+    font-size: 13px;
+}
+.seperatorline {
+    border-bottom: solid 1px black;
+}
+.domainbox {
+    width: 280px;
+    height: 150px;
+    background-color: rgb(0 0 82);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding-block: 20px;
+    padding-inline: 10px;
+    transition: 0.3s;
+}
+
+.domainboxlight {
+    width: 280px;
+    height: 150px;
+    background-color: #a1c6ef;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    padding-block: 20px;
+    padding-inline: 10px;
+    transition: 0.3s;
+}
+.domainbox i,
+.domainboxlight i {
+    font-size: 30px;
+}
+.domainseperatorline {
+    border-bottom: solid 1px white;
+}
+.domainseperatorlineblack {
+    border-bottom: solid 1px black;
+}
+.domainbox:hover,
+.domainboxlight:hover {
+    transform: scale(1.1);
+    box-shadow: 2px 2px 4px #000000;
+}
+.domainarbtext {
+    padding-block: 10px;
+    font-weight: 800;
+    letter-spacing: 0px;
+}
+.domainengtext {
+    padding-block: 10px;
+    font-weight: 800;
+}
+
+/*  ----------------------- Form and Tables -----------------------  */
+
+.formcanvas {
+    border: solid 1px black;
+    margin-right: 10px;
+    margin-left: 0px;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 20px;
+}
+.formcanvas p {
+    font-size: 12px;
+}
+.twofieldrow {
+    display: flex;
+    justify-content: space-between;
+}
+.labelhead {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 7px;
+    padding-top: 10px;
+}
+.form-control {
+    width: 100%;
+    height: auto;
+    padding-block: 10px;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding-inline: 10px;
+    font-size: 12px;
+    background-color: Transparent;
+}
+.sidefiled .form-control {
+    width: 400px;
+}
+.sidefiled p {
+    font-size: 12px;
+}
+
+/* ---------------- Domain Pages -------------- */
+
+/* .profilebody {
+    background-image: url("/Images/7-GrcBackgrounImg.jpg");
+    background-size: cover;
+    margin: 0em;
+} */
+.profilebody .bodysec{
+    background-image: url("/Images/7-GrcBackgrounImg.jpg");
+    background-size: cover;
+    margin-bottom: 3em;
+    padding: 3em 0;
+}
+.CsInducbody {
+    background-image: url("/Images/AlfaisaliyahBuilding.jpg");
+    background-size: cover;
+    margin: 0em;
+}
+.headersec {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to right, #203864, #2e74b6);
+    padding: 20px 0px 10px 0px;
+    /* margin: 0px 0px 50px 0px; */
+    width: 100%;
+    height: 50px;
+    z-index: 1;
+}
+.headerleft {
+    display: flex;
+    justify-content: left;
+    margin: 0px 0px 0px 50px;
+    color: white;
+    font-weight: 800;
+    align-items: center;
+}
+.headericon {
+    font-size: 40px;
+}
+.headertext {
+    font-size: 18px;
+    line-height: 20px;
+}
+.headericon,
+.headertext {
+    margin-right: 10px;
+}
+.bodysec {
+    display: flex;
+    justify-content: space-between;
+}
+.parasec {
+    background-color: rgba(46, 116, 182, 0.9);
+    margin: 0px 30px 0px 30px;
+    padding: 30px;
+    width: 35%;
+    height: auto;
+    border-radius: 20px;
+}
+.parasec p {
+    color: white;
+    font-size: 18px;
+    text-align: justify;
+    padding-bottom: 20px;
+}
+.parasec h3 {
+    font-size: 25px;
+    color: white;
+    padding-bottom: 10px;
+}
+.button {
+    background-color: black;
+    color: white;
+    padding: 10px 50px 10px 50px;
+    margin: 0px 56px 0px 0px;
+    border: solid 1px black;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-size: 12px;
+}
+.button:hover {
+    background-color: white;
+    color: black;
+}
+.linksec {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 30px 0px 30px;
+    cursor: pointer;
+}
+.rowsec a {
+    text-decoration: none;
+    color: black;
+}
+.itemsec {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 0px 20px 20px 20px;
+    width: 200px;
+    height: 100px;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+.itemsec i {
+    margin-right: 10px;
+    font-size: 40px;
+    transition: 0.3s;
+}
+.itemsec p {
+    font-size: 20px;
+    transition: 0.3s;
+    font-weight: 800;
+}
+.itemsec:hover {
+    background-color: rgba(46, 116, 182, 0.9);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.itemsec:hover i,
+.itemsec:hover p {
+    color: white;
+}
+.imgicon {
+    width: 43px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* --------------- Regulatory Report Home Page -------------- */
+
+.regubg {
+    background-image: url("/Images/8-RegulatoryReportingBG.jpg");
+    background-size: cover;
+    margin: 0em;
+}
+.buttonsec {
+    padding-inline: 80px;
+}
+.firstrow {
+    display: flex;
+    justify-content: space-between;
+}
+.regubutton {
+    background-color: #203864;
+    border: solid 3px white;
+    border-radius: 10px;
+    padding-block: 10px;
+    padding-inline: 10px;
+    align-items: center;
+    text-align: center;
+    margin-block: 10px;
+    margin-inline: 20px;
+    width: 250px;
+    height: 100px;
+    opacity: 1;
+    transition: 0.3s;
+}
+.regubutton p {
+    color: white;
+    font-size: 15px;
+    opacity: 1;
+    padding-block: 10px;
+}
+.regubutton:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
+.regusepline {
+    border: solid 1px white;
+    width: 245px;
+    justify-content: center;
+}
+a {
+    text-decoration: none;
+}
+
+/* ------------ Risk vs Control Table -------------- */
+
+.rtheadingtext {
+    text-align: center;
+}
+table {
+    width: 99%;
+    margin-block: 20px;
+    margin-inline: auto;
+    border-collapse: collapse;
+    line-height: 22px;
+}
+table p {
+    font-size: 12px;
+}
+td {
+    padding: 8px;
+    text-align: right;
+    border-bottom: 1px solid #000;
+    font-size: 12px;
+}
+th {
+    padding-block: 10px;
+    padding-inline: 20px;
+    background-color: #203864;
+    color: white;
+    text-align: right;
+}
+th:first-child {
+    border-radius: 20px 0px 0px 0px;
+}
+th:last-child {
+    border-radius: 0px 20px 0px 0px;
+}
+tr:nth-child(even) {
+    background-color: #99bbe0;
+}
+tr:nth-child(odd) {
+    background-color: white;
+}
+td {
+    border: solid 1px black;
+}
+
+/* ---- Control Evidence Table ----- */
+.togbutton {
+    display: flex;
+    justify-content: space-around;
+    padding-inline: 350px;
+}
+.togactive {
+    background-color: #0056b3;
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: white;
+    border: solid 1px #0056b3;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+.togdeactive {
+    background-color: #3f3f3f;
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.togdeactive:hover {
+    transform: scale(1.1);
+    box-shadow: 2px 2px 4px #000000;
+}
+
+/* ---------------- CISO Education ------------------- */
+
+.BlacnkBox {
+    width: 300px;
+    height: 150px;
+}
+
+.BoxText {
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: 800;
+}
+
+.TitleText {
+    margin-top: 40px;
+}
+
+.CisoEdudomainbox {
+    width: 280px;
+    height: 190px;
+    background-color: rgb(0 0 82);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding-block: 0px;
+    padding-inline: 10px;
+    transition: 0.3s;
+}
+
+.CisoEdudomainboxlight {
+    width: 280px;
+    height: 190px;
+    background-color: rgb(161, 198, 239);
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    padding-block: 0px;
+    padding-inline: 10px;
+    transition: 0.3s;
+}
+.CisoEdudomainbox:hover,
+.CisoEdudomainboxlight:hover {
+    transform: scale(1.1);
+    box-shadow: 2px 2px 4px #000000;
+}

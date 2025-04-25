@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200;300;400;500;600;700;800;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    /* Colors */
+    --black: #000000;
+    --light-gray: #636363;
+    --green: #94c11f;
+    --white: #ffffff;
+    --light-blue: #0d75b2;
+    --dark-green: #597a01;
+    --dark-blue: #0056b3;
+    --dim-blue: #e6f2f2;
+}
+
+body {
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
+}
+
+.registertitle {
+    padding-top: 100px;
+    padding-bottom: 30px;
+}
+
+.arabichead {
+    font-family: "Noto Sans Arabic", sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 35px;
+    color: black;
+    top: 30%;
+}
+
+.enghead {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 25px;
+    color: black;
+}
+
+.IndiTable {
+    padding-top: 100px;
+    margin-left: 20px;
+    padding-bottom: 50px;
+}
+
+.IndiTable .TableHeading {
+    font-size: 15px;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* -------Risk Register Style--------- */
+
+/* default styling. Nothing to do with freexing first row and column */
+main {
+    display: flex;
+}
+main > * {
+    border: 1px solid;
+}
+
+table {
+    border-collapse: collapse;
+    font-family: helvetica;
+}
+td,
+th {
+    border: 1px solid;
+    padding: 10px;
+    min-width: 200px;
+    background: white;
+    box-sizing: border-box;
+    text-align: left;
+    color: #000000;
+}
+.table-container {
+    position: relative;
+    max-height: 500px;
+    width: 1280px;
+    overflow: scroll;
+    margin:auto;
+}
+td.control-description-cell {
+    min-width: 800px;
+    white-space: inherit;
+    max-width: 600px;
+    text-align: left;
+    line-height: 1.8;
+    padding: 1em;
+}
+/*
+thead th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+*/
+th.RiskDetailsHead {
+    background-color: #002060;
+    color: white;
+    text-align: center;
+}
+
+th.RiskDetailsSubHead {
+    background-color: #8ea9db;
+}
+
+th.InherentRiskHead {
+    background-color: #833c0c;
+    color: white;
+    text-align: center;
+}
+
+th.InherentRiskSubHead {
+    background-color: #f4b084;
+}
+
+th.ControlAssessmentHead {
+    background-color: #004522;
+    color: white;
+    text-align: center;
+}
+
+th.ControlAssessmentSubHead {
+    background-color: #3fb085;
+}
+
+th.ResidualRiskHead {
+    background-color: #806000;
+    color: white;
+    text-align: center;
+}
+
+th.ResidualRiskSubHead {
+    background-color: #d6b654;
+}
+
+th.RiskAssessmentHead {
+    background-color: #222b35;
+    color: white;
+    text-align: center;
+}
+
+th.RiskAssessmentSubHead {
+    background-color: #8497b0;
+}
+
+th.RiskMonitoringHead {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+th.RiskMonitoringSubHead {
+    background-color: #aeaaaa;
+}
+
+tfoot {
+    position: -webkit-sticky;
+    bottom: 0;
+    z-index: 2;
+}
+
+tfoot td {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+}
+
+tfoot td:first-child {
+    z-index: 3;
+}
+
+tbody {
+    overflow: scroll;
+    height: 200px;
+}
+
+
+.ReportsTextEng {
+    font-size: 15px;
+    color: white;
+    font-weight: 300;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.ReportsTextArb {
+    color: white;
+    font-size: 15px;
+    font-weight: 300;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    text-align: center;
+
+}

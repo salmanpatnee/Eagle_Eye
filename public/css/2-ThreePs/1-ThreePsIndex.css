@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    /* Colors */
+    --black: #000000;
+    --light-gray: #636363;
+    --green: #94c11f;
+    --white: #ffffff;
+    --light-blue: #0d75b2;
+    --dark-green: #597a01;
+    --dark-blue: #0056b3;
+    --dim-blue: #e6f2f2;
+}
+
+.threeps-background {
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    text-align: center;
+    width: 1280px;
+    height: 567px;
+    /* padding: 100px 0; Adjust the padding as needed */
+}
+
+.threeps-background img {
+    width: 1280px;
+    height: 560px;
+}
+
+.ps-linePsHead {
+    color: #000000;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.ps-lineArb1 {
+    color: #000000;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.ps-line1 {
+    color: #000000;
+    font-size: 30px;
+    font-weight: bold;
+    padding-top: 27px;
+    text-align: center;
+}
+
+.hps-line1 {
+    color: #000000;
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.ps-line2 {
+    color: #000000;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 20px;
+    text-align: center;
+}
+.ps-line3 {
+    color: #000000;
+    font-size: 17px;
+    font-weight: 300;
+    padding-top: 5px;
+    text-align: center;
+}
+
+.threeps-success-button {
+    position: absolute;
+    width: 150px;
+    height: 130px;
+    transform: translate(-50%, -50%); /* Center the button */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #ff9d00;
+    border-radius: 20px;
+    text-decoration: none;
+    top: 27%; /* Adjust the vertical position */
+    left: 50%; /* Adjust the horizontal position */
+}
+
+.people-button {
+    position: absolute;
+    width: 150px;
+    height: 130px;
+    transform: translate(-50%, -50%); /* Center the button */
+    padding-top: 40px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #0080ff;
+    border-radius: 20px;
+    text-decoration: none;
+    top: 70%; /* Adjust the vertical position */
+    left: 30%; /* Adjust the horizontal position */
+}
+
+.people-button:hover {
+    background-color: var(--dark-blue); /* Hover background color */
+}
+
+.process-button {
+    position: absolute;
+    width: 150px;
+    height: 130px;
+    transform: translate(-50%, -50%); /* Center the button */
+    padding-top: 40px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #94c11f;
+    border-radius: 20px;
+    text-decoration: none;
+    top: 70%; /* Adjust the vertical position */
+    left: 50%; /* Adjust the horizontal position */
+}
+
+.process-button:hover {
+    background-color: #6a8b17; /* Hover background color */
+}
+
+.product-button {
+    position: absolute;
+    width: 150px;
+    height: 130px;
+    transform: translate(-50%, -50%); /* Center the button */
+    padding-top: 40px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #c033df;
+    border-radius: 20px;
+    text-decoration: none;
+    top: 70%; /* Adjust the vertical position */
+    left: 70%; /* Adjust the horizontal position */
+}
+
+.product-button:hover {
+    background-color: #721e85; /* Hover background color */
+}
+
+.CenterLine {
+    width: 508px;
+    height: 0;
+    border-top: 3px solid var(--white);
+    border-radius: 50px;
+    position: relative;
+    rotate: 0deg;
+    top: -51%;
+    left: 29.8%;
+}
+
+.ProcessLine {
+    width: 104px;
+    height: 0;
+    border-top: 3px solid var(--white);
+    border-radius: 50px;
+    position: relative;
+    rotate: 90deg;
+    top: -54%;
+    left: 586px;
+}
+
+.PeopleLine {
+    width: 60px;
+    height: 0;
+    border-top: 3px solid var(--white);
+    border-radius: 50px;
+    position: relative;
+    rotate: 90deg;
+    top: -47%;
+    left: 27.5%;
+}
+
+.ProductLine {
+    width: 60px;
+    height: 0;
+    border-top: 3px solid var(--white);
+    border-radius: 50px;
+    position: relative;
+    rotate: 90deg;
+    top: -47.5%;
+    left: 67.1%;
+}

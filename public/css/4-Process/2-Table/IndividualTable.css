@@ -1,0 +1,917 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    /* Colors */
+    --black: #000000;
+    --light-gray: #636363;
+    --green: #94c11f;
+    --white: #ffffff;
+    --light-blue: #0d75b2;
+    --dark-green: #597a01;
+    --dark-blue: #0056b3;
+    --dim-blue: #e6f2f2;
+}
+.bg-white {
+    background-color: white;
+}
+.text-danger {
+    font-size: 12px;
+    color: red;
+}
+.text-center {
+    text-align: center;
+}
+main#main-content {
+    margin-top: 6em;
+}
+.ar {
+    direction: rtl;
+}
+.flex {
+    display: flex;
+}
+.items-center {
+    align-items: center;
+}
+.me-1 {
+    margin-right: 1em;
+}
+button.btn-transparent {
+    border: none;
+    cursor: pointer;
+}
+ol.resource-list {
+    width: 350px;
+    margin-top: 0.5em;
+    padding: 0;
+}
+ol.resource-list li {
+    list-style: none;
+    line-height: 2em;
+    /* margin-left: 1.2em; */
+    border: solid 1px rgb(158, 158, 158);
+    border-radius: 5px;
+    padding-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+ol.resource-list li a {
+    color: #000;
+}
+.ContentTablebg ol.resource-list {
+    width: 100%;
+}
+a.disabled {
+    pointer-events: none;
+    cursor: none;
+    opacity: 0.6;
+}
+.justify-end {
+    justify-content: end;
+}
+
+ol.resource-list {
+    width: 350px;
+    margin-top: 0.5em;
+}
+
+.IndiTable {
+    padding-top: 100px;
+    margin-left: 300px;
+    padding-bottom: 50px;
+}
+
+#subdomain {
+    color: black;
+    margin-top: 2em;
+}
+
+.IndiTable {
+    padding-top: 100px;
+    margin-left: 300px;
+    padding-bottom: 50px;
+}
+
+.ContAssIndiTable {
+    padding-top: 0px;
+    margin-left: 30px;
+    padding-bottom: 0px;
+    margin-top: 6em;
+    margin-bottom: 3em;
+}
+
+.IndiTable .TableHeading {
+    font-size: 15px;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ContAssIndiTable .TableHeading {
+    font-size: 15px;
+    color: black;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: 20px;
+    margin-right: 30px;
+}
+
+.IndiTable .ButtonContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-right: 30px;
+}
+
+.ContAssIndiTable .ButtonContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-left: 760px;
+}
+
+.AssmentButtonContainer {
+    /* display: flex; */
+    /* gap: 140px; */
+    justify-content: flex-end;
+    /* margin-left: 763px; */
+    width: 830px;
+    margin-bottom: 50px;
+    display: flex;
+    gap: 10px;
+}
+
+.MoreButton, .DisabledButton {
+    width: 100px;
+    /* margin-right: -120px; */
+    text-decoration: none;
+    color: white;
+    background-color: #203864;
+    padding: 10px 0px;
+    text-align: center;
+    border-radius: 20px;
+    transition-duration: 0.5s;
+    float: right;
+}
+
+.DisabledButton {
+    /* width: 100px;
+    margin-right: -120px;
+    text-decoration: none;
+    color: white;
+    background-color: #203864;
+    padding: 10px 0px;
+    text-align: center;
+    border-radius: 20px;
+    transition-duration: 0.5s;
+    float: right;*/
+    opacity: 30%;
+    cursor: not-allowed;
+    pointer-events: none; 
+}
+
+.FindAddMoreButton {
+    width: 200px;
+    /* margin-right: -453px; */
+    text-decoration: none;
+    color: white;
+    background-color: #203864;
+    padding: 10px 0px;
+    text-align: center;
+    border-radius: 20px;
+    transition-duration: 0.5s;
+    float: right;
+}
+
+
+
+.ButtonArbTxt {
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+}
+
+.ButtonEngTxt {
+    font-size: 12px;
+    color: white;
+}
+
+.DeleteButton {
+    width: 100px;
+    text-align: center;
+    /* margin-right: 30px; */
+    text-decoration: none;
+    color: white;
+    background-color: #203864;
+    padding: 10px 0px;
+    border-radius: 20px;
+    transition-duration: 0.5s;
+    float: right;
+}
+.not-allow {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+.DisDeleteButton {
+    width: 100px;
+    text-align: center;
+    /* margin-right: 30px; */
+    text-decoration: none;
+    color: white;
+    background-color: #203864;
+    padding: 10px 0px;
+    border-radius: 20px;
+    transition-duration: 0.5s;
+    float: right;
+    opacity: 30%;
+    cursor: default;
+}
+
+.IndiTable .MoreButton:hover,
+.IndiTable .DeleteButton:hover,
+.ContAssIndiTable .MoreButton:hover,
+.ContAssIndiTable .DeleteButton:hover {
+    background-color: #2e74b6;
+}
+
+.IndiTable .ContentTableSection,
+.ContAssIndiTable .ContentTableSection {
+    border: solid 1.5px black;
+    border-radius: 5px;
+    margin-right: 30px;
+    margin-top: 40px;
+}
+
+.IndiTable .ContentTableSection .ContentTable,
+.IndiTable .ContentTableSection .ContentTablebg,
+.ContAssIndiTable .ContentTableSection .ContentTable {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.IndiTable .column,
+.ContAssIndiTable .column, .multiselect {
+    /* flex: 2%; */
+    flex: 0;
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+    margin-right: 0px;
+    padding: 10px;
+}
+
+.IndiTable h4,
+.ContAssIndiTable .ContentTable h4 {
+    height: 30px;
+    color: black;
+    font-weight: 600;
+    padding-bottom: 5px;
+    font-size: 15px;
+    line-height: 17px;
+}
+
+.IndiTable .sh-tx {
+    color: black;
+    border: solid 1px rgb(158, 158, 158);
+    border-radius: 5px;
+    width: 350px;
+    /* height: 30px; */
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    /* background-color: transparent; */
+    min-height: 30px;
+}
+
+.ContAssIndiTable .ContentTable .sh-tx {
+    color: black;
+    border: solid 1px rgb(158, 158, 158);
+    border-radius: 5px;
+    width: 481px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    /* background-color: transparent; */
+}
+
+.IndiTable .dbsh-tx,
+.ContAssIndiTable .ContentTable .dbsh-tx {
+    color: black;
+    border: solid 1px rgb(158, 158, 158);
+    border-radius: 5px;
+    width: 350px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: white;
+}
+
+.IndiTable .bg-tx {
+    color: black;
+    border: solid 1px rgb(158, 158, 158);
+    border-radius: 5px;
+    width: 100%;
+    min-width: auto;
+    height: auto;
+    min-height: 60px;
+    display: flex;
+    align-items: top;
+    padding-left: 10px;
+    padding-top: 5px;
+    background-color: transparent;
+    padding: 0.8em;
+    line-height: 1.8em;
+    background-color: white;
+}
+.alert-danger {
+    color: red;
+    margin-top: 2em;
+}
+
+.ContAssIndiTable .ContentTable .bg-tx {
+    color: black;
+    border: solid 1px rgb(158, 158, 158);
+    border-radius: 5px;
+    width: 1265px;
+    height: auto;
+    min-height: 60px;
+    display: flex;
+    align-items: top;
+    padding-left: 10px;
+    padding-top: 5px;
+    background-color: white;
+}
+
+.SubmitButton {
+    position: relative;
+    left: 733px;
+    background-color: #000000;
+    color: white;
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 50px;
+    transition-duration: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SubmitButton:hover {
+    background-color: white;
+    color: black;
+}
+
+.ListTable {
+    overflow-x: auto;
+    margin-top: 40px;
+    margin-right: 20px;
+    border: 2px solid #6e6e6e;
+    border-radius: 4px;
+}
+
+.ContAssListTable {
+    overflow-x: auto;
+    margin-top: 40px;
+    margin-right: 20px;
+    border: 2px solid #6e6e6e;
+    border-radius: 10px;
+    margin-left: -280px;
+}
+.ListTable td:nth-child(3) {
+    white-space: nowrap;
+  }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+th {
+    text-align: left;
+    padding: 8px;
+    background: #2e74b6;
+    color: white;
+    white-space: nowrap;
+}
+
+td {
+    text-align: left;
+    padding: 8px;
+    vertical-align: top;
+}
+td p {
+    margin-bottom: 0.9em;
+}
+td a {
+    text-decoration: none;
+    color: black;
+}
+
+tr {
+    border: solid 1px gray;
+}
+
+.ListHeadArbTxt {
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    padding-bottom: 5px;
+}
+
+.ListHeadEngTxt {
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+}
+/* ------ */
+.multiselect {
+    width: 375px;
+}
+
+.selectBox {
+    position: relative;
+    margin-left: 10px;
+}
+
+.selectBox select {
+    width: 100%;
+    padding: 5px;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkboxes {
+    display: none;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: scroll;
+    background-color: white;
+    padding: 10px;
+    width: 350px;
+    height: auto;
+    margin-left: 10px;
+}
+
+#checkboxes label {
+    display: block;
+}
+
+#checkboxes label:hover {
+    background-color: #f1f1f1;
+}
+
+#checkboxes .CheckBoxText {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 8px;
+    color: black;
+}
+
+.HeadingTxt {
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+    /* margin-left: -18px; */
+}
+
+.HeadingTxt .ArbTxt {
+    font-weight: 500;
+    line-height: 30px;
+    font-size: 18px;
+    text-decoration: none;
+    color: var(--white);
+    text-align: right;
+}
+
+.HeadingTxt .EngTxt {
+    font-size: 15px;
+}
+
+.MenuTxt {
+    display: flex;
+    flex-direction: column;
+}
+.ContentTable .MenuTxt {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: #000;
+}
+.ContentTable span {
+    font-size: 15px;
+}
+
+.PageHead {
+    display: flex;
+    flex-direction: column;
+}
+
+.PageHeadArbTxt {
+    font-size: 30px;
+    font-weight: 700;
+    color: black;
+    letter-spacing: 0px;
+}
+
+.PageHeadEngTxt {
+    font: 15px;
+    color: black;
+}
+
+.FieldHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 220px;
+}
+
+.FieldHeadArbTxt {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0px;
+    text-align: right;
+}
+
+.FieldHeadEngTxt {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.AttchFieldHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.AttchFieldHead .CatFieldHeadEngTxt {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.AttchFieldHead .CatFieldHeadArbTxt {
+    font-size: 20px;
+    margin-right: -158px;
+    font-weight: 900;
+    letter-spacing: 0px;
+}
+
+.AssessmentHeadings {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+    background-color: #203864;
+    padding-block: 10px;
+    font-weight: 600;
+}
+
+/* Regulatory Rerports */
+
+.RegulatoryBgImage {
+    position: relative;
+}
+
+.RegulatoryBgImage img {
+    width: 100%;
+    height: 571px;
+    position: relative;
+}
+
+.overlay {
+    background-color: #000f2c;
+    opacity: 0.5; /* Adjust opacity as needed */
+    width: 100%;
+    height: 571px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.RegulatorySection {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-inline: 100px;
+    padding-top: 136px;
+}
+
+.RegulatoryBoxSec {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.ReportsText {
+    width: 275px;
+    height: 150px;
+    background-color: #203864;
+    border: solid 5px white;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    padding-top: 30px;
+    cursor: context-menu;
+    transition-duration: 0.4s;
+}
+
+.ReportsTextEng {
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.ReportsTextArb {
+    color: white;
+    font-size: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+}
+
+.ReportsText:hover {
+    -ms-transform: scale(1); /* IE 9 */
+    -webkit-transform: scale(1); /* Safari 3-8 */
+    transform: scale(1.1);
+}
+
+/*.fieldarea {*/
+/*    width:100%;*/
+/*}*/
+.IndiTable .ContentTablebg .column {
+    flex: auto;
+}
+
+.wrapper {
+    display: flex;
+    gap: 30px;
+}
+
+.wrapper #sidebar {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+}
+
+.wrapper .IndiTable {
+    padding-top: 100px;
+    padding-bottom: 50px;
+    width: 79%;
+    margin-left: 22%;
+}   
+
+.wrapper .IndiTable .ButtonContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+}
+
+.wrapper .DisabledButton,
+.wrapper .MoreButton,
+.wrapper .DeleteButton {
+    margin-right: auto;
+}
+
+/* Loader Css */
+
+.sk-chase {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    animation: sk-chase 2.5s infinite linear both;
+    margin: 2em auto;
+}
+
+.sk-chase-dot {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: sk-chase-dot 2s infinite ease-in-out both;
+}
+
+.sk-chase-dot:before {
+    content: "";
+    display: block;
+    width: 25%;
+    height: 25%;
+    background-color: #213e6d;
+    border-radius: 100%;
+    animation: sk-chase-dot-before 2s infinite ease-in-out both;
+}
+
+.sk-chase-dot:nth-child(1) {
+    animation-delay: -1.1s;
+}
+
+.sk-chase-dot:nth-child(2) {
+    animation-delay: -1s;
+}
+
+.sk-chase-dot:nth-child(3) {
+    animation-delay: -0.9s;
+}
+
+.sk-chase-dot:nth-child(4) {
+    animation-delay: -0.8s;
+}
+
+.sk-chase-dot:nth-child(5) {
+    animation-delay: -0.7s;
+}
+
+.sk-chase-dot:nth-child(6) {
+    animation-delay: -0.6s;
+}
+
+.sk-chase-dot:nth-child(1):before {
+    animation-delay: -1.1s;
+}
+
+.sk-chase-dot:nth-child(2):before {
+    animation-delay: -1s;
+}
+
+.sk-chase-dot:nth-child(3):before {
+    animation-delay: -0.9s;
+}
+
+.sk-chase-dot:nth-child(4):before {
+    animation-delay: -0.8s;
+}
+
+.sk-chase-dot:nth-child(5):before {
+    animation-delay: -0.7s;
+}
+
+.sk-chase-dot:nth-child(6):before {
+    animation-delay: -0.6s;
+}
+
+.table-container .ListTable {
+    max-height: 70vh;
+    overflow-y: auto;
+    /* border: none; */
+}
+
+.table-container .table-header {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    /* Ensure the header background is visible */
+    z-index: 1;
+    /* Ensure the header is above the rows */
+    border-bottom: 2px solid #ddd;
+    /* Optional: add border to the header */
+    /* border: none; */
+    border-width: 0px 1px;
+}
+
+
+
+@keyframes sk-chase {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes sk-chase-dot {
+    80%,
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes sk-chase-dot-before {
+    50% {
+        transform: scale(0.4);
+    }
+
+    100%,
+    0% {
+        transform: scale(1);
+    }
+}
+
+
+
+
+/* @media screen and (max-width: 1366px) {
+    .ContAssIndiTable .ContentTable .bg-tx {
+        width: 1145px !important;
+    }
+} */
+
+/* @media screen and (max-width: 1280px) {
+    .ContAssIndiTable .ContentTable .bg-tx {
+        width: 1180px !important;
+    }
+}
+
+@media screen and (max-width: 1180px) {
+    .ContAssIndiTable .ContentTable .bg-tx {
+        width: 975px !important;
+    }
+} */
+
+@media screen and (min-width: 1281px) and (max-width: 1366px) {
+    .ContAssIndiTable .ContentTable .bg-tx {
+        width: 1265px !important;
+    }
+}
+
+@media screen and (min-width: 1181px) and (max-width: 1280px) {
+    .ContAssIndiTable .ContentTable .bg-tx {
+        width: 1180px !important;
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1180px) {
+    .ContAssIndiTable .ContentTable .bg-tx {
+        width: 1080px !important;
+    }
+    .ContAssIndiTable .ContentTable .sh-tx {
+        width: 370px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1179px) {
+    .wrapper .IndiTable {
+        width: 78%;
+    }
+    tbody th {
+        padding: 5px !important;
+    }
+    tbody td {
+        font-size: 12px;
+    }
+    .IndiTable .sh-tx {
+        width: 320px;
+    }
+    ol.resource-list {
+        width: 320px;
+    }
+    .fixposition {
+        max-width: 1024px;
+    }
+    /* .ContentTableSection {
+        padding-inline: 15px;
+    } */
+    .ContAssIndiTable .ButtonContainer {
+
+        margin-left: 0;
+        width: 100%;
+        /* margin-right: 30px; */
+    }
+    .AssmentButtonContainer {
+        width: 740px;
+        margin-bottom: 0;
+        display: flex;
+        gap: 10px;
+    }
+    .PageHeadArbTxt {
+        font-size: 24px;
+      
+    }
+    
+}
+
+@media screen and (max-width: 1024px) {
+    .ContAssIndiTable .ContentTable .bg-tx {
+        width: 940px !important;
+        /* width: 830px !important; */
+    }
+    .ContAssIndiTable .ContentTable .sh-tx {
+        width: 390px;
+    }
+}

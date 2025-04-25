@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200;300;400;500;600;700;800;900&display=swap");
+
+/* font-family: 'Roboto', sans-serif;
+font-family: 'Noto Sans Arabic', sans-serif; */
+
+.ocd {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.OCDVBC {
+    flex: 1;
+    max-width: 69%;
+    background-color: white;
+    border-radius: 8px;
+    height: 420px;
+    padding: 20px 10px;
+    text-align: center;
+    border: 1px solid rgba(203, 208, 221, 0.54);
+}
+
+.CSSOCDVBC {
+    flex: 1;
+    max-width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    height: 420px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.OCDBRCS {
+    flex: 1;
+    max-width: 30%;
+    text-align: center;
+    align-items: center;
+}
+
+.OCDBRCONE {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    height: 200px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.OCDBRCTWO {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    height: 200px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.BRCHRT {
+    width: 100%;
+    max-width: 800px;
+    max-height: 300px;
+    margin-top: 30px;
+}
+
+.DONTCHRT {
+    width: 100%;
+    max-width: 300px;
+}
+
+.CSSBRCHRT {
+    width: 100%;
+    max-height: 300px;
+    margin-top: 30px;
+}

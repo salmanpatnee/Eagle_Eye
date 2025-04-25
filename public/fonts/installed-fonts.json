@@ -1,0 +1,8 @@
+{
+    "dejavu sans": {
+        "bold": "C:\\Users\\Salman Ghani\\Herd\\grc\\vendor\\dompdf\\dompdf\/lib\/fonts\/DejaVuSans-Bold",
+        "bold_italic": "C:\\Users\\Salman Ghani\\Herd\\grc\\vendor\\dompdf\\dompdf\/lib\/fonts\/DejaVuSans-BoldOblique",
+        "italic": "C:\\Users\\Salman Ghani\\Herd\\grc\\vendor\\dompdf\\dompdf\/lib\/fonts\/DejaVuSans-Oblique",
+        "normal": "dejavu_sans_normal_b2769f0bfbfb600cea93452248e6a935"
+    }
+}
