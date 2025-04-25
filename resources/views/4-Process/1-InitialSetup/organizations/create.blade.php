@@ -146,7 +146,7 @@
                             </div>
                             <div class="ContentTablebg">
                                 <div class="column">
-                                    <x-input label="Logo" label_ar="شعار "
+                                    <x-input label="Organization Logo" label_ar="شعار الجهة"
                                         name="organization_logo"
                                         placeholder="Enter Organization Contact Number" type="file"
                                         :value="$organization?->organization_logo" class="bg-tx"/>
