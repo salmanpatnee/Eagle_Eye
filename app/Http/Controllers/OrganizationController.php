@@ -39,10 +39,18 @@ class OrganizationController extends Controller
             'initiative_owner_name' => 'nullable',
             'initiative_owner_title' => 'nullable',
             'initiative_owner_contact_number' => 'nullable',
-            'initiative_owner_email' => 'nullable|email'
+            'initiative_owner_email' => 'nullable|email',
+            'organization_logo' => 'nullable|file|image|max:2048',
         ]);
 
+        if ($request->hasFile('organization_logo')) {
+            $file = $request->file('organization_logo');
+            $path = $file->store('organization_logos', 'public');
+            $attributes['organization_logo'] = $path;
+        }
+        
         Organization::create($attributes);
+
         
         return redirect(route('organizations.index'))
             ->with('success', 'Organization saved successfully.');
