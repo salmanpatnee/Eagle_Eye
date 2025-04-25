@@ -6,6 +6,7 @@ use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class OrganizationController extends Controller
 {
@@ -81,7 +82,7 @@ class OrganizationController extends Controller
             $path = $file->store('organization_logos', 'public');
             $attributes['organization_logo'] = $path;
         }
-        
+
         $organization->update($attributes);
 
         return redirect(route('organizations.index'))
@@ -96,7 +97,13 @@ class OrganizationController extends Controller
             'record' => ['required'],
         ]);
 
-        Organization::where('id', $attributes['record'])->delete();
+        $organization = Organization::findOrFail($attributes['record']);
+        
+        if ($organization->organization_logo) {
+            Storage::disk('public')->delete($organization->organization_logo);
+        }
+
+        $organization->delete();
 
         return redirect(route('organizations.index'))
             ->with('success', 'Organization deleted successfully.');
