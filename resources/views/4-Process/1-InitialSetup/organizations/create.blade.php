@@ -43,7 +43,7 @@
             <div class="IndiTable">
                 <form id="form"
                     action="{{ isset($organization) ? route('organizations.update', $organization->id) : route('organizations.store') }}"
-                    method="POST">
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     @if (isset($organization))
                         @method('PUT')
