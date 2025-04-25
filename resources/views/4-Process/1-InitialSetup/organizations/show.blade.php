@@ -44,6 +44,14 @@
         .DeleteButton {
             margin-right: auto;
         }
+
+        .logo {
+            max-height: 60px;
+            background-color: white;
+            padding: .5em;
+            border-radius: 10px;
+            margin-top: .5em;
+        }
     </style>
 </head>
 
@@ -91,8 +99,10 @@
                         <p class="ButtonEngTxt">Update</p>
                     </a>
                     <form method="POST" action="{{ route('organizations.destroy') }}" id="deleteForm">
-                        <input type="hidden" name="record" value="{{$organization->id}}">
-                        <button type="button" class="{{ auth()->user()->can('manage-initial-setup') ? 'DeleteButton' : 'DisabledButton' }}" id="btnDelete">
+                        <input type="hidden" name="record" value="{{ $organization->id }}">
+                        <button type="button"
+                            class="{{ auth()->user()->can('manage-initial-setup') ? 'DeleteButton' : 'DisabledButton' }}"
+                            id="btnDelete">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
@@ -110,6 +120,18 @@
                                 <p class="FieldHeadArbTxt">رمز الجهة</p>
                             </div>
                             <p class="sh-tx">{{ $organization->organization_id }}</p>
+                        </div>
+                        <div class="column">
+                            <div class="FieldHead">
+                                <p class="FieldHeadEngTxt">Organization Logo</p>
+                                <p class="FieldHeadArbTxt">رمز الجهة</p>
+                            </div>
+                            @if ($organization->organization_logo == null)
+                                <p class="sh-tx">No Logo</p>
+                            @else
+                                <img src="{{ asset('storage/' . $organization->organization_logo) }}"
+                                    alt="Organization Logo" class="logo">
+                            @endif
                         </div>
                     </div>
                     <div class="ContentTable">
