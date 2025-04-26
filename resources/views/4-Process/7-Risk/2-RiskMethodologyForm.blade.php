@@ -13,7 +13,52 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
+    <style>
+        h1 {
+            font-size: 1.7em;
+            margin: 0 0 0 10px;
+        }
+
+        .btn {
+            color: #fff;
+        }
+
+        .btn-dark,
+        .btn-dark:hover,
+        .btn-dark:active {
+            color: #fff;
+            background-color: #000;
+            border-color: #000;
+        }
+
+        .modal-header {
+
+            background: linear-gradient(to right, #203864, #2e74b6);
+        }
+
+        .modal-title {
+
+            color: #fff;
+        }
+
+        .ck.ck-content.ck-editor__editable {
+            height: 200px;
+        }
+
+        div#selectedCategoriesText {
+            margin-top: 1em;
+            color: cornflowerblue;
+        }
+
+        @media (min-width: 768px) {
+            .modal-dialog {
+                width: 100vh;
+                margin: 200px auto;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -160,6 +205,20 @@
                     <div class="ContentTablebg">
                         <div class="column">
                             <div class="FieldHead">
+                                <p class="FieldHeadEngTxt">Scope</p>
+                                <p class="FieldHeadArbTxt">نِطَاق</p>
+                            </div>
+                            <p><input type="text" name="scope" id="scope" class="bg-tx"
+                                    placeholder="Write Scope" value="{{ old('scope', $riskmethod?->scope) }}">
+                                @error('scope')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ContentTablebg">
+                        <div class="column">
+                            <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Risk Methodology Source</p>
                                 <p class="FieldHeadArbTxt">مصدر منهجية المخاطر</p>
                             </div>
@@ -172,6 +231,89 @@
                             </p>
                         </div>
                     </div>
+
+                    <div class="ContentTable">
+                        <div class="column">
+
+                            <x-label label="Objectives" label_ar="أهداف" />
+                            <x-modal-button modal_id="objectivesModal" label="Add objectives" name="objectives"
+                                :data="isset($objectiveIds) ? json_encode($objectiveIds) : ''" />
+
+                        </div>
+                        <div class="column">
+
+                        </div>
+                    </div>
+
+
+                    <div class="">
+                        <div class="column">
+                            <div class="FieldHead">
+                                <p class="FieldHeadEngTxt">Context Establishment</p>
+                                <p class="FieldHeadArbTxt">إنشاء السياق</p>
+                            </div>
+                            <textarea name="context" id="editor" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->context) !!}</textarea>
+                            <x-error name="context" />
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="column">
+                            <div class="FieldHead">
+                                <p class="FieldHeadEngTxt"> Risk Identification</p>
+                                <p class="FieldHeadArbTxt">تحديد المخاطر</p>
+                            </div>
+                            <textarea name="risk_identification" id="risk_identification" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->risk_identification) !!}</textarea>
+                            <x-error name="risk_identification" />
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="column">
+                            <div class="FieldHead">
+                                <p class="FieldHeadEngTxt">Risk Analysis</p>
+                                <p class="FieldHeadArbTxt">تحليل المخاطر</p>
+                            </div>
+                            <textarea name="risk_analysis" id="risk_analysis" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->risk_analysis) !!}</textarea>
+                            <x-error name="risk_analysis" />
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="column">
+                            <div class="FieldHead">
+                                <p class="FieldHeadEngTxt">Risk Evaluation</p>
+                                <p class="FieldHeadArbTxt">تقييم المخاطر</p>
+                            </div>
+                            <textarea name="risk_evaluation" id="risk_evaluation" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->risk_evaluation) !!}</textarea>
+                            <x-error name="risk_evaluation" />
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="column">
+                            <div class="FieldHead">
+                                <p class="FieldHeadEngTxt">Documentation and Review</p>
+                                <p class="FieldHeadArbTxt">التوثيق والمراجعة</p>
+                            </div>
+                            <textarea name="documentation" id="documentation" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->documentation) !!}</textarea>
+                            <x-error name="documentation" />
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="column">
+                            <div class="FieldHead">
+                                <p class="FieldHeadEngTxt">Alignment with ISO/IEC 27005</p>
+                                <p class="FieldHeadArbTxt">التوافق مع ISO/IEC 27005</p>
+                            </div>
+                            <textarea name="alignment_iso" id="alignment_iso" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->alignment_iso) !!}</textarea>
+                            <x-error name="alignment_iso" />
+                        </div>
+                    </div>
+
+
+                    
                     <div class="ContentTable">
                         <div class="column">
                             <div class="FieldHead">
@@ -239,12 +381,13 @@
                                 <p class="FieldHeadArbTxt">تحديد مخاطر الجوع</p>
                             </div>
 
-                            <select name="risk_appetite_determination" id="risk_appetite_determination" class="sh-tx" required>
+                            <select name="risk_appetite_determination" id="risk_appetite_determination"
+                                class="sh-tx" required>
                                 <option value="">Select Appetite Score</option>
                                 @foreach ($appetites as $appetite)
                                     <option value="{{ $appetite->risk_appetite_id }}"
                                         {{ $appetite->risk_appetite_id == old('risk_appetite_determination', $riskmethod?->risk_appetite_determination) ? 'selected' : '' }}>
-                                     {{ $appetite->risk_appetite_id }} - {{ $appetite->risk_score }}
+                                        {{ $appetite->risk_appetite_id }} - {{ $appetite->risk_score }}
                                     </option>
                                 @endforeach
                             </select>
@@ -378,9 +521,62 @@
         </form>
     </div>
 
-    @include('components.delete-confirmation-modal')
+    <x-modal id="objectivesModal" title="Select Objectives" :data="$objectives" :selectedvalues="isset($objectiveIds) ? $objectiveIds : []"
+        checkboxClass="objectiveCheckbox" id_key="id" value_key="objective" />
 
+    @include('components.delete-confirmation-modal')
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
     <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                height: 300
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+            ClassicEditor
+            .create(document.querySelector('#risk_identification'), {
+                height: 300
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+            ClassicEditor
+            .create(document.querySelector('#risk_analysis'), {
+                height: 300
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+            ClassicEditor
+            .create(document.querySelector('#risk_evaluation'), {
+                height: 300
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+            ClassicEditor
+            .create(document.querySelector('#documentation'), {
+                height: 300
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+            ClassicEditor
+            .create(document.querySelector('#alignment_iso'), {
+                height: 300
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
         function goBack() {
             window.history.back();
         }
@@ -388,6 +584,25 @@
         function showDeleteModal() {
             window.deleteConfirmationModal.show(document.getElementById('delete_form'));
         }
+
+        $('.objectiveCheckbox').change(function() {
+            var selectedOptionsText = [];
+
+            var selectedOptions = [];
+
+            $('.objectiveCheckbox:checked').each(function() {
+                selectedOptionsText.push($(this).val());
+            });
+
+            $('#objectives').val(JSON.stringify(selectedOptionsText));
+
+            if (selectedOptionsText.length) {
+                $('#objectivesText').text(selectedOptionsText.length + " Objectives Selected.");
+            } else {
+                $('#objectivesText').text("No Objectives Selected.");
+
+            }
+        });
     </script>
 </body>
 

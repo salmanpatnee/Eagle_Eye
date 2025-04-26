@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asset;
+use App\Models\Objective;
 use App\Models\Owner;
 use App\Models\Risk;
 use App\Models\RiskAcceptance;
@@ -31,9 +32,10 @@ class RiskMethodologyController extends Controller
         $risks = Risk::select('risk_id', 'risk_name')->get();
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
+        $objectives = Objective::select('id', 'objective_id', 'objective')->get();
 
 
-        return view('4-Process/7-Risk/2-RiskMethodologyForm', compact('riskmethod', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances'));
+        return view('4-Process/7-Risk/2-RiskMethodologyForm', compact('riskmethod', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectives'));
     }
 
     // To edit the table
