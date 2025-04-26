@@ -13,35 +13,50 @@ class RiskMethodology extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public function owner(){
+    public function owner()
+    {
         return $this->belongsTo(Owner::class, 'owner_id', 'owner_role_id');
     }
 
-    public function appetite(){
+    public function appetite()
+    {
         return $this->belongsTo(RiskAppetite::class, 'risk_appetite_determination', 'risk_appetite_id');
     }
 
-    public function acceptance(){
+    public function acceptance()
+    {
         return $this->belongsTo(RiskAcceptance::class, 'risk_acceptance', 'risk_acceptance_id');
     }
 
-    public function asset() {
+    public function asset()
+    {
         return $this->belongsTo(Asset::class, 'asset_identification', 'asset_id');
     }
 
-    public function threat() {
+    public function threat()
+    {
         return $this->belongsTo(ThreatAgent::class, 'threat_identification', 'threat_agent_id');
     }
 
-    public function vulnerability() {
+    public function vulnerability()
+    {
         return $this->belongsTo(Vulnerability::class, 'vulnerability_identification', 'va_id');
     }
 
-    public function risk() {
+    public function risk()
+    {
         return $this->belongsTo(Risk::class, 'risk_name', 'risk_id');
     }
 
-  
-
-    
+    public function objectives()
+    {
+        return $this->belongsToMany(
+            Objective::class,
+            'methodology_objective_tables',
+            'methodology_id',
+            'objective_id',
+            'risk_methodology_id',
+            'objective_id'
+        );
+    }
 }

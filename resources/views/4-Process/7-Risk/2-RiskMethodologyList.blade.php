@@ -138,10 +138,11 @@
     @include('components.delete-confirmation-modal')
     <script src="{{ asset('js/delete-confirmation.js') }}"></script>
     <script>
-        document.getElementById('btnDelete').addEventListener('click', function() {
+        document.getElementById('btnDelete').addEventListener('click', function(event) {
+            event.preventDefault();
             const selectedRadio = document.querySelector('.record:checked');
             if (selectedRadio) {
-                showDeleteConfirmation('deleteForm');
+                window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
             } else {
                 alert('Please select a record to delete.');
             }

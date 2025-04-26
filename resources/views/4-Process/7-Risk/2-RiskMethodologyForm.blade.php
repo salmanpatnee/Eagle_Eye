@@ -522,7 +522,7 @@
     </div>
 
     <x-modal id="objectivesModal" title="Select Objectives" :data="$objectives" :selectedvalues="isset($objectiveIds) ? $objectiveIds : []"
-        checkboxClass="objectiveCheckbox" id_key="id" value_key="objective" />
+        checkboxClass="objectiveCheckbox" id_key="objective_id" value_key="objective" />
 
     @include('components.delete-confirmation-modal')
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

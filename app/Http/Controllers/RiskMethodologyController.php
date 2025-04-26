@@ -38,25 +38,6 @@ class RiskMethodologyController extends Controller
         return view('4-Process/7-Risk/2-RiskMethodologyForm', compact('riskmethod', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectives'));
     }
 
-    // To edit the table
-    public function edit($id)
-    {
-        $data = $riskmethod = DB::table('risk_methodology_table')->where('risk_methodology_id', $id)->first();
-        $owners = Owner::select('owner_role_id', 'owner_name')->get();
-        $appetites =  RiskAppetite::select('risk_appetite_id', 'risk_score')->get();
-        $acceptances = RiskAcceptance::select('risk_acceptance_id', 'risk_acceptance_source')->distinct()->get();
-        $assets = Asset::select('asset_id', 'asset_name')->get();
-        $threats = ThreatAgent::select('threat_agent_id', 'threat_agent_name')->get();
-        $vulnerabilities = Vulnerability::select('va_id', 'va_name')->get();
-        $risks = Risk::select('risk_id', 'risk_name')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-
-        return view('4-Process/7-Risk/2-RiskMethodologyForm', compact('riskmethod', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances'));
-    }
-
-
     public function store(Request $request)
     {
         // Validation
@@ -76,12 +57,54 @@ class RiskMethodologyController extends Controller
             'risk_acceptance' => 'nullable',
             'risk_audit' => 'nullable',
             'risk_change_management' => 'nullable',
+            'scope' => 'nullable',
+            'scope' => 'nullable',
+            'objectives' => 'nullable',
+            'context' => 'nullable',
+            'risk_identification' => 'nullable',
+            'risk_analysis' => 'nullable',
+            'risk_evaluation' => 'nullable',
+            'documentation' => 'nullable',
+            'alignment_iso' => 'nullable',
         ]);
 
-        RiskMethodology::create($attributes);
+        $objectives = $attributes['objectives'];
+        unset($attributes['objectives']);
+
+
+        $methodology = RiskMethodology::create($attributes);
+
+        if ($objectives && $objectivesArray = json_decode($objectives, true)) {
+
+            $methodology->objectives()
+                ->attach($objectivesArray);
+        }
 
         return redirect()->route('riskmethod.index')->with('success', 'Risk Method saved successfully.');
     }
+
+    // To edit the table
+    public function edit(RiskMethodology $riskmethod)
+    {
+
+        $data = $riskmethod;
+        $owners = Owner::select('owner_role_id', 'owner_name')->get();
+        $appetites =  RiskAppetite::select('risk_appetite_id', 'risk_score')->get();
+        $acceptances = RiskAcceptance::select('risk_acceptance_id', 'risk_acceptance_source')->distinct()->get();
+        $assets = Asset::select('asset_id', 'asset_name')->get();
+        $threats = ThreatAgent::select('threat_agent_id', 'threat_agent_name')->get();
+        $vulnerabilities = Vulnerability::select('va_id', 'va_name')->get();
+        $risks = Risk::select('risk_id', 'risk_name')->get();
+        $routeName = $this->_routeName;
+        $primaryKey = $this->_primaryKey;
+        $objectives = Objective::select('id', 'objective_id', 'objective')->get();
+        $objectiveIds = $riskmethod->objectives()->pluck('objectives.objective_id')->toArray();
+
+        return view('4-Process/7-Risk/2-RiskMethodologyForm', compact('riskmethod', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectiveIds', 'objectives'));
+    }
+
+
+
 
     public function update(RiskMethodology $riskMethodology, Request $request)
     {
@@ -102,9 +125,27 @@ class RiskMethodologyController extends Controller
             'risk_acceptance' => 'nullable',
             'risk_audit' => 'nullable',
             'risk_change_management' => 'nullable',
+            'scope' => 'nullable',
+            'scope' => 'nullable',
+            'objectives' => 'nullable',
+            'context' => 'nullable',
+            'risk_identification' => 'nullable',
+            'risk_analysis' => 'nullable',
+            'risk_evaluation' => 'nullable',
+            'documentation' => 'nullable',
+            'alignment_iso' => 'nullable',
         ]);
 
+        $objectives = $attributes['objectives'];
+        unset($attributes['objectives']);
+
         $riskMethodology->update($attributes);
+
+        if ($objectives && $objectivesArray = json_decode($objectives, true)) {
+
+            $riskMethodology->objectives()
+                ->sync($objectivesArray);
+        }
 
         return redirect()->route('riskmethod.index')->with('success', 'Risk Method saved successfully.');
     }
@@ -117,7 +158,7 @@ class RiskMethodologyController extends Controller
         $columns = RiskMethodology::with('asset', 'risk', 'owner')->get();
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
-        
+
 
         return view('4-Process/7-Risk/2-RiskMethodologyList', compact('routeName', 'columns', 'primaryKey'));
     }
@@ -130,16 +171,12 @@ class RiskMethodologyController extends Controller
         ]);
 
         $data = RiskMethodology::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
+        $data->objectives()->detach(); // Detach the objectives relationship before deleting the record
         $data->delete();
 
         return redirect(route($this->_routeName . '.index'));
 
-        $selecteddelete = $request->input('selecteddelete');
-
-        if (!empty($selecteddelete)) {
-            DB::table('risk_methodology_table')->whereIn('risk_methodology_id', $selecteddelete)->delete();
-        }
-        return redirect('/risk-methodology-list');
+        
     }
 
 
@@ -148,7 +185,7 @@ class RiskMethodologyController extends Controller
     public function show(RiskMethodology $riskMethodology)
     {
         $data = $riskMethodology->load('owner', 'appetite', 'acceptance', 'asset', 'threat', 'vulnerability', 'risk');
-     
+
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
