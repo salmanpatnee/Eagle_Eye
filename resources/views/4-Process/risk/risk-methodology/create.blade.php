@@ -104,7 +104,7 @@
                 <p class="PageHeadEngTxt">Risk Methodology</p>
             </div>
             <div class="ButtonContainer">
-                <a href="/risk-methodology-list" class="MoreButton">
+                <a href="{{route($routeName.'.index')}}" class="MoreButton">
                     <p class="ButtonArbTxt">منظر</p>
                     <p class="ButtonEngTxt">View</p>
                 </a>
@@ -135,7 +135,7 @@
                 </button>
 
 
-                <form method="POST" action="{{ route($routeName . '.delete') }}" id="delete_form">
+                <form method="POST" action="{{ route($routeName . '.destroy') }}" id="delete_form">
                     <input type="hidden" name="record" value="{{ $data?->id }}">
                     @csrf
                     @method('DELETE')
@@ -143,12 +143,12 @@
             </div>
         </div>
         <form id="form"
-            action="{{ isset($riskmethod) ? route('riskmethod.update', $riskmethod->id) : route('riskmethod.store') }}"
+            action="{{ isset($riskMethodology) ? route($routeName . '.update', $riskMethodology->id) : route($routeName.'.store') }}"
             method="POST">
             @csrf
-            @if (isset($riskmethod))
+            @if (isset($riskMethodology))
                 @method('PUT')
-                <input type="hidden" name="id" value="{{ $riskmethod->id }}">
+                <input type="hidden" name="id" value="{{ $riskMethodology->id }}">
             @endif
 
             <table cellspacing="0">
@@ -161,8 +161,8 @@
                             </div>
                             <p><input type="text" name="risk_methodology_id" id="risk_methodology_id" class="sh-tx"
                                     placeholder="Enter ID"
-                                    value="{{ old('risk_methodology_id', $riskmethod?->risk_methodology_id) }}"
-                                    {{ $riskmethod?->risk_methodology_id ? 'readonly' : '' }} required>
+                                    value="{{ old('risk_methodology_id', $riskMethodology?->risk_methodology_id) }}"
+                                    {{ $riskMethodology?->risk_methodology_id ? 'readonly' : '' }} required>
                                 @error('risk_methodology_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -177,7 +177,7 @@
                                 <option value="">Select Owner</option>
                                 @foreach ($owners as $owner)
                                     <option value="{{ $owner->owner_role_id }}"
-                                        {{ $owner->owner_role_id == old('owner_id', $riskmethod?->owner_id) ? 'selected' : '' }}>
+                                        {{ $owner->owner_role_id == old('owner_id', $riskMethodology?->owner_id) ? 'selected' : '' }}>
                                         {{ $owner->owner_role_id }} - {{ $owner->owner_name }}
                                     </option>
                                 @endforeach
@@ -195,7 +195,7 @@
                             </div>
                             <p><input type="text" name="background" id="background" class="bg-tx"
                                     placeholder="Write Background"
-                                    value="{{ old('background', $riskmethod?->background) }}">
+                                    value="{{ old('background', $riskMethodology?->background) }}">
                                 @error('background')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -209,7 +209,7 @@
                                 <p class="FieldHeadArbTxt">نِطَاق</p>
                             </div>
                             <p><input type="text" name="scope" id="scope" class="bg-tx"
-                                    placeholder="Write Scope" value="{{ old('scope', $riskmethod?->scope) }}">
+                                    placeholder="Write Scope" value="{{ old('scope', $riskMethodology?->scope) }}">
                                 @error('scope')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -224,7 +224,7 @@
                             </div>
                             <p><input type="text" name="risk_methodology_source" id="risk_methodology_source"
                                     class="bg-tx" placeholder="Write Risk Methodology Source"
-                                    value="{{ old('risk_methodology_source', $riskmethod?->risk_methodology_source) }}">
+                                    value="{{ old('risk_methodology_source', $riskMethodology?->risk_methodology_source) }}">
                                 @error('risk_methodology_source')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -252,7 +252,7 @@
                                 <p class="FieldHeadEngTxt">Context Establishment</p>
                                 <p class="FieldHeadArbTxt">إنشاء السياق</p>
                             </div>
-                            <textarea name="context" id="editor" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->context) !!}</textarea>
+                            <textarea name="context" id="editor" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskMethodology?->context) !!}</textarea>
                             <x-error name="context" />
                         </div>
                     </div>
@@ -263,7 +263,7 @@
                                 <p class="FieldHeadEngTxt"> Risk Identification</p>
                                 <p class="FieldHeadArbTxt">تحديد المخاطر</p>
                             </div>
-                            <textarea name="risk_identification" id="risk_identification" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->risk_identification) !!}</textarea>
+                            <textarea name="risk_identification" id="risk_identification" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskMethodology?->risk_identification) !!}</textarea>
                             <x-error name="risk_identification" />
                         </div>
                     </div>
@@ -274,7 +274,7 @@
                                 <p class="FieldHeadEngTxt">Risk Analysis</p>
                                 <p class="FieldHeadArbTxt">تحليل المخاطر</p>
                             </div>
-                            <textarea name="risk_analysis" id="risk_analysis" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->risk_analysis) !!}</textarea>
+                            <textarea name="risk_analysis" id="risk_analysis" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskMethodology?->risk_analysis) !!}</textarea>
                             <x-error name="risk_analysis" />
                         </div>
                     </div>
@@ -285,7 +285,7 @@
                                 <p class="FieldHeadEngTxt">Risk Evaluation</p>
                                 <p class="FieldHeadArbTxt">تقييم المخاطر</p>
                             </div>
-                            <textarea name="risk_evaluation" id="risk_evaluation" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->risk_evaluation) !!}</textarea>
+                            <textarea name="risk_evaluation" id="risk_evaluation" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskMethodology?->risk_evaluation) !!}</textarea>
                             <x-error name="risk_evaluation" />
                         </div>
                     </div>
@@ -296,7 +296,7 @@
                                 <p class="FieldHeadEngTxt">Documentation and Review</p>
                                 <p class="FieldHeadArbTxt">التوثيق والمراجعة</p>
                             </div>
-                            <textarea name="documentation" id="documentation" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->documentation) !!}</textarea>
+                            <textarea name="documentation" id="documentation" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskMethodology?->documentation) !!}</textarea>
                             <x-error name="documentation" />
                         </div>
                     </div>
@@ -307,7 +307,7 @@
                                 <p class="FieldHeadEngTxt">Alignment with ISO/IEC 27005</p>
                                 <p class="FieldHeadArbTxt">التوافق مع ISO/IEC 27005</p>
                             </div>
-                            <textarea name="alignment_iso" id="alignment_iso" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskmethod?->alignment_iso) !!}</textarea>
+                            <textarea name="alignment_iso" id="alignment_iso" class="bg-tx" cols="30" rows="2">{!! html_entity_decode($riskMethodology?->alignment_iso) !!}</textarea>
                             <x-error name="alignment_iso" />
                         </div>
                     </div>
@@ -325,7 +325,7 @@
                                 <option value="">Select Option</option>
                                 @foreach ($assets as $asset)
                                     <option value="{{ $asset->asset_id }}"
-                                        {{ old('asset_identification', $riskmethod?->asset_identification) == $asset->asset_id ? 'selected' : null }}>
+                                        {{ old('asset_identification', $riskMethodology?->asset_identification) == $asset->asset_id ? 'selected' : null }}>
                                         {{ $asset->asset_id }} -
                                         {{ $asset->asset_name }}
                                     </option>
@@ -344,7 +344,7 @@
                                 <option value="">Select Option</option>
                                 @foreach ($threats as $threat)
                                     <option value="{{ $threat->threat_agent_id }}"
-                                        {{ old('threat_identification', $riskmethod?->threat_identification) == $threat->threat_agent_id ? 'selected' : null }}>
+                                        {{ old('threat_identification', $riskMethodology?->threat_identification) == $threat->threat_agent_id ? 'selected' : null }}>
                                         {{ $threat->threat_agent_id }} -
                                         {{ $threat->threat_agent_name }}
                                     </option>
@@ -365,7 +365,7 @@
                                 <option value="">Select Option</option>
                                 @foreach ($vulnerabilities as $vulnerability)
                                     <option value="{{ $vulnerability->va_id }}"
-                                        {{ old('vulnerability_identification', $riskmethod?->vulnerability_identification) == $vulnerability->va_id ? 'selected' : null }}>
+                                        {{ old('vulnerability_identification', $riskMethodology?->vulnerability_identification) == $vulnerability->va_id ? 'selected' : null }}>
                                         {{ $vulnerability->va_id }} -
                                         {{ $vulnerability->va_name }}
                                     </option>
@@ -386,7 +386,7 @@
                                 <option value="">Select Appetite Score</option>
                                 @foreach ($appetites as $appetite)
                                     <option value="{{ $appetite->risk_appetite_id }}"
-                                        {{ $appetite->risk_appetite_id == old('risk_appetite_determination', $riskmethod?->risk_appetite_determination) ? 'selected' : '' }}>
+                                        {{ $appetite->risk_appetite_id == old('risk_appetite_determination', $riskMethodology?->risk_appetite_determination) ? 'selected' : '' }}>
                                         {{ $appetite->risk_appetite_id }} - {{ $appetite->risk_score }}
                                     </option>
                                 @endforeach
@@ -404,7 +404,7 @@
                             </div>
                             <p><input type="text" name="risk_assessment_approach" id="risk_assessment_approach"
                                     class="bg-tx" placeholder="Write Risk Assessment Approach"
-                                    value="{{ old('risk_assessment_approach', $riskmethod?->risk_assessment_approach) }}">
+                                    value="{{ old('risk_assessment_approach', $riskMethodology?->risk_assessment_approach) }}">
                                 @error('risk_assessment_approach')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -421,7 +421,7 @@
                                 <option value="">Select Option</option>
                                 @foreach ($risks as $risk)
                                     <option value="{{ $risk->risk_id }}"
-                                        {{ old('risk_name', $riskmethod?->risk_name) == $risk->risk_id ? 'selected' : null }}>
+                                        {{ old('risk_name', $riskMethodology?->risk_name) == $risk->risk_id ? 'selected' : null }}>
                                         {{ $risk->risk_id }} -
                                         {{ $risk->risk_name }}
                                     </option>
@@ -438,7 +438,7 @@
                             </div>
                             <p><input type="text" name="risk_treatment" id="risk_treatment" class="sh-tx"
                                     placeholder="Write Risk Treatment"
-                                    value="{{ old('risk_treatment', $riskmethod?->risk_treatment) }}">
+                                    value="{{ old('risk_treatment', $riskMethodology?->risk_treatment) }}">
                                 @error('risk_treatment')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -453,7 +453,7 @@
                             </div>
                             <p><input type="text" name="residual_risk" id="residual_risk" class="sh-tx"
                                     placeholder="Write Residual Risk"
-                                    value="{{ old('residual_risk', $riskmethod?->residual_risk) }}">
+                                    value="{{ old('residual_risk', $riskMethodology?->residual_risk) }}">
                                 @error('residual_risk')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -469,7 +469,7 @@
                                 <option value="">Select Acceptance</option>
                                 @foreach ($acceptances as $acceptance)
                                     <option value="{{ $acceptance->risk_acceptance_id }}"
-                                        {{ $acceptance->risk_acceptance_id == old('risk_acceptance', $riskmethod?->risk_acceptance) ? 'selected' : '' }}>
+                                        {{ $acceptance->risk_acceptance_id == old('risk_acceptance', $riskMethodology?->risk_acceptance) ? 'selected' : '' }}>
                                         {{ $acceptance->risk_acceptance_source }}
                                     </option>
                                 @endforeach
@@ -479,7 +479,7 @@
                             @enderror
                             {{-- <p><input type="text" name="risk_acceptance" id="risk_acceptance" class="sh-tx"
                                     placeholder="Write Risk Acceptance"
-                                    value="{{ old('risk_acceptance', $riskmethod?->risk_acceptance) }}">
+                                    value="{{ old('risk_acceptance', $riskMethodology?->risk_acceptance) }}">
                                 @error('risk_acceptance')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -494,7 +494,7 @@
                             </div>
                             <p><input type="text" name="risk_audit" id="risk_audit" class="bg-tx"
                                     placeholder="Write Risk Audit"
-                                    value="{{ old('risk_audit', $riskmethod?->risk_audit) }}">
+                                    value="{{ old('risk_audit', $riskMethodology?->risk_audit) }}">
                                 @error('risk_audit')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -509,7 +509,7 @@
                             </div>
                             <p><input type="text" name="risk_change_management" id="risk_change_management"
                                     class="bg-tx" placeholder="Write Risk Change Management"
-                                    value="{{ old('risk_change_management', $riskmethod?->risk_change_management) }}">
+                                    value="{{ old('risk_change_management', $riskMethodology?->risk_change_management) }}">
                                 @error('risk_change_management')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

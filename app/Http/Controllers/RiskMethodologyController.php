@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RiskMethodologyRequest;
 use App\Models\Asset;
 use App\Models\Objective;
 use App\Models\Owner;
@@ -12,17 +13,35 @@ use App\Models\RiskMethodology;
 use App\Models\ThreatAgent;
 use App\Models\Vulnerability;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class RiskMethodologyController extends Controller
 {
-    private $_routeName = "riskmethod";
+    private $_routeName = "risk-methodology";
     private $_primaryKey = "risk_methodology_id";
 
-    // To add data into the table
+    public function index()
+    {
+        $riskMethodologies = RiskMethodology::with('asset', 'risk', 'owner')->get();
+        $routeName = $this->_routeName;
+        $primaryKey = $this->_primaryKey;
+
+        return view('4-Process/risk/risk-methodology/index', compact('routeName', 'riskMethodologies', 'primaryKey'));
+    }
+
+    public function show(RiskMethodology $riskMethodology)
+    {
+        $data = $riskMethodology->load('owner', 'appetite', 'acceptance', 'asset', 'threat', 'vulnerability', 'risk');
+
+        $routeName = $this->_routeName;
+        $primaryKey = $this->_primaryKey;
+
+
+        return view('4-Process/risk/risk-methodology/show', compact('riskMethodology', 'routeName', 'data', 'primaryKey'));
+    }
+
     public function create()
     {
-        $data = $riskmethod = null;
+        $data = $riskMethodology = null;
         $owners = Owner::select('owner_role_id', 'owner_name')->get();
         $appetites =  RiskAppetite::select('risk_appetite_id', 'risk_score')->get();
         $acceptances = RiskAcceptance::select('risk_acceptance_id', 'risk_acceptance_source')->distinct()->get();
@@ -35,42 +54,15 @@ class RiskMethodologyController extends Controller
         $objectives = Objective::select('id', 'objective_id', 'objective')->get();
 
 
-        return view('4-Process/7-Risk/2-RiskMethodologyForm', compact('riskmethod', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectives'));
+        return view('4-Process/risk/risk-methodology/create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectives'));
     }
 
-    public function store(Request $request)
+    public function store(RiskMethodologyRequest $request)
     {
-        // Validation
-        $attributes = $request->validate([
-            'risk_methodology_id' => ['required', 'unique:risk_methodology_table'],
-            'background' => 'nullable',
-            'owner_id' => 'nullable',
-            'risk_methodology_source' => 'nullable',
-            'asset_identification' => 'nullable',
-            'threat_identification' => 'nullable',
-            'vulnerability_identification' => 'nullable',
-            'risk_appetite_determination' => 'nullable',
-            'risk_assessment_approach' => 'nullable',
-            'risk_name' => 'nullable',
-            'risk_treatment' => 'nullable',
-            'residual_risk' => 'nullable',
-            'risk_acceptance' => 'nullable',
-            'risk_audit' => 'nullable',
-            'risk_change_management' => 'nullable',
-            'scope' => 'nullable',
-            'scope' => 'nullable',
-            'objectives' => 'nullable',
-            'context' => 'nullable',
-            'risk_identification' => 'nullable',
-            'risk_analysis' => 'nullable',
-            'risk_evaluation' => 'nullable',
-            'documentation' => 'nullable',
-            'alignment_iso' => 'nullable',
-        ]);
-
+        $attributes = $request->validated();
+        
         $objectives = $attributes['objectives'];
         unset($attributes['objectives']);
-
 
         $methodology = RiskMethodology::create($attributes);
 
@@ -80,14 +72,12 @@ class RiskMethodologyController extends Controller
                 ->attach($objectivesArray);
         }
 
-        return redirect()->route('riskmethod.index')->with('success', 'Risk Method saved successfully.');
+        return redirect()->route($this->_routeName . '.index')->with('success', 'Risk Methodology Saved Successfully.');
     }
 
-    // To edit the table
-    public function edit(RiskMethodology $riskmethod)
+    public function edit(RiskMethodology $riskMethodology)
     {
-
-        $data = $riskmethod;
+        $data = $riskMethodology;
         $owners = Owner::select('owner_role_id', 'owner_name')->get();
         $appetites =  RiskAppetite::select('risk_appetite_id', 'risk_score')->get();
         $acceptances = RiskAcceptance::select('risk_acceptance_id', 'risk_acceptance_source')->distinct()->get();
@@ -98,43 +88,14 @@ class RiskMethodologyController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
         $objectives = Objective::select('id', 'objective_id', 'objective')->get();
-        $objectiveIds = $riskmethod->objectives()->pluck('objectives.objective_id')->toArray();
+        $objectiveIds = $riskMethodology->objectives()->pluck('objectives.objective_id')->toArray();
 
-        return view('4-Process/7-Risk/2-RiskMethodologyForm', compact('riskmethod', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectiveIds', 'objectives'));
+        return view('4-Process/risk/risk-methodology/create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectiveIds', 'objectives'));
     }
 
-
-
-
-    public function update(RiskMethodology $riskMethodology, Request $request)
+    public function update(RiskMethodology $riskMethodology, RiskMethodologyRequest $request)
     {
-        // Validation
-        $attributes = $request->validate([
-            'risk_methodology_id' => ['required', 'unique:risk_methodology_table,risk_methodology_id,' . $riskMethodology->id],
-            'background' => 'nullable',
-            'owner_id' => 'nullable',
-            'risk_methodology_source' => 'nullable',
-            'asset_identification' => 'nullable',
-            'threat_identification' => 'nullable',
-            'vulnerability_identification' => 'nullable',
-            'risk_appetite_determination' => 'nullable',
-            'risk_assessment_approach' => 'nullable',
-            'risk_name' => 'nullable',
-            'risk_treatment' => 'nullable',
-            'residual_risk' => 'nullable',
-            'risk_acceptance' => 'nullable',
-            'risk_audit' => 'nullable',
-            'risk_change_management' => 'nullable',
-            'scope' => 'nullable',
-            'scope' => 'nullable',
-            'objectives' => 'nullable',
-            'context' => 'nullable',
-            'risk_identification' => 'nullable',
-            'risk_analysis' => 'nullable',
-            'risk_evaluation' => 'nullable',
-            'documentation' => 'nullable',
-            'alignment_iso' => 'nullable',
-        ]);
+        $attributes = $request->validated();
 
         $objectives = $attributes['objectives'];
         unset($attributes['objectives']);
@@ -147,24 +108,10 @@ class RiskMethodologyController extends Controller
                 ->sync($objectivesArray);
         }
 
-        return redirect()->route('riskmethod.index')->with('success', 'Risk Method saved successfully.');
+        return redirect()->route($this->_routeName . '.index')->with('success', 'Risk Method saved successfully.');
     }
 
-    //--------------------------------------------------------------------//
-
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
-    {
-        $columns = RiskMethodology::with('asset', 'risk', 'owner')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-
-        return view('4-Process/7-Risk/2-RiskMethodologyList', compact('routeName', 'columns', 'primaryKey'));
-    }
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         $attributes = $request->validate([
             'record' => ['required'],
@@ -175,21 +122,5 @@ class RiskMethodologyController extends Controller
         $data->delete();
 
         return redirect(route($this->_routeName . '.index'));
-
-        
-    }
-
-
-
-    // 4.Controller - DETAILED TABLE
-    public function show(RiskMethodology $riskMethodology)
-    {
-        $data = $riskMethodology->load('owner', 'appetite', 'acceptance', 'asset', 'threat', 'vulnerability', 'risk');
-
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-
-        return view('4-Process/7-Risk/2-RiskMethodologyTable', compact('riskMethodology', 'routeName', 'data', 'primaryKey'));
     }
 }

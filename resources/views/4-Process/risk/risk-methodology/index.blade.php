@@ -53,7 +53,7 @@
 
     <!-- CONTENT -->
     <div class="IndiTable">
-        <form method="POST" action="{{ route('riskmethod.delete') }}" id="deleteForm">
+        <form method="POST" action="{{ route($routeName . '.destroy') }}" id="deleteForm">
             @csrf
             @method('DELETE')
             <div class="TableHeading">
@@ -114,19 +114,19 @@
                                 <p class="ListHeadEngTxt">Risk</p>
                             </th>
                         </tr>
-                        @foreach ($columns as $data)
+                        @foreach ($riskMethodologies as $riskMethodology)
                             <tr>
                                 <td>
                                     <input type="radio" name="record" class="record"
-                                        value="{{ $data->risk_methodology_id }}" required>
+                                        value="{{ $riskMethodology->id }}" required>
                                 </td>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td><a
-                                        href="/risk-methodology-table/{{ $data->risk_methodology_id }}">{{ $data->risk_methodology_id }}</a>
+                                        href="{{ route($routeName . '.show', $riskMethodology->id) }}">{{ $riskMethodology->risk_methodology_id }}</a>
                                 </td>
-                                <td>{{ $data->owner?->owner_name }}</td>
-                                <td>{{ $data->asset?->asset_name }}</td>
-                                <td>{{ $data->risk?->risk_name }}</td>
+                                <td>{{ $riskMethodology->owner?->owner_name }}</td>
+                                <td>{{ $riskMethodology->asset?->asset_name }}</td>
+                                <td>{{ $riskMethodology->risk?->risk_name }}</td>
                             </tr>
                         @endforeach
                     </table>
@@ -152,7 +152,7 @@
             event.preventDefault();
             const selectedRadio = document.querySelector('.record:checked');
             if (selectedRadio) {
-                window.location.href = `/risk-methodology/edit/${selectedRadio.value}`;
+                window.location.href = `/risk-methodology/${selectedRadio.value}/edit`;
             } else {
                 alert('Please select a record.');
             }
