@@ -1,11 +1,12 @@
 <style>
     .IndiTable .ButtonContainer {
         gap: 10px;
-        margin-right: 30px;  
+        margin-right: 30px;
     }
 
     .MoreButton,
-    .DisabledButton, .RightButton {
+    .DisabledButton,
+    .RightButton {
         margin-right: auto;
     }
 </style>
@@ -21,8 +22,8 @@
         </a>
     </li>
     <li
-        class="{{ request()->routeIs('riskmethod.index') || request()->routeIs('riskmethod.show') || request()->routeIs('riskmethod.create') || request()->routeIs('riskmethod.edit') ? 'active' : '' }}">
-        <a href="/risk-methodology-list">
+        class="{{ request()->routeIs('risk-methodology.index') || request()->routeIs('risk-methodology.show') || request()->routeIs('risk-methodology.create') || request()->routeIs('risk-methodology.edit') ? 'active' : '' }}">
+        <a href="{{ route('risk-methodology.index') }}">
             <i class='bx bxs-label'></i>
             <div class="MenuTxt">
                 <h3>منهجية المخاطر</h3>

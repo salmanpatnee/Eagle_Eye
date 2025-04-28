@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool">
-    <meta name="description" content="Zain Cloud GRC Tool">
-    <!-- Boxicons Icons-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
+@extends('4-Process.risk.risk-methodology.layout')
+@push('styles')
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
     <style>
         h1 {
             font-size: 1.7em;
@@ -59,43 +45,9 @@
             }
         }
     </style>
-</head>
+@endpush
 
-<body>
-
-
-    <!-- SIDEBAR -->
-    <section id="sidebar">
-        <header>
-            <div class="Header">
-                <a href="/compliance">
-                    <i class='bx bx-home'></i>
-                </a>
-                <p class="bold-arbtext">العمليات</p>
-                <p class="bold-text">Processes</p>
-                <i class='bx bx-right-arrow-alt'></i>
-                <div class="HeadingTxt">
-                    <p class="ArbTxt">تحديد المخاطر</p>
-                    <p class="EngTxt">Risk Identification</p>
-                </div>
-                <div class="text-center d-flex gap-3" style="margin-left: auto">
-                    @include('partials.roles')
-                    <div class="RightButtonContainer">
-                        <button type="button" class="RightButton" onclick="goBack()">
-                            <p>للخلف</p>
-                            <p>Back</p>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
-        @include('4-Process/7-Risk/risksidebar')
-    </section>
-    <!-- SIDEBAR -->
-
-
-
-    <!-- CONTENT -->
+@section('content')
     <div class="IndiTable">
 
         <div class="TableHeading">
@@ -104,7 +56,7 @@
                 <p class="PageHeadEngTxt">Risk Methodology</p>
             </div>
             <div class="ButtonContainer">
-                <a href="{{route($routeName.'.index')}}" class="MoreButton">
+                <a href="{{ route($routeName . '.index') }}" class="MoreButton">
                     <p class="ButtonArbTxt">منظر</p>
                     <p class="ButtonEngTxt">View</p>
                 </a>
@@ -143,7 +95,7 @@
             </div>
         </div>
         <form id="form"
-            action="{{ isset($riskMethodology) ? route($routeName . '.update', $riskMethodology->id) : route($routeName.'.store') }}"
+            action="{{ isset($riskMethodology) ? route($routeName . '.update', $riskMethodology->id) : route($routeName . '.store') }}"
             method="POST">
             @csrf
             @if (isset($riskMethodology))
@@ -208,8 +160,8 @@
                                 <p class="FieldHeadEngTxt">Scope</p>
                                 <p class="FieldHeadArbTxt">نِطَاق</p>
                             </div>
-                            <p><input type="text" name="scope" id="scope" class="bg-tx"
-                                    placeholder="Write Scope" value="{{ old('scope', $riskMethodology?->scope) }}">
+                            <p><input type="text" name="scope" id="scope" class="bg-tx" placeholder="Write Scope"
+                                    value="{{ old('scope', $riskMethodology?->scope) }}">
                                 @error('scope')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -313,7 +265,7 @@
                     </div>
 
 
-                    
+
                     <div class="ContentTable">
                         <div class="column">
                             <div class="FieldHead">
@@ -381,8 +333,8 @@
                                 <p class="FieldHeadArbTxt">تحديد مخاطر الجوع</p>
                             </div>
 
-                            <select name="risk_appetite_determination" id="risk_appetite_determination"
-                                class="sh-tx" required>
+                            <select name="risk_appetite_determination" id="risk_appetite_determination" class="sh-tx"
+                                required>
                                 <option value="">Select Appetite Score</option>
                                 @foreach ($appetites as $appetite)
                                     <option value="{{ $appetite->risk_appetite_id }}"
@@ -478,12 +430,12 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                             {{-- <p><input type="text" name="risk_acceptance" id="risk_acceptance" class="sh-tx"
-                                    placeholder="Write Risk Acceptance"
-                                    value="{{ old('risk_acceptance', $riskMethodology?->risk_acceptance) }}">
-                                @error('risk_acceptance')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </p> --}}
+                                placeholder="Write Risk Acceptance"
+                                value="{{ old('risk_acceptance', $riskMethodology?->risk_acceptance) }}">
+                            @error('risk_acceptance')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </p> --}}
                         </div>
                     </div>
                     <div class="ContentTablebg">
@@ -523,63 +475,34 @@
 
     <x-modal id="objectivesModal" title="Select Objectives" :data="$objectives" :selectedvalues="isset($objectiveIds) ? $objectiveIds : []"
         checkboxClass="objectiveCheckbox" id_key="objective_id" value_key="objective" />
+@endsection
 
-    @include('components.delete-confirmation-modal')
+
+@push('scripts')
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
     <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'), {
-                height: 300
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        const editorSelectors = [
+            '#editor',
+            '#risk_identification',
+            '#risk_analysis',
+            '#risk_evaluation',
+            '#documentation',
+            '#alignment_iso'
+        ];
 
+        editorSelectors.forEach(selector => {
             ClassicEditor
-            .create(document.querySelector('#risk_identification'), {
-                height: 300
-            })
-            .catch(error => {
-                console.error(error);
-            });
+                .create(document.querySelector(selector), {
+                    height: 300
+                })
+                .catch(error => {
+                    console.error(`Error initializing editor for ${selector}:`, error);
+                });
+        });
 
-            ClassicEditor
-            .create(document.querySelector('#risk_analysis'), {
-                height: 300
-            })
-            .catch(error => {
-                console.error(error);
-            });
 
-            ClassicEditor
-            .create(document.querySelector('#risk_evaluation'), {
-                height: 300
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-            ClassicEditor
-            .create(document.querySelector('#documentation'), {
-                height: 300
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-            ClassicEditor
-            .create(document.querySelector('#alignment_iso'), {
-                height: 300
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-        function goBack() {
-            window.history.back();
-        }
 
         function showDeleteModal() {
             window.deleteConfirmationModal.show(document.getElementById('delete_form'));
@@ -604,6 +527,4 @@
             }
         });
     </script>
-</body>
-
-</html>
+@endpush

@@ -1,57 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool">
-    <meta name="description" content="Zain Cloud GRC Tool">
-    <!-- Boxicons Icons-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
-</head>
-
-<body>
-
-
-    <!-- SIDEBAR -->
-    <section id="sidebar">
-        <header>
-            <div class="Header">
-                <a href="/compliance">
-                    <i class='bx bx-home'></i>
-                </a>
-                <p class="bold-arbtext">العمليات</p>
-                <p class="bold-text">Processes</p>
-                <i class='bx bx-right-arrow-alt'></i>
-                <div class="HeadingTxt">
-                    <p class="ArbTxt">تحديد المخاطر</p>
-                    <p class="EngTxt">Risk Identification</p>
-                </div>
-                <div class="text-center d-flex gap-3" style="margin-left: auto">
-                    @include('partials.roles')
-                    <div class="RightButtonContainer">
-                        <button type="button" class="RightButton" onclick="goBack()">
-                            <p>للخلف</p>
-                            <p>Back</p>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </header>
-        @include('4-Process/7-Risk/risksidebar')
-    </section>
-    <!-- SIDEBAR -->
-
-
-
-    <!-- CONTENT -->
+@extends('4-Process.risk.risk-methodology.layout')
+@section('content')
     <div class="IndiTable">
         <form method="POST" action="{{ route($routeName . '.destroy') }}" id="deleteForm">
             @csrf
@@ -72,8 +20,7 @@
                         <p class="ButtonEngTxt">Add</p>
                     </a>
 
-                    <a href=""
-                        class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}"
+                    <a href="" class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}"
                         id="btnUpdate">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
@@ -117,8 +64,8 @@
                         @foreach ($riskMethodologies as $riskMethodology)
                             <tr>
                                 <td>
-                                    <input type="radio" name="record" class="record"
-                                        value="{{ $riskMethodology->id }}" required>
+                                    <input type="radio" name="record" class="record" value="{{ $riskMethodology->id }}"
+                                        required>
                                 </td>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td><a
@@ -134,9 +81,9 @@
             </div>
         </form>
     </div>
+@endsection
 
-    @include('components.delete-confirmation-modal')
-    <script src="{{ asset('js/delete-confirmation.js') }}"></script>
+@push('scripts')
     <script>
         document.getElementById('btnDelete').addEventListener('click', function(event) {
             event.preventDefault();
@@ -157,11 +104,5 @@
                 alert('Please select a record.');
             }
         });
-
-        function goBack() {
-            window.history.back();
-        }
     </script>
-</body>
-
-</html>
+@endpush
