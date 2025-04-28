@@ -732,16 +732,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('risk-methodology', RiskMethodologyController::class)->except(['destroy']);
     Route::delete('/risk-methodology/delete', [RiskMethodologyController::class, 'destroy'])->name('risk-methodology.destroy');
 
-    // Route::controller(RiskMethodologyController::class)->group(function () {
-    //     Route::get('/risk-methodology-list', 'index')->name('riskmethod.index');
-    //     Route::get('/risk-methodology-table/{riskMethodology:risk_methodology_id}', 'show')->name('riskmethod.show');;
-    //     Route::get('/risk-methodology-input', 'create')->name('riskmethod.create');
-    //     Route::get('/risk-methodology/edit/{riskmethod:risk_methodology_id}', 'edit')->name('riskmethod.edit');
-    //     Route::post('/risk-methodology', 'store')->name('riskmethod.store');
-    //     Route::put('/risk-methodology/{riskMethodology}', 'update')->name('riskmethod.update');
-    //     Route::delete('/risk-methodology/delete', 'delete')->name('riskmethod.delete');
-    // });
-
 
     // ------------Risk Type--------------
 
