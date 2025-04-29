@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RiskMethodologyRequest;
 use App\Models\Asset;
 use App\Models\Objective;
+use App\Models\Organization;
 use App\Models\Owner;
 use App\Models\Risk;
 use App\Models\RiskAcceptance;
@@ -30,13 +31,18 @@ class RiskMethodologyController extends Controller
 
     public function show(RiskMethodology $riskMethodology)
     {
-        $data = $riskMethodology->load('owner', 'appetite', 'acceptance', 'asset', 'threat', 'vulnerability', 'risk');
+        $data = $riskMethodology->load('owner', 'appetite', 'acceptance', 'asset', 'threat', 'vulnerability', 'risk', 'objectives');
 
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
 
-        return view('4-Process/risk/risk-methodology/show', compact('riskMethodology', 'routeName', 'data', 'primaryKey'));
+        // return view('4-Process/risk/risk-methodology/show', compact('riskMethodology', 'routeName', 'data', 'primaryKey'));
+
+        $organization = Organization::first();
+        $riskAppetites =  RiskAppetite::select('risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name')->orderBy('risk_appetite_id')->get(); 
+        $impacts = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Catastrophic'];     
+        return view('4-Process/risk/risk-methodology/report', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
     }
 
     public function create()
