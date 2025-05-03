@@ -203,6 +203,18 @@
         </a>
     </div>
     <div class="processes">
+        <a href="/risk-methodology" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">منهجية المخاطر</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Risk Methodology</p>
+                </div>
+            </div>
+        </a>
         <a href="/risk-identification-list" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
@@ -227,6 +239,9 @@
                 </div>
             </div>
         </a>
+        
+    </div>
+    <div class="processes">
         <a href="/control-identification-list" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
@@ -239,8 +254,6 @@
                 </div>
             </div>
         </a>
-    </div>
-    <div class="processes">
         <a href="/risk-treatment" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
@@ -265,6 +278,8 @@
                 </div>
             </div>
         </a>
+    </div>
+    <div class="processes">
         <a href="/risk-acceptance-list" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
@@ -277,8 +292,6 @@
                 </div>
             </div>
         </a>
-    </div>
-    <div class="processes">
         <a href="/risk-register" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
@@ -303,8 +316,7 @@
                 </div>
             </div>
         </a>
-        <div class="spacebox"></div>
-
+       
     </div>
     <!-- Reporting -->
     <div>
