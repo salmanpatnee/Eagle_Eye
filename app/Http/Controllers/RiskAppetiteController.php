@@ -22,6 +22,7 @@ class RiskAppetiteController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
+        
         return view('4-Process/7-Risk/5-RiskAppetiteList', compact('riskAppetites', 'routeName',  'primaryKey', 'data', 'result', 'impacts', 'riskAppetite'));
     }
 

@@ -14,7 +14,7 @@ use App\Models\RiskMethodology;
 use App\Models\ThreatAgent;
 use App\Models\Vulnerability;
 use Illuminate\Http\Request;
-
+use Mpdf\Mpdf;
 class RiskMethodologyController extends Controller
 {
     private $_routeName = "risk-methodology";
@@ -42,7 +42,36 @@ class RiskMethodologyController extends Controller
         $organization = Organization::first();
         $riskAppetites =  RiskAppetite::select('risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name')->orderBy('risk_appetite_id')->get(); 
         $impacts = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Catastrophic'];     
-        return view('4-Process/risk/risk-methodology/report', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
+
+        if (request()->has('pdf')) {
+            // Increase PCRE backtrack limit
+            // ini_set('pcre.backtrack_limit', '1000000');
+
+            $mpdf = new Mpdf();
+            $bootstrapCSS = file_get_contents('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
+            $mpdf->WriteHTML($bootstrapCSS, \Mpdf\HTMLParserMode::HEADER_CSS);
+
+            // Get the HTML content
+            $html = view("4-Process/risk/risk-methodology/pdf", compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'))->render();
+
+            // Split HTML into smaller chunks (e.g. 500KB each)
+            $chunks = str_split($html, 500000);
+
+            // Write HTML chunks separately
+            foreach ($chunks as $chunk) {
+                $mpdf->WriteHTML($chunk);
+            }
+
+            // Set the headers to prompt the file download
+            return response($mpdf->Output("RiskMethodology.pdf", 'D'))
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="RiskMethodology.pdf"');
+        } else {
+
+            // return view("{$path}/index", compact('report', 'controlAssessmentId'));
+            return view('4-Process/risk/risk-methodology/report', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
+        }
+        
     }
 
     public function create()
