@@ -122,6 +122,24 @@
                         </div>
                         <div class="column">
                             <div class="FieldHead">
+                                <p class="FieldHeadEngTxt">Risk Methodology Name</p>
+                                <p class="FieldHeadArbTxt">اسم منهجية المخاطر</p>
+                            </div>
+                            <p><input type="text" name="risk_methodology_name" id="risk_methodology_name" class="sh-tx"
+                                    placeholder="Enter Risk Methodology Name"
+                                    value="{{ old('risk_methodology_name', $riskMethodology?->risk_methodology_name) }}"
+                                    required>
+                                @error('risk_methodology_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </p>
+                        </div>
+
+                        
+                    </div>
+                    <div class="ContentTable">
+                        <div class="column">
+                            <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Risk Function Owner</p>
                                 <p class="FieldHeadArbTxt">صاحب منهجية المخاطر</p>
                             </div>
@@ -138,6 +156,14 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="column">
+
+                            <x-label label="Objectives" label_ar="أهداف" />
+                            <x-modal-button modal_id="objectivesModal" label="Add objectives" name="objectives"
+                                :data="isset($objectiveIds) ? json_encode($objectiveIds) : ''" />
+
+                        </div>
+                        
                     </div>
                     <div class="ContentTablebg">
                         <div class="column">
@@ -184,18 +210,7 @@
                         </div>
                     </div>
 
-                    <div class="ContentTable">
-                        <div class="column">
-
-                            <x-label label="Objectives" label_ar="أهداف" />
-                            <x-modal-button modal_id="objectivesModal" label="Add objectives" name="objectives"
-                                :data="isset($objectiveIds) ? json_encode($objectiveIds) : ''" />
-
-                        </div>
-                        <div class="column">
-
-                        </div>
-                    </div>
+                    
 
 
                     <div class="">

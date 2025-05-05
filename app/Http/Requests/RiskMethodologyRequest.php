@@ -32,6 +32,7 @@ class RiskMethodologyRequest extends FormRequest
                 Rule::unique('risk_methodology_table', 'risk_methodology_id')
                     ->ignore($riskMethodologyId, 'risk_methodology_id'),
             ],
+            'risk_methodology_name' => 'nullable',
             'background' => 'nullable',
             'owner_id' => 'nullable',
             'risk_methodology_source' => 'nullable',
