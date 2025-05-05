@@ -46,19 +46,15 @@
                             </th>
                             <th style="padding-right: 0px;">
                                 <p class="ListHeadArbTxt">رمز منهجية المخاطر</p>
-                                <p class="ListHeadEngTxt">Risk Method ID</p>
+                                <p class="ListHeadEngTxt">Risk Methodology ID</p>
                             </th>
-                            <th style="padding-right: 100px;">
-                                <p class="ListHeadArbTxt">صاحب منهجية المخاطر</p>
-                                <p class="ListHeadEngTxt">Function Owner Name</p>
+                            <th style="padding-right: 0px;">
+                                <p class="ListHeadArbTxt">اسم منهجية المخاطر</p>
+                                <p class="ListHeadEngTxt">Risk Methodology Name</p>
                             </th>
-                            <th style="padding-right: 100px;">
-                                <p class="ListHeadArbTxt">صاحب منهجية المخاطر</p>
-                                <p class="ListHeadEngTxt">Asset</p>
-                            </th>
-                            <th style="padding-right: 100px;">
-                                <p class="ListHeadArbTxt"> المخاطر</p>
-                                <p class="ListHeadEngTxt">Risk</p>
+                            <th style="padding-right: 0px;">
+                                <p class="ListHeadArbTxt">مصدر منهجية المخاطر</p>
+                                <p class="ListHeadEngTxt">Risk Methodology Source</p>
                             </th>
                         </tr>
                         @foreach ($riskMethodologies as $riskMethodology)
@@ -71,9 +67,8 @@
                                 <td><a
                                         href="{{ route($routeName . '.show', $riskMethodology->id) }}">{{ $riskMethodology->risk_methodology_id }}</a>
                                 </td>
-                                <td>{{ $riskMethodology->owner?->owner_name }}</td>
-                                <td>{{ $riskMethodology->asset?->asset_name }}</td>
-                                <td>{{ $riskMethodology->risk?->risk_name }}</td>
+                                <td>{{ $riskMethodology->risk_methodology_name }}</td>
+                                <td>{{ $riskMethodology->risk_methodology_source }}</td>
                             </tr>
                         @endforeach
                     </table>

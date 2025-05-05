@@ -22,7 +22,7 @@ class RiskMethodologyController extends Controller
 
     public function index()
     {
-        $riskMethodologies = RiskMethodology::with('asset', 'risk', 'owner')->get();
+        $riskMethodologies = RiskMethodology::all();
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
@@ -31,7 +31,7 @@ class RiskMethodologyController extends Controller
 
     public function show(RiskMethodology $riskMethodology)
     {
-        $data = $riskMethodology->load('owner', 'appetite', 'acceptance', 'asset', 'threat', 'vulnerability', 'risk', 'objectives');
+        $data = $riskMethodology->load('objectives');
 
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
