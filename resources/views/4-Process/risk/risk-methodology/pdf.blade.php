@@ -162,12 +162,24 @@
                 <p class="sh-tx">No Logo</p>
             @else
                 <img src="{{ asset('storage/' . $organization->organization_logo) }}" alt="Organization Logo"
-                    class="mb-4">
+                    class="mb-4" width="250">
             @endif
-            <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold mb-0 arabic-text">{{ $organization->organization_name_arabic }}</p>
-            <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold mb-0">{{ $organization->organization_name_english }}</p>
-            <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold mb-0">Risk Methodology Report </p>
-            <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold">{{ \Carbon\Carbon::now()->format('F j, Y') }}</p>
+            <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold mb-0 arabic-text">
+                {{ $organization->organization_name_arabic }}</p>
+            <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold mb-0">
+                {{ $organization->organization_name_english }}</p>
+            @if ($riskMethodology->risk_methodology_id == 'RM-001')
+                <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold mb-0">Risk Methodology Report Based on
+                    ISO-27005</p>
+            @elseif ($riskMethodology->risk_methodology_id == 'RM-002')
+                <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold mb-0">Risk Methodology Report Based on
+                    ISO-31000</p>
+            @else
+                <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold mb-0">Risk Methodology Report</p>
+            @endif
+
+            <p style="font-weight: bold;" class="lead text-dark fs-5 fw-bold">
+                {{ \Carbon\Carbon::now()->format('F j, Y') }}</p>
         </header>
 
         <main>
@@ -176,6 +188,8 @@
                 <section class="mb-2">
                     <p><b style="font-weight: bold">Risk Methodology ID</b>: {{ $riskMethodology->risk_methodology_id }}
                     </p>
+                    <p><b style="font-weight: bold">Risk Methodology Name</b>:
+                        {{ $riskMethodology->risk_methodology_name }}</p>
                 </section>
                 <hr>
                 <section class="mb-2">
@@ -190,7 +204,7 @@
                         {{ $riskMethodology->risk_methodology_source }}</p>
 
                 </section>
-                
+
                 <section class="mb-2">
                     <h3 class="text-accent h4" style="font-size: 21px; font-weight: bold">Objectives:</h3>
                     <ul>
@@ -273,7 +287,7 @@
                     </div>
                 </section>
                 <section class="mb-2">
-                    <h3 class="text-accent h4" style="font-size: 21px; font-weight: bold">Alignment with ISO/IEC 27005:
+                    <h3 class="text-accent h4" style="font-size: 21px; font-weight: bold">Alignment with ISO/IEC 27005 / 31000:
                     </h3>
                     <div
                         style="font-size: 18px; text-align: justify; line-height: 24px; margin-top:20px; margin-bottom:20px;">

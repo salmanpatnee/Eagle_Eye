@@ -60,6 +60,7 @@ class RiskMethodologyController extends Controller
             // Write HTML chunks separately
             foreach ($chunks as $chunk) {
                 $mpdf->WriteHTML($chunk);
+
             }
 
             // Set the headers to prompt the file download
@@ -67,9 +68,7 @@ class RiskMethodologyController extends Controller
                 ->header('Content-Type', 'application/pdf')
                 ->header('Content-Disposition', 'attachment; filename="RiskMethodology.pdf"');
         } else {
-
-            // return view("{$path}/index", compact('report', 'controlAssessmentId'));
-            return view('4-Process/risk/risk-methodology/report', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
+            return view('4-Process/risk/risk-methodology/show', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
         }
         
     }

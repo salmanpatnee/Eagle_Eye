@@ -15,275 +15,292 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/report.css') }}">
     <style>
-        .tablehead tr th {
-            background-color: #373E49;
-            padding: .5em 0;
-            border: 1px solid #fff;
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200;300;400;500;600;700;800;900&display=swap");
+
+        @font-face {
+            font-family: 'DejaVu Sans';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ asset('fonts/DejaVuSans.ttf') }}') format('truetype');
         }
 
-        .tablehead tr th p {
+        body {
+            /* font-family: 'DejaVu Sans', sans-serif; */
+            /* direction: rtl; */
+            background: #fff;
+            font-family: "Roboto", sans-serif;
+            font-size: 12px;
             margin: 0;
-            line-height: 1.5em;
-            white-space: nowrap;
         }
 
-        th.bg-light-gray {
-            background-color: #203864 !important;
-            color: #fff !important;
-            padding: 0.7em !important;
-            font-weight: 500;
+        .arabic-text {
+            font-family: "Noto Sans Arabic", sans-serif;
         }
 
-        .rtablearea {
-            line-height: 10px;
-            position: absolute;
-            width: 100%;
-            top: 200px;
+        ul li {
+            line-height: 2em;
         }
 
-        tbody tr {
-            vertical-align: top;
+        section#heatmap {
+            margin-block: 3em;
+            width: 97%;
         }
 
-        tbody td {
-            white-space: nowrap;
-            border: 1px solid #000;
-            padding: 12px;
-            line-height: 1.2em;
+        section#heatmap th,
+        section#heatmap td {
+            border: 1px solid #fff;
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        section#heatmap th {
+            background-color: #fff;
+            color: #505050;
+            padding: 1em 0;
             text-align: center;
         }
 
-        tbody td.list {
-
-            text-align: left;
+        section#heatmap tr.heads th {
+            background: #E6E7E8;
+            text-transform: uppercase;
         }
 
-        tbody td span {
-            line-height: 1.5em;
+        section#heatmap td p {
+            line-height: 2em;
         }
 
-        tbody td a {
-    margin-bottom: .5em;
-    display: inline-block;
-    color: black;
-}
-
-        tr:nth-child(even) {
-            background-color: #D9D9D9;
-            /* White for even rows */
+        td.impact {
+            font-weight: 500;
+            background-color: white;
+            padding: 1.5em 0;
         }
-        td.big-text {
-    white-space: initial;
-    /* width: 200px; */
-}
-td.big-text p {
-    width: 300px;
-    text-align: left;
-}
-        @media (min-width: 1024px) and (max-width: 1179px) {
-            .rtablearea {
-                overflow-x: auto;
-            }
+
+        .very-low {
+            background-color: #00b050;
+        }
+
+        .low {
+            background-color: #a8d08d;
+        }
+
+        .medium {
+            background-color: #ffff00;
+        }
+
+        .high {
+            background-color: #ffc000;
+        }
+
+        .critical {
+            background-color: #ff0000;
+            color: white;
+        }
+
+        div#riskAppetiteContent {
+            background-color: #fff;
+        }
+
+        button.btn {
+            background-color: black;
+            padding: .5em;
+            width: 120px;
+            margin: .5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .text-end {
+            text-align: right;
+        }
+
+        .bg-accent {
+            background-color: #224070;
+        }
+
+        .text-accent {
+            color: #224070;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .action-buttons-container {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .btn-report {
+            background-color: #00fbff;
+            color: black;
+            border-radius: 20px;
+            border: solid #00fbff;
+            transition-duration: 0.3s;
+            font-size: 14px;
+            text-align: center;
+            margin: 0 .2em;
+            text-decoration: none;
+            padding: .2em .5em;
+        }
+
+        .btn-report:hover {
+            background-color: white;
+            border: solid 2px black;
+            color: black;
         }
     </style>
 </head>
 
 <body>
-    <div class="fixposition">
-        <div class="dheadersec">
-            <div class="dheaderleft">
-                <div class="dheadericon">
-                    <a href="/compliance" class="text-white">
-                        <i class='bx bx-home'></i>
-                    </a>
-                </div>
-                <div class="dheadertext">
-                    <p>العمليات</p>
-                    <p>Processes</p>
-                </div>
+    <div class="dheadersec">
+        <div class="dheaderleft">
+            <div class="dheadericon">
+                <a href="/compliance" class="text-white">
+                    <i class='bx bx-home'></i>
+                </a>
             </div>
-            <div class="d-flex align-items-center gap-3">
-                @include('partials.roles')
-                <div class="dheaderright">
-                    <button type="dbutton" class="dbutton" onclick="goBack()">
-                        <p>للخلف</p>
-                        <p>Back</p>
-                    </button>
-                </div>
+            <div class="dheadertext">
+                <p>العمليات</p>
+                <p>Processes</p>
             </div>
         </div>
-        <div class="herosec">
-            <div class="herosecleft">
-                <h3>منهجية المخاطر</h3>
-                <h3>Risk Methodology</h3>
-            </div>
-            <div>
-                {{-- <form action="/risk-register">
-                    <div class="filter-row">
 
-                        <div class="col">
-                            <label class="form-label" for="risk">
-                                <p>Risk</p>
-                                <p>المخاطر</p>
-                            </label>
-                            <select class="form-select" name="risk" id="risk" onchange="this.form.submit()">
-                                <option value="">All</option>
-                                @foreach ($risks as $risk)
-                                    <option value="{{ $risk->risk_id }}"
-                                        @if ($risk->risk_id == request('risk')) selected @endif>{{ $risk->risk_id }} -
-                                        {{ $risk->risk_name }}</option>
-                                @endforeach
+        <div class="text-center ms-5">
+            <a href="{{ route('risk-methodology.show', $riskMethodology->id) }}?pdf=1" class="btn btn-report ms-5"><span
+                    class="d-block">تنزيل بصيغة بي دي إف</span> <span>Download as PDF</span></a>
+        </div>
 
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label class="form-label" for="asset_group">
-                                <p>Risk Treatment Action Status</p>
-                                <p>خيارات علاج المخاطر</p>
-                            </label>
-                            <select class="form-select" name="riskTreatment" id="riskTreatment"
-                                onchange="this.form.submit()">
-                                <option value="">All</option>
-                                @foreach ($riskTreatments as $riskTreatment)
-                                    <option value="{{ $riskTreatment->risk_treatment_id }}"
-                                        @if ($riskTreatment->risk_treatment_id == request('riskTreatment')) selected @endif>
-                                        {{ $riskTreatment->risk_treatment_id }} -
-                                        {{ $riskTreatment->risk_treatment_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label class="form-label" for="asset_group">
-                                <p>Last Evalution Date</p>
-                                <p>تاريخ التقييم الأخير</p>
-                            </label>
-                            <input type="date" class="form-select" name="evalutionDate" id="evalutionDate"
-                                value="{{ old('evalutionDate', request('evalutionDate')) }}"
-                                onchange="this.form.submit()">
 
-                        </div>
-                    </div>
-                </form> --}}
+        <div class="d-flex align-items-center gap-3">
+            @include('partials.roles')
+            <div class="dheaderright">
+                <button type="dbutton" class="dbutton" onclick="goBack()">
+                    <p>للخلف</p>
+                    <p>Back</p>
+                </button>
             </div>
         </div>
     </div>
-    <div class="rtablearea">
-        <table class="table-response">
-            <thead class="tablehead">
+    <div class="report">
+        <header class="text-center my-5">
+            @if ($organization->organization_logo == null)
+                <p class="sh-tx">No Logo</p>
+            @else
+                <img src="{{ asset('storage/' . $organization->organization_logo) }}" alt="Organization Logo"
+                    width="250" class="mb-4">
+            @endif
+            <p class="lead text-dark fs-5 fw-bold mb-0 arabic-text">{{ $organization->organization_name_arabic }}</p>
+            <p class="lead text-dark fs-5 fw-bold mb-0">{{ $organization->organization_name_english }}</p>
+            @if ($riskMethodology->risk_methodology_id == 'RM-001')
+                <p class="lead text-dark fs-5 fw-bold mb-0">Risk Methodology Report Based on ISO-27005</p>
+            @elseif ($riskMethodology->risk_methodology_id == 'RM-002')
+                <p class="lead text-dark fs-5 fw-bold mb-0">Risk Methodology Report Based on ISO-31000</p>
+            @else
+                <p class="lead text-dark fs-5 fw-bold mb-0">Risk Methodology Report</p>
+            @endif
+            <p class="lead text-dark fs-5 fw-bold">{{ \Carbon\Carbon::now()->format('F j, Y') }}</p>
+        </header>
 
+        <main>
+            <div class="container fs-5">
+                <!-- Introduction Section -->
+                <section class="mb-2">
+                    <p><b style="font-weight: bold">Risk Methodology ID</b>: {{ $riskMethodology->risk_methodology_id }}
+                    </p>
+                    <p><b style="font-weight: bold">Risk Methodology Name</b>:
+                        {{ $riskMethodology->risk_methodology_name }}</p>
+                </section>
+                <hr>
+                <section class="mb-2">
+                    <h3 class="text-accent h4" style="font-size: 24px; font-weight: 500">Background:</h3>
+                    <p class="text-justify" style="font-size: 20px; text-align: justify; line-height: 30px;">
+                        {{ $riskMethodology->background }}</p>
+                </section>
+                <section class="mb-2">
+                    <h3 class="text-accent h4" style="font-size: 24px; font-weight: 500">Source:</h3>
+                    <p class="text-justify" style="font-size: 20px; text-align: justify; line-height: 30px;">
+                        {{ $riskMethodology->risk_methodology_source }}</p>
 
-                <tr>
+                </section>
+                <section class="mb-2">
+                    <h3 class="text-accent h4" style="font-size: 24px; font-weight: 500">Objectives:</h3>
+                    <ul>
+                        @forelse ($riskMethodology->objectives as $objective)
+                            <li style="font-size: 20px; text-align: justify; line-height: 30px;">
+                                {{ $objective->objective }}</li>
+                        @empty
+                    </ul>
+                    @endforelse
+                </section>
+                <section class="mb-2">
+                    <h3 class="text-accent h4" style="font-size: 24px; font-weight: 500">Scope:</h3>
+                    <p class="text-justify" style="font-size: 20px; text-align: justify; line-height: 30px;">
+                        {{ $riskMethodology->scope }}</p>
+                </section>
+                <hr>
+                <section class="mb-2">
 
-                    <th class="bg-light-gray" position:sticky; left: 0; z-index: 3;">
-                        {{-- <p>رمز المخاطر</p> --}}
-                        <p>Risk Methodology ID</p>
-                    </th>
-                    <th class="bg-light-gray">
-                        <p>Owner</p>
-                    </th>
+                    <h3 class="text-accent h4" style="font-size: 24px; font-weight: 500">Risk Assessment Process
+                        Overview:</h3>
+                    <p class="text-justify" style="font-size: 20px; text-align: justify; line-height: 30px;">The risk
+                        assessment process consists of the following steps:</p>
 
-                    <th class="bg-light-gray">
-                        <p>Background</p>
-                    </th>
+                    <small class="fw-bold">Context Establishment</small>
+                    <p>{!! html_entity_decode($riskMethodology?->context) !!}</p>
+                    <small class="fw-bold">Risk Identification</small>
+                    <p>{!! html_entity_decode($riskMethodology?->risk_identification) !!}</p>
+                    <small class="fw-bold">Risk Analysis</small>
+                    <p>{!! html_entity_decode($riskMethodology?->risk_analysis) !!}</p>
+                    <small class="fw-bold">Risk Evaluation</small>
+                    <p>{!! html_entity_decode($riskMethodology?->risk_evaluation) !!}</p>
+                </section>
+                <hr>
+                <section id="heatmap" class="mb-2">
+                    <h3 class="text-accent h4">Risk Heatmap and Risk Rating Matrix:</h3>
 
-                    <th class="bg-light-gray">
-                        <p>Asset Identification</p>
-                    </th>
+                    <table class="w-100">
+                        <tr class="heads">
+                            <th rowspan="2">Impact</th>
+                            <th colspan="5">Likelihood (Probability)</th>
+                        </tr>
+                        <tr>
+                            <th>1 (Rare)</th>
+                            <th>2 (Unlikely)</th>
+                            <th>3 (Possible)</th>
+                            <th>4 (Likely)</th>
+                            <th>5 (Certain)</th>
+                        </tr>
+                        @foreach ($riskAppetites->chunk(5) as $chunk)
+                            <tr>
+                                <td class="impact">{{ $loop->index + 1 }} ({{ $impacts[$loop->index] }})</td>
+                                @foreach ($chunk as $data)
+                                    <td class="{{ $data->risk_appetite_color }}">
+                                        <p><b>Risk ID:</b> {{ $data->risk_appetite_id }}</p>
+                                        <p><b>Risk Name:</b> {{ $data->risk_appetite_name }}</p>
+                                        <p><b>Risk Score:</b> {{ $data->risk_score }}</p>
+                                    </td>
+                                @endforeach
+                            </tr>
+                        @endforeach
 
-                    <th class="bg-light-gray">
-                        <p>Threat Identification</p>
-                    </th>
+                    </table>
+                </section>
+                <hr>
+                <section class="mb-2">
+                    <h3 class="text-accent h4">Documentation and Review:</h3>
 
-                    <th class="bg-light-gray">
-                        <p>Vulnerability Identification</p>
-                    </th>
+                    {!! html_entity_decode($riskMethodology?->documentation) !!}
+                </section>
+                <section class="mb-2">
+                    <h3 class="text-accent h4">Alignment with ISO/IEC 27005 / 31000:</h3>
 
-                    <th class="bg-light-gray">
-                        <p>Risk Appetite</p>
-                    </th>
-
-                    <th class="bg-light-gray">
-                        <p>Risk Assessment Approach</p>
-                    </th>
-
-                    <th class="bg-light-gray">
-                        <p>Risk Response</p>
-                    </th>
-                    <th class="bg-light-gray">
-                        <p>Residual Risk</p>
-                    </th>
-                    <th class="bg-light-gray">
-                        <p>Risk Acceptance</p>
-                    </th>
-                    <th class="bg-light-gray">
-                        <p>Risk Audit</p>
-                    </th>
-                    <th class="bg-light-gray">
-                        <p>Risk Change Management</p>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody style="background-color: white">
-                <tr>
-                    <td>
-                        {{ $riskMethodology->risk_methodology_id }}
-                    </td>
-                    <td>
-                        <a href="{{route('ownerreg.show', $riskMethodology->owner?->owner_id) }}">
-                            {{ $riskMethodology->owner?->owner_name }}
-                        </a>
-                    </td>
-                    <td class="big-text">
-                        <p>
-
-                            {{ $riskMethodology->background }}
-                        </p>
-                    </td>
-                    <td>
-                        <a href="{{route('assetreg.show', $riskMethodology->asset?->asset_id) }}">
-               
-                            {{ $riskMethodology->asset?->asset_name }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{route('threatagent.show', $riskMethodology->threat?->threat_agent_id) }}">
-
-                            {{ $riskMethodology->threat?->threat_agent_name }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{route('va.show', $riskMethodology->vulnerability?->va_id) }}">
-
-                            {{ $riskMethodology->vulnerability?->va_name }}
-                        </a>
-                    </td>
-                    <td>
-                        {{ $riskMethodology->appetite?->risk_appetite_name }}
-                        {{ $riskMethodology->appetite?->risk_score }}
-                    </td>
-                    <td class="big-text">
-                        <p>{{ $riskMethodology->risk_assessment_approach }}</p>
-                    </td>
-                    <td>
-                        {{ $riskMethodology->risk_treatment }}
-                    </td>
-                    <td>
-                        {{ $riskMethodology->residual_risk }}
-                    </td>
-                    <td>
-                        {{ $riskMethodology->acceptance?->risk_acceptance_source }}
-                    </td>
-                    <td class="big-text">
-                        <p>{{ $riskMethodology->risk_audit }}</p>
-                    </td>
-                    <td class="big-text">
-                        <p>{{ $riskMethodology->risk_change_management }}</p>
-                    </td>
-                </tr>
-            </tbody>
-
-        </table>
+                    {!! html_entity_decode($riskMethodology?->alignment_iso) !!}
+                </section>
+            </div>
+        </main>
     </div>
     <script>
         function goBack() {
