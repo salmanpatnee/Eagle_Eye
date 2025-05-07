@@ -15,12 +15,14 @@
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500&display=swap");
         @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200;300;400;500;600;700;800;900&display=swap");
+
         @font-face {
             font-family: 'DejaVu Sans';
             font-style: normal;
             font-weight: normal;
             src: url('{{ asset('fonts/DejaVuSans.ttf') }}') format('truetype');
         }
+
         body {
             /* font-family: 'DejaVu Sans', sans-serif; */
             direction: rtl;
@@ -339,7 +341,13 @@
     </header>
     <main>
         <div class="report-info">
-            <h1 class="arabic-text">تقييم الضوابط</h1>
+            @if ($organizationData)
+                <img src="{{ asset('storage/' . $organizationData?->organization_logo) }}" alt="Organization Logo"
+                    width="200" class="mb-4">
+                <h2 class="arabic-text mt-0">{{ $organizationData->organization_name_arabic }}</h2>
+                <h2 class="arabic-text mt-0">{{ $organizationData->organization_name_english }}</h2>
+            @endif
+            <h2 class="arabic-text">تقييم الضوابط</h2>
             @yield('header')
             <p class="enghead">Current Date: {{ now()->format('d-m-Y') }}</p>
         </div>

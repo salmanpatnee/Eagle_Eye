@@ -184,9 +184,9 @@
                         <select class="form-select" name="owner" id="owner" onchange="this.form.submit()">
                             <option value="">All</option>
                             @foreach ($owners as $owner)
-                                <option value="{{ $owner->owner_role_id }}"
-                                    @if ($owner->owner_role_id == request('owner')) selected @endif>
-                                    {{ $owner->owner_name }}
+                                <option value="{{ $owner?->owner_role_id }}"
+                                    @if ($owner?->owner_role_id == request('owner')) selected @endif>
+                                    {{ $owner?->owner_name }}
                                 </option>
                             @endforeach
                         </select>

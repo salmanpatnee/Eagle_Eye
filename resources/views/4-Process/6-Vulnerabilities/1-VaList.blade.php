@@ -114,8 +114,8 @@
                                             href="/va-table/{{ $vaname->va_id }}">{{ $vaname->va_id }}</a>
                                     </td>
                                     <td>{{ $vaname->va_name }}</td>
-                                    <td>{{ $vaname->type->va_type_name }}</td>
-                                    <td>{{ $vaname->subType->va_sub_type_name }}</td>
+                                    <td>{{ $vaname->type?->va_type_name }}</td>
+                                    <td>{{ $vaname->subType?->va_sub_type_name }}</td>
                                 </tr>
                             @endforeach
                         </table>

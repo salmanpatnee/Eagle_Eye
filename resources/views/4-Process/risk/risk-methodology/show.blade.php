@@ -186,9 +186,7 @@
     </div>
     <div class="report">
         <header class="text-center my-5">
-            @if ($organization->organization_logo == null)
-                <p class="sh-tx">No Logo</p>
-            @else
+            @if ($organization->organization_logo != null)
                 <img src="{{ asset('storage/' . $organization->organization_logo) }}" alt="Organization Logo"
                     width="250" class="mb-4">
             @endif

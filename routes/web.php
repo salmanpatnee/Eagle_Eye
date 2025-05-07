@@ -1238,13 +1238,14 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(RegulatoryExcelReportController::class)->group(function () {
         Route::get('/ecc-regulatory-report-downloads', 'ccc')->name('ecc-regulatory-report.download');
 
-        Route::get('/ecc-regulatory-report-excel', 'downloadExcelReport')->name('ecc-regulatory-report.excel');
+        Route::get('/ecc-regulatory-report-excel', 'ecc')->name('ecc-regulatory-report.excel');
         Route::get('/ecc-2024-regulatory-report-excel', 'downloadEcc2024ExcelReport')->name('ecc-2024-regulatory-report.excel');
         Route::get('/cscc-regulatory-report-excel', 'downloadCsccExcelReport')->name('cscc-regulatory-report.excel');
         Route::get('/ccc-regulatory-report-excel', 'downloadCccExcelReport')->name('ccc-regulatory-report.excel');
         Route::get('/tcc-regulatory-report-excel', 'downloadTccExcelReport')->name('tcc-regulatory-report.excel');
         Route::get('/osmacc-regulatory-report-excel', 'downloadOsmaccExcelReport')->name('osmacc-regulatory-report.excel');
         Route::get('/dcc-regulatory-report-excel', 'downloadDccExcelReport')->name('dcc-regulatory-report.excel');
+        Route::get('/sama-regulatory-report-excel', 'sama')->name('sama-regulatory-report.excel');
     });
 
 
