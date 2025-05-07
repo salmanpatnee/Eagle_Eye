@@ -80,34 +80,42 @@
 
 <body>
     <div class="dheadersec">
-        <div class="dheaderleft">
-            <div class="dheadericon">
-                <a href="/compliance" class="text-white">
+        <div class="justify-content-between w-100 d-flex align-items-center">
+            <div class="dheaderleft">
+                <div class="dheadericon">
+                    <a href="/compliance" class="text-white">
 
-                    <i class='bx bx-home'></i>
+                        <i class='bx bx-home'></i>
+                    </a>
+                </div>
+                <div class="dheadertext">
+                    <p>العمليات</p>
+                    <p>Processes</p>
+                </div>
+                <div class="dheadericon">
+                    <i class='bx bx-right-arrow-alt'></i>
+                </div>
+                <div class="dheadertext">
+                    <p>
+                        بنتائج مراجعة المتعلقة الضوابط</p>
+                    <p>Audit vs Controls</p>
+                </div>
+            </div>
+            <div>
+                <a href="{{ route('audit-vs-control') }}?pdf=1" class="btn-report btn btn-primary btn-sm">
+                    <p>تنزيل بصيغة بي دي إف</p>
+                    Download as PDF
                 </a>
             </div>
-            <div class="dheadertext">
-                <p>العمليات</p>
-                <p>Processes</p>
-            </div>
-            <div class="dheadericon">
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-            <div class="dheadertext">
-                <p>
-                    بنتائج مراجعة المتعلقة الضوابط</p>
-                <p>Audit vs Controls</p>
-            </div>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-            @include('partials.roles')
-            <div class="dheaderright">
+            <div class="d-flex align-items-center gap-3">
+                @include('partials.roles')
+                <div class="dheaderright">
 
-                <button type="dbutton" class="dbutton" onclick="window.location.href='/compliance'">
-                    <p>للخلف</p>
-                    <p>Back</p>
-                </button>
+                    <button type="dbutton" class="dbutton" onclick="window.location.href='/compliance'">
+                        <p>للخلف</p>
+                        <p>Back</p>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -162,7 +170,7 @@
                             @endforeach
                         </select>
                     </div>
-              
+
                     {{-- <div class="col">
                         <label class="form-label" for="practice">
                             <p>Best Practices</p>
@@ -218,7 +226,8 @@
                         </td>
                         <td>
                             @foreach ($row->Controls as $control)
-                                <p><a href="{{route('controlmaster.show', $control->control_id)}}">{{$control->control_id}} - {{$control->control_name}}</a> </p>
+                                <p><a href="{{ route('controlmaster.show', $control->control_id) }}">{{ $control->control_id }}
+                                        - {{ $control->control_name }}</a> </p>
                             @endforeach
                         </td>
 

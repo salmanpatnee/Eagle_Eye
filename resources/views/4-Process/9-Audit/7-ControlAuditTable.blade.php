@@ -80,33 +80,41 @@
 
 <body>
     <div class="dheadersec">
-        <div class="dheaderleft">
-            <div class="dheadericon">
-                <a href="/compliance" class="text-white">
+        <div class="justify-content-between w-100 d-flex align-items-center">
+            <div class="dheaderleft">
+                <div class="dheadericon">
+                    <a href="/compliance" class="text-white">
 
-                    <i class='bx bx-home'></i>
+                        <i class='bx bx-home'></i>
+                    </a>
+                </div>
+                <div class="dheadertext">
+                    <p>العمليات</p>
+                    <p>Processes</p>
+                </div>
+                <div class="dheadericon">
+                    <i class='bx bx-right-arrow-alt'></i>
+                </div>
+                <div class="dheadertext">
+                    <p>الضوابط المتعلقة بنتائج مراجعة</p>
+                    <p>Control vs Audit</p>
+                </div>
+            </div>
+            <div>
+                <a href="{{ route('control-vs-audit') }}?pdf=1" class="btn-report btn btn-primary btn-sm">
+                    <p>تنزيل بصيغة بي دي إف</p>
+                    Download as PDF
                 </a>
             </div>
-            <div class="dheadertext">
-                <p>العمليات</p>
-                <p>Processes</p>
-            </div>
-            <div class="dheadericon">
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-            <div class="dheadertext">
-                <p>الضوابط المتعلقة بنتائج مراجعة</p>
-                <p>Control vs Audit</p>
-            </div>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-            @include('partials.roles')
-            <div class="dheaderright">
+            <div class="d-flex align-items-center gap-3">
+                @include('partials.roles')
+                <div class="dheaderright">
 
-                <button type="dbutton" class="dbutton" onclick="window.location.href='/compliance'">
-                    <p>للخلف</p>
-                    <p>Back</p>
-                </button>
+                    <button type="dbutton" class="dbutton" onclick="window.location.href='/compliance'">
+                        <p>للخلف</p>
+                        <p>Back</p>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ use App\Models\AuditFinding;
 use App\Models\ControlMaster;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mpdf\Mpdf;
 
 class ControlAuditFindingController extends Controller
 {
@@ -36,7 +37,24 @@ class ControlAuditFindingController extends Controller
             })
             ->get();
 
-        return view('4-Process/9-Audit/7-ControlAuditTable', compact('controlsWithAuditFindings', 'controls', 'findings'));
+            if (request()->has('pdf')) {
+                
+                $mpdf = new Mpdf();
+                
+                $html = view("4-Process/9-Audit/7-ControlAuditPdf", compact('controlsWithAuditFindings'))->render();
+                
+    
+                $mpdf->WriteHTML($html);
+    
+                // Set the headers to prompt the file download
+                return response($mpdf->Output("Control-vs-Audit.pdf", 'D'))
+                    ->header('Content-Type', 'application/pdf')
+                    ->header('Content-Disposition', 'attachment; filename="' . "Control-vs-Audit.pdf" . '"');
+            } else {
+                return view('4-Process/9-Audit/7-ControlAuditTable', compact('controlsWithAuditFindings', 'controls', 'findings'));
+            }
+
+
     }
 
     public function auditVsControls(Request $request)
@@ -65,7 +83,23 @@ class ControlAuditFindingController extends Controller
             })
             ->get();
 
-
-        return view('4-Process/9-Audit/7-AuditControlTable', compact('auditFindingsWithControls', 'controls', 'findings'));
+            if (request()->has('pdf')) {
+                
+                $mpdf = new Mpdf();
+                
+                $html = view("4-Process/9-Audit/7-AuditControlPdf", compact('auditFindingsWithControls'))->render();
+                
+    
+                $mpdf->WriteHTML($html);
+    
+                // Set the headers to prompt the file download
+                return response($mpdf->Output("Audit-vs-Control.pdf", 'D'))
+                    ->header('Content-Type', 'application/pdf')
+                    ->header('Content-Disposition', 'attachment; filename="' . "Audit-vs-Control.pdf" . '"');
+            } else {
+                
+                return view('4-Process/9-Audit/7-AuditControlTable', compact('auditFindingsWithControls', 'controls', 'findings'));
+            }
+            
     }
 }
