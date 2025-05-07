@@ -196,8 +196,8 @@
                         <h3>اسم المخاطر</h3>
                         <span class="text">Risks</span>
                     </div>
-                    <p class="sh-tx">{{ $riskAssessmentDetail->risk->risk_id }} -
-                        {{ $riskAssessmentDetail->risk->risk_name }}</p>
+                    <p class="sh-tx">{{ $riskAssessmentDetail->risk?->risk_id }} -
+                        {{ $riskAssessmentDetail->risk?->risk_name }}</p>
 
 
                 </div>
@@ -315,7 +315,7 @@
                         <h3> اسم خيارات علاج المخاطر</h3>
                         <span class="text"> Risk Treatment</span>
                     </div>
-                    <p class="sh-tx">{{ $riskAssessmentDetail->treatment->risk_treatment_name }}</p>
+                    <p class="sh-tx">{{ $riskAssessmentDetail->treatment?->risk_treatment_name }}</p>
 
                 </div>
             </div>

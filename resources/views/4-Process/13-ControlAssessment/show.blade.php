@@ -228,7 +228,7 @@
                             <h3>اسم التصنيف</h3>
                             <span class="text">Classification Name</span>
                         </div>
-                        <p class="sh-tx">{{ $controlAssessment->classification->classification_name }}</p>
+                        <p class="sh-tx">{{ $controlAssessment->classification?->classification_name }}</p>
                     </div>
                 </div>
                 <div class="ContentTable">
