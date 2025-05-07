@@ -80,40 +80,48 @@
 
 <body>
     <div class="dheadersec">
-        <div class="dheaderleft">
-            <div class="dheadericon">
-                <a href="/compliance" class="text-white">
-                    <i class='bx bx-home'></i>
+        <div class="justify-content-between w-100 d-flex align-items-center">
+            <div class="dheaderleft">
+                <div class="dheadericon">
+                    <a href="/compliance" class="text-white">
+                        <i class='bx bx-home'></i>
+                    </a>
+                </div>
+                <div class="dheadertext">
+                    <p>العمليات</p>
+                    <p>Processes</p>
+                </div>
+                <div class="dheadericon">
+                    <i class='bx bx-right-arrow-alt'></i>
+                </div>
+                <div class="dheadertext">
+                    <p>الأدلة مقابل الضوابط</p>
+                    <p>Evidence vs Controls</p>
+                </div>
+            </div>
+            <div>
+                <a href="{{route('evidence.control.index')}}?pdf=1" class="btn-report btn btn-primary btn-sm">
+                    <p>تنزيل بصيغة بي دي إف</p>
+                    Download as PDF
                 </a>
             </div>
-            <div class="dheadertext">
-                <p>العمليات</p>
-                <p>Processes</p>
-            </div>
-            <div class="dheadericon">
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-            <div class="dheadertext">
-                <p>الأدلة مقابل الضوابط</p>
-                <p>Evidence vs Controls</p>
+            <div class="d-flex align-items-center gap-3">
+                @include('partials.roles')
+                <div class="dheaderright">
+    
+                    <button type="dbutton" class="dbutton" onclick="window.location.href='/compliance'">
+                        <p>للخلف</p>
+                        <p>Back</p>
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="d-flex align-items-center gap-3">
-            @include('partials.roles')
-            <div class="dheaderright">
-    
-                <button type="dbutton" class="dbutton" onclick="window.location.href='/compliance'">
-                    <p>للخلف</p>
-                    <p>Back</p>
-                </button>
-            </div>
-            </div>
     </div>
 
     <div class="herosec">
         <div class="herosecleft">
             <div class="cveButton">
-                <a href="{{ route('control.evidence.index') }}" >
+                <a href="{{ route('control.evidence.index') }}">
                     <div class="rightButton">
                         <p>الضوابط مقابل الأدلة</p>
                         <p>Control vs Evidence</p>
@@ -127,7 +135,7 @@
                     </div>
                 </a>
 
-                
+
             </div>
         </div>
         <div>
@@ -223,22 +231,21 @@
             <tbody class="tablebody">
                 @forelse ($evidencecontrol as $row)
                     <tr>
-                        <td>{{ $loop->index + 1}}</td>
+                        <td>{{ $loop->index + 1 }}</td>
                         <td>
-                            <a href="{{route('evidences.show', $row->evidence_id)}}">
+                            <a href="{{ route('evidences.show', $row->evidence_id) }}">
                                 {{ $row->evidence_id }}
                             </a>
-                            
+
                         </td>
                         <td>
-                            <a href="{{route('evidences.show', $row->evidence_id)}}">
+                            <a href="{{ route('evidences.show', $row->evidence_id) }}"
+                                style="text-decoration: none; color: inherit;">
                                 {{ $row->evidence_name }}
-                            </a>    
+                            </a>
                         </td>
                         <td>
-                            {!!
-                                $row->controls
-                            !!}
+                            {!! $row->controls !!}
                         </td>
                         {{-- <td> {{ $row->control_id }}-{{ $row->control_name }}</td>
                         @php $id = $row->evidence_id @endphp --}}

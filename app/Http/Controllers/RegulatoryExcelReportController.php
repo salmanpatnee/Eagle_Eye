@@ -10,7 +10,6 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 class RegulatoryExcelReportController extends Controller
 {
 
-
     private function _formatStatusText(string $status)
     {
 
@@ -30,8 +29,6 @@ class RegulatoryExcelReportController extends Controller
         return $formattedText;
     }
 
-
-
     public function downloadPdfReport()
     {
         $controlAssessmentId = request('controlAssessmentId');
@@ -44,8 +41,6 @@ class RegulatoryExcelReportController extends Controller
         $mpdf->WriteHTML($html);
         return response($mpdf->Output('', 'S'))->header('Content-Type', 'application/pdf');
     }
-
-
 
     public function ccc()
     {
@@ -88,8 +83,6 @@ class RegulatoryExcelReportController extends Controller
         // return view('4-Process/19-NCAReporting/1-NcaCccReportUpdated', compact('eccreport', 'controlAssessmentId', 'cloudControlType'));
         return view('pdf.nca-ccc-cst-pdf', compact('report', 'controlAssessmentId', 'cloudControlType'));
     }
-
-
 
     public function downloadCccExcelReport()
     {
@@ -250,8 +243,7 @@ class RegulatoryExcelReportController extends Controller
         // return response()->json(['message' => 'File updated successfully.']);
     }
 
-
-    public function downloadExcelReport()
+    public function ecc()
     {
 
         $controlAssessmentId = request('controlAssessmentId');
@@ -643,7 +635,6 @@ class RegulatoryExcelReportController extends Controller
         return response()->json(['message' => 'File updated successfully.']);
     }
 
-
     public function downloadCsccExcelReport()
     {
         $controlAssessmentId = request('controlAssessmentId');
@@ -752,9 +743,6 @@ class RegulatoryExcelReportController extends Controller
 
         return response()->json(['message' => 'File updated successfully.']);
     }
-
-
-
 
     public function downloadTccExcelReport()
     {
@@ -875,7 +863,6 @@ class RegulatoryExcelReportController extends Controller
         return response()->download($outputFilePath)->deleteFileAfterSend(true);
     }
 
-
     public function downloadOsmaccExcelReport()
     {
         $controlAssessmentId = request('controlAssessmentId');
@@ -986,8 +973,6 @@ class RegulatoryExcelReportController extends Controller
         return response()->download($outputFilePath)->deleteFileAfterSend(true);
     }
 
-
-
     public function downloadDccExcelReport()
     {
         $controlAssessmentId = request('controlAssessmentId');
@@ -1097,6 +1082,179 @@ class RegulatoryExcelReportController extends Controller
         return response()->download($outputFilePath)->deleteFileAfterSend(true);
     }
 
+    public function sama()
+    {
+
+        $controlAssessmentId = request('controlAssessmentId');
+        $data = $this->getReport("SAMA-CSF-2017", $controlAssessmentId);
+
+
+        $filePath = storage_path('app/public/reports/SAMA-CSF-Report-Template-Full.xlsx');
+        $outputFilePath = storage_path('app/public/reports/SAMA-CSF-Report-Updated.xlsx');
+
+        copy($filePath, $outputFilePath);
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $headers = [
+            'D' => 'complaince_level_main',
+            'F' => 'complaince_level_sub',
+            'G' => 'remarks',
+            'H' => 'expected_date',
+            'I' => 'corrective_action_due_date'
+        ];
+
+        $startingRow = 9;
+        $iterationCount = 0;
+
+
+        // Loop through each data row
+        foreach ($data as $rowData) {
+
+
+            // Set values in the appropriate cells
+            foreach ($headers as $column => $key) {
+
+                $cellCoordinate = "{$column}{$startingRow}"; // D8, F8, G8, etc.
+                $status = "_";
+
+                switch ($rowData->status) {
+                    case 'Partially Implemented':
+                        $status = "Partially Implemented";
+                        break;
+                    case 'Implemented':
+                        $status = "Implemented";
+                        break;
+                    case 'Not Implemented':
+                        $status = "Not Implemented";
+                        break;
+                }
+
+                $parentControlMap = [
+                    11 => 'SAMA-CSF-3.1.1.3.',
+                ];
+
+                // Check if the startingRow has a corresponding parentControlId
+                if (array_key_exists($startingRow, $parentControlMap)) {
+                    $parentControlId = $parentControlMap[$startingRow];
+                    $parentStatus = getParentStatus($data, $parentControlId, false);
+
+                    // Set parent row values
+                    $sheet->setCellValue("D{$startingRow}", $parentStatus);
+                    $sheet->setCellValue("F{$startingRow}", "_");
+                    $startingRow++;
+
+                    // Set child row values
+                    $sheet->setCellValue("D{$startingRow}", "_");
+                    $sheet->setCellValue("F{$startingRow}", $status);
+                } else {
+                    // Handle rows that are not in the parentControlMap
+                    if ($rowData->control_level_title == 'Main') {
+                        $sheet->setCellValue("D{$startingRow}", $status);
+                        $sheet->setCellValue("F{$startingRow}", "_");
+                    } else {
+                        $sheet->setCellValue("D{$startingRow}", "_");
+                        $sheet->setCellValue("F{$startingRow}", $status);
+                    }
+                }
+
+                // Common row values
+                // $sheet->setCellValue("G{$startingRow}", $rowData->remarks);
+                // $sheet->setCellValue("H{$startingRow}", $rowData->corrective_action);
+                // $sheet->setCellValue("I{$startingRow}", $rowData->corrective_action_due_date);
+
+
+                // Set common row values
+                $sheet->setCellValue("G{$startingRow}", $rowData->remarks);
+                $sheet->setCellValue("H{$startingRow}", $rowData->corrective_action);
+                $sheet->setCellValue("I{$startingRow}", $rowData->corrective_action_due_date);
+
+                $sheet->getStyle($cellCoordinate)
+                    ->getFont()->setName('DIN Next LT Arabic Light')->setSize(12);
+
+                $horizontalAlign = Alignment::HORIZONTAL_CENTER;
+                $verticalAlign = Alignment::VERTICAL_CENTER;
+
+                $sheet->getStyle($cellCoordinate)
+                    ->getAlignment()
+                    ->setHorizontal($horizontalAlign)
+                    ->setVertical($verticalAlign)
+                    ->setWrapText(true);
+            }
+
+            // Move to the next row
+            $startingRow++;
+            $iterationCount++;
+
+            // Tracking the number of rows to skip after each domain entry due to static headers.
+            if ($iterationCount === 17) {
+                $startingRow = 36;
+            } 
+            // elseif ($iterationCount === 6) {
+            //     $startingRow = 26;
+            // } elseif ($iterationCount === 10) {
+            //     $startingRow = 36;
+            // } elseif ($iterationCount === 12) {
+            //     $startingRow = 44;
+            // } elseif ($iterationCount === 19) {
+            //     $startingRow = 58;
+            // } elseif ($iterationCount === 28) {
+            //     $startingRow = 75;
+            // } elseif ($iterationCount === 30) {
+            //     $startingRow = 83;
+            // } elseif ($iterationCount === 33) {
+            //     $startingRow = 92;
+            // } elseif ($iterationCount === 41) {
+            //     $startingRow = 108;
+            // } elseif ($iterationCount === 51) {
+            //     $startingRow = 128;
+            // } elseif ($iterationCount === 57) {
+            //     $startingRow = 140;
+            // } elseif ($iterationCount === 65) {
+            //     $startingRow = 155;
+            // } elseif ($iterationCount === 72) {
+            //     $startingRow = 169;
+            // } elseif ($iterationCount === 80) {
+            //     $startingRow = 184;
+            // } elseif ($iterationCount === 91) {
+            //     $startingRow = 202;
+            // } elseif ($iterationCount === 98) {
+            //     $startingRow = 216;
+            // } elseif ($iterationCount === 104) {
+            //     $startingRow = 229;
+            // } elseif ($iterationCount === 110) {
+            //     $startingRow = 242;
+            // } elseif ($iterationCount === 116) {
+            //     $startingRow = 255;
+            // } elseif ($iterationCount === 124) {
+            //     $startingRow = 270;
+            // } elseif ($iterationCount === 129) {
+            //     $startingRow = 282;
+            // } elseif ($iterationCount === 137) {
+            //     $startingRow = 297;
+            // } elseif ($iterationCount === 145) {
+            //     $startingRow = 312;
+            // } elseif ($iterationCount === 153) {
+            //     $startingRow = 327;
+            // } elseif ($iterationCount === 161) {
+            //     $startingRow = 344;
+            // } elseif ($iterationCount === 167) {
+            //     $startingRow = 359;
+            // } elseif ($iterationCount === 174) {
+            //     $startingRow = 374;
+            // } elseif ($iterationCount === 180) {
+            //     $startingRow = 389;
+            // }
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($outputFilePath);
+        return response()->download($outputFilePath)->deleteFileAfterSend(true);
+
+        return response()->json(['message' => 'File updated successfully.']);
+    }
+
     private function getReport($bestPracticeId, $controlAssessmentId, string $cloudControlType = null)
     {
 
@@ -1169,62 +1327,4 @@ class RegulatoryExcelReportController extends Controller
 
         return $report;
     }
-
-    // private function getReport($bestPracticeId, $controlAssessmentId, string $cloudControlType = null)
-    // {
-
-    //     $report = DB::table('control_master_table as c')
-    //         ->distinct()
-    //         ->join('control_master_table_vs_best_practice_table as cv', 'c.control_id', '=', 'cv.control_id')
-    //         ->join('best_practice_table as bp', 'cv.best_practice_id', '=', 'bp.best_practices_id')
-    //         ->join('control_master_table_vs_domain_table as cvd', 'c.control_id', '=', 'cvd.control_id')
-    //         ->join('domain_table as d', 'cvd.main_domain_id', '=', 'd.main_domain_id')
-    //         ->join('control_master_table_vs_sub_domain_table as cvsd', 'c.control_id', '=', 'cvsd.control_id')
-    //         ->join('sub_domain_table as sd', 'cvsd.sub_domain_id', '=', 'sd.sub_domain_id')
-    //         ->leftJoin(
-    //             DB::raw("(SELECT control_id, MAX(id) AS latest_id FROM control_assessment_details_table GROUP BY control_id) as latest_cad"),
-    //             'c.control_id',
-    //             '=',
-    //             'latest_cad.control_id'
-    //         )
-    //         ->leftJoin('control_assessment_details_table as cad', function ($join) use ($controlAssessmentId) {
-    //             $join->on('latest_cad.latest_id', '=', 'cad.id')
-    //                 ->where('cad.control_assessment_id', '=', $controlAssessmentId);
-    //         })
-    //         ->where('bp.best_practices_id', '=', $bestPracticeId)
-    //         ->when($cloudControlType, function ($query) use ($cloudControlType) {
-    //             $query->where('c.control_cloud', $cloudControlType);
-    //         })
-
-    //         // Select distinct columns
-    //         ->select(
-    //             'c.control_id',
-    //             'c.control_name',
-    //             // DB::raw("CONCAT( <p>c.control_description_ar</p>, ' ', <p>c.control_description</p> ) as description"),
-    //             'c.control_description',
-    //             'c.control_description_ar',
-    //             'c.control_level_title',
-    //             'bp.best_practices_id',
-    //             'bp.best_practices_name',
-    //             'd.main_domain_id',
-    //             'd.main_domain_name',
-    //             'sd.sub_domain_id',
-    //             'sd.sub_domain_name',
-    //             DB::raw("COALESCE(cad.control_implementation_status, 'Not Implemented') as status"),
-    //             DB::raw("COALESCE(cad.remarks, '_') as remarks"),
-    //             DB::raw("COALESCE(cad.corrective_action_due_date, '') as corrective_action_due_date"),
-    //             DB::raw("COALESCE(cad.corrective_action, '_') as corrective_action")
-    //         )
-
-    //         // Order by the parsed control_id parts
-    //         ->orderBy(DB::raw("CAST(SUBSTRING_INDEX(c.control_id, '-', 1) AS UNSIGNED)"))
-    //         ->orderBy(DB::raw("CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 3), '-', -1) AS UNSIGNED)"))
-    //         ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 4), '-', -1) AS UNSIGNED), 0)"))
-    //         ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 5), '-', -1) AS UNSIGNED), 0)"))
-    //         ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 6), '-', -1) AS UNSIGNED), 0)"))
-    //         // ->limit(1)
-    //         ->get();
-
-    //     return $report;
-    // }
 }

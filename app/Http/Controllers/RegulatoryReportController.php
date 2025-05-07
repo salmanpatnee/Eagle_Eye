@@ -279,7 +279,7 @@ class RegulatoryReportController extends Controller
     {
         $controlAssessmentId = request('controlAssessmentId');
         $report = $this->getReport("SAMA-CSF-2017", $controlAssessmentId);
-
+        
         $path = "4-Process/SAMAReporting";
         
 

@@ -8,6 +8,7 @@ use App\Models\ControlMaster;
 use App\Models\BestPractice;
 use App\Models\Domain;
 use App\Models\SubDomain;
+use Mpdf\Mpdf;
 
 use function PHPUnit\Framework\isNull;
 
@@ -55,6 +56,7 @@ class ControlEvidenceController extends Controller
             ->pluck('control_master_table.control_id');
 
 
+        $baseUrl = config('app.url');
         $controlEvidence = DB::table('evidence_vs_control_table AS evc')
             ->join('control_master_table AS c', 'evc.control_id', '=', 'c.control_id')
             ->join('evidence_table AS e', 'evc.evidence_id', '=', 'e.evidence_id')
@@ -69,10 +71,14 @@ class ControlEvidenceController extends Controller
             ->select(
                 'c.control_id',
                 'c.control_name',
-                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/evidences/', e.evidence_id, '\" target=\"_blank\">', e.evidence_name, '</a>') SEPARATOR '<br>') AS evidences"),
 
-                DB::raw("GROUP_CONCAT(CONCAT('<a href=\"/artifacts/', a.id, '\" target=\"_blank\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts")
-            )->when($bestPracticeId, function ($query, $bestPracticeId) {
+
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"" . $baseUrl . "evidences/', e.evidence_id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', e.evidence_name, '</a>') SEPARATOR '<br>') AS evidences"),
+
+                DB::raw("GROUP_CONCAT(CONCAT('<a href=\"" . $baseUrl . "artifacts/', a.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts")
+            )
+
+            ->when($bestPracticeId, function ($query, $bestPracticeId) {
                 $query->where('b.best_practices_id', $bestPracticeId);
             })->when($domainId, function ($query, $domainId) {
                 $query->where('d.main_domain_id', $domainId);
@@ -91,11 +97,26 @@ class ControlEvidenceController extends Controller
             ->get();
 
 
-      
-        return view(
-            '4-Process/10-Evidence/3-ControlEvidenceTable',
-            compact('controlEvidence', 'controlIds', 'practices', 'domains', 'subDomains')
-        );
+        if (request()->has('pdf')) {
+
+            $mpdf = new Mpdf();
+
+            $html = view("4-Process/10-Evidence/pdf", compact('controlEvidence'))->render();
+
+            $mpdf->WriteHTML($html);
+
+            // Set the headers to prompt the file download
+            return response($mpdf->Output("Control-vs-Evidence.pdf", 'D'))
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="' . "Control-vs-Evidence.pdf" . '"');
+        } else {
+
+
+            return view(
+                '4-Process/10-Evidence/3-ControlEvidenceTable',
+                compact('controlEvidence', 'controlIds', 'practices', 'domains', 'subDomains')
+            );
+        }
     }
 
     public function evicontshow(Request $request)
@@ -137,32 +158,8 @@ class ControlEvidenceController extends Controller
             ->pluck('control_master_table.control_id');
 
 
-        // $evidencecontrol = DB::table('evidence_table as e')
-        //     ->select('e.evidence_id', 'e.evidence_name', 'controlmaster.control_id', 'controlmaster.control_name')
-        //     ->join('evidence_vs_control_table as evc', 'e.evidence_id', '=', 'evc.evidence_id')
-        //     ->join('control_master_table as controlmaster', 'evc.control_id', '=', 'controlmaster.control_id')
-        //     ->join('control_master_table_vs_best_practice_table as controlbestpractice', 'controlbestpractice.control_id', '=', 'controlmaster.control_id')
-        //     ->join('best_practice_table as bestpractice', 'bestpractice.best_practices_id', '=', 'controlbestpractice.best_practice_id')
-        //     ->join('control_master_table_vs_domain_table as controldomain', 'controldomain.control_id', '=', 'controlmaster.control_id')
-        //     ->join('domain_table as domain', 'domain.main_domain_id', '=', 'controldomain.main_domain_id')
-        //     ->join('control_master_table_vs_sub_domain_table as controlsubdomain', 'controlsubdomain.control_id', '=', 'controlmaster.control_id')
-        //     ->join('sub_domain_table as subdomain', 'subdomain.sub_domain_id', '=', 'controlsubdomain.sub_domain_id')
-        //     ->orderBy('e.evidence_id');
-
-        // if ($request->has('practice') && !is_null($request->input('practice')))
-        //     $evidencecontrol->where('bestpractice.best_practices_id', $request->input('practice'));
-
-        // if ($request->has('domain') && !is_null($request->input('domain')))
-        //     $evidencecontrol->where('domain.main_domain_id', $request->input('domain'));
-
-        // if ($request->has('subdomain') && !is_null($request->input('subdomain')))
-        //     $evidencecontrol->where('subdomain.sub_domain_id', $request->input('subdomain'));
-
-        // if ($request->has('control_id') && !is_null($request->input('control_id')))
-        //     $evidencecontrol->where('controlmaster.control_id', $request->input('control_id'));
-
-        // $evidencecontrol = $evidencecontrol->get();
-
+        $baseUrl = config('app.url');
+        DB::statement("SET SESSION group_concat_max_len = 1000000");
         $evidencecontrol = DB::table('evidence_vs_control_table AS evc')
             ->join('evidence_table AS e', 'evc.evidence_id', '=', 'e.evidence_id')
             ->join('control_master_table AS c', 'evc.control_id', '=', 'c.control_id')
@@ -177,8 +174,9 @@ class ControlEvidenceController extends Controller
             ->select(
                 'e.evidence_id',
                 'e.evidence_name',
-                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/control-identification-table/', c.control_id, '\" target=\"_blank\">', c.control_id, ' - ', c.control_name, '</a>') SEPARATOR '<br>') AS controls"),
-                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/artifacts/', a.id, '\" target=\"_blank\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts")
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"" . $baseUrl . "control-identification-table/', c.control_id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit; line-height:2em;\">', c.control_id, ' - ', c.control_name, '</a>') SEPARATOR '<br><br>') AS controls"),
+
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"" . $baseUrl . "artifacts/', a.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts")
             )
             ->when($bestPracticeId, function ($query, $bestPracticeId) {
                 $query->where('b.best_practices_id', $bestPracticeId);
@@ -196,17 +194,34 @@ class ControlEvidenceController extends Controller
             ->orderBy('e.evidence_name') // Adjust ordering as needed
             ->get();
 
-        // return $evidencecontrol;
-        return view(
-            '4-Process/10-Evidence/2-EvidenceControlTable',
-            [
-                'evidencecontrol' => $evidencecontrol,
-                'id'              => null,
-                'controlIds'      => $controlIds,
-                'practices'       => $practices,
-                'domains'         => $domains,
-                'subDomains'      => $subDomains
-            ]
-        );
+        
+            if (request()->has('pdf')) {
+
+                $mpdf = new Mpdf();
+                $html = view("4-Process/10-Evidence/EvidenceControlTablePdf", compact('evidencecontrol'))->render();
+                
+                $mpdf->WriteHTML($html);
+    
+                // Set the headers to prompt the file download
+                return response($mpdf->Output("Evidence-vs-Control.pdf", 'D'))
+                    ->header('Content-Type', 'application/pdf')
+                    ->header('Content-Disposition', 'attachment; filename="' . "Evidence-vs-Control.pdf" . '"');
+            } else {
+    
+    
+                
+                return view(
+                    '4-Process/10-Evidence/2-EvidenceControlTable',
+                    [
+                        'evidencecontrol' => $evidencecontrol,
+                        'id'              => null,
+                        'controlIds'      => $controlIds,
+                        'practices'       => $practices,
+                        'domains'         => $domains,
+                        'subDomains'      => $subDomains
+                    ]
+                );
+            }
+            
     }
 }
