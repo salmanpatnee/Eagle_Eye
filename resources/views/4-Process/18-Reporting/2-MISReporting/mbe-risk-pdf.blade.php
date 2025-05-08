@@ -6,31 +6,31 @@
             <thead>
                 <tr>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">رقم</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">رقم</p> --}}
                         <p style="margin: 0; white-space: nowrap;">S.No</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">رمز الضوابط</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">رمز الضوابط</p> --}}
                         <p style="margin: 0; white-space: nowrap;">Risk ID</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">اسم الضوابط</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">اسم الضوابط</p> --}}
                         <p style="margin: 0; white-space: nowrap;">Risk Name</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">حالة</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">حالة</p> --}}
                         <p style="margin: 0; white-space: nowrap;">Status</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">اسم صاحب</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">اسم صاحب</p> --}}
                         <p style="margin: 0; white-space: nowrap;">Owner</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">اسم الوصي</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">اسم الوصي</p> --}}
                         <p style="margin: 0; white-space: nowrap;">Custodians</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">الضوابط</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">الضوابط</p> --}}
                         <p style="margin: 0; white-space: nowrap;">Controls</p>
                     </th>
                 </tr>

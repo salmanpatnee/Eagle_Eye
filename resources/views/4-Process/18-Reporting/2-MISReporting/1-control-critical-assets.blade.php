@@ -38,7 +38,7 @@
                     <tr>
 
                         <td>{{ $loop->index + 1 }}</td>
-                        <td><a href="/control-identification-table/{{ $row->control_id }}">{{ $row->control_id }}</a></td>
+                        <td><a href="{{route('controlmaster.show', $row->control_id)}}">{{ $row->control_id }}</a></td>
                         <td>{{ $row->control_name }}</td>
                         <td>{{ $row->maturity_level }}</td>
                     </tr>

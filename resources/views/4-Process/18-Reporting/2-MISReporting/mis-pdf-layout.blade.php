@@ -94,7 +94,7 @@
                     class="mt-0">
                     {{ $organizationData->organization_name_english }}</h2>
                 <h2 style="font-weight: bold; font-size: 18px; color: #000; margin-top:0; font-family: 'Roboto'"
-                    class="mt-0">Management by Exceptions -  {{$title}}
+                    class="mt-0">Management Information System Reports - {{ $title }}
                 </h2>
                 <h2 style="font-weight: bold; font-size: 18px; color: #000; margin-top:0; font-family: 'Roboto' margin-bottom:30px;"
                     class="mt-0">

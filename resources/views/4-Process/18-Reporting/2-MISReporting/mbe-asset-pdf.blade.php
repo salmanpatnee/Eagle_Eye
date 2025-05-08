@@ -7,35 +7,35 @@
             <thead class="tablehead">
                 <tr>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p>رقم</p>
+                        {{-- <p>رقم</p> --}}
                         <p>S.No</p>
                     </th>
                     <th style="column-width: 200px;">
-                        <p>رمز الأصول</p>
+                        {{-- <p>رمز الأصول</p> --}}
                         <p>Asset ID</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p>اسم الأصول</p>
+                        {{-- <p>اسم الأصول</p> --}}
                         <p>Asset Name</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p>اسم مجموعة الأصول</p>
+                        {{-- <p>اسم مجموعة الأصول</p> --}}
                         <p>Asset Group</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p>اسم صاحب</p>
+                        {{-- <p>اسم صاحب</p> --}}
                         <p>Owner</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p> اسم الوصي </p>
+                        {{-- <p> اسم الوصي </p> --}}
                         <p>Custodians</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p>المخاطر</p>
+                        {{-- <p>المخاطر</p> --}}
                         <p>Risks</p>
                     </th>
                     <th style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p>الضوابط</p>
+                        {{-- <p>الضوابط</p> --}}
                         <p>Controls</p>
                     </th>
                 </tr>

@@ -6,31 +6,31 @@
             <thead class="tablehead">
                 <tr>
                     <th>
-                        <p>رقم</p>
+                        {{-- <p>رقم</p> --}}
                         <p>S.No</p>
                     </th>
                     <th style="column-width: 200px;">
-                        <p>رمز المخاطر</p>
+                        {{-- <p>رمز المخاطر</p> --}}
                         <p>Risk ID</p>
                     </th>
                     <th>
-                        <p>اسم المخاطر</p>
+                        {{-- <p>اسم المخاطر</p> --}}
                         <p>Risk Name</p>
                     </th>
                     <th>
-                        <p>حالة</p>
+                        {{-- <p>حالة</p> --}}
                         <p>Status</p>
                     </th>
                     <th>
-                        <p>اسم صاحب</p>
+                        {{-- <p>اسم صاحب</p> --}}
                         <p>Owner</p>
                     </th>
                     <th>
-                        <p> اسم الوصي </p>
+                        {{-- <p> اسم الوصي </p> --}}
                         <p>Custodians</p>
                     </th>
                     <th>
-                        <p>الضوابط</p>
+                        {{-- <p>الضوابط</p> --}}
                         <p>Controls</p>
                     </th>
                 </tr>

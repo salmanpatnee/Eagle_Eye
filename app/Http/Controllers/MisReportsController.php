@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ControlMaster;
+use App\Models\Asset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Mpdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -112,7 +111,7 @@ class MisReportsController extends Controller
 
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($report, 'mbe-control-report.pdf', 'mbe-pdf');
+            $this->_downloadPdf($report, 'mbe-control-report.pdf', 'mbe-pdf', "Control Status");
         } else if (request()->has('excel')) {
             return $this->_downloadControlExcel($report);
         } else {
@@ -197,7 +196,7 @@ class MisReportsController extends Controller
 
         if (request()->has('pdf')) {
 
-            $this->_downloadPdf($report, 'mbe-risk-report.pdf', 'mbe-risk-pdf');
+            $this->_downloadPdf($report, 'mbe-risk-report.pdf', 'mbe-risk-pdf', 'Risk Status');
         } else if (request()->has('excel')) {
             return $this->_downloadRiskExcel($report);
         } else {
@@ -274,7 +273,7 @@ class MisReportsController extends Controller
 
         if (request()->has('pdf')) {
 
-            $this->_downloadPdf($report, 'mbe-asset-report.pdf', 'asset-pdf');
+            $this->_downloadPdf($report, 'mbe-asset-report.pdf', 'asset-pdf', 'Asset Status');
             // $this->_downloadPdf($report, 'mbe-risk-report.pdf', 'mbe-risk-pdf');
         } else if (request()->has('excel')) {
             return $this->_downloadAssetExcel($report);
@@ -288,259 +287,34 @@ class MisReportsController extends Controller
         }
     }
 
-    private function _downloadPdf($report, $filename, $template)
-    {
-        $mpdf = new Mpdf([
-            'orientation' => 'L'
-        ]);
-
-        $html = view("4-Process/18-Reporting/2-MISReporting/{$template}", compact('report'))->render();
-
-        $mpdf->WriteHTML($html);
-
-        // Set the headers to prompt the file download
-        return response($mpdf->Output($filename, 'D'))
-            ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
-    }
-
-    private function _downloadControlExcel($report)
-    {
-        $filePath = storage_path('app/public/reports/MBE-Controls-Template.xlsx');
-        $outputFilePath = storage_path('app/public/reports/MBE-Controls.xlsx');
-
-        copy($filePath, $outputFilePath);
-
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
-        $sheet = $spreadsheet->getActiveSheet();
-
-        $headers = [
-            'A' => 'sno',
-            'B' => 'control_id',
-            'C' => 'control_name',
-            'D' => 'status',
-            'E' => 'owner_name',
-            'F' => 'custodian_links',
-            'G' => 'risks',
-        ];
-
-        $startingRow = 3;
-        $sNo = 1;
-
-
-        foreach ($report as $rowData) {
-
-            foreach ($headers as $column => $key) {
-                $cellCoordinate = "{$column}{$startingRow}";
-                $custodians = str_replace("<br>", ", \n", strip_tags($rowData->custodian_links, "<br>"));
-                $risks = str_replace("<br>", ", \n", strip_tags($rowData->risks, "<br>"));
-
-                $sheet->setCellValue("A{$startingRow}", $sNo);
-                $sheet->setCellValue("B{$startingRow}", $rowData->control_id);
-                $sheet->setCellValue("C{$startingRow}", $rowData->control_name);
-                $sheet->setCellValue("D{$startingRow}", $rowData->status);
-                $sheet->setCellValue("E{$startingRow}", $rowData->owner_name);
-                $sheet->setCellValue("F{$startingRow}", $custodians);
-                $sheet->setCellValue("G{$startingRow}", $risks);
-
-                $horizontalAlign = Alignment::HORIZONTAL_LEFT;
-                $verticalAlign = Alignment::VERTICAL_TOP;
-
-                $sheet->getStyle($cellCoordinate)
-                    ->getAlignment()
-                    ->setHorizontal($horizontalAlign)
-                    ->setVertical($verticalAlign)
-                    ->setWrapText(true);
-            }
-            $sNo++;
-            $startingRow++;
-        }
-
-        $writer = new Xlsx($spreadsheet);
-        $writer->save($outputFilePath);
-        return response()->download($outputFilePath)->deleteFileAfterSend(true);
-
-        return response()->json(['message' => 'File updated successfully.']);
-    }
-
-    private function _downloadRiskExcel($report)
-    {
-        $filePath = storage_path('app/public/reports/MBE-Risks-Template.xlsx');
-        $outputFilePath = storage_path('app/public/reports/MBE-Risks.xlsx');
-
-        copy($filePath, $outputFilePath);
-
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
-        $sheet = $spreadsheet->getActiveSheet();
-
-        $headers = [
-            'A' => 'sno',
-            'B' => 'risk_id',
-            'C' => 'risk_name',
-            'D' => 'status',
-            'E' => 'owner_name',
-            'F' => 'custodian_links',
-            'G' => 'control_links',
-        ];
-
-        $startingRow = 3;
-        $sNo = 1;
-
-        foreach ($report as $rowData) {
-
-            foreach ($headers as $column => $key) {
-                $cellCoordinate = "{$column}{$startingRow}";
-                $custodians = str_replace("<br>", ", \n", strip_tags($rowData->custodian_links, "<br>"));
-                $controls = str_replace("<br>", ", \n", strip_tags($rowData->control_links, "<br>"));
-
-                $sheet->setCellValue("A{$startingRow}", $sNo);
-                $sheet->setCellValue("B{$startingRow}", $rowData->risk_id);
-                $sheet->setCellValue("C{$startingRow}", $rowData->risk_name);
-                $sheet->setCellValue("D{$startingRow}", $rowData->status);
-                $sheet->setCellValue("E{$startingRow}", $rowData->owner_name);
-                $sheet->setCellValue("F{$startingRow}", $custodians);
-                $sheet->setCellValue("G{$startingRow}", $controls);
-
-                $horizontalAlign = Alignment::HORIZONTAL_LEFT;
-                $verticalAlign = Alignment::VERTICAL_TOP;
-
-                $sheet->getStyle($cellCoordinate)
-                    ->getAlignment()
-                    ->setHorizontal($horizontalAlign)
-                    ->setVertical($verticalAlign)
-                    ->setWrapText(true);
-                $sheet->getColumnDimension('F')->setAutoSize(true);
-                $sheet->getColumnDimension('G')->setAutoSize(true);
-            }
-
-            $sNo++;
-            $startingRow++;
-        }
-
-        $writer = new Xlsx($spreadsheet);
-        $writer->save($outputFilePath);
-        return response()->download($outputFilePath)->deleteFileAfterSend(true);
-
-        return response()->json(['message' => 'File updated successfully.']);
-    }
-
-    private function _downloadAssetExcel($report)
-    {
-        $filePath = storage_path('app/public/reports/MBE-Assets-Template.xlsx');
-        $outputFilePath = storage_path('app/public/reports/MBE-Assets.xlsx');
-
-        copy($filePath, $outputFilePath);
-
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
-        $sheet = $spreadsheet->getActiveSheet();
-
-        
-        $headers = [
-            'A' => 'sno',
-            'B' => 'asset_id',
-            'C' => 'asset_name',
-            'D' => 'asset_group_name',
-            'E' => 'owner_name',
-            'F' => 'custodians',
-            'G' => 'risks',
-            'H' => 'controls',
-        ];
-
-        $startingRow = 3;
-        $sNo = 1;
-
-        foreach ($report as $rowData) {
-
-            foreach ($headers as $column => $key) {
-                $cellCoordinate = "{$column}{$startingRow}";
-                $custodians = str_replace("<br>", ", \n", strip_tags($rowData->custodians, "<br>"));
-                $controls = str_replace("<br>", ", \n", strip_tags($rowData->controls, "<br>"));
-                $risks = str_replace("<br>", ", \n", strip_tags($rowData->risks, "<br>"));
-
-                $sheet->setCellValue("A{$startingRow}", $sNo);
-                $sheet->setCellValue("B{$startingRow}", $rowData->asset_id);
-                $sheet->setCellValue("C{$startingRow}", $rowData->asset_name);
-                $sheet->setCellValue("D{$startingRow}", $rowData->asset_group_name);
-                $sheet->setCellValue("E{$startingRow}", $rowData->owner_name);
-                $sheet->setCellValue("F{$startingRow}", $custodians);
-                $sheet->setCellValue("G{$startingRow}", $risks);
-                $sheet->setCellValue("H{$startingRow}", $controls);
-
-                $horizontalAlign = Alignment::HORIZONTAL_LEFT;
-                $verticalAlign = Alignment::VERTICAL_TOP;
-
-                $sheet->getStyle($cellCoordinate)
-                    ->getAlignment()
-                    ->setHorizontal($horizontalAlign)
-                    ->setVertical($verticalAlign)
-                    ->setWrapText(true);
-                $sheet->getColumnDimension('F')->setAutoSize(true);
-                $sheet->getColumnDimension('G')->setAutoSize(true);
-            }
-
-            $sNo++;
-            $startingRow++;
-        }
-
-        $writer = new Xlsx($spreadsheet);
-        $writer->save($outputFilePath);
-        return response()->download($outputFilePath)->deleteFileAfterSend(true);
-
-        return response()->json(['message' => 'File updated successfully.']);
-    }
-
-    private function _getPdfUrl()
-    {
-        $currentUrl = request()->fullUrl();
-
-        // Check if the current URL already contains query parameters
-        if (strpos($currentUrl, '?') !== false) {
-            // If query string exists, append with '&'
-            $updatedUrl = $currentUrl . '&pdf=1';
-        } else {
-            // If no query string exists, append with '?'
-            $updatedUrl = $currentUrl . '?pdf=1';
-        }
-
-        return $updatedUrl;
-    }
-
-    private function _getExcelUrl()
-    {
-        $currentUrl = request()->fullUrl();
-
-        // Check if the current URL already contains query parameters
-        if (strpos($currentUrl, '?') !== false) {
-            // If query string exists, append with '&'
-            $updatedUrl = $currentUrl . '&excel=1';
-        } else {
-            // If no query string exists, append with '?'
-            $updatedUrl = $currentUrl . '?excel=1';
-        }
-
-        return $updatedUrl;
-    }
-
-
-
-
-
-
     // 2.Controller - SHOW DATA INTO THE LIST
 
     // -------Report of Critical Assets-------
     public function listcritical()
     {
-        $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+        $criticalAssets = Asset::select('asset_id', 'asset_name', 'asset_group_id', 'asset_type_id', 'location_id')
+            ->where('critical_asset', 'Yes')
+            ->whereHas('assetGroup')
+            ->whereHas('assetType')
+            ->whereHas('location')
+            ->with([
+                'assetGroup' => function ($query) {
+                    $query->select('asset_group_id', 'asset_group_name');
+                },
+                'assetType' => function ($query) {
+                    $query->select('asset_type_id', 'asset_type_name');
+                },
+                'location' => function ($query) {
+                    $query->select('location_id', 'location_name');
+                },
+            ])
+            ->get();
 
-            ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
-            ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
-
-            ->where('critical_asset', 'Yes')->get();
-
-
-        return view('4-Process/18-Reporting/2-MISReporting/1-list-critical-assets', ['assetregister' => $assetregister]);
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($criticalAssets, 'critical-asset-report.pdf', 'pdf/critical-asset-pdf', 'Critical Asset');
+        } else {
+            return view('4-Process/18-Reporting/2-MISReporting/1-list-critical-assets', compact('criticalAssets'));
+        }
     }
 
 
@@ -553,7 +327,12 @@ class MisReportsController extends Controller
             ->where('risk_critical_asset', 'Yes')
             ->get();
 
-        return view('4-Process/18-Reporting/2-MISReporting/1-risk-critical-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Risks-Related-to-Critical-Assets.pdf', 'pdf/risks-related-to-critical-assets-pdf', 'Risks Related to Critical Assets');
+        } else {
+            return view('4-Process/18-Reporting/2-MISReporting/1-risk-critical-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -563,7 +342,14 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_critical_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/1-control-critical-assets', ['assetregister' => $assetregister]);
+
+            if (request()->has('pdf')) {
+                $this->_downloadPdf($assetregister, 'Controls-Related-to-Critical-Assets.pdf', 'pdf/controls-related-to-critical-assets-pdf', 'Controls Related to Critical Assets');
+            } else {
+                
+                return view('4-Process/18-Reporting/2-MISReporting/1-control-critical-assets', ['assetregister' => $assetregister]);
+            }
+            
     }
 
 
@@ -1033,5 +819,240 @@ class MisReportsController extends Controller
             ->where('implemented', 'Pending')
             ->get();
         return view('4-Process/18-Reporting/2-MISReporting/14-list-control-pending', ['assetregister' => $assetregister]);
+    }
+
+    private function _downloadPdf($report, $filename, $template, $title = "")
+    {
+        $mpdf = new Mpdf([
+            'orientation' => 'L'
+        ]);
+
+
+
+        $html = view("4-Process/18-Reporting/2-MISReporting/{$template}", compact('report', 'title'))->render();
+
+        $mpdf->WriteHTML($html);
+
+        // Set the headers to prompt the file download
+        return response($mpdf->Output($filename, 'D'))
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    }
+
+    private function _downloadControlExcel($report)
+    {
+        $filePath = storage_path('app/public/reports/MBE-Controls-Template.xlsx');
+        $outputFilePath = storage_path('app/public/reports/MBE-Controls.xlsx');
+
+        copy($filePath, $outputFilePath);
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $headers = [
+            'A' => 'sno',
+            'B' => 'control_id',
+            'C' => 'control_name',
+            'D' => 'status',
+            'E' => 'owner_name',
+            'F' => 'custodian_links',
+            'G' => 'risks',
+        ];
+
+        $startingRow = 3;
+        $sNo = 1;
+
+
+        foreach ($report as $rowData) {
+
+            foreach ($headers as $column => $key) {
+                $cellCoordinate = "{$column}{$startingRow}";
+                $custodians = str_replace("<br>", ", \n", strip_tags($rowData->custodian_links, "<br>"));
+                $risks = str_replace("<br>", ", \n", strip_tags($rowData->risks, "<br>"));
+
+                $sheet->setCellValue("A{$startingRow}", $sNo);
+                $sheet->setCellValue("B{$startingRow}", $rowData->control_id);
+                $sheet->setCellValue("C{$startingRow}", $rowData->control_name);
+                $sheet->setCellValue("D{$startingRow}", $rowData->status);
+                $sheet->setCellValue("E{$startingRow}", $rowData->owner_name);
+                $sheet->setCellValue("F{$startingRow}", $custodians);
+                $sheet->setCellValue("G{$startingRow}", $risks);
+
+                $horizontalAlign = Alignment::HORIZONTAL_LEFT;
+                $verticalAlign = Alignment::VERTICAL_TOP;
+
+                $sheet->getStyle($cellCoordinate)
+                    ->getAlignment()
+                    ->setHorizontal($horizontalAlign)
+                    ->setVertical($verticalAlign)
+                    ->setWrapText(true);
+            }
+            $sNo++;
+            $startingRow++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($outputFilePath);
+        return response()->download($outputFilePath)->deleteFileAfterSend(true);
+
+        return response()->json(['message' => 'File updated successfully.']);
+    }
+
+    private function _downloadRiskExcel($report)
+    {
+        $filePath = storage_path('app/public/reports/MBE-Risks-Template.xlsx');
+        $outputFilePath = storage_path('app/public/reports/MBE-Risks.xlsx');
+
+        copy($filePath, $outputFilePath);
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $headers = [
+            'A' => 'sno',
+            'B' => 'risk_id',
+            'C' => 'risk_name',
+            'D' => 'status',
+            'E' => 'owner_name',
+            'F' => 'custodian_links',
+            'G' => 'control_links',
+        ];
+
+        $startingRow = 3;
+        $sNo = 1;
+
+        foreach ($report as $rowData) {
+
+            foreach ($headers as $column => $key) {
+                $cellCoordinate = "{$column}{$startingRow}";
+                $custodians = str_replace("<br>", ", \n", strip_tags($rowData->custodian_links, "<br>"));
+                $controls = str_replace("<br>", ", \n", strip_tags($rowData->control_links, "<br>"));
+
+                $sheet->setCellValue("A{$startingRow}", $sNo);
+                $sheet->setCellValue("B{$startingRow}", $rowData->risk_id);
+                $sheet->setCellValue("C{$startingRow}", $rowData->risk_name);
+                $sheet->setCellValue("D{$startingRow}", $rowData->status);
+                $sheet->setCellValue("E{$startingRow}", $rowData->owner_name);
+                $sheet->setCellValue("F{$startingRow}", $custodians);
+                $sheet->setCellValue("G{$startingRow}", $controls);
+
+                $horizontalAlign = Alignment::HORIZONTAL_LEFT;
+                $verticalAlign = Alignment::VERTICAL_TOP;
+
+                $sheet->getStyle($cellCoordinate)
+                    ->getAlignment()
+                    ->setHorizontal($horizontalAlign)
+                    ->setVertical($verticalAlign)
+                    ->setWrapText(true);
+                $sheet->getColumnDimension('F')->setAutoSize(true);
+                $sheet->getColumnDimension('G')->setAutoSize(true);
+            }
+
+            $sNo++;
+            $startingRow++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($outputFilePath);
+        return response()->download($outputFilePath)->deleteFileAfterSend(true);
+
+        return response()->json(['message' => 'File updated successfully.']);
+    }
+
+    private function _downloadAssetExcel($report)
+    {
+        $filePath = storage_path('app/public/reports/MBE-Assets-Template.xlsx');
+        $outputFilePath = storage_path('app/public/reports/MBE-Assets.xlsx');
+
+        copy($filePath, $outputFilePath);
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+
+        $headers = [
+            'A' => 'sno',
+            'B' => 'asset_id',
+            'C' => 'asset_name',
+            'D' => 'asset_group_name',
+            'E' => 'owner_name',
+            'F' => 'custodians',
+            'G' => 'risks',
+            'H' => 'controls',
+        ];
+
+        $startingRow = 3;
+        $sNo = 1;
+
+        foreach ($report as $rowData) {
+
+            foreach ($headers as $column => $key) {
+                $cellCoordinate = "{$column}{$startingRow}";
+                $custodians = str_replace("<br>", ", \n", strip_tags($rowData->custodians, "<br>"));
+                $controls = str_replace("<br>", ", \n", strip_tags($rowData->controls, "<br>"));
+                $risks = str_replace("<br>", ", \n", strip_tags($rowData->risks, "<br>"));
+
+                $sheet->setCellValue("A{$startingRow}", $sNo);
+                $sheet->setCellValue("B{$startingRow}", $rowData->asset_id);
+                $sheet->setCellValue("C{$startingRow}", $rowData->asset_name);
+                $sheet->setCellValue("D{$startingRow}", $rowData->asset_group_name);
+                $sheet->setCellValue("E{$startingRow}", $rowData->owner_name);
+                $sheet->setCellValue("F{$startingRow}", $custodians);
+                $sheet->setCellValue("G{$startingRow}", $risks);
+                $sheet->setCellValue("H{$startingRow}", $controls);
+
+                $horizontalAlign = Alignment::HORIZONTAL_LEFT;
+                $verticalAlign = Alignment::VERTICAL_TOP;
+
+                $sheet->getStyle($cellCoordinate)
+                    ->getAlignment()
+                    ->setHorizontal($horizontalAlign)
+                    ->setVertical($verticalAlign)
+                    ->setWrapText(true);
+                $sheet->getColumnDimension('F')->setAutoSize(true);
+                $sheet->getColumnDimension('G')->setAutoSize(true);
+            }
+
+            $sNo++;
+            $startingRow++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($outputFilePath);
+        return response()->download($outputFilePath)->deleteFileAfterSend(true);
+
+        return response()->json(['message' => 'File updated successfully.']);
+    }
+
+    private function _getPdfUrl()
+    {
+        $currentUrl = request()->fullUrl();
+
+        // Check if the current URL already contains query parameters
+        if (strpos($currentUrl, '?') !== false) {
+            // If query string exists, append with '&'
+            $updatedUrl = $currentUrl . '&pdf=1';
+        } else {
+            // If no query string exists, append with '?'
+            $updatedUrl = $currentUrl . '?pdf=1';
+        }
+
+        return $updatedUrl;
+    }
+
+    private function _getExcelUrl()
+    {
+        $currentUrl = request()->fullUrl();
+
+        // Check if the current URL already contains query parameters
+        if (strpos($currentUrl, '?') !== false) {
+            // If query string exists, append with '&'
+            $updatedUrl = $currentUrl . '&excel=1';
+        } else {
+            // If no query string exists, append with '?'
+            $updatedUrl = $currentUrl . '?excel=1';
+        }
+
+        return $updatedUrl;
     }
 }

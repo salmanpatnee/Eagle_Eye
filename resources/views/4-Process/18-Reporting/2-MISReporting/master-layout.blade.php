@@ -15,6 +15,10 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('/css/report.css') }}">
     <style>
+        .dheadersec {
+            padding: 0px;
+        }
+
         .cveButton {
             display: inherit;
         }
@@ -24,42 +28,43 @@
 <body>
 
     <div class="dheadersec">
-        <div class="dheaderleft">
-            <div class="dheadericon">
-                <a href="/compliance" class="text-white">
+        <div class="justify-content-between w-100 d-flex align-items-center">
+            <div class="dheaderleft">
+                <div class="dheadericon">
+                    <a href="/compliance" class="text-white">
 
-                    <i class='bx bx-home'></i>
+                        <i class='bx bx-home'></i>
+                    </a>
+                </div>
+                <div class="dheadertext">
+                    <p>العمليات</p>
+                    <p>Processes</p>
+                </div>
+                <div class="dheadericon">
+                    <i class='bx bx-right-arrow-alt'></i>
+                </div>
+                <div class="dheadertext">
+                    <p>تقارير نظم المعلومات الإدارية</p>
+                    <p>Management Information System Reports</p>
+                </div>
+            </div>
+            <div>
+                <a href="{{ $pdfUrl }}" class="btn-report btn btn-primary btn-sm">
+                    <p>تنزيل بصيغة بي دي إف</p>
+                    Download as PDF
                 </a>
             </div>
-            <div class="dheadertext">
-                <p>العمليات</p>
-                <p>Processes</p>
-            </div>
-            <div class="dheadericon">
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-            <div class="dheadertext">
-                <p>تقارير نظم المعلومات الإدارية</p>
-                <p>Management Information System Reports</p>
+
+            <div class="d-flex align-items-center gap-3">
+                @include('partials.roles')
+                <div class="dheaderright">
+                    <button type="dbutton" class="dbutton" onclick="window.history.back()">
+                        <p>للخلف</p>
+                        <p>Back</p>
+                    </button>
+                </div>
             </div>
         </div>
-
-        
-        <div class="d-flex align-items-center gap-3">
-            @include('partials.roles')
-            <div class="dheaderright">
-                <button type="dbutton" class="dbutton" onclick="window.history.back()">
-                    <p>للخلف</p>
-                    <p>Back</p>
-                </button>
-
-                
-            </div>
-            
-        </div>
-
-
-       
     </div>
     @yield('content')
     <script>

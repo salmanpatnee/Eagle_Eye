@@ -67,7 +67,7 @@
 
 <body>
     <main>
-        <header class="report-header" style="margin-bottom: 30px;">
+        <div class="report-header" style="margin-bottom: 30px;">
             @if ($organizationData)
                 @if ($organizationData->organization_logo != null)
                     <img src="{{ asset('storage/' . $organizationData?->organization_logo) }}" alt="Organization Logo"
@@ -83,7 +83,7 @@
                     class="mt-0">
                     {{ \Carbon\Carbon::now()->format('F j, Y') }}</h2>
             @endif
-        </header>
+        </div>
         <div class="tablearea">
             <table class="table" style="border: 1px solid #000; border-collapse: collapse; width: 100%;">
                 <thead class="tablehead">

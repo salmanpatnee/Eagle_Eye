@@ -23,7 +23,7 @@
                         <p>اسم الأصول</p>
                         <p>Asset Name</p>
                     </th>
-                    
+
                     <th>
                         <p>اسم مجموعة الأصول</p>
                         <p>Asset Group Name</p>
@@ -39,16 +39,18 @@
                 </tr>
             </thead>
             <tbody class="tablebody">
-                @foreach ($assetregister as $row)
+                @foreach ($criticalAssets as $criticalAsset)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td>
-                            <a href="/asset-register-table/{{ $row->asset_id }}">{{ $row->asset_id }}</a>
+                            <a href="{{ route('assetreg.show', $criticalAsset->asset_id) }}">
+                                {{ $criticalAsset->asset_id }}
+                            </a>
                         </td>
-                        <td>{{ $row->asset_name }}</td>
-                        <td>{{ $row->asset_group_name }}</td>
-                        <td>{{ $row->asset_type_name }}</td>
-                        <td>{{ $row->location_name }}</td>
+                        <td>{{ $criticalAsset->asset_name }}</td>
+                        <td>{{ $criticalAsset->assetGroup->asset_group_name }}</td>
+                        <td>{{ $criticalAsset->assetType->asset_type_name }}</td>
+                        <td>{{ $criticalAsset->location->location_name }}</td>
                     </tr>
                 @endforeach
             </tbody>
