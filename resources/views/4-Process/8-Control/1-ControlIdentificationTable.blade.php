@@ -235,7 +235,11 @@
                         <p class="sh-tx">{{ $control->control_reference }}</p>
                     </div>
                     <div class="column">
-
+                        <div class="FieldHead">
+                            <p class="FieldHeadEngTxt">Is Dependent</p>
+                            <p class="FieldHeadArbTxt">هل هو تابع</p>
+                        </div>
+                        <p class="sh-tx">{{ ($control->is_parent_control == "0") ? 'No' : 'Yes' }}</p>
                     </div>
 
                 </div>

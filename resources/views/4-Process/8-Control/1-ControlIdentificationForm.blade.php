@@ -413,19 +413,20 @@
                                 @enderror
                             </p>
                         </div>
-                        {{-- <div class="column">
+                        <div class="column">
                             <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Best Practice Name</p>
-                                <p class="FieldHeadArbTxt">اسم أفضل الممارسات</p>
+                                <p class="FieldHeadEngTxt">Is Parent Control</p>
+                                <p class="FieldHeadArbTxt">هل هو التحكم الرئيسي</p>
                             </div>
-                            <p>
-                                <button type="button" class="sh-tx" data-toggle="modal"
-                                    data-target="#bestPractModal">Add
-                                    Best Practices</button>
-                                <input type="hidden" name="bestPractices" id="selectedBestPractice">
-                            <div id="selectedBestPracticeText"></div>
-                            </p>
-                        </div> --}}
+                            <select name="is_parent_control" id="is_parent_control" class="sh-tx"
+                                value="{{ old('is_parent_control', $controlmaster?->is_parent_control) }}">
+                                <option value="1" {{($controlmaster?->is_parent_control == "1") ? "selected" : ""}}>Yes</option>
+                                <option value="0" {{($controlmaster?->is_parent_control == "0") ? "selected" : ""}}>No</option>
+                                @error('is_parent_control')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </select>
+                        </div>
                     </div>
                     <div class="ContentTable">
                         {{-- <div class="column">

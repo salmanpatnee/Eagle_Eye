@@ -112,6 +112,7 @@ class ControlController extends Controller
             'control_operational' => 'nullable',
             'control_payment' => 'nullable',
             'control_e_banking' => 'nullable',
+            'is_parent_control' => 'nullable',
         ]);
 
         $categories = $attributes['categories'];
@@ -202,6 +203,7 @@ class ControlController extends Controller
             'control_operational' => 'nullable',
             'control_payment' => 'nullable',
             'control_e_banking' => 'nullable',
+            'is_parent_control' => 'nullable',
         ]);
 
         $categories = $attributes['categories'];
