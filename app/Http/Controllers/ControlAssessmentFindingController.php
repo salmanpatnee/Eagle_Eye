@@ -45,6 +45,7 @@ class ControlAssessmentFindingController extends Controller
                     ->where('cadt.control_assessment_id', '=', $controlAssessment->control_assessment_id);
             })
             ->where('bpt.best_practices_id', $controlAssessment->best_practices_id)
+            ->where('c.is_parent_control', 'No')
             ->whereNull('cadt.control_assessment_id')
             ->select('c.control_id', 'c.control_name')
             ->get();
