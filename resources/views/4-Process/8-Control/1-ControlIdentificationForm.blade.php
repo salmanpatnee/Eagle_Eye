@@ -326,13 +326,27 @@
                                 <p class="FieldHeadEngTxt">Main Control</p>
                                 <p class="FieldHeadArbTxt">ضوابط الرئيسي</p>
                             </div>
-                            <p><input type="text" name="control_parent" id="control_parent" class="sh-tx"
+                            <select name="control_parent" id="control_parent" class="sh-tx"
+                                value="{{ old('control_parent', $controlmaster?->control_parent) }}">
+                                <option value="">Select Main Control</option>
+                                @foreach ($controls as $control)
+                                <option value="{{$control->control_id}}" {{ old('control_parent') == $control->control_id ? 'selected' : '' }}>
+                                    {{$control->control_id . ' ' . $control->control_name}}
+                                </option>
+                                @endforeach
+                         
+                                @error('control_parent')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </select>
+
+                            {{-- <p><input type="text" name="control_parent" id="control_parent" class="sh-tx"
                                     placeholder="Write Control Parent Name"
                                     value="{{ old('control_parent', $controlmaster?->control_parent) }}">
                                 @error('control_parent')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </p>
+                            </p> --}}
                         </div>
                     </div>
                     <div class="ContentTable">
@@ -415,13 +429,18 @@
                         </div>
                         <div class="column">
                             <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Is Parent Control</p>
-                                <p class="FieldHeadArbTxt">هل هو التحكم الرئيسي</p>
+                                <p class="FieldHeadEngTxt">Is Dependant</p>
+                                <p class="FieldHeadArbTxt">هل هو تابع</p>
                             </div>
                             <select name="is_parent_control" id="is_parent_control" class="sh-tx"
                                 value="{{ old('is_parent_control', $controlmaster?->is_parent_control) }}">
-                                <option value="1" {{($controlmaster?->is_parent_control == "1") ? "selected" : ""}}>Yes</option>
-                                <option value="0" {{($controlmaster?->is_parent_control == "0") ? "selected" : ""}}>No</option>
+                                <option value="1"
+                                    {{ old('is_parent_control', $controlmaster?->is_parent_control) === '1' ? 'selected' : '' }}>
+                                    Yes</option>
+                                <option value="0"
+                                    {{ old('is_parent_control', $controlmaster?->is_parent_control) !== '1' ? 'selected' : '' }}>
+                                    No</option>
+
                                 @error('is_parent_control')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -999,9 +1018,10 @@
         function goBack() {
             window.history.back();
         }
+
         function showDeleteModal() {
-    window.deleteConfirmationModal.show(document.getElementById('delete_form'));
-}
+            window.deleteConfirmationModal.show(document.getElementById('delete_form'));
+        }
     </script>
 </body>
 

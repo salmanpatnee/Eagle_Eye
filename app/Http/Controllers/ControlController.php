@@ -32,10 +32,13 @@ class ControlController extends Controller
         $domains = DB::table('domain_table')->select('id', 'main_domain_id', 'main_domain_name')->distinct()->get();
         $subDomains = DB::table('sub_domain_table')->select('id', 'sub_domain_id', 'sub_domain_name')->distinct()->get();
         $risks = DB::table('risk_master_table')->select('id', 'risk_id', 'risk_name')->distinct()->get();
+        $controls = ControlMaster::select('control_id', 'control_name')->where('control_id', 'LIKE', 'SAMA-CSF-%')->get();
+        
+
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/8-Control/1-ControlIdentificationForm', compact('controlmaster', 'classificationtable', 'ownername', 'controltype', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'routeName', 'data', 'primaryKey'));
+        return view('4-Process/8-Control/1-ControlIdentificationForm', compact('controlmaster', 'classificationtable', 'ownername', 'controltype', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'routeName', 'data', 'primaryKey', 'controls'));
     }
 
     // To edit the table
@@ -48,7 +51,7 @@ class ControlController extends Controller
         $mainDomainIds = $controlmaster->domains()->pluck('domain_table.main_domain_id')->toArray();
         $subDomainIds = $controlmaster->subDomains()->pluck('sub_domain_table.sub_domain_id')->toArray();
         $riskIds = $controlmaster->risks()->pluck('risk_master_table.risk_id')->toArray();
-
+        $controls = ControlMaster::select('control_id', 'control_name')->where('control_id', 'LIKE', 'SAMA-CSF-%')->where('control_id', "!=", $control->control_id)->get();
 
         // $controlmaster = DB::table('control_master_table')->where('control_id', $id)->first();
         $classificationtable = DB::table('classification_table')->get();
@@ -64,7 +67,7 @@ class ControlController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/8-Control/1-ControlIdentificationForm', compact('controlmaster', 'riskIds', 'subDomainIds', 'mainDomainIds', 'custodianRoleIds', 'categoryIds', 'bestPracticeIds', 'classificationtable', 'ownername', 'controltype', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'routeName', 'data', 'primaryKey'));
+        return view('4-Process/8-Control/1-ControlIdentificationForm', compact('controlmaster', 'riskIds', 'subDomainIds', 'mainDomainIds', 'custodianRoleIds', 'categoryIds', 'bestPracticeIds', 'classificationtable', 'ownername', 'controltype', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'routeName', 'data', 'primaryKey', 'controls'));
     }
 
 

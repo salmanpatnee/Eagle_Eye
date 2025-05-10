@@ -191,4 +191,14 @@ class ControlMaster extends Model
     public function findings(){
         return $this->belongsToMany(AuditFinding::class, 'audit_finding_vs_control_table', 'control_id', 'audit_finding_id', 'control_id', 'audit_finding_id');
     }
+
+    public function children()
+    {
+        return $this->hasMany(ControlMaster::class, 'control_parent', 'control_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(ControlMaster::class, 'control_parent', 'control_id');
+    }
 }
