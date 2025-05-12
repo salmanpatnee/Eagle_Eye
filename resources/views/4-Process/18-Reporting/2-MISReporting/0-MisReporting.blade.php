@@ -303,7 +303,7 @@
                 <a href="/risk-telework-assets">
                     <div class="threebutton">
                         <p>المخاطر المتعلقة بأصول العمل عن بعد</p>
-                        <p>Risk Related to Telwrok Assets</p>
+                        <p>Risk Related to Telework Assets</p>
                     </div>
                 </a>
                 <a href="/control-telework-assets">

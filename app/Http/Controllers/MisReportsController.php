@@ -20,7 +20,7 @@ class MisReportsController extends Controller
             "control_critical_asset" => "Critical Controls",
             "control_cloud" => "Cloud Controls",
             "control_telework" => "Telework Controls",
-            "control_social_media" => "Social Media Controls",
+            "control_social_media" => "PCI DSS Controls",
             "control_data_privicy" => "Data Privacy Controls",
             "control_pii" => "Data PII Controls",
             "control_pci_dss" => "PCI DSS Controls",
@@ -311,7 +311,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($criticalAssets, 'critical-asset-report.pdf', 'pdf/critical-asset-pdf', 'Critical Asset');
+            $this->_downloadPdf($criticalAssets, 'critical-asset-report.pdf', 'pdf/1-critical-asset-pdf', 'Critical Asset');
         } else {
             return view('4-Process/18-Reporting/2-MISReporting/1-list-critical-assets', compact('criticalAssets'));
         }
@@ -329,7 +329,7 @@ class MisReportsController extends Controller
 
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($assetregister, 'Risks-Related-to-Critical-Assets.pdf', 'pdf/risks-related-to-critical-assets-pdf', 'Risks Related to Critical Assets');
+            $this->_downloadPdf($assetregister, 'Risks-Related-to-Critical-Assets.pdf', 'pdf/2-risks-related-to-critical-assets-pdf', 'Risks Related to Critical Assets');
         } else {
             return view('4-Process/18-Reporting/2-MISReporting/1-risk-critical-assets', ['assetregister' => $assetregister]);
         }
@@ -343,13 +343,12 @@ class MisReportsController extends Controller
             ->where('control_critical_asset', 'Yes')
             ->get();
 
-            if (request()->has('pdf')) {
-                $this->_downloadPdf($assetregister, 'Controls-Related-to-Critical-Assets.pdf', 'pdf/controls-related-to-critical-assets-pdf', 'Controls Related to Critical Assets');
-            } else {
-                
-                return view('4-Process/18-Reporting/2-MISReporting/1-control-critical-assets', ['assetregister' => $assetregister]);
-            }
-            
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Controls-Related-to-Critical-Assets.pdf', 'pdf/3-controls-related-to-critical-assets-pdf', 'Controls Related to Critical Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/1-control-critical-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -362,7 +361,14 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('cloud_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/2-list-cloud-assets', ['assetregister' => $assetregister]);
+
+
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Cloud-Assets.pdf', 'pdf/cloud-assets-pdf', 'Cloud Assets');
+        } else {
+            return view('4-Process/18-Reporting/2-MISReporting/2-list-cloud-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -374,7 +380,13 @@ class MisReportsController extends Controller
             ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
             ->where('risk_cloud', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/2-risk-cloud-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Risks-Related-to-Cloud-Assets.pdf', 'pdf/risk-cloud-assets-pdf', 'Risks Related to Cloud Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/2-risk-cloud-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -384,7 +396,13 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_cloud', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/2-control-cloud-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Controls-Related-to-Cloud-Assets.pdf', 'pdf/controls-cloud-assets-pdf', 'Controls Related to Cloud Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/2-control-cloud-assets', ['assetregister' => $assetregister]);
+        }
     }
 
     // -------Report of Telework Assets-------
@@ -396,7 +414,12 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('telework_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/3-list-telework-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Telework-Assets.pdf', 'pdf/Telework-Assets-pdf', 'List of Telework Assets');
+        } else {
+            return view('4-Process/18-Reporting/2-MISReporting/3-list-telework-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -408,7 +431,13 @@ class MisReportsController extends Controller
             ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
             ->where('risk_telework', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/3-risk-telework-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Telework-Risk.pdf', 'pdf/Telework-Risk-pdf', 'Risks Related to Telework Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/3-risk-telework-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -418,7 +447,14 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_telework', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/3-control-telework-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Control-Telework-Asset.pdf', 'pdf/control-telework-asset-pdf', 'Controls Related to Telework Assets');
+        } else {
+
+
+            return view('4-Process/18-Reporting/2-MISReporting/3-control-telework-assets', ['assetregister' => $assetregister]);
+        }
     }
 
     // -------Report of Social Media Assets-------
@@ -430,7 +466,13 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('social_media_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/4-list-social-media-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Social-Media-Asset.pdf', 'pdf/social-media-asset-pdf', 'List of Social Media Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/4-list-social-media-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -442,7 +484,13 @@ class MisReportsController extends Controller
             ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
             ->where('risk_social_media', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/4-risk-social-media-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Risk-Social-Media-Asset.pdf', 'pdf/risk-social-media-asset-pdf', 'Risks Related to Social Media Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/4-risk-social-media-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -452,7 +500,13 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_social_media', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/4-control-social-media-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Controls-Related-to-Social-Media-Assets.pdf', 'pdf/control-social-media-asset-pdf', 'Controls Related to Social Media Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/4-risk-social-media-assets', ['assetregister' => $assetregister]);
+        }
     }
 
     // -------Report of Data Privacy Assets-------
@@ -464,7 +518,12 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('data_privacy_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/5-list-data-privacy-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'data-privacy-Asset.pdf', 'pdf/data-privacy-asset-pdf', 'List of Data Privacy Assets');
+        } else {
+            return view('4-Process/18-Reporting/2-MISReporting/5-list-data-privacy-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -476,7 +535,12 @@ class MisReportsController extends Controller
             ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
             ->where('risk_data_privicy', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/5-risk-data-privacy-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Risk-data-privacy-Asset.pdf', 'pdf/risk-data-privacy-asset-pdf', 'Risks Related to Data Privacy Assets');
+        } else {
+            return view('4-Process/18-Reporting/2-MISReporting/5-risk-data-privacy-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -486,7 +550,12 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_data_privicy', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/5-control-data-privacy-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Controls-Related-to-data-privacy-Assets.pdf', 'pdf/control-data-privacy-asset-pdf', 'Controls Related to Data Privacy Assets');
+        } else {
+            return view('4-Process/18-Reporting/2-MISReporting/5-control-data-privacy-assets', ['assetregister' => $assetregister]);
+        }
     }
 
     // -------Report of PII Assets-------
@@ -498,7 +567,13 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('data_pii_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/6-list-pii-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'PII-Asset.pdf', 'pdf/pii-asset-pdf', 'List of Personally Identifiable Information Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/6-list-pii-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -510,7 +585,13 @@ class MisReportsController extends Controller
             ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
             ->where('risk_pii', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/6-risk-pii-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Risk-PII-Asset.pdf', 'pdf/risk-pii-asset-pdf', 'Risks Related to Personally Identifiable Information Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/6-risk-pii-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -520,7 +601,12 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_pii', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/6-control-pii-assets', ['assetregister' => $assetregister]);
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Controls-Related-to-PII-Assets.pdf', 'pdf/control-pii-asset-pdf', 'Controls Related to Personally Identifiable Information Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/6-control-pii-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -533,7 +619,13 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('payment_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/7-list-payment-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Payment-Asset.pdf', 'pdf/payment-asset-pdf', 'List of Payment Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/7-list-payment-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -545,7 +637,13 @@ class MisReportsController extends Controller
             ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
             ->where('risk_payment', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/7-risk-payment-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Risk-Payment-Asset.pdf', 'pdf/risk-payment-asset-pdf', 'Risks Related to Payment Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/7-risk-payment-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -555,7 +653,13 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_payment', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/7-control-payment-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Controls-Related-to-Payment-Assets.pdf', 'pdf/control-payment-asset-pdf', 'Controls Related to Payment Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/7-control-payment-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -568,7 +672,13 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('pci_dss_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/8-list-pci-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'PCI-DSS-Asset.pdf', 'pdf/pci-dss-asset-pdf', 'List of PCI DSS Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/8-list-pci-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -580,7 +690,13 @@ class MisReportsController extends Controller
             ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
             ->where('risk_pci_dss', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/8-risk-pci-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Risk-PCI-DSS-Asset.pdf', 'pdf/risk-pci-dss-asset-pdf', 'Risks Related to PCI DSS Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/8-risk-pci-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -590,7 +706,12 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_pci_dss', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/8-control-pci-assets', ['assetregister' => $assetregister]);
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Controls-Related-to-PCI-DSS-Assets.pdf', 'pdf/control-pci-dss-asset-pdf', 'Controls Related to PCI DSS Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/8-control-pci-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -603,7 +724,13 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_commerce_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/9-list-e-commerce-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Ecommerce-Asset.pdf', 'pdf/ecommerce-asset-pdf', 'List of Ecommerce Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/9-list-e-commerce-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -615,7 +742,13 @@ class MisReportsController extends Controller
             ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
             ->where('risk_e_commerce', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/9-risk-e-commerce-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Risk-Ecommerce-Asset.pdf', 'pdf/risk-ecommerce-asset-pdf', 'Risks Related to Ecommerce Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/9-risk-e-commerce-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -625,7 +758,13 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_e_commerce', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/9-control-e-commerce-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Controls-Related-to-Ecommerce-Assets.pdf', 'pdf/control-ecommerce-asset-pdf', 'Controls Related to Ecommerce Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/9-control-e-commerce-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -638,7 +777,13 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_banking_asset', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/10-list-e-banking-assets', ['assetregister' => $assetregister]);
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'E-Banking-Asset.pdf', 'pdf/e-banking-asset-pdf', 'List of E-Banking Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/10-list-e-banking-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -650,7 +795,12 @@ class MisReportsController extends Controller
             ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
             ->where('risk_e_banking', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/10-risk-e-banking-assets', ['assetregister' => $assetregister]);
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Risk-E-Banking-Asset.pdf', 'pdf/risk-e-banking-asset-pdf', 'Risks Related to E-Banking Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/10-risk-e-banking-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -660,7 +810,12 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('control_e_banking', 'Yes')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/10-control-e-banking-assets', ['assetregister' => $assetregister]);
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($assetregister, 'Controls-Related-to-E-Banking-Assets.pdf', 'pdf/control-e-banking-asset-pdf', 'Controls Related to E-Banking Assets');
+        } else {
+
+            return view('4-Process/18-Reporting/2-MISReporting/10-control-e-banking-assets', ['assetregister' => $assetregister]);
+        }
     }
 
 
@@ -827,7 +982,7 @@ class MisReportsController extends Controller
             'orientation' => 'L'
         ]);
 
-
+        ini_set("pcre.backtrack_limit", "5000000");
 
         $html = view("4-Process/18-Reporting/2-MISReporting/{$template}", compact('report', 'title'))->render();
 

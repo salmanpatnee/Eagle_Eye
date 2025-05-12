@@ -1324,9 +1324,6 @@ Route::middleware(['auth'])->group(function () {
         return view('4-Process/18-Reporting/2-MISReporting/0-MisReporting');
     });
 
-
-
-
     Route::controller(MisReportsController::class)->group(function () {
         Route::get('/management-by-exceptions', 'mbe')->name('mbe.index');
         Route::get('/management-by-exceptions-risk', 'mbe_risks')->name('mbe-risk.index');
@@ -1463,7 +1460,7 @@ Route::prefix('cs-induction')->group(function () {
     Route::view('/cybersecurity-audit', '4-Process/17-GrcDomain/8-IdentityAccessManagementCsIndu');
     Route::view('/human-resources', '4-Process/17-GrcDomain/9-InformationSystemProcessingCsIndu');
     Route::view('/physical-security', '4-Process/17-GrcDomain/10-EmailProtectionCsIndu');
-    
+
     Route::view('/asset-management', '4-Process/17-GrcDomain/11-NetworkSecurityManagementCsIndu');
     Route::view('/cybersecurity-architecture', '4-Process/17-GrcDomain/12-MobileDeviceSecurityCsIndu');
     Route::view('/identity-and-access-management', '4-Process/17-GrcDomain/13-DataInformationSecurityCsIndu');
@@ -1474,7 +1471,7 @@ Route::prefix('cs-induction')->group(function () {
     Route::view('/secure-disposal', '4-Process/17-GrcDomain/19-CybersecurityIncidentManagementCsIndu');
     Route::view('/payment-system', '4-Process/17-GrcDomain/20-PhysicalSecurityCsIndu');
     Route::view('/electronic-banking', '4-Process/17-GrcDomain/21-WebApplicationSecurityCsIndu');
-    
+
     Route::view('/cybersecurity-event-management', '4-Process/17-GrcDomain/22-CybersecurityResilienceCsIndu');
     Route::view('/cybersecurity-incident-management', '4-Process/17-GrcDomain/23-ThirdPartyCybersecurityCsIndu');
     Route::view('/threat-management', '4-Process/17-GrcDomain/24-CloudComputingCsIndu');

@@ -3,8 +3,8 @@
     <div class="herosec">
         <div class="herosecleft">
             <div class="cveButton">
-                <p>تقارير نظم المعلومات الإدارية</p>
-                <p>Management Information System Reports</p>
+                <h1>تقارير نظم المعلومات الإدارية</h1>
+                <h3>Management Information System Reports</h3>
             </div>
         </div>
     </div>
