@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         h1 {
             font-size: 1.7em;
@@ -55,7 +56,7 @@
             }
         }
     </style>
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Function to generate the ID with a sequence
             function generateID() {
@@ -81,7 +82,7 @@
             // Call the generateID function when the page loads
             generateID();
         });
-    </script>
+    </script> --}}
 </head>
 
 <body>
@@ -330,11 +331,12 @@
                                 value="{{ old('control_parent', $controlmaster?->control_parent) }}">
                                 <option value="">Select Main Control</option>
                                 @foreach ($controls as $control)
-                                <option value="{{$control->control_id}}" {{ old('control_parent') == $control->control_id ? 'selected' : '' }}>
-                                    {{$control->control_id . ' ' . $control->control_name}}
-                                </option>
+                                    <option value="{{ $control->control_id }}"
+                                        {{ old('control_parent') == $control->control_id ? 'selected' : '' }}>
+                                        {{ $control->control_id . ' ' . $control->control_name }}
+                                    </option>
                                 @endforeach
-                         
+
                                 @error('control_parent')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -905,7 +907,12 @@
     <script src="/Css/7-Sidebar/2-Sidebar.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#control_parent').select2();
+        });
+
         $('.categoryCheckbox').change(function() {
             var selectedOptionsText = [];
             var selectedOptions = [];
