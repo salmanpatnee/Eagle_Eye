@@ -3,7 +3,9 @@
     <div class="herosec">
         <div class="herosecleft">
             <div class="cveButton">
-                <h1>Critical Assets Report</h1>
+                <h1>تقرير الأصول الحرجة</h1>
+                <h3>Critical Assets Report</h3>
+                
             </div>
         </div>
     </div>
