@@ -314,7 +314,6 @@ class RegulatoryReportController extends Controller
     {
 
         $report = DB::table('control_master_table AS c')
-            ->distinct()
             ->join('control_master_table_vs_best_practice_table AS cv', 'c.control_id', '=', 'cv.control_id')
             ->join('best_practice_table AS bp', 'cv.best_practice_id', '=', 'bp.best_practices_id')
             ->join('control_master_table_vs_domain_table AS cvd', 'c.control_id', '=', 'cvd.control_id')
@@ -339,13 +338,13 @@ class RegulatoryReportController extends Controller
             ->when($cloudControlType, function ($query, $cloudControlType) {
                 $query->where('c.control_cloud', $cloudControlType);
             })
-
             ->select(
                 'c.control_id',
                 'c.control_name',
                 'c.control_description',
                 'c.control_description_ar',
                 'c.control_level_title',
+                'c.sort_order', // Add sort_order to SELECT to fix MySQL 8+ error with DISTINCT
                 'bp.best_practices_id',
                 'bp.best_practices_name',
                 'd.main_domain_id',
@@ -367,13 +366,18 @@ class RegulatoryReportController extends Controller
                     END AS status_ar"
                 )
             )
-            ->orderByRaw("
-                CAST(SUBSTRING_INDEX(c.control_id, '-', 1) AS UNSIGNED),
-                CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 3), '-', -1) AS UNSIGNED),
-                COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 4), '-', -1) AS UNSIGNED), 0),
-                COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 5), '-', -1) AS UNSIGNED), 0),
-                COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 6), '-', -1) AS UNSIGNED), 0)
-            ")
+            ->distinct()
+            ->when($bestPracticeId === 'SAMA-CSF-2017', function ($query) {
+                return $query->orderBy('c.sort_order');
+            }, function ($query) {
+                return $query->orderByRaw("
+                    CAST(SUBSTRING_INDEX(c.control_id, '-', 1) AS UNSIGNED),
+                    CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 3), '-', -1) AS UNSIGNED),
+                    COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 4), '-', -1) AS UNSIGNED), 0),
+                    COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 5), '-', -1) AS UNSIGNED), 0),
+                    COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 6), '-', -1) AS UNSIGNED), 0)
+                ");
+            })
             ->get();
 
 
