@@ -103,6 +103,16 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.1.3.4.F')
+        @php
+            $status = getParentStatus($report, 'SAMA-CSF-3.1.3.4.F.');
+        @endphp
+        {{-- <x-main-control id="3.1.3.4.F" details="Cyber security requirements that ensure:" details_ar="" :status="$status" /> --}}
+
+        <x-sub-control id="3.1.3.4.F" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.1.3.4.F.1')
         <x-sub-control id="3.1.3.4.F.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -159,6 +169,12 @@
             :control="$control" />
     @endif
 
+
+    @if ($control->control_id == 'SAMA-CSF-3.1.4.1.C')
+        <x-sub-control id="3.1.4.1.C" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.1.4.1.C.1')
         <x-sub-control id="3.1.4.1.C.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -187,10 +203,17 @@
         <x-sub-control id="3.1.4.2.B" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.1.4.2.C')
+        <x-sub-control id="3.1.4.2.C" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.1.4.2.C.1')
         <x-sub-control id="3.1.4.2.C.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.1.4.2.C.2')
         <x-sub-control id="3.1.4.2.C.2" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -241,9 +264,21 @@
         <x-main-control id="3.1.4.4" details="The CISO should be responsible for:" details_ar=""
             :status="$status" />
 
+        <x-sub-control id="3.1.4.4.A" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.1.4.4.A.1')
+        @php
+            $status = getParentStatus($report, 'SAMA-CSF-3.1.4.4.');
+        @endphp
+
         <x-sub-control id="3.1.4.4.A.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
+
+
 
     @if ($control->control_id == 'SAMA-CSF-3.1.4.4.A.2')
         <x-sub-control id="3.1.4.4.A.2" details="{{ $control->control_description }}" details_ar=""
@@ -268,6 +303,11 @@
     @endif
     @if ($control->control_id == 'SAMA-CSF-3.1.4.4.D')
         <x-sub-control id="3.1.4.4.D" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.1.4.4.E')
+        <x-sub-control id="3.1.4.4.E" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
@@ -298,6 +338,11 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.1.4.4.G')
+        <x-sub-control id="3.1.4.4.G" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.1.4.4.G.1')
         <x-sub-control id="3.1.4.4.G.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -316,6 +361,11 @@
         <x-sub-control id="3.1.4.4.H" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+    @if ($control->control_id == 'SAMA-CSF-3.1.4.4.I')
+        <x-sub-control id="3.1.4.4.I" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.1.4.4.I.1')
         <x-sub-control id="3.1.4.4.I.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -332,10 +382,16 @@
         <x-sub-control id="3.1.4.4.I.4" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
-    @if ($control->control_id == 'SAMA-CSF-3.1.4.5.A')
-        <x-sub-control id="3.1.4.5.A" details="{{ $control->control_description }}" details_ar=""
-            :control="$control" />
+
+    @if ($control->control_id == 'SAMA-CSF-3.1.4.5')
+        <x-main-control id="3.1.4.5" :details="$control->control_description" details_ar="" :status="$status" />
     @endif
+    @if ($control->control_id == 'SAMA-CSF-3.1.4.6')
+        <x-main-control id="3.1.4.6" :details="$control->control_description" details_ar="" :status="$status" />
+    @endif
+
+
+
     @if ($control->control_id == 'SAMA-CSF-3.1.4.6.A')
         <x-sub-control id="3.1.4.6.A" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -517,8 +573,15 @@
         <x-main-control id="3.2.1.2" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
+
     @if ($control->control_id == 'SAMA-CSF-3.2.1.3')
         <x-main-control id="3.2.1.3" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.2.1.4')
+        <x-main-control id="3.2.1.4" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
@@ -539,6 +602,11 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.2.1.5')
+        <x-main-control id="3.2.1.5" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.2.1.5.A')
         <x-sub-control id="3.2.1.5.A" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -548,8 +616,14 @@
         <x-sub-control id="3.2.1.5.B" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.2.1.5.C')
         <x-sub-control id="3.2.1.5.C" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.2.1.6')
+        <x-main-control id="3.2.1.6" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
@@ -569,10 +643,17 @@
         <x-sub-control id="3.2.1.6.D" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.2.1.7')
         <x-main-control id="3.2.1.7" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.2.1.8')
+        <x-main-control id="3.2.1.8" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.2.1.8.A')
         <x-sub-control id="3.2.1.8.A" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -589,6 +670,7 @@
         <x-sub-control id="3.2.1.8.D" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.2.1.9')
         <x-main-control id="3.2.1.9" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -667,6 +749,11 @@
     @endif
 
 
+    @if ($control->control_id == 'SAMA-CSF-3.2.1.3.3.B')
+        <x-sub-control id="3.2.1.3.3.B" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.2.1.3.3.B.1')
         <x-sub-control id="3.2.1.3.3.B.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -717,6 +804,12 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.2.1.3.6.B')
+        <x-sub-control id="3.2.1.3.6.B" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+
     @if ($control->control_id == 'SAMA-CSF-3.2.1.3.6.B.1')
         <x-sub-control id="3.2.1.3.6.B.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -752,24 +845,23 @@
 
 
 @foreach ($report as $control)
-    @if ($control->control_id == 'SAMA-CSF-3.2.1.4.A')
-        @php
-            $status = getParentStatus($report, 'SAMA-CSF-3.2.1.4.');
-        @endphp
-        <x-main-control id="3.2.1.4" details="The cyber security treatment should be monitored, including:"
-            details_ar="" :status="$status" />
-
-        <x-sub-control id="3.2.1.4.A" details="{{ $control->control_description }}" details_ar=""
+    @if ($control->control_id == 'SAMA-CSF-3.2.1.4.1')
+        <x-sub-control id="3.2.1.4.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
-    @if ($control->control_id == 'SAMA-CSF-3.2.1.4.B')
-        <x-sub-control id="3.2.1.4.B" details="{{ $control->control_description }}" details_ar=""
+    @if ($control->control_id == 'SAMA-CSF-3.2.1.4.1.A')
+        <x-sub-control id="3.2.1.4.1.A" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.2.1.4.1.B')
+        <x-sub-control id="3.2.1.4.1.B" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
     @if ($control->control_id == 'SAMA-CSF-3.2.1.4.2')
-        <x-main-control id="3.2.1.4.2" details="{{ $control->control_description }}" details_ar=""
+        <x-sub-control id="3.2.1.4.2" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 @endforeach
@@ -920,6 +1012,10 @@
     @endif
     @if ($control->control_id == 'SAMA-CSF-3.3.1.3.D')
         <x-sub-control id="3.3.1.3.D" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+    @if ($control->control_id == 'SAMA-CSF-3.3.1.3.E')
+        <x-sub-control id="3.3.1.3.E" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
     @if ($control->control_id == 'SAMA-CSF-3.3.1.3.E.1')
@@ -1085,10 +1181,17 @@
         <x-sub-control id="3.3.5.4.A" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.3.5.4.B')
+        <x-sub-control id="3.3.5.4.B" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.3.5.4.B.1')
         <x-sub-control id="3.3.5.4.B.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.3.5.4.B.2')
         <x-sub-control id="3.3.5.4.B.2" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -1126,17 +1229,15 @@
         <x-sub-control id="3.3.5.4.E" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+    @if ($control->control_id == 'SAMA-CSF-3.3.5.4.F')
+        <x-sub-control id="3.3.5.4.F" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
 
-    {{-- @if ($control->control_id == 'SAMA-CSF-3.3.5.4.F.1.A')
-        @php
-        $status = getParentStatus($report, 'SAMA-CSF-3.3.5.4.F.1.');
-        @endphp
-        <x-sub-control id="3.3.5.4.F" details="privileged and remote access management, which should address:"
-        details_ar=""  :control="$control"/>
-
-   
-    @endif --}}
-
+    @if ($control->control_id == 'SAMA-CSF-3.3.5.4.F.1')
+        <x-sub-control id="3.3.5.4.F.1" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
     @if ($control->control_id == 'SAMA-CSF-3.3.5.4.F.1.A')
         <x-sub-control id="3.3.5.4.F.1.A" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -1145,12 +1246,17 @@
         <x-sub-control id="3.3.5.4.F.1.B" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.3.5.4.F.2')
         <x-sub-control id="3.3.5.4.F.2" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
     @if ($control->control_id == 'SAMA-CSF-3.3.5.4.F.3')
         <x-sub-control id="3.3.5.4.F.3" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+    @if ($control->control_id == 'SAMA-CSF-3.3.5.4.F.4')
+        <x-sub-control id="3.3.5.4.F.4" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
     @if ($control->control_id == 'SAMA-CSF-3.3.5.4.F.4.A')
@@ -1206,10 +1312,7 @@
         <x-sub-control id="3.3.6.5.C" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
-    @if ($control->control_id == 'SAMA-CSF-3.3.6.5.C')
-        <x-sub-control id="3.3.6.5.C" details="{{ $control->control_description }}" details_ar=""
-            :control="$control" />
-    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.3.6.5.D')
         <x-sub-control id="3.3.6.5.D" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -1253,6 +1356,11 @@
             :status="$status" />
 
         <x-sub-control id="3.3.7.4.A" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.3.7.4.B')
+        <x-sub-control id="3.3.7.4.B" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
@@ -1361,6 +1469,10 @@
     @endif
     @if ($control->control_id == 'SAMA-CSF-3.3.8.6.G')
         <x-sub-control id="3.3.8.6.G" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+    @if ($control->control_id == 'SAMA-CSF-3.3.8.6.H')
+        <x-sub-control id="3.3.8.6.H" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
     @if ($control->control_id == 'SAMA-CSF-3.3.8.6.H.1')
@@ -1521,7 +1633,7 @@
             :control="$control" />
     @endif
 
-    @if ($control->control_id == 'SAMA-CSF-3.3.12.2.1')
+    @if ($control->control_id == 'SAMA-CSF-3.3.12.2.A')
         @php
             $status = getParentStatus($report, 'SAMA-CSF-3.3.12.2.');
         @endphp
@@ -1529,17 +1641,17 @@
             details="For mada information, please refer to the following sections in the mada Rules and Standards Technical Book (see appendix A):"
             details_ar="" :status="$status" />
 
-        <x-sub-control id="3.3.12.2.1" details="{{ $control->control_description }}" details_ar=""
+        <x-sub-control id="3.3.12.2.A" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
-    @if ($control->control_id == 'SAMA-CSF-3.3.12.2.2')
-        <x-sub-control id="3.3.12.2.2" details="{{ $control->control_description }}" details_ar=""
+    @if ($control->control_id == 'SAMA-CSF-3.3.12.2.B')
+        <x-sub-control id="3.3.12.2.B" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
-    @if ($control->control_id == 'SAMA-CSF-3.3.12.2.3')
-        <x-sub-control id="3.3.12.2.3" details="{{ $control->control_description }}" details_ar=""
+    @if ($control->control_id == 'SAMA-CSF-3.3.12.2.C')
+        <x-sub-control id="3.3.12.2.C" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 @endforeach
@@ -1575,6 +1687,11 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.3.13.4.B')
+        <x-sub-control id="3.3.13.4.B" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.3.13.4.B.1')
         <x-sub-control id="3.3.13.4.B.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -1597,6 +1714,10 @@
 
     @if ($control->control_id == 'SAMA-CSF-3.3.13.4.B.5')
         <x-sub-control id="3.3.13.4.B.5" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+    @if ($control->control_id == 'SAMA-CSF-3.3.13.4.B.6')
+        <x-sub-control id="3.3.13.4.B.6" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
@@ -1630,13 +1751,18 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.3.13.4.B.6.G')
+        <x-sub-control id="3.3.13.4.B.6.G" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.3.13.4.B.6.G.1')
         <x-sub-control id="3.3.13.4.B.6.G.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
     @if ($control->control_id == 'SAMA-CSF-3.3.13.4.B.6.G.2')
-        <x-sub-control id="3.3.13.4.B.6.G.2" details="{{ $control->control_description }}" details_ar=""
+        <x-sub-control id="3.3.13.4.b.6.G.2" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
@@ -1680,6 +1806,10 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.3.13.4.C')
+        <x-sub-control id="3.3.13.4.C" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
     @if ($control->control_id == 'SAMA-CSF-3.3.13.4.C.1')
         <x-sub-control id="3.3.13.4.C.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -1693,6 +1823,10 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.3.13.4.D')
+        <x-sub-control id="3.3.13.4.D" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
     @if ($control->control_id == 'SAMA-CSF-3.3.13.4.D.1')
         <x-sub-control id="3.3.13.4.D.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -1912,7 +2046,7 @@
         <x-sub-control id="3.3.15.7.B" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
-    @if ($control->control_id == 'SAMA-CSF-3.3.15.7.C`')
+    @if ($control->control_id == 'SAMA-CSF-3.3.15.7.C')
         <x-sub-control id="3.3.15.7.C" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
@@ -2195,9 +2329,16 @@
         @php
             $status = getParentStatus($report, 'SAMA-CSF-3.4.3.4.A.');
         @endphp
-        <x-main-control id="3.4.3.4"
-            details="The cloud computing policy for hybrid and public cloud services should address requirements for:"
-            details_ar="" :status="$status" />
+
+        {{-- @if ($control->control_id == 'SAMA-CSF-3.4.3.3')
+<x-main-control id="3.4.3.3" details="{{ $control->control_description }}" details_ar=""
+    :control="$control" />
+@endif --}}
+
+
+
+        <x-sub-control id="3.4.3.4.A" details="The process for adopting cloud services, including that:"
+            details_ar="" :control="$control" />
 
         <x-sub-control id="3.4.3.4.A.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
@@ -2213,8 +2354,18 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.4.3.4.B')
+        <x-sub-control id="3.4.3.4.B" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.4.3.4.B.1')
         <x-sub-control id="3.4.3.4.B.1" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.4.3.4.C')
+        <x-sub-control id="3.4.3.4.C" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
@@ -2223,18 +2374,39 @@
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.4.3.4.D')
+        <x-sub-control id="3.4.3.4.D" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.4.3.4.D.1')
         <x-sub-control id="3.4.3.4.D.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.4.3.4.E')
+        <x-sub-control id="3.4.3.4.E" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
 
     @if ($control->control_id == 'SAMA-CSF-3.4.3.4.E.1')
         <x-sub-control id="3.4.3.4.E.1" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
+    @if ($control->control_id == 'SAMA-CSF-3.4.3.4.F')
+        <x-sub-control id="3.4.3.4.F" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
     @if ($control->control_id == 'SAMA-CSF-3.4.3.4.F.1')
         <x-sub-control id="3.4.3.4.F.1" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.4.3.4.G')
+        <x-sub-control id="3.4.3.4.G" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 
@@ -2250,6 +2422,11 @@
 
     @if ($control->control_id == 'SAMA-CSF-3.4.3.4.G.3')
         <x-sub-control id="3.4.3.4.G.3" details="{{ $control->control_description }}" details_ar=""
+            :control="$control" />
+    @endif
+
+    @if ($control->control_id == 'SAMA-CSF-3.4.3.4.H')
+        <x-sub-control id="3.4.3.4.H" details="{{ $control->control_description }}" details_ar=""
             :control="$control" />
     @endif
 

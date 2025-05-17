@@ -9,7 +9,7 @@
         <p>تقرير مفصل</p>
         <p>Detailed Report</p>
     </a> --}}
-    <a href="{{ route('ecc-regulatory-report.excel') }}" class="btn-report" style="pointer-events: none; opacity: .5">
+    <a href="{{ route('sama-regulatory-report.excel') }}" class="btn-report">
         <p>تنزيل بصيغة إكسل</p>
         <p>Download in Excel</p>
     </a>
