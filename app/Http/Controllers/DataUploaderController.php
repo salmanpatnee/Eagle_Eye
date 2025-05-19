@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artifact;
 use App\Models\Asset;
 use App\Models\CustodianName;
+use App\Models\HumanResource;
 use App\Models\Owner;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -175,5 +176,65 @@ class DataUploaderController extends Controller
         }
 
         return back()->with('success', 'Artifact data uploaded successfully!');
+    }
+
+    public function createHr()
+    {
+        return view('3-People/HRUpload');
+    }
+
+    public function UploadHr(Request $request)
+    {
+       
+        // Validate the uploaded file
+        $request->validate([
+            'excel_file' => 'required|mimes:xlsx,xls'
+        ]);
+
+    
+
+        // Load the uploaded file
+        $file = $request->file('excel_file');
+        $spreadsheet = IOFactory::load($file->getPathName());
+        $worksheet = $spreadsheet->getActiveSheet();
+        $rows = $worksheet->toArray();
+        // Extract headers
+        $headers = array_shift($rows);
+        array_pop($headers);
+        array_pop($headers);
+        array_pop($headers);
+        
+        foreach ($rows as $row) {
+            $experties = array_pop($row);
+            $roles = array_pop($row);
+            $certifications = array_pop($row);
+        
+            $data = array_combine($headers, $row);
+        
+            // Ensure asset_id is present to avoid errors
+            if (!isset($data['expert_id'])) {
+                continue;
+            }
+
+            $expert = HumanResource::updateOrCreate(
+                ['expert_id' => $data['expert_id']],
+                $data
+            );
+
+            if (!empty($experties)) {
+                $expertIds = explode(',', $experties);
+                $expert->experties()->sync($expertIds);
+            }
+            if (!empty($roles)) {
+                $roleIds = explode(',', $roles);
+                $expert->roles()->sync($roleIds);
+            }
+            if (!empty($certifications)) {
+                $certificationIds = explode(',', $certifications);
+                $expert->certifications()->sync($certificationIds);
+            }
+        }
+
+        return back()->with('success', 'HR data uploaded successfully!');
     }
 }

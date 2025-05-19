@@ -18,6 +18,12 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
     <style>
+        .w-100 {
+            width: 100%;
+        }
+        .justify-content-between {
+            justify-content: space-between;
+        }
         .headersec {
             display: flex;
             justify-content: space-between;
@@ -169,45 +175,56 @@
 
             white-space: normal;
         }
+
         .asmtablearea {
             top: 450px;
         }
+
         .herosec {
-    
-    padding-block: 50px;
-}
+
+            padding-block: 50px;
+        }
     </style>
 </head>
 
 <body>
     <div class="fixposition">
         <div class="dheadersec">
-            <div class="dheaderleft">
-                <div class="dheadericon">
-                    <a href="/home" style="color: white">
-                        <i class='bx bx-home'></i>
+            <div class="justify-content-between w-100 d-flex align-items-center">
+
+                <div class="dheaderleft">
+                    <div class="dheadericon">
+                        <a href="/home" style="color: white">
+                            <i class='bx bx-home'></i>
+                        </a>
+                    </div>
+                    <div class="dheadertext">
+                        <p>العمليات</p>
+                        <p>Processes</p>
+                    </div>
+                    <div class="dheadericon">
+                        <i class='bx bx-right-arrow-alt'></i>
+                    </div>
+                    <div class="dheadertext">
+                        <p>موارد الخبراء</p>
+                        <p>Expert Resources</p>
+                    </div>
+                </div>
+                <div>
+                    <a href="{{route('hr.upload')}}" class="btn-report btn btn-primary btn-sm">
+                        <p>تحميل البيانات</p>
+                        Upload Data
                     </a>
                 </div>
-                <div class="dheadertext">
-                    <p>العمليات</p>
-                    <p>Processes</p>
+                <div class="d-flex align-items-center gap-3">
+                    @include('partials.roles')
+                    <div class="dheaderright">
+                        <button type="dbutton" class="dbutton" onclick="window.location.href=('/vciso')">
+                            <p>للخلف</p>
+                            <p>Back</p>
+                        </button>
+                    </div>
                 </div>
-                <div class="dheadericon" >
-                    <i class='bx bx-right-arrow-alt'></i>
-                </div>
-                <div class="dheadertext">
-                    <p>موارد الخبراء</p>
-                    <p>Expert Resources</p>
-                </div>
-            </div>
-            <div class="d-flex align-items-center gap-3">
-            @include('partials.roles')
-            <div class="dheaderright">
-                <button type="dbutton" class="dbutton" onclick="window.location.href=('/vciso')">
-                    <p>للخلف</p>
-                    <p>Back</p>
-                </button>
-            </div>
             </div>
         </div>
         <div class="herosec">
@@ -260,7 +277,7 @@
                             @endforeach
                         </select>
                     </div>
-                  
+
                 </div>
                 <div class="filter-row">
                     <div class="col">
@@ -305,7 +322,7 @@
                             @endforeach
                         </select>
                     </div>
-                  
+
                 </div>
                 <div class="filter-row">
                     <div class="col text-center">

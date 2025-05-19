@@ -65,8 +65,6 @@ class HumanResourceController extends Controller
                 }
             })
 
-
-
             ->when($designation, function ($query, $designation) {
                 if (is_array($designation)) {
                     $query->whereIn('designation', $designation);

@@ -30,7 +30,12 @@
     <div class="headersec">
         <div class="headerleft">
             @include('4-Process/headerleft')
-            @include('4-Process/3-Asset/assetheader')
+            <div class="dheadertext" style="line-height: 1em">
+                <p>موارد الخبراء</p>
+                <p>Expert Resources</p>
+            </div>
+
+            {{-- @include('4-Process/3-Asset/assetheader') --}}
         </div>
         <div class="text-center d-flex gap-3">
             @include('partials.roles')
@@ -38,7 +43,7 @@
         </div>
     </div>
     <div class="wrapper">
-        @include('4-Process/3-Asset/AssetSidebar')
+        @include('3-People/HRSidebar')
         <!-- SIDEBAR -->
 
         <!-- CONTENT -->
@@ -51,9 +56,9 @@
               
             </div>
 
-            <form action="{{ route('upload.assets.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('hr.upload.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <h3> <a href="{{asset('templates/asset_register_template.xlsx')}}" download="">Download the template file</a> </h3>
+                <h3> <a href="{{asset('templates/expert_resources_template.xlsx')}}" download="">Download the template file</a> </h3>
 
                 <div class="ContentTableSection">
                     @if (session('success'))

@@ -1390,6 +1390,8 @@ Route::get('/asset-smart-search', [AssetSmartSearch::class, 'show'])->name('asse
 
 
 Route::get('/hr-experts', [HumanResourceController::class, 'show'])->name('hr.expert');
+Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
+Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
 
 
 
