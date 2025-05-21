@@ -25,7 +25,7 @@
             <div class="boxname">
                 <p class="boxarbtext">نظام إدارة أمن المعلومات </p>
                 <div class="seperatorline"></div>
-                <p class="boxengtext">Information Security Management System (ISMS)</p>
+                <p class="boxengtext">ISMS</p>
             </div>
         </div>
     </a>
