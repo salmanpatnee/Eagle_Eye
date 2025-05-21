@@ -100,8 +100,8 @@
                                 <td><a
                                         href="{{ route('locations.show', $location->id) }}">{{ $location->location_id }}</a>
                                 </td>
-                                <td>{{ $location->location_name_english }}</td>
-                                <td>{{ $location->address }}</td>
+                                <td>{{ $location->location_name }}</td>
+                                <td>{{ $location->location_address }}</td>
                             </tr>
                         @endforeach
                     </table>
