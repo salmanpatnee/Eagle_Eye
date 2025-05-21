@@ -298,7 +298,7 @@
                     <i class='bx bxs-label'></i>
                 </div>
                 <div class="boxname">
-                    <p class="boxarbtext">قبول المخاطر</p>
+                    <p class="boxarbtext">سجل المخاطر</p>
                     <div class="seperatorline"></div>
                     <p class="boxengtext">Risk Register</p>
                 </div>
