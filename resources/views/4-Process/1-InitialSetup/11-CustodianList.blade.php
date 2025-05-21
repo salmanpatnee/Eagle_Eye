@@ -17,28 +17,39 @@
     <link rel="stylesheet" href="{{ asset('/css/6-Header/headertwo.css') }}">
 </head>
 <style>
-    .DisabledButton, .MoreButton {
+    .DisabledButton,
+    .MoreButton {
         margin-right: auto;
     }
+
     .IndiTable .ButtonContainer {
-    display: flex;
-    gap: 20px;
-    justify-content: flex-end;
-    margin-right: 30px;
-}
+        display: flex;
+        gap: 20px;
+        justify-content: flex-end;
+        margin-right: 30px;
+    }
 </style>
+
 <body>
 
 
     <!-- SIDEBAR -->
     <div class="headersec">
-        <div class="headerleft">
-            @include('4-Process/headerleft')
-            @include('4-Process/1-InitialSetup/roleheader')
-        </div>
-        <div class="text-center d-flex gap-3">
-            @include('partials.roles')
-            @include('4-Process/backbutton')
+        <div class="justify-content-between w-100 d-flex align-items-center">
+            <div class="headerleft">
+                @include('4-Process/headerleft')
+                @include('4-Process/1-InitialSetup/roleheader')
+            </div>
+            <div>
+                <a href="{{ route('upload.custodian.create') }}" class="btn-report btn btn-primary btn-sm">
+                    <p>تحميل البيانات</p>
+                    Upload Data
+                </a>
+            </div>
+            <div class="text-center d-flex gap-3">
+                @include('partials.roles')
+                @include('4-Process/backbutton')
+            </div>
         </div>
     </div>
     @include('4-Process/1-InitialSetup/_partials/sidebar')
@@ -153,9 +164,9 @@
 
         document.getElementById('btnDelete').addEventListener('click', function(event) {
             event.preventDefault();
-            
+
             const selectedRadio = document.querySelector('.record:checked');
-            
+
             if (selectedRadio) {
                 document.getElementById('deleteRecordId').value = selectedRadio.value;
                 window.deleteConfirmationModal.show(document.getElementById('deleteForm'));

@@ -157,3 +157,35 @@ h1 {
     padding: 1em 0;
     color: green;
 }
+.w-100 {
+    width: 100%;
+}
+.justify-content-between {
+    justify-content: space-between;
+}
+.btn-report {
+    background-color: #00fbff;
+    color: black;
+    border-radius: 20px;
+    border: solid #00fbff;
+    transition-duration: 0.3s;
+    font-size: 14px;
+    text-align: center;
+    margin: 0 .2em;
+    text-decoration: none;
+    padding: .2em .5em;
+    font-family: "Roboto", sans-serif;
+    width: auto;
+    display: inline-block;
+}   
+
+.btn-report:hover {
+    background-color: white;
+    border: solid 2px black;
+    color: black;
+}
+
+.btn-report p {
+    margin: 0;
+    font-size: 14px;
+}

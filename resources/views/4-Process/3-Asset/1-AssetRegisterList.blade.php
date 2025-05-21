@@ -20,8 +20,6 @@
         .filter-row .col {
             width: 40%;
         }
-
-       
     </style>
 </head>
 
@@ -30,14 +28,22 @@
 
     <!-- SIDEBAR -->
     <div class="headersec">
-        <div class="headerleft">
-            @include('4-Process/headerleft')
-            @include('4-Process/3-Asset/assetheader')
-        </div>
-       
-        <div class="text-center d-flex gap-3">
-            @include('partials.roles')
-            @include('4-Process/backbutton')
+        <div class="justify-content-between w-100 d-flex align-items-center">
+
+            <div class="headerleft">
+                @include('4-Process/headerleft')
+                @include('4-Process/3-Asset/assetheader')
+            </div>
+            <div>
+                <a href="{{route('upload.assets.create')}}" class="btn-report btn btn-primary btn-sm">
+                    <p>تحميل البيانات</p>
+                    Upload Data
+                </a>
+            </div>
+            <div class="text-center d-flex gap-3">
+                @include('partials.roles')
+                @include('4-Process/backbutton')
+            </div>
         </div>
     </div>
     <div class="wrapper">
@@ -53,7 +59,7 @@
                     <p class="PageHeadEngTxt">Asset Registration</p>
                 </div>
                 <div>
-                    
+
                 </div>
                 <div class="ButtonContainer">
                     <a href="{{ route('assetreg.index') }}" class="MoreButton">
@@ -149,7 +155,7 @@
                                 </th>
                                 <th style="padding-right: 100px;">
                                     <p class="ListHeadArbTxt">اسم الفئة
-    
+
                                     </p>
                                     <p class="ListHeadEngTxt">Asset Categories</p>
                                 </th>
@@ -157,8 +163,8 @@
                             @foreach ($assets as $asset)
                                 <tr>
                                     <td>
-                                        <input type="radio" name="record" class="record" value="{{ $asset->asset_id }}"
-                                            required>
+                                        <input type="radio" name="record" class="record"
+                                            value="{{ $asset->asset_id }}" required>
                                     </td>
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td style="width: 150px;"><a
@@ -204,7 +210,8 @@
             event.preventDefault();
             const selectedRadio = document.querySelector('.record:checked');
             if (selectedRadio) {
-                document.getElementById('deleteForm').querySelector('input[name="record"]').value = selectedRadio.value;
+                document.getElementById('deleteForm').querySelector('input[name="record"]').value = selectedRadio
+                    .value;
                 window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
             } else {
                 alert('Please select a record.');

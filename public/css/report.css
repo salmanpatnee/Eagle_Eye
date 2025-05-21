@@ -61,7 +61,9 @@
     text-decoration: none;
     padding: .2em .5em;
     font-family: "Roboto", sans-serif;
-}
+    width: auto;
+    display: inline-block;
+}   
 
 .btn-report:hover {
     background-color: white;

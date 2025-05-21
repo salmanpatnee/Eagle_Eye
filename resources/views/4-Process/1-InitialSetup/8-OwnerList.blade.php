@@ -23,13 +23,21 @@
 
         <!-- SIDEBAR -->
         <div class="headersec">
+            <div class="justify-content-between w-100 d-flex align-items-center">
             <div class="headerleft">
                 @include('4-Process/headerleft')
                 @include('4-Process/1-InitialSetup/roleheader')
             </div>
+            <div>
+                <a href="{{route('upload.owner.create')}}" class="btn-report btn btn-primary btn-sm">
+                    <p>تحميل البيانات</p>
+                    Upload Data
+                </a>
+            </div>
             <div class="text-center d-flex gap-3">
                 @include('partials.roles')
                 @include('4-Process/backbutton')
+            </div>
             </div>
         </div>
         @include('4-Process/1-InitialSetup/_partials/sidebar')
