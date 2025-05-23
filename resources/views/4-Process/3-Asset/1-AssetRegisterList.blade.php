@@ -34,12 +34,12 @@
                 @include('4-Process/headerleft')
                 @include('4-Process/3-Asset/assetheader')
             </div>
-            <div>
+            {{-- <div>
                 <a href="{{route('upload.assets.create')}}" class="btn-report btn btn-primary btn-sm">
                     <p>تحميل البيانات</p>
                     Upload Data
                 </a>
-            </div>
+            </div> --}}
             <div class="text-center d-flex gap-3">
                 @include('partials.roles')
                 @include('4-Process/backbutton')

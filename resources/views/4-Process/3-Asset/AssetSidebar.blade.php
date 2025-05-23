@@ -37,5 +37,25 @@
                 <span class="text"></span>
             </a>
         </li>
+        <li>
+            <a href="{{asset('templates/asset_register_template.xlsx')}}" download="">
+                <i class='bx bxs-label'></i>
+                <div class="MenuTxt">
+                    <h3>تحميل قالب اكسل</h3>
+                    <span class="text">Download Excel Data Template</span>
+                </div>
+                <span class="text"></span>
+            </a>
+        </li>
+        <li class="{{ request()->routeIs('upload.assets.create') ? 'active' : '' }}">
+            <a href="{{route('upload.assets.create')}}">
+                <i class='bx bxs-label'></i>
+                <div class="MenuTxt">
+                    <h3>تحميل بيانات الأصول</h3>
+                    <span class="text">Upload Asset Data</span>
+                </div>
+                <span class="text"></span>
+            </a>
+        </li>
     </ul>
 </section>
