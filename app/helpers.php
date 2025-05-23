@@ -1,9 +1,10 @@
 <?php
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 if (!function_exists('getParentStatus')) {
-    function getParentStatus(Collection $report, string $controlIdPattern, bool $formatted = true): string
+    function getParentStatus(Collection $report, string $controlIdPattern, bool $formatted = true, string $ignore = "")
     {
         // Define the hierarchy for status levels
         $statusLevels = [
@@ -12,10 +13,18 @@ if (!function_exists('getParentStatus')) {
             'Implemented' => 3,
         ];
         
-        // Filter report based on control_id pattern
-        $filteredReport = $report->filter(function ($item) use ($controlIdPattern) {
-            return Str::startsWith($item->control_id, $controlIdPattern);
+        // Convert comma separated string to array if needed
+
+        $ignore = array_filter(array_map('trim', is_string($ignore) ? explode(',', $ignore) : []));
+    
+        
+        // Filter report based on control_id pattern and ignore pattern
+        $filteredReport = $report->filter(function ($item) use ($controlIdPattern, $ignore) {
+            return Str::startsWith($item->control_id, $controlIdPattern) && 
+                   !in_array($item->control_id, $ignore);
         });
+
+        // return $filteredReport;
 
         // Get all status values from the filtered records
         $statuses = $filteredReport->pluck('status');

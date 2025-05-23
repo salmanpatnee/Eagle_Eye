@@ -1,4 +1,4 @@
-@props(['id' => '', 'details' => '', 'details_ar' => '', 'control' => ''])
+@props(['id' => '', 'details' => '', 'details_ar' => '', 'control' => '', 'status' => '', ])
 
 <tr>
     <td class="bg-light-gray text-center">_</td>
@@ -17,11 +17,15 @@
     </td>
     <td>_</td>
     <td style="text-align:center" class="status">
-        <p>
-            <span>{{ $control->status_ar }} </span>
-            <br>
-            <span>{{ $control->status }}</span>
-        </p>
+        @if($status)
+            {!!$status!!}
+        @else
+            <p>
+                <span>{{ $control->status_ar }} </span>
+                <br>
+                <span>{{ $control->status }}</span>
+            </p>
+        @endif
     </td>
     <td>{{ $control->remarks }}</td>
     <td>{{ $control->corrective_action }}</td>
