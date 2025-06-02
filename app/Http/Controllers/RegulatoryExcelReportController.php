@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Mpdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -1086,9 +1087,8 @@ class RegulatoryExcelReportController extends Controller
     {
 
         $controlAssessmentId = request('controlAssessmentId');
-        $data = $this->getReport("SAMA-CSF-2017", $controlAssessmentId);
-
-
+        $data = $this->getSamaReport("SAMA-CSF-2017", $controlAssessmentId);
+        // return $data;
         $filePath = storage_path('app/public/reports/SAMA-CSF-Report-Template-Full.xlsx');
         $outputFilePath = storage_path('app/public/reports/SAMA-CSF-Report-Updated.xlsx');
 
@@ -1112,13 +1112,15 @@ class RegulatoryExcelReportController extends Controller
         // Loop through each data row
         foreach ($data as $rowData) {
 
-
             // Set values in the appropriate cells
             foreach ($headers as $column => $key) {
 
                 $cellCoordinate = "{$column}{$startingRow}"; // D8, F8, G8, etc.
                 $status = "_";
 
+                // if($rowData->control_id == 'SAMA-CSF-3.1.1.9.B'){
+                //     return $cellCoordinate;
+                // }
                 switch ($rowData->status) {
                     case 'Partially Implemented':
                         $status = "Partially Implemented";
@@ -1129,40 +1131,129 @@ class RegulatoryExcelReportController extends Controller
                     case 'Not Implemented':
                         $status = "Not Implemented";
                         break;
+                    case 'Not Applicable':
+                        $status = "Not Applicable";
+                        break;
                 }
+                // return [$column, $key, $cellCoordinate, $status, $startingRow];
 
                 $parentControlMap = [
                     11 => 'SAMA-CSF-3.1.1.3.',
+                    15 => 'SAMA-CSF-3.1.1.4.',
+                    24 => 'SAMA-CSF-3.1.1.9.',
+                    37 => 'SAMA-CSF-3.1.2.2',
+                    41 => 'SAMA-CSF-3.1.2.3',
+                    54 => 'SAMA-CSF-3.1.3.3',
+                    59 => 'SAMA-CSF-3.1.3.4',
+                    81 => 'SAMA-CSF-3.1.4.1',
+                    88 => 'SAMA-CSF-3.1.4.2',
+                    98 => 'SAMA-CSF-3.1.4.3',
+                    102 => 'SAMA-CSF-3.1.4.4',
+                    128 => 'SAMA-CSF-3.1.4.5',
+                    130 => 'SAMA-CSF-3.1.4.6',
+                    140 => 'SAMA-CSF-3.1.5.2',
+                    155 => 'SAMA-CSF-3.1.6.2',
+                    161 => 'SAMA-CSF-3.1.6.5',
+                    165 => 'SAMA-CSF-3.1.6.6',
+                    171 => 'SAMA-CSF-3.1.7.1',
+                    194 => 'SAMA-CSF-3.2.1.4',
+                    199 => 'SAMA-CSF-3.2.1.5',
+                    203 => 'SAMA-CSF-3.2.1.6',
+                    209 => 'SAMA-CSF-3.2.1.8',
+                    245 => 'SAMA-CSF-3.2.1.3.3',
+                    251 => 'SAMA-CSF-3.2.1.3.5',
+                    255 => 'SAMA-CSF-3.2.1.3.6',
+                    308 => 'SAMA-CSF-3.2.4.5',
+                    332 => 'SAMA-CSF-3.3.1.3',
+                    349 => 'SAMA-CSF-3.3.2.3',
+                    364 => 'SAMA-CSF-3.3.3.3',
+                    379 => 'SAMA-CSF-3.3.4.3',
+                    395 => 'SAMA-CSF-3.3.5.4',
+                    429 => 'SAMA-CSF-3.3.6.5',
+                    447 => 'SAMA-CSF-3.3.7.4',
+                    473 => 'SAMA-CSF-3.3.8.6',
+                    499 => 'SAMA-CSF-3.3.9.4',
+                    513 => 'SAMA-CSF-3.3.10.4',
+                    540 => 'SAMA-CSF-3.3.12.2',
+                    554 => 'SAMA-CSF-3.3.13.4',
+                    599 => 'SAMA-CSF-3.3.14.3',
+                    601 => 'SAMA-CSF-3.3.14.4',
+                    624 => 'SAMA-CSF-3.3.15.4',
+                    637 => 'SAMA-CSF-3.3.15.7',
+                    658 => 'SAMA-CSF-3.3.16.3',
+                    674 => 'SAMA-CSF-3.3.17.3',
+                    693 => 'SAMA-CSF-3.4.1.4',
+                    697 => 'SAMA-CSF-3.4.1.5',
+                    705 => 'SAMA-CSF-3.4.1.6',
+                    716 => 'SAMA-CSF-3.4.2.3',
+                    730 => 'SAMA-CSF-3.4.3.4',
+                ];
+
+                $subParentControlMap = [
+                    65 => 'SAMA-CSF-3.1.3.4.F',
+                    84 => 'SAMA-CSF-3.1.4.1.C',
+                    92 => 'SAMA-CSF-3.1.4.2.C',
+                    103 => 'SAMA-CSF-3.1.4.4.A',
+                    111 => 'SAMA-CSF-3.1.4.4.E',
+                    118 => 'SAMA-CSF-3.1.4.4.G',
+                    123 => 'SAMA-CSF-3.1.4.4.I',
+                    247 => 'SAMA-CSF-3.2.1.3.3.B',
+                    257 => 'SAMA-CSF-3.2.1.3.3.6.B',
+                    339 => 'SAMA-CSF-3.3.1.3.E',
+                    397 => 'SAMA-CSF-3.3.5.4.B',
+                    408 => 'SAMA-CSF-3.3.5.4.F',
+                    409 => 'SAMA-CSF-3.3.5.4.F.1',
+                    414 => 'SAMA-CSF-3.3.5.4.F.4',
+                    449 => 'SAMA-CSF-3.3.7.4.B',
+                    480 => 'SAMA-CSF-3.3.8.6.H',
+                    556 => 'SAMA-CSF-3.3.13.4.B',
+                    562 => 'SAMA-CSF-3.3.13.4.B.6',
+                    569 => 'SAMA-CSF-3.3.13.4.B.6.G',
+                    580 => 'SAMA-CSF-3.3.13.4.C',
+                    584 => 'SAMA-CSF-3.3.13.4.D',
+                    731 => 'SAMA-CSF-3.4.3.4.A',
+                    735 => 'SAMA-CSF-3.4.3.4.B',
+                    737 => 'SAMA-CSF-3.4.3.4.C',
+                    739 => 'SAMA-CSF-3.4.3.4.D',
+                    741 => 'SAMA-CSF-3.4.3.4.E',
+                    743 => 'SAMA-CSF-3.4.3.4.F',
+                    745 => 'SAMA-CSF-3.4.3.4.G',
+                    749 => 'SAMA-CSF-3.4.3.4.H',
                 ];
 
                 // Check if the startingRow has a corresponding parentControlId
                 if (array_key_exists($startingRow, $parentControlMap)) {
+
+                    Log::info("Parent Control: " . $rowData->control_id);
+
                     $parentControlId = $parentControlMap[$startingRow];
                     $parentStatus = getParentStatus($data, $parentControlId, false);
 
                     // Set parent row values
                     $sheet->setCellValue("D{$startingRow}", $parentStatus);
                     $sheet->setCellValue("F{$startingRow}", "_");
-                    $startingRow++;
+                } elseif (array_key_exists($startingRow, $subParentControlMap)) {
 
-                    // Set child row values
+
+                    $parentControlId = $subParentControlMap[$startingRow];
+                    $parentStatus = getParentStatus($data, $parentControlId, false);
+
+                    Log::info("SubParent Control: " . $rowData->control_id);
+                    // Set parent row values
                     $sheet->setCellValue("D{$startingRow}", "_");
-                    $sheet->setCellValue("F{$startingRow}", $status);
+                    $sheet->setCellValue("F{$startingRow}", $parentStatus);
                 } else {
+                    Log::info("Child Control: " . $rowData->control_id);
                     // Handle rows that are not in the parentControlMap
                     if ($rowData->control_level_title == 'Main') {
                         $sheet->setCellValue("D{$startingRow}", $status);
                         $sheet->setCellValue("F{$startingRow}", "_");
                     } else {
+                        //   return "D{$startingRow}";
                         $sheet->setCellValue("D{$startingRow}", "_");
                         $sheet->setCellValue("F{$startingRow}", $status);
                     }
                 }
-
-                // Common row values
-                // $sheet->setCellValue("G{$startingRow}", $rowData->remarks);
-                // $sheet->setCellValue("H{$startingRow}", $rowData->corrective_action);
-                // $sheet->setCellValue("I{$startingRow}", $rowData->corrective_action_due_date);
 
 
                 // Set common row values
@@ -1186,66 +1277,18 @@ class RegulatoryExcelReportController extends Controller
             // Move to the next row
             $startingRow++;
             $iterationCount++;
+            // Log::info($iterationCount . ' ' . $startingRow . ' ' . $rowData->control_id . ' ' . $rowData->control_level_title);
 
             // Tracking the number of rows to skip after each domain entry due to static headers.
-            if ($iterationCount === 17) {
-                $startingRow = 36;
-            } 
-            // elseif ($iterationCount === 6) {
-            //     $startingRow = 26;
-            // } elseif ($iterationCount === 10) {
-            //     $startingRow = 36;
-            // } elseif ($iterationCount === 12) {
-            //     $startingRow = 44;
-            // } elseif ($iterationCount === 19) {
-            //     $startingRow = 58;
-            // } elseif ($iterationCount === 28) {
-            //     $startingRow = 75;
-            // } elseif ($iterationCount === 30) {
-            //     $startingRow = 83;
-            // } elseif ($iterationCount === 33) {
-            //     $startingRow = 92;
-            // } elseif ($iterationCount === 41) {
-            //     $startingRow = 108;
-            // } elseif ($iterationCount === 51) {
-            //     $startingRow = 128;
-            // } elseif ($iterationCount === 57) {
-            //     $startingRow = 140;
-            // } elseif ($iterationCount === 65) {
-            //     $startingRow = 155;
-            // } elseif ($iterationCount === 72) {
-            //     $startingRow = 169;
-            // } elseif ($iterationCount === 80) {
-            //     $startingRow = 184;
-            // } elseif ($iterationCount === 91) {
-            //     $startingRow = 202;
-            // } elseif ($iterationCount === 98) {
-            //     $startingRow = 216;
-            // } elseif ($iterationCount === 104) {
-            //     $startingRow = 229;
-            // } elseif ($iterationCount === 110) {
-            //     $startingRow = 242;
-            // } elseif ($iterationCount === 116) {
-            //     $startingRow = 255;
-            // } elseif ($iterationCount === 124) {
-            //     $startingRow = 270;
-            // } elseif ($iterationCount === 129) {
-            //     $startingRow = 282;
-            // } elseif ($iterationCount === 137) {
-            //     $startingRow = 297;
-            // } elseif ($iterationCount === 145) {
-            //     $startingRow = 312;
-            // } elseif ($iterationCount === 153) {
-            //     $startingRow = 327;
-            // } elseif ($iterationCount === 161) {
-            //     $startingRow = 344;
-            // } elseif ($iterationCount === 167) {
-            //     $startingRow = 359;
-            // } elseif ($iterationCount === 174) {
-            //     $startingRow = 374;
-            // } elseif ($iterationCount === 180) {
-            //     $startingRow = 389;
-            // }
+            $add7RowsAt = [20, 29, 51, 102, 110, 125, 131, 157, 160, 162, 183, 187,191,195,203,205,215,223,231,239,265,277,294,315,322,331,337,342,381,398,426,435,444,461,467,493];
+            $add9RowsAt = [131, 205, 444];
+            if (in_array($iterationCount, $add7RowsAt)) {
+                if (in_array($iterationCount, $add9RowsAt)) {
+                    $startingRow += 9;
+                } else {
+                    $startingRow += 7;
+                }
+            }
         }
 
         $writer = new Xlsx($spreadsheet);
@@ -1323,6 +1366,80 @@ class RegulatoryExcelReportController extends Controller
 
 
 
+
+
+        return $report;
+    }
+
+    private function getSamaReport($bestPracticeId, $controlAssessmentId, string $cloudControlType = null)
+    {
+
+        $report = DB::table('control_master_table AS c')
+            ->join('control_master_table_vs_best_practice_table AS cv', 'c.control_id', '=', 'cv.control_id')
+            ->join('best_practice_table AS bp', 'cv.best_practice_id', '=', 'bp.best_practices_id')
+            ->join('control_master_table_vs_domain_table AS cvd', 'c.control_id', '=', 'cvd.control_id')
+            ->join('domain_table AS d', 'cvd.main_domain_id', '=', 'd.main_domain_id')
+            ->join('control_master_table_vs_sub_domain_table AS cvsd', 'c.control_id', '=', 'cvsd.control_id')
+            ->join('sub_domain_table AS sd', 'cvsd.sub_domain_id', '=', 'sd.sub_domain_id')
+            ->leftJoin(DB::raw('(
+                    SELECT cad.control_id,
+                           cad.control_implementation_status,
+                           cad.remarks,
+                           cad.corrective_action_due_date,
+                           cad.corrective_action
+                    FROM control_assessment_details_table AS cad
+                    INNER JOIN (
+                        SELECT control_id, MAX(id) AS max_id
+                        FROM control_assessment_details_table
+                        GROUP BY control_id
+                    ) AS latest_assessment ON cad.control_id = latest_assessment.control_id
+                                           AND cad.id = latest_assessment.max_id
+                ) AS latest_cad'), 'c.control_id', '=', 'latest_cad.control_id')
+            ->where('bp.best_practices_id', '=', $bestPracticeId)
+            ->when($cloudControlType, function ($query, $cloudControlType) {
+                $query->where('c.control_cloud', $cloudControlType);
+            })
+            ->select(
+                'c.control_id',
+                'c.control_name',
+                'c.control_description',
+                'c.control_description_ar',
+                'c.control_level_title',
+                'c.sort_order', // Add sort_order to SELECT to fix MySQL 8+ error with DISTINCT
+                'bp.best_practices_id',
+                'bp.best_practices_name',
+                'd.main_domain_id',
+                'd.main_domain_name',
+                'sd.sub_domain_id',
+                'sd.sub_domain_name',
+                DB::raw("COALESCE(latest_cad.control_implementation_status, 'Not Implemented') AS status"),
+                DB::raw("COALESCE(latest_cad.remarks, '') AS remarks"),
+                DB::raw("COALESCE(latest_cad.corrective_action_due_date, '') AS corrective_action_due_date"),
+                DB::raw("COALESCE(latest_cad.corrective_action, '') AS corrective_action"),
+                DB::raw(
+                    "
+                    CASE 
+                        WHEN COALESCE(latest_cad.control_implementation_status, 'Not Implemented') = 'Partially Implemented' THEN 'مطبق جزئيًا'
+                        WHEN COALESCE(latest_cad.control_implementation_status, 'Not Implemented') = 'Implemented' THEN 'مطبق كليًا'
+                        WHEN COALESCE(latest_cad.control_implementation_status, 'Not Implemented') = 'Not Implemented' THEN 'غير مطبق'
+                        WHEN COALESCE(latest_cad.control_implementation_status, 'Not Implemented') = 'Not Applicable' THEN 'لاينطبق'
+                        ELSE 'غير مطبق'
+                    END AS status_ar"
+                )
+            )
+            ->distinct()
+            ->when($bestPracticeId === 'SAMA-CSF-2017', function ($query) {
+                return $query->orderBy('c.sort_order');
+            }, function ($query) {
+                return $query->orderByRaw("
+                    CAST(SUBSTRING_INDEX(c.control_id, '-', 1) AS UNSIGNED),
+                    CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 3), '-', -1) AS UNSIGNED),
+                    COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 4), '-', -1) AS UNSIGNED), 0),
+                    COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 5), '-', -1) AS UNSIGNED), 0),
+                    COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 6), '-', -1) AS UNSIGNED), 0)
+                ");
+            })
+            ->get();
 
 
         return $report;
