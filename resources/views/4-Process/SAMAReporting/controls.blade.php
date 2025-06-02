@@ -21,11 +21,12 @@
                 @php $status = getParentStatus($report, 'SAMA-CSF-3.1.1.3.'); @endphp
                 <x-main-control id="3.1.1.3" details="{{ $control->control_description }}" details_ar=""
                     :status="$status" />
+            @endif
 
+            @if ($control->control_id == 'SAMA-CSF-3.1.1.3.A')
                 <x-sub-control id="3.1.1.3.A" details="{{ $control->control_description }}" details_ar=""
                     :control="$control" />
             @endif
-
             @if ($control->control_id == 'SAMA-CSF-3.1.1.3.B')
                 <x-sub-control id="3.1.1.3.B" details="{{ $control->control_description }}" details_ar=""
                     :control="$control" />
@@ -542,7 +543,14 @@
             @endif
 
             @if ($control->control_id == 'SAMA-CSF-3.1.4.5')
-                <x-main-control id="3.1.4.5" :details="$control->control_description" details_ar="" :control="$control" />
+                @php
+                    $status = getParentStatus($report, 'SAMA-CSF-3.1.4.5.');
+                @endphp
+                <x-main-control id="3.1.4.5" :details="$control->control_description" details_ar="" :status="$status" />
+            @endif
+            @if ($control->control_id == 'SAMA-CSF-3.1.4.5.A')
+                <x-sub-control id="3.1.4.5.A" details="{{ $control->control_description }}" details_ar=""
+                    :control="$control" />
             @endif
 
             @if ($control->control_id == 'SAMA-CSF-3.1.4.6')
@@ -800,6 +808,7 @@
                 <x-sub-control id="3.2.1.5.C" details="{{ $control->control_description }}" details_ar=""
                     :control="$control" />
             @endif
+           
 
             @if ($control->control_id == 'SAMA-CSF-3.2.1.6')
                 @php
@@ -1010,7 +1019,7 @@
             @endif
 
             @if ($control->control_id == 'SAMA-CSF-3.2.1.3.6.B.1')
-                <x-sub-control id="3.2.1.3.6.B" details="{{ $control->control_description }}" details_ar=""
+                <x-sub-control id="3.2.1.3.6.B.1" details="{{ $control->control_description }}" details_ar=""
                     :control="$control" />
             @endif
 

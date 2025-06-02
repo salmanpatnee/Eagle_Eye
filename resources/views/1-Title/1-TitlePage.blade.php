@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/1-Title/1-TitleIndex.css">
     <style>
         .page-landing {
-            background-image: url('https://vciso.compliance360grc.com/Images/1-BackgroundImage-3.png');
+            background-image: url('https://virtualciso.compliance360grc.com/Images/1-BackgroundImage-3.png');
             background-size: 100% 100%;
             width: 90%;
             background-repeat: no-repeat;
