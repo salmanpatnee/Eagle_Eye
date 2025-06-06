@@ -44,6 +44,7 @@
         tbody tr {
             vertical-align: top;
         }
+
         tbody td {
             white-space: nowrap;
             border: 1px solid #000;
@@ -71,7 +72,10 @@
             background-color: #D9D9D9;
             /* White for even rows */
         }
-
+        .dheadersec > div {
+    width: 33%;
+    text-align: center;
+}
         @media (min-width: 1024px) and (max-width: 1179px) {
             .rtablearea {
                 overflow-x: auto;
@@ -93,6 +97,12 @@
                     <p>العمليات</p>
                     <p>Processes</p>
                 </div>
+            </div>
+            <div style="margin-left: -50px;">
+                <a href="{{ route('risk.register.excel', request()->query()) }}" class="btn-report">
+                    <p>تنزيل بصيغة إكسل</p>
+                    <p>Download in Excel</p> 
+                </a>
             </div>
             <div class="d-flex align-items-center gap-3">
                 @include('partials.roles')
@@ -211,7 +221,7 @@
                         <p>Inherent risk likelihood (1-5)</p>
                     </th>
                     <th class="bg-light-gray">
-                        <p>Inherent risk magnitude/impact (1-5)</p>
+                        <p>Inherent risk magnitude/impact</p>
                     </th>
                     <th class="bg-light-gray">
                         <p>Overall inherent risk rating</p>
@@ -270,28 +280,31 @@
                         </td>
                         <td class="list">{!! $row->categories !!}</td>
                         <td>{{ $row->owner_name }}</td>
-                        <td>&nbsp;</td>
+                        <td>{{ $row->risk_assessment_start_date }}</td>
                         <td>{{ $row->risk_description }}</td>
-                        <td>&nbsp;</td>
+                        <td>{{ $row->remarks }}</td>
                         <td class="list">{!! $row->agents !!}</td>
                         <td>{{ $row->risk_assessment_description }}</td>
                         <td>{{ $row->date_of_risk_analysis }}</td>
                         <td>{{ $row->risk_inherent_likelihood }}</td>
                         <td>{{ $row->risk_inherent_impact }}</td>
-                        <td>{{ $row->risk_inherent_score }}</td>
+                        {{-- <td style="background-color: {{ $row->appetite_color }};">{{ $row->risk_appetite_name }}</td> --}}
+                        <td>{{ $row->risk_appetite_name }}</td>
                         <td>&nbsp;</td>
                         <td>{{ $row->risk_treatment_name }}</td>
                         <td>{{ $row->risk_treatment_description }}</td>
                         <td class="list">{!! $row->control_owner !!}</td>
                         <td class="list">{!! $row->status !!}</td>
                         <td>{{ $row->corrective_action_due_date }}</td>
-                        <td style="background-color: {{ $row->risk_appetite_color }};">{{ $row->risk_appetite }}</td>
+                        <td>{{$row->risk_finding_description}}</td>
                         <td>{{ $row->risk_likelihood }}</td>
-                        <td>{{ $row->risk_impact }}</td>
-                        <td>{{ $row->risk_score }}</td>
+                        <td>{{ $row->risk_impact }}</td>                      
+                        <td>{{ $row->risk_appetite }}</td>
+                        {{-- <td style="background-color: {{ $row->risk_appetite_color }};">{{ $row->risk_appetite }}</td> --}}
                         <td>{{ $row->preventive_action }}</td>
                         <td>{{ $row->last_evaluation_date }}</td>
                         <td>{{ $row->lesson_learned }}</td>
+
 
                     </tr>
                 @endforeach

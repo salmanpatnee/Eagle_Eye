@@ -1382,6 +1382,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(RiskRegisterController::class)->group(function () {
         Route::get('/risk-register', 'riskregister');
+        Route::get('/risk-register-excel', 'getRiskRegisterExcel')->name('risk.register.excel');
     });
 });
 
