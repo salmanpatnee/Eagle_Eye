@@ -296,7 +296,7 @@
 
                 <div class="ContentTable">
                     <div class="column">
-                        <x-input label="Risk Maturity Justification" label_ar="ضوابط تفاصيل التنفيذ"
+                        <x-input label="Risk Maturity Justification" label_ar="تبرير استحقاق المخاطر"
                             name="maturity_justification" class="bg-tx" />
                     </div>
                 </div>
@@ -311,10 +311,10 @@
                 
                 <div class="ContentTable">
                     <div class="column">
-                        <x-input label="Auditee Name" label_ar="" name="risk_auditee_name" />
+                        <x-input label="Auditee Name" label_ar="اسم المدقق" name="risk_auditee_name" />
                     </div>
                     <div class="column">
-                        <x-input label="Auditee Department" label_ar="" name="risk_auditee_department" />
+                        <x-input label="Auditee Department" label_ar="قسم المراجعين" name="risk_auditee_department" />
                     </div>
                 </div>
                 <div class="ContentTable">
@@ -339,21 +339,21 @@
                 </div>
                 <div class="ContentTable">
                     <div class="column">
-                        <x-input label="Correctice Action" label_ar="" name="corrective_action" />
+                        <x-input label="Corrective Action" label_ar="الإجراء التصحيحي" name="corrective_action" />
 
                     </div>
                     <div class="column">
-                        <x-input label="Correctice Action Due Date" label_ar="" name="corrective_action_due_date"
+                        <x-input label="Corrective Action Due Date" label_ar="تاريخ استحقاق الإجراء التصحيحي" name="corrective_action_due_date"
                             type="date" />
                     </div>
                 </div>
 
                 <div class="ContentTable">
                     <div class="column">
-                        <x-input label="Preventive Ation" label_ar="" name="preventive_action" />
+                        <x-input label="Preventive Action" label_ar="العمل الوقائي" name="preventive_action" />
                     </div>
                     <div class="column">
-                        <x-input label="Preventive Ation due date" label_ar="" name="preventive_action_due_date"
+                        <x-input label="Preventive Action due date" label_ar="تاريخ استحقاق الإجراء الوقائي" name="preventive_action_due_date"
                             type="date" />
                     </div>
                 </div>
@@ -365,7 +365,7 @@
                     <div class="column">
                         <div class="FieldHead">
                             <p class="FieldHeadEngTxt">Lesson Learned</p>
-                            <p class="FieldHeadArbTxt">تم تدقيق النظام</p>
+                            <p class="FieldHeadArbTxt">الدرس المستفاد</p>
                         </div>
                         <p><input type="text" name="lesson_learned" id="lesson_learned" class="bg-tx"
                                 placeholder="Write Lesson Learned" value="{{ old('lesson_learned') }}"></p>
