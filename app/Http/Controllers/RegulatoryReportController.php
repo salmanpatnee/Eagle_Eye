@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ControlAssessment;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Mpdf\Mpdf;
@@ -44,49 +45,18 @@ class RegulatoryReportController extends Controller
         $cloudControlType = request('cloud_control_type');
         $version = request('version');
 
-  
+
 
         if ($bestPracticeId === 'NCA-ECC-2018' && $version === 'v1') {
             return redirect()
                 ->route('ecc-regulatory-report.show', ['controlAssessmentId' => $controlAssessmentId]);
-        } 
-        else if ($bestPracticeId === 'NCA-CCC-2020') {
+        } else if ($bestPracticeId === 'NCA-CCC-2020') {
             return redirect()
                 ->route('ccc-regulatory-report.show', ['controlAssessmentId' => $controlAssessmentId, 'cloudControlType' => $cloudControlType]);
-        }
-        
-        else {
+        } else {
             return redirect()
                 ->route('ecc-2024-regulatory-report.show', ['controlAssessmentId' => $controlAssessmentId]);
         }
-
-
-        // switch ($bestPracticeId) {
-        //     case 'NCA-ECC-2018':
-        //         return redirect()
-        //             ->route('ecc-regulatory-report.show', ['controlAssessmentId' => $controlAssessmentId]);
-        //         break;
-        //     case 'NCA-CSCC-2019':
-        //         return redirect()
-        //             ->route('cscc-regulatory-report.show', ['controlAssessmentId' => $controlAssessmentId]);
-        //         break;
-        //     case 'NCA-CCC-2020':
-        //         return redirect()
-        //             ->route('ccc-regulatory-report.show', ['controlAssessmentId' => $controlAssessmentId, 'cloudControlType' => $cloudControlType]);
-        //         break;
-        //     case 'NCA-TCC-2021':
-        //         return redirect()
-        //             ->route('tcc-regulatory-report.show', ['controlAssessmentId' => $controlAssessmentId]);
-        //         break;
-        //     case 'NCA-OSMACC-2021':
-        //         return redirect()
-        //             ->route('osmacc-regulatory-report.show', ['controlAssessmentId' => $controlAssessmentId]);
-        //         break;
-        //     case 'NCA-DCC-2022':
-        //         return redirect()
-        //             ->route('dcc-regulatory-report.show', ['controlAssessmentId' => $controlAssessmentId]);
-        //         break;
-        // }
     }
 
     public function ecc(Request $request)
@@ -96,17 +66,7 @@ class RegulatoryReportController extends Controller
         $path = "4-Process/19-NCAReporting/ecc";
 
         if (request()->has('pdf')) {
-
-            $mpdf = new Mpdf(['orientation' => 'L']);
-
-            $html = view("{$path}/pdf", compact('report'))->render();
-
-            $mpdf->WriteHTML($html);
-
-            // Set the headers to prompt the file download
-            return response($mpdf->Output("NCA-ECC-Report.pdf", 'D'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'attachment; filename="' . "NCA-ECC-Report.pdf" . '"');
+            $this->generatePdf($path, $report, 'NCA-ECC-Report.pdf');
         } else {
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
         }
@@ -117,21 +77,11 @@ class RegulatoryReportController extends Controller
         $controlAssessmentId = request('controlAssessmentId');
         $report = $this->getReport("NCA-ECC-2024", $controlAssessmentId);
 
-        
+
         $path = "4-Process/19-NCAReporting/ecc2";
 
         if (request()->has('pdf')) {
-
-            $mpdf = new Mpdf(['orientation' => 'L']);
-
-            $html = view("{$path}/pdf", compact('report'))->render();
-
-            $mpdf->WriteHTML($html);
-
-            // Set the headers to prompt the file download
-            return response($mpdf->Output("NCA-ECC-Report.pdf", 'D'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'attachment; filename="' . "NCA-ECC-Report.pdf" . '"');
+            $this->generatePdf($path, $report, 'NCA-ECC-Report.pdf');
         } else {
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
         }
@@ -144,17 +94,7 @@ class RegulatoryReportController extends Controller
         $path = "4-Process/19-NCAReporting/cscc";
 
         if (request()->has('pdf')) {
-
-            $mpdf = new Mpdf(['orientation' => 'L']);
-
-            $html = view("{$path}/pdf", compact('report'))->render();
-
-            $mpdf->WriteHTML($html);
-
-            // Set the headers to prompt the file download
-            return response($mpdf->Output("NCA-CSCC-Report.pdf", 'D'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'attachment; filename="' . "NCA-ECC-Report.pdf" . '"');
+            $this->generatePdf($path, $report, 'NCA-CSCC-Report.pdf');
         } else {
 
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
@@ -170,10 +110,10 @@ class RegulatoryReportController extends Controller
 
         if ($cloudControlType === 'csp') {
             $template = "{$path}/csp/index";
-            $pdfTemplate = "{$path}/csp/pdf";
+            $pdfTemplate = "{$path}/csp";
         } else {
             $template = "{$path}/cst/index";
-            $pdfTemplate = "{$path}/cst/pdf";
+            $pdfTemplate = "{$path}/cst";
         }
 
         $report =  $this->getReport("NCA-CCC-2020", $controlAssessmentId, $cloudControlType);
@@ -181,16 +121,7 @@ class RegulatoryReportController extends Controller
 
         if (request()->has('pdf')) {
 
-            $mpdf = new Mpdf(['orientation' => 'L']);
-
-            $html = view($pdfTemplate, compact('report'))->render();
-
-            $mpdf->WriteHTML($html);
-
-            // Set the headers to prompt the file download
-            return response($mpdf->Output("NCA-CCC-Report.pdf", 'D'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'attachment; filename="' . "NCA-ECC-Report.pdf" . '"');
+            $this->generatePdf($pdfTemplate, $report, 'NCA-CCC-Report.pdf');
         } else {
 
             return view($template, compact('report', 'controlAssessmentId', 'cloudControlType'));
@@ -205,16 +136,7 @@ class RegulatoryReportController extends Controller
 
         if (request()->has('pdf')) {
 
-            $mpdf = new Mpdf(['orientation' => 'L']);
-
-            $html = view("{$path}/pdf", compact('report'))->render();
-
-            $mpdf->WriteHTML($html);
-
-            // Set the headers to prompt the file download
-            return response($mpdf->Output("NCA-TCC-Report.pdf", 'D'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'attachment; filename="' . "NCA-ECC-Report.pdf" . '"');
+            $this->generatePdf($path, $report, 'NCA-TCC-Report.pdf');
         } else {
 
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
@@ -230,16 +152,7 @@ class RegulatoryReportController extends Controller
 
         if (request()->has('pdf')) {
 
-            $mpdf = new Mpdf(['orientation' => 'L']);
-
-            $html = view("{$path}/pdf", compact('report'))->render();
-
-            $mpdf->WriteHTML($html);
-
-            // Set the headers to prompt the file download
-            return response($mpdf->Output("NCA-OSMACC-Report.pdf", 'D'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'attachment; filename="' . "NCA-ECC-Report.pdf" . '"');
+            $this->generatePdf($path, $report, 'NCA-OSMACC-Report.pdf');
         } else {
 
             if ($isDownloadRequest) {
@@ -258,17 +171,7 @@ class RegulatoryReportController extends Controller
         $path = "4-Process/19-NCAReporting/dcc";
 
         if (request()->has('pdf')) {
-
-            $mpdf = new Mpdf(['orientation' => 'L']);
-
-            $html = view("{$path}/pdf", compact('report'))->render();
-
-            $mpdf->WriteHTML($html);
-
-            // Set the headers to prompt the file download
-            return response($mpdf->Output("NCA-DCC-Report.pdf", 'D'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'attachment; filename="' . "NCA-ECC-Report.pdf" . '"');
+            $this->generatePdf($path, $report, 'NCA-DCC-Report.pdf');
         } else {
 
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
@@ -279,35 +182,40 @@ class RegulatoryReportController extends Controller
     {
         $controlAssessmentId = request('controlAssessmentId');
         $report = $this->getReport("SAMA-CSF-2017", $controlAssessmentId);
-        // return $report;
         $path = "4-Process/SAMAReporting";
-        
+
 
         if (request()->has('pdf')) {
-            // Increase PCRE backtrack limit
-            ini_set("pcre.backtrack_limit", "5000000");
 
-            $mpdf = new Mpdf(['orientation' => 'L']);
-
-            // Get the HTML content
-            $html = view("{$path}/pdf", compact('report'))->render();
-
-            // Split HTML into smaller chunks (e.g. 500KB each)
-            $chunks = str_split($html, 500000);
-
-            // Write HTML chunks separately
-            foreach ($chunks as $chunk) {
-                $mpdf->WriteHTML($chunk);
-            }
-
-            // Set the headers to prompt the file download
-            return response($mpdf->Output("SAMA-CSF-Report.pdf", 'D'))
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'attachment; filename="' . "SAMA-CSF-Report.pdf" . '"');
+            $this->generatePdf($path, $report, 'SAMA-Report.pdf');
         } else {
 
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
         }
+    }
+
+    private function generatePdf(string $path, Collection $report, string $reportName)
+    {
+        // Increase PCRE backtrack limit
+        ini_set("pcre.backtrack_limit", "5000000");
+
+        $mpdf = new Mpdf(['orientation' => 'L']);
+
+        // Get the HTML content
+        $html = view("{$path}/pdf", compact('report'))->render();
+
+        // Split HTML into smaller chunks (e.g. 500KB each)
+        $chunks = str_split($html, 500000);
+
+        // Write HTML chunks separately
+        foreach ($chunks as $chunk) {
+            $mpdf->WriteHTML($chunk);
+        }
+
+        // Set the headers to prompt the file download
+        return response($mpdf->Output($reportName, 'D'))
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="' . $reportName . '"');
     }
 
     private function getReport($bestPracticeId, $controlAssessmentId, string $cloudControlType = null)
