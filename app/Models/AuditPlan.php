@@ -12,4 +12,19 @@ class AuditPlan extends Model
     protected $table = 'audit_plan_table';
     protected $guarded = [];
     public $timestamps = false;
+
+    public function auditee()
+    {
+        return $this->belongsTo(Auditee::class, 'auditee_id', 'auditee_id');
+    }
+
+    public function auditor()
+    {
+        return $this->belongsTo(Auditor::class, 'auditor_id', 'auditor_id');
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id', 'location_id');
+    }
 }

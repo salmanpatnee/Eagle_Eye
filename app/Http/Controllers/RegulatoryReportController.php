@@ -184,12 +184,9 @@ class RegulatoryReportController extends Controller
         $report = $this->getReport("SAMA-CSF-2017", $controlAssessmentId);
         $path = "4-Process/SAMAReporting";
 
-
         if (request()->has('pdf')) {
-
             $this->generatePdf($path, $report, 'SAMA-Report.pdf');
         } else {
-
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
         }
     }

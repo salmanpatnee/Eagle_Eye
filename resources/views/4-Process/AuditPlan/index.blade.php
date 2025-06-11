@@ -47,7 +47,7 @@
     <!-- SIDEBAR -->
     <!-- CONTENT -->
     <div class="IndiTable">
-        <form method="POST" action="{{ route('audits.delete') }}" id="deleteForm">
+        <form method="POST" action="{{ route('audit.plan.delete') }}" id="deleteForm">
             @csrf
             @method('DELETE')
             <div class="TableHeading">
@@ -56,7 +56,7 @@
                     <p class="PageHeadEngTxt">Audit Plan</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="" class="MoreButton">
+                    <a href="{{route('audit.plan.index')}}" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
@@ -108,18 +108,18 @@
                                 <p class="ListHeadEngTxt">Audit End Date</p>
                             </th>
                         </tr>
-                        @foreach ($columns as $rows)
+                        @foreach ($auditPlans as $auditPlan)
                             <tr>
                                 <td>
-                                    <input type="radio" name="record" class="record" value="{{ $rows->$primaryKey }}"
+                                    <input type="radio" name="record" class="record" value="{{ $auditPlan->$primaryKey }}"
                                         required>
                                 </td>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="/audit-plan-table/{{ $rows->audit_id }}">{{ $rows->audit_id }}</a>
+                                <td><a href="{{route('audit.plan.show', $auditPlan->audit_id)}}">{{ $auditPlan->audit_id }}</a>
                                 </td>
-                                <td>{{ $rows->audit_name }}</td>
-                                <td>{{ $rows->audit_plan_start_date }}</td>
-                                <td>{{ $rows->audit_plan_end_date }}</td>
+                                <td>{{ $auditPlan->audit_name }}</td>
+                                <td>{{ $auditPlan->audit_plan_start_date }}</td>
+                                <td>{{ $auditPlan->audit_plan_end_date }}</td>
                             </tr>
                         @endforeach
                     </table>

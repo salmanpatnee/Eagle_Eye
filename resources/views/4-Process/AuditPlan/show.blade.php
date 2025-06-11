@@ -71,7 +71,7 @@
                     <p class="ButtonEngTxt">Update</p>
                 </a>
                 <form method="POST" action="{{ route($routeName . '.delete') }}" id="deleteForm">
-                    <input type="hidden" name="record" value="{{ $auditData?->audit_id }}">
+                    <input type="hidden" name="record" value="{{ $auditPlan?->audit_id }}">
                     <button type="button" id="btnDelete"
                         class="{{ auth()->user()->can('delete-data') && auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يمسح</p>
@@ -90,14 +90,14 @@
                             <p class="FieldHeadEngTxt">Audit ID</p>
                             <p class="FieldHeadArbTxt">رمز المراجعة</p>
                         </div>
-                        <p class="sh-tx">{{ $auditData->audit_id }}</p>
+                        <p class="sh-tx">{{ $auditPlan->audit_id }}</p>
                     </div>
                     <div class="column">
                         <div class="FieldHead">
                             <p class="FieldHeadEngTxt">Audit Name</p>
                             <p class="FieldHeadArbTxt">اسم المراجعة</p>
                         </div>
-                        <p class="sh-tx">{{ $auditData->audit_name }}</p>
+                        <p class="sh-tx">{{ $auditPlan->audit_name }}</p>
                     </div>
                 </div>
                 <div class="ContentTablebg">
@@ -106,7 +106,7 @@
                             <p class="FieldHeadEngTxt">Audit Description</p>
                             <p class="FieldHeadArbTxt">وصف المراجعة</p>
                         </div>
-                        <p class="bg-tx">{{ $auditData->audit_description }}</p>
+                        <p class="bg-tx">{{ $auditPlan->audit_description }}</p>
                     </div>
                 </div>
                 <div class="ContentTablebg">
@@ -115,7 +115,7 @@
                             <p class="FieldHeadEngTxt">Audit Sponsor</p>
                             <p class="FieldHeadArbTxt">مراجعة الراعي</p>
                         </div>
-                        <p class="bg-tx">{{ $auditData->audit_sponsor }}</p>
+                        <p class="bg-tx">{{ $auditPlan->audit_sponsor }}</p>
                     </div>
                 </div>
                 <div class="ContentTablebg">
@@ -124,7 +124,7 @@
                             <p class="FieldHeadEngTxt">Audit Scope</p>
                             <p class="FieldHeadArbTxt">مراجعة نطاق</p>
                         </div>
-                        <p class="bg-tx">{{ $auditData->audit_scope }}</p>
+                        <p class="bg-tx">{{ $auditPlan->audit_scope }}</p>
                     </div>
                 </div>
                 <div class="ContentTablebg">
@@ -133,7 +133,7 @@
                             <p class="FieldHeadEngTxt">Audit Objectives</p>
                             <p class="FieldHeadArbTxt">أهداف المراجعة</p>
                         </div>
-                        <p class="bg-tx">{{ $auditData->audit_objectives }}</p>
+                        <p class="bg-tx">{{ $auditPlan->audit_objectives }}</p>
                     </div>
                 </div>
                 <div class="ContentTablebg">
@@ -142,7 +142,7 @@
                             <p class="FieldHeadEngTxt">Audit Criteria</p>
                             <p class="FieldHeadArbTxt">معايير المراجعة</p>
                         </div>
-                        <p class="bg-tx">{{ $auditData->audit_criteria }}</p>
+                        <p class="bg-tx">{{ $auditPlan->audit_criteria }}</p>
                     </div>
                 </div>
                 <div class="ContentTablebg">
@@ -151,23 +151,61 @@
                             <p class="FieldHeadEngTxt">Audit Methodology</p>
                             <p class="FieldHeadArbTxt">منهجية المراجعة</p>
                         </div>
-                        <p class="bg-tx">{{ $auditData->audit_methodology }}</p>
+                        <p class="bg-tx">{{ $auditPlan->audit_methodology }}</p>
                     </div>
                 </div>
+                <div class="ContentTablebg">
+                    <div class="column">
+                        <div class="FieldHead">
+                            <p class="FieldHeadEngTxt">Sampling</p>
+                            <p class="FieldHeadArbTxt">أخذ العينات</p>
+                        </div>
+                        <p class="bg-tx">{{ $auditPlan->sampling }}</p>
+                    </div>
+                </div>
+                <div class="ContentTablebg">
+                    <div class="column">
+                        <div class="FieldHead">
+                            <p class="FieldHeadEngTxt">Evidence Needed</p>
+                            <p class="FieldHeadArbTxt">الأدلة المطلوبة</p>
+                        </div>
+                        <p class="bg-tx">{{ $auditPlan->evidence_needed }}</p>
+                    </div>
+                </div>
+                 <div class="ContentTablebg">
+                    <div class="column">
+                        <div class="FieldHead">
+                            <p class="FieldHeadEngTxt">Schedule</p>
+                            <p class="FieldHeadArbTxt">جدول</p>
+                        </div>
+                        <p class="bg-tx">{{ $auditPlan->schedule }}</p>
+                    </div>
+                </div>
+                <div class="ContentTablebg">
+                    <div class="column">
+                        <div class="FieldHead">
+                            <p class="FieldHeadEngTxt">Comment</p>
+                            <p class="FieldHeadArbTxt">تعليق</p>
+                        </div>
+                        <p class="bg-tx">{{ $auditPlan->comment }}</p>
+                    </div>
+                </div>
+               
+
                 <div class="ContentTable">
                     <div class="column">
                         <div class="FieldHead">
                             <p class="FieldHeadEngTxt">Audit Plan Start Date</p>
                             <p class="FieldHeadArbTxt">تاريخ بدء خطة التدقيق</p>
                         </div>
-                        <p class="sh-tx">{{ $auditData->audit_plan_start_date }}</p>
+                        <p class="sh-tx">{{ $auditPlan->audit_plan_start_date }}</p>
                     </div>
                     <div class="column">
                         <div class="FieldHead">
                             <p class="FieldHeadEngTxt">Audit Plan End Date</p>
                             <p class="FieldHeadArbTxt">تاريخ انتهاء خطة التدقيق</p>
                         </div>
-                        <p class="sh-tx">{{ $auditData->audit_plan_end_date }}</p>
+                        <p class="sh-tx">{{ $auditPlan->audit_plan_end_date }}</p>
                     </div>
                 </div>
                 <div class="ContentTable">
@@ -176,16 +214,19 @@
                             <p class="FieldHeadEngTxt">Auditing Entity</p>
                             <p class="FieldHeadArbTxt">الجهة المراجعة</p>
                         </div>
-                        <p class="sh-tx">{{ $auditData->auditing_entity }}</p>
+                        <p class="sh-tx">{{ $auditPlan->auditing_entity }}</p>
                     </div>
                     <div class="column">
                         <div class="FieldHead">
-                            <p class="FieldHeadEngTxt">Auditee Name</p>
-                            <p class="FieldHeadArbTxt">اسم مدقق</p>
+                            <p class="FieldHeadEngTxt">Audit Type</p>
+                            <p class="FieldHeadArbTxt">نوع التدقيق</p>
                         </div>
-                        <p class="sh-tx">{{ $auditData->auditee_first_name }} {{ $auditData->auditee_last_name }}
-                        </p>
+                        <p class="sh-tx">{{ $auditPlan->audit_type }}</p>
                     </div>
+
+
+
+
                 </div>
                 <div class="ContentTable">
                     <div class="column">
@@ -193,24 +234,48 @@
                             <p class="FieldHeadEngTxt">Auditing Location</p>
                             <p class="FieldHeadArbTxt">موقع التدقيق</p>
                         </div>
-                        <p class="sh-tx">{{ $auditData->location_name }}</p>
+                        <p class="sh-tx">{{ $auditPlan->location->location_name }}</p>
                     </div>
                     <div class="column">
                         <div class="FieldHead">
                             <p class="FieldHeadEngTxt">Audit Nature</p>
                             <p class="FieldHeadArbTxt">طبيعة التدقيق</p>
                         </div>
-                        <p class="sh-tx">{{ $auditData->audit_nature }}</p>
+                        <p class="sh-tx">{{ $auditPlan->audit_nature }}</p>
                     </div>
                 </div>
                 <div class="ContentTable">
                     <div class="column">
                         <div class="FieldHead">
-                            <p class="FieldHeadEngTxt">Audit Type</p>
-                            <p class="FieldHeadArbTxt">نوع التدقيق</p>
+                            <p class="FieldHeadEngTxt">Auditor</p>
+                            <p class="FieldHeadArbTxt">اسم المراجع</p>
                         </div>
-                        <p class="sh-tx">{{ $auditData->audit_type }}</p>
+                        <p class="sh-tx">{{ $auditPlan->auditor->auditor_first_name }} {{ $auditPlan->auditor->auditor_last_name }}
+                        </p>
                     </div>
+                     <div class="column">
+                        <div class="FieldHead">
+                            <p class="FieldHeadEngTxt">Auditee Name</p>
+                            <p class="FieldHeadArbTxt">اسم مدقق</p>
+                        </div>
+                        <p class="sh-tx">{{ $auditPlan->auditee->auditee_first_name }} {{ $auditPlan->auditee->auditee_last_name }}
+                        </p>
+                    </div>
+
+
+                </div>
+                <div class="ContentTable">
+                    
+                     <div class="column">
+                        <div class="FieldHead">
+                            <p class="FieldHeadEngTxt">Cost</p>
+                            <p class="FieldHeadArbTxt">يكلف</p>
+                        </div>
+                        <p class="sh-tx">{{ $auditPlan->cost }} 
+                        </p>
+                    </div>
+
+
                 </div>
             </div>
     </div>

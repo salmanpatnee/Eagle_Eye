@@ -12,7 +12,7 @@
 </style>
 <ul class="side-menu top">
     <li
-        class="{{ request()->routeIs('audits.index') || request()->routeIs('audits.show') || request()->routeIs('audits.create') || request()->routeIs('audits.edit') ? 'active' : '' }}">
+        class="{{ request()->routeIs('audit.plan.index') || request()->routeIs('audit.plan.show') || request()->routeIs('audit.plan.create') || request()->routeIs('audit.plan.edit') ? 'active' : '' }}">
         <a href="/audit-plan-list">
             <i class='bx bxs-dashboard'></i>
             <div class="MenuTxt">

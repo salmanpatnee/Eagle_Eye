@@ -891,16 +891,14 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Audit Plan
-
-
     Route::controller(AuditPlanController::class)->group(function () {
-        Route::get('/audit-plan-list', 'index')->name('audits.index');
-        Route::get('/audit-plan-table/{audit_id}', 'show')->name('audits.show');
-        Route::post('/audit-plan-input/post', 'store')->name('audits.store');
-        Route::get('/audit-plan-input', 'view')->name('audits.create');
-        Route::get('/audit-plan/edit/{audit}', 'edit')->name('audits.edit');
-        Route::patch('/audit-plan/{auditPlan:audit_id}', 'update')->name('audits.update');
-        Route::delete('/audit-plan/delete', 'delete')->name('audits.delete');
+        Route::get('/audit-plan-list', 'index')->name('audit.plan.index');
+        Route::get('/audit-plan-table/{auditPlan:audit_id}', 'show')->name('audit.plan.show');
+        Route::post('/audit-plan-input/post', 'store')->name('audit.plan.store');
+        Route::get('/audit-plan-input', 'create')->name('audit.plan.create');
+        Route::get('/audit-plan/edit/{auditPlan:audit_id}', 'edit')->name('audit.plan.edit');
+        Route::put('/audit-plan/{auditPlan}', 'update')->name('audit.plan.update');
+        Route::delete('/audit-plan/delete', 'delete')->name('audit.plan.delete');
     });
 
     // Audit Master

@@ -2,77 +2,80 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Audit;
+use App\Http\Requests\AuditPlanRequest;
+use App\Models\Auditee;
+use App\Models\Auditor;
 use App\Models\AuditPlan;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AuditPlanController extends Controller
 {
-    private $_routeName = "audits";
+    private $_routeName = "audit.plan";
     private $_primaryKey = "audit_id";
-    // 1.Controller - DATA ENTER INTO THE DATABASE TABLE
-    public function store(Request $request)
-    {
 
-        $attributes = $request->validate([
-            'audit_id' => ['required', 'unique:audit_plan_table'],
-            'audit_name' => ['required'],
-            'audit_description' => ['nullable'],
-            'audit_sponsor' => ['nullable'],
-            'audit_scope' => ['nullable'],
-            'audit_objectives' => ['nullable'],
-            'audit_criteria' => ['nullable'],
-            'audit_methodology' => ['nullable'],
-            'audit_plan_start_date' => ['required'],
-            'audit_plan_end_date' => ['required'],
-            'auditing_entity' => ['nullable'],
-            'auditee_id' => ['required'],
-            'location_id' => ['required'],
-            'audit_nature' => ['nullable'],
-            'audit_type' => ['nullable'],
-        ]);
+    public function index()
+    {
+        $auditPlans = AuditPlan::select('audit_id', 'audit_name', 'audit_plan_start_date', 'audit_plan_end_date')->get();
+        $routeName = $this->_routeName;
+        $primaryKey = $this->_primaryKey;
+        return view('4-Process/AuditPlan/index', compact('auditPlans', 'routeName', 'primaryKey'));
+    }
+
+    public function show(AuditPlan $auditPlan)
+    {
+        $data = $auditPlan->with(['auditee', 'auditor', 'location'])->first();
+
+        $routeName = $this->_routeName;
+        $primaryKey = $this->_primaryKey;
+
+        return view('4-Process/AuditPlan/show', compact('auditPlan', 'data', 'routeName', 'primaryKey'));
+    }
+
+    public function create()
+    {
+        $auditors = Auditor::select('auditor_id', 'auditor_first_name', 'auditor_last_name')->get();
+        $auditees = Auditee::select('auditee_id', 'auditee_first_name', 'auditee_last_name')->get();
+        $locations = Location::select('location_id', 'location_name')->get();
+        $auditPlan = null;
+
+        $routeName = $this->_routeName;
+        $primaryKey = $this->_primaryKey;
+
+        return view('4-Process/AuditPlan/create', compact('auditors', 'auditees', 'locations', 'routeName',  'primaryKey', 'auditPlan'));
+    }
+
+    public function store(AuditPlanRequest $request)
+    {
+        $attributes = $request->validated();
 
         AuditPlan::create($attributes);
 
-        return redirect('/audit-plan-list')->with('success', 'Location information has been saved.');
+        return redirect(route('audit.plan.index'))->with('success', 'Audit plan has been saved.');
     }
 
-    public function update(AuditPlan $auditPlan, Request $request)
+    public function edit(AuditPlan $auditPlan)
     {
+        $data = $auditPlan->with(['auditee', 'auditor', 'location'])->first();
+        $auditors = Auditor::select('auditor_id', 'auditor_first_name', 'auditor_last_name')->get();
+        $auditees = Auditee::select('auditee_id', 'auditee_first_name', 'auditee_last_name')->get();
+        $locations = Location::select('location_id', 'location_name')->get();
 
-        $attributes = $request->validate([
-            'audit_id' => ['required', 'unique:audit_plan_table,audit_id,' . $auditPlan->id],
-            'audit_name' => ['required'],
-            'audit_description' => ['nullable'],
-            'audit_sponsor' => ['nullable'],
-            'audit_scope' => ['nullable'],
-            'audit_objectives' => ['nullable'],
-            'audit_criteria' => ['nullable'],
-            'audit_methodology' => ['nullable'],
-            'audit_plan_start_date' => ['required'],
-            'audit_plan_end_date' => ['required'],
-            'auditing_entity' => ['nullable'],
-            'auditee_id' => ['required'],
-            'location_id' => ['required'],
-            'audit_nature' => ['nullable'],
-            'audit_type' => ['nullable'],
-        ]);
+        $routeName = $this->_routeName;
+        $primaryKey = $this->_primaryKey;
+        return view('4-Process/AuditPlan/create', compact('auditors', 'auditees', 'locations', 'auditPlan', 'routeName', 'data', 'primaryKey'));
+    }
+
+    public function update(AuditPlan $auditPlan, AuditPlanRequest $request)
+    {
+        $attributes = $request->validated();
 
         $auditPlan->update($attributes);
 
-
-        return redirect('/audit-plan-list')->with('success', 'Location information has been saved.');
+        return redirect(route('audit.plan.index'))->with('success', 'Audit plan has been updated.');
     }
-
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
-    {
-        $columns = DB::table('audit_plan_table')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/9-Audit/6-AuditPlanList', compact('columns', 'routeName', 'primaryKey'));
-    }
+            
 
     // 3.Controller - DELETE RECORD FROM LIST
     public function delete(Request $request)
@@ -81,10 +84,10 @@ class AuditPlanController extends Controller
             'record' => ['required'],
         ]);
 
-        
+
         $data = AuditPlan::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
         $data->delete();
-        return redirect(route($this->_routeName.'.index'));
+        return redirect(route($this->_routeName . '.index'));
 
         $selecteddelete = $request->input('selecteddelete');
 
@@ -97,62 +100,7 @@ class AuditPlanController extends Controller
 
 
 
-    // 4.Controller - DETAILED TABLE
-    public function show($audit_id)
-    {
-        $data = $auditData = DB::table('audit_plan_table')
-            ->join('auditee_table', 'audit_plan_table.auditee_id', '=', 'auditee_table.auditee_id')
-            ->join('location_table', 'audit_plan_table.location_id', '=', 'location_table.location_id') // Corrected join condition
-            ->where('audit_plan_table.audit_id', $audit_id)
-            ->select('*')
-            ->first();
 
 
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/9-Audit/6-AuditPlanTable', compact('auditData', 'routeName', 'data', 'primaryKey'));
-    }
-
-
-
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $AuditeeNames = DB::table('auditee_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $AuditLocNames = DB::table('location_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/9-Audit/6-AuditPlanForm', compact('AuditeeNames', 'AuditLocNames', 'routeName',  'primaryKey'));
-    }
-
-    public function edit($audit_id)
-    {
-        $data = $auditData = DB::table('audit_plan_table')
-            ->join('auditee_table', 'audit_plan_table.auditee_id', '=', 'auditee_table.auditee_id')
-            ->join('location_table', 'audit_plan_table.location_id', '=', 'location_table.location_id') // Corrected join condition
-            ->where('audit_plan_table.audit_id', $audit_id)
-            ->select('*')
-            ->first();
-
-
-        $AuditeeNames = DB::table('auditee_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $AuditLocNames = DB::table('location_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/9-Audit/6-AuditPlanEditForm', compact('AuditeeNames', 'AuditLocNames', 'auditData', 'routeName', 'data', 'primaryKey'));
-    }
+    
 }
