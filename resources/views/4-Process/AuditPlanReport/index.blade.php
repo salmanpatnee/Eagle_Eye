@@ -101,9 +101,13 @@
                 </div>
             </div>
             <div style="margin-left: -50px;">
-                <a href="{{ route('risk.register.excel', request()->query()) }}" class="btn-report">
+                <a href="{{ route('audit.plan.excel.report', request()->query()) }}" class="btn-report">
                     <p>تنزيل بصيغة إكسل</p>
                     <p>Download in Excel</p>
+                </a>
+                <a href="{{ route('audit.plan.report.index') }}?pdf=1" class="btn-report">
+                    <p>تنزيل بصيغة بي دي إف</p>
+                    <p>Download as PDF</p>
                 </a>
             </div>
             <div class="d-flex align-items-center gap-3">
