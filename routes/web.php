@@ -90,6 +90,7 @@ use App\Http\Controllers\ControlEvidenceController;
 use App\Http\Controllers\ControlAuditFindingController;
 use App\Http\Controllers\OCDController;
 use App\Http\Controllers\AssetSmartSearch;
+use App\Http\Controllers\AuditPlanReportController;
 use App\Http\Controllers\CMSController;
 use App\Http\Controllers\DataUploaderController;
 use App\Http\Controllers\ExportController;
@@ -899,6 +900,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/audit-plan/edit/{auditPlan:audit_id}', 'edit')->name('audit.plan.edit');
         Route::put('/audit-plan/{auditPlan}', 'update')->name('audit.plan.update');
         Route::delete('/audit-plan/delete', 'delete')->name('audit.plan.delete');
+    });
+
+    // Audit Plan Report
+    Route::controller(AuditPlanReportController::class)->group(function () {
+       
+        Route::get('/audit-plan-report', 'index')->name('audit.plan.report.index');
     });
 
     // Audit Master

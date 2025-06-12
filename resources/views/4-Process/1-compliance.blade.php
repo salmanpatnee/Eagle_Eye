@@ -611,7 +611,7 @@
         </div>
     </div>
     <div class="processes">
-        <a href="/audit-plan-list" class="boxhyperlink">
+        <a href="{{route('audit.plan.index')}}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -623,7 +623,20 @@
                 </div>
             </div>
         </a>
-        <a href="{{ route('audit-registrations.index') }}" class="boxhyperlink">
+        <a href="{{ route('audit.plan.report.index') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">خطة التدقيق</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Audit Plan</p>
+                </div>
+            </div>
+        </a>
+
+<a href="{{ route('audit-registrations.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -635,6 +648,11 @@
                 </div>
             </div>
         </a>
+       
+        
+    </div>
+    <div class="processes">
+        <div class="spacebox"></div>
         <a href="/controls-audit-findings" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
@@ -647,12 +665,15 @@
                 </div>
             </div>
         </a>
+        <div class="spacebox"></div>
+        
+        
     </div>
     <!-- ISO 27000 Family -->
     <div>
         <div class="sectionhead">
-            <p>ISO 27000 Related Evidences</p>
-            <p>الأدلة ذات الصلة بمعيار ISO 27000</p>
+            <p>ISO 27001 Related Evidences</p>
+            <p>الأدلة ذات الصلة بمعيار ISO 27001</p>
         </div>
     </div>
     <div class="processes">
