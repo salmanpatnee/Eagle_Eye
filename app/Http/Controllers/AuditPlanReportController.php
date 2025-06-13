@@ -127,6 +127,82 @@ class AuditPlanReportController extends Controller
         return response()->download($outputFilePath)->deleteFileAfterSend(true);
     }
 
+    public function generateSummarizeExcelReport(Request $request)
+    {
+
+        $auditPlans = $this->getAuditPlanSummary();
+
+        $filePath = storage_path('app/public/reports/Audit-Plan-Summary-Template.xlsx');
+        $outputFilePath = storage_path('app/public/reports/Audit-Plan-Summary-Template-Updated.xlsx');
+
+        // Copy the template file to a new file for output
+        copy($filePath, $outputFilePath);
+
+        // Load the spreadsheet from the output file
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($outputFilePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Define the headers and their corresponding data keys
+        $headers = [
+            'B' => 'audit_id',
+            'C' => 'audit_name',
+            'D' => 'auditee',
+            'E' => 'auditor_organization', // Empty column Date of risk identification = Risk Assessment Date Master
+            'F' => 'auditor',
+            'G' => 'audit_plan_start_date',
+            'H' => 'audit_plan_end_date',
+        ];
+
+        $startingRow = 11;
+
+        // Loop through each data row and fill the spreadsheet
+        foreach ($auditPlans as $rowData) {
+
+            foreach ($headers as $column => $key) {
+                $cellCoordinate = "{$column}{$startingRow}";
+                $value = $rowData[$key] ?? '';
+
+                $sheet->setCellValue($cellCoordinate, $value);
+
+                // Set font and alignment
+                $sheet->getStyle($cellCoordinate)
+                    ->getFont()
+                    ->setName('DIN Next LT Arabic Light')
+                    ->setSize(12)
+                    ->getColor()
+                    ->setRGB('000000'); // Set text color to black
+
+                $horizontalAlign = \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER;
+                $verticalAlign = \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP;
+
+                $sheet->getStyle($cellCoordinate)
+                    ->getAlignment()
+                    ->setHorizontal($horizontalAlign)
+                    ->setVertical($verticalAlign)
+                    ->setWrapText(true);
+
+                // Add black border to the cell
+                $sheet->getStyle($cellCoordinate)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN)
+                    ->setColor(new \PhpOffice\PhpSpreadsheet\Style\Color(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_BLACK));
+
+                // Set column width to approx 300px (Excel column width is not in pixels, but roughly 1 unit = 7 pixels)
+                // 300px / 7 = ~43
+                $sheet->getColumnDimension($column)->setWidth(21);
+
+                // Set row height to auto (0) so it adjusts to content
+                // $sheet->getRowDimension($startingRow)->setRowHeight(-1);
+            }
+            $startingRow++;
+        }
+
+        // Save the updated spreadsheet
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $writer->save($outputFilePath);
+
+        // Return the file as a download and delete after sending
+        return response()->download($outputFilePath)->deleteFileAfterSend(true);
+    }
+
     private function getAuditPlanData()
     {
         return AuditPlan::with('auditor')->get()->map(function ($plan) {

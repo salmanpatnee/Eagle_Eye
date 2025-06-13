@@ -109,7 +109,7 @@
                     <p>تقرير مفصل</p>
                     <p>Detailed Report</p>
                 </a>
-                <a href="{{ route('audit.plan.excel.report', request()->query()) }}" class="btn-report">
+                <a href="{{ route('audit.plan.summarize.excel.report', request()->query()) }}" class="btn-report">
                     <p>تنزيل بصيغة إكسل</p>
                     <p>Download in Excel</p>
                 </a>

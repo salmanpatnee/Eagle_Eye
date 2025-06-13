@@ -907,6 +907,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/audit-plan-report', 'index')->name('audit.plan.report.index');
         Route::get('/audit-plan-summarize-report', 'summarizeReport')->name('audit.plan.report.summarize');
         Route::get('/audit-plan-excel-report', 'generateExcelReport')->name('audit.plan.excel.report');
+        Route::get('/audit-plan-summarize-excel-report', 'generateSummarizeExcelReport')->name('audit.plan.summarize.excel.report');
     });
 
     // Audit Master
