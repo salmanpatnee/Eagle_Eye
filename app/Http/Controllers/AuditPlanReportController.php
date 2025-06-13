@@ -21,7 +21,18 @@ class AuditPlanReportController extends Controller
             return view("{$path}/index", compact('auditPlans'));
         }
     }
-    
+
+    public function summarizeReport()
+    {
+        $path = '4-Process/AuditPlanReport';
+        $auditPlanSummary = $this->getAuditPlanSummary();
+        if (request()->has('pdf')) {
+            $this->generatePdf($path, $auditPlanSummary, 'Audit-Plan-Summary.pdf');
+        } else {
+            return view("{$path}/summary", compact('auditPlanSummary'));
+        }
+    }
+
     public function generateExcelReport(Request $request)
     {
 
@@ -137,6 +148,23 @@ class AuditPlanReportController extends Controller
                 'cost' => $plan->cost,
                 'comment' => $plan->comment,
                 'duration_in_days' => Carbon::parse($plan->audit_plan_end_date)->diffInDays(Carbon::parse($plan->audit_plan_start_date)),
+            ];
+        });
+    }
+
+    private function getAuditPlanSummary()
+    {
+        return AuditPlan::with('auditor', 'auditee')->get()->map(function ($plan) {
+            return [
+                'audit_id' => $plan->audit_id,
+                'audit_name' => $plan->audit_name,
+                'auditee' => trim(optional($plan->auditee)->auditee_first_name . ' ' . optional($plan->auditee)->auditee_last_name),
+                'auditee_id' => optional($plan->auditee)->auditee_id,
+                'auditor_id' => optional($plan->auditor)->auditor_id,
+                'auditor_organization' => optional($plan->auditor)->auditor_organization,
+                'auditor' => trim(optional($plan->auditor)->auditor_first_name . ' ' . optional($plan->auditor)->auditor_last_name),
+                'audit_plan_start_date' => $plan->audit_plan_start_date,
+                'audit_plan_end_date' => $plan->audit_plan_end_date,
             ];
         });
     }
