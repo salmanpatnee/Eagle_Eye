@@ -21,36 +21,6 @@ class AuditPlanReportController extends Controller
             return view("{$path}/index", compact('auditPlans'));
         }
     }
-
-    private function generatePdf(string $path, Collection $report, string $reportName)
-    {
-        // Increase PCRE backtrack limit
-        ini_set("pcre.backtrack_limit", "5000000");
-
-        $mpdf = new Mpdf([
-            'orientation' => 'L',
-            'margin_top' => 0,
-            'margin_bottom' => 0,
-            'margin_left' => 0,
-            'margin_right' => 0,
-        ]);
-
-        // Get the HTML content
-        $html = view("{$path}/pdf", compact('report'))->render();
-
-        // Split HTML into smaller chunks (e.g. 500KB each)
-        $chunks = str_split($html, 500000);
-
-        // Write HTML chunks separately
-        foreach ($chunks as $chunk) {
-            $mpdf->WriteHTML($chunk);
-        }
-
-        // Set the headers to prompt the file download
-        return response($mpdf->Output($reportName, 'D'))
-            ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="' . $reportName . '"');
-    }
     
     public function generateExcelReport(Request $request)
     {
@@ -169,5 +139,35 @@ class AuditPlanReportController extends Controller
                 'duration_in_days' => Carbon::parse($plan->audit_plan_end_date)->diffInDays(Carbon::parse($plan->audit_plan_start_date)),
             ];
         });
+    }
+
+    private function generatePdf(string $path, Collection $report, string $reportName)
+    {
+        // Increase PCRE backtrack limit
+        ini_set("pcre.backtrack_limit", "5000000");
+
+        $mpdf = new Mpdf([
+            'orientation' => 'L',
+            'margin_top' => 0,
+            'margin_bottom' => 0,
+            'margin_left' => 0,
+            'margin_right' => 0,
+        ]);
+
+        // Get the HTML content
+        $html = view("{$path}/pdf", compact('report'))->render();
+
+        // Split HTML into smaller chunks (e.g. 500KB each)
+        $chunks = str_split($html, 500000);
+
+        // Write HTML chunks separately
+        foreach ($chunks as $chunk) {
+            $mpdf->WriteHTML($chunk);
+        }
+
+        // Set the headers to prompt the file download
+        return response($mpdf->Output($reportName, 'D'))
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="' . $reportName . '"');
     }
 }
