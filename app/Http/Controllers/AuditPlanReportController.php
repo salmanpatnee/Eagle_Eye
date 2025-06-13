@@ -27,7 +27,7 @@ class AuditPlanReportController extends Controller
         $path = '4-Process/AuditPlanReport';
         $auditPlanSummary = $this->getAuditPlanSummary();
         if (request()->has('pdf')) {
-            $this->generatePdf($path, $auditPlanSummary, 'Audit-Plan-Summary.pdf');
+            $this->generatePdf($path, $auditPlanSummary, 'Audit-Plan-Summary.pdf', 'summaryPdf');
         } else {
             return view("{$path}/summary", compact('auditPlanSummary'));
         }
@@ -245,7 +245,7 @@ class AuditPlanReportController extends Controller
         });
     }
 
-    private function generatePdf(string $path, Collection $report, string $reportName)
+    private function generatePdf(string $path, Collection $report, string $reportName, string $templateName = "pdf")
     {
         // Increase PCRE backtrack limit
         ini_set("pcre.backtrack_limit", "5000000");
@@ -259,7 +259,7 @@ class AuditPlanReportController extends Controller
         ]);
 
         // Get the HTML content
-        $html = view("{$path}/pdf", compact('report'))->render();
+        $html = view("{$path}/{$templateName}", compact('report'))->render();
 
         // Split HTML into smaller chunks (e.g. 500KB each)
         $chunks = str_split($html, 500000);
