@@ -202,6 +202,7 @@
             </div>
         </a>
     </div>
+  
     <div class="processes">
         <a href="/risk-methodology" class="boxhyperlink">
             <div class="itemprocesses">
@@ -317,6 +318,22 @@
             </div>
         </a>
        
+    </div>
+      <div class="processes">
+        <div class="spacebox"></div>
+        <a href="{{route('va.register')}}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">سجل الثغرات الأمنية</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Vulnerability Regsiter</p>
+                </div>
+            </div>
+        </a>
+        <div class="spacebox"></div>
     </div>
     <!-- Reporting -->
     <div>
@@ -439,51 +456,7 @@
         <div class="spacebox"></div>
     </div>
 
-    <!-- Vulnerability Penetration Test -->
-    <div>
-        <div class="sectionhead">
-            <p>Vulnerability Assessment / Penetration Test Tracking</p>
-            <p>تتبع تقييم الثغرات الأمنية / اختبار الاختراق</p>
-        </div>
-    </div>
-    <div class="processes">
-        <a href="{{ route('patch.index') }}" class="boxhyperlink">
-            <div class="itemprocesses">
-                <div class="boxicon">
-                    <i class='bx bxs-label'></i>
-                </div>
-                <div class="boxname">
-                    <p class="boxarbtext">القضايا المفتوحة لاختبار الثغرات</p>
-                    <div class="seperatorline"></div>
-                    <p class="boxengtext">VA-Pen Test Open Issues</p>
-                </div>
-            </div>
-        </a>
-        <a href="{{ route('pen-test-asset-vs-risk') }}" class="boxhyperlink">
-            <div class="itemprocesses">
-                <div class="boxicon">
-                    <i class='bx bxs-label'></i>
-                </div>
-                <div class="boxname">
-                    <p class="boxarbtext">الأصول المعرضة للثغرات الأمنية</p>
-                    <div class="seperatorline"></div>
-                    <p class="boxengtext">Assets at Risks WRT VA</p>
-                </div>
-            </div>
-        </a>
-        <a href="{{ route('pen-test-dashboard.index') }}" class="boxhyperlink">
-            <div class="itemprocesses">
-                <div class="boxicon">
-                    <i class='bx bxs-label'></i>
-                </div>
-                <div class="boxname">
-                    <p class="boxarbtext">لوحة تحكم اختبار الثغرات الأمنية</p>
-                    <div class="seperatorline"></div>
-                    <p class="boxengtext">VA Pen Test Dashboard</p>
-                </div>
-            </div>
-        </a>
-    </div>
+   
 
 
     <!-- Evidence Management -->
@@ -731,6 +704,53 @@
         <div class="spacebox"></div>
     </div>
     @include('4-Process/domain-ISO-27001')
+
+     <!-- Vulnerability Penetration Test -->
+    <div>
+        <div class="sectionhead">
+            <p>Vulnerability Assessment / Penetration Test Tracking</p>
+            <p>تتبع تقييم الثغرات الأمنية / اختبار الاختراق</p>
+        </div>
+    </div>
+    <div class="processes">
+        <a href="{{ route('patch.index') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">القضايا المفتوحة لاختبار الثغرات</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">VA-Pen Test Open Issues</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('pen-test-asset-vs-risk') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">الأصول المعرضة للثغرات الأمنية</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Assets at Risks WRT VA</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('pen-test-dashboard.index') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">لوحة تحكم اختبار الثغرات الأمنية</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">VA Pen Test Dashboard</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    
     @include('4-Process/resource-management')
 
 </body>
