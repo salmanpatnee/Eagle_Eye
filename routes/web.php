@@ -114,6 +114,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SamaRegulatoryReportController;
 use App\Http\Controllers\ThirdPartyController;
 use App\Http\Controllers\TPTExpertsControl;
+use App\Http\Controllers\VulnerabilityRegisterController;
 use App\Models\ControlMaster;
 use App\Models\UserRole;
 use Illuminate\Support\Facades\DB;
@@ -656,6 +657,12 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/va/{vulnerability}', 'update')->name('va.update');
         Route::delete('/va/delete', 'delete')->name('va.delete');
     });
+
+    // ------------Vulnerability Register--------------
+     Route::controller(VulnerabilityRegisterController::class)->group(function () {
+        Route::get('/vulnerability-register', 'index')->name('va.register');
+    });
+
 
     // ------------Vulnerability CVE--------------
 
