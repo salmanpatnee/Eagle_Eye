@@ -101,7 +101,7 @@
                 </div>
             </div>
             <div style="margin-left: -50px;">
-                <a href="{{ route('va.register', request()->query()) }}" class="btn-report">
+                <a href="{{ route('va.register.excel', request()->query()) }}" class="btn-report">
                     <p>تنزيل بصيغة إكسل</p>
                     <p>Download in Excel</p>
                 </a>
@@ -204,7 +204,7 @@
                     </th>
 
                     <th class="bg-light-gray">
-                        <p>CVE Score</p>
+                        <p>CVSS Score</p>
                     </th>
 
                     <th class="bg-light-gray">
@@ -250,37 +250,36 @@
             <tbody style="background-color: white">
                 @foreach ($data as $row)
                     <tr>
-                        <td class="text-center">{{ $loop->iteration }}</td>
-                        <td class="text-center">
+                        <td>{{ $loop->iteration }}</td>
+                        <td>
                             <a href="{{ route('va.show', $row->va_id) }}">
                                 {{ $row->va_id }}
                             </a>
                         </td>
-                        <td class="text-center">{{ $row->va_name }}</td>
-                        <td class="text-center">
+                        <td>{{ $row->va_name }}</td>
+                        <td>
                             <div style="width: 300px;white-space: normal;">
                                 {{ $row->va_master_description }}
                             </div>
                         </td>
-                        <td class="text-center">{{ $row->cveid }}</td>
-                        <td class="text-center">{{ $row->cvss_score }}</td>
-                        <td class="text-center">{!! $row->assets !!}</td>
-                        <td class="text-center">{!! $row->threat_agents !!}</td>
-                        <td class="text-center">
+                        <td>{{ $row->cveid }}</td>
+                        <td>{{ $row->cvss_score }}</td>
+                        <td>{!! $row->assets !!}</td>
+                        <td>{!! $row->threat_agents !!}</td>
+                        <td>
                             <div style="width: 300px;white-space: normal;">
                                 {{ $row->threat_agent_description }}
                             </div>
                         </td>
-                        <td class="text-center">{{ $row->risk_likelihood }}</td>
-                        <td class="text-center">{{ $row->risk_impact }}</td>
-                        <td class="text-center">{{ $row->risk_appetite_color }}</td>
-                        <td class="text-center"><a
-                                href="{{ route('ownerreg.show', $row->owner_id) }}">{{ $row->owner_name }}</a></td>
-                        <td class="text-center">{{ $row->va_pt_status }}</td>
-                        <td class="text-center">{{ $row->discovery_date }}</td>
-                        <td class="text-center">{{ $row->due_date }}</td>
-                        <td class="text-center">{{ $row->due_date }}</td>
-                        <td class="text-center">
+                        <td>{{ $row->risk_likelihood }}</td>
+                        <td>{{ $row->risk_impact }}</td>
+                        <td>{{ $row->risk_appetite_color }}</td>
+                        <td><a href="{{ route('ownerreg.show', $row->owner_id) }}">{{ $row->owner_name }}</a></td>
+                        <td>{{ $row->va_pt_status }}</td>
+                        <td>{{ $row->discovery_date }}</td>
+                        <td>{{ $row->due_date }}</td>
+                        <td>{{ $row->due_date }}</td>
+                        <td>
                             <div style="width: 300px;white-space: normal;">
                                 {!! $row->va_pt_finding_description !!}
                             </div>

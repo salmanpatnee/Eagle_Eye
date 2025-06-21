@@ -661,6 +661,7 @@ Route::middleware(['auth'])->group(function () {
     // ------------Vulnerability Register--------------
      Route::controller(VulnerabilityRegisterController::class)->group(function () {
         Route::get('/vulnerability-register', 'index')->name('va.register');
+        Route::get('/vulnerability-register-excel', 'generateExcelReport')->name('va.register.excel');
     });
 
 
