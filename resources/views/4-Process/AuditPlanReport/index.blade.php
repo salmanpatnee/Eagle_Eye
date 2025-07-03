@@ -38,7 +38,7 @@
             line-height: 10px;
             position: absolute;
             width: 100%;
-            top: 200px;
+            top: 340px;
         }
 
         tbody tr {
@@ -101,6 +101,7 @@
                 </div>
             </div>
             <div style="margin-left: -50px;">
+             
                 <a href="{{ route('audit.plan.report.summarize') }}" class="btn-report">
                     <p>تقرير ملخص</p>
                     <p>Summary Report</p>
@@ -109,7 +110,8 @@
                     <p>تنزيل بصيغة إكسل</p>
                     <p>Download in Excel</p>
                 </a>
-                <a href="{{ route('audit.plan.report.index') }}?pdf=1" class="btn-report">
+                <a href="{{ route('audit.plan.report.index', array_merge(request()->query(), ['pdf' => 1])) }}" class="btn-report">
+
                     <p>تنزيل بصيغة بي دي إف</p>
                     <p>Download as PDF</p>
                 </a>
@@ -129,7 +131,43 @@
                 <h3>خطة التدقيق</h3>
                 <h3>Audit Plan</h3>
             </div>
+            <div>
+                <form action="">
+                    <div class="filter-row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <label class="form-label" for="team_responsible">
+                                <p>Team Responsible</p>
+                                <p>فريق المسؤول</p>
+                            </label>
+                            <select class="form-select" name="team_responsible" id="team_responsible"
+                                onchange="this.form.submit()">
+                                <option value="">All</option>
+                                @foreach ($teamResponsible as $team)
+                                    <option value="{{ $team->auditor_organization }}"
+                                        @if ($team->auditor_organization == request('team_responsible')) selected @endif>
+                                        {{ $team->auditor_organization }}</option>
+                                @endforeach
 
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="status">
+                                <p>Audit Start Date</p>
+                                <p>تاريخ بدء التدقيق</p>
+                            </label>
+
+
+
+                            <input type="date" class="form-select" name="audit_start_date" id="audit_start_date"
+                                value="{{ old('audit_start_date', request('audit_start_date')) }}"
+                                onchange="this.form.submit()">
+
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <div class="rtablearea">

@@ -2,41 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auditor;
 use App\Models\AuditPlan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Mpdf\Mpdf;
 
-class AuditPlanReportController extends Controller
+class AuditPlanReportController extends Controller 
 {
-    public function index()
+    public function index(Request $request)
     {
+        $team = request('team_responsible');
+        $audit_start_date = request('audit_start_date');
+
+        $teamResponsible = $this->getTeamResponsibleData();
+        
         $path = '4-Process/AuditPlanReport';
-        $auditPlans = $this->getAuditPlanData();
+        $auditPlans = $this->getAuditPlanData($team, $audit_start_date);
+         
 
         if (request()->has('pdf')) {
             $this->generatePdf($path, $auditPlans, 'Audit-Plan.pdf');
         } else {
-            return view("{$path}/index", compact('auditPlans'));
+            return view("{$path}/index", compact('auditPlans', 'teamResponsible'));
         }
     }
 
-    public function summarizeReport()
+    public function summarizeReport(Request $request)
     {
+        $team = request('team_responsible');
+        $audit_start_date = request('audit_start_date');
+       
+        $teamResponsible = $this->getTeamResponsibleData();
+
         $path = '4-Process/AuditPlanReport';
-        $auditPlanSummary = $this->getAuditPlanSummary();
+        $auditPlanSummary = $this->getAuditPlanSummary($team, $audit_start_date);
         if (request()->has('pdf')) {
             $this->generatePdf($path, $auditPlanSummary, 'Audit-Plan-Summary.pdf', 'summaryPdf');
         } else {
-            return view("{$path}/summary", compact('auditPlanSummary'));
+            return view("{$path}/summary", compact('auditPlanSummary', 'teamResponsible'));
         }
     }
 
     public function generateExcelReport(Request $request)
     {
+        $team = request('team_responsible');
+        $audit_start_date = request('audit_start_date');
 
-        $auditPlans = $this->getAuditPlanData();
+        $auditPlans = $this->getAuditPlanData($team, $audit_start_date);
 
         $filePath = storage_path('app/public/reports/Audit-Plan-Template.xlsx');
         $outputFilePath = storage_path('app/public/reports/Audit-Plan-Template-Updated.xlsx');
@@ -129,8 +143,9 @@ class AuditPlanReportController extends Controller
 
     public function generateSummarizeExcelReport(Request $request)
     {
-
-        $auditPlans = $this->getAuditPlanSummary();
+        $team = request('team_responsible');
+        $audit_start_date = request('audit_start_date');
+        $auditPlans = $this->getAuditPlanSummary($team, $audit_start_date);
 
         $filePath = storage_path('app/public/reports/Audit-Plan-Summary-Template.xlsx');
         $outputFilePath = storage_path('app/public/reports/Audit-Plan-Summary-Template-Updated.xlsx');
@@ -203,9 +218,25 @@ class AuditPlanReportController extends Controller
         return response()->download($outputFilePath)->deleteFileAfterSend(true);
     }
 
-    private function getAuditPlanData()
+    private function getTeamResponsibleData() {
+        return Auditor::select('auditor_organization')->distinct()->get();
+    }
+
+    private function getAuditPlanData($team, $audit_start_date)
     {
-        return AuditPlan::with('auditor')->get()->map(function ($plan) {
+        $query = AuditPlan::with('auditor');
+
+        if (!empty($team)) {
+            $query->whereHas('auditor', function ($q) use ($team) {
+                $q->where('auditor_organization', $team);
+            });
+        }
+
+        if (!empty($audit_start_date)) {
+            $query->whereDate('audit_plan_start_date', $audit_start_date);
+        }
+
+        return $query->get()->map(function ($plan) {
             return [
                 'audit_id' => $plan->audit_id,
                 'audit_name' => $plan->audit_name,
@@ -228,9 +259,21 @@ class AuditPlanReportController extends Controller
         });
     }
 
-    private function getAuditPlanSummary()
+    private function getAuditPlanSummary($team, $audit_start_date)
     {
-        return AuditPlan::with('auditor', 'auditee')->get()->map(function ($plan) {
+        $query = AuditPlan::with('auditor', 'auditee');
+
+        if (!empty($team)) {
+            $query->whereHas('auditor', function ($q) use ($team) {
+                $q->where('auditor_organization', $team);
+            });
+        }
+
+        if (!empty($audit_start_date)) {
+            $query->whereDate('audit_plan_start_date', $audit_start_date);
+        }
+
+        return $query->get()->map(function ($plan) {
             return [
                 'audit_id' => $plan->audit_id,
                 'audit_name' => $plan->audit_name,
