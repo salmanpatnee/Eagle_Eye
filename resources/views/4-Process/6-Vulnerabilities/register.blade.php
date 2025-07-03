@@ -38,7 +38,7 @@
             line-height: 10px;
             position: absolute;
             width: 100%;
-            top: 200px;
+            top: 340px;
         }
 
         tbody tr {
@@ -105,7 +105,7 @@
                     <p>تنزيل بصيغة إكسل</p>
                     <p>Download in Excel</p>
                 </a>
-                <a href="{{ route('va.register', request()->query()) }}?pdf=1" class="btn-report">
+                <a href="{{ route('va.register', array_merge(request()->query(), ['pdf' => 1])) }}" class="btn-report">
                     <p>تنزيل بصيغة بي دي إف</p>
                     <p>Download as PDF</p>
                 </a>
@@ -125,54 +125,61 @@
                 <h3>سجل الثغرات</h3>
                 <h3>Vulnerability Register</h3>
             </div>
-            {{-- <div>
-                <form action="/risk-register">
+            <div>
+                <form action="">
                     <div class="filter-row">
 
                         <div class="col">
-                            <label class="form-label" for="risk">
-                                <p>Risk</p>
-                                <p>المخاطر</p>
+                            <label class="form-label" for="assets">
+                                <p>Affected Assets</p>
+                                <p>الأصول المتأثرة</p>
                             </label>
-                            <select class="form-select" name="risk" id="risk" onchange="this.form.submit()">
+                            <select class="form-select" name="assets" id="assets" onchange="this.form.submit()">
                                 <option value="">All</option>
-                                @foreach ($risks as $risk)
-                                    <option value="{{ $risk->risk_id }}"
-                                        @if ($risk->risk_id == request('risk')) selected @endif>{{ $risk->risk_id }} -
-                                        {{ $risk->risk_name }}</option>
+                                @foreach ($affectedAssets as $affectedAsset)
+                                    <option value="{{ $affectedAsset->asset_id }}"
+                                        @if ($affectedAsset->asset_id == request('assets')) selected @endif>{{ $affectedAsset->asset_id }}
+                                        -
+                                        {{ $affectedAsset->asset_name }}</option>
                                 @endforeach
 
                             </select>
                         </div>
                         <div class="col">
-                            <label class="form-label" for="asset_group">
-                                <p>Risk Treatment Action Status</p>
-                                <p>خيارات علاج المخاطر</p>
+                            <label class="form-label" for="status">
+                                <p>Status</p>
+                                <p>الحالة</p>
                             </label>
-                            <select class="form-select" name="riskTreatment" id="riskTreatment"
-                                onchange="this.form.submit()">
-                                <option value="">All</option>
-                                @foreach ($riskTreatments as $riskTreatment)
-                                    <option value="{{ $riskTreatment->risk_treatment_id }}"
-                                        @if ($riskTreatment->risk_treatment_id == request('riskTreatment')) selected @endif>
-                                        {{ $riskTreatment->risk_treatment_id }} -
-                                        {{ $riskTreatment->risk_treatment_name }}</option>
-                                @endforeach
+
+
+
+                            <select class="form-select" name="status" id="status" onchange="this.form.submit()">
+                                <option value="" @if (old('status', request('status')) == '') selected @endif>Select Status
+                                </option>
+                                <option value="Open - Not Started" @if (old('status', request('status')) == 'Open - Not Started') selected @endif>
+                                    Open - Not Started
+                                </option>
+                                <option value="Open - WIP" @if (old('status', request('status')) == 'Open - WIP') selected @endif>
+                                    Open - WIP
+                                </option>
+                                <option value="Closed" @if (old('status', request('status')) == 'Closed') selected @endif>
+                                    Closed
+                                </option>
                             </select>
                         </div>
                         <div class="col">
-                            <label class="form-label" for="asset_group">
-                                <p>Last Evalution Date</p>
-                                <p>تاريخ التقييم الأخير</p>
+                            <label class="form-label" for="resolution_date">
+                                <p>Resolution Date</p>
+                                <p>تاريخ الحل</p>
                             </label>
-                            <input type="date" class="form-select" name="evalutionDate" id="evalutionDate"
-                                value="{{ old('evalutionDate', request('evalutionDate')) }}"
+                            <input type="date" class="form-select" name="resolution_date" id="resolution_date"
+                                value="{{ old('resolution_date', request('resolution_date')) }}"
                                 onchange="this.form.submit()">
 
                         </div>
                     </div>
                 </form>
-            </div> --}}
+            </div>
         </div>
     </div>
     <div class="rtablearea">
