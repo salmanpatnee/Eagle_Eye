@@ -48,7 +48,7 @@
                 @endif
                 <div class="TableHeading">
                     <div class="PageHead">
-                        <p class="PageHeadArbTxt">المواقع الجهة</p>
+                        <p class="PageHeadArbTxt">القسم الجهة</p>
                         <p class="PageHeadEngTxt">Organization Departments</p>
                     </div>
                     <div class="ButtonContainer">

@@ -24,7 +24,7 @@
     <div class="headersec">
         <div class="headerleft">
             @include('4-Process/headerleft')
-            @include('4-Process/1-InitialSetup/roleheader')
+            @include('4-Process/1-InitialSetup/initialheader')
         </div>
         <div class="text-center d-flex gap-3">
             @include('partials.roles')
@@ -145,15 +145,26 @@
                             <div class="column">
                                 <div class="FieldHead">
                                     <p class="FieldHeadEngTxt">System/Application/Other</p>
-                                    <p class="FieldHeadArbTxt">المتعلقة بالنظام/التطبيق/أخرى</p>
+                                    {{-- <p class="FieldHeadArbTxt">النظام / التطبيق / أخرى</p> --}}
+                                    
                                 </div>
-                                <p> <select name="system_application_other" id="system_application_other"
-                                        class="sh-tx"
-                                        value="{{ old('system_application_other', $custodianrole?->system_application_other) }}">
-                                        <option value="System">System</option>
-                                        <option value="Application">Application</option>
-                                        <option value="Others">Other</option>
-                                    </select>
+                                <p> <select name="system_application_other" id="system_application_other" class="sh-tx">
+                                    <option value="" disabled {{ old('system_application_other', $custodianrole?->system_application_other) ? '' : 'selected' }}>
+                                        Select an option
+                                    </option>
+                                    <option value="System"
+                                        {{ old('system_application_other', $custodianrole?->system_application_other) == 'System' ? 'selected' : '' }}>
+                                        System
+                                    </option>
+                                    <option value="Application"
+                                        {{ old('system_application_other', $custodianrole?->system_application_other) == 'Application' ? 'selected' : '' }}>
+                                        Application
+                                    </option>
+                                    <option value="Other"
+                                        {{ old('system_application_other', $custodianrole?->system_application_other) == 'Other' ? 'selected' : '' }}>
+                                        Other
+                                    </option>
+                                </select>
                                     @error('system_application_other')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -186,7 +197,7 @@
             var csccStandOneSection = document.getElementById("DefineOther");
 
             function toggleCsccStandOneSection() {
-                if (relationCriticalAssetSelect.value === "Others") {
+                if (relationCriticalAssetSelect.value === "Other") {
                     csccStandOneSection.style.display = "block";
                 } else {
                     csccStandOneSection.style.display = "none";
@@ -205,9 +216,10 @@
         function goBack() {
             window.history.back();
         }
+
         function showDeleteModal() {
-    window.deleteConfirmationModal.show(document.getElementById('delete_form'));
-}
+            window.deleteConfirmationModal.show(document.getElementById('delete_form'));
+        }
     </script>
 </body>
 

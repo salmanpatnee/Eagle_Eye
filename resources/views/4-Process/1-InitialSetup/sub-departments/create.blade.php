@@ -86,7 +86,7 @@
                 <div class="ContentTableSection">
                     <div class="ContentTable">
                         <div class="column">
-                            <x-input label="Sub-Department ID" label_ar="اسم القسم الفرعي" name="sub_department_id"
+                            <x-input label="Sub-Department ID" label_ar="رمز القسم الفرعي" name="sub_department_id"
                                 placeholder="Enter Sub-Department ID" :value="$subDepartment?->sub_department_id" required />
 
 

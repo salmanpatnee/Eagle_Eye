@@ -192,7 +192,7 @@
                             <div class="multiselect">
                                 <div class="AttchFieldHead">
                                     <p class="CatFieldHeadEngTxt">Category</p>
-                                    <p class="CatFieldHeadArbTxt">الفئة</p>
+                                    <p class="CatFieldHeadArbTxt" style="margin-right: 0">الفئة</p>
                                 </div>
                                 <div class="selectBox" onclick="showCheckboxes()">
                                     <select name="artifact_category_id" id="artifact_category_id" class="sh-tx">

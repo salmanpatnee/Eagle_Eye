@@ -60,6 +60,7 @@ ol.resource-list li {
     border-radius: 5px;
     padding-left: 0.5em;
     margin-bottom: 0.5em;
+    margin-left: 0;
 }
 
 ol.resource-list li a {

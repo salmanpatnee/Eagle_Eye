@@ -55,7 +55,7 @@
             <a href="{{ route('categories.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
-                    <h3>فئة</h3>
+                    <h3>الفئة</h3>
                     <span class="text">Category</span>
                 </div>
             </a>
@@ -65,7 +65,7 @@
             <a href="{{ route('sub-categories.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
-                    <h3>تصنيف فرعي</h3>
+                    <h3>الفئة الفرعية</h3>
                     <span class="text">Sub-Category</span>
                 </div>
             </a>
@@ -85,7 +85,7 @@
             <a href="{{ route('domains.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
-                    <h3>قائمة المجالات</h3>
+                    <h3>المكون الأساسي</h3>
                     <span class="text">Domains List</span>
                 </div>
             </a>
@@ -95,13 +95,13 @@
             <a href="{{ route('sub-domains.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
-                    <h3>قائمة النطاقات الفرعية</h3>
+                    <h3>المكون الفرعي</h3>
                     <span class="text">Sub-Domains List</span>
                 </div>
             </a>
         </li>
 
-        <li class="{{ request()->routeIs('ownerreg.index') || request()->routeIs('ownerreg.show') || request()->routeIs('ownerreg.create') || request()->routeIs('ownerreg.edit') ? 'active' : '' }}">
+        <li class="{{ request()->routeIs('ownerreg.index') || request()->routeIs('ownerreg.show') || request()->routeIs('ownerreg.create') || request()->routeIs('ownerreg.edit') || request()->routeIs('upload.owner.create') ? 'active' : '' }}">
             <a href="/owner-list">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
@@ -111,7 +111,7 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('ownerrole.index') || request()->routeIs('ownerrole.show') || request()->routeIs('ownerrole.edit') || request()->routeIs('ownerrole.create') ? 'active' : '' }}">
+            class="{{ request()->routeIs('ownerrole.index') || request()->routeIs('ownerrole.show') || request()->routeIs('ownerrole.edit') || request()->routeIs('ownerrole.create')  ? 'active' : '' }}">
             <a href="/owner-role-list">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
@@ -121,7 +121,7 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('custodian.index') || request()->routeIs('custodian.show') || request()->routeIs('custodian.edit') || request()->routeIs('custodian.create') ? 'active' : '' }}">
+            class="{{ request()->routeIs('custodian.index') || request()->routeIs('custodian.show') || request()->routeIs('custodian.edit') || request()->routeIs('custodian.create') || request()->routeIs('upload.custodian.create') ? 'active' : '' }}">
             <a href="/custodian-list">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">

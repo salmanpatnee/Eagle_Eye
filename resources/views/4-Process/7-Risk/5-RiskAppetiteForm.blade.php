@@ -353,7 +353,7 @@
                     <div class="ContentTable">
                         <div class="column">
                             <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Risk Appetite Uppler Limit</p>
+                                <p class="FieldHeadEngTxt">Risk Appetite Upper Limit</p>
                                 <p class="FieldHeadArbTxt">الحد الأعلى لمخاطر الجوع</p>
                             </div>
                             <p><input type="text" name="risk_appetite_upper_limit" id="risk_appetite_upper_limit"

@@ -1,6 +1,6 @@
 <section id="sidebar">
     <ul class="side-menu top">
-        <li class="{{ request()->routeIs('assetreg.index') || request()->routeIs('assetreg.show') ? 'active' : '' }}">
+        <li class="{{ request()->routeIs('assetreg.index') || request()->routeIs('assetreg.show') || request()->routeIs('assetreg.create') || request()->routeIs('assetreg.edit') ? 'active' : '' }}">
             <a href="{{route('assetreg.index')}}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
@@ -9,7 +9,7 @@
                 </div>
             </a>
         </li>
-        <li class="{{ request()->routeIs('assetstatus.index') || request()->routeIs('assetstatus.show') ? 'active' : '' }}">
+        <li class="{{ request()->routeIs('assetstatus.index') || request()->routeIs('assetstatus.show') || request()->routeIs('assetstatus.create') || request()->routeIs('assetstatus.edit') ? 'active' : '' }}">
             <a href="{{route('assetstatus.index')}}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
@@ -18,7 +18,7 @@
                 </div>
             </a>
         </li>
-        <li class="{{ request()->routeIs('assettype.index') || request()->routeIs('assettype.show') ? 'active' : '' }}">
+        <li class="{{ request()->routeIs('assettype.index') || request()->routeIs('assettype.show') || request()->routeIs('assettype.create') || request()->routeIs('assettype.edit') ? 'active' : '' }}">
             <a href="{{route('assettype.index')}}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
@@ -27,7 +27,7 @@
                 </div>
             </a>
         </li>
-        <li class="{{ request()->routeIs('assetsubtype.index') || request()->routeIs('assetsubtype.show') ? 'active' : '' }}">
+        <li class="{{ request()->routeIs('assetsubtype.index') || request()->routeIs('assetsubtype.show') || request()->routeIs('assetsubtype.create') || request()->routeIs('assetsubtype.edit') ? 'active' : '' }}">
             <a href="{{route('assetsubtype.index')}}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">

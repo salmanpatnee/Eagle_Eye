@@ -90,7 +90,7 @@
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Artifact Description</p>
-                                {{-- <p class="FieldHeadArbTxt">وصف الأصول</p> --}}
+                                <p class="FieldHeadArbTxt">وصف المرفقات</p>
                             </div>
                             <p class="bg-tx">{{ $artifact?->artifact_description }}</p>
                         </div>
@@ -99,14 +99,14 @@
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Creation Date</p>
-                                <p class="FieldHeadArbTxt">رمز المرفقات</p>
+                                <p class="FieldHeadArbTxt">تاريخ الإنشاء</p>
                             </div>
                             <p class="sh-tx">{{ $artifact?->artifact_creation_date }}</p>
                         </div>
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Classification</p>
-                                {{-- <p class="FieldHeadArbTxt">اسم المرفقات</p> --}}
+                                <p class="FieldHeadArbTxt">اسم تصنيف</p>
                             </div>
                             <p class="sh-tx">{{ $artifact->classification?->classification_name }}</p>
                         </div>
@@ -115,14 +115,14 @@
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Category</p>
-                                <p class="FieldHeadArbTxt">رمز المرفقات</p>
+                                <p class="FieldHeadArbTxt">فئة</p>
                             </div>
                             <p class="sh-tx">{{ $artifact->category?->category_name }}</p>
                         </div>
                         <div class="column">
                             <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">System </p>
-                                {{-- <p class="FieldHeadArbTxt">اسم المرفقات</p> --}}
+                                <p class="FieldHeadEngTxt">System Name</p>
+                                <p class="FieldHeadArbTxt">اسم النظام</p>
                             </div>
                             <p class="sh-tx">{{ $artifact->artifact_system_name }}</p>
                         </div>
@@ -330,7 +330,7 @@
                         @empty
                         <tr>
                             <td colspan="2" class="text-center">
-                                <p>No attachments yet.</p>
+                                <p style="margin: 0" >No attachments yet.</p>
                             </td>
                         </tr>
                     @endforelse

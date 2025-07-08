@@ -79,7 +79,7 @@
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset ID</p>
-                                <p class="FieldHeadArbTxt">قيمة</p>
+                                <p class="FieldHeadArbTxt">رمز الأصول</p>
                             </div>
                             <p class="sh-tx">{{ $asset->asset_id }}</p>
                         </div>

@@ -48,7 +48,7 @@
                 <input type="hidden" name="record" id="deleteRecordId">
                 <div class="TableHeading">
                     <div class="PageHead">
-                        <p class="PageHeadArbTxt">المواقع الجهة</p>
+                        <p class="PageHeadArbTxt">القسم الجهة</p>
                         <p class="PageHeadEngTxt">Organization Departments</p>
                     </div>
                     <div class="ButtonContainer">
@@ -101,7 +101,7 @@
                                 <p class="ListHeadEngTxt">Department Names</p>
                             </th>
                             <th style="padding-right: 100px;">
-                                <p class="ListHeadArbTxt">امواقع </p>
+                                <p class="ListHeadArbTxt">المواقع </p>
                                 <p class="ListHeadEngTxt">Location</p>
                             </th>
                         </tr>

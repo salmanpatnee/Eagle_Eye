@@ -50,15 +50,17 @@
                         <p class="ListHeadEngTxt">S.No</p>
                     </th>
                     <th style="padding-right: 0px;">
-                        <p class="ListHeadArbTxt">رمز الفئة</p>
+                        <p class="ListHeadArbTxt">رمز أفضل الممارسات</p>
                         <p class="ListHeadEngTxt">Best Practice IDs</p>
                     </th>
                     <th style="padding-right: 100px;">
-                        <p class="ListHeadArbTxt">رمز الفئة</p>
+                        <p class="ListHeadArbTxt">اسم  أفضل الممارسات</p>
                         <p class="ListHeadEngTxt">Best Practice Names</p>
                     </th>
                     <th style="padding-right: 0px;">
-                        <p class="ListHeadArbTxt">رمز الفئة</p>
+                        <p class="ListHeadArbTxt">سنة أفضل الممارسات
+
+                        </p>
                         <p class="ListHeadEngTxt">Release Year</p>
                     </th>
                     <th style="padding-right: 0px;">

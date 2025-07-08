@@ -81,15 +81,15 @@
                                     <p class="ListHeadEngTxt">S.No</p>
                                 </th>
                                 <th style="padding-right: 0px;">
-                                    <p class="ListHeadArbTxt">رمز نوع وكيل التهديد</p>
+                                    <p class="ListHeadArbTxt">رمز النوع الفرعي لعامل التهديد</p>
                                     <p class="ListHeadEngTxt">Threat Sub-Type ID</p>
                                 </th>
                                 <th style="padding-right: 100px;">
-                                    <p class="ListHeadArbTxt">رمز نوع وكيل التهديد</p>
+                                    <p class="ListHeadArbTxt">رمز النوع الفرعي لعامل التهديد</p>
                                     <p class="ListHeadEngTxt">Threat Sub-Type Name</p>
                                 </th>
                                 <th style="padding-right: 100px;">
-                                    <p class="ListHeadArbTxt">نوع وكيل التهديد</p>
+                                    <p class="ListHeadArbTxt">النوع الفرعي لعامل التهديد</p>
                                     <p class="ListHeadEngTxt">Threat Agent Type</p>
                                 </th>
                             </tr>

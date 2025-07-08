@@ -98,16 +98,21 @@
                             <p class="bg-tx">{{ $department->department_description }}</p>
                         </div>
                     </div>
-                </div>
-                <div class="ContentTableSection">
                     <div class="ContentTable">
                         <div class="column">
-                            <h4>Location Name</h4>
+                            <div class="FieldHead">
+                                <p class="FieldHeadEngTxt">Location Name</p>
+                                <p class="FieldHeadArbTxt">اسم الموقع</p>
+                            </div>
                             <p class="sh-tx">{{ $department->location?->location_name }}</p>
-                            </p>
+                        </div>
+                        <div class="column">
+                            
                         </div>
                     </div>
                 </div>
+              
+                
             </table>
         </div>
 

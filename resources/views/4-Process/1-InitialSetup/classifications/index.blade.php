@@ -91,11 +91,11 @@
                                     <p class="ListHeadEngTxt">S.No</p>
                                 </th>
                                 <th style="padding-right: 0px;">
-                                    <p class="ListHeadArbTxt">رمز القسم الفرعي</p>
+                                    <p class="ListHeadArbTxt">رمز التصنيف</p>
                                     <p class="ListHeadEngTxt">Classification IDs</p>
                                 </th>
                                 <th style="padding-right: 100px;">
-                                    <p class="ListHeadArbTxt">رمز القسم الفرعي</p>
+                                    <p class="ListHeadArbTxt">اسم التصنيف</p>
                                     <p class="ListHeadEngTxt">Classification Names</p>
                                 </th>
                                 <th style="padding-right: 100px;">

@@ -14,7 +14,7 @@
                 <a href="{{ route('users.create') }}">
                     <i class='bx bxs-label'></i>
                     <div class="MenuTxt">
-                        <h3>المستخدمين</h3>
+                        <h3>إضافة مستخدم</h3>
                         <span class="text">Add User</span>
                     </div>
                 </a>
@@ -24,7 +24,7 @@
                 <a href="{{ route('users.create') }}" class="not-allow">
                     <i class='bx bxs-label'></i>
                     <div class="MenuTxt">
-                        <h3>المستخدمين</h3>
+                        <h3>إضافة مستخدم</h3>
                         <span class="text">Add User</span>
                     </div>
                 </a>

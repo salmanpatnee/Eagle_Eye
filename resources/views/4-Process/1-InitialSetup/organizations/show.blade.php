@@ -124,7 +124,7 @@
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Organization Logo</p>
-                                <p class="FieldHeadArbTxt">رمز الجهة</p>
+                                <p class="FieldHeadArbTxt">شعار الجهة</p>
                             </div>
                             @if ($organization->organization_logo == null)
                                 <p class="sh-tx">No Logo</p>

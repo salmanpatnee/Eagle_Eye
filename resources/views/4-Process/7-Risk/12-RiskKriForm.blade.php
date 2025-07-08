@@ -167,7 +167,7 @@
                                 <p class="FieldHeadArbTxt">مصدر مؤشر المخاطر الرئيسية</p>
                             </div>
                             <p><input type="text" name="key_risk_indicator_source" id="key_risk_indicator_source"
-                                    class="sh-tx" placeholder="Write Name"
+                                    class="sh-tx" placeholder="Write KRI Source"
                                     value="{{ old('key_risk_indicator_source', $riskkri?->key_risk_indicator_source) }}"
                                     required>
                                 @error('key_risk_indicator_source')
@@ -181,7 +181,7 @@
                                 <p class="FieldHeadArbTxt">قيمة مؤشر المخاطر الرئيسي</p>
                             </div>
                             <p><input type="text" name="key_risk_indicator_value" id="key_risk_indicator_value"
-                                    class="sh-tx" placeholder="Write Name"
+                                    class="sh-tx" placeholder="Write KRI Value"
                                     value="{{ old('key_risk_indicator_value', $riskkri?->key_risk_indicator_value) }}"
                                     required>
                                 @error('key_risk_indicator_value')

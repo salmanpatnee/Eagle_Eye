@@ -38,8 +38,8 @@
     <div class="IndiTable">
         <div class="TableHeading">
             <div class="PageHead">
-                <p class="PageHeadArbTxt">وكلاء التهديد</p>
-                <p class="PageHeadEngTxt">Threat Agents</p>
+                <p class="PageHeadArbTxt">نوع وكيل التهديد</p>
+                <p class="PageHeadEngTxt">Threat Agents Types</p>
             </div>
             <div class="ButtonContainer">
                 <a href="/threat-agent-type-list" class="MoreButton">
@@ -74,7 +74,7 @@
                     <div class="column">
                         <div class="FieldHead">
                             <p class="FieldHeadEngTxt">Threat Agent Type ID</p>
-                            <p class="FieldHeadArbTxt">رمز وكلاء التهديد</p>
+                            <p class="FieldHeadArbTxt">رمز نوع وكيل التهديد</p>
                         </div>
 
                         <p class="sh-tx">{{ $threattype->threat_agent_type_id }}</p>
@@ -83,7 +83,7 @@
                     <div class="column">
                         <div class="FieldHead">
                             <p class="FieldHeadEngTxt">Threat Agent Type Name</p>
-                            <p class="FieldHeadArbTxt">اسم وكلاء التهديد</p>
+                            <p class="FieldHeadArbTxt">اسم نوع وكيل التهديد</p>
                         </div>
 
                         <p class="sh-tx">{{ $threattype->threat_agent_type_name }}</p>
@@ -94,7 +94,7 @@
                     <div class="column">
                         <div class="FieldHead">
                             <p class="FieldHeadEngTxt">Threat Agent Type Description</p>
-                            <p class="FieldHeadArbTxt">وصف وكلاء التهديد</p>
+                            <p class="FieldHeadArbTxt">وصف نوع وكيل التهديد</p>
                         </div>
 
                         <p class="bg-tx">{{ $threattype->threat_agent_type_description }}</p>

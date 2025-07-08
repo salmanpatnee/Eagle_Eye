@@ -128,7 +128,7 @@
                                 <div class="column">
 
                                     <x-input label="Owner Title" label_ar="تسمية صاحب المبادرة"
-                                        name="initiative_owner_title" placeholder="Enter  Owner Title" :value="$organization?->initiative_owner_title" />
+                                        name="initiative_owner_title" placeholder="Enter Owner Title" :value="$organization?->initiative_owner_title" />
                                 </div>
                             </div>
                             <div class="ContentTable">

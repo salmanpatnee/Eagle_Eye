@@ -632,7 +632,7 @@ Route::middleware(['auth'])->group(function () {
     // ------------Threat Agent Vector--------------
 
 
-    Route::controller(ThreatAgentVectorController::class)->group(function () {
+    Route::controller(ThreatAgenrisk-methodology/tVectorController::class)->group(function () {
         Route::get('/threat-agent-vector-list', 'index')->name('threatvector.index');
         Route::get('/threat-agent-vector-table/{threat_agent_vector_id}', 'show')->name('threatvector.show');;
         Route::get('/threat-agent-vector-input', 'create')->name('threatvector.create');

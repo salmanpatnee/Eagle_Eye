@@ -50,12 +50,12 @@
                             <p class="ListHeadEngTxt">S.No</p>
                         </th>
                         <th style="padding-right: 0px;">
-                            <p class="ListHeadArbTxt">رمز القسم الفرعي</p>
+                            <p class="ListHeadArbTxt">رمز الجهة</p>
                             <p class="ListHeadEngTxt">Organization ID</p>
                         </th>
                         <th style="padding-right: 100px;">
-                            <p class="ListHeadArbTxt">الاسم الكامل للجهة</p>
-                            <p class="ListHeadEngTxt">Organization Names</p>
+                            <p class="ListHeadArbTxt">الاسم الجهة</p>
+                            <p class="ListHeadEngTxt">Organization Name</p>
                         </th>
                         <th style="padding-right: 100px;">
                             <p class="ListHeadArbTxt">رقم الاتصال</p>

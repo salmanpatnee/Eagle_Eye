@@ -81,11 +81,11 @@
                                 <p class="ListHeadEngTxt">S.No</p>
                             </th>
                             <th style="padding-right: 100px;">
-                                <p class="ListHeadArbTxt">رمز النوع الفرعي للأصول</p>
+                                <p class="ListHeadArbTxt">رمز مجموعة الأصول</p>
                                 <p class="ListHeadEngTxt">Asset Group ID</p>
                             </th>
                             <th style="padding-right: 0px;">
-                                <p class="ListHeadArbTxt">اسم النوع الفرعي للأصول</p>
+                                <p class="ListHeadArbTxt">اسم مجموعة الأصول</p>
                                 <p class="ListHeadEngTxt">Asset Group Name</p>
                             </th>
                             <th style="padding-right: 0px;">

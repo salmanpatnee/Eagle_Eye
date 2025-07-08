@@ -110,7 +110,7 @@
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Best Practices</p>
-                                <p class="FieldHeadArbTxt">التصنيف</p>
+                                <p class="FieldHeadArbTxt">أفضل الممارسات</p>
                             </div>
                             <div class="sh-tx" style="display: inherit; height: auto">
                                 @forelse ($domain->bestPractices as $bestPractice)

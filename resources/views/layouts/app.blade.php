@@ -51,6 +51,9 @@
                 alert('Please select a record.');
             }
         });
+        function goBack() {
+            window.history.back();
+        }
     </script>
 
     <!-- SIDEBAR -->

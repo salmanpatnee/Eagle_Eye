@@ -19,6 +19,8 @@ class CustodianRoleController extends Controller
     public function edit($id)
     {
         $custodianrole = DB::table('custodian_table')->where('custodian_role_id', $id)->first();
+        // return $custodianrole;
+
 
         return view('4-Process/1-InitialSetup/10-CustodianRoleForm', compact('custodianrole'));
     }

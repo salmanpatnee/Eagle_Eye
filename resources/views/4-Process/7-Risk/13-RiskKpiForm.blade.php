@@ -167,7 +167,8 @@
                                 <p class="FieldHeadArbTxt">مصدر مؤشر الأداء الرئيسية</p>
                             </div>
                             <p><input type="text" name="key_performance_indicatory_source"
-                                    id="key_performance_indicatory_source" class="sh-tx" placeholder="Write Name"
+                                    id="key_performance_indicatory_source" class="sh-tx"
+                                    placeholder="Write KPI Source"
                                     value="{{ old('key_performance_indicatory_source', $riskkpi?->key_performance_indicatory_source) }}"
                                     required>
                                 @error('key_performance_indicatory_source')
@@ -181,7 +182,8 @@
                                 <p class="FieldHeadArbTxt">قيمة مؤشر الأداء الرئيسية</p>
                             </div>
                             <p><input type="text" name="key_performance_indicatory_value"
-                                    id="key_performance_indicatory_value" class="sh-tx" placeholder="Write Name"
+                                    id="key_performance_indicatory_value" class="sh-tx"
+                                    placeholder="Write KPI Value"
                                     value="{{ old('key_performance_indicatory_value', $riskkpi?->key_performance_indicatory_value) }}"
                                     required>
                                 @error('key_performance_indicatory_source')

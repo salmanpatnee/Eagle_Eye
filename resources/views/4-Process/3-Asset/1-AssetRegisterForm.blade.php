@@ -79,47 +79,7 @@
         </div>
     </div>
     <div class="wrapper">
-        <section id="sidebar">
-            <ul class="side-menu top">
-                <li class="active">
-                    <a href="/asset-register-input">
-                        <i class='bx bxs-label'></i>
-                        <div class="MenuTxt">
-                            <h3>تسجيل الأصول</h3>
-                            <span class="text">Asset Registration</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/asset-status-input">
-                        <i class='bx bxs-label'></i>
-                        <div class="MenuTxt">
-                            <h3>حالة الأصول</h3>
-                            <span class="text">Asset Status</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/asset-type-input">
-                        <i class='bx bxs-label'></i>
-                        <div class="MenuTxt">
-                            <h3>نوع الأصل</h3>
-                            <span class="text">Asset Type</span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/asset-sub-type-input">
-                        <i class='bx bxs-label'></i>
-                        <div class="MenuTxt">
-                            <h3>النوع الفرعي للأصول</h3>
-                            <span class="text">Asset Sub-Type</span>
-                        </div>
-                        <span class="text"></span>
-                    </a>
-                </li>
-            </ul>
-        </section>
+        @include('4-Process/3-Asset/AssetSidebar')
         <!-- SIDEBAR -->
 
 

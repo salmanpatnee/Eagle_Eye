@@ -71,8 +71,8 @@
         <div class="IndiTable">
             <div class="TableHeading">
                 <div class="PageHead">
-                    <p class="PageHeadArbTxt">دور المستخدم</p>
-                    <p class="PageHeadEngTxt">User Role</p>
+                    <p class="PageHeadArbTxt"> المستخدم</p>
+                    <p class="PageHeadEngTxt">User </p>
                 </div>
                 <div class="ButtonContainer">
                     <a href="{{ route('users.index') }}" class="MoreButton">

@@ -68,7 +68,7 @@
                     @endif
                     
                     <form method="POST" action="{{ route($routeName.'.delete') }}" id="deleteForm">
-                        <input type="hidden" name="record" value="{{ $data->id }}">
+                        <input type="hidden" name="record" value="{{ $data?->id }}">
                         @csrf
                         @method('DELETE')
                         <button type="button" id="btnDelete"

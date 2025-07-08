@@ -212,7 +212,7 @@
             @endif
         </div>
     </div>
-    <x-modal id="bestpracticemodel" title="Select Best Practive" :data="$bestPractices" :selectedvalues="isset($bestPracticeIds) ? $bestPracticeIds : []"
+    <x-modal id="bestpracticemodel" title="Select Best Practice" :data="$bestPractices" :selectedvalues="isset($bestPracticeIds) ? $bestPracticeIds : []"
         checkboxClass="bestPracticeCheckbox" id_key="best_practices_id" value_key="best_practices_name" />
 
     @include('components.delete-confirmation-modal')

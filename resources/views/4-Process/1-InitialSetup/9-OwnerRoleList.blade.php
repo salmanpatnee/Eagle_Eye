@@ -24,7 +24,7 @@
     <div class="headersec">
         <div class="headerleft">
             @include('4-Process/headerleft')
-            @include('4-Process/1-InitialSetup/roleheader')
+            @include('4-Process/1-InitialSetup/initialheader')
         </div>
         <div class="text-center d-flex gap-3">
             @include('partials.roles')
@@ -97,7 +97,7 @@
                                     <p class="ListHeadEngTxt">Owner Role Name</p>
                                 </th>
                                 <th style="padding-right: 100px;">
-                                    <p class="ListHeadArbTxt">اسم دور الصاحب</p>
+                                    <p class="ListHeadArbTxt">وصف دور الصاحب</p>
                                     <p class="ListHeadEngTxt">Owner Role Description</p>
                                 </th>
                             </tr>

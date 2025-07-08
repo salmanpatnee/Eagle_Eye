@@ -108,7 +108,7 @@
                     </div>
                     <div class="twofieldrow">
                         <div class="sidefiled">
-                            <x-input label="Location Country" label_ar="عنوان الجهة" name="location_country"
+                            <x-input label="Location Country" label_ar="البلد الموقع" name="location_country"
                                 placeholder="Enter Location Country" :value="$location?->location_country" />
 
 

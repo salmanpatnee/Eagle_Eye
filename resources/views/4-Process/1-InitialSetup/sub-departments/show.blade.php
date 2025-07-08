@@ -78,7 +78,7 @@
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Sub-Department ID</p>
-                                <p class="FieldHeadArbTxt">اسم القسم الفرعي</p>
+                                <p class="FieldHeadArbTxt">رمز القسم الفرعي</p>
                             </div>
                             <p class="sh-tx">{{ $subDepartment->sub_department_id }}</p>
                         </div>

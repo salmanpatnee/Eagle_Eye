@@ -135,7 +135,7 @@
                     <p class="PageHeadEngTxt">Risk Appetite</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="" class="MoreButton">
+                    {{-- <a href="" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
@@ -156,7 +156,7 @@
                         class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يمسح</p>
                         <p class="ButtonEngTxt">Delete</p>
-                    </button>
+                    </button> --}}
                 </div>
             </div>
             <section id="heatmap">

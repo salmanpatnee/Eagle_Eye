@@ -129,10 +129,12 @@
                                 <p class="FieldHeadArbTxt">اسم الوصي</p>
                             </div>
                             <ol class="resource-list">
-                                @foreach ($assetGroup->custodians as $custodian)
+                                @forelse ($assetGroup->custodians as $custodian)
                                     <li>{{ $custodian->custodian_role_title }}</li>
-                                @endforeach
-                            </ol>
+                                </ol>
+                                @empty
+                                <p class="sh-tx"></p>
+                                @endforelse
                         </div>
                         {{-- <div class="column">
                             <div class="FieldHead">

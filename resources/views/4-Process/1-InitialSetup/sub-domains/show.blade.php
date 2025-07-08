@@ -118,7 +118,7 @@
                                 <p class="FieldHeadEngTxt">Categories</p>
                                 <p class="FieldHeadArbTxt">اسم الفئة</p>
                             </div>
-                            <ol class="resource-list">
+                            <ol class="resource-list" style="margin-top: 0;">
                                 @forelse ($subDomain->categories as $category)
                                     <li>{{ $category->category_name }}</li>
                                 @empty

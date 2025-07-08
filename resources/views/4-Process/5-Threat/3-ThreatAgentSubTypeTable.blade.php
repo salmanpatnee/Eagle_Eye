@@ -98,7 +98,7 @@
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Threat Agent Type</p>
-                                <p class="FieldHeadArbTxt">رمز النوع الفرعي لعامل التهديد</p>
+                                <p class="FieldHeadArbTxt"> نوع وكيل التهديد</p>
                             </div>
                             <p class="sh-tx">{{ $threatAgentSubType->type?->threat_agent_type_name }}</p>
                         </div>
