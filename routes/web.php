@@ -196,17 +196,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/compliance', function () {
         return view('4-Process/1-compliance');
-    });
-
-    Route::get('/compliance-v2', function () {
-        return view('4-Process/1-compliance-v2');
     })->name('compliance');
 
-    Route::get('/compliance-v3', function () {
-        $roles = UserRole::all();
-
-        return view('4-Process/1-compliance-v3', compact('roles'));
-    })->name('compliance');
 
     // Organization
     Route::get('/expert-organization-input', function () {
