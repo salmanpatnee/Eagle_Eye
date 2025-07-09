@@ -155,7 +155,7 @@ Route::middleware(['guest'])->group(function () {
     // Title Page
     Route::get('/', function () {
         return view('1-Title.1-TitlePage');
-    });
+    })->name('welcome');
 });
 
 Route::middleware(['auth'])->group(function () {
