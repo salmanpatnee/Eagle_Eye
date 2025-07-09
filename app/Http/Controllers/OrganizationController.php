@@ -27,7 +27,7 @@ class OrganizationController extends Controller
     {
         $organization = null;
 
-        return view('4-Process.1-InitialSetup.organizations.create', compact('organization'));
+        return view('4-Process.1-InitialSetup.organizations. create', compact('organization'));
     }
 
     public function store(Request $request)

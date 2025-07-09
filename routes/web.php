@@ -121,6 +121,11 @@ use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
+Route::get('/tailadmin', function () {
+    return view('tailadmin');
+});
+
+
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
     // $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->get()->pluck('control_id');
@@ -632,7 +637,7 @@ Route::middleware(['auth'])->group(function () {
     // ------------Threat Agent Vector--------------
 
 
-    Route::controller(ThreatAgenrisk-methodology/tVectorController::class)->group(function () {
+    Route::controller(ThreatAgentVectorController::class)->group(function () {
         Route::get('/threat-agent-vector-list', 'index')->name('threatvector.index');
         Route::get('/threat-agent-vector-table/{threat_agent_vector_id}', 'show')->name('threatvector.show');;
         Route::get('/threat-agent-vector-input', 'create')->name('threatvector.create');
