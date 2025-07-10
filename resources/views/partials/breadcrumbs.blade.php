@@ -1,11 +1,13 @@
 <!-- Breadcrumb Start -->
 <div>
-    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div class="flex flex-col">
-            <span class="ibm-plex-sans-arabic-semibold text-xl font-semibold text-gray-800 dark:text-white/90 text-right" dir="rtl">
+            <span
+                class="ibm-plex-sans-arabic-semibold text-sm lg:text-xl font-semibold text-gray-800 dark:text-white/90 text-right"
+                dir="rtl">
                 @yield('title_ar', '')
             </span>
-            <span class="text-xl font-semibold text-gray-800 dark:text-white/90">
+            <span class="text-sm lg:text-xl font-semibold text-gray-800 dark:text-white/90">
                 @yield('title')
             </span>
         </div>
