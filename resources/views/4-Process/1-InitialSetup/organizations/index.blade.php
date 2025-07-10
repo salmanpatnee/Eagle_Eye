@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+@section('title', 'Organization Setup')
+@section('title_ar', 'إعداد الجهة')
 @section('content')
 
     <!-- CONTENT -->
