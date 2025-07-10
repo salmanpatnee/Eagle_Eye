@@ -34,9 +34,8 @@
             </button>
             <!-- Hamburger Toggle BTN -->
             <a href="index.html" class="lg:hidden">
-                <img class="dark:hidden" src="{{ asset('tailadmin/build/src/images/logo/logo.svg') }}" alt="Logo" />
-                <img class="hidden dark:block" src="{{ asset('tailadmin/build/src/images/logo/logo-dark.svg') }}"
-                    alt="Logo" />
+                <img class="dark:hidden" src="{{ asset('images/logo/logo.svg') }}" alt="Logo" />
+                <img class="hidden dark:block" src="{{ asset('images/logo/logo-dark.svg') }}" alt="Logo" />
             </a>
             <!-- Application nav menu button -->
             <button
@@ -50,7 +49,7 @@
                 </svg>
             </button>
             <!-- SEARCH -->
-            
+
         </div>
         <div :class="menuToggle ? 'flex' : 'hidden'"
             class="shadow-theme-md w-full items-center justify-between gap-4 px-5 py-4 lg:flex lg:justify-end lg:px-0 lg:shadow-none">
@@ -64,9 +63,10 @@
                     <a class="flex items-center text-gray-700 dark:text-gray-400" href="#"
                         @click.prevent="dropdownOpen = ! dropdownOpen">
                         <span class="mr-3 h-11 w-11 overflow-hidden rounded-full">
-                            <img src="{{ asset('tailadmin/build/src/images/user/avatar.png') }}" alt="User" />
+                            <img src="{{ asset('images/user/avatar.png') }}" alt="User" />
                         </span>
-                        <span class="text-theme-sm mr-1 block font-medium">  {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }} </span>
+                        <span class="text-theme-sm mr-1 block font-medium">
+                            {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }} </span>
                         <svg :class="dropdownOpen && 'rotate-180'" class="stroke-gray-500 dark:stroke-gray-400"
                             width="18" height="20" viewBox="0 0 18 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +79,7 @@
                         class="shadow-theme-lg dark:bg-gray-dark absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800">
                         <div>
                             <span class="text-theme-sm block font-medium text-gray-700 dark:text-gray-400">
-                                {{auth()->user()->role->role_name}}
+                                {{ auth()->user()->role->role_name }}
                             </span>
                             <span class="text-theme-xs mt-0.5 block text-gray-500 dark:text-gray-400">
                                 {{ auth()->user()->email }}
@@ -128,7 +128,7 @@
                         </ul> --}}
                         <form id="logout-form" method="POST" action="{{ route('login.destroy') }}">
                             @csrf
-                            
+
                             <button
                                 class="w-full group text-theme-sm mt-3 flex items-center justify-between gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
                                 <span class="flex items-center gap-3">
@@ -141,7 +141,8 @@
                                     </svg>
                                     <span>Sign out</span>
                                 </span>
-                                <span class="text-theme-sm text-gray-700 dark:text-gray-400" dir="rtl" style="font-family: inherit;">
+                                <span class="text-theme-sm text-gray-700 dark:text-gray-400" dir="rtl"
+                                    style="font-family: inherit;">
                                     تسجيل الخروج
                                 </span>
                             </button>
