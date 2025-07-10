@@ -6,7 +6,13 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Sign In | {{ env('APP_NAME', 'Eagle Eye') }}</title>
+    <title>
+        @hasSection('title')
+            @yield('title') | {{ env('APP_NAME', 'Eagle Eye') }}
+        @else
+            {{ env('APP_NAME', 'Eagle Eye') }}
+        @endif
+    </title>
     <link rel="icon" href="{{ asset('tailadmin/build/favicon.ico') }}">
     <link href="{{ asset('tailadmin/build/style.css') }}" rel="stylesheet">
 </head>
