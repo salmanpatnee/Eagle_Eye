@@ -312,9 +312,9 @@ layer(base);
     display: none;
 }
 
-.sidebar:hover .menu-item-text {
+/* .sidebar:hover .menu-item-text {
     display: inline;
-}
+} */
 
 .sidebar:hover .menu-item-arrow {
     display: block;

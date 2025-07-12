@@ -53,6 +53,12 @@
     text-align: right;
 }
 
+[dir="rtl"].font-bold {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
 [dir="rtl"] .text-right {
     text-align: left;
 }
