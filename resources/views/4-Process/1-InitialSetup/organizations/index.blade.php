@@ -2,117 +2,36 @@
 @section('title', 'Organization Setup')
 @section('title_ar', 'إعداد الجهة')
 @section('content')
+    <div>
+        <x-table.action-wrapper>
+            <x-action.button label="Add" label_ar="يضيف" route_name="organizations.create" />
+        </x-table.action-wrapper>
 
-    <!-- CONTENT -->
-   
-        <form method="POST" action="{{ route('organizations.destroy') }}" id="deleteForm">
-            @csrf
-            @method('DELETE')
-            <input type="hidden" name="record" id="deleteRecordId">
-            <div class="TableHeading">
-                <div class="PageHead">
-                    <p class="PageHeadArbTxt">إعداد الجهة</p>
-                    <p class="PageHeadEngTxt">Organization Setup</p>
-                </div>
-                <div class="ButtonContainer">
-                    <a href="{{ route('organizations.index') }}" class="MoreButton">
-                        <p class="ButtonArbTxt">منظر</p>
-                        <p class="ButtonEngTxt">View</p>
-                    </a>
-
-                    <a href="{{ route('organizations.create') }}"
-                        class="{{ auth()->user()->can('manage-initial-setup') ? 'MoreButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">يضيف</p>
-                        <p class="ButtonEngTxt">Add</p>
-                    </a>
-
-                    <a href=""
-                        class="{{ auth()->user()->can('manage-initial-setup') ? 'MoreButton' : 'DisabledButton' }}"
-                        id="btnUpdate">
-                        <p class="ButtonArbTxt">تحديث</p>
-                        <p class="ButtonEngTxt">Update</p>
-                    </a>
-
-                    <button type="button"
-                        class="{{ auth()->user()->can('manage-initial-setup') ? 'DeleteButton' : 'DisabledButton' }}"
-                        id="btnDelete">
-                        <p class="ButtonArbTxt">يمسح</p>
-                        <p class="ButtonEngTxt">Delete</p>
-                    </button>
-
-                </div>
-            </div>
-            <div class="ListTable">
-                <table cellspacing="0">
+        <x-table.table>
+            <x-table.thead>
+                <x-table.th label="S.No" label_ar="رقم" />
+                <x-table.th label="Organization ID" label_ar="رمز للجهة" />
+                <x-table.th label="Organization Name" label_ar="الاسم للجهة" />
+                <x-table.th label="Contact Number" label_ar="رقم الاتصال" />
+                <x-table.th label="Email Address" label_ar="عنوان البريد الإلكتروني" />
+                <x-table.th label="Action" label_ar="إجراء " />
+            </x-table.thead>
+            <x-table.tbody>
+                @foreach ($organizations as $organization)
                     <tr>
-                        <th style="padding-right: 0px;"></th>
-                        <th style="padding-right: 0px;">
-                            <p class="ListHeadArbTxt">رقم</p>
-                            <p class="ListHeadEngTxt">S.No</p>
-                        </th>
-                        <th style="padding-right: 0px;">
-                            <p class="ListHeadArbTxt">رمز الجهة</p>
-                            <p class="ListHeadEngTxt">Organization ID</p>
-                        </th>
-                        <th style="padding-right: 100px;">
-                            <p class="ListHeadArbTxt">الاسم الجهة</p>
-                            <p class="ListHeadEngTxt">Organization Name</p>
-                        </th>
-                        <th style="padding-right: 100px;">
-                            <p class="ListHeadArbTxt">رقم الاتصال</p>
-                            <p class="ListHeadEngTxt">Contact Number</p>
-                        </th>
-                        <th style="padding-right: 100px;">
-                            <p class="ListHeadArbTxt">عنوان البريد الإلكتروني</p>
-                            <p class="ListHeadEngTxt">Email Address</p>
-                        </th>
+                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td>{{ $organization->organization_id }}</x-table.td>
+                        <x-table.td>{{ $organization->organization_name_english }}</x-table.td>
+                        <x-table.td>{{ $organization->initiative_owner_contact_number }}</x-table.td>
+                        <x-table.td>{{ $organization->initiative_owner_email }}</x-table.td>
+                        <x-table.td action_col="true">
+                            <x-action.view route_name="organizations.show" param="{{ $organization->id }}" />
+                            <x-action.edit route_name="organizations.edit" param="{{ $organization->id }}" />
+                            <x-action.delete route_name="organizations.edit" param="{{ $organization->id }}" />
+                        </x-table.td>
                     </tr>
-                    @foreach ($organizations as $organization)
-                        <tr>
-                            <td>
-                                <input type="radio" name="record" class="record" value="{{ $organization->id }}"
-                                    required>
-                            </td>
-                            <td>{{ $loop->index + 1 }}</td>
-                            <td><a
-                                    href="{{ route('organizations.show', $organization->id) }}">{{ $organization->organization_id }}</a>
-                            </td>
-                            <td>{{ $organization->organization_name_english }}</td>
-                            <td>{{ $organization->initiative_owner_contact_number }}</td>
-                            <td>{{ $organization->initiative_owner_email }}</td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
-        </form>
+                @endforeach
+            </x-table.tbody>
+        </x-table.table>
     </div>
-
-    @include('components.delete-confirmation-modal')
-
-    <script>
-        document.getElementById('btnUpdate').addEventListener('click', function(event) {
-            event.preventDefault();
-
-            const selectedRadio = document.querySelector('.record:checked');
-
-            if (selectedRadio) {
-                window.location.href = `/organizations/edit/${selectedRadio.value}`;
-            } else {
-                alert('Please select a record.');
-            }
-        });
-
-        document.getElementById('btnDelete').addEventListener('click', function(event) {
-            event.preventDefault();
-            
-            const selectedRadio = document.querySelector('.record:checked');
-            
-            if (selectedRadio) {
-                document.getElementById('deleteRecordId').value = selectedRadio.value;
-                window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-            } else {
-                alert('Please select a record.');
-            }
-        });
-    </script>
 @endsection
