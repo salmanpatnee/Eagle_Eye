@@ -1,215 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
+@section('title', 'Organization Setup')
+@section('title_ar', 'إعداد الجهة')
+@section('content')
+    <div>
+        <x-table.action-wrapper title="Organization Details">
+            <x-action.button label="All Organizations" label_ar="جميع الجهات" route_name="organizations.index" />
+        </x-table.action-wrapper>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div class="border-gray-100 border-t p-3">
+            <x-info-row>
+                <x-info-col label="Organization ID" label_ar="رمز الجهة">
+                    {{ $organization->organization_id }}
+                </x-info-col>
 
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool">
-    <meta name="description" content="Zain Cloud GRC Tool">
-    <!-- Boxicons Icons-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/6-Header/headertwo.css') }}">
-    <style>
-        .wrapper {
-            display: flex;
-            gap: 30px;
-        }
+                <x-info-col label="Organization Logo" label_ar="شعار الجهة">
+                    @if ($organization->organization_logo == null)
+                        <p class="sh-tx">No Logo</p>
+                    @else
+                        <img src="{{ asset('storage/' . $organization->organization_logo) }}" alt="Organization Logo"
+                            class="w-[23%]">
+                    @endif
+                </x-info-col>
+            </x-info-row>
 
-        #sidebar {
-            position: initial;
-        }
+            <x-info-row>
+                <x-info-col label="Organization Name" label_ar="اسم الجهة">
+                    {{ $organization->organization_name_english }}
+                </x-info-col>
 
-        .IndiTable {
-            padding-top: 100px;
-            margin-left: 0;
-            padding-bottom: 50px;
-            width: 80%;
-        }
+                <x-info-col label="Organization Name Arabic" label_ar=" اسم الجهة (بالعربي) ">
+                    {{ $organization->organization_name_arabic }}
+                </x-info-col>
+            </x-info-row>
 
-        .IndiTable .ButtonContainer {
-            display: flex;
-            gap: 10px;
-            justify-content: start;
-            /* padding-right: 20px; */
-        }
+            <x-info-col-lg label=" Organization Address" label_ar="عنوان الجهة">
+                {{ $organization->organization_address ?? '—' }}
+            </x-info-col-lg>
 
-        .DisabledButton,
-        .MoreButton,
-        .DeleteButton {
-            margin-right: auto;
-        }
+            <x-info-row>
+                <x-info-col label="Owner Name" label_ar="اسم صاحب المبادرة">
+                    {{ $organization->initiative_owner_name ?? '—' }}
+                </x-info-col>
+                <x-info-col label="Owner Title" label_ar="تسمية صاحب المبادرة">
+                    {{ $organization->initiative_owner_title }}
+                </x-info-col>
+            </x-info-row>
 
-        .logo {
-            max-height: 60px;
-            background-color: white;
-            padding: .5em;
-            border-radius: 10px;
-            margin-top: .5em;
-        }
-    </style>
-</head>
+            <x-info-row>
+                <x-info-col label="Contact Number" label_ar="رقم الاتصال">
+                    {{ $organization->initiative_owner_contact_number ?? '—' }}
+                </x-info-col>
 
-<body>
-
-
-    <!-- SIDEBAR -->
-    <div class="headersec">
-        <div class="headerleft">
-            @include('4-Process/headerleft')
-            @include('4-Process/1-InitialSetup/initialheader')
-        </div>
-        <div class="text-center d-flex gap-3">
-            @include('partials.roles')
-            @include('4-Process/backbutton')
+                <x-info-col label="Email Address" label_ar="عنوان البريد الإلكتروني">
+                    {{ $organization->initiative_owner_email ?? '—' }}
+                </x-info-col>
+            </x-info-row>
         </div>
     </div>
-    <div class="wrapper">
-        @include('4-Process.1-InitialSetup._partials.sidebar')
-        <!-- SIDEBAR -->
-
-
-
-        <!-- CONTENT -->
-        <div class="IndiTable">
-            <div class="TableHeading">
-                <div class="PageHead">
-                    <p class="PageHeadArbTxt">إعداد الجهة</p>
-                    <p class="PageHeadEngTxt">Organization Setup</p>
-                </div>
-                <div class="ButtonContainer">
-                    <a href="{{ route('organizations.index') }}" class="MoreButton">
-                        <p class="ButtonArbTxt">منظر</p>
-                        <p class="ButtonEngTxt">View</p>
-                    </a>
-
-                    <a href="{{ route('organizations.create') }}"
-                        class="{{ auth()->user()->can('manage-initial-setup') ? 'MoreButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">يضيف</p>
-                        <p class="ButtonEngTxt">Add</p>
-                    </a>
-                    <a href="{{ route('organizations.edit', $organization->id) }}"
-                        class="{{ auth()->user()->can('manage-initial-setup') ? 'MoreButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">تحديث</p>
-                        <p class="ButtonEngTxt">Update</p>
-                    </a>
-                    <form method="POST" action="{{ route('organizations.destroy') }}" id="deleteForm">
-                        <input type="hidden" name="record" value="{{ $organization->id }}">
-                        <button type="button"
-                            class="{{ auth()->user()->can('manage-initial-setup') ? 'DeleteButton' : 'DisabledButton' }}"
-                            id="btnDelete">
-                            <p class="ButtonArbTxt">يمسح</p>
-                            <p class="ButtonEngTxt">Delete</p>
-                        </button>
-                        @csrf
-                        @method('DELETE')
-                    </form>
-                </div>
-            </div>
-            <table cellspacing="0">
-                <div class="ContentTableSection">
-                    <div class="ContentTable">
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Organization ID</p>
-                                <p class="FieldHeadArbTxt">رمز الجهة</p>
-                            </div>
-                            <p class="sh-tx">{{ $organization->organization_id }}</p>
-                        </div>
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Organization Logo</p>
-                                <p class="FieldHeadArbTxt">شعار الجهة</p>
-                            </div>
-                            @if ($organization->organization_logo == null)
-                                <p class="sh-tx">No Logo</p>
-                            @else
-                                <img src="{{ asset('storage/' . $organization->organization_logo) }}"
-                                    alt="Organization Logo" class="logo">
-                            @endif
-                        </div>
-                    </div>
-                    <div class="ContentTable">
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Organization Name (English)</p>
-                                <p class="FieldHeadArbTxt"></p>
-                            </div>
-                            <p class="sh-tx">{{ $organization->organization_name_english }}</p>
-                        </div>
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt"></p>
-                                <p class="FieldHeadArbTxt">(بالعربي) الاسم الكامل للجهة</p>
-                            </div>
-                            <p class="sh-tx">{{ $organization->organization_name_arabic }}</p>
-                        </div>
-                    </div>
-                    <div class="ContentTablebg">
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Organization Address</p>
-                                <p class="FieldHeadArbTxt">عنوان الجهة</p>
-                            </div>
-                            <p class="bg-tx">{{ $organization->organization_address }}</p>
-                        </div>
-                    </div>
-                    <div class="ContentTable">
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Owner Name</p>
-                                <p class="FieldHeadArbTxt">اسم صاحب المبادرة</p>
-                            </div>
-                            <p class="sh-tx">{{ $organization->initiative_owner_name }}</p>
-                        </div>
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Owner Title</p>
-                                <p class="FieldHeadArbTxt">تسمية صاحب المبادرة</p>
-                            </div>
-                            <p class="sh-tx">{{ $organization->initiative_owner_title }}</p>
-                        </div>
-                    </div>
-                    <div class="ContentTable">
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Contact Number</p>
-                                <p class="FieldHeadArbTxt">رقم الاتصال</p>
-                            </div>
-                            <p class="sh-tx">{{ $organization->initiative_owner_contact_number }}</p>
-                        </div>
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Email Address</p>
-                                <p class="FieldHeadArbTxt">عنوان البريد الإلكتروني</p>
-                            </div>
-                            <p class="sh-tx">{{ $organization->initiative_owner_email }}</p>
-                        </div>
-                    </div>
-                </div>
-            </table>
-        </div>
-    </div>
-
-    @include('components.delete-confirmation-modal')
-
-    <script src="/Css/4-Process/1-Form/1-Form.js"></script>
-    <script src="/Css/7-Sidebar/2-Sidebar.js"></script>
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-
-        document.getElementById('btnDelete').addEventListener('click', function(event) {
-            event.preventDefault();
-            window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-        });
-    </script>
-</body>
-
-</html>
+@endsection
