@@ -42,7 +42,7 @@ module.exports = {
   entry: "./src/js/index.js",
   devServer: {
     static: {
-      directory: path.join(__dirname, "./build"),
+      directory: path.join(__dirname, "./src"),
     },
     compress: true,
     port: 3000,
