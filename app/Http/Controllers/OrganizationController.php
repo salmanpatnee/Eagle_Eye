@@ -27,7 +27,7 @@ class OrganizationController extends Controller
     {
         $organization = null;
 
-        return view('4-Process.1-InitialSetup.organizations. create', compact('organization'));
+        return view('4-Process.1-InitialSetup.organizations.create', compact('organization'));
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class OrganizationController extends Controller
 
         Organization::create($attributes);
 
-        
+
         return redirect(route('organizations.index'))
             ->with('success', 'Organization saved successfully.');
     }
@@ -66,14 +66,14 @@ class OrganizationController extends Controller
     {
 
         $attributes = $request->validate([
-            'organization_id' => ['required', 'unique:organization_table,organization_id,'.$organization->id],
+            'organization_id' => ['required', 'unique:organization_table,organization_id,' . $organization->id],
             'organization_name_english' => 'required',
             'organization_name_arabic' => 'nullable',
             'organization_address' => 'nullable',
             'initiative_owner_name' => 'nullable',
             'initiative_owner_title' => 'nullable',
             'initiative_owner_contact_number' => 'nullable',
-            'initiative_owner_email' => 'nullable|email', 
+            'initiative_owner_email' => 'nullable|email',
             'organization_logo' => 'nullable|file|image|max:2048',
         ]);
 
@@ -92,13 +92,13 @@ class OrganizationController extends Controller
 
     public function destroy(Request $request)
     {
-        
+
         $attributes =  $request->validate([
             'record' => ['required'],
         ]);
 
         $organization = Organization::findOrFail($attributes['record']);
-        
+
         if ($organization->organization_logo) {
             Storage::disk('public')->delete($organization->organization_logo);
         }
@@ -108,5 +108,4 @@ class OrganizationController extends Controller
         return redirect(route('organizations.index'))
             ->with('success', 'Organization deleted successfully.');
     }
-
 }
