@@ -33,7 +33,7 @@
                 </svg>
             </button>
             <!-- Hamburger Toggle BTN -->
-            <a href="index.html" class="lg:hidden">
+            <a href="{{ route('compliance') }}" class="lg:hidden">
                 <img class="dark:hidden" src="{{ asset('images/logo/logo.svg') }}" alt="Logo" />
                 <img class="hidden dark:block" src="{{ asset('images/logo/logo-dark.svg') }}" alt="Logo" />
             </a>
@@ -62,8 +62,8 @@
                 <div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
                     <a class="flex items-center text-gray-700 dark:text-gray-400" href="#"
                         @click.prevent="dropdownOpen = ! dropdownOpen">
-                        <span class="mr-3 h-11 w-11 overflow-hidden rounded-full">
-                            <img src="{{ asset('images/user/avatar.png') }}" alt="User" />
+                        <span class="mr-3 h-11 w-11 overflow-hidden ">
+                            <img src="{{ asset('images/user/Admin.png') }}" alt="User" />
                         </span>
                         <span class="text-theme-sm mr-1 block font-medium">
                             {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }} </span>
