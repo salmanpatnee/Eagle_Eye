@@ -206,11 +206,11 @@ layer(base);
 }
 
 @utility menu-item-icon-active {
-    @apply fill-black;
+    @apply fill-brand-950;
 }
 
 @utility menu-item-icon-inactive {
-    @apply fill-white group-hover:fill-gray-700;
+    @apply group-hover:fill-brand-950 fill-white;
 }
 
 @utility menu-item-arrow {
