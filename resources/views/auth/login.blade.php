@@ -33,14 +33,16 @@
                             <div class="space-y-5">
                                 <!-- Email -->
                                 <div>
-                                    <x-form.label for="username" label="Username" required="true" :rtl="['label' => 'اسم المستخدم']" />
+                                    <x-form.label for="username" label="Username" required="true"
+                                        label_ar="اسم المستخدم" />
                                     <x-form.input name="username" required="true" />
                                     <x-form.error field="username" />
                                 </div>
                                 <!-- Password -->
                                 <div>
 
-                                    <x-form.label for="password" label="Password" required="true" :rtl="['label' => 'أدخل كلمة المرور']" />
+                                    <x-form.label for="password" label="Password" required="true"
+                                        label_ar="أدخل كلمة المرور" />
 
                                     <div x-data="{ showPassword: false }" class="relative">
 
