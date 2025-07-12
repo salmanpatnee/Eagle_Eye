@@ -34,20 +34,10 @@
                  </h3>
                  <ul class="flex flex-col gap-4 mb-6">
 
-                     <x-menu-item route_name="organizations.index" label="Organizations" :active="true" />
-                     <x-menu-item route_name="locations.index" label="Locations" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Departments" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Sub-Departments" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Classification" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Category" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Sub-Category" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Best Practices" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Domains" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Sub-Domains" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Owners" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Owner Roles" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Custodians" :active="false" />
-                     <x-menu-item route_name="locations.index" label="Custodian Roles" :active="false" />
+                     <x-sidebar-menu-item route_name="organizations.index" label_ar="إعداد الجهة"
+                         label="Organizations" />
+                     <x-sidebar-menu-item route_name="locations.index" label_ar="إعداد الجهة" label="Locations" />
+
 
 
                      <!-- Menu Item Pages -->
