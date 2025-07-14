@@ -4,11 +4,12 @@
     'label' => '',
     'label_ar' => '',
     'route_name' => '',
+    'route_param' => '',
 ])
 
 
 @if ($route_name)
-    <a href="{{ route($route_name) }}" {{ $attributes->merge(['class' => 'inline-block']) }}>
+    <a href="{{ route($route_name, $route_param) }}" {{ $attributes->merge(['class' => 'inline-block']) }}>
 @endif
 <button type="{{ $type }}"
     {{ $attributes->merge(['class' => "bg-brand-950 font-medium hover:bg-brand-600 inline-flex items-center p-3 rounded-lg shadow-theme-xs text-sm text-white transition $class"]) }}>
