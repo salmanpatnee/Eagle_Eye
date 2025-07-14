@@ -90,15 +90,8 @@ class OrganizationController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy(Organization $organization)
     {
-
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $organization = Organization::findOrFail($attributes['record']);
-
         if ($organization->organization_logo) {
             Storage::disk('public')->delete($organization->organization_logo);
         }
@@ -108,4 +101,23 @@ class OrganizationController extends Controller
         return redirect(route('organizations.index'))
             ->with('success', 'Organization deleted successfully.');
     }
+
+    // public function destroy(Request $request)
+    // {
+
+    //     $attributes =  $request->validate([
+    //         'record' => ['required'],
+    //     ]);
+
+    //     $organization = Organization::findOrFail($attributes['record']);
+
+    //     if ($organization->organization_logo) {
+    //         Storage::disk('public')->delete($organization->organization_logo);
+    //     }
+
+    //     $organization->delete();
+
+    //     return redirect(route('organizations.index'))
+    //         ->with('success', 'Organization deleted successfully.');
+    // }
 }

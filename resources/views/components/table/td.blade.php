@@ -4,7 +4,7 @@
 
 <td class="px-3 py-3 whitespace-nowrap">
     @if ($action_col === 'true')
-        <div class="flex gap-2">
+        <div class="flex">
             {{ $slot }}
         </div>
     @else

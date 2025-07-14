@@ -331,7 +331,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/organizations', 'store')->name('organizations.store');
         Route::get('/organizations/edit/{organization}', 'edit')->name('organizations.edit');
         Route::put('/organizations/{organization}', 'update')->name('organizations.update');
-        Route::delete('/organizations', 'destroy')->name('organizations.destroy');
+        Route::delete('/organizations/{organization}', 'destroy')->name('organizations.destroy');
     });
 
 
@@ -655,7 +655,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // ------------Vulnerability Register--------------
-     Route::controller(VulnerabilityRegisterController::class)->group(function () {
+    Route::controller(VulnerabilityRegisterController::class)->group(function () {
         Route::get('/vulnerability-register', 'index')->name('va.register');
         Route::get('/vulnerability-register-excel', 'generateExcelReport')->name('va.register.excel');
     });

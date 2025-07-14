@@ -28,6 +28,7 @@
                 <li class="text-sm text-gray-800 dark:text-white/90">
                     @yield('title')
                 </li>
+
             </ol>
         </nav>
     </div>

@@ -8,7 +8,7 @@
             <h1 class="font-medium text-lg text-center sm:text-left"> {{ $title }}</h1>
         @endif
     </div>
-    <div class="w-full sm:w-auto flex justify-center sm:justify-end">
+    <div class="w-full sm:w-auto flex justify-center sm:justify-end gap-2">
         {{ $slot }}
     </div>
 </div>
