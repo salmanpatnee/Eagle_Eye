@@ -36,7 +36,7 @@
                                     <x-form.label for="username" label="Username" required="true"
                                         label_ar="اسم المستخدم" />
                                     <x-form.input name="username" required="true" />
-                                    <x-form.error field="username" />
+                                    <x-form.error name="username" />
                                 </div>
                                 <!-- Password -->
                                 <div>
@@ -67,7 +67,7 @@
                                                     fill="#98A2B3" />
                                             </svg>
                                         </span>
-                                        <x-form.error field="password" />
+                                        <x-form.error name="password" />
                                     </div>
                                 </div>
 
