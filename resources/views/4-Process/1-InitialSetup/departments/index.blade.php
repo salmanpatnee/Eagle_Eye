@@ -33,5 +33,11 @@
                 @endforeach
             </x-table.tbody>
         </x-table.table>
+
+        <x-pagination>
+            {{ $departments->links() }}
+        </x-pagination>
+
+
     </div>
 @endsection

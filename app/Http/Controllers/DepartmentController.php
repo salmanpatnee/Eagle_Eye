@@ -12,7 +12,7 @@ class DepartmentController extends Controller
 
     public function index()
     {
-        $departments = Department::select('id', 'department_id', 'department_name', 'location_id')->with('location')->get();
+        $departments = Department::select('id', 'department_id', 'department_name', 'location_id')->with('location')->paginate(20);
 
         return view('4-Process.1-InitialSetup.departments.index', compact('departments'));
     }
@@ -73,7 +73,6 @@ class DepartmentController extends Controller
 
     public function destroy(Department $department)
     {
-
         // Check if the department has subDepartments before deleting
         if ($department->subDepartments()->exists()) {
             return redirect(route('departments.index'))
