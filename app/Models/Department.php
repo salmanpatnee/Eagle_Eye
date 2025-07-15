@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
-    
-    protected $table = 'department_table'; 
+
+    protected $table = 'department_table';
     public $timestamps = false;
     protected $guarded = [];
 
@@ -22,7 +22,6 @@ class Department extends Model
     public function subDepartments()
     {
         // 1 to many
-        return $this->hasMany(SubDepartment::class, 'sub_department_id', 'sub_department_id');
+        return $this->hasMany(SubDepartment::class, null, 'department_id');
     }
-
 }

@@ -77,10 +77,10 @@
                             </a>
                         @endif
                         <button type="button" id="btnDelete"
-                        class="{{ request()->routeIs('departments.edit') ? 'MoreButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">يمسح</p>
-                        <p class="ButtonEngTxt">Delete</p>
-                    </button>
+                            class="{{ request()->routeIs('departments.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                            <p class="ButtonArbTxt">يمسح</p>
+                            <p class="ButtonEngTxt">Delete</p>
+                        </button>
 
                     </div>
                 </div>
@@ -126,11 +126,11 @@
                         </div>
                 </table>
             </form>
-            <form method="POST" action="{{ route('departments.destroy') }}" id="delete_form">
+            {{-- <form method="POST" action="{{ route('departments.destroy') }}" id="delete_form">
                 <input type="hidden" name="record" value="{{ $department?->id }}">
                 @csrf
                 @method('DELETE')
-            </form>
+            </form> --}}
         </div>
     </div>
 

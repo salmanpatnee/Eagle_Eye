@@ -12,10 +12,7 @@ class DepartmentController extends Controller
 
     public function index()
     {
-        $departments = Department::select('d.id', 'd.department_id', 'd.department_name', 'l.location_name')
-            ->from('department_table as d')
-            ->leftJoin('location_table as l', 'd.location_id', '=', 'l.location_id')
-            ->get();
+        $departments = Department::select('id', 'department_id', 'department_name', 'location_id')->with('location')->get();
 
         return view('4-Process.1-InitialSetup.departments.index', compact('departments'));
     }
@@ -74,36 +71,18 @@ class DepartmentController extends Controller
             ->with('success', 'Department saved successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Department $department)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
 
-        Department::where('id', $attributes['record'])->delete();
+        // Check if the department has subDepartments before deleting
+        if ($department->subDepartments()->exists()) {
+            return redirect(route('departments.index'))
+                ->with('error', "Department {$department->department_name} cannot be deleted due to existing sub-departments.");
+        }
+
+        $department->delete();
 
         return redirect(route('departments.index'))
-        ->with('success', 'Department(s) deleted successfully.');
-
-        // $departmentsIds =  $request->validate([
-        //     'departments' => ['required', 'array'],
-        // ]);
-
-        // try {
-        //     Department::whereIn('id', $departmentsIds['departments'])->each(function ($department) {
-        //         if ($department->subDepartments()->exists()) {
-
-        //             throw new \Exception("Department {$department->department_name} cannot be deleted due to existing dependencies.");
-        //         }
-        //         $department->delete();
-        //     });
-
-        //     return redirect(route('departments.index'))
-        //         ->with('success', 'Department(s) deleted successfully.');
-        // } catch (\Exception $e) {
-
-        //     return redirect(route('departments.index'))
-        //         ->with('error', $e->getMessage());
-        // }
+            ->with('success', 'Department deleted successfully.');
     }
 }

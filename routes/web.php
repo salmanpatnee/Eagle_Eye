@@ -353,7 +353,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/departments', 'store')->name('departments.store');
         Route::get('/departments/edit/{department}', 'edit')->name('departments.edit');
         Route::put('/department/{department}', 'update')->name('departments.update');
-        Route::delete('/departments', 'destroy')->name('departments.destroy');
+        Route::delete('/departments/{department}', 'destroy')->name('departments.destroy');
     });
 
 
