@@ -83,38 +83,18 @@ class LocationController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy(Location $location)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
+        // Check if the department has subDepartments before deleting
 
-        Location::where('id', $attributes['record'])->delete();
+        if ($location->departments()->exists()) {
+            return redirect(route('locations.index'))
+                ->with('error', "Location {$location->location_name} cannot be deleted due to existing departments.");
+        }
 
-        
+        $location->delete();
+
         return redirect(route('locations.index'))
-        ->with('success', 'Location(s) deleted successfully.');
-
-
-        // $locationIds = $request->validate([
-        //     'locations' => ['required', 'array'],
-        // ]);
-
-        // try {
-        //     Location::whereIn('id', $locationIds['locations'])->each(function ($location) {
-        //         if ($location->departments()->exists()) {
-        //             throw new \Exception("Location {$location->location_name} cannot be deleted due to existing dependencies.");
-        //         }
-        //         $location->delete();
-        //     });
-
-        //     return redirect(route('locations.index'))
-        //         ->with('success', 'Location(s) deleted successfully.');
-
-        // } catch (\Exception $e) {
-            
-        //     return redirect(route('locations.index'))
-        //         ->with('error', $e->getMessage());
-        // }
+            ->with('success', 'Location deleted successfully.');
     }
 }

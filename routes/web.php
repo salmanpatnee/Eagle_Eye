@@ -342,7 +342,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/locations', 'store')->name('locations.store');
         Route::get('/locations/edit/{location}', 'edit')->name('locations.edit');
         Route::put('/location/{location}', 'update')->name('locations.update');
-        Route::delete('/locations', 'destroy')->name('locations.destroy');
+        Route::delete('/locations/{location}', 'destroy')->name('locations.destroy');
     });
 
 
