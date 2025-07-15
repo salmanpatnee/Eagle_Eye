@@ -23,8 +23,7 @@
         </option>
         @foreach ($data as $row)
             <option value="{{ $row->$id_key }}" class="text-gray-700" @if (old($name, $value) == $row->$id_key) selected @endif>
-                {{ $row->$id_key }} {{ $row->$value_key }}
-            </option>
+                {{ $row->$id_key }} {{ $row->$value_key }}</option>
         @endforeach
     </select>
 
