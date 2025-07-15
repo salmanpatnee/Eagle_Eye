@@ -14,6 +14,18 @@
                     class="min-h-screen rounded-lg border border-gray-200 bg-white p-4  dark:border-gray-800 dark:bg-white/[0.03]">
                     <div class="mx-auto w-full">
 
+
+                        @if (session('error'))
+                            <x-alert-error>
+                                {{ session('error') }}
+                            </x-alert-error>
+                        @endif
+                        @if (session('success'))
+                            <x-alert-success>
+                                {{ session('success') }}
+                            </x-alert-success>
+                        @endif
+
                         <div
                             class="relative max-w-full overflow-x-auto   rounded-lg border border-gray-200 bg-white pt-4 dark:border-gray-800 dark:bg-white/[0.03]">
                             @yield('content')
