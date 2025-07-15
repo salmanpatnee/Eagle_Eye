@@ -48,8 +48,8 @@ class MainDomainController extends Controller
 
         $domain = Domain::create($attributes);
 
-        if ($bestPractices && $bestPracticesArray = json_decode($bestPractices, true)) {
-            $domain->bestPractices()->attach($bestPracticesArray);
+        if (count($bestPractices)) {
+            $domain->bestPractices()->attach($bestPractices);
         }
 
         return redirect(route('domains.index'))
@@ -64,6 +64,7 @@ class MainDomainController extends Controller
         $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $bestPracticeIds =  $domain->bestPractices->pluck('best_practices_id')->toArray();
 
+        return $domain;
 
         return view('4-Process.1-InitialSetup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
     }
@@ -83,8 +84,8 @@ class MainDomainController extends Controller
 
         $domain->update($attributes);
 
-        if ($bestPractices && $bestPracticesArray = json_decode($bestPractices, true)) {
-            $domain->bestPractices()->sync($bestPracticesArray);
+        if (count($bestPractices)) {
+            $domain->bestPractices()->sync($bestPractices);
         }
 
         return redirect(route('domains.index'))
