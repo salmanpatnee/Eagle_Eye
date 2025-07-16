@@ -6,7 +6,12 @@
 
 <script>
     $(document).ready(function() {
-        $('.js-example-basic-single').select2();
+        $('.multiselect').select2();
+    }).on('select2:open', function() {
+        // Apply Tailwind classes to the ul
+        $('.select2-results__options').addClass(
+            'shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden'
+        );
     });
 </script>
 </body>
