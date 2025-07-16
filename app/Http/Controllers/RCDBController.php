@@ -76,7 +76,7 @@ class RCDBController extends Controller
                 'rd.implementation_status as status',
                 'o.owner_id',
                 'o.owner_name',
-                DB::raw('GROUP_CONCAT(CONCAT("<a href=\'/custodian-table/", c.custodian_name_id, "\' >",c.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
+                DB::raw('GROUP_CONCAT(CONCAT("<a href=\'/custodians/", c.custodian_name_id, "\' >",c.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
             )
             ->whereIn('rd.id', function ($query) {
                 $query->select(DB::raw('MAX(id)'))
@@ -146,14 +146,14 @@ class RCDBController extends Controller
             ')
             ->first();
 
-        
-            $controlDetails = ControlMaster::select(
+
+        $controlDetails = ControlMaster::select(
             'control_master_table.control_id',
             'cad.control_assessment_id',
             'cad.control_implementation_status',
             'o.owner_name',
             'o.owner_id',
-            DB::raw('GROUP_CONCAT(CONCAT("<a href=\'/custodian-table/", cn.custodian_name_id, "\' >", cn.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
+            DB::raw('GROUP_CONCAT(CONCAT("<a href=\'/custodians/", cn.custodian_name_id, "\' >", cn.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
             DB::raw('(SELECT GROUP_CONCAT(CONCAT("<a href=\'/storage/files/", f.path, "\' >", "View Attachments", "</a>") SEPARATOR "<br>")
                           FROM evidence_vs_control_table AS evc
                           JOIN evidence_table AS e ON e.evidence_id = evc.evidence_id

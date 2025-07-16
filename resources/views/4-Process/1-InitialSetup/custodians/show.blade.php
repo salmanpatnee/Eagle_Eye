@@ -43,21 +43,21 @@
                     <p class="PageHeadEngTxt">Custodian Registration</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="/custodian-list" class="MoreButton">
+                    <a href="/custodians" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('custodian.create') }}"
+                    <a href="{{ route('custodians.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
-                    <a href="{{ route('custodian.edit', $custodian->custodian_name_id) }}"
+                    <a href="{{ route('custodians.edit', $custodian->custodian_name_id) }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('custodian.delete') }}" id="deleteForm">
+                    {{-- <form method="POST" action="{{ route('custodians.destroy') }}" id="deleteForm">
                         <input type="hidden" name="record" value="{{ $custodian->id }}">
                         <button type="button" id="btnDelete"
                             class="{{ auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}">
@@ -66,7 +66,7 @@
                         </button>
                         @csrf
                         @method('DELETE')
-                    </form>
+                    </form> --}}
                 </div>
             </div>
             <table cellspacing="0">

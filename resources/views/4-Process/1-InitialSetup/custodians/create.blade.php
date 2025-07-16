@@ -35,24 +35,24 @@
 
         @include('4-Process/1-InitialSetup/_partials/sidebar')
         <!-- SIDEBAR -->
-    
-    
-    
+
+
+
         <!-- CONTENT -->
         <div class="IndiTable">
-    
+
             <div class="TableHeading">
                 <div class="PageHead">
                     <p class="PageHeadArbTxt">تسجيل الوصي</p>
                     <p class="PageHeadEngTxt">Custodian Registration</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="/custodian-list" class="MoreButton">
+                    <a href="/custodians" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    @if (request()->routeIs('custodian.edit'))
-                        <a href="{{ route('custodian.create') }}" class="MoreButton">
+                    @if (request()->routeIs('custodians.edit'))
+                        <a href="{{ route('custodians.create') }}" class="MoreButton">
                             <p class="ButtonArbTxt">يضيف</p>
                             <p class="ButtonEngTxt">Add</p>
                         </a>
@@ -70,28 +70,29 @@
                             <p class="ButtonEngTxt">Update</p>
                         </a>
                     @endif
-                    
+
                     <button type="button" onclick="showDeleteModal()"
-                        class="{{ request()->routeIs('custodian.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                        class="{{ request()->routeIs('custodians.edit') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يمسح</p>
                         <p class="ButtonEngTxt">Delete</p>
                     </button>
                 </div>
             </div>
-            <form method="POST" action="{{ route('custodian.delete') }}" id="delete_form">
+            {{-- <form method="POST" action="{{ route('custodians.destroy') }}" id="delete_form">
                 <input type="hidden" name="record" value="{{ $custodian?->id }}">
                 @csrf
                 @method('DELETE')
-            </form>
-    
-            <form id="form" action="{{ isset($custodian) ? route('custodian.update', $custodian->id) : route('custodian.store') }}"
+            </form> --}}
+
+            <form id="form"
+                action="{{ isset($custodian) ? route('custodians.update', $custodian->id) : route('custodians.store') }}"
                 method="POST">
                 @csrf
                 @if (isset($custodian))
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $custodian->id }}">
                 @endif
-    
+
                 <table cellspacing="0">
                     <div class="ContentTableSection">
                         <div class="ContentTable">
@@ -114,8 +115,8 @@
                                     <p class="FieldHeadEngTxt">Custodian Name</p>
                                     <p class="FieldHeadArbTxt">اسم الوصي</p>
                                 </div>
-                                <p><input type="text" name="custodian_name_name" id="custodian_name_name" class="sh-tx"
-                                        placeholder="Enter Custodian Name"
+                                <p><input type="text" name="custodian_name_name" id="custodian_name_name"
+                                        class="sh-tx" placeholder="Enter Custodian Name"
                                         value="{{ old('custodian_name_name', $custodian?->custodian_name_name) }}"
                                         required>
                                     @error('custodian_name_name')
@@ -145,9 +146,9 @@
                                     <p class="FieldHeadEngTxt">Custodian Contact Number</p>
                                     <p class="FieldHeadArbTxt">رقم الجوال الوصي</p>
                                 </div>
-                                <p style="margin-top: 22px;"><input type="text" name="custodian_name_contact_number"
-                                        id="custodian_name_contact_number" class="sh-tx"
-                                        placeholder="Enter Custodian Contact Number"
+                                <p style="margin-top: 22px;"><input type="text"
+                                        name="custodian_name_contact_number" id="custodian_name_contact_number"
+                                        class="sh-tx" placeholder="Enter Custodian Contact Number"
                                         value="{{ old('custodian_name_contact_number', $custodian?->custodian_name_contact_number) }}">
                                     @error('custodian_name_contact_number')
                                         <span class="text-danger">{{ $message }}</span>
@@ -178,11 +179,11 @@
                                 <p>
                                     <select name="custodian_role_id" id="custodian_role_id" class="sh-tx" required>
                                         <option value="">Select Option</option>
-                                        @foreach ($custodianrole as $custodianroledata)
-                                            <option value="{{ $custodianroledata->custodian_role_id }}"
-                                                {{ $custodianroledata->custodian_role_id == old('custodian_role_id', $custodian?->custodian_role_id) ? 'selected' : '' }}>
-                                                {{ $custodianroledata->custodian_role_id }}
-                                                {{ $custodianroledata->custodian_role_title }}
+                                        @foreach ($custodianRoles as $custodianRole)
+                                            <option value="{{ $custodianRole->custodian_role_id }}"
+                                                {{ $custodianRole->custodian_role_id == old('custodian_role_id', $custodian?->custodian_role_id) ? 'selected' : '' }}>
+                                                {{ $custodianRole->custodian_role_id }}
+                                                {{ $custodianRole->custodian_role_title }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -203,9 +204,10 @@
         function goBack() {
             window.history.back();
         }
+
         function showDeleteModal() {
-    window.deleteConfirmationModal.show(document.getElementById('delete_form'));
-}
+            window.deleteConfirmationModal.show(document.getElementById('delete_form'));
+        }
     </script>
 </body>
 

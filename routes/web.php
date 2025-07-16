@@ -485,13 +485,13 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::controller(CustodianController::class)->group(function () {
-        Route::get('/custodian-list', 'index')->name('custodian.index');
-        Route::get('/custodian-table/{custodian:custodian_name_id}', 'show')->name('custodian.show');
-        Route::get('/custodian-input', 'create')->name('custodian.create');
-        Route::get('/custodian/edit/{id}', 'edit')->name('custodian.edit');
-        Route::post('/custodian', 'store')->name('custodian.store');
-        Route::put('/custodian/{custodian}', 'update')->name('custodian.update');
-        Route::delete('/custodian/delete', 'delete')->name('custodian.delete');
+        Route::get('/custodians', 'index')->name('custodians.index');
+        Route::get('/custodians/create', 'create')->name('custodians.create');
+        Route::get('/custodians/{custodian}', 'show')->name('custodians.show');
+        Route::get('/custodians/edit/{custodian}', 'edit')->name('custodians.edit');
+        Route::post('/custodians', 'store')->name('custodians.store');
+        Route::put('/custodians/{custodian}', 'update')->name('custodians.update');
+        Route::delete('/custodians/{custodian}', 'delete')->name('custodians.destroy');
     });
 
 
@@ -1739,8 +1739,8 @@ Route::get('/upload-owners', [DataUploaderController::class, 'createOwner'])->na
 Route::post('/upload-owners', [DataUploaderController::class, 'uploadOwners'])->name('upload.owners.store');
 
 // Custodian Data Uploader
-Route::get('/upload-custodians', [DataUploaderController::class, 'createCustodian'])->name('upload.custodian.create');
-Route::post('/upload-custodians', [DataUploaderController::class, 'uploadCustodian'])->name('upload.custodian.store');
+Route::get('/upload-custodians', [DataUploaderController::class, 'createCustodian'])->name('upload.custodians.create');
+Route::post('/upload-custodians', [DataUploaderController::class, 'uploadCustodian'])->name('upload.custodians.store');
 
 // Artifact Data Uploader
 Route::get('/upload-artifacts', [DataUploaderController::class, 'createArtifact'])->name('upload.artifact.create');

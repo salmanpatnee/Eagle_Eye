@@ -66,7 +66,7 @@ class OCDController extends Controller
 
         $heatmap = $this->reportService->getHeatmapData();
 
-        
+
 
         return view(
             '4-Process/18-Reporting/3-Dashboard/index',
@@ -140,7 +140,7 @@ class OCDController extends Controller
                 'o.owner_id',
                 DB::raw('COALESCE(cad_latest.control_implementation_status, "Not Implemented") as status'),
                 'cad_latest.control_assessment_id',
-                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodian-table/", ct.custodian_name_id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
+                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", ct.custodian_name_id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
                 // DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/storage/files/", af.path, "\' >", "View Attachments", "</a>") SEPARATOR "<br>") as evidences')
             )
             ->where('cad.control_maturity_level', $level)->where('c.control_id', 'LIKE', 'SAMA-CSF-%')
@@ -341,7 +341,7 @@ class OCDController extends Controller
                 'o.owner_id',
                 DB::raw('COALESCE(cad_latest.control_implementation_status, "Not Implemented") as status'),
                 'cad_latest.control_assessment_id',
-                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodian-table/", ct.custodian_name_id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
+                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", ct.custodian_name_id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
                 DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/storage/files/", af.path, "\' >", "View Attachments", "</a>") SEPARATOR "<br>") as evidences')
             )
             ->where('d.sub_domain_id', $subdomainId)
@@ -401,7 +401,7 @@ class OCDController extends Controller
                 'owner_table.owner_name',
                 'c.control_id',
                 DB::raw('COALESCE(cad.control_implementation_status, "Not Implemented") as status'),
-                DB::raw('GROUP_CONCAT(CONCAT("<a href=\'/custodian-table/", cn.custodian_name_id, "\' >",cn.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
+                DB::raw('GROUP_CONCAT(CONCAT("<a href=\'/custodians/", cn.custodian_name_id, "\' >",cn.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
                 DB::raw('COALESCE(cad.control_assessment_id, "#") as control_assessment_id')
                 // DB::raw('GROUP_CONCAT(cn.custodian_name_name) as custodians')
             )
@@ -683,7 +683,7 @@ class OCDController extends Controller
                 'la.risk_assessment_id',
                 'o.owner_name',
                 'o.owner_id',
-                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodian-table/", cu.custodian_name_id, "\' >",cu.custodian_name_name, "</a>") SEPARATOR "<br>") AS custodians')
+                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", cu.custodian_name_id, "\' >",cu.custodian_name_name, "</a>") SEPARATOR "<br>") AS custodians')
 
             )
             ->get();
@@ -803,7 +803,7 @@ class OCDController extends Controller
             DB::raw('COALESCE(cad.control_implementation_status, "Not Implemented") as status'),
             'owner_table.owner_name'
         )
-            ->selectRaw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodian-table/", custodian_name_table.custodian_name_id, "\' >", custodian_name_table.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
+            ->selectRaw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", custodian_name_table.custodian_name_id, "\' >", custodian_name_table.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
             ->selectRaw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/storage/files/", artifact_attachments.path, "\' >", "View Attachments", "</a>") SEPARATOR "<br>") as evidences')
             ->join('control_master_table_vs_sub_domain_table', 'control_master_table.control_id', '=', 'control_master_table_vs_sub_domain_table.control_id')
             ->join('sub_domain_table', 'control_master_table_vs_sub_domain_table.sub_domain_id', '=', 'sub_domain_table.sub_domain_id')
@@ -887,7 +887,7 @@ class OCDController extends Controller
                 o.owner_id,
                 o.owner_name,
                 GROUP_CONCAT(DISTINCT CONCAT(
-                    "<a href=\'/custodian-table/", cn.custodian_name_id, "\' >", cn.custodian_name_name, "</a>"
+                    "<a href=\'/custodians/", cn.custodian_name_id, "\' >", cn.custodian_name_name, "</a>"
                 ) SEPARATOR "<br>") AS custodians
             ')
             ->join('asset_group_table as g', 'a.asset_group_id', '=', 'g.asset_group_id')
@@ -1007,14 +1007,14 @@ class OCDController extends Controller
         o.owner_id as asset_owner_id, 
         o.owner_name as asset_owner_name,
         GROUP_CONCAT(DISTINCT CONCAT(
-            "<a href=\'/custodian-table/", cu.custodian_name_id, "\'>", cu.custodian_name_name, "</a>"
+            "<a href=\'/custodians/", cu.custodian_name_id, "\'>", cu.custodian_name_name, "</a>"
         ) SEPARATOR "<br>") as asset_custodians,
         r.risk_id, 
         r.risk_name, 
         ro.owner_id as risk_owner_id, 
         ro.owner_name as risk_owner_name,
         GROUP_CONCAT(DISTINCT CONCAT(
-            "<a href=\'/custodian-table/", rcu.custodian_name_id, "\'>", rcu.custodian_name_name, "</a>"
+            "<a href=\'/custodians/", rcu.custodian_name_id, "\'>", rcu.custodian_name_name, "</a>"
         ) SEPARATOR "<br>") as risk_custodians,
         COALESCE(rad.implementation_status, "Open")  AS latest_status
     ')

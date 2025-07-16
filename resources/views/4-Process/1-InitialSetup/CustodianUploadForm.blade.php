@@ -50,7 +50,7 @@
 
     <!-- CONTENT -->
     <div class="IndiTable">
-        <form action="{{ route('upload.custodian.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('upload.custodians.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <h3> <a href="{{ asset('templates/custodian_name_template.xlsx') }}" download="">Download the
                     template file</a> </h3>

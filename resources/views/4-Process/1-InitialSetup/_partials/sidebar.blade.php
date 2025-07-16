@@ -122,8 +122,8 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('custodian.index') || request()->routeIs('custodian.show') || request()->routeIs('custodian.edit') || request()->routeIs('custodian.create') || request()->routeIs('upload.custodian.create') ? 'active' : '' }}">
-            <a href="/custodian-list">
+            class="{{ request()->routeIs('custodians.index') || request()->routeIs('custodians.show') || request()->routeIs('custodians.edit') || request()->routeIs('custodians.create') || request()->routeIs('upload.custodians.create') ? 'active' : '' }}">
+            <a href="/custodians">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>تسجيل الوصي</h3>

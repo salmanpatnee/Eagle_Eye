@@ -20,8 +20,8 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('custodian.index') || request()->routeIs('custodians.show') ? 'active' : '' }}">
-            <a href="/custodian-list">
+            class="{{ request()->routeIs('custodians.index') || request()->routeIs('custodians.show') ? 'active' : '' }}">
+            <a href="/custodians">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>تسجيل الوصي</h3>

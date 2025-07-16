@@ -310,7 +310,7 @@
                                                         // html +=
                                                         //     `<td> <a href="/owners/{owner}/${ownerNameId}" >${owner}</a></td>`;
                                                         // html +=
-                                                        //     `<td><a href="/custodian-table/${row.custodian_name_id}" >${row.custodians}</a></td>`;
+                                                        //     `<td><a href="/custodians/${row.custodian_name_id}" >${row.custodians}</a></td>`;
                                                         html += "</tr>";
                                                         i++;
                                                     });

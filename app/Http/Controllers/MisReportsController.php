@@ -82,7 +82,7 @@ class MisReportsController extends Controller
                 DB::raw("COALESCE(latest_cad.control_implementation_status, 'Not Implemented') AS status"),
                 'o.owner_name',
                 'o.owner_id', // Adding owner_name to the SELECT list
-                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/custodian-table/', cnt.custodian_name_id, '\" style=\"color: black;\">', cnt.custodian_name_name, '</a>') SEPARATOR '<br>') AS custodian_links"),
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/custodians/', cnt.custodian_name_id, '\" style=\"color: black;\">', cnt.custodian_name_name, '</a>') SEPARATOR '<br>') AS custodian_links"),
                 DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/risk-identification-table/', rm.risk_id, '\" style=\"color: black;\">', rm.risk_name, '</a>') SEPARATOR '<br>') AS risks")
                 // Wrap risks in anchor tags with <br> separation
             )
@@ -170,7 +170,7 @@ class MisReportsController extends Controller
                 'o.owner_name',
                 'o.owner_id',  // Risk owner name
                 DB::raw("COALESCE(rad.implementation_status, 'Open') as status"),
-                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/custodian-table/', cnt.custodian_name_id, '\" style=\"color: black;\">', cnt.custodian_name_name, '</a>') SEPARATOR '<br>') AS custodian_links"), // Distinct custodian names with links
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/custodians/', cnt.custodian_name_id, '\" style=\"color: black;\">', cnt.custodian_name_name, '</a>') SEPARATOR '<br>') AS custodian_links"), // Distinct custodian names with links
                 DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/control-identification-table/', c.control_id, '\" >', c.control_id, ' - ', c.control_name, '</a>') SEPARATOR '<br>') AS control_links")
                 // Distinct concatenation of control_id and control_name with links
             )
@@ -251,7 +251,7 @@ class MisReportsController extends Controller
                 'ag.asset_group_name',
                 'o.owner_id',
                 'o.owner_name',
-                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodian-table/", c.custodian_role_id, "-", c.custodian_role_title, "\' style=\"color: black;\">", c.custodian_role_title, "</a>") SEPARATOR "<br>") as custodians'),
+                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", c.custodian_role_id, "-", c.custodian_role_title, "\' style=\"color: black;\">", c.custodian_role_title, "</a>") SEPARATOR "<br>") as custodians'),
                 DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/risk-identification-table/", r.risk_id, "\' style=\"color: black;\">",  r.risk_name, "</a>") SEPARATOR "<br>") as risks'),
                 DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/control-identification-table/', cm.control_id, '\" >', cm.control_id, ' - ', cm.control_name, '</a>') SEPARATOR '<br>') AS controls")
                 // DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/control-identification-table/", cm.control_id, "\' >",  cm.control_name, "</a>") SEPARATOR "<br>") as controls')
