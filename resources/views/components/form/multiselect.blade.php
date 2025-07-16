@@ -16,14 +16,17 @@
     <select id="{{ $name }}" name="{{ $name }}" multiple @if ($required) required @endif
         {{ $attributes->merge([
             'class' =>
-                'shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10  h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden',
+                'multiselect shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10  h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden',
         ]) }}>
         <option value="" class="text-gray-700">
             Select Option
         </option>
         @foreach ($data as $row)
-            <option value="{{ $row->$id_key }}" class="text-gray-700" @if (old($name, $value) == $row->$id_key) selected @endif>
-                {{ $row->$id_key }} {{ $row->$value_key }}</option>
+            <option value="{{ $row->$id_key }}" class="text-gray-700" @if (in_array($row->$id_key, old($name, $value))) selected @endif>
+                {{ $row->$id_key }} {{ $row->$value_key }}
+            </option>
+            {{-- <option value="{{ $row->$id_key }}" class="text-gray-700" @if (old($name, $value) == $row->$id_key) selected @endif>
+                {{ $row->$id_key }} {{ $row->$value_key }}</option> --}}
         @endforeach
     </select>
 

@@ -38,18 +38,9 @@
                     </div>
 
                     <div>
-
                         <x-form.multiselect label="Best Practice" label_ar="أفضل الممارسات" name="bestPractices[]"
-                            class="multiselect" required="true" placeholder="Enter Classification" :value="$domain?->bestPractices"
-                            :data="$bestPractices" id_key="best_practices_id" value_key="best_practices_name" />
-
-                        {{-- <select
-                            class="js-example-basic-single shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10  h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden"
-                            name="state" multiple="multiple" class="">
-                            <option value="AL">Alabama</option>
-                            ...
-                            <option value="WY">Wyoming</option>
-                        </select> --}}
+                            required="true" :value="$bestPracticeIds" :data="$bestPractices" id_key="best_practices_id"
+                            value_key="best_practices_name" />
                     </div>
                 </x-form.grid-col>
 

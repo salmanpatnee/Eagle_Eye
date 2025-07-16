@@ -29,8 +29,8 @@ class MainDomainController extends Controller
         $domain = null;
         $classifications = Classification::select('classification_id', 'classification_name')->get();
         $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
-
-        return view('4-Process.1-InitialSetup.domains.create', compact('domain', 'classifications', 'bestPractices'));
+        $bestPracticeIds = [];
+        return view('4-Process.1-InitialSetup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
     }
 
     public function store(Request $request)
@@ -48,6 +48,7 @@ class MainDomainController extends Controller
 
         $domain = Domain::create($attributes);
 
+
         if (count($bestPractices)) {
             $domain->bestPractices()->attach($bestPractices);
         }
@@ -60,11 +61,10 @@ class MainDomainController extends Controller
     {
         $domain->load('bestPractices');
 
+
         $classifications = Classification::select('classification_id', 'classification_name')->get();
         $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $bestPracticeIds =  $domain->bestPractices->pluck('best_practices_id')->toArray();
-
-
 
         return view('4-Process.1-InitialSetup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
     }
