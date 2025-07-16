@@ -10,7 +10,7 @@
 
         <x-table.table>
             <x-table.thead>
-                <x-table.th label="Serial Number" label_ar="الرقم التسلسلي" />
+                <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Department ID" label_ar="رمز القسم" />
                 <x-table.th label="Department Name" label_ar="اسم القسم" />
                 <x-table.th label="Location Name" label_ar="اسم الموقع" />

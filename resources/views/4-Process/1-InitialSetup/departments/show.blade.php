@@ -59,7 +59,7 @@
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('departments.destroy') }}" id="deleteForm">
+                    {{-- <form method="POST" action="{{ route('departments.destroy') }}" id="deleteForm">
                         <input type="hidden" name="record" value="{{ $department->id }}">
                         <button type="button" id="btnDelete"
                             class="{{ auth()->user()->can('manage-initial-setup') ? 'DeleteButton' : 'DisabledButton' }}">
@@ -68,7 +68,7 @@
                         </button>
                         @csrf
                         @method('DELETE')
-                    </form>
+                    </form> --}}
                 </div>
             </div>
             <table cellspacing="0">
@@ -107,12 +107,12 @@
                             <p class="sh-tx">{{ $department->location?->location_name }}</p>
                         </div>
                         <div class="column">
-                            
+
                         </div>
                     </div>
                 </div>
-              
-                
+
+
             </table>
         </div>
 
