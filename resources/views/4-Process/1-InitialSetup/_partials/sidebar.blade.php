@@ -132,8 +132,8 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('custodianrole.index') || request()->routeIs('custodianrole.show') || request()->routeIs('custodianrole.create') || request()->routeIs('custodianrole.edit') ? 'active' : '' }}">
-            <a href="/custodian-role-list">
+            class="{{ request()->routeIs('custodian-roles.index') || request()->routeIs('custodian-roles.show') || request()->routeIs('custodian-roles.create') || request()->routeIs('custodian-roles.edit') ? 'active' : '' }}">
+            <a href="/custodian-roles">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>دور الوصي</h3>

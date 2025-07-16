@@ -472,13 +472,13 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::controller(CustodianRoleController::class)->group(function () {
-        Route::get('/custodian-role-list', 'index')->name('custodianrole.index');
-        Route::get('/custodian-role-table/{owner_role_id}', 'show')->name('custodianrole.show');
-        Route::get('/custodian-role-input', 'create')->name('custodianrole.create');
-        Route::get('/custodian-role/edit/{id}', 'edit')->name('custodianrole.edit');
-        Route::post('/custodian-role', 'store')->name('custodianrole.store');
-        Route::put('/custodian-role/{custodian}', 'update')->name('custodianrole.update');
-        Route::delete('/custodian-role/delete', 'delete')->name('custodianrole.delete');
+        Route::get('/custodian-roles', 'index')->name('custodian-roles.index');
+        Route::get('/custodian-roles/create', 'create')->name('custodian-roles.create');
+        Route::get('/custodian-roles/{custodianRole}', 'show')->name('custodian-roles.show');
+        Route::get('/custodian/roles/edit/{custodianRole}', 'edit')->name('custodian-roles.edit');
+        Route::post('/custodian-roles', 'store')->name('custodian-roles.store');
+        Route::put('/custodian-roles/{custodianRole}', 'update')->name('custodian-roles.update');
+        Route::delete('/custodian-roles/{custodianRole}', 'delete')->name('custodian-roles.destroy');
     });
 
     // ------------Custodian Name--------------

@@ -47,12 +47,12 @@
                     <p class="PageHeadEngTxt">Custodian Roles</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="/custodian-role-list" class="MoreButton">
+                    <a href="/custodian-roles" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    @if (request()->routeIs('custodianrole.edit'))
-                        <a href="{{ route('custodianrole.create') }}" class="MoreButton">
+                    @if (request()->routeIs('custodian-roles.edit'))
+                        <a href="{{ route('custodian-roles.create') }}" class="MoreButton">
                             <p class="ButtonArbTxt">يضيف</p>
                             <p class="ButtonEngTxt">Add</p>
                         </a>
@@ -72,26 +72,26 @@
                     @endif
 
                     <button type="button" onclick="showDeleteModal()"
-                        class="{{ request()->routeIs('custodianrole.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                        class="{{ request()->routeIs('custodian-roles.edit') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يمسح</p>
                         <p class="ButtonEngTxt">Delete</p>
                     </button>
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('custodianrole.delete') }}" id="delete_form">
-                <input type="hidden" name="record" value="{{ $custodianrole?->id }}">
+            {{-- <form method="POST" action="{{ route('custodian-roles.delete') }}" id="delete_form">
+                <input type="hidden" name="record" value="{{ $custodianRole?->id }}">
                 @csrf
                 @method('DELETE')
-            </form>
+            </form> --}}
 
             <form id="form"
-                action="{{ isset($custodianrole) ? route('custodianrole.update', $custodianrole->id) : route('custodianrole.store') }}"
+                action="{{ isset($custodianRole) ? route('custodian-roles.update', $custodianRole->id) : route('custodian-roles.store') }}"
                 method="POST">
                 @csrf
-                @if (isset($custodianrole))
+                @if (isset($custodianRole))
                     @method('PUT')
-                    <input type="hidden" name="id" value="{{ $custodianrole->id }}">
+                    <input type="hidden" name="id" value="{{ $custodianRole->id }}">
                 @endif
                 <table cellspacing="0">
                     <div class="ContentTableSection">
@@ -103,8 +103,8 @@
                                 </div>
                                 <p><input type="text" name="custodian_role_id" id="custodian_role_id" class="sh-tx"
                                         placeholder="Enter Custodian ID"
-                                        value="{{ old('custodian_role_id', $custodianrole?->custodian_role_id) }}"
-                                        {{ $custodianrole?->custodian_role_id ? 'readonly' : '' }} required>
+                                        value="{{ old('custodian_role_id', $custodianRole?->custodian_role_id) }}"
+                                        {{ $custodianRole?->custodian_role_id ? 'readonly' : '' }} required>
                                     @error('custodian_role_id')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -117,7 +117,7 @@
                                 </div>
                                 <p><input type="text" name="custodian_role_title" id="custodian_role_title"
                                         class="sh-tx" placeholder="Enter Title"
-                                        value="{{ old('custodian_role_title', $custodianrole?->custodian_role_title) }}"
+                                        value="{{ old('custodian_role_title', $custodianRole?->custodian_role_title) }}"
                                         required>
                                     @error('custodian_role_title')
                                         <span class="text-danger">{{ $message }}</span>
@@ -134,7 +134,7 @@
                                 <p><input type="text" name="custodian_role_description"
                                         id="custodian_role_description" class="bg-tx"
                                         placeholder="Enter Custodian Department"
-                                        value="{{ old('custodian_role_description', $custodianrole?->custodian_role_description) }}">
+                                        value="{{ old('custodian_role_description', $custodianRole?->custodian_role_description) }}">
                                     @error('custodian_role_description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -146,25 +146,27 @@
                                 <div class="FieldHead">
                                     <p class="FieldHeadEngTxt">System/Application/Other</p>
                                     {{-- <p class="FieldHeadArbTxt">النظام / التطبيق / أخرى</p> --}}
-                                    
+
                                 </div>
-                                <p> <select name="system_application_other" id="system_application_other" class="sh-tx">
-                                    <option value="" disabled {{ old('system_application_other', $custodianrole?->system_application_other) ? '' : 'selected' }}>
-                                        Select an option
-                                    </option>
-                                    <option value="System"
-                                        {{ old('system_application_other', $custodianrole?->system_application_other) == 'System' ? 'selected' : '' }}>
-                                        System
-                                    </option>
-                                    <option value="Application"
-                                        {{ old('system_application_other', $custodianrole?->system_application_other) == 'Application' ? 'selected' : '' }}>
-                                        Application
-                                    </option>
-                                    <option value="Other"
-                                        {{ old('system_application_other', $custodianrole?->system_application_other) == 'Other' ? 'selected' : '' }}>
-                                        Other
-                                    </option>
-                                </select>
+                                <p> <select name="system_application_other" id="system_application_other"
+                                        class="sh-tx">
+                                        <option value="" disabled
+                                            {{ old('system_application_other', $custodianRole?->system_application_other) ? '' : 'selected' }}>
+                                            Select an option
+                                        </option>
+                                        <option value="System"
+                                            {{ old('system_application_other', $custodianRole?->system_application_other) == 'System' ? 'selected' : '' }}>
+                                            System
+                                        </option>
+                                        <option value="Application"
+                                            {{ old('system_application_other', $custodianRole?->system_application_other) == 'Application' ? 'selected' : '' }}>
+                                            Application
+                                        </option>
+                                        <option value="Other"
+                                            {{ old('system_application_other', $custodianRole?->system_application_other) == 'Other' ? 'selected' : '' }}>
+                                            Other
+                                        </option>
+                                    </select>
                                     @error('system_application_other')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -177,7 +179,7 @@
                                 </div>
                                 <p><input type="text" name="other" id="DefineOth" class="sh-tx"
                                         placeholder="Define Other"
-                                        value="{{ old('other', $custodianrole?->other) }}">
+                                        value="{{ old('other', $custodianRole?->other) }}">
                                     @error('other')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

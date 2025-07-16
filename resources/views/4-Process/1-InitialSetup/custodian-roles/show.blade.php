@@ -46,22 +46,22 @@
                     <p class="PageHeadEngTxt">Custodian Roles</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="/custodian-role-list" class="MoreButton">
+                    <a href="/custodian-roles" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('custodianrole.create') }}"
+                    <a href="{{ route('custodian-roles.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
-                    <a href="{{ route('custodianrole.edit', $custodian_role_id->custodian_role_id) }}"
+                    <a href="{{ route('custodian-roles.edit', $custodianRole->custodian_role_id) }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('custodianrole.delete') }}" id="deleteForm">
-                        <input type="hidden" name="record" value="{{ $custodian_role_id->id }}">
+                    {{-- <form method="POST" action="{{ route('custodian-roles.delete') }}" id="deleteForm">
+                        <input type="hidden" name="record" value="{{ $custodianRole->id }}">
                         <button type="button" id="btnDelete"
                             class="{{ auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
@@ -69,7 +69,7 @@
                         </button>
                         @csrf
                         @method('DELETE')
-                    </form>
+                    </form> --}}
                 </div>
             </div>
             <table cellspacing="0">
@@ -80,14 +80,14 @@
                                 <p class="FieldHeadEngTxt">Custodian Role ID</p>
                                 <p class="FieldHeadArbTxt">رمز دور الوصي</p>
                             </div>
-                            <p class="sh-tx">{{ $custodian_role_id->custodian_role_id }}</p>
+                            <p class="sh-tx">{{ $custodianRole->custodian_role_id }}</p>
                         </div>
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Custodian Role Title</p>
                                 <p class="FieldHeadArbTxt">عنوان دور الوصي</p>
                             </div>
-                            <p class="sh-tx">{{ $custodian_role_id->custodian_role_title }}</p>
+                            <p class="sh-tx">{{ $custodianRole->custodian_role_title }}</p>
                         </div>
                     </div>
                     <div class="ContentTablebg">
@@ -96,7 +96,7 @@
                                 <p class="FieldHeadEngTxt">Custodian Role Description</p>
                                 <p class="FieldHeadArbTxt">وصف دور الوصي</p>
                             </div>
-                            <p class="bg-tx">{{ $custodian_role_id->custodian_role_description }}</p>
+                            <p class="bg-tx">{{ $custodianRole->custodian_role_description }}</p>
                         </div>
                     </div>
                     <div class="ContentTable">
@@ -105,14 +105,14 @@
                                 <p class="FieldHeadEngTxt">System/Application/Other</p>
                                 <p class="FieldHeadArbTxt">المتعلقة بالنظام/التطبيق/أخرى</p>
                             </div>
-                            <p class="sh-tx">{{ $custodian_role_id->system_application_other }}</p>
+                            <p class="sh-tx">{{ $custodianRole->system_application_other }}</p>
                         </div>
                         <div class="column" id="DefineOther">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Define Other</p>
                                 <p class="FieldHeadArbTxt">تعريف أخرى</p>
                             </div>
-                            <p class="sh-tx" style="height: 53px;">{{ $custodian_role_id->other }}</p>
+                            <p class="sh-tx" style="height: 53px;">{{ $custodianRole->other }}</p>
                         </div>
                     </div>
                 </div>

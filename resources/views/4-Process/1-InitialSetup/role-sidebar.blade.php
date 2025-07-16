@@ -30,8 +30,8 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('custodianrole.index') || request()->routeIs('custodianrole.show') ? 'active' : '' }}">
-            <a href="/custodian-role-list">
+            class="{{ request()->routeIs('custodian-roles.index') || request()->routeIs('custodian-roles.show') ? 'active' : '' }}">
+            <a href="/custodian-roles">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>دور الوصي</h3>
