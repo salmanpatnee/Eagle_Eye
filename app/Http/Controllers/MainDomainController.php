@@ -64,7 +64,7 @@ class MainDomainController extends Controller
         $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $bestPracticeIds =  $domain->bestPractices->pluck('best_practices_id')->toArray();
 
-        return $domain;
+
 
         return view('4-Process.1-InitialSetup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
     }
