@@ -27,6 +27,7 @@
                 <x-info-col label="Classification" label_ar="التصنيف">
                     {{ $domain->classification->classification_id ?? '—' }}
                 </x-info-col>
+
                 <x-info-col label="Best Practices" label_ar="أفضل الممارسات">
 
                     <x-list :data="$domain->bestPractices" id_key="best_practices_id" value_key="best_practices_name" />

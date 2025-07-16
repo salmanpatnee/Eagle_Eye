@@ -36,8 +36,10 @@ class SubDomainController extends Controller
         $classifications = Classification::select('classification_id', 'classification_name')->get();
         $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $categories = Category::select('category_id', 'category_name')->get();
+        $categoryIds = [];
+        $bestPracticeIds = [];
 
-        return view('4-Process.1-InitialSetup.sub-domains.create', compact('subDomain', 'classifications', 'categories', 'domains', 'bestPractices'));
+        return view('4-Process.1-InitialSetup.sub-domains.create', compact('subDomain', 'classifications', 'categories', 'domains', 'bestPractices', 'bestPracticeIds', 'categoryIds'));
     }
 
     public function store(Request $request)
@@ -60,13 +62,10 @@ class SubDomainController extends Controller
 
         $subDomain = SubDomain::create($attributes);
 
-        if ($bestPractices && $bestPracticesArray = json_decode($bestPractices, true)) {
-            $subDomain->bestPractices()->attach($bestPracticesArray);
-        }
+        $subDomain->bestPractices()->attach($bestPractices ?? []);
 
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $subDomain->categories()->attach($categoriesArray);
-        }
+        $subDomain->categories()->attach($categories ?? []);
+
 
         return redirect()->route('sub-domains.index')
             ->with('success', 'Sub-Domain saved successfully.');
@@ -105,13 +104,10 @@ class SubDomainController extends Controller
 
         $subDomain->update($attributes);
 
-        if ($bestPractices && $bestPracticesArray = json_decode($bestPractices, true)) {
-            $subDomain->bestPractices()->sync($bestPracticesArray);
-        }
+        $subDomain->bestPractices()->sync($bestPractices ?? []);
 
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $subDomain->categories()->sync($categoriesArray);
-        }
+        $subDomain->categories()->sync($categories ?? []);
+
 
         return redirect(route('sub-domains.index'))
             ->with('success', 'Sub-Domain saved successfully.');
