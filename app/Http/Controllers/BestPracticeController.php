@@ -12,8 +12,8 @@ class BestPracticeController extends Controller
     public function index()
     {
         $bestPractices = BestPractice::select('id', 'best_practices_id', 'best_practices_name', 'best_practices_release_year', 'best_practices_version', 'best_practices_country')
-        ->orderBy('sort_order', 'asc')
-        ->get();
+            ->orderBy('sort_order', 'asc')
+            ->get();
 
         return view('4-Process.1-InitialSetup.best-practices.index', compact('bestPractices'));
     }
@@ -88,7 +88,7 @@ class BestPracticeController extends Controller
         BestPractice::where('best_practices_id', $attributes['record'])->delete();
 
         return redirect(route('best-practices.index'))
-        ->with('success', 'Location(s) deleted successfully.');
+            ->with('success', 'Location(s) deleted successfully.');
 
         // $ids = $request->validate([
         //     'records' => ['required', 'array'],
@@ -109,11 +109,9 @@ class BestPracticeController extends Controller
         //         ->with('success', 'Location(s) deleted successfully.');
 
         // } catch (\Exception $e) {
-            
+
         //     return redirect(route('best-practices.index'))
         //         ->with('error', $e->getMessage());
         // }
     }
-
-   
 }
