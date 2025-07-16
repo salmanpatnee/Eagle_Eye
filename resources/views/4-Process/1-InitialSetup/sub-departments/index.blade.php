@@ -8,13 +8,13 @@
         </x-table.action-wrapper>
 
         <x-table.table>
-           <x-table.thead>
-            <x-table.th label="Serial Number" label_ar="الرقم التسلسلي" />
-            <x-table.th label="Sub-Department ID" label_ar="رمز القسم الفرعي" />
-            <x-table.th label="Sub-Department Name" label_ar="اسم القسم الفرعي" />
-            <x-table.th label="Department Name" label_ar="اسم القسم" />
-            <x-table.th label="Action" label_ar="إجراء " />
-        </x-table.thead>
+            <x-table.thead>
+                <x-table.th label="S.No" label_ar="رقم" />
+                <x-table.th label="Sub-Department ID" label_ar="رمز القسم الفرعي" />
+                <x-table.th label="Sub-Department Name" label_ar="اسم القسم الفرعي" />
+                <x-table.th label="Department Name" label_ar="اسم القسم" />
+                <x-table.th label="Action" label_ar="إجراء " />
+            </x-table.thead>
 
             <x-table.tbody>
                 @foreach ($subDepartments as $subDepartment)

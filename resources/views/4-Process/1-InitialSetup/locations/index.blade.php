@@ -9,7 +9,7 @@
 
         <x-table.table>
             <x-table.thead>
-                <x-table.th label="Serial Number" label_ar="الرقم التسلسلي" />
+                <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Location ID" label_ar="رمز الموقع" />
                 <x-table.th label="Location Name" label_ar="اسم الموقع" />
                 <x-table.th label="Location City" label_ar="البلد الموقع" />
