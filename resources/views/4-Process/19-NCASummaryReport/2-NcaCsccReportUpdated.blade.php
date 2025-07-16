@@ -39,7 +39,7 @@
                             <p>Summary Report</p>
                         </button>
                     </a> --}}
-                    <a href="{{route('regulatory-reports.create')}}?best_practice=NCA-CSCC-2019">
+                    <a href="{{ route('regulatory-reports.create') }}?best_practice=NCA-CSCC-2019">
                         <button class="ReportButton">
                             <p>تقرير مفصل</p>
                             <p>Detailed Report</p>
@@ -86,14 +86,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-1' &&
-                $row->sub_domain_id == 'NCA-CSCC-1-1')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-1' &&
+                            $row->sub_domain_id == 'NCA-CSCC-1-1')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -114,14 +114,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-1' &&
-                $row->sub_domain_id == 'NCA-CSCC-1-2')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-1' &&
+                            $row->sub_domain_id == 'NCA-CSCC-1-2')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -142,14 +142,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-1' &&
-                $row->sub_domain_id == 'NCA-CSCC-1-3')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-1' &&
+                            $row->sub_domain_id == 'NCA-CSCC-1-3')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -169,14 +169,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-1' &&
-                $row->sub_domain_id == 'NCA-CSCC-1-4')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-1' &&
+                            $row->sub_domain_id == 'NCA-CSCC-1-4')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -197,14 +197,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-1' &&
-                $row->sub_domain_id == 'NCA-CSCC-1-5')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-1' &&
+                            $row->sub_domain_id == 'NCA-CSCC-1-5')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -230,14 +230,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-1')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-1')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -258,14 +258,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-2')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-2')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -286,14 +286,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-3')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-3')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -313,14 +313,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-4')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-4')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -340,14 +340,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-5')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-5')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -372,14 +372,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-6')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-6')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -400,14 +400,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-7')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-7')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -428,14 +428,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-8')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-8')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -457,14 +457,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-9')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-9')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -485,14 +485,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-10')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-10')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -514,14 +514,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-11')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-11')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -542,14 +542,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-12')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-12')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -571,14 +571,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-2' &&
-                $row->sub_domain_id == 'NCA-CSCC-2-13')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-2' &&
+                            $row->sub_domain_id == 'NCA-CSCC-2-13')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -603,14 +603,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-3' &&
-                $row->sub_domain_id == 'NCA-CSCC-3-1')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-3' &&
+                            $row->sub_domain_id == 'NCA-CSCC-3-1')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -636,14 +636,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-4' &&
-                $row->sub_domain_id == 'NCA-CSCC-4-1')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-4' &&
+                            $row->sub_domain_id == 'NCA-CSCC-4-1')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -666,14 +666,14 @@
                     @include('4-Process/19-NCASummaryReport/1-NcaEccTableHeads')
                 </tr>
                 @foreach ($csccsummaryreport as $row)
-                @if (
-                $row->best_practices_id == 'NCA-CSCC-2019' &&
-                $row->main_domain_id == 'NCA-CSCC-4' &&
-                $row->sub_domain_id == 'NCA-CSCC-4-2')
-                <tr>
-                    @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
-                </tr>
-                @endif
+                    @if (
+                        $row->best_practices_id == 'NCA-CSCC-2019' &&
+                            $row->main_domain_id == 'NCA-CSCC-4' &&
+                            $row->sub_domain_id == 'NCA-CSCC-4-2')
+                        <tr>
+                            @include('4-Process/19-NCASummaryReport/1-NcaEccTableRows')
+                        </tr>
+                    @endif
                 @endforeach
             </table>
         </div>
@@ -698,7 +698,7 @@
             });
         }
 
-        // Call the function with table attr on which you want automatic serial number
+        // Call the function with table attr on which you want automatic S.No
         addRowCount('.summaryreport');
     </script> --}}
 

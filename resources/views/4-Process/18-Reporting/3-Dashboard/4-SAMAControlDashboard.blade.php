@@ -231,7 +231,7 @@
                                                         `<td>${row.status}</td>`;
 
                                                     html +=
-                                                        `<td><a href="/owner-table/${row.owner_id}">${row.owner_name}</a></td>`;
+                                                        `<td><a href="/owners/{owner}/${row.owner_id}">${row.owner_name}</a></td>`;
                                                     html += `<td>${row.custodians}</td>`;
 
                                                     html += "</tr>";

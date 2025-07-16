@@ -223,7 +223,7 @@
                         <td class="text-center">{{ $row->risk_impact }}</td>
                         <td class="text-center">{{ $row->risk_appetite_color }}</td>
                         <td class="text-center"><a
-                                href="{{ route('ownerreg.show', $row->owner_id) }}">{{ $row->owner_name }}</a></td>
+                                href="{{ route('owners.show', $row->owner_id) }}">{{ $row->owner_name }}</a></td>
                         <td class="text-center">{{ $row->va_pt_status }}</td>
                         <td class="text-center">{{ $row->discovery_date }}</td>
                         <td class="text-center">{{ $row->due_date }}</td>

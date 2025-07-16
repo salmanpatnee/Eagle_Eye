@@ -281,7 +281,7 @@
                         <td>{{ $row->risk_likelihood }}</td>
                         <td>{{ $row->risk_impact }}</td>
                         <td>{{ $row->risk_appetite_color }}</td>
-                        <td><a href="{{ route('ownerreg.show', $row->owner_id) }}">{{ $row->owner_name }}</a></td>
+                        <td><a href="{{ route('owners.show', $row->owner_id) }}">{{ $row->owner_name }}</a></td>
                         <td>{{ $row->va_pt_status }}</td>
                         <td>{{ $row->discovery_date }}</td>
                         <td>{{ $row->due_date }}</td>

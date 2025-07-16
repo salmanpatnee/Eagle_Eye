@@ -50,11 +50,14 @@
                      <x-sidebar-menu-item route_name="domains.index" label_ar="قائمة النطاقات" label="Domain List" />
                      <x-sidebar-menu-item route_name="sub-domains.index" label_ar="قائمة النطاقات الفرعية"
                          label="Sub-Domain List" />
-                     {{-- <x-sidebar-menu-item route_name="owner-list.index" label_ar="تسجيل المالك" label="Owner Registration" /> --}}
-                     {{-- <x-sidebar-menu-item route_name="owner-role-list.index" label_ar="دور المالك" label="Owner Role" /> --}}
-                     {{-- <x-sidebar-menu-item route_name="custodian-list.index" label_ar="تسجيل المسؤول" label="Custodian Registration" /> --}}
-                     {{-- <x-sidebar-menu-item route_name="custodian-role-list.index" label_ar="دور المسؤول" label="Custodian Role" /> --}}
-                     {{-- <x-sidebar-menu-item route_name="options.index" label_ar="إعدادات" label="Settings" /> --}}
+                     <x-sidebar-menu-item route_name="owners.index" label_ar="تسجيل المالك"
+                         label="Owner Registration" />
+                     <x-sidebar-menu-item route_name="ownerrole.index" label_ar="دور المالك" label="Owner Role" />
+                     <x-sidebar-menu-item route_name="custodian.index" label_ar="تسجيل المسؤول"
+                         label="Custodian Registration" />
+                     <x-sidebar-menu-item route_name="custodianrole.index" label_ar="دور المسؤول"
+                         label="Custodian Role" />
+                     <x-sidebar-menu-item route_name="users.index" label_ar="إعدادات" label="Settings" />
 
 
                      <!-- Menu Item Pages -->

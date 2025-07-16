@@ -49,12 +49,12 @@
                     <p class="PageHeadEngTxt">Owner Registration</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="/owner-list" class="MoreButton">
+                    <a href="/owners" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    @if (request()->routeIs('ownerreg.edit'))
-                        <a href="{{ route('ownerreg.create') }}" class="MoreButton">
+                    @if (request()->routeIs('owners.edit'))
+                        <a href="{{ route('owners.create') }}" class="MoreButton">
                             <p class="ButtonArbTxt">يضيف</p>
                             <p class="ButtonEngTxt">Add</p>
                         </a>
@@ -74,23 +74,24 @@
                     @endif
 
                     <button type="button" onclick="showDeleteModal()"
-                        class="{{ request()->routeIs('ownerreg.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                        class="{{ request()->routeIs('owners.edit') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يمسح</p>
                         <p class="ButtonEngTxt">Delete</p>
                     </button>
-                    <form method="POST" action="{{ route('ownerreg.delete') }}" id="delete_form">
-                        <input type="hidden" name="record" value="{{ $ownerreg?->id }}">
+                    <form method="POST" action="{{ route('owners.destroy') }}" id="delete_form">
+                        <input type="hidden" name="record" value="{{ $owner?->id }}">
                         @csrf
                         @method('DELETE')
                     </form>
                 </div>
             </div>
-            <form id="form" action="{{ isset($ownerreg) ? route('ownerreg.update', $ownerreg?->id) : route('ownerreg.store') }}"
+            <form id="form"
+                action="{{ isset($owner) ? route('owners.update', $owner?->id) : route('owners.store') }}"
                 method="POST">
                 @csrf
-                @if (isset($ownerreg))
+                @if (isset($owner))
                     @method('PUT')
-                    <input type="hidden" name="id" value="{{ $ownerreg->id }}">
+                    <input type="hidden" name="id" value="{{ $owner->id }}">
                 @endif
                 <table cellspacing="0">
                     <div class="ContentTableSection">
@@ -101,8 +102,8 @@
                                     <p class="FieldHeadArbTxt">رمز صاحب</p>
                                 </div>
                                 <p><input type="text" name="owner_id" id="owner_id" class="sh-tx"
-                                        placeholder="Enter ID" value="{{ old('owner_id', $ownerreg?->owner_id) }}"
-                                        {{ $ownerreg?->owner_id ? 'readonly' : '' }} required>
+                                        placeholder="Enter ID" value="{{ old('owner_id', $owner?->owner_id) }}"
+                                        {{ $owner?->owner_id ? 'readonly' : '' }} required>
                                     @error('owner_id')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -114,8 +115,8 @@
                                     <p class="FieldHeadArbTxt">اسم صاحب</p>
                                 </div>
                                 <p><input type="text" name="owner_name" id="owner_name" class="sh-tx"
-                                        placeholder="Enter Name"
-                                        value="{{ old('owner_name', $ownerreg?->owner_name) }}" required>
+                                        placeholder="Enter Name" value="{{ old('owner_name', $owner?->owner_name) }}"
+                                        required>
                                     @error('owner_name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -133,7 +134,7 @@
                                         <option value="">Select Option</option>
                                         @foreach ($ownerroles as $ownerrolesdata)
                                             <option value="{{ $ownerrolesdata->owner_role_id }}"
-                                                {{ $ownerrolesdata->owner_role_id == old('owner_role_id', $ownerreg?->owner_role_id) ? 'selected' : '' }}>
+                                                {{ $ownerrolesdata->owner_role_id == old('owner_role_id', $owner?->owner_role_id) ? 'selected' : '' }}>
                                                 {{ $ownerrolesdata->owner_role_id }}
                                                 {{ $ownerrolesdata->owner_role_name }}
                                             </option>
@@ -151,7 +152,7 @@
                                         <option value="">Select Option</option>
                                         @foreach ($department as $departmentdata)
                                             <option value="{{ $departmentdata->department_id }}"
-                                                {{ $departmentdata->department_id == old('department_id', $ownerreg?->department_id) ? 'selected' : '' }}>
+                                                {{ $departmentdata->department_id == old('department_id', $owner?->department_id) ? 'selected' : '' }}>
                                                 {{ $departmentdata->department_id }}
                                                 {{ $departmentdata->department_name }}
                                             </option>
@@ -168,7 +169,7 @@
                                 </div>
                                 <p><input type="text" name="specification" id="specification" class="bg-tx"
                                         placeholder="Enter Specification"
-                                        value="{{ old('specification', $ownerreg?->specification) }}">
+                                        value="{{ old('specification', $owner?->specification) }}">
                                     @error('specification')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -185,7 +186,7 @@
                                 </div>
                                 <p><input type="text" name="owner_contact_numbner" id="owner_contact_numbner"
                                         class="sh-tx" placeholder="Enter Number" style="margin-top: 24px;"
-                                        value="{{ old('owner_contact_numbner', $ownerreg?->owner_contact_numbner) }}">
+                                        value="{{ old('owner_contact_numbner', $owner?->owner_contact_numbner) }}">
                                     @error('owner_contact_numbner')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -198,7 +199,7 @@
                                 </div>
                                 <p><input type="text" name="owner_email_address" id="owner_email_address"
                                         class="sh-tx" placeholder="Enter Email Address"
-                                        value="{{ old('owner_email_address', $ownerreg?->owner_email_address) }}">
+                                        value="{{ old('owner_email_address', $owner?->owner_email_address) }}">
                                     @error('owner_email_address')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -219,6 +220,7 @@
         function goBack() {
             window.history.back();
         }
+
         function showDeleteModal() {
             window.deleteConfirmationModal.show(document.getElementById('delete_form'));
         }

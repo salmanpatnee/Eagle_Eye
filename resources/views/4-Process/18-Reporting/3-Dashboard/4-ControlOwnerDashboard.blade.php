@@ -65,7 +65,7 @@
                             <td>{{ $row->control_id }}</td>
                             <td>{{ $row->status }}</td>
                             <td>
-                                <a href="{{ route('ownerreg.show', $row->owner_id) }}" target="_blank">
+                                <a href="{{ route('owners.show', $row->owner_id) }}" target="_blank">
                                     {{ $row->owner_name }}
                                 </a>
                             </td>

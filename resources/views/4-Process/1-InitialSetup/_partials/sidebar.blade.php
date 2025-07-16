@@ -101,8 +101,9 @@
             </a>
         </li>
 
-        <li class="{{ request()->routeIs('ownerreg.index') || request()->routeIs('ownerreg.show') || request()->routeIs('ownerreg.create') || request()->routeIs('ownerreg.edit') || request()->routeIs('upload.owner.create') ? 'active' : '' }}">
-            <a href="/owner-list">
+        <li
+            class="{{ request()->routeIs('owners.index') || request()->routeIs('owners.show') || request()->routeIs('owners.create') || request()->routeIs('owners.edit') || request()->routeIs('upload.owner.create') ? 'active' : '' }}">
+            <a href="/owners">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>تسجيل مالك</h3>
@@ -111,7 +112,7 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('ownerrole.index') || request()->routeIs('ownerrole.show') || request()->routeIs('ownerrole.edit') || request()->routeIs('ownerrole.create')  ? 'active' : '' }}">
+            class="{{ request()->routeIs('ownerrole.index') || request()->routeIs('ownerrole.show') || request()->routeIs('ownerrole.edit') || request()->routeIs('ownerrole.create') ? 'active' : '' }}">
             <a href="/owner-role-list">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">

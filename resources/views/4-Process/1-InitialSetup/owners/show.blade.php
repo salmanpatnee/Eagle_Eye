@@ -46,24 +46,25 @@
                     <p class="PageHeadEngTxt">Owner Registration</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="/owner-list" class="MoreButton">
+                    <a href="/owners" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('ownerreg.create') }}"
+                    <a href="{{ route('owners.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
-                    <a href="{{ route('ownerreg.edit', $owner->owner_id) }}"
+                    <a href="{{ route('owners.edit', $owner->owner_id) }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('ownerreg.delete') }}" id="deleteForm">
+                    <form method="POST" action="{{ route('owners.destroy') }}" id="deleteForm">
                         <input type="hidden" name="record" value="{{ $owner->id }}">
                         <button type="button"
-                            class="{{ auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}" id="btnDelete">
+                            class="{{ auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}"
+                            id="btnDelete">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
@@ -148,7 +149,7 @@
         function goBack() {
             window.history.back();
         }
-        
+
         document.getElementById('btnDelete').addEventListener('click', function(event) {
             event.preventDefault();
             window.deleteConfirmationModal.show(document.getElementById('deleteForm'));

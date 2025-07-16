@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/11-Dashboard/1-Dashboard.css') }}" />
-    <link rel="stylesheet" href="{{asset('/css/dashboard.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -35,9 +35,11 @@
             max-width: 1200;
             margin: 30px auto 60px;
         }
+
         th {
             white-space: nowrap;
         }
+
         td {
             text-align: left;
             padding: 8px;
@@ -48,8 +50,8 @@
 </head>
 
 <body>
-     <!-- SIDEBAR -->
-     <section>
+    <!-- SIDEBAR -->
+    <section>
         <header>
             <div class="Header">
 
@@ -67,7 +69,8 @@
                 </div>
 
                 <div>
-                    <button id="print" class="btn btn-info btn-turqouis btn-sm rounded rounded-5 text-black" data-filename="Risks on Critical Software">
+                    <button id="print" class="btn btn-info btn-turqouis btn-sm rounded rounded-5 text-black"
+                        data-filename="Risks on Critical Software">
                         <p class="m-0">تنزيل بصيغة بي دي إف</p>
                         <p class="m-0">Download as PDF</p>
                     </button>
@@ -91,7 +94,7 @@
         <div id="print-area">
             <div class="OCD">
                 <div class="OCDVBC">
-                    <h3>Risks on {{$assetGroup->asset_group_name}}</h3>
+                    <h3>Risks on {{ $assetGroup->asset_group_name }}</h3>
                     <canvas id="assetStatus" class="BRCHRT"></canvas>
                 </div>
             </div>
@@ -142,7 +145,7 @@
                                         {!!$risk->assets!!}
                                     </td>
                                     <td>
-                                        <a href="{{ route('ownerreg.show', $risk->owner_id) }}"
+                                        <a href="{{ route('owners.show', $risk->owner_id) }}"
                                             >{{ $risk->owner_name }}</a>
                                     </td>
                                     <td>{!! $risk->custodians !!}</td>
@@ -156,7 +159,7 @@
                 </div>
             </div>
         </div>
-        
+
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script>
             function initializeCharts() {
@@ -236,85 +239,95 @@
                         },
                         onClick: function(event, elements) {
                             if (elements.length > 0) {
-                            const element = assetChartBar.getElementAtEvent(event)[0];
-                            if (element) {
-                                const datasetIndex = element._datasetIndex;
-                                const dataIndex = element._index;
+                                const element = assetChartBar.getElementAtEvent(event)[0];
+                                if (element) {
+                                    const datasetIndex = element._datasetIndex;
+                                    const dataIndex = element._index;
 
-                                const dataset = assetChartBar.data.datasets[datasetIndex];
-                                if (dataset && dataset.data[dataIndex]) {
-                                    const dataPoint = dataset.data[dataIndex];
-                                    const assetGroupId = assetGroup.asset_group_id
-                                    
+                                    const dataset = assetChartBar.data.datasets[datasetIndex];
+                                    if (dataset && dataset.data[dataIndex]) {
+                                        const dataPoint = dataset.data[dataIndex];
+                                        const assetGroupId = assetGroup.asset_group_id
 
-                                    
-                                    $('#riskAppetiteContentRow').css('visibility', 'hidden');
-                                    $('.sk-chase').show();
-                                    const tableBody = $('#table_body');
-                                    let html = "";
 
-                                    $.ajax({
-                                        url: `/group-asset-risks/${dataPoint.id}?status=${dataPoint.statusCode}&?assetGroupId=${assetGroupId}`,
-                                        type: 'GET',
-                                        dataType: 'json',
-                                        success: function(response) {
-                                            console.log('Response:', response);
-                                            if (response.length) {
 
-                                                if(dataPoint.statusCode === null) {
-                                                    $("h2#subdomain").text("Asset Risk Status Overview");
-                                                } else if(dataPoint.statusCode === 1) {
-                                                    $("h2#subdomain").text("Asset Closed Risk Status Overview");
-                                                } else if(dataPoint.statusCode === 3) {
-                                                    $("h2#subdomain").text("Asset Open Risk Status Overview");
-                                                }
-                                                let i = 1;
-                                                response.forEach(row => {
-                                                    html += "<tr>";
+                                        $('#riskAppetiteContentRow').css('visibility', 'hidden');
+                                        $('.sk-chase').show();
+                                        const tableBody = $('#table_body');
+                                        let html = "";
+
+                                        $.ajax({
+                                            url: `/group-asset-risks/${dataPoint.id}?status=${dataPoint.statusCode}&?assetGroupId=${assetGroupId}`,
+                                            type: 'GET',
+                                            dataType: 'json',
+                                            success: function(response) {
+                                                console.log('Response:', response);
+                                                if (response.length) {
+
+                                                    if (dataPoint.statusCode === null) {
+                                                        $("h2#subdomain").text(
+                                                            "Asset Risk Status Overview");
+                                                    } else if (dataPoint.statusCode === 1) {
+                                                        $("h2#subdomain").text(
+                                                            "Asset Closed Risk Status Overview");
+                                                    } else if (dataPoint.statusCode === 3) {
+                                                        $("h2#subdomain").text(
+                                                            "Asset Open Risk Status Overview");
+                                                    }
+                                                    let i = 1;
+                                                    response.forEach(row => {
+                                                        html += "<tr>";
                                                         html += `<td>${i}</td>`;
-                                                        html += `<td><a href="/asset-register-table/${row.asset_id}" >${row.asset_name}</a></td>`;
-                                                        html += `<td><a href="/owner-table/${row.asset_owner_id}" >${row.asset_owner_name}</a></td>`;
-                                                        html += `<td>${row.asset_custodians}</td>`;
-                                                        html += `<td><a href="/risk-identification-table/${row.risk_id}" >${row.risk_name}</a></td>`;
-                                                        html += `<td><a href="/owner-table/${row.risk_owner_id}" >${row.risk_owner_name}</a></td>`;
-                                                        html += `<td>${row.risk_custodians}</td>`;
+                                                        html +=
+                                                            `<td><a href="/asset-register-table/${row.asset_id}" >${row.asset_name}</a></td>`;
+                                                        html +=
+                                                            `<td><a href="/owners/{owner}/${row.asset_owner_id}" >${row.asset_owner_name}</a></td>`;
+                                                        html +=
+                                                            `<td>${row.asset_custodians}</td>`;
+                                                        html +=
+                                                            `<td><a href="/risk-identification-table/${row.risk_id}" >${row.risk_name}</a></td>`;
+                                                        html +=
+                                                            `<td><a href="/owners/{owner}/${row.risk_owner_id}" >${row.risk_owner_name}</a></td>`;
+                                                        html +=
+                                                            `<td>${row.risk_custodians}</td>`;
                                                         // html += `<td><a href="/risk-assessment-table/${row.risk_assessment_id}" >${row.latest_status}</a></td>`;
                                                         html += `<td>${row.latest_status}</td>`;
-                                                        html += `<td><a href="/risk-controls/${row.risk_id}">View Controls</a></td>`;
-                                                    // if (row.control_assessment_id != "#") {
-                                                    // } else {
-                                                    //     html +=
-                                                    //         `<td>${row.control_id}</td>`;
-                                                    // }
+                                                        html +=
+                                                            `<td><a href="/risk-controls/${row.risk_id}">View Controls</a></td>`;
+                                                        // if (row.control_assessment_id != "#") {
+                                                        // } else {
+                                                        //     html +=
+                                                        //         `<td>${row.control_id}</td>`;
+                                                        // }
 
-                                                    // if (row.control_assessment_id != "#") {
-                                                    //     html +=
-                                                    //         `<td> <a href="/control-assessments/${row.control_assessment_id}" >${row.status}</a></td>`;
-                                                    // } else {
-                                                    //     html +=
-                                                    //         `<td>${row.status}</td>`;
-                                                    // }
-                                                    // html +=
-                                                    //     `<td> <a href="/owner-table/${ownerNameId}" >${owner}</a></td>`;
-                                                    // html +=
-                                                    //     `<td><a href="/custodian-table/${row.custodian_name_id}" >${row.custodians}</a></td>`;
-                                                    html += "</tr>";
-                                                    i++;
-                                                });
-                                                $(tableBody).html(html)
+                                                        // if (row.control_assessment_id != "#") {
+                                                        //     html +=
+                                                        //         `<td> <a href="/control-assessments/${row.control_assessment_id}" >${row.status}</a></td>`;
+                                                        // } else {
+                                                        //     html +=
+                                                        //         `<td>${row.status}</td>`;
+                                                        // }
+                                                        // html +=
+                                                        //     `<td> <a href="/owners/{owner}/${ownerNameId}" >${owner}</a></td>`;
+                                                        // html +=
+                                                        //     `<td><a href="/custodian-table/${row.custodian_name_id}" >${row.custodians}</a></td>`;
+                                                        html += "</tr>";
+                                                        i++;
+                                                    });
+                                                    $(tableBody).html(html)
 
-                                                $('.sk-chase').hide();
-                                                $('#riskAppetiteContentRow').css('visibility',
-                                                    'visible');
+                                                    $('.sk-chase').hide();
+                                                    $('#riskAppetiteContentRow').css('visibility',
+                                                        'visible');
+                                                }
+                                            },
+                                            error: function(xhr, status, error) {
+                                                console.error('Error:', error);
                                             }
-                                        },
-                                        error: function(xhr, status, error) {
-                                            console.error('Error:', error);
-                                        }
-                                    });
+                                        });
+                                    }
                                 }
                             }
-                        }
                         },
                         plugins: {
                             labels: {
@@ -334,7 +347,7 @@
                 window.history.back();
             }
         </script>
-        <script src="{{asset('/js/dashboard.js')}}"></script>
+        <script src="{{ asset('/js/dashboard.js') }}"></script>
     </body>
 </body>
 

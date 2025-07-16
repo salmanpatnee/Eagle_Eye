@@ -24,28 +24,28 @@
         <!-- SIDEBAR -->
         <div class="headersec">
             <div class="justify-content-between w-100 d-flex align-items-center">
-            <div class="headerleft">
-                @include('4-Process/headerleft')
-                @include('4-Process/1-InitialSetup/initialheader')
-                {{-- @include('4-Process/1-InitialSetup/roleheader') --}}
-            </div>
-            <div>
-                <a href="{{route('upload.owner.create')}}" class="btn-report btn btn-primary btn-sm">
-                    <p>تحميل البيانات</p>
-                    Upload Data
-                </a>
-            </div>
-            <div class="text-center d-flex gap-3">
-                @include('partials.roles')
-                @include('4-Process/backbutton')
-            </div>
+                <div class="headerleft">
+                    @include('4-Process/headerleft')
+                    @include('4-Process/1-InitialSetup/initialheader')
+                    {{-- @include('4-Process/1-InitialSetup/roleheader') --}}
+                </div>
+                <div>
+                    <a href="{{ route('upload.owner.create') }}" class="btn-report btn btn-primary btn-sm">
+                        <p>تحميل البيانات</p>
+                        Upload Data
+                    </a>
+                </div>
+                <div class="text-center d-flex gap-3">
+                    @include('partials.roles')
+                    @include('4-Process/backbutton')
+                </div>
             </div>
         </div>
         @include('4-Process/1-InitialSetup/_partials/sidebar')
 
         <!-- CONTENT -->
         <div class="IndiTable">
-            <form method="POST" action="{{ route('ownerreg.delete') }}" id="deleteForm">
+            <form method="POST" action="{{ route('owners.destroy') }}" id="deleteForm">
                 @csrf
                 @method('DELETE')
                 <input type="hidden" name="record" id="deleteRecordId">
@@ -59,13 +59,15 @@
                             <p class="ButtonArbTxt">منظر</p>
                             <p class="ButtonEngTxt">View</p>
                         </a>
-                        <a href="{{ route('ownerreg.create') }}"
+                        <a href="{{ route('owners.create') }}"
                             class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يضيف</p>
                             <p class="ButtonEngTxt">Add</p>
                         </a>
 
-                        <a href="" class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}" id="btnUpdate">
+                        <a href=""
+                            class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}"
+                            id="btnUpdate">
                             <p class="ButtonArbTxt">تحديث</p>
                             <p class="ButtonEngTxt">Update</p>
                         </a>
@@ -107,12 +109,12 @@
                             @foreach ($owners as $owner)
                                 <tr>
                                     <td>
-                                        <input type="radio" name="record" class="record" value="{{ $owner->owner_id }}"
-                                            required>
+                                        <input type="radio" name="record" class="record"
+                                            value="{{ $owner->owner_id }}" required>
                                     </td>
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td style="width: 180px;"><a
-                                            href="/owner-table/{{ $owner->owner_id }}">{{ $owner->owner_id }}</a>
+                                            href="/owners/{owner}/{{ $owner->owner_id }}">{{ $owner->owner_id }}</a>
                                     </td>
                                     <td>{{ $owner->owner_name }}</td>
                                     <td>{{ $owner->role?->owner_role_name }}</td>
@@ -137,7 +139,7 @@
             const selectedRadio = document.querySelector('.record:checked');
 
             if (selectedRadio) {
-                window.location.href = `/owner/edit/${selectedRadio.value}`;
+                window.location.href = `owners/edit/${selectedRadio.value}`;
             } else {
                 alert('Please select a record.');
             }
@@ -145,9 +147,9 @@
 
         document.getElementById('btnDelete').addEventListener('click', function(event) {
             event.preventDefault();
-            
+
             const selectedRadio = document.querySelector('.record:checked');
-            
+
             if (selectedRadio) {
                 document.getElementById('deleteRecordId').value = selectedRadio.value;
                 window.deleteConfirmationModal.show(document.getElementById('deleteForm'));

@@ -437,7 +437,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
             Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
             Route::delete('/users', [UserController::class, 'destroy'])->name('users.destroy');
-
             Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
             Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
         });
@@ -448,13 +447,13 @@ Route::middleware(['auth'])->group(function () {
     // ------------Owner--------------
 
     Route::controller(OwnerController::class)->group(function () {
-        Route::get('/owner-list', 'index')->name('ownerreg.index');
-        Route::get('/owner-table/{owner:owner_id}', 'show')->name('ownerreg.show');
-        Route::get('/owner-input', 'create')->name('ownerreg.create');
-        Route::get('/owner/edit/{id}', 'edit')->name('ownerreg.edit');
-        Route::post('/owner', 'store')->name('ownerreg.store');
-        Route::put('/owner/{owner}', 'update')->name('ownerreg.update');
-        Route::delete('/owner/delete', 'delete')->name('ownerreg.delete');
+        Route::get('/owners', 'index')->name('owners.index');
+        Route::get('/owners/create', 'create')->name('owners.create');
+        Route::get('/owners/{owner}', 'show')->name('owners.show');
+        Route::post('/owners', 'store')->name('owners.store');
+        Route::get('owners/edit/{owner}', 'edit')->name('owners.edit');
+        Route::put('/owners/{owner}', 'update')->name('owners.update');
+        Route::delete('/owners/{owner}', 'delete')->name('owners.destroy');
     });
 
     // ------------Owner Role--------------

@@ -60,7 +60,7 @@
                             {{ $row->status }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            <a href="owner-table/{{ $row->owner_id }}" style="color: black">
+                            <a href="owners/{owner}/{{ $row->owner_id }}" style="color: black">
 
                                 {{ $row->owner_name }}
                             </a>

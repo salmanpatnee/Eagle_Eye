@@ -1,7 +1,7 @@
 <section id="sidebar">
     <ul class="side-menu top">
-        <li class="{{ request()->routeIs('ownerreg.index') || request()->routeIs('ownerreg.show') ? 'active' : '' }}">
-            <a href="/owner-list">
+        <li class="{{ request()->routeIs('owners.index') || request()->routeIs('owners.show') ? 'active' : '' }}">
+            <a href="/owners">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>تسجيل مالك</h3>
@@ -28,7 +28,8 @@
                 </div>
             </a>
         </li>
-        <li class="{{ request()->routeIs('custodianrole.index') || request()->routeIs('custodianrole.show') ? 'active' : '' }}">
+        <li
+            class="{{ request()->routeIs('custodianrole.index') || request()->routeIs('custodianrole.show') ? 'active' : '' }}">
             <a href="/custodian-role-list">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">

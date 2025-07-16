@@ -54,7 +54,7 @@
                             {{ $row->asset_group_name }}
                         </td>
                         <td>
-                            <a href="owner-table/{{ $row->owner_id }}">
+                            <a href="owners/{owner}/{{ $row->owner_id }}">
 
                                 {{ $row->owner_name }}
                             </a>

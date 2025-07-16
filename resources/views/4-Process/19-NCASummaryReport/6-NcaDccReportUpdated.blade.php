@@ -409,7 +409,7 @@
             });
         }
 
-        // Call the function with table attr on which you want automatic serial number
+        // Call the function with table attr on which you want automatic S.No
         addRowCount('.summaryreport');
     </script> --}}
 

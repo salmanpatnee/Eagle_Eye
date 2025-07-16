@@ -63,23 +63,26 @@
         }
 
         tbody td a {
-    margin-bottom: .5em;
-    display: inline-block;
-    color: black;
-}
+            margin-bottom: .5em;
+            display: inline-block;
+            color: black;
+        }
 
         tr:nth-child(even) {
             background-color: #D9D9D9;
             /* White for even rows */
         }
+
         td.big-text {
-    white-space: initial;
-    /* width: 200px; */
-}
-td.big-text p {
-    width: 300px;
-    text-align: left;
-}
+            white-space: initial;
+            /* width: 200px; */
+        }
+
+        td.big-text p {
+            width: 300px;
+            text-align: left;
+        }
+
         @media (min-width: 1024px) and (max-width: 1179px) {
             .rtablearea {
                 overflow-x: auto;
@@ -230,7 +233,7 @@ td.big-text p {
                         {{ $riskMethodology->risk_methodology_id }}
                     </td>
                     <td>
-                        <a href="{{route('ownerreg.show', $riskMethodology->owner?->owner_id) }}">
+                        <a href="{{ route('owners.show', $riskMethodology->owner?->owner_id) }}">
                             {{ $riskMethodology->owner?->owner_name }}
                         </a>
                     </td>
@@ -241,19 +244,19 @@ td.big-text p {
                         </p>
                     </td>
                     <td>
-                        <a href="{{route('assetreg.show', $riskMethodology->asset?->asset_id) }}">
-               
+                        <a href="{{ route('assetreg.show', $riskMethodology->asset?->asset_id) }}">
+
                             {{ $riskMethodology->asset?->asset_name }}
                         </a>
                     </td>
                     <td>
-                        <a href="{{route('threatagent.show', $riskMethodology->threat?->threat_agent_id) }}">
+                        <a href="{{ route('threatagent.show', $riskMethodology->threat?->threat_agent_id) }}">
 
                             {{ $riskMethodology->threat?->threat_agent_name }}
                         </a>
                     </td>
                     <td>
-                        <a href="{{route('va.show', $riskMethodology->vulnerability?->va_id) }}">
+                        <a href="{{ route('va.show', $riskMethodology->vulnerability?->va_id) }}">
 
                             {{ $riskMethodology->vulnerability?->va_name }}
                         </a>

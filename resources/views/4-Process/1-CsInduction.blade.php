@@ -91,7 +91,7 @@
                 </div>
             </div>
         </a>
-        <a href="/owner-input" class="boxhyperlink">
+        <a href="/owners/create" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

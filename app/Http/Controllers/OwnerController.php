@@ -10,43 +10,42 @@ class OwnerController extends Controller
 {
     public function index()
     {
-        $owners = Owner::with('department', 'role')->get();
-        
-        return view('4-Process/1-InitialSetup/8-OwnerList', compact('owners'));
-    } 
+        // $owners = Owner::with('department', 'role')->get();
+        $owners = Owner::with('department', 'role')->paginate(20);
+
+        return view('4-Process/1-InitialSetup/owners/index', compact('owners'));
+    }
 
 
-     // 4.Controller - DETAILED TABLE
-     public function show(Owner $owner) 
-     {
+    // 4.Controller - DETAILED TABLE
+    public function show(Owner $owner)
+    {
         $owner->load('department', 'role');
-
- 
-         return view('4-Process/1-InitialSetup/8-OwnerTable', compact('owner'));
-     }
+        return view('4-Process/1-InitialSetup/owners/show', compact('owner'));
+    }
 
 
-     // To add data into the table
-     public function create(){
+    // To add data into the table
+    public function create()
+    {
         $ownerreg = null;
         $ownerroles = DB::table('owner_role_table')->get();
         $department = DB::table('department_table')->get();
-        return view('4-Process/1-InitialSetup/8-OwnerForm', compact('ownerreg', 'ownerroles', 'department'));
+        return view('4-Process/1-InitialSetup/owners/create', compact('ownerreg', 'ownerroles', 'department'));
     }
 
     // To edit the table
-     public function edit($id)
-     {
-        $ownerreg = DB::table('owner_table')->where('owner_id', $id)->first();
+    public function edit(Owner $owner)
+    {
         $ownerroles = DB::table('owner_role_table')->get();
         $department = DB::table('department_table')->get();
-        
-        
-        return view('4-Process/1-InitialSetup/8-OwnerForm', compact('ownerreg', 'ownerroles', 'department'));
-     }
 
-    
-     // To store the edited data into the table
+
+        return view('4-Process/1-InitialSetup/owners/create', compact('owner', 'ownerroles', 'department'));
+    }
+
+
+    // To store the edited data into the table
     public function store(Request $request)
     {
         // Validation
@@ -61,17 +60,17 @@ class OwnerController extends Controller
         ]);
 
         Owner::create($attributes);
-    
 
-        return redirect()->route('ownerreg.index')->with('success', 'Department saved successfully.');
+
+        return redirect()->route('owners.index')->with('success', 'Department saved successfully.');
     }
 
-     // To store the edited data into the table
-     public function update(Owner $owner, Request $request)
-     {
-         // Validation
-         $attributes = $request->validate([
-            'owner_id' => ['required', 'unique:owner_table,owner_id,'.$owner->id],
+    // To store the edited data into the table
+    public function update(Owner $owner, Request $request)
+    {
+        // Validation
+        $attributes = $request->validate([
+            'owner_id' => ['required', 'unique:owner_table,owner_id,' . $owner->id],
             'owner_name' => 'required',
             'owner_role_id' => 'required',
             'specification' => 'nullable',
@@ -79,59 +78,59 @@ class OwnerController extends Controller
             'owner_email_address' => 'nullable',
             'department_id' => 'required',
         ]);
- 
-         $owner->update($attributes);
 
- 
-         return redirect()->route('ownerreg.index')->with('success', 'Department saved successfully.');
-     }
+        $owner->update($attributes);
+
+
+        return redirect()->route('owners.index')->with('success', 'Department saved successfully.');
+    }
     //--------------------------------------------------------------------//
 
 
     // 2.Controller - SHOW DATA INTO THE LIST
 
-
-    
-
-
-
     // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request) {
+    public function delete(Owner $owner)
+    {
+        $owner->delete();
+
+        return redirect(route('owners.index'))
+            ->with('success', 'Owner deleted successfully.');
+
         $attributes =  $request->validate([
             'record' => ['required'],
         ]);
 
         $data = Owner::where('id', $attributes['record'])->orWhere('owner_id', $attributes['record'])->first();
 
-        
+
         $data->delete();
-        return redirect('/owner-list');
+        return redirect('/owners');
 
 
         $selecteddelete = $request->input('selecteddelete');
 
         if (!empty($selecteddelete)) {
             DB::table('owner_table')->whereIn('owner_id', $selecteddelete)->delete();
-        } return redirect('/owner-list');
+        }
+        return redirect('/owners');
     }
 
 
-    
 
-    
+
+
     // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
     public function view()
-  {
-      $OwnerRoles = DB::table('owner_role_table')
-          ->select('*')
-          ->distinct()
-          ->get();
-      $OwnerDptNames = DB::table('department_table')
-          ->select('*')
-          ->distinct()
-          ->get();
-      return view('4-Process/1-InitialSetup/8-OwnerForm', compact('OwnerRoles', 'OwnerDptNames'));
-  }
-
-
+    {
+        $OwnerRoles = DB::table('owner_role_table')
+            ->select('*')
+            ->distinct()
+            ->get();
+        $OwnerDptNames = DB::table('department_table')
+            ->select('*')
+            ->distinct()
+            ->get();
+        return view('4-Process/1-InitialSetup/8-OwnerForm', compact('OwnerRoles', 'OwnerDptNames'));
+    }
 }

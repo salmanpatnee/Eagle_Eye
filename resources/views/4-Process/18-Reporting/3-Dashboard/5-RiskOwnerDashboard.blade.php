@@ -112,7 +112,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('ownerreg.show', $risk->owner_id) }}"
+                                        <a href="{{ route('owners.show', $risk->owner_id) }}"
                                             target="_blank">{{ $risk->owner_name }}
                                         </a>
                                     </td>
@@ -224,7 +224,7 @@
                                                     html +=
                                                         `<td> <a href="/risk-assessment-table/${row.risk_assessment_id}" target="_blank">${row.status}</a></td>`;
                                                     html +=
-                                                        `<td><a href="/owner-table/${row.owner_id}" target="_blank">${row.owner_id} - ${row.owner_name}</a></td>`;
+                                                        `<td><a href="/owners/{owner}/${row.owner_id}" target="_blank">${row.owner_id} - ${row.owner_name}</a></td>`;
                                                     html +=
                                                         `<td><a href="#" target="_blank">${row.custodians}</a></td>`;
                                                     html +=

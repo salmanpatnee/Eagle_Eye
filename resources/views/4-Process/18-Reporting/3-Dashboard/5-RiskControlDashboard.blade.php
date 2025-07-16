@@ -101,22 +101,21 @@
                         <tbody id="table_body">
                             @foreach ($controlDetails as $control)
                                 <tr>
-                                    <td>{{$loop->index + 1}}</td>
+                                    <td>{{ $loop->index + 1 }}</td>
                                     <td>
-                                        <a href="{{ route('control-assessments.show', $control->control_assessment_id) }}"
-                                            >{{ $control->control_id }}
+                                        <a
+                                            href="{{ route('control-assessments.show', $control->control_assessment_id) }}">{{ $control->control_id }}
                                         </a>
                                     </td>
 
                                     <td>
-                                        <a href="{{ route('control-assessments.show', $control->control_assessment_id) }}"
-                                            >
+                                        <a
+                                            href="{{ route('control-assessments.show', $control->control_assessment_id) }}">
                                             {{ $control->control_implementation_status }}
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('ownerreg.show', $control->owner_id) }}"
-                                            >{{ $control->owner_name }}
+                                        <a href="{{ route('owners.show', $control->owner_id) }}">{{ $control->owner_name }}
                                         </a>
                                     </td>
                                     <td>
@@ -234,38 +233,42 @@
                                         success: function(response) {
                                             console.log('Response:', response);
                                             if (response.length) {
-                                                if(dataPoint.statusCode === null) {
+                                                if (dataPoint.statusCode === null) {
                                                     $("h2#subdomain").text("Control Status Report");
-                                                } else if(dataPoint.statusCode === 1) {
-                                                    $("h2#subdomain").text("Implemented Controls Report");
-                                                } else if(dataPoint.statusCode === 2) {
-                                                    $("h2#subdomain").text("Not Implemented Controls Report");
-                                                } else if(dataPoint.statusCode === 3) {
-                                                    $("h2#subdomain").text("Partially Implemented Controls Report");
-                                                } else if(dataPoint.statusCode === 4) {
-                                                    $("h2#subdomain").text("Not Applicable Controls Report");
+                                                } else if (dataPoint.statusCode === 1) {
+                                                    $("h2#subdomain").text(
+                                                        "Implemented Controls Report");
+                                                } else if (dataPoint.statusCode === 2) {
+                                                    $("h2#subdomain").text(
+                                                        "Not Implemented Controls Report");
+                                                } else if (dataPoint.statusCode === 3) {
+                                                    $("h2#subdomain").text(
+                                                        "Partially Implemented Controls Report");
+                                                } else if (dataPoint.statusCode === 4) {
+                                                    $("h2#subdomain").text(
+                                                        "Not Applicable Controls Report");
                                                 }
                                                 let i = 1
                                                 response.forEach(row => {
 
                                                     html += "<tr>";
-                                                        html += `<td>${i}</td>`;
+                                                    html += `<td>${i}</td>`;
                                                     html +=
                                                         `<td><a href="/control-assessments/${row.control_assessment_id}" >${row.control_id}</a></td>`;
                                                     html +=
                                                         `<td> <a href="/control-assessments/${row.control_assessment_id}" >${row.control_implementation_status}</a></td>`;
                                                     html +=
-                                                        `<td><a href="/owner-table/${row.owner_id}" >${row.owner_name}</a></td>`;
+                                                        `<td><a href="/owners/{owner}/${row.owner_id}" >${row.owner_name}</a></td>`;
                                                     html +=
                                                         `<td>${row.custodians != null ? row.custodians : ''}</td>`;
-                                                        if(row.evidence !== null){
+                                                    if (row.evidence !== null) {
 
-                                                            html +=
-                                                                `<td>${row.evidence}</td>`;
-                                                        } else {
-                                                            html +=
+                                                        html +=
+                                                            `<td>${row.evidence}</td>`;
+                                                    } else {
+                                                        html +=
                                                             `<td>-</td>`;
-                                                        }
+                                                    }
                                                     html += "</tr>";
                                                     i++;
                                                 });

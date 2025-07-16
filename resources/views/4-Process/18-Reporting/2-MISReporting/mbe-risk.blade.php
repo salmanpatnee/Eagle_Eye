@@ -1,6 +1,5 @@
 @extends('4-Process/18-Reporting/2-MISReporting/mbe-layout')
 @section('content')
-    
     <div class="tablearea">
         <table class="table">
             <thead class="tablehead">
@@ -51,7 +50,7 @@
                             {{ $row->status }}
                         </td>
                         <td>
-                            <a href="owner-table/{{ $row->owner_id }}">
+                            <a href="owners/{owner}/{{ $row->owner_id }}">
 
                                 {{ $row->owner_name }}
                             </a>

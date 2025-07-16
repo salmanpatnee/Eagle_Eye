@@ -50,7 +50,7 @@
             <tr>
                 <td>3</td>
                 <td>Data Captured</td>
-                <td>Asset type, model, serial number, IP address, software version, location.</td>
+                <td>Asset type, model, S.No, IP address, software version, location.</td>
                 <td>Configuration settings, relationships, dependencies, ownership, change history.</td>
             </tr>
             <tr>
