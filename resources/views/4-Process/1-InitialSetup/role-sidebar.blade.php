@@ -9,8 +9,9 @@
                 </div>
             </a>
         </li>
-        <li class="{{ request()->routeIs('ownerrole.index') || request()->routeIs('ownerrole.show') ? 'active' : '' }}">
-            <a href="/owner-role-list">
+        <li
+            class="{{ request()->routeIs('owner-roles.index') || request()->routeIs('owner-roles.show') ? 'active' : '' }}">
+            <a href="/owner-roles">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>دور الصاحب</h3>

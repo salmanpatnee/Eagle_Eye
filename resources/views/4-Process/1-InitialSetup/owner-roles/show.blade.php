@@ -46,30 +46,21 @@
                     <p class="PageHeadEngTxt">Owner Roles</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="/owner-role-list" class="MoreButton">
+                    <a href="/owner-roles" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('ownerrole.create') }}"
+                    <a href="{{ route('owner-roles.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
-                    <a href="{{ route('ownerrole.edit', $owner_role_id->owner_role_id) }}"
+                    <a href="{{ route('owner-roles.edit', $ownerRole->owner_role_id) }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('ownerrole.delete') }}" id="deleteForm">
-                        <input type="hidden" name="record" value="{{ $owner_role_id->owner_role_id }}">
-                        <button type="submit"
-                            class="{{ auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}" id="btnDelete">
-                            <p class="ButtonArbTxt">يمسح</p>
-                            <p class="ButtonEngTxt">Delete</p>
-                        </button>
-                        @csrf
-                        @method('DELETE')
-                    </form>
+
                 </div>
             </div>
             <table cellspacing="0">
@@ -80,14 +71,14 @@
                                 <p class="FieldHeadEngTxt">Owner Role ID</p>
                                 <p class="FieldHeadArbTxt">رمز دور الصاحب</p>
                             </div>
-                            <p class="sh-tx">{{ $owner_role_id->owner_role_id }}</p>
+                            <p class="sh-tx">{{ $ownerRole->owner_role_id }}</p>
                         </div>
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Owner Role Name</p>
                                 <p class="FieldHeadArbTxt">اسم دور الصاحب</p>
                             </div>
-                            <p class="sh-tx">{{ $owner_role_id->owner_role_name }}</p>
+                            <p class="sh-tx">{{ $ownerRole->owner_role_name }}</p>
                         </div>
                     </div>
                     <div class="ContentTablebg">
@@ -96,7 +87,7 @@
                                 <p class="FieldHeadEngTxt">Owner Role Description</p>
                                 <p class="FieldHeadArbTxt">وصف دور الصاحب</p>
                             </div>
-                            <p class="bg-tx">{{ $owner_role_id->owner_role_description }}</p>
+                            <p class="bg-tx">{{ $ownerRole->owner_role_description }}</p>
                         </div>
                     </div>
                 </div>
@@ -111,7 +102,7 @@
         function goBack() {
             window.history.back();
         }
-         document.getElementById('btnDelete').addEventListener('click', function(event) {
+        document.getElementById('btnDelete').addEventListener('click', function(event) {
             event.preventDefault();
             window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
         });

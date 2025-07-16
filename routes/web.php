@@ -459,13 +459,13 @@ Route::middleware(['auth'])->group(function () {
     // ------------Owner Role--------------
 
     Route::controller(OwnerRoleController::class)->group(function () {
-        Route::get('/owner-role-list', 'index')->name('ownerrole.index');
-        Route::get('/owner-role-table/{owner_role_id}', 'show')->name('ownerrole.show');
-        Route::get('/owner-role-input', 'create')->name('ownerrole.create');
-        Route::get('/owner-role/edit/{id}', 'edit')->name('ownerrole.edit');
-        Route::post('/owner-role', 'store')->name('ownerrole.store');
-        Route::put('/owner-role/{ownerRole}', 'update')->name('ownerrole.update');
-        Route::delete('/owner-role/delete', 'delete')->name('ownerrole.delete');
+        Route::get('/owner-roles', 'index')->name('owner-roles.index');
+        Route::get('/owner-roles/create', 'create')->name('owner-roles.create');
+        Route::get('/owner-roles/{owner_role}', 'show')->name('owner-roles.show');
+        Route::get('/owner-roles/edit/{owner_role}', 'edit')->name('owner-roles.edit');
+        Route::post('/owner-roles', 'store')->name('owner-roles.store');
+        Route::put('/owner-roles/{owner_role}', 'update')->name('owner-roles.update');
+        Route::delete('/owner-roles/{owner_role}', 'delete')->name('owner-roles.destroy');
     });
 
     // ------------Custodian Role--------------

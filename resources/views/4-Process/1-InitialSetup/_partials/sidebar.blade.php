@@ -112,8 +112,8 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('ownerrole.index') || request()->routeIs('ownerrole.show') || request()->routeIs('ownerrole.edit') || request()->routeIs('ownerrole.create') ? 'active' : '' }}">
-            <a href="/owner-role-list">
+            class="{{ request()->routeIs('owner-roles.index') || request()->routeIs('owner-roles.show') || request()->routeIs('owner-roles.edit') || request()->routeIs('owner-roles.create') ? 'active' : '' }}">
+            <a href="/owner-roles">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>دور الصاحب</h3>

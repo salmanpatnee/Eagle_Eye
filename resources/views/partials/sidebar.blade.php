@@ -52,7 +52,7 @@
                          label="Sub-Domain List" />
                      <x-sidebar-menu-item route_name="owners.index" label_ar="تسجيل المالك"
                          label="Owner Registration" />
-                     <x-sidebar-menu-item route_name="ownerrole.index" label_ar="دور المالك" label="Owner Role" />
+                     <x-sidebar-menu-item route_name="owner-roles.index" label_ar="دور المالك" label="Owner Role" />
                      <x-sidebar-menu-item route_name="custodian.index" label_ar="تسجيل المسؤول"
                          label="Custodian Registration" />
                      <x-sidebar-menu-item route_name="custodianrole.index" label_ar="دور المسؤول"

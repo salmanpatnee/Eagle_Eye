@@ -8,18 +8,28 @@ use Illuminate\Support\Facades\DB;
 
 class OwnerRoleController extends Controller
 {
-    // To add data into the table
+
+    public function index()
+    {
+        $ownerRoles = OwnerRole::paginate(20);
+        return view('4-Process/1-InitialSetup/owner-roles/index', compact('ownerRoles'));
+    }
+
+    public function show(OwnerRole $ownerRole)
+    {
+        return view('4-Process/1-InitialSetup/owner-roles/show', compact('ownerRole'));
+    }
+
     public function create()
     {
-        $ownerrole = null;
-        return view('4-Process/1-InitialSetup/9-OwnerRoleForm', compact('ownerrole'));
+        $ownerRole = null;
+        return view('4-Process/1-InitialSetup/owner-roles/create', compact('ownerRole'));
     }
 
     // To edit the table
-    public function edit($id)
+    public function edit(OwnerRole $ownerRole)
     {
-        $ownerrole = DB::table('owner_role_table')->where('owner_role_id', $id)->first();
-        return view('4-Process/1-InitialSetup/9-OwnerRoleForm', compact('ownerrole'));
+        return view('4-Process/1-InitialSetup/owner-roles/create', compact('ownerRole'));
     }
 
 
@@ -36,7 +46,7 @@ class OwnerRoleController extends Controller
 
         OwnerRole::create($attributes);
 
-        return redirect()->route('ownerrole.index')->with('success', 'Owner Role saved successfully.');
+        return redirect()->route('owner-roles.index')->with('success', 'Owner Role saved successfully.');
     }
 
     // To store the edited data into the table
@@ -52,18 +62,12 @@ class OwnerRoleController extends Controller
         $ownerRole->update($attributes);
 
 
-        return redirect()->route('ownerrole.index')->with('success', 'Owner Role saved successfully.');
+        return redirect()->route('owner-roles.index')->with('success', 'Owner Role saved successfully.');
     }
 
     //--------------------------------------------------------------------//
 
-    // 2.Controller - SHOW DATA INTO THE LIST
 
-    public function index()
-    {
-        $OwnerRole = DB::table('owner_role_table')->get();
-        return view('4-Process/1-InitialSetup/9-OwnerRoleList', ['OwnerRole' => $OwnerRole]);
-    }
 
 
     public function delete(Request $request)
@@ -74,11 +78,11 @@ class OwnerRoleController extends Controller
 
         $data = OwnerRole::where('id', $attributes['record'])->orWhere('owner_role_id', $attributes['record'])->first();
 
-        
+
         $data->delete();
 
-        return redirect('/owner-role-list')
-        ->with('success', 'Record(s) deleted successfully.');
+        return redirect('/owner-roles')
+            ->with('success', 'Record(s) deleted successfully.');
 
         // $ids =  $request->validate([
         //     'selecteddelete' => ['required', 'array'],
@@ -93,27 +97,12 @@ class OwnerRoleController extends Controller
         //         $role->delete();
         //     });
 
-        //     return redirect('/owner-role-list')
+        //     return redirect('/owner-roles')
         //         ->with('success', 'Record(s) deleted successfully.');
         // } catch (\Exception $e) {
 
-        //     return redirect('/owner-role-list')
+        //     return redirect('/owner-roles')
         //         ->with('error', $e->getMessage());
         // }
-    }
-
-
-
-    // Controller for Detailed Table
-    public function show($owner_role_id)
-    {
-        // Fetch data from the database based on department_id
-        $owner_role_id = DB::table('owner_role_table')->where('owner_role_id', $owner_role_id)->first();
-
-        if (!$owner_role_id) {
-            abort(404);
-        }
-
-        return view('4-Process/1-InitialSetup/9-OwnerRoleTable', compact('owner_role_id'));
     }
 }
