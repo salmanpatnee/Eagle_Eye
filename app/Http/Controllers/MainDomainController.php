@@ -48,10 +48,7 @@ class MainDomainController extends Controller
 
         $domain = Domain::create($attributes);
 
-
-        if (count($bestPractices)) {
-            $domain->bestPractices()->attach($bestPractices);
-        }
+        $domain->bestPractices()->attach($bestPractices ?? []);
 
         return redirect(route('domains.index'))
             ->with('success', 'Domain saved successfully.');
@@ -76,7 +73,7 @@ class MainDomainController extends Controller
             'main_domain_name' => 'required',
             'main_domain_description' => 'nullable',
             'classification_id' => 'nullable',
-            'bestPractices' => 'required',
+            'bestPractices' => 'nullable',
         ]);
 
         $bestPractices = $attributes['bestPractices'] ?? null;
@@ -84,9 +81,7 @@ class MainDomainController extends Controller
 
         $domain->update($attributes);
 
-        if (count($bestPractices)) {
-            $domain->bestPractices()->sync($bestPractices);
-        }
+        $domain->bestPractices()->sync($bestPractices ?? []);
 
         return redirect(route('domains.index'))
             ->with('success', 'Domain saved successfully.');

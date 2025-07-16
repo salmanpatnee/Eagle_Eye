@@ -196,6 +196,9 @@ layer(base);
 .select2-selection__choice__display {
     @apply text-sm text-gray-800;
 }
+.list-wrapper {
+    @apply rounded-lg border border-gray-200 bg-white sm:w-fit;
+}
 
 @utility menu-item {
     @apply text-theme-sm relative flex items-center gap-3 rounded-lg px-3 py-2 font-medium;

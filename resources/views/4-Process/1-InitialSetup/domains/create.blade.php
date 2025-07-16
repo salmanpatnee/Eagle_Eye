@@ -39,14 +39,14 @@
 
                     <div>
                         <x-form.multiselect label="Best Practice" label_ar="أفضل الممارسات" name="bestPractices[]"
-                            required="true" :value="$bestPracticeIds" :data="$bestPractices" id_key="best_practices_id"
+                            :value="$bestPracticeIds" :data="$bestPractices" id_key="best_practices_id"
                             value_key="best_practices_name" />
                     </div>
                 </x-form.grid-col>
 
 
                 <div class="flex justify-end">
-                    <x-form.submit label="Department" label_ar="القسم" :isUpdate="$domain?->main_domain_id" />
+                    <x-form.submit label="Domain" label_ar="المكون الأساسي" :isUpdate="$domain?->main_domain_id" />
                 </div>
             </div>
         </form>
