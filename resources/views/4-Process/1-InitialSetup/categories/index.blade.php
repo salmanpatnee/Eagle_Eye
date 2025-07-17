@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Category Definition')
 @section('title_ar', 'تعريف الفئة')
 @section('content')

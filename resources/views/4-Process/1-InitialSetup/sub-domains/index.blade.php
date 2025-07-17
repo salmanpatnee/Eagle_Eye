@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Sub-Domains Setup')
 @section('title_ar', 'إعداد المكون الفرعي')
 @section('content')

@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Organization Sub-Departments')
 @section('title_ar', 'القسم الفرعي في الجهة')
-@section('content') 
-    <div> 
+@section('content')
+    <div>
         <x-table.action-wrapper title="Organization Sub-Departments">
             <x-action.button label="View" label_ar="منظر" route_name="sub-departments.index" />
             <x-action.button label="Edit" label_ar="تحرير" route_name="sub-departments.edit"

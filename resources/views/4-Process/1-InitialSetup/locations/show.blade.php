@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Location Setup')
 @section('title_ar', 'إعداد الموقع')
 @section('content')
@@ -24,6 +24,7 @@
                     {{ $location->location_description ?? '—' }}
                 </x-info-col-lg>
             </x-info-row>
+
             <x-info-row>
                 <x-info-col label="Location Country" label_ar="البلد الموقع">
                     {{ $location->location_country }}

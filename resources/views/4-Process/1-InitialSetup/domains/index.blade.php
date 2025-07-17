@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Domain Setup')
 @section('title_ar', 'إعداد المكون')
-@section('content') 
+@section('content')
     <div>
 
         <x-table.action-wrapper>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 
 @section('content')
     <!-- CONTENT -->
@@ -12,7 +12,7 @@
                 <p class="PageHeadEngTxt">Sub-Category Definition</p>
             </div>
             <div class="ButtonContainer">
-                <a href="{{route('sub-categories.index')}}" class="MoreButton">
+                <a href="{{ route('sub-categories.index') }}" class="MoreButton">
                     <p class="ButtonArbTxt">منظر</p>
                     <p class="ButtonEngTxt">View</p>
                 </a>
@@ -22,7 +22,9 @@
                     <p class="ButtonEngTxt">Add</p>
                 </a>
 
-                <a href="" class="{{ auth()->user()->can('manage-initial-setup') ? 'MoreButton' : 'DisabledButton' }}" id="btnUpdate">
+                <a href=""
+                    class="{{ auth()->user()->can('manage-initial-setup') ? 'MoreButton' : 'DisabledButton' }}"
+                    id="btnUpdate">
                     <p class="ButtonArbTxt">تحديث</p>
                     <p class="ButtonEngTxt">Update</p>
                 </a>
@@ -60,8 +62,10 @@
                         <td>
                             <input type="radio" name="record" class="record" value="{{ $subCategory->id }}" required>
                         </td>
-                        <td>{{ $loop->index + 1}}</td>
-                        <td><a href="{{route('sub-categories.show', $subCategory->id)}}">{{ $subCategory->sub_category_id }}</a></td>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td><a
+                                href="{{ route('sub-categories.show', $subCategory->id) }}">{{ $subCategory->sub_category_id }}</a>
+                        </td>
                         <td>{{ $subCategory->sub_category_name }}</td>
                         <td>{{ $subCategory->category->category_name }}</td>
                     </tr>
@@ -87,9 +91,9 @@
 
         document.getElementById('btnDelete').addEventListener('click', function(event) {
             event.preventDefault();
-            
+
             const selectedRadio = document.querySelector('.record:checked');
-            
+
             if (selectedRadio) {
                 document.getElementById('deleteRecordId').value = selectedRadio.value;
                 window.deleteConfirmationModal.show(document.getElementById('deleteForm'));

@@ -1,14 +1,13 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Location Setup')
 @section('title_ar', 'إعداد الموقع')
-@section('content') 
+@section('content')
     <div>
         <x-table.action-wrapper title="New Location">
             <x-action.button label="View" label_ar="منظر" route_name="locations.index" />
         </x-table.action-wrapper>
 
-        <form
-            action="{{ isset($location) ? route('locations.update', $location->id) : route('locations.store') }}"
+        <form action="{{ isset($location) ? route('locations.update', $location->id) : route('locations.store') }}"
             method="POST" enctype="multipart/form-data">
             @csrf
             @if (isset($location))
@@ -22,8 +21,8 @@
                             :readonly="$location?->location_id" placeholder="Enter Location ID" :value="$location?->location_id" />
                     </div>
                     <div>
-                        <x-form.field label="Location Name" label_ar="اسم الموقع" name="location_name"
-                            required="true" placeholder="Enter Location Name" :value="$location?->location_name" />
+                        <x-form.field label="Location Name" label_ar="اسم الموقع" name="location_name" required="true"
+                            placeholder="Enter Location Name" :value="$location?->location_name" />
                     </div>
                 </x-form.grid-col>
                 <x-form.grid-col-full>
@@ -52,8 +51,8 @@
                 </x-form.grid-col>
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Contact Person Name" label_ar="اسم جهة الاتصال بالموقع" name="location_contact_name"
-                            placeholder="Enter Contact Person Name" :value="$location?->location_contact_name" />
+                        <x-form.field label="Contact Person Name" label_ar="اسم جهة الاتصال بالموقع"
+                            name="location_contact_name" placeholder="Enter Contact Person Name" :value="$location?->location_contact_name" />
                     </div>
                     <div>
                         <x-form.field label="Contact Person Number" label_ar="رقم الجوال" name="location_contact_number"
@@ -62,8 +61,8 @@
                 </x-form.grid-col>
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Contact Person Email" label_ar="البريد الإلكتروني لجهة الاتصال" name="location_contact_email"
-                            placeholder="Enter Contact Person Email" :value="$location?->location_contact_email" />
+                        <x-form.field label="Contact Person Email" label_ar="البريد الإلكتروني لجهة الاتصال"
+                            name="location_contact_email" placeholder="Enter Contact Person Email" :value="$location?->location_contact_email" />
                     </div>
                 </x-form.grid-col>
 

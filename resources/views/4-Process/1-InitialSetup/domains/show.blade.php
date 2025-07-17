@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Main Domains')
 @section('title_ar', 'المكون الأساسي')
 @section('content')
@@ -19,9 +19,11 @@
                 </x-info-col>
             </x-info-row>
 
-            <x-info-col-lg label="Domain Description" label_ar="وصف المكون الأساسي">
-                {{ $domain->main_domain_description ?? '—' }}
-            </x-info-col-lg>
+            <x-info-row>
+                <x-info-col-lg label="Domain Description" label_ar="وصف المكون الأساسي">
+                    {{ $domain->main_domain_description ?? '—' }}
+                </x-info-col-lg>
+            </x-info-row>
 
             <x-info-row>
                 <x-info-col label="Classification" label_ar="التصنيف">

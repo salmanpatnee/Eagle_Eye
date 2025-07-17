@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Sub-Category Definition')
 @section('title_ar', 'تعريف الفئة الفرعية')
-@section('content') 
+@section('content')
     <div>
 
         <x-table.action-wrapper>

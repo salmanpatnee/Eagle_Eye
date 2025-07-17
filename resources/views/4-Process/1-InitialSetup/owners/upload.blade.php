@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Owner Registration')
 @section('title_ar', 'تسجيل صاحب')
 @section('content')
