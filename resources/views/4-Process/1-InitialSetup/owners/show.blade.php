@@ -60,7 +60,7 @@
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('owners.destroy') }}" id="deleteForm">
+                    {{-- <form method="POST" action="{{ route('owners.destroy') }}" id="deleteForm">
                         <input type="hidden" name="record" value="{{ $owner->id }}">
                         <button type="button"
                             class="{{ auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}"
@@ -70,7 +70,7 @@
                         </button>
                         @csrf
                         @method('DELETE')
-                    </form>
+                    </form> --}}
                 </div>
             </div>
             <table cellspacing="0">

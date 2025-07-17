@@ -5,6 +5,7 @@
     <div>
         <x-table.action-wrapper>
             <x-action.button label="Add Owner" label_ar="إضافة صاحب" route_name="owners.create" />
+            <x-action.button label="Upload Owners" label_ar="تحميل صاحب" route_name="upload.owner.create" />
         </x-table.action-wrapper>
 
         <x-table.table>

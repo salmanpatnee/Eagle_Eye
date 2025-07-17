@@ -6,6 +6,7 @@
         <x-table.action-wrapper>
 
             <x-action.button label="Add Custodian" label_ar="إضافة الوصي" route_name="custodians.create" />
+            <x-action.button label="Upload Custodians" label_ar="رفع الوصي" route_name="upload.custodians.create" />
         </x-table.action-wrapper>
 
         <x-table.table>

@@ -78,11 +78,11 @@
                         <p class="ButtonArbTxt">يمسح</p>
                         <p class="ButtonEngTxt">Delete</p>
                     </button>
-                    <form method="POST" action="{{ route('owners.destroy') }}" id="delete_form">
+                    {{-- <form method="POST" action="{{ route('owners.destroy') }}" id="delete_form">
                         <input type="hidden" name="record" value="{{ $owner?->id }}">
                         @csrf
                         @method('DELETE')
-                    </form>
+                    </form> --}}
                 </div>
             </div>
             <form id="form"

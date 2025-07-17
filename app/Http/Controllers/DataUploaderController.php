@@ -60,7 +60,7 @@ class DataUploaderController extends Controller
 
     public function createOwner()
     {
-        return view('4-Process/1-InitialSetup/OwnerUploadForm');
+        return view('4-Process/1-InitialSetup/owners/upload');
     }
 
     public function uploadOwners(Request $request)
@@ -100,7 +100,7 @@ class DataUploaderController extends Controller
 
     public function createCustodian()
     {
-        return view('4-Process/1-InitialSetup/CustodianUploadForm');
+        return view('4-Process/1-InitialSetup/custodians/upload');
     }
 
     public function uploadCustodian(Request $request)
@@ -185,13 +185,13 @@ class DataUploaderController extends Controller
 
     public function UploadHr(Request $request)
     {
-       
+
         // Validate the uploaded file
         $request->validate([
             'excel_file' => 'required|mimes:xlsx,xls'
         ]);
 
-    
+
 
         // Load the uploaded file
         $file = $request->file('excel_file');
@@ -203,14 +203,14 @@ class DataUploaderController extends Controller
         array_pop($headers);
         array_pop($headers);
         array_pop($headers);
-        
+
         foreach ($rows as $row) {
             $experties = array_pop($row);
             $roles = array_pop($row);
             $certifications = array_pop($row);
-        
+
             $data = array_combine($headers, $row);
-        
+
             // Ensure asset_id is present to avoid errors
             if (!isset($data['expert_id'])) {
                 continue;
