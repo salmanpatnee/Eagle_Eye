@@ -120,7 +120,7 @@
         </a>
     </div>
     <div class="processes">
-        <a href="/asset-register-list" class="boxhyperlink">
+        <a href="/assets" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -202,7 +202,7 @@
             </div>
         </a>
     </div>
-  
+
     <div class="processes">
         <a href="/risk-methodology" class="boxhyperlink">
             <div class="itemprocesses">
@@ -240,7 +240,7 @@
                 </div>
             </div>
         </a>
-        
+
     </div>
     <div class="processes">
         <a href="/control-identification-list" class="boxhyperlink">
@@ -317,11 +317,11 @@
                 </div>
             </div>
         </a>
-       
+
     </div>
-      <div class="processes">
+    <div class="processes">
         <div class="spacebox"></div>
-        <a href="{{route('va.register')}}" class="boxhyperlink">
+        <a href="{{ route('va.register') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -456,7 +456,7 @@
         <div class="spacebox"></div>
     </div>
 
-   
+
 
 
     <!-- Evidence Management -->
@@ -584,7 +584,7 @@
         </div>
     </div>
     <div class="processes">
-        <a href="{{route('audit.plan.index')}}" class="boxhyperlink">
+        <a href="{{ route('audit.plan.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -609,7 +609,7 @@
             </div>
         </a>
 
-<a href="{{ route('audit-registrations.index') }}" class="boxhyperlink">
+        <a href="{{ route('audit-registrations.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -621,8 +621,8 @@
                 </div>
             </div>
         </a>
-       
-        
+
+
     </div>
     <div class="processes">
         <div class="spacebox"></div>
@@ -639,8 +639,8 @@
             </div>
         </a>
         <div class="spacebox"></div>
-        
-        
+
+
     </div>
     <!-- ISO 27000 Family -->
     <div>
@@ -705,7 +705,7 @@
     </div>
     @include('4-Process/domain-ISO-27001')
 
-     <!-- Vulnerability Penetration Test -->
+    <!-- Vulnerability Penetration Test -->
     <div>
         <div class="sectionhead">
             <p>Vulnerability Assessment / Penetration Test Tracking</p>
@@ -750,7 +750,7 @@
             </div>
         </a>
     </div>
-    
+
     @include('4-Process/resource-management')
 
 </body>

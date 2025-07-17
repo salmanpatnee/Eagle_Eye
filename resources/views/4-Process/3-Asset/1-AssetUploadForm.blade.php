@@ -48,12 +48,13 @@
                 <div class="PageHead">
 
                 </div>
-              
+
             </div>
 
             <form action="{{ route('upload.assets.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <h3> <a href="{{asset('templates/asset_register_template.xlsx')}}" download="">Download the template file</a> </h3>
+                <h3> <a href="{{ asset('templates/asset_register_template.xlsx') }}" download="">Download the
+                        template file</a> </h3>
 
                 <div class="ContentTableSection">
                     @if (session('success'))
@@ -102,7 +103,7 @@
             const selectedRadio = document.querySelector('.record:checked');
 
             if (selectedRadio) {
-                window.location.href = `/asset-register/edit/${selectedRadio.value}`;
+                window.location.href = `/assets/edit/${selectedRadio.value}`;
             } else {
                 alert('Please select a record.');
             }

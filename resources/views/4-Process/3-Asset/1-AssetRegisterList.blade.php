@@ -62,12 +62,12 @@
 
                 </div>
                 <div class="ButtonContainer">
-                    <a href="{{ route('assetreg.index') }}" class="MoreButton">
+                    <a href="{{ route('assets.index') }}" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
 
-                    <a href="{{ route('assetreg.create') }}"
+                    <a href="{{ route('assets.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div>
-                <form action="{{ route('assetreg.index') }}">
+                <form action="{{ route('assets.index') }}">
                     <div class="filter-row">
 
                         <div class="col">
@@ -126,7 +126,7 @@
                     </div>
                 </form>
             </div>
-            <form method="POST" id="deleteForm" action="{{ route('assetreg.delete') }}">
+            <form method="POST" id="deleteForm" action="{{ route('assets.destroy') }}">
                 @csrf
                 @method('DELETE')
                 <input type="hidden" name="record" value="">
@@ -168,7 +168,7 @@
                                     </td>
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td style="width: 150px;"><a
-                                            href="/asset-register-table/{{ $asset->asset_id }}">{{ $asset->asset_id }}</a>
+                                            href="/assets/{{ $asset->asset_id }}">{{ $asset->asset_id }}</a>
                                     </td>
                                     <td>{{ $asset->asset_name }}</td>
                                     <td>{{ $asset->asset_description }}</td>
@@ -200,7 +200,7 @@
             const selectedRadio = document.querySelector('.record:checked');
 
             if (selectedRadio) {
-                window.location.href = `/asset-register/edit/${selectedRadio.value}`;
+                window.location.href = `/assets/edit/${selectedRadio.value}`;
             } else {
                 alert('Please select a record.');
             }

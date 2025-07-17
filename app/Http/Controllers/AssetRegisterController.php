@@ -11,6 +11,36 @@ use Illuminate\Support\Facades\DB;
 
 class AssetRegisterController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $categories = Category::select('category_id', 'category_name')->get();
+        $assetOptions = Asset::select('asset_id', 'asset_name')->get();
+
+        $asset = $request->input('asset') ?? null;
+        $category = $request->input('category') ?? null;
+
+        $assets = Asset::with('categories')
+            ->when($asset, function ($query, $asset) {
+                $query->where('asset_id', $asset);
+            })->when($category, function ($query, $category) {
+                $query->whereHas('categories', function ($query) use ($category) {
+                    $query->where('category_table.category_id', $category);
+                });
+            })->paginate(20);
+
+
+
+        return view('4-Process/3-Asset/asset-register/index', compact('assets', 'categories', 'assetOptions', 'asset', 'category'));
+    }
+
+    public function show(Asset $asset)
+    {
+        $asset->load('categories', 'custodians', 'assetGroup', 'owner', 'assetType', 'assetSubType', 'owner', 'assetStatus', 'classification');
+
+        return view('4-Process/3-Asset/asset-register/show', compact('asset'));
+    }
+
     // To add data into the table
     public function create()
     {
@@ -134,7 +164,7 @@ class AssetRegisterController extends Controller
                 ->attach($categoriesArray);
         }
 
-        return redirect()->route('assetreg.index')->with('success', 'Asset saved successfully.');
+        return redirect()->route('assets.index')->with('success', 'Asset saved successfully.');
     }
 
     public function update(Asset $asset, Request $request)
@@ -217,33 +247,12 @@ class AssetRegisterController extends Controller
                 ->sync($categoriesArray);
         }
 
-        return redirect()->route('assetreg.index')->with('success', 'Asset saved successfully.');
+        return redirect()->route('assets.index')->with('success', 'Asset saved successfully.');
     }
     //----------------------------------------------------------------------------------------------//
 
 
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index(Request $request)
-    {
-        $categories = Category::select('category_id', 'category_name')->get();
-        $assetOptions = Asset::select('asset_id', 'asset_name')->get();
 
-        $asset = $request->input('asset') ?? null;
-        $category = $request->input('category') ?? null;
-
-        $assets = Asset::with('categories')
-            ->when($asset, function ($query, $asset) {
-                $query->where('asset_id', $asset);
-            })->when($category, function ($query, $category) {
-                $query->whereHas('categories', function ($query) use ($category) {
-                    $query->where('category_table.category_id', $category);
-                });
-            })->get();
-
-           
-
-        return view('4-Process/3-Asset/1-AssetRegisterList', compact('assets', 'categories', 'assetOptions'));
-    }
 
     // 3.Controller - DELETE RECORD FROM LIST
     public function delete(Request $request)
@@ -254,7 +263,7 @@ class AssetRegisterController extends Controller
 
         Asset::where('asset_id', $attributes['record'])->delete();
 
-        return redirect('/asset-register-list');
+        return redirect('/assets');
 
         // $selectedassetregister = $request->input('selectedassetregister');
 
@@ -270,14 +279,6 @@ class AssetRegisterController extends Controller
         // // if (!empty($selectedassetregister)) {
         // //     DB::table('asset_register_table')->whereIn('asset_id', $selectedassetregister)->delete();
         // // }
-        // return redirect('/asset-register-list');
-    }
-
-
-    public function show(Asset $asset)
-    {
-        $asset->load('categories', 'custodians', 'assetGroup', 'owner', 'assetType', 'assetSubType', 'owner', 'assetStatus', 'classification');
-
-        return view('4-Process/3-Asset/1-AssetRegisterTable', compact('asset'));
+        // return redirect('/assets');
     }
 }

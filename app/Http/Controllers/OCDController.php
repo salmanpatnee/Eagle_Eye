@@ -881,7 +881,7 @@ class OCDController extends Controller
                 DISTINCT r.risk_id, 
                 ra.risk_assessment_id,
                 GROUP_CONCAT(DISTINCT CONCAT(
-                    "<a href=\'/asset-register-table/", a.asset_id, "\' >", a.asset_name, "</a>"
+                    "<a href=\'/assets/", a.asset_id, "\' >", a.asset_name, "</a>"
                 ) SEPARATOR "<br>") AS assets,
                 COALESCE(ra.implementation_status, "Open") AS status,
                 o.owner_id,

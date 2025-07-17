@@ -67,7 +67,7 @@
         </a>
     </div>
     <div class="processes">
-        <a href="/asset-register-input" class="boxhyperlink">
+        <a href="/assets/create" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

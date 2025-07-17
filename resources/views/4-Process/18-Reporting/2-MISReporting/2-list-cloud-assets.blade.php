@@ -44,7 +44,7 @@
                 @foreach ($assetregister as $row)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td><a href="{{ route('assetreg.show', $row->asset_id) }}">{{ $row->asset_id }}</a>
+                        <td><a href="{{ route('assets.show', $row->asset_id) }}">{{ $row->asset_id }}</a>
                         <td>{{ $row->asset_name }}</td>
                         <td>{{ $row->asset_group_name }}</td>
                         <td>{{ $row->asset_type_name }}</td>

@@ -279,7 +279,7 @@
                                                         html += "<tr>";
                                                         html += `<td>${i}</td>`;
                                                         html +=
-                                                            `<td><a href="/asset-register-table/${row.asset_id}" >${row.asset_name}</a></td>`;
+                                                            `<td><a href="/assets/${row.asset_id}" >${row.asset_name}</a></td>`;
                                                         html +=
                                                             `<td><a href="/owners/{owner}/${row.asset_owner_id}" >${row.asset_owner_name}</a></td>`;
                                                         html +=

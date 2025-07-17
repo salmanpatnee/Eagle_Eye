@@ -37,7 +37,7 @@
         <section id="sidebar">
             <ul class="side-menu top">
                 <li>
-                    <a href="/asset-register-input">
+                    <a href="/assets/create">
                         <i class='bx bxs-label'></i>
                         <div class="MenuTxt">
                             <h3>تسجيل الأصول</h3>
@@ -76,9 +76,9 @@
             </ul>
         </section>
         <!-- SIDEBAR -->
-    
-    
-    
+
+
+
         <!-- CONTENT -->
         <div class="IndiTable">
             <form id="form"
@@ -100,30 +100,30 @@
                             <p class="ButtonEngTxt">View</p>
                         </a>
                         @if (request()->routeIs('assetstatus.edit'))
-                        <a href="{{route('assetstatus.create')}}" class="MoreButton">
-                            <p class="ButtonArbTxt">يضيف</p>
-                            <p class="ButtonEngTxt">Add</p>
-                        </a>
-                        <button type="submit" form="form" class="MoreButton">
-                            <p class="ButtonArbTxt">تحديث</p>
-                            <p class="ButtonEngTxt">Update</p>
-                        </button>
-                    @else
-                        <button type="submit" form="form" class="MoreButton">
-                            <p class="ButtonArbTxt">يضيف</p>
-                            <p class="ButtonEngTxt">Add</p>
-                        </button>
-                        <a href="" class="DisabledButton">
-                            <p class="ButtonArbTxt">تحديث</p>
-                            <p class="ButtonEngTxt">Update</p>
-                        </a>
-                    @endif
+                            <a href="{{ route('assetstatus.create') }}" class="MoreButton">
+                                <p class="ButtonArbTxt">يضيف</p>
+                                <p class="ButtonEngTxt">Add</p>
+                            </a>
+                            <button type="submit" form="form" class="MoreButton">
+                                <p class="ButtonArbTxt">تحديث</p>
+                                <p class="ButtonEngTxt">Update</p>
+                            </button>
+                        @else
+                            <button type="submit" form="form" class="MoreButton">
+                                <p class="ButtonArbTxt">يضيف</p>
+                                <p class="ButtonEngTxt">Add</p>
+                            </button>
+                            <a href="" class="DisabledButton">
+                                <p class="ButtonArbTxt">تحديث</p>
+                                <p class="ButtonEngTxt">Update</p>
+                            </a>
+                        @endif
 
-                    <button type="button" onclick="showDeleteModal()"
-                        class="{{ auth()->user()->can('delete-data') && request()->routeIs('assetstatus.edit') ? 'MoreButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">يمسح</p>
-                        <p class="ButtonEngTxt">Delete</p>
-                    </button>
+                        <button type="button" onclick="showDeleteModal()"
+                            class="{{ auth()->user()->can('delete-data') && request()->routeIs('assetstatus.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                            <p class="ButtonArbTxt">يمسح</p>
+                            <p class="ButtonEngTxt">Delete</p>
+                        </button>
                     </div>
                 </div>
                 <table cellspacing="0">
@@ -163,8 +163,9 @@
                                     <p class="FieldHeadEngTxt">Asset Status Description</p>
                                     <p class="FieldHeadArbTxt">وصف حالة الأصول</p>
                                 </div>
-                                <p><input type="text" name="asset_status_description" id="asset_status_description"
-                                        class="bg-tx" placeholder="Write Asset Status Description"
+                                <p><input type="text" name="asset_status_description"
+                                        id="asset_status_description" class="bg-tx"
+                                        placeholder="Write Asset Status Description"
                                         value="{{ old('asset_status_description', $assetstatus?->asset_status_description) }}">
                                     @error('asset_status_description')
                                         <span class="text-danger">{{ $message }}</span>
@@ -191,9 +192,10 @@
         function goBack() {
             window.history.back();
         }
+
         function showDeleteModal() {
-    window.deleteConfirmationModal.show(document.getElementById('delete_form'));
-}
+            window.deleteConfirmationModal.show(document.getElementById('delete_form'));
+        }
     </script>
 </body>
 

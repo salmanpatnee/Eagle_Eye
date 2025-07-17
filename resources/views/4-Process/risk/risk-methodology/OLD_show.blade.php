@@ -244,7 +244,7 @@
                         </p>
                     </td>
                     <td>
-                        <a href="{{ route('assetreg.show', $riskMethodology->asset?->asset_id) }}">
+                        <a href="{{ route('assets.show', $riskMethodology->asset?->asset_id) }}">
 
                             {{ $riskMethodology->asset?->asset_name }}
                         </a>

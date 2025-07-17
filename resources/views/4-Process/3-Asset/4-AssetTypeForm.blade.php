@@ -36,7 +36,7 @@
         <section id="sidebar">
             <ul class="side-menu top">
                 <li>
-                    <a href="/asset-register-input">
+                    <a href="/assets/create">
                         <i class='bx bxs-label'></i>
                         <div class="MenuTxt">
                             <h3>تسجيل الأصول</h3>
@@ -190,9 +190,10 @@
         function goBack() {
             window.history.back();
         }
+
         function showDeleteModal() {
-    window.deleteConfirmationModal.show(document.getElementById('delete_form'));
-}
+            window.deleteConfirmationModal.show(document.getElementById('delete_form'));
+        }
     </script>
 </body>
 

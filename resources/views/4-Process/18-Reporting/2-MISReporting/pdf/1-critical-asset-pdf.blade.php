@@ -46,7 +46,7 @@
 
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
 
-                            <a href="{{ route('assetreg.show', $row->asset_id) }}" style="color: black">
+                            <a href="{{ route('assets.show', $row->asset_id) }}" style="color: black">
                                 {{ $row->asset_id }}
                             </a>
 

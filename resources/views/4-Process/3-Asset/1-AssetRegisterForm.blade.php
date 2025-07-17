@@ -86,14 +86,14 @@
 
         <!-- CONTENT -->
         <div class="IndiTable">
-            <form method="POST" action="{{ route('assetreg.delete') }}" id="delete_form">
+            <form method="POST" action="{{ route('assets.destroy') }}" id="delete_form">
                 <input type="hidden" name="record" value="{{ $assetregister?->asset_id }}">
                 @csrf
                 @method('DELETE')
             </form>
 
             <form id="form"
-                action="{{ isset($assetregister) ? route('assetreg.update', $assetregister->asset_id) : route('assetreg.store') }}"
+                action="{{ isset($assetregister) ? route('assets.update', $assetregister->asset_id) : route('assets.store') }}"
                 method="POST">
                 @csrf
                 @if (isset($assetregister))
@@ -107,12 +107,12 @@
                     </div>
 
                     <div class="ButtonContainer">
-                        <a href="/asset-register-list" class="MoreButton">
+                        <a href="/assets" class="MoreButton">
                             <p class="ButtonArbTxt">منظر</p>
                             <p class="ButtonEngTxt">View</p>
                         </a>
-                        @if (request()->routeIs('assetreg.edit'))
-                            <a href="{{ route('assetreg.create') }}" class="MoreButton">
+                        @if (request()->routeIs('assets.edit'))
+                            <a href="{{ route('assets.create') }}" class="MoreButton">
                                 <p class="ButtonArbTxt">يضيف</p>
                                 <p class="ButtonEngTxt">Add</p>
                             </a>
@@ -132,7 +132,7 @@
                         @endif
 
                         <button type="button" onclick="showDeleteModal()"
-                            class="{{ auth()->user()->can('delete-data') && request()->routeIs('assetreg.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                            class="{{ auth()->user()->can('delete-data') && request()->routeIs('assets.edit') ? 'MoreButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>

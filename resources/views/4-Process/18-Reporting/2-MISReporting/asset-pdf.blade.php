@@ -58,7 +58,7 @@
                             {{ $loop->index + 1 }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: center; vertical-align: top;">
-                            <a href="{{ route('assetreg.show', $row->asset_id) }}"
+                            <a href="{{ route('assets.show', $row->asset_id) }}"
                                 style="color: #000; font-size: 12px; text-decoration: none;">
                                 {{ $row->asset_id }}
                             </a>

@@ -501,13 +501,13 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::controller(AssetRegisterController::class)->group(function () {
-        Route::get('/asset-register-list', 'index')->name('assetreg.index');
-        Route::get('/asset-register-table/{asset:asset_id}', 'show')->name('assetreg.show');
-        Route::get('/asset-register-input', 'create')->name('assetreg.create');
-        Route::get('/asset-register/edit/{asset:asset_id}', 'edit')->name('assetreg.edit');
-        Route::post('/asset-register', 'store')->name('assetreg.store');
-        Route::put('/asset-register/{asset:asset_id}', 'update')->name('assetreg.update');
-        Route::delete('/asset-register/delete', 'delete')->name('assetreg.delete');
+        Route::get('/assets', 'index')->name('assets.index');
+        Route::get('/assets/{asset:asset_id}', 'show')->name('assets.show');
+        Route::get('/assets/create', 'create')->name('assets.create');
+        Route::get('/assets/edit/{asset:asset_id}', 'edit')->name('assets.edit');
+        Route::post('/assets', 'store')->name('assets.store');
+        Route::put('/assets/{asset:asset_id}', 'update')->name('assets.update');
+        Route::delete('/assets/{asset:asset_id}', 'delete')->name('assets.destroy');
     });
 
     // ------------Asset Status--------------

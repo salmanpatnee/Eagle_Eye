@@ -48,7 +48,7 @@
                 @foreach ($assetregister as $row)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td><a href="/asset-register-table/{{ $row->asset_id }}">{{ $row->asset_id }}</a>
+                        <td><a href="/assets/{{ $row->asset_id }}">{{ $row->asset_id }}</a>
                         </td>
                         <td>{{ $row->asset_name }}</td>
                         <td>{{ $row->asset_group_name }}</td>
@@ -60,8 +60,3 @@
         </table>
     </div>
 @endsection
-
-
-
-
-

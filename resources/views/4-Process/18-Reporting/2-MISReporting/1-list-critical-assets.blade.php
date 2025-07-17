@@ -5,7 +5,7 @@
             <div class="cveButton">
                 <h1>تقرير الأصول الحرجة</h1>
                 <h3>Critical Assets Report</h3>
-                
+
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td>
-                            <a href="{{ route('assetreg.show', $criticalAsset->asset_id) }}">
+                            <a href="{{ route('assets.show', $criticalAsset->asset_id) }}">
                                 {{ $criticalAsset->asset_id }}
                             </a>
                         </td>

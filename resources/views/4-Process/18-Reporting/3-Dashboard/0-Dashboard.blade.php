@@ -61,7 +61,7 @@
     <!-- CONTENT -->
     <div class="IndiTable">
         <div class="UpperBoxContainer">
-            <a href="/asset-register-list">
+            <a href="/assets">
                 <div class="UpperBox">
                     <i class='bx bxs-box'></i>
                     <h3>{{ $assetCount }}</h3>

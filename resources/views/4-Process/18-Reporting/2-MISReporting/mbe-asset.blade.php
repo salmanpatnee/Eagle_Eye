@@ -43,7 +43,7 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td>
-                            <a href="{{ route('assetreg.show', $row->asset_id) }}">
+                            <a href="{{ route('assets.show', $row->asset_id) }}">
                                 {{ $row->asset_id }}
                             </a>
                         </td>

@@ -45,19 +45,17 @@
             </thead>
             <tbody class="tablebody">
                 @foreach ($assetregister as $row)
-                <tr>
-                    <td>{{ $loop->index + 1 }}</td>
-                    <td><a href="/asset-register-table/{{ $row->asset_id }}">{{ $row->asset_id }}</a>
-                    </td>
-                    <td>{{ $row->asset_name }}</td>
-                    <td>{{ $row->asset_group_name }}</td>
-                    <td>{{ $row->asset_type_name }}</td>
-                    <td>{{ $row->location_name }}</td>
-                </tr>
-            @endforeach
+                    <tr>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td><a href="/assets/{{ $row->asset_id }}">{{ $row->asset_id }}</a>
+                        </td>
+                        <td>{{ $row->asset_name }}</td>
+                        <td>{{ $row->asset_group_name }}</td>
+                        <td>{{ $row->asset_type_name }}</td>
+                        <td>{{ $row->location_name }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 @endsection
-
-

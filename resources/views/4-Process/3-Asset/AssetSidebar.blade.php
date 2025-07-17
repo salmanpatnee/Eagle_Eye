@@ -1,7 +1,8 @@
 <section id="sidebar">
     <ul class="side-menu top">
-        <li class="{{ request()->routeIs('assetreg.index') || request()->routeIs('assetreg.show') || request()->routeIs('assetreg.create') || request()->routeIs('assetreg.edit') ? 'active' : '' }}">
-            <a href="{{route('assetreg.index')}}">
+        <li
+            class="{{ request()->routeIs('assets.index') || request()->routeIs('assets.show') || request()->routeIs('assets.create') || request()->routeIs('assets.edit') ? 'active' : '' }}">
+            <a href="{{ route('assets.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>تسجيل الأصول</h3>
@@ -9,8 +10,9 @@
                 </div>
             </a>
         </li>
-        <li class="{{ request()->routeIs('assetstatus.index') || request()->routeIs('assetstatus.show') || request()->routeIs('assetstatus.create') || request()->routeIs('assetstatus.edit') ? 'active' : '' }}">
-            <a href="{{route('assetstatus.index')}}">
+        <li
+            class="{{ request()->routeIs('assetstatus.index') || request()->routeIs('assetstatus.show') || request()->routeIs('assetstatus.create') || request()->routeIs('assetstatus.edit') ? 'active' : '' }}">
+            <a href="{{ route('assetstatus.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>حالة الأصول</h3>
@@ -18,8 +20,9 @@
                 </div>
             </a>
         </li>
-        <li class="{{ request()->routeIs('assettype.index') || request()->routeIs('assettype.show') || request()->routeIs('assettype.create') || request()->routeIs('assettype.edit') ? 'active' : '' }}">
-            <a href="{{route('assettype.index')}}">
+        <li
+            class="{{ request()->routeIs('assettype.index') || request()->routeIs('assettype.show') || request()->routeIs('assettype.create') || request()->routeIs('assettype.edit') ? 'active' : '' }}">
+            <a href="{{ route('assettype.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>نوع الأصل</h3>
@@ -27,8 +30,9 @@
                 </div>
             </a>
         </li>
-        <li class="{{ request()->routeIs('assetsubtype.index') || request()->routeIs('assetsubtype.show') || request()->routeIs('assetsubtype.create') || request()->routeIs('assetsubtype.edit') ? 'active' : '' }}">
-            <a href="{{route('assetsubtype.index')}}">
+        <li
+            class="{{ request()->routeIs('assetsubtype.index') || request()->routeIs('assetsubtype.show') || request()->routeIs('assetsubtype.create') || request()->routeIs('assetsubtype.edit') ? 'active' : '' }}">
+            <a href="{{ route('assetsubtype.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>النوع الفرعي للأصول</h3>
@@ -38,7 +42,7 @@
             </a>
         </li>
         <li>
-            <a href="{{asset('templates/asset_register_template.xlsx')}}" download="">
+            <a href="{{ asset('templates/asset_register_template.xlsx') }}" download="">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>تحميل قالب اكسل</h3>
@@ -48,7 +52,7 @@
             </a>
         </li>
         <li class="{{ request()->routeIs('upload.assets.create') ? 'active' : '' }}">
-            <a href="{{route('upload.assets.create')}}">
+            <a href="{{ route('upload.assets.create') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>تحميل بيانات الأصول</h3>
