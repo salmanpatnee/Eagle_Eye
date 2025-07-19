@@ -16,7 +16,7 @@ class CategoryController extends Controller
             ->orderByRaw('CAST(SUBSTRING_INDEX(category_id, "-", 1) AS UNSIGNED)')
             ->orderByRaw('CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(category_id, "-", -1), ".", 1) AS UNSIGNED)')
             ->orderByRaw('SUBSTRING_INDEX(category_id, ".", -1)')
-            ->get();
+            ->paginate(20);
 
         return view('4-Process.1-InitialSetup.categories.index', compact('categories'));
     }
@@ -81,7 +81,7 @@ class CategoryController extends Controller
         Category::where('category_id', $attributes['record'])->delete();
 
         return redirect(route('categories.index'))
-                ->with('success', 'Category deleted successfully.');
+            ->with('success', 'Category deleted successfully.');
 
         // $ids =  $request->validate([
         //     'records' => ['required', 'array'],

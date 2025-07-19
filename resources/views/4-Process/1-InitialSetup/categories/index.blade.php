@@ -5,7 +5,7 @@
     <div>
 
         <x-table.action-wrapper>
-            <x-action.button label="Add Organization" label_ar="إضافة جهة" route_name="categories.create" />
+            <x-action.button label="Add Category" label_ar="إضافة الفئة" route_name="categories.create" />
         </x-table.action-wrapper>
 
         <x-table.table>
@@ -32,5 +32,8 @@
                 @endforeach
             </x-table.tbody>
         </x-table.table>
+        <x-pagination>
+            {{ $categories->links() }}
+        </x-pagination>
     </div>
 @endsection
