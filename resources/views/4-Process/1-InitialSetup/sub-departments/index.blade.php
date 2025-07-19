@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <x-table.action-wrapper>
-            <x-action.button label="Add" label_ar="يضيف" route_name="sub-departments.create" />
+            <x-action.button label="Add Sub-Departments" label_ar="إضافة القسم الفرعي" route_name="sub-departments.create" />
         </x-table.action-wrapper>
 
         <x-table.table>
