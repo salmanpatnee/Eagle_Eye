@@ -65,35 +65,16 @@ class ClassificationController extends Controller
             ->with('success', 'Classification saved successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Classification $classification)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
+        if ($classification->domains()->exists() || $classification->subDomains()->exists()) {
+            return redirect(route('classifications.index'))
+                ->with('error', "Classification '{$classification->classification_name}' cannot be deleted due to existing dependencies.");
+        }
 
-        Classification::where('id', $attributes['record'])->delete();
-        
+        $classification->delete();
+
         return redirect(route('classifications.index'))
-                ->with('success', 'Classification(s) deleted successfully.');
-
-        // $ids =  $request->validate([
-        //     'classifications' => ['required', 'array'],
-        // ]);
-
-        // try {
-        //     Classification::whereIn('id', $ids['classifications'])->each(function ($classification) {
-        //         if ($classification->domains()->exists() || $classification->subDomains()->exists()) {
-        //             throw new \Exception("Classification '{$classification->classification_name}' cannot be deleted due to existing dependencies.");
-        //         }
-        //         $classification->delete();
-        //     });
-
-        //     return redirect(route('classifications.index'))
-        //         ->with('success', 'Classification(s) deleted successfully.');
-        // } catch (\Exception $e) {
-
-        //     return redirect(route('classifications.index'))
-        //         ->with('error', $e->getMessage());
-        // }
+            ->with('success', 'Classification deleted successfully.');
     }
 }

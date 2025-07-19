@@ -375,7 +375,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/classifications', 'store')->name('classifications.store');
         Route::get('/classifications/edit/{classification}', 'edit')->name('classifications.edit');
         Route::put('/classifications/{classification}', 'update')->name('classifications.update');
-        Route::delete('/classifications', 'destroy')->name('classifications.destroy');
+        Route::delete('/classifications/{classification}', 'destroy')->name('classifications.destroy');
     });
 
 
@@ -386,7 +386,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/categories', 'store')->name('categories.store');
         Route::get('/categories/edit/{category}', 'edit')->name('categories.edit');
         Route::put('/categories/{category}', 'update')->name('categories.update');
-        Route::delete('/categories', 'destroy')->name('categories.destroy');
+        Route::delete('/categories/{category}', 'destroy')->name('categories.destroy');
     });
 
     Route::controller(SubCategoryController::class)->group(function () {
