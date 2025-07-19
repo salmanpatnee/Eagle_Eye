@@ -47,7 +47,7 @@ class RiskInherentController extends Controller
         RiskInherent::create($attributes);
 
 
-        return redirect()->route('RiskInherent.index')->with('success', 'Risk Inherent Saved Successfully.');
+        return redirect()->route('risk-inherent.index')->with('success', 'Risk Inherent Saved Successfully.');
     }
 
     // To store the edited data into the table
@@ -65,7 +65,7 @@ class RiskInherentController extends Controller
 
         $riskInherent->update($attributes);
 
-        return redirect()->route('RiskInherent.index')->with('success', 'Risk Inherent Saved Successfully.');
+        return redirect()->route('risk-inherent.index')->with('success', 'Risk Inherent Saved Successfully.');
     }
 
     //--------------------------------------------------------------------//
@@ -86,7 +86,7 @@ class RiskInherentController extends Controller
             'record' => ['required'],
         ]);
 
-        
+
         $data = RiskInherent::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
 
         $data->delete();

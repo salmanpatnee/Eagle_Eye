@@ -5,7 +5,8 @@
     }
 
     .MoreButton,
-    .DisabledButton, .RightButton {
+    .DisabledButton,
+    .RightButton {
         margin-right: auto;
     }
 </style>
@@ -21,7 +22,7 @@
         </a>
     </li>
     <li
-        class="{{ request()->routeIs('RiskInherent.index') || request()->routeIs('RiskInherent.show') || request()->routeIs('RiskInherent.create') || request()->routeIs('RiskInherent.edit') ? 'active' : '' }}">
+        class="{{ request()->routeIs('risk-inherent.index') || request()->routeIs('RiskInherent.show') || request()->routeIs('RiskInherent.create') || request()->routeIs('RiskInherent.edit') ? 'active' : '' }}">
         <a href="/risk-inherent-list">
             <i class='bx bxs-label'></i>
             <div class="MenuTxt">
