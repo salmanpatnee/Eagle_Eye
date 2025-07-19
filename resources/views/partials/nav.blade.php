@@ -7,6 +7,21 @@
     <div class="flex grow flex-col items-center justify-between lg:flex-row lg:px-6">
         <div
             class="flex w-full items-center justify-between gap-2 border-b border-gray-200 px-3 py-3 sm:gap-4 lg:justify-normal lg:border-b-0 lg:px-0 lg:py-4 dark:border-gray-800">
+            <div :class="sidebarToggle ? 'justify-center' : 'justify-between'"
+                class="flex items-center gap-2 sidebar-header hidden lg:flex">
+                <a href="{{ route('compliance') }}">
+                    <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
+                        <span class="flex items-center space-x-2">
+                            <img class="dark:hidden w-10" src="{{ asset('images/logo/EagleEyeLogo.png') }}"
+                                alt="Logo" />
+                            <span class="dark:hidden text-2xl font-semibold">Eagle Eye</span>
+                        </span>
+                    </span>
+                    <img class="logo-icon" :class="sidebarToggle ? 'lg:block mt-10 w-20' : 'hidden'"
+                        src="{{ asset('images/logo/EagleEyeLogo.png') }}" alt="Logo" />
+
+                </a>
+            </div>
             <!-- Hamburger Toggle BTN -->
             <button :class="sidebarToggle ? 'bg-gray-100 dark:bg-gray-800' : ''"
                 class="z-99999 flex h-10 w-10 items-center justify-center rounded-lg border-gray-200 text-gray-500 lg:hidden dark:border-gray-800 dark:text-gray-400"

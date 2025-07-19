@@ -16,19 +16,24 @@ class RiskTreatmentTableController extends Controller
         $riskId = $request->input('risk') ?? null;
         $controlId = $request->input('control') ?? null;
 
-       $controls = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
+        $controls = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
             ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
             ->orderControls()
-            ->pluck('control_master_table.control_id');
+            ->get();
+        // ->pluck('control_master_table.control_id');
+
+
 
         $risks = Risk::select('risk_id', 'risk_name')
             ->get();
 
-            $riskTreatments = Risk::whereHas('controls', function ($query) use ($controlId) {
-                if ($controlId) {
-                    $query->where('risk_vs_control_table.control_id', $controlId);
-                }
-            })
+
+
+        $riskTreatments = Risk::whereHas('controls', function ($query) use ($controlId) {
+            if ($controlId) {
+                $query->where('risk_vs_control_table.control_id', $controlId);
+            }
+        })
             ->with(['controls' => function ($query) use ($controlId) {
                 if ($controlId) {
                     $query->where('risk_vs_control_table.control_id', $controlId);
@@ -38,9 +43,9 @@ class RiskTreatmentTableController extends Controller
                 $query->where('risk_master_table.risk_id', $riskId);
             })
             ->get();
-        
 
-        return view('4-Process/7-Risk/7-RiskTreatmentTable', compact('riskTreatments', 'controls', 'risks'));
+
+        return view('4-Process/7-Risk/7-RiskTreatmentTable', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
     }
 
     public function controlVsRisk(Request $request)
@@ -51,16 +56,17 @@ class RiskTreatmentTableController extends Controller
         $controls = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
             ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
             ->orderControls()
-            ->pluck('control_master_table.control_id');
+            ->get();
+        // ->pluck('control_master_table.control_id');
 
         $risks = Risk::select('risk_id', 'risk_name')
             ->get();
 
-            $riskTreatments = ControlMaster::whereHas('risks', function ($query) use ($riskId) {
-                if ($riskId) {
-                    $query->where('risk_master_table.risk_id', $riskId);
-                }
-            })
+        $riskTreatments = ControlMaster::whereHas('risks', function ($query) use ($riskId) {
+            if ($riskId) {
+                $query->where('risk_master_table.risk_id', $riskId);
+            }
+        })
             ->with(['risks' => function ($query) use ($riskId) {
                 if ($riskId) {
                     $query->where('risk_master_table.risk_id', $riskId);
@@ -71,8 +77,8 @@ class RiskTreatmentTableController extends Controller
             })
             ->get();
 
-        
 
-        return view('4-Process/7-Risk/control-risk', compact('riskTreatments', 'controls', 'risks'));
+
+        return view('4-Process/7-Risk/control-risk', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
     }
 }

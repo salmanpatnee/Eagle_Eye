@@ -839,7 +839,7 @@ Route::middleware(['auth'])->group(function () {
     // ------------Risk Inherent--------------
 
     Route::controller(RiskInherentController::class)->group(function () {
-        Route::get('/risk-inherent-list', 'index')->name('RiskInherent.index');
+        Route::get('/risk-inherent-list', 'index')->name('risk-inherent.index');
         Route::get('/risk-inherent-table/{risk_id}', 'show')->name('RiskInherent.show');
         Route::get('/risk-inherent-input', 'create')->name('RiskInherent.create');
         Route::get('/risk-inherent/edit/{id}', 'edit')->name('RiskInherent.edit');

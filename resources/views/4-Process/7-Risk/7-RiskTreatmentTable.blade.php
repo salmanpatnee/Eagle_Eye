@@ -1,118 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('4-Process.7-Risk.layout.app-full')
+@section('title', 'Risk vs Control')
+@section('title_ar', 'تقرير معالجة المخاطر')
+@section('content')
+    <div>
+        <x-table.action-wrapper title="Risk vs Controls">
+            <x-action.button label="Control vs Risk" label_ar="تقرير معالجة المخاطر" route_name="control-risk.index" />
+            <x-action.button label="Risk vs Control" label_ar="الضوابط مقابل الأدلة" route_name="risk-treatment.index" disabled
+                class="opacity-75" />
+        </x-table.action-wrapper>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool">
-    <meta name="description" content="Zain Cloud GRC Tool">
-    <!-- Boxicons Icons-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('/css/report.css') }}">
-</head>
-
-<body style="background-color: #f6f6f6">
-    <div class="dheadersec ">
-        <div class="dheaderleft">
-            <div class="dheadericon">
-                <a href="/compliance" class="text-white">
-                    <i class='bx bx-home'></i>
-                </a>
-            </div>
-            <div class="dheadertext">
-                <p>العمليات</p>
-                <p>Processes</p>
-            </div>
-            <div class="dheadericon">
-                <i class="bx bx-right-arrow-alt"></i>
-            </div>
-            <div class="dheadertext">
-                <p>تقرير معالجة المخاطر</p>
-                <p>Risk vs Control</p>
-            </div>
-
-        </div>
-        
-        <div class="d-flex align-items-center gap-3">
-            @include('partials.roles')
-            <div class="dheaderright">
-                <button type="dbutton" class="dbutton" onclick="goBack()">
-                    <p>للخلف</p>
-                    <p>Back</p>
-                </button>
-            </div>
-        </div>
-
-    </div>
-    <div class="herosec">
-
-        <div class="herosecleft" style="margin-bottom: 2em;">
-            <div class="cveButton">
-                
-                <a href="{{ route('control-risk.index') }}">
-                    <div class="rightButton">
-                        <p>الضوابط مقابل الأدلة</p>
-                        <p>Control vs Risk</p>
+        <form action="{{ route('risk-treatment.index') }}" method="GET">
+            <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
+                <x-form.grid-col>
+                    <div>
+                        <x-form.select label="Risks" label_ar="المخاطر" name="risk" placeholder="Select Risk"
+                            :value="$riskId" :data="$risks" id_key="risk_id" value_key="risk_name"
+                            onchange="this.form.submit()" :value="$riskId" />
                     </div>
-                </a>
-
-                <a href="{{ route('control-risk.index') }}" class="disabled">
-                    <div class="rightButton">
-                        <p>الضوابط مقابل الأدلة</p>
-                        <p>Risk vs Control</p>
+                    <div>
+                        <x-form.select label="Controls" label_ar="الضوابط" name="control" placeholder="Select Control"
+                            :value="$controlId" :data="$controls" id_key="control_id" value_key="control_name"
+                            onchange="this.form.submit()" />
                     </div>
-                </a>
-                
-            </div>
-        </div>
-
-        <form action="{{ route('risk-treatment.index') }}">
-            <div class="row">
-                <div class="col-2"></div>
-                <div class="col">
-                    <label class="form-label" for="practice">
-                        <p>Risks</p>
-                        <p> المخاطر</p>
-                    </label>
-                    <select class="form-select" name="risk" id="risk" onchange="this.form.submit()">
-                        <option value="">All</option>
-                        @foreach ($risks as $risk)
-                            <option value="{{ $risk->risk_id }}" @if ($risk->risk_id == request('risk')) selected @endif>
-                                {{ $risk->risk_id }} - {{ $risk->risk_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col">
-                    <label class="form-label" for="domain">
-                        <p>Controls</p>
-                        <p>الضوابط</p>
-                    </label>
-                    <select class="form-select" name="control" id="control" onchange="this.form.submit()">
-                        <option value="">All</option>
-                        @foreach ($controls as $control)
-                            <option value="{{ $control }}" @if ($control == request('control')) selected @endif>
-                                {{ $control }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-               
-
-                <div class="col-2"></div>
+                </x-form.grid-col>
             </div>
         </form>
 
-        <div class="herosecleft">
-            <h3>تقرير معالجة المخاطر</h3>
-            <h3>Risk vs Controls</h3>
-        </div>
+        <x-table.table>
+            <x-table.thead>
+                <x-table.th label="S.No" label_ar="رقم" />
+                <x-table.th label="Risk ID" label_ar="رمز المخاطر" />
+                <x-table.th label="Risk Name" label_ar="اسم المخاطر" />
+                <x-table.th label="Control Name" label_ar="اسم الضوابط" />
+            </x-table.thead>
+            <x-table.tbody>
+                @forelse ($riskTreatments as $riskTreatment)
+                    <tr>
+                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td><a href="{{ route('riskmaster.show', $riskTreatment->risk_id) }}"
+                                target="_blank">{{ $riskTreatment->risk_id }}</a></x-table.td>
+                        <x-table.td>{{ $riskTreatment->risk_name }}</x-table.td>
+                        <x-table.td>
+                            <x-table-list :data="$riskTreatment->controls" id_key="control_id" value_key="control_name" />
+                        </x-table.td>
+                    </tr>
+                @endforeach
+            </x-table.tbody>
+        </x-table.table>
     </div>
+@endsection
+
+
+{{-- <!DOCTYPE html>
+<html lang="en">
+
+
+<body style="background-color: #f6f6f6">
+ 
+ 
     <div class="tablearea">
         <table class="table">
             <thead class="tablehead">
@@ -173,4 +118,4 @@
             window.history.back();
         }
     </script>
-</body>
+</body> --}}
