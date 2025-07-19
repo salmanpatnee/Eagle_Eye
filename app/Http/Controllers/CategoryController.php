@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-
-
     public function index()
     {
         $categories = Category::select('id', 'category_id', 'category_name', 'category_name_ar', 'Category_source')
@@ -72,36 +70,16 @@ class CategoryController extends Controller
 
 
 
-    public function destroy(Request $request)
+    public function destroy(Category $category)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
+        if ($category->subCategories()->exists()) {
+            return redirect(route('categories.index'))
+                ->with('error', "Category {$category->category_name} cannot be deleted due to existing dependencies.");
+        }
 
-        Category::where('category_id', $attributes['record'])->delete();
+        $category->delete();
 
         return redirect(route('categories.index'))
             ->with('success', 'Category deleted successfully.');
-
-        // $ids =  $request->validate([
-        //     'records' => ['required', 'array'],
-        // ]);
-
-        // try {
-        //     Category::whereIn('id', $ids['records'])->each(function ($category) {
-        //         if ($category->subCategories()->exists() || $category->audits()->exists()) {
-
-        //             throw new \Exception("Category {$category->category_name} cannot be deleted due to existing dependencies.");
-        //         }
-        //         $category->delete();
-        //     });
-
-        //     return redirect(route('categories.index'))
-        //         ->with('success', 'Category deleted successfully.');
-        // } catch (\Exception $e) {
-
-        //     return redirect(route('categories.index'))
-        //         ->with('error', $e->getMessage());
-        // }
     }
 }
