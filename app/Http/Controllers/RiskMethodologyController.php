@@ -15,6 +15,7 @@ use App\Models\ThreatAgent;
 use App\Models\Vulnerability;
 use Illuminate\Http\Request;
 use Mpdf\Mpdf;
+
 class RiskMethodologyController extends Controller
 {
     private $_routeName = "risk-methodology";
@@ -40,8 +41,8 @@ class RiskMethodologyController extends Controller
         // return view('4-Process/risk/risk-methodology/show', compact('riskMethodology', 'routeName', 'data', 'primaryKey'));
 
         $organization = Organization::first();
-        $riskAppetites =  RiskAppetite::select('risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name')->orderBy('risk_appetite_id')->get(); 
-        $impacts = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Catastrophic'];     
+        $riskAppetites =  RiskAppetite::select('risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name')->orderBy('risk_appetite_id')->get();
+        $impacts = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Catastrophic'];
 
         if (request()->has('pdf')) {
             // Increase PCRE backtrack limit
@@ -60,7 +61,6 @@ class RiskMethodologyController extends Controller
             // Write HTML chunks separately
             foreach ($chunks as $chunk) {
                 $mpdf->WriteHTML($chunk);
-
             }
 
             // Set the headers to prompt the file download
@@ -70,7 +70,6 @@ class RiskMethodologyController extends Controller
         } else {
             return view('4-Process/risk/risk-methodology/show', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
         }
-        
     }
 
     public function create()
@@ -86,15 +85,15 @@ class RiskMethodologyController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
         $objectives = Objective::select('id', 'objective_id', 'objective')->get();
+        $objectiveIds = [];
 
-
-        return view('4-Process/risk/risk-methodology/create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectives'));
+        return view('4-Process/risk/risk-methodology/create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectives', 'objectiveIds'));
     }
 
     public function store(RiskMethodologyRequest $request)
     {
         $attributes = $request->validated();
-        
+
         $objectives = $attributes['objectives'];
         unset($attributes['objectives']);
 

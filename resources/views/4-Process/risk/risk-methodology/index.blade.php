@@ -1,103 +1,37 @@
-@extends('4-Process.risk.risk-methodology.layout')
+@extends('4-Process.risk.risk-methodology.layout.app')
+@section('title', 'Risk Methodology')
+@section('title_ar', 'منهجية المخاطر')
 @section('content')
-    <div class="IndiTable">
-        <form method="POST" action="{{ route($routeName . '.destroy') }}" id="deleteForm">
-            @csrf
-            @method('DELETE')
-            <div class="TableHeading">
-                <div class="PageHead">
-                    <p class="PageHeadArbTxt">منهجية المخاطر</p>
-                    <p class="PageHeadEngTxt">Risk Methodology</p>
-                </div>
-                <div class="ButtonContainer">
-                    <a href="" class="MoreButton">
-                        <p class="ButtonArbTxt">منظر</p>
-                        <p class="ButtonEngTxt">View</p>
-                    </a>
-                    <a href="{{ route($routeName . '.create') }}"
-                        class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">يضيف</p>
-                        <p class="ButtonEngTxt">Add</p>
-                    </a>
+    <div>
 
-                    <a href="" class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}"
-                        id="btnUpdate">
-                        <p class="ButtonArbTxt">تحديث</p>
-                        <p class="ButtonEngTxt">Update</p>
-                    </a>
+        <x-table.action-wrapper>
+            <x-action.button label="Add Methodology" label_ar="إضافة منهجية المخاطر" route_name="risk-methodology.create" />
+        </x-table.action-wrapper>
 
-                    <button type="button" id="btnDelete"
-                        class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">يمسح</p>
-                        <p class="ButtonEngTxt">Delete</p>
-                    </button>
-                </div>
-            </div>
+        <x-table.table>
+            <x-table.thead>
+                <x-table.th label="S.No" label_ar="رقم" />
+                <x-table.th label="Risk Methodology ID" label_ar="رمز منهجية المخاطر" />
+                <x-table.th label="Risk Methodology Name" label_ar="الاسم منهجية المخاطر" />
+                <x-table.th label="Risk Methodology Source" label_ar="مصدر منهجية المخاطر" />
+                <x-table.th label="Action" label_ar="إجراء" />
+            </x-table.thead>
+            <x-table.tbody>
+                @foreach ($riskMethodologies as $riskMethodology)
+                    <tr>
+                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td>{{ $riskMethodology->risk_methodology_id }}</x-table.td>
+                        <x-table.td>{{ $riskMethodology->risk_methodology_name }}</x-table.td>
+                        <x-table.td>{{ $riskMethodology->risk_methodology_source }}</x-table.td>
 
-            <div class="table-container">
-
-                <div class="ListTable">
-                    <table cellspacing="0">
-                        <tr class="table-header">
-                            <th style="padding-right: 0px;"></th>
-                            <th style="padding-right: 0px">
-                                <p class="ListHeadArbTxt">رقم</p>
-                                <p class="ListHeadEngTxt">S.No</p>
-                            </th>
-                            <th style="padding-right: 0px;">
-                                <p class="ListHeadArbTxt">رمز منهجية المخاطر</p>
-                                <p class="ListHeadEngTxt">Risk Methodology ID</p>
-                            </th>
-                            <th style="padding-right: 0px;">
-                                <p class="ListHeadArbTxt">اسم منهجية المخاطر</p>
-                                <p class="ListHeadEngTxt">Risk Methodology Name</p>
-                            </th>
-                            <th style="padding-right: 0px;">
-                                <p class="ListHeadArbTxt">مصدر منهجية المخاطر</p>
-                                <p class="ListHeadEngTxt">Risk Methodology Source</p>
-                            </th>
-                        </tr>
-                        @foreach ($riskMethodologies as $riskMethodology)
-                            <tr>
-                                <td>
-                                    <input type="radio" name="record" class="record" value="{{ $riskMethodology->id }}"
-                                        required>
-                                </td>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td><a
-                                        href="{{ route($routeName . '.show', $riskMethodology->id) }}">{{ $riskMethodology->risk_methodology_id }}</a>
-                                </td>
-                                <td>{{ $riskMethodology->risk_methodology_name }}</td>
-                                <td>{{ $riskMethodology->risk_methodology_source }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
-        </form>
+                        <x-table.td action_col="true">
+                            <x-action.view route_name="risk-methodology.show" param="{{ $riskMethodology->id }}" />
+                            <x-action.edit route_name="risk-methodology.edit" param="{{ $riskMethodology->id }}" />
+                            <x-action.delete route_name="risk-methodology.destroy" param="{{ $riskMethodology->id }}" />
+                        </x-table.td>
+                    </tr>
+                @endforeach
+            </x-table.tbody>
+        </x-table.table>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        document.getElementById('btnDelete').addEventListener('click', function(event) {
-            event.preventDefault();
-            const selectedRadio = document.querySelector('.record:checked');
-            if (selectedRadio) {
-                window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-            } else {
-                alert('Please select a record to delete.');
-            }
-        });
-
-        document.getElementById('btnUpdate').addEventListener('click', function(event) {
-            event.preventDefault();
-            const selectedRadio = document.querySelector('.record:checked');
-            if (selectedRadio) {
-                window.location.href = `/risk-methodology/${selectedRadio.value}/edit`;
-            } else {
-                alert('Please select a record.');
-            }
-        });
-    </script>
-@endpush
