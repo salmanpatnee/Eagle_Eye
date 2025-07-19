@@ -5,7 +5,7 @@
     <div>
         <x-table.action-wrapper>
 
-            <x-action.button label="Add" label_ar="يضيف" route_name="departments.create" />
+            <x-action.button label="Add Departments" label_ar="قسم إضافة" route_name="departments.create" />
         </x-table.action-wrapper>
 
         <x-table.table>
