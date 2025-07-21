@@ -1,210 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('4-Process.7-Risk.layout.app-full')
+@section('title', 'Risk Status')
+@section('title_ar', 'حالة المخاطر')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@section('content')
+    <div>
+        <x-table.action-wrapper title="Risk Status">
 
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool">
-    <meta name="description" content="Zain Cloud GRC Tool">
-    <!-- Boxicons Icons-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('/css/report.css') }}">
-    <style>
-        th p {
-            line-height: 1em;
-        }
+        </x-table.action-wrapper>
 
-        .tablebody tr td {
+        <div class="space-y-6 border-t border-gray-100 p-2 sm:p-4 mb-5">
+            <x-form.grid-col>
+                <div>
+                    <div class="rounded-xl border border-gray-200 bg-white">
+                        <h4
+                            class="bg-brand-950 border-brand-500 border-y font-medium mb-1 px-3 py-1 rounded-t-xl text-left  text-white">
+                            Risk Status Summary
+                        </h4>
 
-            white-space: nowrap;
-            line-height: 25px;
-        }
 
-        .tablearea {
-            margin-top: 0px;
-            line-height: 10px;
-            position: relative;
-            z-index: 50;
-        }
+                        <ul class="flex flex-col">
+                            <li
+                                class="flex items-center justify-between text-gray-800 gap-2 border-b border-gray-200 px-3 py-2.5 text-sm last:border-b-0">
+                                <span class="font-bold text-gray-800">Total Risks:</span> {{ $risksCount->total_risks }}
+                            </li>
+                            <li
+                                class="flex items-center justify-between gap-2 border-b border-gray-200 px-3 py-2.5 text-sm text-gray-500 last:border-b-0">
+                                <span class="font-bold text-gray-800">Open Risks:</span> {{ $risksCount->open_risks }}
+                            </li>
+                            <li
+                                class="flex items-center justify-between gap-2 border-b border-gray-200 px-3 py-2.5 text-sm text-gray-500 last:border-b-0">
+                                <span class="font-bold text-gray-800">Close Risks:</span> {{ $risksCount->closed_risks }}
+                            </li>
+                        </ul>
 
-        .risk-status-content {
-    position: absolute;
-    width: 100%;
-    top: 194px;
-}
-
-        .card-header {
-            background-color: #203864;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        li.list-group-item {
-            font-size: 12px;
-        }
-
-        .herosec {
-            padding-bottom: 30px !important;
-            
-        }
-    </style>
-</head>
-
-<body style="background-color: #f6f6f6">
-    <div class="fixposition">
-
-        <div class="dheadersec">
-            <div class="dheaderleft">
-                <div class="dheadericon">
-                    <a href="/compliance" class="text-white">
-                        <i class='bx bx-home'></i>
-                    </a>
-                </div>
-                <div class="dheadertext">
-                    <p>العمليات</p>
-                    <p>Processes</p>
-                </div>
-                <!--<div class="dheadericon">-->
-                <!--    <i class='bx bx-right-arrow-alt'></i>-->
-                <!--</div>-->
-                <!--<div class="dheadertext">-->
-                <!--    <p>تقرير المخاطر مقابل مجموعة الأصول</p>-->
-                <!--    <p>Risk vs Asset Group Table</p>-->
-                <!--</div>-->
-            </div>
-            <div class="d-flex align-items-center gap-3">
-                @include('partials.roles')
-                <div class="dheaderright">
-                    <button type="dbutton" class="dbutton" onclick="goBack()">
-                        <p>للخلف</p>
-                        <p>Back</p>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="herosec">
-            <div class="herosecleft">
-                <h3>Risk Status</h3>
-                <p style="text-align: center; line-height: 35px; color:#203864;">Current Date:
-                    {{ now()->format('d-m-Y') }}
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="risk-status-content">
-        <section class="herosec" style="position: fixed; width: 100%; top: 190px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                Risk Status Summary
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class=" py-1 list-group-item d-flex justify-content-between"><b class="mr-3">Total
-                                        Risks:</b> {{ $risksCount->total_risks }}</li>
-                                <li class=" py-1 list-group-item d-flex justify-content-between"><b class="mr-3">Open
-                                        Risks:</b> {{ $risksCount->open_risks }}</li>
-                                <li class=" py-1 list-group-item d-flex justify-content-between"><b class="mr-3">Close
-                                        Risks:</b> {{ $risksCount->closed_risks }}</li>
-
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                Control Status Summary
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item py-1 d-flex justify-content-between"><b class="mr-3">Total
-                                        Controls:</b> {{ $controlsCount->total_controls }}</li>
-                                <li class="list-group-item py-1 d-flex justify-content-between"><b
-                                        class="mr-3">Implemented:</b> {{ $controlsCount->implemented_controls }}</li>
-                                <li class="list-group-item py-1 d-flex justify-content-between"><b
-                                        class="mr-3">Partially Implemented:</b>
-                                    {{ $controlsCount->partially_implemented_controls }}</li>
-                                <li class="list-group-item py-1 d-flex justify-content-between"><b class="mr-3">Not
-                                        Applicable:</b> {{ $controlsCount->not_applicable_controls }}</li>
-                                <li class="list-group-item py-1 d-flex justify-content-between"><b
-                                        class="mr-3">Partially Implemented </b>
-                                    {{ $controlsCount->not_implemented_controls }}</li>
-                        </div>
                     </div>
                 </div>
-        </section>
-        <div class="tablearea" style="margin-top: 220px;"> 
-            <table class="table">
-                <thead class="tablehead">
+                <div>
+                    <div class="rounded-xl border border-gray-200 bg-white">
+                        <h4
+                            class="bg-brand-950 border-brand-500 border-y font-medium mb-1 px-3 py-1 rounded-t-xl text-left  text-white">
+                            Control Status Summary
+                        </h4>
+
+
+                        <ul class="flex flex-col">
+                            <li
+                                class="flex items-center justify-between text-gray-800 gap-2 border-b border-gray-200 px-3 py-2.5 text-sm last:border-b-0">
+                                <span class="font-bold text-gray-800">Total Controls:</span>
+                                {{ $controlsCount->total_controls }}
+                            </li>
+                            <li
+                                class="flex items-center justify-between gap-2 border-b border-gray-200 px-3 py-2.5 text-sm text-gray-500 last:border-b-0">
+                                <span class="font-bold text-gray-800">Implemented:</span>
+                                {{ $controlsCount->implemented_controls }}
+                            </li>
+                            <li
+                                class="flex items-center justify-between gap-2 border-b border-gray-200 px-3 py-2.5 text-sm text-gray-500 last:border-b-0">
+                                <span class="font-bold text-gray-800">Partially Implemented:</span>
+                                {{ $controlsCount->partially_implemented_controls }}
+                            </li>
+                            <li
+                                class="flex items-center justify-between gap-2 border-b border-gray-200 px-3 py-2.5 text-sm text-gray-500 last:border-b-0">
+                                <span class="font-bold text-gray-800">Not Applicable:</span>
+                                {{ $controlsCount->not_applicable_controls }}
+                            </li>
+                            <li
+                                class="flex items-center justify-between gap-2 border-b border-gray-200 px-3 py-2.5 text-sm text-gray-500 last:border-b-0">
+                                <span class="font-bold text-gray-800">Partially Implemented:</span>
+                                {{ $controlsCount->not_implemented_controls }}
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </x-form.grid-col>
+        </div>
+
+        <x-table.table>
+            <x-table.thead>
+                <x-table.th label="S.No" />
+                <x-table.th label="Risk" />
+                <x-table.th label="Risk Owner" />
+                <x-table.th label="Risk Assessment" />
+                <x-table.th label="Risk Assessment Date" />
+                <x-table.th label="Risk Finding" />
+                <x-table.th label="Risk Status" />
+                <x-table.th label="Controls" />
+                <x-table.th label="Control Implementation Status" />
+                <x-table.th label="Control Owner Name" />
+
+            </x-table.thead>
+
+            <x-table.tbody>
+
+                @foreach ($riskStatus as $row)
                     <tr>
-                        <th >
-                          
-                            <p>S.No</p>
-                        </th>
-                        <th>
-                            <p>Risk</p>
-                        </th>
-                        <th>
-                            <p>Risk Owner</p>
-                        </th>
-                        <th>
-                            <p>Risk Assessment</p>
-                        </th>
-                        <th>
-                            <p>Risk Assessment Date</p>
-                        </th>
-                        <th>
-                            <p>Risk Finding</p>
-                        </th>
-                        <th>
-                            <p>Risk Status</p>
-                        </th>
-                        <th>
-                            <p>Controls</p>
-                        </th>
-                        <th>
-                            <p>Control Implementation Status
-                            </p>
-                        </th>
-                        <th>
-                            <p>Control Owner Name</p>
-                        </th>
+                        <x-table.td class="text-center">
+                            {{ $loop->index + 1 }}
+                        </x-table.td>
+                        <x-table.td>
+                            <a href="{{ route('riskmaster.show', $row->risk_id) }}" target="_blank" class="text-dark">
+                                {{ $row->risk }}
+                            </a>
+                        </x-table.td>
+                        <x-table.td>{{ $row->risk_owner }}</x-table.td>
+                        <x-table.td>{{ $row->risk_assessment }}</x-table.td>
+                        <x-table.td>{{ $row->risk_assessment_start_date }}</x-table.td>
+                        <x-table.td>{{ $row->findings }}</x-table.td>
+                        <x-table.td>{{ $row->implementation_status }}</x-table.td>
+                        <x-table.td>{!! $row->controls !!}</x-table.td>
+                        <x-table.td>{!! $row->control_status !!}</x-table.td>
+                        <x-table.td>{!! $row->control_owner !!}</x-table.td>
                     </tr>
-                </thead>
-                <tbody class="tablebody">
-                    @foreach ($riskStatus as $row)
-                        <tr>
-                            <td class="text-center">
-                                {{$loop->index + 1}}
-                            </td>
-                            <td>
-                                <a href="{{ route('riskmaster.show', $row->risk_id) }}" target="_blank" class="text-dark">
-                                    {{ $row->risk }}
-                                </a>
-                            </td>
-                            <td>{{ $row->risk_owner }}</td>
-                            <td>{{ $row->risk_assessment }}</td>
-                            <td>{{ $row->risk_assessment_start_date }}</td>
-                            <td>{{ $row->findings }}</td>
-                            <td>{{ $row->implementation_status }}</td>
-                            <td>{!! $row->controls !!}</td>
-                            <td>{!! $row->control_status !!}</td>
-                            <td>{!! $row->control_owner !!}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                @endforeach
+            </x-table.tbody>
+        </x-table.table>
     </div>
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-</body>
+@endsection

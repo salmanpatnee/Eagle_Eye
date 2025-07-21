@@ -973,7 +973,7 @@ class MisReportsController extends Controller
         $assetregister = DB::table('control_master_table')
             ->where('implemented', 'Pending')
             ->get();
-        return view('4-Process/18-Reporting/2-MISReporting/14-list-control-pending', ['assetregister' => $assetregister]);
+        return view('4-Process/18-Reporting/2-MISReporting/14-list-control-pending',     ['assetregister' => $assetregister]);
     }
 
     private function _downloadPdf($report, $filename, $template, $title = "")
