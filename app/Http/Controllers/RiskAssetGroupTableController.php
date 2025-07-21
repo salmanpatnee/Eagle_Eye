@@ -36,7 +36,7 @@ class RiskAssetGroupTableController extends Controller
             ->get();
 
 
-        return view('4-Process/7-Risk/14-AssetGroupRisk', compact('riskassetgroup', 'risks', 'assetGroups'));
+        return view('4-Process/7-Risk/14-AssetGroupRisk', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
     }
 
     public function index(Request $request)
@@ -64,24 +64,6 @@ class RiskAssetGroupTableController extends Controller
             ->get();
 
 
-        return view('4-Process/7-Risk/14-RiskAssetGroup', compact('riskassetgroup', 'risks', 'assetGroups'));
+        return view('4-Process/7-Risk/14-RiskAssetGroup', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
     }
-
-
-
-    //     public function index(Request $request)
-    // {
-    //     $controlNames = DB::table('risk_master_table')->distinct()->pluck('asset_group_name');
-    //     $selectedControl = $request->input('asset_group_name');
-
-    //     $query = DB::table('risk_master_table');
-
-    //     if ($selectedControl) {
-    //         $query->where('asset_group_name', $selectedControl);
-    //     }
-
-    //     $risks = $query->get();
-
-    //     return view('4-Process/7-Risk/14-RiskAssetGroup', compact('risks', 'controlNames', 'selectedControl'));
-    // }
 }

@@ -1,172 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('4-Process.7-Risk.layout.app-full')
+@section('title', 'Asset Group vs Risk')
+@section('title_ar', 'مجموعة الأصول مقابل المخاطر')
+@section('content')
+    <div>
+        <x-table.action-wrapper title="Risk vs Asset Group">
+            <x-action.button label="Asset Group vs Risk" label_ar="مجموعة الأصول مقابل المخاطر"
+                route_name="assetgroupvsrisk" />
+            <x-action.button label="Risk vs Asset Group" label_ar="المخاطر مقابل مجموعة الأصول" route_name="riskvsassetgroup"
+                disabled class="opacity-75" />
+        </x-table.action-wrapper>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool">
-    <meta name="description" content="Zain Cloud GRC Tool">
-    <!-- Boxicons Icons-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('/css/report.css') }}">
-</head>
-
-<body style="background-color: #f6f6f6">
-    <div class="dheadersec">
-        <div class="dheaderleft">
-            <div class="dheadericon">
-                <a href="/compliance" class="text-white">
-                    <i class='bx bx-home'></i>
-                </a>
-            </div>
-            <div class="dheadertext">
-                <p>العمليات</p>
-                <p>Processes</p>
-            </div>
-            <div class="dheadericon">
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-            <div class="dheadertext">
-                <p>مجموعة الأصول مقابل المخاطر</p>
-                <p>Asset Group vs Risk</p>
-            </div>
-            <!--<div class="dheadericon">-->
-            <!--    <i class='bx bx-right-arrow-alt'></i>-->
-            <!--</div>-->
-            <!--<div class="dheadertext">-->
-            <!--    <p>تقرير المخاطر مقابل مجموعة الأصول</p>-->
-            <!--    <p>Risk vs Asset Group Table</p>-->
-            <!--</div>-->
-        </div>
-        <div class="d-flex align-items-center gap-3">
-            @include('partials.roles')
-            <div class="dheaderright">
-                <button type="dbutton" class="dbutton" onclick="goBack()">
-                    <p>للخلف</p>
-                    <p>Back</p>
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="herosec">
-
-        <div class="herosecleft">
-
-            <div class="cveButton">
-                
-                <a href="{{route('riskvsassetgroup')}}">
-                    <div class="leftButton">
-                        <p>المخاطر مقابل مجموعة الأصول</p>
-                        <p>Risk vs Asset Group</p>
+        <form action="{{ route('assetgroupvsrisk') }}" method="GET">
+            <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
+                <x-form.grid-col>
+                    <div>
+                        <x-form.select label="Asset Group" label_ar="مجموعة الأصول" name="assetGroup"
+                            placeholder="Select Asset Group" :value="$assetGroupId" :data="$assetGroups" id_key="asset_group_id"
+                            value_key="asset_group_name" onchange="this.form.submit()" />
                     </div>
-                </a>
-                <a href="{{route('assetgroupvsrisk')}}"  class="disabled">
-                    <div class="leftButton">
-                        <p>مجموعة الأصول مقابل المخاطر</p>
-                        <p>Asset Group vs Risk</p>
+                    <div>
+                        <x-form.select label="Risks" label_ar="المخاطر" name="risk" placeholder="Select Risk"
+                            :value="$riskId" :data="$risks" id_key="risk_id" value_key="risk_name"
+                            onchange="this.form.submit()" :value="$riskId" />
                     </div>
-                </a>
+                </x-form.grid-col>
             </div>
-        </div>
+        </form>
 
-        {{-- <div class="herosecleft">
-            <h3>تقرير المخاطر مقابل مجموعة الأصول</h3>
-            <h3>Risk vs Asset Group Table</h3>
-        </div> --}}
-        <div>
-            <form action="/asset-risk-group">
-                <div class="filter-row">
-                    <div class="col">
-                        <label class="form-label" for="asset_group">
-                            <p>Asset Group</p>
-                            <p>مجموعة الأصول</p>
-                        </label>
-                        <select class="form-select" name="assetGroup" id="assetGroup" onchange="this.form.submit()">
-                            <option value="">All</option>
-                            @foreach ($assetGroups as $assetGroup)
-                                <option value="{{ $assetGroup->asset_group_id }}"
-                                    @if ($assetGroup->asset_group_id == request('assetGroup')) selected @endif>{{ $assetGroup->asset_group_id }}
-                                    - {{ $assetGroup->asset_group_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col">
-                        <label class="form-label" for="risk">
-                            <p>Risk</p>
-                            <p>المخاطر</p>
-                        </label>
-                        <select class="form-select" name="risk" id="risk" onchange="this.form.submit()">
-                            <option value="">All</option>
-                            @foreach ($risks as $risk)
-                                <option value="{{ $risk->risk_id }}" @if ($risk->risk_id == request('risk')) selected @endif>
-                                    {{ $risk->risk_id }} - {{ $risk->risk_name }}</option>
-                            @endforeach
-
-                        </select>
-                    </div>
-                    
-
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="tablearea">
-        <table class="table">
-            <thead class="tablehead">
-                <tr>
-                    <th>
-                        <p>رمز</p>
-                        <p>S.No</p>
-                    </th>
-                    <th>
-                        <p>رمز مجموعة الأصول</p>
-                        <p>Asset Group ID</p>
-                    </th>
-                    <th>
-                        <p> اسم مجموعة الأصول</p>
-                        <p>Asset Group Name</p>
-                    </th>
-                    <th>
-                        <p>المخاطر </p>
-                        <p>Risk</p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="tablebody">
-                @foreach ($riskassetgroup as $row)
+        <x-table.table>
+            <x-table.thead>
+                <x-table.th label="S.No" label_ar="رقم" />
+                <x-table.th label="Asset Group ID" label_ar="رمز مجموعة الأصول" />
+                <x-table.th label="Asset Group Name" label_ar="اسم مجموعة الأصول" />
+                <x-table.th label="Risk" label_ar="المخاطر" />
+            </x-table.thead>
+            <x-table.tbody>
+                @forelse ($riskassetgroup as $row)
                     <tr>
-                        <td class="text-center">
-                            {{ $loop->index + 1 }}
-                        </td>
-                        <td>
-                            <a href="{{ route('assetgroup.show', $row->asset_group_id) }}" class="text-dark">
-                                {{ $row->asset_group_id }}
-                            </a>
-                        </td>
-                        <td>{{ $row->asset_group_name }}</td>
-                        <td>
-                            @foreach ($row->risks as $risk)
-                                <p>
-                                    <a href="{{ route('riskmaster.show', $risk->risk_id) }}" class="text-dark">
-                                        {{ $risk->risk_id }} - {{ $risk->risk_name }}
-                                    </a>
-                                </p>
-                            @endforeach
-                        </td>
+                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td><a href="{{ route('assetgroup.show', $row->asset_group_id) }}"
+                                target="_blank">{{ $row->asset_group_id }}</a></x-table.td>
+                        <x-table.td>{{ $row->asset_group_name }}</x-table.td>
+                        <x-table.td>
+                            <x-table-list :data="$row->risks" id_key="risk_id" value_key="risk_name" />
+                        </x-table.td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
+            </x-table.tbody>
+        </x-table.table>
     </div>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-</body>
+@endsection
