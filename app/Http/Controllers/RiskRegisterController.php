@@ -129,9 +129,9 @@ class RiskRegisterController extends Controller
                 'rad.risk_impact',
                 'rad.risk_score',
                 'rad.preventive_action',
-                'rad.lesson_learned', 
+                'rad.lesson_learned',
                 'rad.remarks'
-                
+
             )
             ->get();
     }
@@ -144,7 +144,7 @@ class RiskRegisterController extends Controller
         $evalutionDate = $request->input('evalutionDate') ?? null;
 
         $riskRegister = $this->getRiskRegister($riskId, $riskTreatment, $evalutionDate);
-        
+
 
 
         $riskTreatments = RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')
@@ -178,7 +178,7 @@ class RiskRegisterController extends Controller
                 ->header('Content-Disposition', 'attachment; filename="' . "Risk-Register.pdf" . '"');
         } else {
             // return $riskRegister;
-            return view("4-Process/18-Reporting/2-MISReporting/11-RiskRegisterTwo", compact('riskRegister', 'risks', 'riskTreatments'));
+            return view("4-Process/18-Reporting/2-MISReporting/11-RiskRegisterTwo", compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
         }
     }
 
