@@ -3,7 +3,7 @@
 @section('title_ar', 'دور الصاحب')
 @section('content')
     <div>
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="All Owner Roles">
 
             <x-action.button label="Add Owner Role" label_ar="إضافة دور الصاحب" route_name="owner-roles.create" />
         </x-table.action-wrapper>
@@ -34,9 +34,9 @@
             </x-table.tbody>
         </x-table.table>
 
-        {{-- <x-pagination>
-            {{ $departments->links() }}
-        </x-pagination> --}}
+        <x-pagination>
+            {{ $ownerRoles->links() }}
+        </x-pagination>
 
 
     </div>

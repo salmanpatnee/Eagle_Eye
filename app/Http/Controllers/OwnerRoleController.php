@@ -70,39 +70,11 @@ class OwnerRoleController extends Controller
 
 
 
-    public function delete(Request $request)
+    public function delete(OwnerRole $ownerRole)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
 
-        $data = OwnerRole::where('id', $attributes['record'])->orWhere('owner_role_id', $attributes['record'])->first();
-
-
-        $data->delete();
-
-        return redirect('/owner-roles')
-            ->with('success', 'Record(s) deleted successfully.');
-
-        // $ids =  $request->validate([
-        //     'selecteddelete' => ['required', 'array'],
-        // ]);
-
-        // try {
-        //     OwnerRole::whereIn('id', $ids['selecteddelete'])->each(function ($role) {
-        //         if ($role->owners()->exists() || $role->assetGroups()->exists()) {
-
-        //             throw new \Exception("Record cannot be deleted due to existing dependencies.");
-        //         }
-        //         $role->delete();
-        //     });
-
-        //     return redirect('/owner-roles')
-        //         ->with('success', 'Record(s) deleted successfully.');
-        // } catch (\Exception $e) {
-
-        //     return redirect('/owner-roles')
-        //         ->with('error', $e->getMessage());
-        // }
+        $ownerRole->delete();
+        return redirect(route('owner-roles.index'))
+            ->with('success', 'Owner Role deleted successfully.');
     }
 }

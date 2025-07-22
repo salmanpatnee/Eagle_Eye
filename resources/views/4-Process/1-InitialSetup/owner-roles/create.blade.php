@@ -1,161 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('4-Process.1-InitialSetup.layout.app')
+@section('title', 'Owner Role Details')
+@section('title_ar', 'دور الصاحب')
+@section('content')
+    <div>
+        <x-table.action-wrapper title="{{ $ownerRole?->id ? 'Update' : 'New' }} Owner">
+            <x-action.button label="View" label_ar="منظر" route_name="owner-roles.index" />
+        </x-table.action-wrapper>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool">
-    <meta name="description" content="Zain Cloud GRC Tool">
-    <!-- Boxicons Icons-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/6-Header/headertwo.css') }}">
-</head>
-
-<body>
-
-
-    <!-- SIDEBAR -->
-    <div class="headersec">
-        <div class="headerleft">
-            @include('4-Process/headerleft')
-            @include('4-Process/1-InitialSetup/initialheader')
-        </div>
-        <div class="text-center d-flex gap-3">
-            @include('partials.roles')
-            @include('4-Process/backbutton')
-        </div>
-    </div>
-
-    <div class="wrapper">
-
-        @include('4-Process/1-InitialSetup/_partials/sidebar')
-        <!-- SIDEBAR -->
+        <form action="{{ isset($ownerRole) ? route('owner-roles.update', $ownerRole->id) : route('owner-roles.store') }}"
+            method="POST">
+            @csrf
+            @if (isset($ownerRole))
+                @method('PUT')
+            @endif
+            <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
+                <x-form.grid-col>
+                    <div>
+                        <x-form.field label="Owner Role ID" label_ar="رمز دور الصاحب" name="owner_role_id" required="true"
+                            :readonly="$ownerRole?->owner_role_id" placeholder="Enter Owner Role ID" :value="$ownerRole?->owner_role_id" />
+                    </div>
+                    <div>
+                        <x-form.field label="Owner Role Name" label_ar="اسم دور الصاحب" name="owner_role_name"
+                            required="true" placeholder="Enter Owner Role Name" :value="$ownerRole?->owner_role_name" />
+                    </div>
+                </x-form.grid-col>
 
 
 
-        <!-- CONTENT -->
-        <div class="IndiTable">
+                <x-form.grid-col-full>
+                    <x-form.textarea-field label="Owner Role Description" label_ar="وصف دور الصاحب"
+                        name="owner_role_description" placeholder="Enter Owner Role Description" :value="$ownerRole?->owner_role_description" />
+                </x-form.grid-col-full>
 
-            <div class="TableHeading">
-                <div class="PageHead">
-                    <p class="PageHeadArbTxt">دور الصاحب</p>
-                    <p class="PageHeadEngTxt">Owner Roles</p>
-                </div>
-                <div class="ButtonContainer">
-                    <a href="/owner-roles" class="MoreButton">
-                        <p class="ButtonArbTxt">منظر</p>
-                        <p class="ButtonEngTxt">View</p>
-                    </a>
-                    @if (request()->routeIs('owner-roles.edit'))
-                        <a href="{{ route('owner-roles.create') }}" class="MoreButton">
-                            <p class="ButtonArbTxt">يضيف</p>
-                            <p class="ButtonEngTxt">Add</p>
-                        </a>
-                        <button type="submit" form="form" class="MoreButton">
-                            <p class="ButtonArbTxt">تحديث</p>
-                            <p class="ButtonEngTxt">Update</p>
-                        </button>
-                    @else
-                        <button type="submit" form="form" class="MoreButton">
-                            <p class="ButtonArbTxt">يضيف</p>
-                            <p class="ButtonEngTxt">Add</p>
-                        </button>
-                        <a href="" class="DisabledButton">
-                            <p class="ButtonArbTxt">تحديث</p>
-                            <p class="ButtonEngTxt">Update</p>
-                        </a>
-                    @endif
-
-                    <button type="button" onclick="showDeleteModal()"
-                        class="{{ request()->routeIs('owner-roles.edit') ? 'MoreButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">يمسح</p>
-                        <p class="ButtonEngTxt">Delete</p>
-                    </button>
-                    {{-- <form method="POST" action="{{ route('owner-roles.destroy') }}" id="delete_form">
-                        <input type="hidden" name="record" value="{{ $ownerRole?->id }}">
-                        @csrf
-                        @method('DELETE')
-                    </form> --}}
+                <div class="flex justify-end">
+                    <x-form.submit label="Owner Role" label_ar="دور الصاحب" :isUpdate="$ownerRole?->owner_role_id" />
                 </div>
             </div>
-            <form id="form"
-                action="{{ isset($ownerRole) ? route('owner-roles.update', $ownerRole->id) : route('owner-roles.store') }}"
-                method="POST">
-                @csrf
-                @if (isset($ownerRole))
-                    @method('PUT')
-                    <input type="hidden" name="id" value="{{ $ownerRole->id }}">
-                @endif
-                <table cellspacing="0">
-                    <div class="ContentTableSection">
-                        <div class="ContentTable">
-                            <div class="column">
-                                <div class="FieldHead">
-                                    <p class="FieldHeadEngTxt">Owner Role ID</p>
-                                    <p class="FieldHeadArbTxt">رمز دور الصاحب</p>
-                                </div>
-                                <p><input type="text" name="owner_role_id" id="owner_role_id" class="sh-tx"
-                                        placeholder="Enter Owner's Role ID"
-                                        value="{{ old('owner_role_id', $ownerRole?->owner_role_id) }}"
-                                        {{ $ownerRole?->owner_role_id ? 'readonly' : '' }} required>
-                                    @error('owner_role_id')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </p>
-                            </div>
-                            <div class="column">
-                                <div class="FieldHead">
-                                    <p class="FieldHeadEngTxt">Owner Role Name</p>
-                                    <p class="FieldHeadArbTxt">اسم دور الصاحب</p>
-                                </div>
-                                <p><input type="text" name="owner_role_name" id="owner_role_name" class="sh-tx"
-                                        placeholder="Enter Owner's Role Name"
-                                        value="{{ old('owner_role_name', $ownerRole?->owner_role_name) }}" required>
-                                    @error('owner_role_name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </p>
-                            </div>
-                        </div>
-                        <div class="ContentTablebg">
-                            <div class="column">
-                                <div class="FieldHead">
-                                    <p class="FieldHeadEngTxt">Owner Role Description</p>
-                                    <p class="FieldHeadArbTxt">وصف دور الصاحب</p>
-                                </div>
-                                <p><input type="text" name="owner_role_description" id="owner_role_description"
-                                        class="bg-tx" placeholder="Enter Owner's Role Description"
-                                        value="{{ old('owner_role_description', $ownerRole?->owner_role_description) }}">
-                                    @error('owner_role_description')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </table>
-            </form>
-        </div>
+        </form>
+
     </div>
-    @include('components.delete-confirmation-modal')
-
-    <script src="/Css/4-Process/1-Form/1-Form.js"></script>
-    <script src="/Css/7-Sidebar/2-Sidebar.js"></script>
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-
-        function showDeleteModal() {
-            window.deleteConfirmationModal.show(document.getElementById('delete_form'));
-        }
-    </script>
-</body>
-
-</html>
+@endsection
