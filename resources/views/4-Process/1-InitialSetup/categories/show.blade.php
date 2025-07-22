@@ -3,7 +3,7 @@
 @section('title_ar', 'تعريف الفئة')
 @section('content')
     <div>
-        <x-table.action-wrapper title="Category Definition">
+        <x-table.action-wrapper title="Category Details">
             <x-action.button label="View" label_ar="منظر" route_name="categories.index" />
             <x-action.button label="Edit" label_ar="تحرير" route_name="categories.edit"
                 route_param="{{ $category->category_id }}" />
@@ -13,6 +13,9 @@
             <x-info-row>
                 <x-info-col label="Category ID" label_ar="رمز الفئة">
                     {{ $category->category_id }}
+                </x-info-col>
+                <x-info-col label="Category Source" label_ar="مصدر الفئة">
+                    {{ $category->Category_source ?? '—' }}
                 </x-info-col>
             </x-info-row>
             <x-info-row>
@@ -28,11 +31,6 @@
                 {{ $category->category_description ?? '—' }}
             </x-info-col-lg>
 
-            <x-info-row>
-                <x-info-col label="Category Source" label_ar="مصدر الفئة">
-                    {{ $category->Category_source ?? '—' }}
-                </x-info-col>
-            </x-info-row>
         </div>
     </div>
 @endsection

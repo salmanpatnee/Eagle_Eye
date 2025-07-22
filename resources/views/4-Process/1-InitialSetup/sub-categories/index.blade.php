@@ -4,8 +4,8 @@
 @section('content')
     <div>
 
-        <x-table.action-wrapper>
-            <x-action.button label="Add Organization" label_ar="إضافة جهة" route_name="sub-categories.create" />
+        <x-table.action-wrapper title="All Sub-Categories">
+            <x-action.button label="Add Sub-Category" label_ar="إضافة الفئة الفرعية" route_name="sub-categories.create" />
         </x-table.action-wrapper>
 
         <x-table.table>

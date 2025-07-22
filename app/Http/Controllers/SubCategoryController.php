@@ -71,19 +71,9 @@ class SubCategoryController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy(SubCategory $subCategory)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        SubCategory::where('id', $attributes['record'])->delete();
-
-        // $ids =  $request->validate([
-        //     'records' => ['required', 'array'],
-        // ]);
-
-        // SubCategory::whereIn('id', $ids['records'])->delete();
+        $subCategory->delete();
 
         return redirect(route('sub-categories.index'))
             ->with('success', 'Sub-Category deleted successfully.');
