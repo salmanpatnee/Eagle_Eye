@@ -3,7 +3,7 @@
 @section('title_ar', 'القسم الفرعي في الجهة')
 @section('content')
     <div>
-        <x-table.action-wrapper title="Organization Sub-Departments">
+        <x-table.action-wrapper title="Sub-Department Details">
             <x-action.button label="View" label_ar="منظر" route_name="sub-departments.index" />
             <x-action.button label="Edit" label_ar="تحرير" route_name="sub-departments.edit"
                 route_param="{{ $subDepartment->id }}" />
@@ -26,7 +26,7 @@
 
             <x-info-row>
                 <x-info-col label="Deparment" label_ar="القسم">
-                    {{ $department->department->department_name ?? '—' }}
+                    {{ $subDepartment->department->department_name ?? '—' }}
                 </x-info-col>
             </x-info-row>
         </div>

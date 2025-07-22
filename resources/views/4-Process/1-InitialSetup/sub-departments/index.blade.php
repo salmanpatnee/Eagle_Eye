@@ -3,8 +3,8 @@
 @section('title_ar', 'القسم الفرعي في الجهة')
 @section('content')
     <div>
-        <x-table.action-wrapper>
-            <x-action.button label="Add Sub-Departments" label_ar="إضافة القسم الفرعي" route_name="sub-departments.create" />
+        <x-table.action-wrapper title="All Sub-Departments">
+            <x-action.button label="Add Sub-Department" label_ar="إضافة القسم الفرعي" route_name="sub-departments.create" />
         </x-table.action-wrapper>
 
         <x-table.table>
@@ -26,7 +26,7 @@
                         <x-table.td action_col="true">
                             <x-action.view route_name="sub-departments.show" param="{{ $subDepartment->id }}" />
                             <x-action.edit route_name="sub-departments.edit" param="{{ $subDepartment->id }}" />
-                            <x-action.delete route_name="sub-departments.edit" param="{{ $subDepartment->id }}" />
+                            <x-action.delete route_name="sub-departments.destroy" param="{{ $subDepartment->id }}" />
                         </x-table.td>
                     </tr>
                 @endforeach

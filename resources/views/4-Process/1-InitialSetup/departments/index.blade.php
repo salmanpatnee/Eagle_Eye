@@ -3,9 +3,9 @@
 @section('title_ar', 'قسم الجهة')
 @section('content')
     <div>
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="All Departments">
 
-            <x-action.button label="Add Departments" label_ar="قسم إضافة" route_name="departments.create" />
+            <x-action.button label="Add Department" label_ar="قسم إضافة" route_name="departments.create" />
         </x-table.action-wrapper>
 
         <x-table.table>

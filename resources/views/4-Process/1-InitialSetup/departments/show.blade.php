@@ -3,7 +3,7 @@
 @section('title_ar', 'قسم الجهة')
 @section('content')
     <div>
-        <x-table.action-wrapper title="Organization Departments">
+        <x-table.action-wrapper title="Department Details">
             <x-action.button label="View" label_ar="منظر" route_name="departments.index" />
             <x-action.button label="Edit" label_ar="تحرير" route_name="departments.edit"
                 route_param="{{ $department->id }}" />
