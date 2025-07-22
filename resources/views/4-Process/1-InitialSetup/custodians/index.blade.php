@@ -3,7 +3,7 @@
 @section('title_ar', 'تسجيل الوصي')
 @section('content')
     <div>
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="All Custodians">
 
             <x-action.button label="Add Custodian" label_ar="إضافة الوصي" route_name="custodians.create" />
             <x-action.button label="Upload Custodians" label_ar="رفع الوصي" route_name="upload.custodians.create" />
@@ -37,9 +37,9 @@
             </x-table.tbody>
         </x-table.table>
 
-        {{-- <x-pagination>
-            {{ $departments->links() }}
-    </x-pagination> --}}
+        <x-pagination>
+            {{ $custodians->links() }}
+        </x-pagination>
 
 
     </div>

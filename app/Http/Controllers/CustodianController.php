@@ -11,7 +11,7 @@ class CustodianController extends Controller
 
     public function index()
     {
-        $custodians = CustodianName::with('role')->get();
+        $custodians = CustodianName::with('role')->paginate(20);
         return view('4-Process/1-InitialSetup/custodians/index', compact('custodians'));
     }
 
@@ -77,22 +77,10 @@ class CustodianController extends Controller
 
 
     // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
+    public function delete(CustodianName $custodian)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $data = CustodianName::where('id', $attributes['record'])->orWhere('custodian_name_id', $attributes['record'])->first();
-        $data->delete();
-
-        return redirect('/custodians');
-
-        // $selecteddelete = $request->input('selecteddelete');
-
-        // if (!empty($selecteddelete)) {
-        //     DB::table('custodian_name_table')->whereIn('custodian_name_id', $selecteddelete)->delete();
-        // }
+        $custodian->delete();
+        return redirect()->route('custodians.index')->with('success', 'Custodian deleted successfully.');
     }
 
 

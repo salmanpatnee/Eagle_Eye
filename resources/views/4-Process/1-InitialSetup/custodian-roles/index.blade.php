@@ -3,8 +3,7 @@
 @section('title_ar', 'دور الوصي')
 @section('content')
     <div>
-        <x-table.action-wrapper>
-
+        <x-table.action-wrapper title="All Custodian Roles">
             <x-action.button label="Add Custodian Role" label_ar="إضافة دور الوصي" route_name="custodian-roles.create" />
         </x-table.action-wrapper>
 
@@ -34,9 +33,9 @@
             </x-table.tbody>
         </x-table.table>
 
-        {{-- <x-pagination>
-            {{ $departments->links() }}
-        </x-pagination> --}}
+        <x-pagination>
+            {{ $custodianRoles->links() }}
+        </x-pagination>
 
 
     </div>

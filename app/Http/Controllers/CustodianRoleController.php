@@ -10,7 +10,7 @@ class CustodianRoleController extends Controller
 {
     public function index()
     {
-        $custodianRoles = Custodian::get();
+        $custodianRoles = Custodian::paginate(20);
         return view('4-Process/1-InitialSetup/custodian-roles/index', compact('custodianRoles'));
     }
 
@@ -71,37 +71,9 @@ class CustodianRoleController extends Controller
 
 
 
-    public function delete(Request $request)
+    public function delete(Custodian $custodianRole)
     {
-
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $data = Custodian::where('id', $attributes['record'])->orWhere('custodian_role_id', $attributes['record'])->first();
-        $data->delete();
-
-        return redirect('/custodian-roles');
-
-        // $ids =  $request->validate([
-        //     'selecteddelete' => ['required', 'array'],
-        // ]);
-
-        // try {
-        //     Custodian::whereIn('id', $ids['selecteddelete'])->each(function ($role) {
-        //         if ($role->custodians()->exists()) {
-
-        //             throw new \Exception("Record cannot be deleted due to existing dependencies.");
-        //         }
-        //         $role->delete();
-        //     });
-
-        //         ->with('success', 'Record(s) deleted successfully.');
-        // } catch (\Exception $e) {
-
-        //     return redirect('/custodian-roles')
-        //         ->with('error', $e->getMessage());
-        // }
-
+        $custodianRole->delete();
+        return redirect()->route('custodian-roles.index')->with('success', 'Custodian Role Deleted Successfully.');
     }
 }
