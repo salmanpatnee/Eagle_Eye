@@ -364,7 +364,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/sub-departments', 'store')->name('sub-departments.store');
         Route::get('/sub-departments/edit/{subDepartment}', 'edit')->name('sub-departments.edit');
         Route::put('/sub-departments/{subDepartment}', 'update')->name('sub-departments.update');
-        Route::delete('/sub-departments', 'destroy')->name('sub-departments.destroy');
+        Route::delete('/sub-departments/{subDepartment}', 'destroy')->name('sub-departments.destroy');
     });
 
 
@@ -396,7 +396,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/sub-categories', 'store')->name('sub-categories.store');
         Route::get('/sub-categories/edit/{subCategory}', 'edit')->name('sub-categories.edit');
         Route::put('/sub-categories/{subCategory}', 'update')->name('sub-categories.update');
-        Route::delete('/sub-categories', 'destroy')->name('sub-categories.destroy');
+        Route::delete('/sub-categories/{subCategory}', 'destroy')->name('sub-categories.destroy');
     });
 
     Route::controller(BestPracticeController::class)->group(function () {
@@ -406,7 +406,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/best-practices', 'store')->name('best-practices.store');
         Route::get('/best-practices/edit/{bestPractice}', 'edit')->name('best-practices.edit');
         Route::put('/best-practices/{bestPractice}', 'update')->name('best-practices.update');
-        Route::delete('/best-practices', 'destroy')->name('best-practices.destroy');
+        Route::delete('/best-practices/{bestPractice}', 'destroy')->name('best-practices.destroy');
     });
 
     Route::controller(MainDomainController::class)->group(function () {
@@ -416,7 +416,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/domains', 'store')->name('domains.store');
         Route::get('/domains/edit/{domain}', 'edit')->name('domains.edit');
         Route::put('/domains/{domain}', 'update')->name('domains.update');
-        Route::delete('/domains', 'destroy')->name('domains.destroy');
+        Route::delete('/domains/{domain}', 'destroy')->name('domains.destroy');
     });
 
     Route::controller(SubDomainController::class)->group(function () {
@@ -426,7 +426,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/sub-domains', 'store')->name('sub-domains.store');
         Route::get('/sub-domains/edit/{subDomain}', 'edit')->name('sub-domains.edit');
         Route::put('/sub-domains/{subDomain}', 'update')->name('sub-domains.update');
-        Route::delete('/sub-domains', 'destroy')->name('sub-domains.destroy');
+        Route::delete('/sub-domains/{subDomain}', 'destroy')->name('sub-domains.destroy');
     });
 
     Route::middleware(['auth'])->group(function () {

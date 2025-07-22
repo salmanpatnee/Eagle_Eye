@@ -3,7 +3,7 @@
 @section('title_ar', 'إعداد الجهة')
 @section('content')
     <div>
-        <x-table.action-wrapper title="New Organization">
+        <x-table.action-wrapper title="{{ $organization?->id ? 'Update' : 'New' }} Organization">
             <x-action.button label="View" label_ar="منظر" route_name="organizations.index" />
         </x-table.action-wrapper>
 

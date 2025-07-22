@@ -5,6 +5,7 @@
     'required' => false,
     'value' => '',
     'data' => [],
+    'custom_data' => [],
     'id_key' => '',
     'value_key' => '',
     'attributes' => [],
@@ -21,10 +22,19 @@
         <option value="" class="text-gray-700">
             Select Option
         </option>
-        @foreach ($data as $row)
-            <option value="{{ $row->$id_key }}" class="text-gray-700" @if (old($name, $value) == $row->$id_key) selected @endif>
-                {{ $row->$id_key }} - {{ $row->$value_key }}</option>
-        @endforeach
+        @if (count($custom_data))
+            @foreach ($custom_data as $row)
+                <option value="{{ $row }}" class="text-gray-700"
+                    @if (old($name, $value) == $row) selected @endif>
+                    {{ $row }}</option>
+            @endforeach
+        @else
+            @foreach ($data as $row)
+                <option value="{{ $row->$id_key }}" class="text-gray-700"
+                    @if (old($name, $value) == $row->$id_key) selected @endif>
+                    {{ $row->$id_key }} - {{ $row->$value_key }}</option>
+            @endforeach
+        @endif
     </select>
 
     <span class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">

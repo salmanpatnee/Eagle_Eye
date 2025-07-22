@@ -3,7 +3,7 @@
 @section('title_ar', 'إعداد الموقع')
 @section('content')
     <div>
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="All Locations">
             <x-action.button label="Add Location" label_ar="إضافة موقع" route_name="locations.create" />
         </x-table.action-wrapper>
 

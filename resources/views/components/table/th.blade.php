@@ -11,6 +11,6 @@
                 style="display: inline;">{{ $label_ar }}</span>
             &nbsp;
         @endif
-        <span style="display: inline;">{{ $label }}</span>
+        <span class="block">{{ $label }}</span>
     </span>
 </th>

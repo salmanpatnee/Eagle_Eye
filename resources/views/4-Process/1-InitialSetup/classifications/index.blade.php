@@ -4,15 +4,15 @@
 @section('content')
     <div>
 
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="All Classifications">
             <x-action.button label="Add Classification" label_ar="إضافة التصنيف" route_name="classifications.create" />
         </x-table.action-wrapper>
 
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Classification IDs" label_ar="رمز القسم الفرعي" />
-                <x-table.th label="Classification Names" label_ar="رمز القسم الفرعي" />
+                <x-table.th label="Classification IDs" label_ar="رمز  التصنيف" />
+                <x-table.th label="Classification Names" label_ar="اسم  التصنيف" />
                 <x-table.th label="Classification Source" label_ar="مصدر التصنيف" />
                 <x-table.th label="Action" label_ar="إجراء " />
             </x-table.thead>

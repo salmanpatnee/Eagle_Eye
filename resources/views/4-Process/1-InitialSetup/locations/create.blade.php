@@ -3,7 +3,7 @@
 @section('title_ar', 'إعداد الموقع')
 @section('content')
     <div>
-        <x-table.action-wrapper title="New Location">
+        <x-table.action-wrapper title="{{ $location?->id ? 'Update' : 'New' }} Location">
             <x-action.button label="View" label_ar="منظر" route_name="locations.index" />
         </x-table.action-wrapper>
 

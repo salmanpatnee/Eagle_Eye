@@ -1,9 +1,9 @@
 @extends('4-Process.1-InitialSetup.layout.app')
 @section('title', 'Classification Definition')
 @section('title_ar', 'تعريف التصنيف')
-@section('content') 
-    <div> 
-        <x-table.action-wrapper title="Classification Definition">
+@section('content')
+    <div>
+        <x-table.action-wrapper title="Classification Details">
             <x-action.button label="View" label_ar="منظر" route_name="classifications.index" />
             <x-action.button label="Edit" label_ar="تحرير" route_name="classifications.edit"
                 route_param="{{ $classification->id }}" />

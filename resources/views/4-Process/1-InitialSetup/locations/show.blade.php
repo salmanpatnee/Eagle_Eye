@@ -19,11 +19,10 @@
                 </x-info-col>
             </x-info-row>
 
-            <x-info-row>
-                <x-info-col-lg label="Location Description" label_ar="وصف الموقع">
-                    {{ $location->location_description ?? '—' }}
-                </x-info-col-lg>
-            </x-info-row>
+            <x-info-col-lg label="Location Description" label_ar="وصف الموقع">
+                {{ $location->location_description ?? '—' }}
+            </x-info-col-lg>
+
 
             <x-info-row>
                 <x-info-col label="Location Country" label_ar="البلد الموقع">

@@ -8,5 +8,6 @@
 ])
 
 <x-form.label label="{{ $label }}" label_ar="{{ $label_ar }}" for="{{ $name }}" />
-<x-form.textarea name="{{ $name }}" required placeholder="{{ $placeholder }}" value="{{ $value }}" />
+<x-form.textarea name="{{ $name }}" required="{{ $required }}" placeholder="{{ $placeholder }}"
+    value="{{ $value }}" />
 <x-form.error name="{{ $name }}" />
