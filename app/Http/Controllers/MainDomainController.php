@@ -12,7 +12,7 @@ class MainDomainController extends Controller
 
     public function index()
     {
-        $domains = Domain::select('id', 'main_domain_id', 'main_domain_name', 'main_domain_description')->get();
+        $domains = Domain::select('id', 'main_domain_id', 'main_domain_name', 'main_domain_description')->paginate(20);
 
         return view('4-Process.1-InitialSetup.domains.index', compact('domains'));
     }
@@ -87,38 +87,17 @@ class MainDomainController extends Controller
             ->with('success', 'Domain saved successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Domain $domain)
     {
+        if ($domain->subDomains()->exists()) {
+            return redirect(route('domains.index'))
+                ->with('error', "Domain {$domain->main_domain_name} cannot be deleted due to existing dependencies.");
+        }
 
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        Domain::where('id', $attributes['record'])->delete();
+        $domain->bestPractices()->detach();
+        $domain->delete();
 
         return redirect(route('domains.index'))
-            ->with('success', 'domain(s) deleted successfully.');
-
-
-        // $ids =  $request->validate([
-        //     'records' => ['required', 'array'],
-        // ]);
-
-        // try {
-        //     Domain::whereIn('id', $ids['records'])->each(function ($domain) {
-        //         if ($domain->subDomains()->exists()) {
-        //             throw new \Exception("Domain {$domain->main_domain_name} cannot be deleted due to existing dependencies.");
-        //         }
-        //         $domain->bestPractices()->detach();
-        //         $domain->delete();
-        //     });
-
-        //     return redirect(route('domains.index'))
-        //         ->with('success', 'domain(s) deleted successfully.');
-        // } catch (\Exception $e) {
-
-        //     return redirect(route('domains.index'))
-        //         ->with('error', $e->getMessage());
-        // }
+            ->with('success', 'Domain deleted successfully.');
     }
 }

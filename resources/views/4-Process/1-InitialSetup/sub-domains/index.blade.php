@@ -4,7 +4,7 @@
 @section('content')
     <div>
 
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="All Sub-Domains">
             <x-action.button label="Add Sub-Domains" label_ar="إضافة المكون الفرعي" route_name="sub-domains.create" />
         </x-table.action-wrapper>
 
@@ -22,7 +22,7 @@
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td>{{ $subDomain->sub_domain_id }}</x-table.td>
                         <x-table.td>{{ $subDomain->sub_domain_name }}</x-table.td>
-                        <x-table.td>{{ $subDomain->sub_domain_name }}</x-table.td>
+                        <x-table.td>{{ $subDomain->domain->main_domain_id }}</x-table.td>
 
                         <x-table.td action_col="true">
                             <x-action.view route_name="sub-domains.show" param="{{ $subDomain->id }}" />
@@ -33,5 +33,9 @@
                 @endforeach
             </x-table.tbody>
         </x-table.table>
+
+        <x-pagination>
+            {{ $subDomains->links() }}
+        </x-pagination>
     </div>
 @endsection

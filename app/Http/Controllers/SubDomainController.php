@@ -16,7 +16,7 @@ class SubDomainController extends Controller
     public function index()
     {
         $subDomains = SubDomain::select('id',  'sub_domain_id', 'sub_domain_name', 'main_domain_id')->with('domain')
-            ->get();
+            ->paginate(20);
 
         return view('4-Process.1-InitialSetup.sub-domains.index', compact('subDomains'));
     }
@@ -114,35 +114,13 @@ class SubDomainController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy(SubDomain $subDomain)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        SubDomain::where('id', $attributes['record'])->delete();
+        $subDomain->bestPractices()->detach();
+        $subDomain->categories()->detach();
+        $subDomain->delete();
 
         return redirect(route('sub-domains.index'))
             ->with('success', 'Sub-Domain(s) deleted successfully.');
-
-        // $ids =  $request->validate([
-        //     'records' => ['required', 'array'],
-        // ]);
-
-        // try {
-        //     SubDomain::whereIn('id', $ids['records'])->each(function ($subDomain) {
-
-        //         $subDomain->bestPractices()->detach();
-        //         $subDomain->categories()->detach();
-        //         $subDomain->delete();
-        //     });
-
-        //     return redirect(route('sub-domains.index'))
-        //         ->with('success', 'Sub-Domain(s) deleted successfully.');
-        // } catch (\Exception $e) {
-
-        //     return redirect(route('sub-domains.index'))
-        //         ->with('error', $e->getMessage());
-        // }
     }
 }

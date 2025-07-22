@@ -3,7 +3,7 @@
 @section('title_ar', 'المكون الأساسي')
 @section('content')
     <div>
-        <x-table.action-wrapper title="New Domain">
+        <x-table.action-wrapper title="{{ $domain?->id ? 'Update' : 'New' }} Domain">
             <x-action.button label="View" label_ar="منظر" route_name="domains.index" />
         </x-table.action-wrapper>
 
@@ -25,21 +25,20 @@
                     </div>
                 </x-form.grid-col>
 
-                <x-form.grid-col-full>
-                    <x-form.textarea-field label="Domain Description" label_ar="وصف المكون الأساسي"
-                        name="main_domain_description" placeholder="Enter Domain Description" :value="$domain?->main_domain_description" />
-                </x-form.grid-col-full>
+                <x-form.textarea-field label="Domain Description" label_ar="وصف المكون الأساسي"
+                    name="main_domain_description" placeholder="Enter Domain Description" :value="$domain?->main_domain_description" />
+
 
                 <x-form.grid-col>
                     <div>
                         <x-form.select label="Classification" label_ar="التصنيف" name="classification_id" required="true"
                             placeholder="Enter Classification" :value="$domain?->classification_id" :data="$classifications"
-                            id_key="classification_id" />
+                            id_key="classification_id" value_key="classification_name" />
                     </div>
 
                     <div>
-                        <x-form.multiselect label="Best Practice" label_ar="أفضل الممارسات" name="bestPractices[]"
-                            :value="$bestPracticeIds" :data="$bestPractices" id_key="best_practices_id"
+                        <x-form.multiselect label="Best Practice" required="true" label_ar="أفضل الممارسات"
+                            name="bestPractices[]" :value="$bestPracticeIds" :data="$bestPractices" id_key="best_practices_id"
                             value_key="best_practices_name" />
                     </div>
                 </x-form.grid-col>

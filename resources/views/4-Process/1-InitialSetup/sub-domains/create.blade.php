@@ -3,7 +3,7 @@
 @section('title_ar', 'إعداد المكون الفرعي')
 @section('content')
     <div>
-        <x-table.action-wrapper title="New Domain">
+        <x-table.action-wrapper title="{{ $subDomain?->id ? 'Update' : 'New' }} Sub-Domain">
             <x-action.button label="View" label_ar="منظر" route_name="sub-domains.index" />
         </x-table.action-wrapper>
 
@@ -35,7 +35,7 @@
                     <div>
                         <x-form.select label="Classification" label_ar="التصنيف" name="classification_id" required="true"
                             placeholder="Enter Classification" :value="$subDomain?->classification_id" :data="$classifications"
-                            id_key="classification_id" />
+                            id_key="classification_id" value_key="classification_name" />
                     </div>
 
                     <div>
