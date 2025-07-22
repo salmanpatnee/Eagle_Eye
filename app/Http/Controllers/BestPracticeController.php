@@ -79,39 +79,15 @@ class BestPracticeController extends Controller
             ->with('success', 'Best Practice saved successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(BestPractice $bestPractice)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
 
-        BestPractice::where('best_practices_id', $attributes['record'])->delete();
+        $bestPractice->controls()->detach();
+        $bestPractice->domains()->detach();
+        $bestPractice->subDomains()->detach();
+        $bestPractice->delete();
 
         return redirect(route('best-practices.index'))
-            ->with('success', 'Location(s) deleted successfully.');
-
-        // $ids = $request->validate([
-        //     'records' => ['required', 'array'],
-        // ]);
-
-        // try {
-        //     BestPractice::whereIn('id', $ids['records'])->each(function ($bestPractice) {
-        //         if ($bestPractice->domains()->exists() || $bestPractice->subDomains()->exists() || $bestPractice->controls()->exists()) {
-        //             throw new \Exception("Best Practice {$bestPractice->best_practices_name} cannot be deleted due to existing dependencies.");
-        //         }
-        //         $bestPractice->domains()->detach();
-        //         $bestPractice->subDomains()->detach();
-        //         $bestPractice->controls()->detach();
-        //         $bestPractice->delete();
-        //     });
-
-        //     return redirect(route('best-practices.index'))
-        //         ->with('success', 'Location(s) deleted successfully.');
-
-        // } catch (\Exception $e) {
-
-        //     return redirect(route('best-practices.index'))
-        //         ->with('error', $e->getMessage());
-        // }
+            ->with('success', 'Best Practice deleted successfully.');
     }
 }
