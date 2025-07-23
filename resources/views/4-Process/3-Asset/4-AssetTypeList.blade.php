@@ -40,7 +40,7 @@
 
         <!-- CONTENT -->
         <div class="IndiTable">
-            <form method="POST" id="deleteForm" action="{{ route('assettype.delete') }}">
+            <form method="POST" id="deleteForm" action="{{ route('asset-type.delete') }}">
                 @csrf
                 @method('DELETE')
                 <input type="hidden" name="record" value="">
@@ -50,11 +50,11 @@
                         <p class="PageHeadEngTxt">Asset Type Definition</p>
                     </div>
                     <div class="ButtonContainer">
-                        <a href="{{ route('assettype.index') }}" class="MoreButton">
+                        <a href="{{ route('asset-type.index') }}" class="MoreButton">
                             <p class="ButtonArbTxt">منظر</p>
                             <p class="ButtonEngTxt">View</p>
                         </a>
-                        <a href="{{ route('assettype.create') }}"
+                        <a href="{{ route('asset-type.create') }}"
                             class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يضيف</p>
                             <p class="ButtonEngTxt">Add</p>
@@ -144,7 +144,8 @@
             event.preventDefault();
             const selectedRadio = document.querySelector('.record:checked');
             if (selectedRadio) {
-                document.getElementById('deleteForm').querySelector('input[name="record"]').value = selectedRadio.value;
+                document.getElementById('deleteForm').querySelector('input[name="record"]').value = selectedRadio
+                    .value;
                 window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
             } else {
                 alert('Please select a record.');

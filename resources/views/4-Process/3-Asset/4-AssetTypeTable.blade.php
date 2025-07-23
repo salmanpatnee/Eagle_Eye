@@ -35,9 +35,9 @@
 
         @include('4-Process/3-Asset/AssetSidebar')
         <!-- SIDEBAR -->
-    
-    
-    
+
+
+
         <!-- CONTENT -->
         <div class="IndiTable">
             <div class="TableHeading">
@@ -46,25 +46,26 @@
                     <p class="PageHeadEngTxt">Asset Type Definition</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="{{ route('assettype.index') }}" class="MoreButton">
+                    <a href="{{ route('asset-type.index') }}" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('assettype.create') }}"
+                    <a href="{{ route('asset-type.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
 
-                    <a href="{{route('assettype.edit', $asset_type_id->asset_type_id)}}"
+                    <a href="{{ route('asset-type.edit', $asset_type_id->asset_type_id) }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}"
                         id="btnUpdate">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('assettype.delete') }}" id="deleteForm">
-                        <input type="hidden" name="record" value="{{$asset_type_id->id}}">
-                        <button type="button" id="btnDelete" class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}">
+                    <form method="POST" action="{{ route('asset-type.delete') }}" id="deleteForm">
+                        <input type="hidden" name="record" value="{{ $asset_type_id->id }}">
+                        <button type="button" id="btnDelete"
+                            class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
@@ -106,16 +107,17 @@
     </div>
     @include('components.delete-confirmation-modal')
 
-        <script src="/Css/4-Process/1-Form/1-Form.js"></script>
-        <script src="/Css/7-Sidebar/2-Sidebar.js"></script>
-        <script>
-            function goBack() {
-                window.history.back();
-            }
-            document.getElementById('btnDelete').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-});
-        </script>
+    <script src="/Css/4-Process/1-Form/1-Form.js"></script>
+    <script src="/Css/7-Sidebar/2-Sidebar.js"></script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+        document.getElementById('btnDelete').addEventListener('click', function(event) {
+            event.preventDefault();
+            window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
+        });
+    </script>
 </body>
+
 </html>

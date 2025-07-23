@@ -37,7 +37,7 @@
 
     <!-- CONTENT -->
     <div class="IndiTable">
-        <form method="POST" id="deleteForm" action="{{ route('assetsubtype.delete') }}">
+        <form method="POST" id="deleteForm" action="{{ route('asset-sub-type.delete') }}">
             @csrf
             @method('DELETE')
             <input type="hidden" name="record" value="">
@@ -51,13 +51,15 @@
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('assetsubtype.create') }}"
+                    <a href="{{ route('asset-sub-type.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
 
-                    <a href="" class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}" id="btnUpdate">
+                    <a href=""
+                        class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}"
+                        id="btnUpdate">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
@@ -99,8 +101,8 @@
                         @foreach ($assetSubTypes as $assetSubType)
                             <tr>
                                 <td>
-                                    <input type="radio" name="record" class="record" value="{{ $assetSubType->asset_sub_type_id }}"
-                                        required>
+                                    <input type="radio" name="record" class="record"
+                                        value="{{ $assetSubType->asset_sub_type_id }}" required>
                                 </td>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td><a
@@ -136,7 +138,8 @@
             event.preventDefault();
             const selectedRadio = document.querySelector('.record:checked');
             if (selectedRadio) {
-                document.getElementById('deleteForm').querySelector('input[name="record"]').value = selectedRadio.value;
+                document.getElementById('deleteForm').querySelector('input[name="record"]').value = selectedRadio
+                    .value;
                 window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
             } else {
                 alert('Please select a record.');

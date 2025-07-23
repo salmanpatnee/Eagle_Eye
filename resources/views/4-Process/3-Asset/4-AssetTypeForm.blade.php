@@ -81,7 +81,7 @@
         <!-- CONTENT -->
         <div class="IndiTable">
             <form id="form"
-                action="{{ isset($assettype) ? route('assettype.update', $assettype->id) : route('assettype.store') }}"
+                action="{{ isset($assettype) ? route('asset-type.update', $assettype->id) : route('asset-type.store') }}"
                 method="POST">
                 @csrf
                 @if (isset($assettype))
@@ -98,8 +98,8 @@
                             <p class="ButtonArbTxt">منظر</p>
                             <p class="ButtonEngTxt">View</p>
                         </a>
-                        @if (request()->routeIs('assettype.edit'))
-                            <a href="{{ route('assettype.create') }}" class="MoreButton">
+                        @if (request()->routeIs('asset-type.edit'))
+                            <a href="{{ route('asset-type.create') }}" class="MoreButton">
                                 <p class="ButtonArbTxt">يضيف</p>
                                 <p class="ButtonEngTxt">Add</p>
                             </a>
@@ -119,7 +119,7 @@
                         @endif
 
                         <button type="button" onclick="showDeleteModal()"
-                            class="{{ auth()->user()->can('delete-data') && request()->routeIs('assettype.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                            class="{{ auth()->user()->can('delete-data') && request()->routeIs('asset-type.edit') ? 'MoreButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
@@ -175,7 +175,7 @@
                 </table>
             </form>
 
-            <form method="POST" action="{{ route('assettype.delete') }}" id="delete_form">
+            <form method="POST" action="{{ route('asset-type.delete') }}" id="delete_form">
                 <input type="hidden" name="record" value="{{ $assettype?->id }}">
                 @csrf
                 @method('DELETE')

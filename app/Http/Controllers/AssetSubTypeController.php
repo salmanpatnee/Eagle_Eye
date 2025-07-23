@@ -40,7 +40,7 @@ class AssetSubTypeController extends Controller
         DB::table('asset_sub_type_table')->insert($attributes);
 
 
-        return redirect()->route('assetsubtype.index')->with('success', 'Asset Sub Type Saved Successfully.');
+        return redirect()->route('asset-sub-type.index')->with('success', 'Asset Sub Type Saved Successfully.');
     }
 
 
@@ -57,7 +57,7 @@ class AssetSubTypeController extends Controller
         $assetSubType->update($attributes);
 
 
-        return redirect()->route('assetsubtype.index')->with('success', 'Asset Sub Type Saved Successfully.');
+        return redirect()->route('asset-sub-type.index')->with('success', 'Asset Sub Type Saved Successfully.');
     }
 
     //--------------------------------------------------------------------//
@@ -84,7 +84,7 @@ class AssetSubTypeController extends Controller
         $data = AssetSubType::where('id', $attributes['record'])
             ->orWhere('asset_sub_type_id', $attributes['record'])
             ->first();
-            
+
         $data->delete();
 
 

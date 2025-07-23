@@ -33,12 +33,12 @@
     </div>
     <div class="wrapper">
         @include('4-Process/3-Asset/AssetSidebar')
-    
-    
-    
+
+
+
         <!-- CONTENT -->
         <div class="IndiTable">
-            <form method="POST" id="deleteForm" action="{{ route('assetstatus.delete') }}">
+            <form method="POST" id="deleteForm" action="{{ route('asset-status.delete') }}">
                 @csrf
                 @method('DELETE')
                 <input type="hidden" name="record" value="">
@@ -48,22 +48,24 @@
                         <p class="PageHeadEngTxt">Asset Status Definition</p>
                     </div>
                     <div class="ButtonContainer">
-                        <a href="{{ route('assetstatus.index') }}" class="MoreButton">
+                        <a href="{{ route('asset-status.index') }}" class="MoreButton">
                             <p class="ButtonArbTxt">منظر</p>
                             <p class="ButtonEngTxt">View</p>
                         </a>
-    
-                        <a href="{{ route('assetstatus.create') }}"
+
+                        <a href="{{ route('asset-status.create') }}"
                             class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يضيف</p>
                             <p class="ButtonEngTxt">Add</p>
                         </a>
-    
-                        <a href="" class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}" id="btnUpdate">
+
+                        <a href=""
+                            class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}"
+                            id="btnUpdate">
                             <p class="ButtonArbTxt">تحديث</p>
                             <p class="ButtonEngTxt">Update</p>
                         </a>
-    
+
                         <button type="button" id="btnDelete"
                             class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
@@ -71,7 +73,7 @@
                         </button>
                     </div>
 
-                    
+
                 </div>
                 <div class="table-container">
 
@@ -82,7 +84,7 @@
                                 <th style="padding-right: 0px">
                                     <p class="ListHeadArbTxt">رقم</p>
                                     <p class="ListHeadEngTxt">S.No</p>
-                                  </th>
+                                </th>
                                 <th style="padding-right: 0px;">
                                     <p class="ListHeadArbTxt">رمز حالة الأصول</p>
                                     <p class="ListHeadEngTxt">Asset Status ID</p>
@@ -99,10 +101,10 @@
                             @foreach ($AssetStatus as $AssetStatus)
                                 <tr>
                                     <td>
-                                        <input type="radio" name="record" class="record" value="{{ $AssetStatus->asset_status_id }}"
-                                            required>
+                                        <input type="radio" name="record" class="record"
+                                            value="{{ $AssetStatus->asset_status_id }}" required>
                                     </td>
-                                    <td>{{ $loop->index + 1}}</td>
+                                    <td>{{ $loop->index + 1 }}</td>
                                     <td><a
                                             href="/asset-status-table/{{ $AssetStatus->asset_status_id }}">{{ $AssetStatus->asset_status_id }}</a>
                                     </td>
@@ -115,7 +117,7 @@
                 </div>
             </form>
         </div>
-    
+
     </div>
 
     @include('components.delete-confirmation-modal')
@@ -137,7 +139,8 @@
             event.preventDefault();
             const selectedRadio = document.querySelector('.record:checked');
             if (selectedRadio) {
-                document.getElementById('deleteForm').querySelector('input[name="record"]').value = selectedRadio.value;
+                document.getElementById('deleteForm').querySelector('input[name="record"]').value = selectedRadio
+                    .value;
                 window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
             } else {
                 alert('Please select a record.');
@@ -149,4 +152,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -35,7 +35,7 @@
 
         @include('4-Process/3-Asset/AssetSidebar')
         <!-- SIDEBAR -->
-    
+
         <!-- CONTENT -->
         <div class="IndiTable">
             <div class="TableHeading">
@@ -48,19 +48,20 @@
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('assetstatus.create') }}"
+                    <a href="{{ route('asset-status.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
-                    <a href="{{ route('assetstatus.edit', $asset_status_id->asset_status_id) }}"
+                    <a href="{{ route('asset-status.edit', $asset_status_id->asset_status_id) }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('assetstatus.delete') }}" id="deleteForm">
-                        <input type="hidden" name="record" value="{{$asset_status_id->id}}">
-                        <button type="button"  id="btnDelete" class="{{ auth()->user()->can('delete-data') && auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}">
+                    <form method="POST" action="{{ route('asset-status.delete') }}" id="deleteForm">
+                        <input type="hidden" name="record" value="{{ $asset_status_id->id }}">
+                        <button type="button" id="btnDelete"
+                            class="{{ auth()->user()->can('delete-data') && auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
@@ -109,9 +110,10 @@
             window.history.back();
         }
         document.getElementById('btnDelete').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-});
+            event.preventDefault();
+            window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
+        });
     </script>
 </body>
+
 </html>

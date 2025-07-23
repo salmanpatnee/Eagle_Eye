@@ -82,7 +82,7 @@
         <!-- CONTENT -->
         <div class="IndiTable">
             <form id="form"
-                action="{{ isset($assetstatus) ? route('assetstatus.update', $assetstatus->id) : route('assetstatus.store') }}"
+                action="{{ isset($assetstatus) ? route('asset-status.update', $assetstatus->id) : route('asset-status.store') }}"
                 method="POST">
                 @csrf
                 @if (isset($assetstatus))
@@ -99,8 +99,8 @@
                             <p class="ButtonArbTxt">منظر</p>
                             <p class="ButtonEngTxt">View</p>
                         </a>
-                        @if (request()->routeIs('assetstatus.edit'))
-                            <a href="{{ route('assetstatus.create') }}" class="MoreButton">
+                        @if (request()->routeIs('asset-status.edit'))
+                            <a href="{{ route('asset-status.create') }}" class="MoreButton">
                                 <p class="ButtonArbTxt">يضيف</p>
                                 <p class="ButtonEngTxt">Add</p>
                             </a>
@@ -120,7 +120,7 @@
                         @endif
 
                         <button type="button" onclick="showDeleteModal()"
-                            class="{{ auth()->user()->can('delete-data') && request()->routeIs('assetstatus.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                            class="{{ auth()->user()->can('delete-data') && request()->routeIs('asset-status.edit') ? 'MoreButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
@@ -177,7 +177,7 @@
                     </div>
                 </table>
             </form>
-            <form method="POST" action="{{ route('assetstatus.delete') }}" id="delete_form">
+            <form method="POST" action="{{ route('asset-status.delete') }}" id="delete_form">
                 <input type="hidden" name="record" value="{{ $assetstatus?->id }}">
                 @csrf
                 @method('DELETE')

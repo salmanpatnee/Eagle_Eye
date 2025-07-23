@@ -41,7 +41,9 @@
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td>{{ $asset->asset_id }}</x-table.td>
                         <x-table.td>{{ $asset->asset_name }}</x-table.td>
-                        <x-table.td>{{ $asset->asset_description }}</x-table.td>
+                        <x-table.td>
+                            <div class="w-2xl">{{ $asset->asset_description }}</div>
+                        </x-table.td>
                         <x-table.td>
                             <x-table-list :data="$asset->categories" id_key="" value_key="category_name" />
                         </x-table.td>

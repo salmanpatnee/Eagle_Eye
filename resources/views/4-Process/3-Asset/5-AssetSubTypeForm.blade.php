@@ -36,13 +36,13 @@
 
         @include('4-Process/3-Asset/AssetSidebar')
         <!-- SIDEBAR -->
-    
-    
-    
+
+
+
         <!-- CONTENT -->
         <div class="IndiTable">
             <form id="form"
-                action="{{ isset($assetsubtype) ? route('assetsubtype.update', $assetsubtype->id) : route('assetsubtype.store') }}"
+                action="{{ isset($assetsubtype) ? route('asset-sub-type.update', $assetsubtype->id) : route('asset-sub-type.store') }}"
                 method="POST">
                 @csrf
                 @if (isset($assetsubtype))
@@ -59,8 +59,8 @@
                             <p class="ButtonArbTxt">منظر</p>
                             <p class="ButtonEngTxt">View</p>
                         </a>
-                        @if (request()->routeIs('assetsubtype.edit'))
-                            <a href="{{route('assetsubtype.create')}}" class="MoreButton">
+                        @if (request()->routeIs('asset-sub-type.edit'))
+                            <a href="{{ route('asset-sub-type.create') }}" class="MoreButton">
                                 <p class="ButtonArbTxt">يضيف</p>
                                 <p class="ButtonEngTxt">Add</p>
                             </a>
@@ -80,7 +80,7 @@
                         @endif
 
                         <button type="button" onclick="showDeleteModal()"
-                            class="{{ auth()->user()->can('delete-data') && request()->routeIs('assetsubtype.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                            class="{{ auth()->user()->can('delete-data') && request()->routeIs('asset-sub-type.edit') ? 'MoreButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
@@ -124,8 +124,9 @@
                                     <p class="FieldHeadEngTxt">Asset Sub-Type Description</p>
                                     <p class="FieldHeadArbTxt">وصف النوع الفرعي للأصول</p>
                                 </div>
-                                <p><input type="text" name="asset_sub_type_description" id="asset_sub_type_description"
-                                        class="bg-tx" placeholder="Write Asset Sub-Type Description"
+                                <p><input type="text" name="asset_sub_type_description"
+                                        id="asset_sub_type_description" class="bg-tx"
+                                        placeholder="Write Asset Sub-Type Description"
                                         value="{{ old('asset_sub_type_description', $assetsubtype?->asset_sub_type_description) }}">
                                     @error('asset_sub_type_description')
                                         <span class="text-danger">{{ $message }}</span>
@@ -156,7 +157,7 @@
                     </div>
                 </table>
             </form>
-            <form method="POST" action="{{ route('assetsubtype.delete') }}" id="delete_form">
+            <form method="POST" action="{{ route('asset-sub-type.delete') }}" id="delete_form">
                 <input type="hidden" name="record" value="{{ $assetsubtype?->id }}">
                 @csrf
                 @method('DELETE')
@@ -171,9 +172,11 @@
         function goBack() {
             window.history.back();
         }
+
         function showDeleteModal() {
-    window.deleteConfirmationModal.show(document.getElementById('delete_form'));
-}
+            window.deleteConfirmationModal.show(document.getElementById('delete_form'));
+        }
     </script>
 </body>
+
 </html>

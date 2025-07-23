@@ -35,9 +35,9 @@
 
         @include('4-Process/3-Asset/AssetSidebar')
         <!-- SIDEBAR -->
-    
-    
-    
+
+
+
         <!-- CONTENT -->
         <div class="IndiTable">
             <div class="TableHeading">
@@ -50,24 +50,27 @@
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="/asset-sub-type-input" class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
+                    <a href="/asset-sub-type-input"
+                        class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
-                    <a href="{{ route('assetsubtype.edit', $asset_sub_type_id->asset_sub_type_id) }}" class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
+                    <a href="{{ route('asset-sub-type.edit', $asset_sub_type_id->asset_sub_type_id) }}"
+                        class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('assetsubtype.delete') }}" id="deleteForm">
-                        <input type="hidden" name="record" value="{{$asset_sub_type_id->id}}">
-                        <button type="button" id="btnDelete" class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}">
+                    <form method="POST" action="{{ route('asset-sub-type.delete') }}" id="deleteForm">
+                        <input type="hidden" name="record" value="{{ $asset_sub_type_id->id }}">
+                        <button type="button" id="btnDelete"
+                            class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
                         @csrf
                         @method('DELETE')
                     </form>
-                    
+
                 </div>
             </div>
             <table cellspacing="0">
@@ -119,10 +122,10 @@
             window.history.back();
         }
         document.getElementById('btnDelete').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-});
-
+            event.preventDefault();
+            window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
+        });
     </script>
 </body>
+
 </html>
