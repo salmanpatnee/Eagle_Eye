@@ -63,7 +63,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/asset-sub-type-input">
+                    <a href="/asset-sub-types/create">
                         <i class='bx bxs-label'></i>
                         <div class="MenuTxt">
                             <h3>النوع الفرعي للأصول</h3>

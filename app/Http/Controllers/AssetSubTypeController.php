@@ -9,24 +9,26 @@ use Illuminate\Support\Facades\DB;
 
 class AssetSubTypeController extends Controller
 {
-    // To add data into the table
+    public function index()
+    {
+        $assetSubTypes = AssetSubType::with('type')->paginate(20);
+
+        return view('4-Process/3-Asset/asset-sub-types/index', compact('assetSubTypes'));
+    }
+
+    public function show(AssetSubType $assetSubType)
+    {
+        $assetSubType->load('type');
+
+        return view('4-Process/3-Asset/asset-sub-types/show', compact('assetSubType'));
+    }
+
     public function create()
     {
-        $assetsubtype = null;
-        $assettypes = DB::table('asset_type_table')->get();
-        return view('4-Process/3-Asset/5-AssetSubTypeForm', compact('assetsubtype', 'assettypes'));
+        $assetSubType = null;
+        $assetTypes = AssetType::all();
+        return view('4-Process/3-Asset/asset-sub-types/create', compact('assetSubType', 'assetTypes'));
     }
-
-    // To edit the table
-    public function edit($id)
-    {
-        $assetsubtype = DB::table('asset_sub_type_table')->where('asset_sub_type_id', $id)->first();
-        $assettypes = DB::table('asset_type_table')->get();
-
-
-        return view('4-Process/3-Asset/5-AssetSubTypeForm', compact('assetsubtype', 'assettypes'));
-    }
-
 
     public function store(Request $request)
     {
@@ -40,9 +42,15 @@ class AssetSubTypeController extends Controller
         DB::table('asset_sub_type_table')->insert($attributes);
 
 
-        return redirect()->route('asset-sub-type.index')->with('success', 'Asset Sub Type Saved Successfully.');
+        return redirect()->route('asset-sub-types.index')->with('success', 'Asset Sub Type Saved Successfully.');
     }
 
+    public function edit(AssetSubType $assetSubType)
+    {
+        $assetTypes = AssetType::all();
+
+        return view('4-Process/3-Asset/asset-sub-types/create', compact('assetSubType', 'assetTypes'));
+    }
 
     public function update(AssetSubType $assetSubType, Request $request)
     {
@@ -57,72 +65,12 @@ class AssetSubTypeController extends Controller
         $assetSubType->update($attributes);
 
 
-        return redirect()->route('asset-sub-type.index')->with('success', 'Asset Sub Type Saved Successfully.');
+        return redirect()->route('asset-sub-types.index')->with('success', 'Asset Sub Type Saved Successfully.');
     }
 
-    //--------------------------------------------------------------------//
-
-
-    // 2.Controller - SHOW DATA INTO THE LIST
-
-    public function index()
+    public function delete(AssetSubType $assetSubType)
     {
-        $assetSubTypes = AssetSubType::with('type')->get();
-
-        return view('4-Process/3-Asset/5-AssetSubTypeList', compact('assetSubTypes'));
-    }
-
-
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
-    {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $data = AssetSubType::where('id', $attributes['record'])
-            ->orWhere('asset_sub_type_id', $attributes['record'])
-            ->first();
-
-        $data->delete();
-
-
-        return redirect('/asset-sub-type-list');
-
-        // $selectedassetsubtype = $request->input('selectedassetsubtype');
-
-        // if (!empty($selectedassetsubtype)) {
-        //     DB::table('asset_sub_type_table')->whereIn('asset_sub_type_id', $selectedassetsubtype)->delete();
-        // }
-    }
-
-
-
-
-    // 4.Controller - DETAILED TABLE
-    public function show($asset_sub_type_id)
-    {
-
-        $asset_sub_type_id = DB::table('asset_sub_type_table')
-            ->join('asset_type_table', 'asset_sub_type_table.asset_type_id', '=', 'asset_type_table.asset_type_id')
-            ->where('asset_sub_type_table.asset_sub_type_id', $asset_sub_type_id)
-            ->first();
-
-        if (!$asset_sub_type_id) {
-            abort(404);
-        }
-
-        return view('4-Process/3-Asset/5-AssetSubTypeTable', compact('asset_sub_type_id'));
-    }
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $assetTypes = DB::table('asset_type_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        return view('4-Process.3-Asset.5-AssetSubTypeForm', compact('assetTypes'));
+        $assetSubType->delete();
+        return redirect()->route('asset-sub-types.index')->with('success', 'Asset Sub Type Deleted Successfully.');
     }
 }

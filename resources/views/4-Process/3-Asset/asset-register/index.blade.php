@@ -32,7 +32,7 @@
                 <x-table.th label="Asset ID" label_ar="رمز الأصول" />
                 <x-table.th label="Asset Name" label_ar="الاسم الأصول" />
                 <x-table.th label="Asset Description" label_ar="وصف الأصول" />
-                <x-table.th label="Categories" label_ar="وصف الأصول" />
+                <x-table.th label="Categories" label_ar="اسم الفئة" />
                 <x-table.th label="Action" label_ar="إجراء " />
             </x-table.thead>
             <x-table.tbody>

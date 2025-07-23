@@ -31,8 +31,8 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('asset-sub-type.index') || request()->routeIs('asset-sub-type.show') || request()->routeIs('asset-sub-type.create') || request()->routeIs('asset-sub-type.edit') ? 'active' : '' }}">
-            <a href="{{ route('asset-sub-type.index') }}">
+            class="{{ request()->routeIs('asset-sub-types.index') || request()->routeIs('asset-sub-types.show') || request()->routeIs('asset-sub-types.create') || request()->routeIs('asset-sub-types.edit') ? 'active' : '' }}">
+            <a href="{{ route('asset-sub-types.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>النوع الفرعي للأصول</h3>

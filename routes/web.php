@@ -543,13 +543,13 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::controller(AssetSubTypeController::class)->group(function () {
-        Route::get('/asset-sub-type-list', 'index')->name('asset-sub-type.index');
-        Route::get('/asset-sub-type-table/{asset_sub_type_id}', 'show')->name('asset-sub-type.show');
-        Route::get('/asset-sub-type-input', 'create')->name('asset-sub-type.create');
-        Route::get('/asset-sub-type/edit/{id}', 'edit')->name('asset-sub-type.edit');
-        Route::post('/asset-sub-type', 'store')->name('asset-sub-type.store');
-        Route::put('/asset-sub-type/{assetSubType}', 'update')->name('asset-sub-type.update');
-        Route::delete('/asset-sub-type/delete', 'delete')->name('asset-sub-type.delete');
+        Route::get('/asset-sub-types', 'index')->name('asset-sub-types.index');
+        Route::get('/asset-sub-types/create', 'create')->name('asset-sub-types.create');
+        Route::get('/asset-sub-types/{assetSubType}', 'show')->name('asset-sub-types.show');
+        Route::post('/asset-sub-type', 'store')->name('asset-sub-types.store');
+        Route::get('/asset-sub-types/edit/{assetSubType}', 'edit')->name('asset-sub-types.edit');
+        Route::put('/asset-sub-types/{assetSubType}', 'update')->name('asset-sub-types.update');
+        Route::delete('/asset-sub-types/{assetSubType}', 'delete')->name('asset-sub-types.destroy');
     });
 
 
