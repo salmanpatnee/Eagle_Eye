@@ -11,28 +11,6 @@
             <x-action.button label="View" label_ar="منظر" route_name="assets.index" />
         </x-table.action-wrapper>
 
-        @if ($errors->any())
-            <div class="alert alert-danger mb-4">
-                <ul class="list-disc pl-5 text-sm text-red-600">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        @if (session('success'))
-            <div class="alert alert-success mb-4 text-green-700">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger mb-4 text-red-700">
-                {{ session('error') }}
-            </div>
-        @endif
-
         <form action="{{ isset($asset) ? route('assets.update', $asset->id) : route('assets.store') }}" method="POST">
             @csrf
             @if (isset($asset))
