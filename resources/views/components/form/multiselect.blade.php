@@ -8,6 +8,7 @@
     'id_key' => '',
     'value_key' => '',
     'attributes' => [],
+    'show_key' => false,
 ])
 
 <x-form.label label="{{ $label }}" label_ar="{{ $label_ar }}" for="{{ $name }}" />
@@ -22,9 +23,19 @@
             Select Option
         </option>
         @foreach ($data as $row)
-            <option value="{{ $row->$id_key }}" class="text-gray-700" @if (in_array($row->$id_key, old($name, $value))) selected @endif>
-                {{ $row->$value_key }}
-            </option>
+            @if ($show_key)
+                <option value="{{ $row->$id_key }}" class="text-gray-700"
+                    @if (in_array($row->$id_key, old($name, $value))) selected @endif>
+                    {{ $row->$id_key }}
+                    - {{ $row->$value_key }}
+                </option>
+            @else
+                <option value="{{ $row->$id_key }}" class="text-gray-700"
+                    @if (in_array($row->$id_key, old($name, $value))) selected @endif>
+                    {{ $row->$value_key }}
+                </option>
+            @endif
+
             {{-- <option value="{{ $row->$id_key }}" class="text-gray-700" @if (old($name, $value) == $row->$id_key) selected @endif>
                 {{ $row->$id_key }} {{ $row->$value_key }}</option> --}}
         @endforeach

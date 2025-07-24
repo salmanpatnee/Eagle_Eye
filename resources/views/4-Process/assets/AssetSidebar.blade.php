@@ -21,8 +21,8 @@
             </a>
         </li>
         <li
-            class="{{ request()->routeIs('asset-type.index') || request()->routeIs('asset-type.show') || request()->routeIs('asset-type.create') || request()->routeIs('asset-type.edit') ? 'active' : '' }}">
-            <a href="{{ route('asset-type.index') }}">
+            class="{{ request()->routeIs('asset-types.index') || request()->routeIs('asset-types.show') || request()->routeIs('asset-types.create') || request()->routeIs('asset-types.edit') ? 'active' : '' }}">
+            <a href="{{ route('asset-types.index') }}">
                 <i class='bx bxs-label'></i>
                 <div class="MenuTxt">
                     <h3>نوع الأصل</h3>

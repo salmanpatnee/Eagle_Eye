@@ -502,25 +502,25 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(AssetRegisterController::class)->group(function () {
         Route::get('/assets', 'index')->name('assets.index');
-        Route::get('/assets/{asset:asset_id}', 'show')->name('assets.show');
         Route::get('/assets/create', 'create')->name('assets.create');
-        Route::get('/assets/edit/{asset:asset_id}', 'edit')->name('assets.edit');
+        Route::get('/assets/{asset}', 'show')->name('assets.show');
         Route::post('/assets', 'store')->name('assets.store');
-        Route::put('/assets/{asset:asset_id}', 'update')->name('assets.update');
-        Route::delete('/assets/{asset:asset_id}', 'delete')->name('assets.destroy');
+        Route::get('/assets/edit/{asset}', 'edit')->name('assets.edit');
+        Route::put('/assets/{asset}', 'update')->name('assets.update');
+        Route::delete('/assets/{asset}', 'delete')->name('assets.destroy');
     });
 
     // ------------Asset Status--------------
 
 
     Route::controller(AssetStatusController::class)->group(function () {
-        Route::get('/asset-status-list', 'index')->name('asset-status.index');
-        Route::get('/asset-status-table/{asset_status_id}', 'show')->name('asset-status.show');
-        Route::get('/asset-status-input', 'create')->name('asset-status.create');
-        Route::get('/asset-status/edit/{id}', 'edit')->name('asset-status.edit');
+        Route::get('/asset-status', 'index')->name('asset-status.index');
+        Route::get('/asset-status/create', 'create')->name('asset-status.create');
+        Route::get('/asset-status/{assetStatus}', 'show')->name('asset-status.show');
         Route::post('/asset-status', 'store')->name('asset-status.store');
+        Route::get('/asset-status/edit/{assetStatus}', 'edit')->name('asset-status.edit');
         Route::put('/asset-status/{assetStatus}', 'update')->name('asset-status.update');
-        Route::delete('/asset-status/delete', 'delete')->name('asset-status.delete');
+        Route::delete('/asset-status/{assetStatus}', 'delete')->name('asset-status.destroy');
     });
 
 
@@ -528,13 +528,13 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::controller(AssetTypeController::class)->group(function () {
-        Route::get('/asset-type-list', 'index')->name('asset-type.index');
-        Route::get('/asset-type-table/{asset_type_id}', 'show')->name('asset-type.show');
-        Route::get('/asset-type-input', 'create')->name('asset-type.create');
-        Route::get('/asset-type/edit/{id}', 'edit')->name('asset-type.edit');
-        Route::post('/asset-type', 'store')->name('asset-type.store');
-        Route::put('/asset-type/{asset_type_id}', 'update')->name('asset-type.update');
-        Route::delete('/asset-type/delete', 'delete')->name('asset-type.delete');
+        Route::get('/asset-types', 'index')->name('asset-types.index');
+        Route::get('/asset-types/create', 'create')->name('asset-types.create');
+        Route::get('/asset-types/{assetType}', 'show')->name('asset-types.show');
+        Route::post('/asset-type', 'store')->name('asset-types.store');
+        Route::get('/asset-types/edit/{assetType}', 'edit')->name('asset-types.edit');
+        Route::put('/asset-type/{assetType}', 'update')->name('asset-types.update');
+        Route::delete('/asset-type/{assetType}', 'delete')->name('asset-types.destroy');
     });
 
 

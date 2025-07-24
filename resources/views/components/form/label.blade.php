@@ -14,7 +14,7 @@
         @endif
     </span>
     @if (!empty($label_ar))
-        <span class="font-bold sm:ml-2 sm:order-2 sm:text-left sm:w-auto text-left text-sm w-full" dir="rtl"
+        <span class="font-bold sm:ml-2 sm:order-2 sm:text-right sm:w-auto text-right text-sm w-full" dir="rtl"
             lang="ar" aria-label="{{ $label_ar }}">
             {{ $label_ar }}
             @if ($required)

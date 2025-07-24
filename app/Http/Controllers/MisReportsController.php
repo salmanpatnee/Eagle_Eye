@@ -357,7 +357,7 @@ class MisReportsController extends Controller
     {
         $assetregister = DB::table('asset_register_table as assetregister')
             ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
-            ->join('asset_type_table as assettype', 'asset-type.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('cloud_asset', 'Yes')
             ->get();
@@ -410,7 +410,7 @@ class MisReportsController extends Controller
     {
         $assetregister = DB::table('asset_register_table as assetregister')
             ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
-            ->join('asset_type_table as assettype', 'asset-type.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('telework_asset', 'Yes')
             ->get();
@@ -462,7 +462,7 @@ class MisReportsController extends Controller
     {
         $assetregister = DB::table('asset_register_table as assetregister')
             ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
-            ->join('asset_type_table as assettype', 'asset-type.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('social_media_asset', 'Yes')
             ->get();
@@ -514,7 +514,7 @@ class MisReportsController extends Controller
     {
         $assetregister = DB::table('asset_register_table as assetregister')
             ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
-            ->join('asset_type_table as assettype', 'asset-type.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('data_privacy_asset', 'Yes')
             ->get();
@@ -563,7 +563,7 @@ class MisReportsController extends Controller
     {
         $assetregister = DB::table('asset_register_table as assetregister')
             ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
-            ->join('asset_type_table as assettype', 'asset-type.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('data_pii_asset', 'Yes')
             ->get();
@@ -615,7 +615,7 @@ class MisReportsController extends Controller
     {
         $assetregister = DB::table('asset_register_table as assetregister')
             ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
-            ->join('asset_type_table as assettype', 'asset-type.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('payment_asset', 'Yes')
             ->get();
@@ -668,7 +668,7 @@ class MisReportsController extends Controller
     {
         $assetregister = DB::table('asset_register_table as assetregister')
             ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
-            ->join('asset_type_table as assettype', 'asset-type.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('pci_dss_asset', 'Yes')
             ->get();
@@ -720,7 +720,7 @@ class MisReportsController extends Controller
     {
         $assetregister = DB::table('asset_register_table as assetregister')
             ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
-            ->join('asset_type_table as assettype', 'asset-type.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_commerce_asset', 'Yes')
             ->get();
@@ -773,7 +773,7 @@ class MisReportsController extends Controller
     {
         $assetregister = DB::table('asset_register_table as assetregister')
             ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
-            ->join('asset_type_table as assettype', 'asset-type.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_banking_asset', 'Yes')
             ->get();

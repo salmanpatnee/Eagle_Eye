@@ -13,21 +13,21 @@ class AssetSubTypeController extends Controller
     {
         $assetSubTypes = AssetSubType::with('type')->paginate(20);
 
-        return view('4-Process/3-Asset/asset-sub-types/index', compact('assetSubTypes'));
+        return view('4-Process/assets/asset-sub-types/index', compact('assetSubTypes'));
     }
 
     public function show(AssetSubType $assetSubType)
     {
         $assetSubType->load('type');
 
-        return view('4-Process/3-Asset/asset-sub-types/show', compact('assetSubType'));
+        return view('4-Process/assets/asset-sub-types/show', compact('assetSubType'));
     }
 
     public function create()
     {
         $assetSubType = null;
         $assetTypes = AssetType::all();
-        return view('4-Process/3-Asset/asset-sub-types/create', compact('assetSubType', 'assetTypes'));
+        return view('4-Process/assets/asset-sub-types/create', compact('assetSubType', 'assetTypes'));
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class AssetSubTypeController extends Controller
     {
         $assetTypes = AssetType::all();
 
-        return view('4-Process/3-Asset/asset-sub-types/create', compact('assetSubType', 'assetTypes'));
+        return view('4-Process/assets/asset-sub-types/create', compact('assetSubType', 'assetTypes'));
     }
 
     public function update(AssetSubType $assetSubType, Request $request)

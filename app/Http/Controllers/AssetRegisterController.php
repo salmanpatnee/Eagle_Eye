@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Asset;
 use App\Models\Category;
-use App\Models\Custodian;
-use App\Models\CustodianName;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,57 +29,30 @@ class AssetRegisterController extends Controller
 
 
 
-        return view('4-Process/3-Asset/asset-register/index', compact('assets', 'categories', 'assetOptions', 'asset', 'category'));
+        return view('4-Process/assets/asset-register/index', compact('assets', 'categories', 'assetOptions', 'asset', 'category'));
     }
 
     public function show(Asset $asset)
     {
-        $asset->load('categories', 'custodians', 'assetGroup', 'owner', 'assetType', 'assetSubType', 'owner', 'assetStatus', 'classification');
+        $asset->load('categories', 'assetGroup', 'owner', 'assetType', 'assetSubType', 'owner', 'assetStatus', 'classification');
 
-        return view('4-Process/3-Asset/asset-register/show', compact('asset'));
+        return view('4-Process/assets/asset-register/show', compact('asset'));
     }
 
     // To add data into the table
     public function create()
     {
-        $assetregister = null;
+        $asset = null;
         $categories = DB::table('category_table')->distinct()->get();
-        $custodians = DB::table('custodian_name_table')->distinct()->get();
-        $assetgroup = DB::table('asset_group_table')->get();
+        $assetGroups = DB::table('asset_group_table')->get();
         $assetOwners = DB::table('owner_table')->get();
         $assetTypes = DB::table('asset_type_table')->get();
-        $assetSubType = DB::table('asset_sub_type_table')->get();
+        $assetSubTypes = DB::table('asset_sub_type_table')->get();
         $locations = DB::table('location_table')->get();
         $assetStatus = DB::table('asset_status_table')->get();
-        $assetclass = DB::table('classification_table')->get();
-        return view('4-Process/3-Asset/1-AssetRegisterForm', compact('assetregister', 'categories', 'custodians', 'assetgroup', 'assetOwners', 'assetTypes', 'assetSubType', 'locations', 'assetStatus', 'assetclass'));
-    }
-
-    // To edit the table
-    public function edit($id)
-    {
-        $assetregister = Asset::where('asset_id', $id)->first();
-
-
-        $categories = DB::table('category_table')->distinct()->get();
-        $custodians = DB::table('custodian_name_table')->distinct()->get();
-        // $assetregister = DB::table('asset_register_table')->where('asset_id', $id)->first();
-        $assetgroup = DB::table('asset_group_table')->get();
-        $assetOwners = DB::table('owner_table')->get();
-        $assetTypes = DB::table('asset_type_table')->get();
-        $assetSubType = DB::table('asset_sub_type_table')->get();
-        $locations = DB::table('location_table')->get();
-        $assetStatus = DB::table('asset_status_table')->get();
-        $assetclass = DB::table('classification_table')->get();
-
-        $assetregister->load('custodians', 'categories');
-
-        $custodianIds = $assetregister->custodians->pluck('custodian_name_id')->toArray();
-        $categoryIds = $assetregister->categories->pluck('category_id')->toArray();
-
-
-
-        return view('4-Process/3-Asset/1-AssetRegisterForm', compact('custodianIds', 'categoryIds', 'assetregister',  'categories', 'custodians', 'assetgroup', 'assetOwners', 'assetTypes', 'assetSubType', 'locations', 'assetStatus', 'assetclass'));
+        $classifications = DB::table('classification_table')->get();
+        $categoryIds = [];
+        return view('4-Process/assets/asset-register/create', compact('asset', 'categories', 'assetGroups', 'assetOwners', 'assetTypes', 'assetSubTypes', 'locations', 'assetStatus', 'classifications', 'categoryIds'));
     }
 
     // To store the edited data into the table
@@ -95,7 +66,6 @@ class AssetRegisterController extends Controller
             'asset_host_name' => 'nullable',
             'asset_url' => 'nullable',
             'categories' => 'nullable',
-            // 'custodians' => 'nullable',
             'cs_confidentiality' => 'nullable',
             'cs_integrity' => 'nullable',
             'cs_availability' => 'nullable',
@@ -146,26 +116,39 @@ class AssetRegisterController extends Controller
             'classification_id' => 'nullable',
         ]);
 
-        $categories = $attributes['categories'];
-        // $custodians = $attributes['custodians'];
-
+        $categories = $attributes['categories'] ?? null;
         unset($attributes['categories']);
-        // unset($attributes['custodians']);
+
+
 
         $asset = Asset::create($attributes);
 
-        // if ($custodians && $custodiansArray = json_decode($custodians, true)) {
-        //     $asset->custodians()
-        //         ->attach($custodiansArray);
-        // }
-
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $asset->categories()
-                ->attach($categoriesArray);
-        }
+        $asset->categories()->attach($categories ?? []);
 
         return redirect()->route('assets.index')->with('success', 'Asset saved successfully.');
     }
+
+    // To edit the table
+    public function edit(Asset $asset)
+    {
+
+        $categories = DB::table('category_table')->distinct()->get();
+        $assetGroups = DB::table('asset_group_table')->get();
+        $assetOwners = DB::table('owner_table')->get();
+        $assetTypes = DB::table('asset_type_table')->get();
+        $assetSubTypes = DB::table('asset_sub_type_table')->get();
+        $locations = DB::table('location_table')->get();
+        $assetStatus = DB::table('asset_status_table')->get();
+        $classifications = DB::table('classification_table')->get();
+
+        $asset->load('categories');
+
+        $categoryIds = $asset->categories->pluck('category_id')->toArray();
+
+        return view('4-Process/assets/asset-register/create', compact('categoryIds', 'asset',  'categories', 'assetGroups', 'assetOwners', 'assetTypes', 'assetSubTypes', 'locations', 'assetStatus', 'classifications'));
+    }
+
+
 
     public function update(Asset $asset, Request $request)
     {
@@ -178,7 +161,6 @@ class AssetRegisterController extends Controller
             'asset_host_name' => 'nullable',
             'asset_url' => 'nullable',
             'categories' => 'nullable',
-            // 'custodians' => 'nullable',
             'cs_confidentiality' => 'nullable',
             'cs_integrity' => 'nullable',
             'cs_availability' => 'nullable',
@@ -229,23 +211,12 @@ class AssetRegisterController extends Controller
             'classification_id' => 'nullable',
         ]);
 
-        $categories = $attributes['categories'];
-        // $custodians = $attributes['custodians'];
-
+        $categories = $attributes['categories'] ?? null;
         unset($attributes['categories']);
-        unset($attributes['custodians']);
 
         $asset->update($attributes);
 
-        // if ($custodians && $custodiansArray = json_decode($custodians, true)) {
-        //     $asset->custodians()
-        //         ->sync($custodiansArray);
-        // }
-
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $asset->categories()
-                ->sync($categoriesArray);
-        }
+        $asset->categories()->sync($categories ?? []);
 
         return redirect()->route('assets.index')->with('success', 'Asset saved successfully.');
     }
@@ -255,30 +226,15 @@ class AssetRegisterController extends Controller
 
 
     // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
+    public function delete(Asset $asset)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        Asset::where('asset_id', $attributes['record'])->delete();
-
-        return redirect('/assets');
-
-        // $selectedassetregister = $request->input('selectedassetregister');
-
-        // if (count($selectedassetregister)) {
-        //     foreach ($selectedassetregister as $id) {
-        //         $asset = Asset::find($id);
-        //         $asset->categories()->detach();
-        //         $asset->custodians()->detach();
-        //         $asset->delete();
-        //     }
-        // }
-
-        // // if (!empty($selectedassetregister)) {
-        // //     DB::table('asset_register_table')->whereIn('asset_id', $selectedassetregister)->delete();
-        // // }
-        // return redirect('/assets');
+        if ($asset->categories()->exists() || $asset->custodians()->exists()) {
+            return redirect()->route('assets.index')
+                ->with('error', "Asset {$asset->asset_name} cannot be deleted due to existing dependencies.");
+        } else {
+            $asset->delete();
+            return redirect()->route('assets.index')
+                ->with('success', "Asset {$asset->asset_name} deleted successfully.");
+        }
     }
 }

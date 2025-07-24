@@ -5,7 +5,7 @@
 
 
 <div class="mb-6">
-    <div class="border rounded-lg p-3 bg-white">
+    <div class="border border-gray-300 rounded-lg p-3 bg-white">
         <x-form.label :label="$label" :label_ar="$label_ar" />
 
 

@@ -1,0 +1,47 @@
+@extends('4-Process.assets.layout.app')
+@section('title', 'Asset Type Definition')
+@section('title_ar', 'تعريف نوع الأصل')
+
+@section('content')
+    <div>
+
+        <x-table.action-wrapper title="All Asset Types">
+            <x-action.button label="Add Asset Type" label_ar="إضافة نوع الأصل" route_name="asset-types.create" />
+        </x-table.action-wrapper>
+
+
+        <x-table.table>
+            <x-table.thead>
+                <x-table.th label="S.No" label_ar="رقم" />
+                <x-table.th label="Asset Type ID" label_ar="رمز نوع الأصل" />
+                <x-table.th label="Asset Type Name" label_ar="اسم نوع الأصل" />
+                <x-table.th label="Asset Type Description" label_ar="وصف نوع الأصل" />
+                <x-table.th label="Action" label_ar="إجراء " />
+            </x-table.thead>
+            <x-table.tbody>
+                @foreach ($assetTypes as $AssetType)
+                    <tr>
+                        <x-table.td>
+                            {{ $loop->index + 1 }}
+                        </x-table.td>
+                        <x-table.td>
+                            {{ $AssetType->asset_type_id }}
+                        </x-table.td>
+                        <x-table.td>{{ $AssetType->asset_type_name }}</x-table.td>
+                        <x-table.td>{{ $AssetType->asset_type_description }}</x-table.td>
+                        <x-table.td action_col="true">
+                            <x-action.view route_name="asset-types.show" param="{{ $AssetType->id }}" />
+                            <x-action.edit route_name="asset-types.edit" param="{{ $AssetType->id }}" />
+                            <x-action.delete route_name="asset-types.destroy" param="{{ $AssetType->id }}" />
+                        </x-table.td>
+                    </tr>
+                @endforeach
+            </x-table.tbody>
+        </x-table.table>
+
+        <x-pagination>
+            {{ $assetTypes->links() }}
+        </x-pagination>
+
+    </div>
+@endsection

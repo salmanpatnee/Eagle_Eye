@@ -78,7 +78,7 @@
             <h1>Threat Agents List</h1>
             <div class="ButtonContainer">
                 <a href="/threat-agent-input" class="MoreButton">Add Information</a>
-                <a href="/asset-type-input" class="DeleteButton">Delete Information</a>
+                <a href="/asset-types/create" class="DeleteButton">Delete Information</a>
             </div>
         </div>
         {{-- <div class="ListTable">
@@ -91,7 +91,7 @@
 				@foreach ($AssetType as $AssetType)
 				<tr>
 					<td><input type="checkbox"></td>
-					<td><a href="/asset-type-table/{{ $AssetType->asset_type_id   }}">{{ $AssetType->asset_type_id }}</a></td>
+					<td><a href="/asset-types/{{ $AssetType->asset_type_id   }}">{{ $AssetType->asset_type_id }}</a></td>
 					<td>{{ $AssetType->asset_type_name }}</td> <!-- Corrected typo here -->
 				</tr>
 				@endforeach

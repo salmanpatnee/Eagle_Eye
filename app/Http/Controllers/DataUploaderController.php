@@ -14,7 +14,7 @@ class DataUploaderController extends Controller
 {
     public function create()
     {
-        return view('4-Process/3-Asset/1-AssetUploadForm');
+        return view('4-Process/assets/asset-register/upload');
     }
 
     public function uploadAssets(Request $request)

@@ -1,4 +1,4 @@
-@extends('4-Process.3-Asset.layout.app')
+@extends('4-Process.assets.layout.app')
 @section('title', 'Asset Sub-Type Definition')
 @section('title_ar', 'تعريف النوع الفرعي الأصل')
 
@@ -27,9 +27,7 @@
                             <x-table.serial :loop="$loop" :paginator="$assetSubTypes" />
                         </x-table.td>
                         <x-table.td>
-                            <a href="{{ route('asset-sub-types.show', $assetSubType->asset_sub_type_id) }}">
-                                {{ $assetSubType->asset_sub_type_id }}
-                            </a>
+                            {{ $assetSubType->asset_sub_type_id }}
                         </x-table.td>
                         <x-table.td>{{ $assetSubType->asset_sub_type_name }}</x-table.td>
                         <x-table.td>{{ $assetSubType->type?->asset_type_name }}</x-table.td>
