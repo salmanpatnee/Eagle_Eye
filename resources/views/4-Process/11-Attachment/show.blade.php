@@ -35,39 +35,42 @@
 
         @include('4-Process/11-Attachment/sidebar')
         <!-- SIDEBAR -->
-    
-    
+
+
         <div class="IndiTable">
             <div class="TableHeading">
                 <div class="PageHead">
                     <p class="PageHeadArbTxt">إدارة المرفقات</p>
                     <p class="PageHeadEngTxt">Artifact Management</p>
                 </div>
-    
-                <div class="ButtonContainer" >
+
+                <div class="ButtonContainer">
                     <a href="{{ route('artifacts.index') }}" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('artifacts.create') }}" class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
+                    <a href="{{ route('artifacts.create') }}"
+                        class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
-                    <a href="{{ route('artifacts.edit', $artifact->id) }}" class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
+                    <a href="{{ route('artifacts.edit', $artifact->id) }}"
+                        class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form action="{{route('artifacts.delete', $artifact->id)}}" method="POST" id="deleteForm">
+                    <form action="{{ route('artifacts.destroy', $artifact->id) }}" method="POST" id="deleteForm">
                         @method('DELETE')
                         @csrf
-                        <button type="button" id="btnDelete" class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}">
+                        <button type="button" id="btnDelete"
+                            class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
                     </form>
                 </div>
             </div>
-    
+
             <table cellspacing="0">
                 <div class="ContentTableSection">
                     <div class="ContentTable">
@@ -150,7 +153,7 @@
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to Telework?</p>
                                 <p class="FieldHeadArbTxt">الأصول مرتبطة حصريًا بالعمل عن بعد؟
-    
+
                                 </p>
                             </div>
                             <p class="sh-tx">{{ $artifact->artifact_telework }}</p>
@@ -158,16 +161,16 @@
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to Social Media?
-    
+
                                 </p>
                                 <p class="FieldHeadArbTxt">الأصول المرتبطة حصريًا بوسائل التواصل الاجتماعي؟
-    
+
                                 </p>
                             </div>
                             <p class="sh-tx">{{ $artifact->artifact_social_media }}</p>
                         </div>
                     </div>
-    
+
                     <div class="ContentTable">
                         <div class="column">
                             <div class="FieldHead">
@@ -179,8 +182,8 @@
                         </div>
                         <div class="column">
                             <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Asset Exclusively Related to PII?    
-    
+                                <p class="FieldHeadEngTxt">Asset Exclusively Related to PII?
+
                                 </p>
                                 <p class="FieldHeadArbTxt">؟(PII) الأصول المرتبطة حصريًا بمعلومات تحديد الهوية الشخصية
                                 </p>
@@ -188,7 +191,7 @@
                             <p class="sh-tx">{{ $artifact->artifact_pii }}</p>
                         </div>
                     </div>
-    
+
                     <div class="ContentTable">
                         <div class="column">
                             <div class="FieldHead">
@@ -200,19 +203,19 @@
                         </div>
                         <div class="column">
                             <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Asset Exclusively Related to E-Commerce?    
-    
+                                <p class="FieldHeadEngTxt">Asset Exclusively Related to E-Commerce?
+
                                 </p>
                                 <p class="FieldHeadArbTxt">الأصول المتعلقة حصرا بالتجارة الإلكترونية؟
-    
-    
+
+
                                 </p>
                             </div>
                             <p class="sh-tx">{{ $artifact->artifact_e_commerce }}</p>
                         </div>
                     </div>
                     <div class="ContentTable">
-                        
+
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to Infrastructure?</p>
@@ -221,7 +224,7 @@
                             <div style="margin-bottom: 10px"></div>
                             <p class="sh-tx">{{ $artifact->artifact_e_commerce }}</p>
                         </div>
-                        
+
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to Application?</p>
@@ -232,7 +235,7 @@
                         </div>
                     </div>
                     <div class="ContentTable">
-                        
+
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to HR?</p>
@@ -241,7 +244,7 @@
                             <div style="margin-bottom: 10px"></div>
                             <p class="sh-tx">{{ $artifact->artifact_hr }}</p>
                         </div>
-                        
+
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to Physical Security?</p>
@@ -252,7 +255,7 @@
                         </div>
                     </div>
                     <div class="ContentTable">
-                        
+
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to Third Party?</p>
@@ -261,39 +264,39 @@
                             <div style="margin-bottom: 10px"></div>
                             <p class="sh-tx">{{ $artifact->artifact_third_party }}</p>
                         </div>
-                        
+
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to Operational Technology?</p>
                                 <p class="FieldHeadArbTxt">الأصول المرتبطة حصريًا بالتكنولوجيا التشغيلية؟</p>
                             </div>
                             <div style="margin-bottom: 10px"></div>
-                            <p class="sh-tx">{{$artifact->artifact_opertaional_tech}}</p>
+                            <p class="sh-tx">{{ $artifact->artifact_opertaional_tech }}</p>
                         </div>
                     </div>
                     <div class="ContentTable">
-                        
+
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to E-Banking?</p>
                                 <p class="FieldHeadArbTxt">الأصول المرتبطة حصريًا بالخدمات المصرفية الإلكترونية؟</p>
                             </div>
                             <div style="margin-bottom: 10px"></div>
-                            <p class="sh-tx">{{$artifact->artifact_payment}}</p>
+                            <p class="sh-tx">{{ $artifact->artifact_payment }}</p>
                         </div>
-                        
+
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Asset Exclusively Related to Payments?</p>
                                 <p class="FieldHeadArbTxt">الأصول المرتبطة حصرا بالمدفوعات؟</p>
                             </div>
                             <div style="margin-bottom: 10px"></div>
-                            <p class="sh-tx">{{$artifact->artifact_e_banking}}</p>
+                            <p class="sh-tx">{{ $artifact->artifact_e_banking }}</p>
                         </div>
                     </div>
                 </div>
             </table>
-    
+
             <div class="ListTable" id="attachments">
                 <table cellspacing="0">
                     <tr>
@@ -307,7 +310,7 @@
                         </th>
                         <th></th>
                     </tr>
-    
+
                     @forelse ($artifact->attachments as $attachment)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
@@ -319,7 +322,8 @@
                                     <a href="{{ asset('storage/' . $attachment->path) }}" download>View</a>
                                 </small>
                                 <small>
-                                    <form method="POST" action="{{route('artifacts.attachments.destroy', $attachment->id)}}">
+                                    <form method="POST"
+                                        action="{{ route('artifacts.attachments.destroy', $attachment->id) }}">
                                         @method('DELETE')
                                         @csrf
                                         <button class="btn-transparent" type="submit">Delete</button>
@@ -327,10 +331,10 @@
                                 </small>
                             </td>
                         </tr>
-                        @empty
+                    @empty
                         <tr>
                             <td colspan="2" class="text-center">
-                                <p style="margin: 0" >No attachments yet.</p>
+                                <p style="margin: 0">No attachments yet.</p>
                             </td>
                         </tr>
                     @endforelse
@@ -348,9 +352,9 @@
             window.history.back();
         }
         document.getElementById('btnDelete').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-});
+            event.preventDefault();
+            window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
+        });
     </script>
 </body>
 

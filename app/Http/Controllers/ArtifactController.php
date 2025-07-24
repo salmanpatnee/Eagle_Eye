@@ -17,20 +17,22 @@ class ArtifactController extends Controller
     {
         $artifacts = Artifact::select('id', 'artifact_id', 'artifact_name')
             ->withCount('attachments')
-            ->get();
+            ->paginate(20);
 
-        return view('4-Process/11-Attachment/index', compact('artifacts'));
+        return view('4-Process/artifacts/index', compact('artifacts'));
     }
 
     public function show(Artifact $artifact)
     {
         $artifact->load('attachments', 'classification', 'category');
 
-        return view('4-Process/11-Attachment/show', compact('artifact'));
+        return view('4-Process/artifacts/show', compact('artifact'));
     }
 
     public function create()
     {
+        $artifact = null;
+
         $classifications = Classification::select('classification_id', 'classification_name')
             ->distinct()
             ->get();
@@ -41,7 +43,7 @@ class ArtifactController extends Controller
             ->get();
 
 
-        return view('4-Process/11-Attachment/create', compact('classifications', 'categories'));
+        return view('4-Process/artifacts/create', compact('classifications', 'categories', 'artifact'));
     }
 
     public function store(Request $request)
@@ -102,7 +104,7 @@ class ArtifactController extends Controller
             ->get();
 
 
-        return view('4-Process/11-Attachment/edit', compact('artifact', 'classifications', 'categories'));
+        return view('4-Process/artifacts/create', compact('artifact', 'classifications', 'categories'));
     }
 
     public function update(Artifact $artifact, Request $request)
@@ -152,40 +154,13 @@ class ArtifactController extends Controller
             ->with('success', 'Artifact updated.');
     }
 
-    public function destroy(?Artifact $artifact, Request $request)
+    public function destroy(Artifact $artifact)
     {
+        $this->_deleteArtifactAttachments($artifact);
 
-
-        if ($artifact->exists) {
-            $this->_deleteArtifactAttachments($artifact);
-
-            $artifact->delete();
-        } else {
-
-            $attributes =  $request->validate([
-                'record' => ['required'],
-            ]);
-
-            $artifact = Artifact::find($attributes['record'])->first();
-
-            $this->_deleteArtifactAttachments($artifact);
-
-            $artifact->delete();
-
-            // $selectedArtifacts = $request->input('selectedArtifacts');
-
-            // if (count($selectedArtifacts)) {
-            //     foreach ($selectedArtifacts as $artifactId) {
-            //         $artifact = Artifact::find($artifactId);
-
-            //         $this->_deleteArtifactAttachments($artifact);
-
-            //         $artifact->delete();
-            //     }
-            // }
-        }
-
-        return redirect(route('artifacts.index'));
+        $artifact->delete();
+        return redirect(route('artifacts.index'))
+            ->with('success', 'Artifact deleted.');
     }
 
     private function _deleteArtifactAttachments($artifact)
@@ -211,7 +186,7 @@ class ArtifactController extends Controller
             Attachment::create([
                 'artifact_id' => $artifactId,
                 'name' => $tempFile->file,
-                'path' => 'files/'.$tempFile->file // Only the file name, no folder
+                'path' => 'files/' . $tempFile->file // Only the file name, no folder
             ]);
 
             // Delete the temporary directory

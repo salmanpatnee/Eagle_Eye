@@ -96,12 +96,14 @@
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </button>
-                    <form action="{{ route('artifacts.delete', $artifact->id) }}" method="POST" id="delete_form">
+                    <form action="{{ route('artifacts.destroy', $artifact->id) }}" method="POST" id="delete_form">
                         @method('DELETE')
                         @csrf
-                        
-                        
-                        <button type="button" onclick="showDeleteModal()" class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}" form="delete">
+
+
+                        <button type="button" onclick="showDeleteModal()"
+                            class="{{ auth()->user()->can('delete-data') ? 'DeleteButton' : 'DisabledButton' }}"
+                            form="delete">
                             <p class="ButtonArbTxt">يمسح</p>
                             <p class="ButtonEngTxt">Delete</p>
                         </button>
@@ -517,7 +519,7 @@
         </form>
     </div>
     @include('components.delete-confirmation-modal')
-    
+
     {{-- <script src="/Css/4-Process/1-Form/1-Form.js"></script> --}}
     {{-- <script src="/Css/7-Sidebar/2-Sidebar.js"></script> --}}
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
@@ -537,9 +539,10 @@
         function goBack() {
             window.history.back();
         }
+
         function showDeleteModal() {
-    window.deleteConfirmationModal.show(document.getElementById('delete_form'));
-}
+            window.deleteConfirmationModal.show(document.getElementById('delete_form'));
+        }
     </script>
 </body>
 
