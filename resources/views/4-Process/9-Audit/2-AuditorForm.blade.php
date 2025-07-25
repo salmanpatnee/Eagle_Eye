@@ -62,11 +62,12 @@
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <button type="submit" class="{{ auth()->user()->can('manage-asset')  ? 'MoreButton' : 'DisabledButton' }}">
+                    <button type="submit"
+                        class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </button>
-                    <a href="/asset-group-input" class="DisabledButton">
+                    <a href="/asset-groups/create" class="DisabledButton">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
@@ -85,7 +86,7 @@
                                 <p class="FieldHeadArbTxt">رمز المراجع</p>
                             </div>
                             <p><input type="text" name="auditor_id" id="auditor_id" class="sh-tx"
-                                    placeholder="Enter Auditor ID" required value="{{old('auditor_id')}}"></p>
+                                    placeholder="Enter Auditor ID" required value="{{ old('auditor_id') }}"></p>
                         </div>
                     </div>
                     <div class="ContentTable">
@@ -95,7 +96,8 @@
                                 <p class="FieldHeadArbTxt">مراجع الاسم الأول</p>
                             </div>
                             <p><input type="text" name="auditor_first_name" id="auditor_first_name" class="sh-tx"
-                                    placeholder="Write Auditor First Name" required value="{{old('auditor_first_name')}}"></p>
+                                    placeholder="Write Auditor First Name" required
+                                    value="{{ old('auditor_first_name') }}"></p>
                         </div>
                         <div class="column">
                             <div class="FieldHead">
@@ -103,7 +105,7 @@
                                 <p class="FieldHeadArbTxt">مراجع الاسم الأخير</p>
                             </div>
                             <p><input type="text" name="auditor_last_name" id="auditor_last_name" class="sh-tx"
-                                    placeholder="Write Auditor Last Name" value="{{old('auditor_last_name')}}"></p>
+                                    placeholder="Write Auditor Last Name" value="{{ old('auditor_last_name') }}"></p>
                         </div>
                     </div>
                     <div class="ContentTablebg">
@@ -112,8 +114,9 @@
                                 <p class="FieldHeadEngTxt">Auditor Organization</p>
                                 <p class="FieldHeadArbTxt">مراجع الجهة</p>
                             </div>
-                            <p><input type="text" name="auditor_organization" id="auditor_organization" class="bg-tx"
-                                    placeholder="Write Auditor Organization Name" value="{{old('auditor_organization')}}"></p>
+                            <p><input type="text" name="auditor_organization" id="auditor_organization"
+                                    class="bg-tx" placeholder="Write Auditor Organization Name"
+                                    value="{{ old('auditor_organization') }}"></p>
                         </div>
                     </div>
                     <div class="ContentTable">
@@ -122,16 +125,18 @@
                                 <p class="FieldHeadEngTxt">Auditor Contact Number</p>
                                 <p class="FieldHeadArbTxt">مراجع رقم الجوال</p>
                             </div>
-                            <p><input type="tel" name="auditor_contact_number" id="auditor_contact_number" class="sh-tx"
-                                    placeholder="Write Auditor Contact Number" value="{{old('auditor_contact_number')}}"></p>
+                            <p><input type="tel" name="auditor_contact_number" id="auditor_contact_number"
+                                    class="sh-tx" placeholder="Write Auditor Contact Number"
+                                    value="{{ old('auditor_contact_number') }}"></p>
                         </div>
                         <div class="column">
                             <div class="FieldHead">
                                 <p class="FieldHeadEngTxt">Auditor Email Address</p>
                                 <p class="FieldHeadArbTxt">مراجع عنوان البريد الإلكتروني</p>
                             </div>
-                            <p><input type="email" name="auditor_contact_email" id="auditor_contact_email" class="sh-tx"
-                                    placeholder="Write Auditor Email Address" value="{{old('auditor_contact_email')}}"></p>
+                            <p><input type="email" name="auditor_contact_email" id="auditor_contact_email"
+                                    class="sh-tx" placeholder="Write Auditor Email Address"
+                                    value="{{ old('auditor_contact_email') }}"></p>
                         </div>
                     </div>
                 </div>
@@ -148,4 +153,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -87,44 +87,44 @@
                     <p class="PageHeadEngTxt">Asset Groups</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="/asset-group-list" class="MoreButton">
+                    <a href="/asset-groups" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    @if (request()->routeIs('assetgroup.edit'))
-                    <a href="{{route('assetgroup.create')}}" class="MoreButton">
-                        <p class="ButtonArbTxt">يضيف</p>
-                        <p class="ButtonEngTxt">Add</p>
-                    </a>
-                    <button type="submit" form="form" class="MoreButton">
-                        <p class="ButtonArbTxt">تحديث</p>
-                        <p class="ButtonEngTxt">Update</p>
-                    </button>
-                @else
-                    <button type="submit" form="form" class="MoreButton">
-                        <p class="ButtonArbTxt">يضيف</p>
-                        <p class="ButtonEngTxt">Add</p>
-                    </button>
-                    <a href="" class="DisabledButton">
-                        <p class="ButtonArbTxt">تحديث</p>
-                        <p class="ButtonEngTxt">Update</p>
-                    </a>
-                @endif
+                    @if (request()->routeIs('asset-groups.edit'))
+                        <a href="{{ route('asset-groups.create') }}" class="MoreButton">
+                            <p class="ButtonArbTxt">يضيف</p>
+                            <p class="ButtonEngTxt">Add</p>
+                        </a>
+                        <button type="submit" form="form" class="MoreButton">
+                            <p class="ButtonArbTxt">تحديث</p>
+                            <p class="ButtonEngTxt">Update</p>
+                        </button>
+                    @else
+                        <button type="submit" form="form" class="MoreButton">
+                            <p class="ButtonArbTxt">يضيف</p>
+                            <p class="ButtonEngTxt">Add</p>
+                        </button>
+                        <a href="" class="DisabledButton">
+                            <p class="ButtonArbTxt">تحديث</p>
+                            <p class="ButtonEngTxt">Update</p>
+                        </a>
+                    @endif
 
-                <button type="button" onclick="showDeleteModal()"
-                    class="{{ auth()->user()->can('delete-data') && request()->routeIs('assetgroup.edit') ? 'MoreButton' : 'DisabledButton' }}">
-                    <p class="ButtonArbTxt">يمسح</p>
-                    <p class="ButtonEngTxt">Delete</p>
-                </button>
+                    <button type="button" onclick="showDeleteModal()"
+                        class="{{ auth()->user()->can('delete-data') && request()->routeIs('asset-groups.edit') ? 'MoreButton' : 'DisabledButton' }}">
+                        <p class="ButtonArbTxt">يمسح</p>
+                        <p class="ButtonEngTxt">Delete</p>
+                    </button>
                 </div>
             </div>
-            <form method="POST" action="{{ route('assetgroup.delete') }}" id="delete_form">
+            <form method="POST" action="{{ route('asset-groups.destroy') }}" id="delete_form">
                 <input type="hidden" name="record" value="{{ $assetGroup?->id }}">
                 @csrf
                 @method('DELETE')
             </form>
             <form id="form"
-                action="{{ isset($assetGroup) ? route('assetgroup.update', $assetGroup->id) : route('assetgroup.store') }}"
+                action="{{ isset($assetGroup) ? route('asset-groups.update', $assetGroup->id) : route('asset-groups.store') }}"
                 method="POST">
                 @csrf
                 @if (isset($assetGroup))
@@ -336,9 +336,10 @@
                 $('#custodiansText').text("Custodian selected.");
             }
         });
+
         function showDeleteModal() {
-    window.deleteConfirmationModal.show(document.getElementById('delete_form'));
-}
+            window.deleteConfirmationModal.show(document.getElementById('delete_form'));
+        }
 
         function updateSelectedCustodian() {
             var selectedOptionsText = [];

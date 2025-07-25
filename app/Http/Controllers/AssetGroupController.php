@@ -10,30 +10,29 @@ use Illuminate\Support\Facades\DB;
 
 class AssetGroupController extends Controller
 {
-    // To add data into the table
+
+    public function index()
+    {
+        $assetGroups = AssetGroup::with('owner', 'classification')->paginate(20);
+        return view('4-Process/asset-groups/index', compact('assetGroups'));
+    }
+
+
+    public function show(AssetGroup $assetGroup)
+    {
+        $assetGroup->load('owner', 'classification', 'custodians');
+        return view('4-Process/asset-groups/show', compact('assetGroup'));
+    }
+
     public function create()
     {
         $assetGroup = null;
-        $grpowner = Owner::select('owner_role_id', 'owner_name')->get();
-        $classname = DB::table('classification_table')->get();
+        $owners = Owner::select('owner_role_id', 'owner_name')->get();
+        $classifications = DB::table('classification_table')->get();
         $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->get();
-        return view('4-Process/4-AssetGroup/1-AssetGroupForm', compact('assetGroup', 'grpowner', 'classname', 'custodians'));
+        $custodianIds = [];
+        return view('4-Process/asset-groups/create', compact('assetGroup', 'owners', 'classifications', 'custodians', 'custodianIds'));
     }
-
-    // To edit the table
-    public function edit(AssetGroup $assetGroup)
-    {
-        $assetGroup->load('owner', 'classification', 'custodians');
-
-        $classname = DB::table('classification_table')->get();
-        $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->get();
-        $grpowner = Owner::select('owner_role_id', 'owner_name')->get();
-        $custodianRoleIds = $assetGroup->custodians()->pluck('custodian_role_id')->toArray();
-
-
-        return view('4-Process/4-AssetGroup/1-AssetGroupForm', compact('assetGroup', 'grpowner', 'classname', 'custodians', 'custodianRoleIds'));
-    }
-
 
     // To store the edited data into the table
     public function store(Request $request)
@@ -48,19 +47,33 @@ class AssetGroupController extends Controller
             'custodians' => 'required',
         ]);
 
+
         $custodians = $attributes['custodians'];
         unset($attributes['custodians']);
 
         $assetGroup = AssetGroup::create($attributes);
 
-
-        if ($custodians && $custodiansArray = json_decode($custodians, true)) {
-            $assetGroup->custodians()->attach($custodiansArray);
-        }
+        $assetGroup->custodians()->attach($custodians ?? []);
 
 
-        return redirect()->route('assetgroup.index')->with('success', 'Asset Group saved successfully.');
+        return redirect()->route('asset-groups.index')->with('success', 'Asset Group saved successfully.');
     }
+
+
+    public function edit(AssetGroup $assetGroup)
+    {
+        $assetGroup->load('owner', 'classification', 'custodians');
+
+        $classifications = DB::table('classification_table')->get();
+        $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->get();
+        $owners = Owner::select('owner_role_id', 'owner_name')->get();
+        $custodianIds = $assetGroup->custodians()->pluck('custodian_role_id')->toArray();
+
+
+        return view('4-Process/asset-groups/create', compact('assetGroup', 'owners', 'classifications', 'custodians', 'custodianIds'));
+    }
+
+
 
     public function update(AssetGroup $assetGroup, Request $request)
     {
@@ -79,72 +92,19 @@ class AssetGroupController extends Controller
 
         $assetGroup->update($attributes);
 
-        if ($custodians && $custodiansArray = json_decode($custodians, true)) {
-            $assetGroup->custodians()->sync($custodiansArray);
-        }
+        $assetGroup->custodians()->sync($custodians ?? []);
 
-        return redirect()->route('assetgroup.index')->with('success', 'Asset Group saved successfully.');
+        return redirect()->route('asset-groups.index')->with('success', 'Asset Group saved successfully.');
     }
 
     //--------------------------------------------------------------------//
 
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
-    {
-        // $assetGroups = DB::table('asset_group_table')->get();
-        $assetGroups = AssetGroup::with('owner', 'classification')->get();
 
-        return view('4-Process/4-AssetGroup/1-AssetGroupList', compact('assetGroups'));
-    }
 
     // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
+    public function destroy(AssetGroup $assetGroup)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $data = AssetGroup::where('id', $attributes['record'])->orWhere('asset_group_id', $attributes['record'])->first();
-        $data->delete();
-
-        return redirect('/asset-group-list');
-
-        // $selectedassetGroup = $request->input('selectedassetGroup');
-
-        // if (!empty($selectedassetGroup)) {
-        //     DB::table('asset_group_table')->whereIn('asset_group_id', $selectedassetGroup)->delete();
-        // }
-    }
-
-    // 4.Controller - DETAILED TABLE
-    public function show(AssetGroup $assetGroup)
-    {
-        $assetGroup->load('owner', 'classification', 'custodians');
-
-        return view('4-Process/4-AssetGroup/1-AssetGroupTable', compact('assetGroup'));
-    }
-
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $assetOwnerNames = DB::table('owner_table')
-            ->select('*')
-            ->distinct()
-            ->join('owner_role_table', 'owner_table.owner_role_id', '=', 'owner_role_table.owner_role_id')
-            ->get();
-        $assetCustNames = DB::table('custodian_name_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $assetClassNames = DB::table('classification_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $assetCategory = DB::table('category_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        return view('4-Process/4-AssetGroup/1-AssetGroupForm', compact('assetOwnerNames', 'assetCustNames', 'assetClassNames', 'assetCategory'));
+        $assetGroup->delete();
+        return redirect(route('asset-groups.index'))->with('success', 'Asset Group deleted successfully.');
     }
 }

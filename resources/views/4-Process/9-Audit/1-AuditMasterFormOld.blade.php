@@ -95,7 +95,7 @@
                             <p class="ButtonArbTxt">يضيف</p>
                             <p class="ButtonEngTxt">Add</p>
                         </button>
-                        <a href="/asset-group-input" class="DisabledButton">
+                        <a href="/asset-groups/create" class="DisabledButton">
                             <p class="ButtonArbTxt">تحديث</p>
                             <p class="ButtonEngTxt">Update</p>
                         </a>
@@ -327,7 +327,7 @@
                             <p class="ButtonArbTxt">يضيف</p>
                             <p class="ButtonEngTxt">Add</p>
                         </button>
-                        <a href="/asset-group-input" class="DisabledButton">
+                        <a href="/asset-groups/create" class="DisabledButton">
                             <p class="ButtonArbTxt">تحديث</p>
                             <p class="ButtonEngTxt">Update</p>
                         </a>

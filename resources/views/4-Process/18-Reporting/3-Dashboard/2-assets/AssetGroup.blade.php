@@ -247,7 +247,7 @@
                                     const dataset = assetChartBar.data.datasets[datasetIndex];
                                     if (dataset && dataset.data[dataIndex]) {
                                         const dataPoint = dataset.data[dataIndex];
-                                        const assetGroupId = assetGroup.asset_group_id
+                                        const assetGroupId = asset - groups.asset_group_id
 
 
 

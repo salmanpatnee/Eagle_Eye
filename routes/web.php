@@ -553,18 +553,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // Asset Group
-
-
-    Route::controller(AssetGroupController::class)->group(function () {
-        Route::get('/asset-group-list', 'index')->name('assetgroup.index');
-        Route::get('/asset-group-table/{assetGroup:asset_group_id}', 'show')->name('assetgroup.show');
-        Route::get('/asset-group-input', 'create')->name('assetgroup.create');
-        Route::get('/asset-group/edit/{assetGroup:asset_group_id}', 'edit')->name('assetgroup.edit');
-        Route::post('/asset-group', 'store')->name('assetgroup.store');
-        Route::put('/asset-group/{assetGroup}', 'update')->name('assetgroup.update');
-        Route::delete('/asset-group/delete', 'delete')->name('assetgroup.delete');
-    });
+    // Asset Groups
+    Route::resource('asset-groups', AssetGroupController::class);
 
     // Threat
 

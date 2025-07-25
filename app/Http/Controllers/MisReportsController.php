@@ -356,7 +356,7 @@ class MisReportsController extends Controller
     public function listcloud()
     {
         $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_group_table as assetgroup', 'asset-groups.asset_group_id', '=', 'assetregister.asset_group_id')
             ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('cloud_asset', 'Yes')
@@ -409,7 +409,7 @@ class MisReportsController extends Controller
     public function listtelework()
     {
         $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_group_table as assetgroup', 'asset-groups.asset_group_id', '=', 'assetregister.asset_group_id')
             ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('telework_asset', 'Yes')
@@ -461,7 +461,7 @@ class MisReportsController extends Controller
     public function listSocialMedia()
     {
         $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_group_table as assetgroup', 'asset-groups.asset_group_id', '=', 'assetregister.asset_group_id')
             ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('social_media_asset', 'Yes')
@@ -513,7 +513,7 @@ class MisReportsController extends Controller
     public function listDataPrivacy()
     {
         $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_group_table as assetgroup', 'asset-groups.asset_group_id', '=', 'assetregister.asset_group_id')
             ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('data_privacy_asset', 'Yes')
@@ -562,7 +562,7 @@ class MisReportsController extends Controller
     public function listPii()
     {
         $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_group_table as assetgroup', 'asset-groups.asset_group_id', '=', 'assetregister.asset_group_id')
             ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('data_pii_asset', 'Yes')
@@ -614,7 +614,7 @@ class MisReportsController extends Controller
     public function listPayment()
     {
         $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_group_table as assetgroup', 'asset-groups.asset_group_id', '=', 'assetregister.asset_group_id')
             ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('payment_asset', 'Yes')
@@ -667,7 +667,7 @@ class MisReportsController extends Controller
     public function listPci()
     {
         $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_group_table as assetgroup', 'asset-groups.asset_group_id', '=', 'assetregister.asset_group_id')
             ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('pci_dss_asset', 'Yes')
@@ -719,7 +719,7 @@ class MisReportsController extends Controller
     public function listEcom()
     {
         $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_group_table as assetgroup', 'asset-groups.asset_group_id', '=', 'assetregister.asset_group_id')
             ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_commerce_asset', 'Yes')
@@ -772,7 +772,7 @@ class MisReportsController extends Controller
     public function listEbank()
     {
         $assetregister = DB::table('asset_register_table as assetregister')
-            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_group_table as assetgroup', 'asset-groups.asset_group_id', '=', 'assetregister.asset_group_id')
             ->join('asset_type_table as assettype', 'asset-types.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_banking_asset', 'Yes')

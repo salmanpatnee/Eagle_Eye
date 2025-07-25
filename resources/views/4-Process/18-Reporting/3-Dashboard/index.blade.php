@@ -605,8 +605,7 @@
             type: "bar",
             data: {
                 labels: ownerLabels,
-                datasets: [
-                    {
+                datasets: [{
                         label: 'Total Controls',
                         backgroundColor: colors.BLUE,
                         data: totalControls.map((value, index) => ({
@@ -615,7 +614,7 @@
                             id: ownerRoleIds[index],
                             statusCode: null
                         }))
-                    }, 
+                    },
                     {
                         label: 'Implemented',
                         backgroundColor: colors.GREEN,
@@ -817,11 +816,11 @@
     <!------------- Asset Groups Vs Risks ---------------->
     <script>
         const riskVsAssetGroup = @json($riskVsAssetGroup);
-        const assetGroupId = riskVsAssetGroup.assetGroupId
-        const assetGroups = riskVsAssetGroup.assetGroupName
-        const risk_count = riskVsAssetGroup.risk_count
-        const open_risks = riskVsAssetGroup.open_risks
-        const closed_risks = riskVsAssetGroup.closed_risks
+        const assetGroupId = riskVsasset - groups.assetGroupId
+        const assetGroups = riskVsasset - groups.assetGroupName
+        const risk_count = riskVsasset - groups.risk_count
+        const open_risks = riskVsasset - groups.open_risks
+        const closed_risks = riskVsasset - groups.closed_risks
 
         const assetChartBar = new Chart("assetGroupStatus", {
             type: "bar",
@@ -1209,7 +1208,7 @@
     <!------------- Heatmap ---------------->
     <script>
         const heatmapData = {!! json_encode($heatmap) !!}
-    
+
         const heatmapBackgroundColor = [
             "#00B050",
             "#A8D08D",

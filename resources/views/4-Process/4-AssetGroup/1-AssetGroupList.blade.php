@@ -37,7 +37,7 @@
 
     <!-- CONTENT -->
     <div class="IndiTable">
-        <form method="POST" action="{{ route('assetgroup.delete') }}" id="deleteForm">
+        <form method="POST" action="{{ route('asset-groups.destroy') }}" id="deleteForm">
             @csrf
             @method('DELETE')
             <div class="TableHeading">
@@ -50,7 +50,7 @@
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('assetgroup.create') }}"
+                    <a href="{{ route('asset-groups.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
@@ -90,17 +90,17 @@
                             </th>
                             <th style="padding-right: 0px;">
                                 <p class="ListHeadArbTxt">اسم صاحب مجموعة الأصول
-    
+
                                 </p>
                                 <p class="ListHeadEngTxt">Owner</p>
                             </th>
                             <th style="padding-right: 0px;">
                                 <p class="ListHeadArbTxt">اسم التصنيف مجموعة الأصول
-    
+
                                 </p>
                                 <p class="ListHeadEngTxt">Classification</p>
                             </th>
-                            
+
                         </tr>
                         @foreach ($assetGroups as $assetGroup)
                             <tr>
@@ -110,12 +110,12 @@
                                 </td>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td style="width: 220px;"><a
-                                        href="/asset-group-table/{{ $assetGroup->asset_group_id }}">{{ $assetGroup->asset_group_id }}</a>
+                                        href="/asset-groups/{{ $assetGroup->asset_group_id }}">{{ $assetGroup->asset_group_id }}</a>
                                 </td>
                                 <td>{{ $assetGroup->asset_group_name }}</td>
                                 <td>{{ $assetGroup?->owner?->owner_name }}</td>
                                 <td>{{ $assetGroup->classification?->classification_name }}</td>
-    
+
                             </tr>
                         @endforeach
                     </table>

@@ -112,7 +112,7 @@
         </div>
     </div>
     <div class="processes">
-        <a href="/asset-group-input" class="boxhyperlink">
+        <a href="/asset-groups/create" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

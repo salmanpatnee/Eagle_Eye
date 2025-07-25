@@ -35,9 +35,9 @@
 
         @include('4-Process/4-AssetGroup/asset-group-sidebar')
         <!-- SIDEBAR -->
-    
-    
-    
+
+
+
         <!-- CONTENT -->
         <div class="IndiTable">
             <div class="TableHeading">
@@ -46,21 +46,21 @@
                     <p class="PageHeadEngTxt">Asset Groups</p>
                 </div>
                 <div class="ButtonContainer">
-                    <a href="/asset-group-list" class="MoreButton">
+                    <a href="/asset-groups" class="MoreButton">
                         <p class="ButtonArbTxt">منظر</p>
                         <p class="ButtonEngTxt">View</p>
                     </a>
-                    <a href="{{ route('assetgroup.create') }}"
+                    <a href="{{ route('asset-groups.create') }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">يضيف</p>
                         <p class="ButtonEngTxt">Add</p>
                     </a>
-                    <a href="{{ route('assetgroup.edit', $assetGroup->asset_group_id) }}"
+                    <a href="{{ route('asset-groups.edit', $assetGroup->asset_group_id) }}"
                         class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
                         <p class="ButtonArbTxt">تحديث</p>
                         <p class="ButtonEngTxt">Update</p>
                     </a>
-                    <form method="POST" action="{{ route('assetgroup.delete') }}" id="deleteForm">
+                    <form method="POST" action="{{ route('asset-groups.destroy') }}" id="deleteForm">
                         <input type="hidden" name="record" value="{{ $assetGroup->id }}">
                         <button type="button" id="btnDelete"
                             class="{{ auth()->user()->can('delete-data') && auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}">
@@ -131,10 +131,10 @@
                             <ol class="resource-list">
                                 @forelse ($assetGroup->custodians as $custodian)
                                     <li>{{ $custodian->custodian_role_title }}</li>
-                                </ol>
-                                @empty
-                                <p class="sh-tx"></p>
-                                @endforelse
+                            </ol>
+                        @empty
+                            <p class="sh-tx"></p>
+                            @endforelse
                         </div>
                         {{-- <div class="column">
                             <div class="FieldHead">
@@ -158,9 +158,9 @@
             window.history.back();
         }
         document.getElementById('btnDelete').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-});
+            event.preventDefault();
+            window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
+        });
     </script>
 </body>
 
