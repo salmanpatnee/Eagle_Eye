@@ -63,7 +63,7 @@ class AssetStatusController extends Controller
         return redirect()->route('asset-status.index')->with('success', 'Asset Status saved successfully.');
     }
 
-    public function delete(AssetStatus $assetStatus)
+    public function destroy(AssetStatus $assetStatus)
     {
         $assetStatus->delete();
         return redirect()->route('asset-status.index')->with('success', 'Asset Status deleted successfully.');

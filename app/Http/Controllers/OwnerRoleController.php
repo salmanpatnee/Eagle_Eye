@@ -70,7 +70,7 @@ class OwnerRoleController extends Controller
 
 
 
-    public function delete(OwnerRole $ownerRole)
+    public function destroy(OwnerRole $ownerRole)
     {
 
         $ownerRole->delete();

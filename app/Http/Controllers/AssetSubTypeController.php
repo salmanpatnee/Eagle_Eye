@@ -68,7 +68,7 @@ class AssetSubTypeController extends Controller
         return redirect()->route('asset-sub-types.index')->with('success', 'Asset Sub Type Saved Successfully.');
     }
 
-    public function delete(AssetSubType $assetSubType)
+    public function destroy(AssetSubType $assetSubType)
     {
         $assetSubType->delete();
         return redirect()->route('asset-sub-types.index')->with('success', 'Asset Sub Type Deleted Successfully.');

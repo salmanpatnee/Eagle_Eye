@@ -71,7 +71,7 @@ class CustodianRoleController extends Controller
 
 
 
-    public function delete(Custodian $custodianRole)
+    public function destroy(Custodian $custodianRole)
     {
         $custodianRole->delete();
         return redirect()->route('custodian-roles.index')->with('success', 'Custodian Role Deleted Successfully.');

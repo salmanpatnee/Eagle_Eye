@@ -30,7 +30,7 @@
 
 
                 <div class="flex justify-end">
-                    <x-form.submit label="Asset Type" label_ar="النوع الفرعي الأصل" :isUpdate="$assetType?->asset_sub_type_id" />
+                    <x-form.submit label="Asset Type" label_ar="النوع الفرعي الأصل" :isUpdate="$assetType?->id" />
                 </div>
             </div>
         </form>

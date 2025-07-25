@@ -75,26 +75,9 @@ class CustodianController extends Controller
     }
 
 
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(CustodianName $custodian)
+    public function destroy(CustodianName $custodian)
     {
         $custodian->delete();
         return redirect()->route('custodians.index')->with('success', 'Custodian deleted successfully.');
-    }
-
-
-
-
-
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $CustoTitles = DB::table('custodian_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        return view('4-Process/1-InitialSetup/11-CustodianForm', compact('CustoTitles'));
     }
 }

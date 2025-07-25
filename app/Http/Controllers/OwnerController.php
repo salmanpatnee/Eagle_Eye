@@ -84,35 +84,12 @@ class OwnerController extends Controller
 
         return redirect()->route('owners.index')->with('success', 'Owner saved successfully.');
     }
-    //--------------------------------------------------------------------//
 
-
-    // 2.Controller - SHOW DATA INTO THE LIST
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Owner $owner)
+    public function destroy(Owner $owner)
     {
         $owner->delete();
 
         return redirect(route('owners.index'))
             ->with('success', 'Owner deleted successfully.');
-    }
-
-
-
-
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $ownerRoles = DB::table('owner_role_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $OwnerDptNames = DB::table('department_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        return view('4-Process/1-InitialSetup/8-OwnerForm', compact('ownerRoles', 'OwnerDptNames'));
     }
 }

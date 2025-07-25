@@ -224,9 +224,7 @@ class AssetRegisterController extends Controller
 
 
 
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Asset $asset)
+    public function destroy(Asset $asset)
     {
         if ($asset->categories()->exists() || $asset->custodians()->exists()) {
             return redirect()->route('assets.index')

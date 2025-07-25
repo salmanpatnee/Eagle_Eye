@@ -37,8 +37,13 @@
 
                 <x-form.grid-col>
                     <div>
-                        <x-form.field type="password" label="Password" label_ar="كلمة المرور" name="password"
-                            required="true" placeholder="Enter Username" />
+                        @if ($user?->id)
+                            <x-form.field type="password" label="Password" label_ar="كلمة المرور" name="password"
+                                placeholder="Enter Password" />
+                        @else
+                            <x-form.field type="password" label="Password" label_ar="كلمة المرور" name="password"
+                                placeholder="Enter Password" required="true" />
+                        @endif
                     </div>
                     <div>
                         <x-form.select label="Role" label_ar="دور" name="role_id" required="true"
