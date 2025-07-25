@@ -1,4 +1,4 @@
-@extends('4-Process.assets.layout.app')
+@extends('layouts.asset')
 @section('title', 'Asset Registration')
 @section('title_ar', 'تسجيل الأصول')
 @section('content')

@@ -1,4 +1,4 @@
-@extends('4-Process.assets.layout.app')
+@extends('layouts.asset')
 @section('title', 'Asset Status Definition')
 @section('title_ar', 'تعريف حالة الأصول')
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('sidebar-menu-items')
-    @include('4-Process.assets._partials.sidebar')
+    @include('partials.sidebar-menus.assets')
 @endsection
 @section('content')
     @yield('content')

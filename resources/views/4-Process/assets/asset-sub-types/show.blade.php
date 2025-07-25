@@ -1,4 +1,4 @@
-@extends('4-Process.assets.layout.app')
+@extends('layouts.asset')
 @section('title', 'Asset Sub-Type Definition')
 @section('title_ar', 'تعريف النوع الفرعي الأصل')
 @section('content')
