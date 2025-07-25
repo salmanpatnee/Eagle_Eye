@@ -169,8 +169,6 @@ Route::middleware(['auth'])->group(function () {
         return view('2-ThreePs.1-ThreePs');
     });
 
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-
 
     Route::get('/control-smart-search', [ControlSmartSearch::class, 'index'])->name('control.smart.search.index');
 
@@ -324,236 +322,46 @@ Route::middleware(['auth'])->group(function () {
     //     └── Options
     // -----------------------------------------------------
 
-    Route::controller(OrganizationController::class)->group(function () {
-        Route::get('/organizations', 'index')->name('organizations.index');
-        Route::get('/organizations/create', 'create')->name('organizations.create');
-        Route::get('/organizations/{organization}', 'show')->name('organizations.show');
-        Route::post('/organizations', 'store')->name('organizations.store');
-        Route::get('/organizations/edit/{organization}', 'edit')->name('organizations.edit');
-        Route::put('/organizations/{organization}', 'update')->name('organizations.update');
-        Route::delete('/organizations/{organization}', 'destroy')->name('organizations.destroy');
-    });
+    Route::resource('organizations', OrganizationController::class);
+    Route::resource('locations', LocationController::class);
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('sub-departments', SubDepartmentController::class);
+    Route::resource('classifications', ClassificationController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('sub-categories', SubCategoryController::class);
+    Route::resource('best-practices', BestPracticeController::class);
+    Route::resource('domains', MainDomainController::class);
+    Route::resource('sub-domains', SubDomainController::class);
+    Route::resource('owner-roles', OwnerRoleController::class);
+    Route::resource('owners', OwnerController::class);
+    Route::resource('custodian-roles', CustodianRoleController::class);
+    Route::resource('custodians', CustodianController::class);
 
-
-    Route::controller(LocationController::class)->group(function () {
-        Route::get('/locations', 'index')->name('locations.index');
-        Route::get('/locations/create', 'create')->name('locations.create');
-        Route::get('/locations/{location}', 'show')->name('locations.show');
-        Route::post('/locations', 'store')->name('locations.store');
-        Route::get('/locations/edit/{location}', 'edit')->name('locations.edit');
-        Route::put('/location/{location}', 'update')->name('locations.update');
-        Route::delete('/locations/{location}', 'destroy')->name('locations.destroy');
-    });
-
-
-    Route::controller(DepartmentController::class)->group(function () {
-        Route::get('/departments', 'index')->name('departments.index');
-        Route::get('/departments/create', 'create')->name('departments.create');
-        Route::get('/departments/{department}', 'show')->name('departments.show');
-        Route::post('/departments', 'store')->name('departments.store');
-        Route::get('/departments/edit/{department}', 'edit')->name('departments.edit');
-        Route::put('/department/{department}', 'update')->name('departments.update');
-        Route::delete('/departments/{department}', 'destroy')->name('departments.destroy');
-    });
-
-
-    Route::controller(SubDepartmentController::class)->group(function () {
-        Route::get('/sub-departments', 'index')->name('sub-departments.index');
-        Route::get('/sub-departments/create', 'create')->name('sub-departments.create');
-        Route::get('/sub-departments/{subDepartment}', 'show')->name('sub-departments.show');
-        Route::post('/sub-departments', 'store')->name('sub-departments.store');
-        Route::get('/sub-departments/edit/{subDepartment}', 'edit')->name('sub-departments.edit');
-        Route::put('/sub-departments/{subDepartment}', 'update')->name('sub-departments.update');
-        Route::delete('/sub-departments/{subDepartment}', 'destroy')->name('sub-departments.destroy');
-    });
-
-
-    Route::controller(ClassificationController::class)->group(function () {
-        Route::get('/classifications', 'index')->name('classifications.index');
-        Route::get('/classifications/create', 'create')->name('classifications.create');
-        Route::get('/classifications/{classification}', 'show')->name('classifications.show');
-        Route::post('/classifications', 'store')->name('classifications.store');
-        Route::get('/classifications/edit/{classification}', 'edit')->name('classifications.edit');
-        Route::put('/classifications/{classification}', 'update')->name('classifications.update');
-        Route::delete('/classifications/{classification}', 'destroy')->name('classifications.destroy');
-    });
-
-
-    Route::controller(CategoryController::class)->group(function () {
-        Route::get('/categories', 'index')->name('categories.index');
-        Route::get('/categories/create', 'create')->name('categories.create');
-        Route::get('/categories/{category}', 'show')->name('categories.show');
-        Route::post('/categories', 'store')->name('categories.store');
-        Route::get('/categories/edit/{category}', 'edit')->name('categories.edit');
-        Route::put('/categories/{category}', 'update')->name('categories.update');
-        Route::delete('/categories/{category}', 'destroy')->name('categories.destroy');
-    });
-
-    Route::controller(SubCategoryController::class)->group(function () {
-        Route::get('/sub-categories', 'index')->name('sub-categories.index');
-        Route::get('/sub-categories/create', 'create')->name('sub-categories.create');
-        Route::get('/sub-categories/{subCategory}', 'show')->name('sub-categories.show');
-        Route::post('/sub-categories', 'store')->name('sub-categories.store');
-        Route::get('/sub-categories/edit/{subCategory}', 'edit')->name('sub-categories.edit');
-        Route::put('/sub-categories/{subCategory}', 'update')->name('sub-categories.update');
-        Route::delete('/sub-categories/{subCategory}', 'destroy')->name('sub-categories.destroy');
-    });
-
-    Route::controller(BestPracticeController::class)->group(function () {
-        Route::get('/best-practices', 'index')->name('best-practices.index');
-        Route::get('/best-practices/create', 'create')->name('best-practices.create');
-        Route::get('/best-practices/{bestPractice}', 'show')->name('best-practices.show');
-        Route::post('/best-practices', 'store')->name('best-practices.store');
-        Route::get('/best-practices/edit/{bestPractice}', 'edit')->name('best-practices.edit');
-        Route::put('/best-practices/{bestPractice}', 'update')->name('best-practices.update');
-        Route::delete('/best-practices/{bestPractice}', 'destroy')->name('best-practices.destroy');
-    });
-
-    Route::controller(MainDomainController::class)->group(function () {
-        Route::get('/domains', 'index')->name('domains.index');
-        Route::get('/domains/create', 'create')->name('domains.create');
-        Route::get('/domains/{domain}', 'show')->name('domains.show');
-        Route::post('/domains', 'store')->name('domains.store');
-        Route::get('/domains/edit/{domain}', 'edit')->name('domains.edit');
-        Route::put('/domains/{domain}', 'update')->name('domains.update');
-        Route::delete('/domains/{domain}', 'destroy')->name('domains.destroy');
-    });
-
-    Route::controller(SubDomainController::class)->group(function () {
-        Route::get('/sub-domains', 'index')->name('sub-domains.index');
-        Route::get('/sub-domains/create', 'create')->name('sub-domains.create');
-        Route::get('/sub-domains/{subDomain}', 'show')->name('sub-domains.show');
-        Route::post('/sub-domains', 'store')->name('sub-domains.store');
-        Route::get('/sub-domains/edit/{subDomain}', 'edit')->name('sub-domains.edit');
-        Route::put('/sub-domains/{subDomain}', 'update')->name('sub-domains.update');
-        Route::delete('/sub-domains/{subDomain}', 'destroy')->name('sub-domains.destroy');
-    });
 
     Route::middleware(['auth'])->group(function () {
 
         Route::middleware('superadmin')->group(function () {
-            Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-            Route::post('/users', [UserController::class, 'store'])->name('users.store');
-            Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
-            Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
-            Route::delete('/users/{user}    ', [UserController::class, 'destroy'])->name('users.destroy');
-            Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
-            Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
+            Route::resource('users', UserController::class);
+            // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
+            // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
         });
-
-        Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-    });
-
-    // ------------Owner--------------
-
-    Route::controller(OwnerController::class)->group(function () {
-        Route::get('/owners', 'index')->name('owners.index');
-        Route::get('/owners/create', 'create')->name('owners.create');
-        Route::get('/owners/{owner}', 'show')->name('owners.show');
-        Route::post('/owners', 'store')->name('owners.store');
-        Route::get('owners/edit/{owner}', 'edit')->name('owners.edit');
-        Route::put('/owners/{owner}', 'update')->name('owners.update');
-        Route::delete('/owners/{owner}', 'delete')->name('owners.destroy');
-    });
-
-    // ------------Owner Role--------------
-
-    Route::controller(OwnerRoleController::class)->group(function () {
-        Route::get('/owner-roles', 'index')->name('owner-roles.index');
-        Route::get('/owner-roles/create', 'create')->name('owner-roles.create');
-        Route::get('/owner-roles/{owner_role}', 'show')->name('owner-roles.show');
-        Route::get('/owner-roles/edit/{owner_role}', 'edit')->name('owner-roles.edit');
-        Route::post('/owner-roles', 'store')->name('owner-roles.store');
-        Route::put('/owner-roles/{owner_role}', 'update')->name('owner-roles.update');
-        Route::delete('/owner-roles/{owner_role}', 'delete')->name('owner-roles.destroy');
-    });
-
-    // ------------Custodian Role--------------
-
-
-    Route::controller(CustodianRoleController::class)->group(function () {
-        Route::get('/custodian-roles', 'index')->name('custodian-roles.index');
-        Route::get('/custodian-roles/create', 'create')->name('custodian-roles.create');
-        Route::get('/custodian-roles/{custodianRole}', 'show')->name('custodian-roles.show');
-        Route::get('/custodian/roles/edit/{custodianRole}', 'edit')->name('custodian-roles.edit');
-        Route::post('/custodian-roles', 'store')->name('custodian-roles.store');
-        Route::put('/custodian-roles/{custodianRole}', 'update')->name('custodian-roles.update');
-        Route::delete('/custodian-roles/{custodianRole}', 'delete')->name('custodian-roles.destroy');
-    });
-
-    // ------------Custodian Name--------------
-
-
-    Route::controller(CustodianController::class)->group(function () {
-        Route::get('/custodians', 'index')->name('custodians.index');
-        Route::get('/custodians/create', 'create')->name('custodians.create');
-        Route::get('/custodians/{custodian}', 'show')->name('custodians.show');
-        Route::get('/custodians/edit/{custodian}', 'edit')->name('custodians.edit');
-        Route::post('/custodians', 'store')->name('custodians.store');
-        Route::put('/custodians/{custodian}', 'update')->name('custodians.update');
-        Route::delete('/custodians/{custodian}', 'delete')->name('custodians.destroy');
     });
 
 
-    // Asset
 
     // ------------Asset Register--------------
-
-
-    Route::controller(AssetRegisterController::class)->group(function () {
-        Route::get('/assets', 'index')->name('assets.index');
-        Route::get('/assets/create', 'create')->name('assets.create');
-        Route::get('/assets/{asset}', 'show')->name('assets.show');
-        Route::post('/assets', 'store')->name('assets.store');
-        Route::get('/assets/edit/{asset}', 'edit')->name('assets.edit');
-        Route::put('/assets/{asset}', 'update')->name('assets.update');
-        Route::delete('/assets/{asset}', 'delete')->name('assets.destroy');
-    });
+    Route::resource('assets', AssetRegisterController::class);
 
     // ------------Asset Status--------------
-
-
-    Route::controller(AssetStatusController::class)->group(function () {
-        Route::get('/asset-status', 'index')->name('asset-status.index');
-        Route::get('/asset-status/create', 'create')->name('asset-status.create');
-        Route::get('/asset-status/{assetStatus}', 'show')->name('asset-status.show');
-        Route::post('/asset-status', 'store')->name('asset-status.store');
-        Route::get('/asset-status/edit/{assetStatus}', 'edit')->name('asset-status.edit');
-        Route::put('/asset-status/{assetStatus}', 'update')->name('asset-status.update');
-        Route::delete('/asset-status/{assetStatus}', 'delete')->name('asset-status.destroy');
-    });
-
+    Route::resource('asset-status', AssetStatusController::class);
 
     // ------------Asset Type--------------
-
-
-    Route::controller(AssetTypeController::class)->group(function () {
-        Route::get('/asset-types', 'index')->name('asset-types.index');
-        Route::get('/asset-types/create', 'create')->name('asset-types.create');
-        Route::get('/asset-types/{assetType}', 'show')->name('asset-types.show');
-        Route::post('/asset-type', 'store')->name('asset-types.store');
-        Route::get('/asset-types/edit/{assetType}', 'edit')->name('asset-types.edit');
-        Route::put('/asset-type/{assetType}', 'update')->name('asset-types.update');
-        Route::delete('/asset-type/{assetType}', 'delete')->name('asset-types.destroy');
-    });
-
-
+    Route::resource('asset-types', AssetTypeController::class);
 
     // ------------Asset Sub-Type--------------
+    Route::resource('asset-sub-types', AssetSubTypeController::class);
 
-
-    Route::controller(AssetSubTypeController::class)->group(function () {
-        Route::get('/asset-sub-types', 'index')->name('asset-sub-types.index');
-        Route::get('/asset-sub-types/create', 'create')->name('asset-sub-types.create');
-        Route::get('/asset-sub-types/{assetSubType}', 'show')->name('asset-sub-types.show');
-        Route::post('/asset-sub-type', 'store')->name('asset-sub-types.store');
-        Route::get('/asset-sub-types/edit/{assetSubType}', 'edit')->name('asset-sub-types.edit');
-        Route::put('/asset-sub-types/{assetSubType}', 'update')->name('asset-sub-types.update');
-        Route::delete('/asset-sub-types/{assetSubType}', 'delete')->name('asset-sub-types.destroy');
-    });
-
-
-    // Asset Groups
+    // ------------Asset Groups--------------
     Route::resource('asset-groups', AssetGroupController::class);
 
     // Threat
@@ -614,18 +422,18 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/threat-agent-rating/delete', 'delete')->name('threatrating.delete');
     });
 
-    // ------------Threat Agent Vector--------------
+    // ------------Threat Agent Vectors--------------
+    Route::resource('threat-agent-vectors', ThreatAgentVectorController::class);
 
-
-    Route::controller(ThreatAgentVectorController::class)->group(function () {
-        Route::get('/threat-agent-vector-list', 'index')->name('threatvector.index');
-        Route::get('/threat-agent-vector-table/{threat_agent_vector_id}', 'show')->name('threatvector.show');;
-        Route::get('/threat-agent-vector-input', 'create')->name('threatvector.create');
-        Route::get('/threat-agent-vector/edit/{id}', 'edit')->name('threatvector.edit');
-        Route::post('/threat-agent-vector', 'store')->name('threatvector.store');
-        Route::put('/threat-agent-vector/{agentVector}', 'update')->name('threatvector.update');
-        Route::delete('/threat-agent-vector/delete', 'delete')->name('threatvector.delete');
-    });
+    // Route::controller(ThreatAgentVectorController::class)->group(function () {
+    //     Route::get('threat-agent-vectors', 'index')->name('threatvector.index');
+    //     Route::get('/threat-agent-vectors/{threat_agent_vector_id}', 'show')->name('threatvector.show');;
+    //     Route::get('/threat-agent-vectors/create', 'create')->name('threatvector.create');
+    //     Route::get('/threat-agent-vector/edit/{id}', 'edit')->name('threatvector.edit');
+    //     Route::post('/threat-agent-vector', 'store')->name('threatvector.store');
+    //     Route::put('/threat-agent-vector/{agentVector}', 'update')->name('threatvector.update');
+    //     Route::delete('/threat-agent-vector/delete', 'delete')->name('threatvector.delete');
+    // });
 
 
     // Vulnerability
@@ -974,16 +782,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Artifacts
-
-    Route::controller(ArtifactController::class)->group(function () {
-        Route::get('/artifacts', 'index')->name('artifacts.index');
-        Route::get('/artifacts/create', 'create')->name('artifacts.create');
-        Route::get('/artifacts/{artifact}', 'show')->name('artifacts.show');
-        Route::post('/artifacts', 'store')->name('artifacts.store');
-        Route::get('/artifacts/{artifact}/edit', 'edit')->name('artifacts.edit');
-        Route::put('/artifacts/{artifact}', 'update')->name('artifacts.update');
-        Route::delete('/artifacts/{artifact}', 'destroy')->name('artifacts.destroy');
-    });
+    Route::resource('artifacts', ArtifactController::class);
 
     // Attachments
     Route::controller(TempFileUploadController::class)->group(function () {

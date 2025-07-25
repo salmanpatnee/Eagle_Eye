@@ -177,7 +177,7 @@
                 </div>
             </div>
         </a>
-        <a href="/threat-agent-list" class="boxhyperlink">
+        <a href="{{ route('threat-agent-vectors.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

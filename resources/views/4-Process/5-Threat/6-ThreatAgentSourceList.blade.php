@@ -55,7 +55,7 @@
                 </a>
             </li>
             <li>
-                <a href="/threat-agent-vector-input">
+                <a href="/threat-agent-vectors/create">
                     <i class='bx bxs-label'></i>
                     <span class="text">Threat Agent Vector</span>
                 </a>
