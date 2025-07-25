@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\ThreatAgentSubType;
 use App\Models\ThreatAgentType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ThreatAgentSubTypeController extends Controller
 {
-    private $_routeName = "threatsubtype";
-    private $_primaryKey = "threat_agent_sub_type_id";
 
     public function index()
     {

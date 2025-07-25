@@ -4,13 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ThreatAgentType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ThreatAgentTypeController extends Controller
 {
-    private $_routeName = "threattype";
-    private $_primaryKey = "threat_agent_type_id";
-
     public function index()
     {
         $threatAgentTypes = ThreatAgentType::paginate(20);

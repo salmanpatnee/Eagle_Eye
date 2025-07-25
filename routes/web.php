@@ -347,8 +347,6 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-
-
     // ------------Asset Register--------------
     Route::resource('assets', AssetRegisterController::class);
 
@@ -364,22 +362,8 @@ Route::middleware(['auth'])->group(function () {
     // ------------Asset Groups--------------
     Route::resource('asset-groups', AssetGroupController::class);
 
-    // Threat
-
-
-    // ------------Threat Agent--------------
-
-
-    Route::controller(ThreatAgentController::class)->group(function () {
-        Route::get('/threat-agent-list', 'index')->name('threatagent.index');
-        Route::get('/threat-agent-table/{threatAgent:threat_agent_id}', 'show')->name('threatagent.show');
-        Route::get('/threat-agent-input', 'create')->name('threatagent.create');
-        Route::get('/threat-agent/edit/{id}', 'edit')->name('threatagent.edit');
-        Route::post('/threat-agent', 'store')->name('threatagent.store');
-        Route::put('/threat-agent/{threatAgent}', 'update')->name('threatagent.update');
-        Route::delete('/threat-agent/delete', 'delete')->name('threatagent.delete');
-    });
-
+    // ------------Threat Agents--------------
+    Route::resource('threat-agents', ThreatAgentController::class);
 
     // ------------Threat Agent Types--------------
     Route::resource('threat-agent-types', ThreatAgentTypeController::class);
