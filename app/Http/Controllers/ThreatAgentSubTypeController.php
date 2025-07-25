@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ThreatAgentSubType;
+use App\Models\ThreatAgentType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,26 +12,27 @@ class ThreatAgentSubTypeController extends Controller
     private $_routeName = "threatsubtype";
     private $_primaryKey = "threat_agent_sub_type_id";
 
+    public function index()
+    {
+        $threatAgentSubTypes = ThreatAgentSubType::with('type')->get();
+
+        return view('4-Process/threat-management/threat-agent-sub-types/index', compact('threatAgentSubTypes'));
+    }
+
+    public function show(ThreatAgentSubType $threatAgentSubType)
+    {
+        $threatAgentSubType->load('type');
+        return view('4-Process/threat-management/threat-agent-sub-types/show', compact('threatAgentSubType'));
+    }
+
+
     // To add data into the table
     public function create()
     {
-        $data = $threatsubtype = null;
-        $threatTypes = DB::table('threat_agent_type_table')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $threatAgentSubType = null;
+        $threatAgentTypes = ThreatAgentType::all();
 
-        return view('4-Process/5-Threat/3-ThreatAgentSubTypeForm', compact('threatsubtype', 'threatTypes', 'routeName', 'data', 'primaryKey'));
-    }
-
-    // To edit the table
-    public function edit($id)
-    {
-        $data = $threatsubtype = DB::table('threat_agent_sub_type_table')->where('threat_agent_sub_type_id', $id)->first();
-        $threatTypes = DB::table('threat_agent_type_table')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/5-Threat/3-ThreatAgentSubTypeForm', compact('threatsubtype', 'threatTypes', 'routeName', 'data', 'primaryKey'));
+        return view('4-Process/threat-management/threat-agent-sub-types/create', compact('threatAgentSubType', 'threatAgentTypes'));
     }
 
 
@@ -47,12 +49,18 @@ class ThreatAgentSubTypeController extends Controller
         ThreatAgentSubType::create($attributes);
 
 
-        return redirect()->route('threatsubtype.index')
+        return redirect()->route('threat-agent-sub-types.index')
             ->with('success', 'Threat Agent Sub Type Saved Successfully.');
     }
 
+    public function edit(ThreatAgentSubType $threatAgentSubType)
+    {
+        $threatAgentSubType->load('type');
+        $threatAgentTypes = ThreatAgentType::all();
 
-    // To store the edited data into the table
+        return view('4-Process/threat-management/threat-agent-sub-types/create', compact('threatAgentSubType', 'threatAgentTypes'));
+    }
+
     public function update(ThreatAgentSubType $threatAgentSubType,  Request $request)
     {
 
@@ -66,66 +74,13 @@ class ThreatAgentSubTypeController extends Controller
 
         $threatAgentSubType->update($attributes);
 
-        return redirect()->route('threatsubtype.index')->with('success', 'Threat Agent Sub Type Saved Successfully.');
-    }
-
-    //--------------------------------------------------------------------//
-
-
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
-    {
-        // $threatsubTypes = DB::table('threat_agent_sub_type_table')->get();
-        $threatsubTypes = ThreatAgentSubType::with('type')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/5-Threat/3-ThreatAgentSubTypeList', compact('routeName', 'primaryKey', 'threatsubTypes'));
-    }
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
-    {
-
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $data = ThreatAgentSubType::where('id', $attributes['record'])->orWhere('threat_agent_sub_type_id', $attributes['record'])->first();
-        $data->delete();
-        return redirect('/threat-agent-sub-type-list');
-
-
-        $selectedthreatsubTypess = $request->input('selectedthreatsubTypess');
-
-        if (!empty($selectedthreatsubTypess)) {
-            DB::table('threat_agent_sub_type_table')->whereIn('threat_agent_sub_type_id', $selectedthreatsubTypess)->delete();
-        }
-        return redirect('/threat-agent-sub-type-list');
+        return redirect()->route('threat-agent-sub-types.index')->with('success', 'Threat Agent Sub Type Saved Successfully.');
     }
 
 
-    // 4.Controller - DETAILED TABLE
-    public function show(ThreatAgentSubType $threatAgentSubType)
+    public function destroy(ThreatAgentSubType $threatAgentSubType)
     {
-
-        $data = $threatAgentSubType->load('type');
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-
-
-        return view('4-Process/5-Threat/3-ThreatAgentSubTypeTable', compact('threatAgentSubType', 'routeName', 'data', 'primaryKey'));
-    }
-
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $threatTypes = DB::table('threat_agent_type_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        return view('4-Process/5-Threat/3-ThreatAgentSubTypeForm', compact('threatTypes'));
+        $threatAgentSubType->delete();
+        return redirect()->route('threat-agent-sub-types.index')->with('success', 'Threat Agent Sub Type Deleted Successfully.');
     }
 }

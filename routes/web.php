@@ -396,18 +396,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     // ------------Threat Agent Sub-Type--------------
-
-
-    Route::controller(ThreatAgentSubTypeController::class)->group(function () {
-        Route::get('/threat-agent-sub-type-list', 'index')->name('threatsubtype.index');
-        Route::get('/threat-agent-sub-type-table/{threatAgentSubType:threat_agent_sub_type_id}', 'show')->name('threatsubtype.show');
-        Route::get('/threat-agent-sub-type-input', 'create')->name('threatsubtype.create');
-        Route::get('/threat-agent-sub-type/edit/{id}', 'edit')->name('threatsubtype.edit');
-        Route::post('/threat-agent-sub-type', 'store')->name('threatsubtype.store');
-        Route::put('/threat-agent-sub-type/{threatAgentSubType}', 'update')->name('threatsubtype.update');
-        Route::delete('/threat-agent-sub-type/delete', 'delete')->name('threatsubtype.delete');
-    });
-
+    Route::resource('threat-agent-sub-types', ThreatAgentSubTypeController::class);
 
     // ------------Threat Agent Ratings--------------
     Route::resource('threat-agent-ratings', ThreatAgentRatingController::class);
