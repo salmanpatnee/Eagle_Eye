@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ThreatAgentRating;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ThreatAgentRatingController extends Controller
 {
-    private $_routeName = "threatrating";
-    private $_primaryKey = "threat_agent_rating_id";
 
     public function index()
     {

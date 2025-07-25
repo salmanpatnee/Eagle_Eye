@@ -381,21 +381,10 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // ------------Threat Agent Type--------------
+    // ------------Threat Agent Types--------------
+    Route::resource('threat-agent-types', ThreatAgentTypeController::class);
 
-
-    Route::controller(ThreatAgentTypeController::class)->group(function () {
-        Route::get('/threat-agent-type-list', 'index')->name('threattype.index');
-        Route::get('/threat-agent-type-table/{threat_agent_type_id}', 'show')->name('threattype.show');
-        Route::get('/threat-agent-type-input', 'create')->name('threattype.create');
-        Route::get('/threat-agent-type/edit/{id}', 'edit')->name('threattype.edit');
-        Route::post('/threat-agent-type', 'store')->name('threattype.store');
-        Route::put('/threat-agent-type/{threatAgentType}', 'update')->name('threattype.update');
-        Route::delete('/threat-agent-type/delete', 'delete')->name('threattype.delete');
-    });
-
-
-    // ------------Threat Agent Sub-Type--------------
+    // ------------Threat Agent Sub-Types--------------
     Route::resource('threat-agent-sub-types', ThreatAgentSubTypeController::class);
 
     // ------------Threat Agent Ratings--------------
