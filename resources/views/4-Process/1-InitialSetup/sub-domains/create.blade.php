@@ -12,13 +12,12 @@
             @csrf
             @if (isset($subDomain))
                 @method('PUT')
-                <input type="hidden" name="id" value="{{ $subDomain->id }}">
             @endif
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Sub-Domain ID" label_ar="اسم المكون الفرعي" name="sub_domain_id"
-                            required="true" :readonly="$subDomain?->sub_domain_id" placeholder="Enter Sub-Domain ID" :value="$subDomain?->sub_domain_id" />
+                        <x-form.field label="Sub-Domain ID" label_ar="اسم المكون الفرعي" name="sub_domain_id" required="true"
+                            :readonly="$subDomain?->sub_domain_id" placeholder="Enter Sub-Domain ID" :value="$subDomain?->sub_domain_id" />
                     </div>
                     <div>
                         <x-form.field label="Sub-Domain Name" label_ar="اسم المكون الأساسي" name="sub_domain_name"

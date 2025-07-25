@@ -69,8 +69,7 @@
                     </div>
                 </x-form.grid-col>
                 <div>
-                    {{-- <x-form.file-upload label="File Attachment" label_ar="إرفاق ملفات" name="fileAttachment" multiple="true"
-                        required="true" /> --}}
+
                     <x-form.label label="File Attachment" label_ar="إرفاق ملفات" for="fileAttachment" />
                     <input type="file" class="filepond" name="fileAttachment" multiple credits="false"
                         id="fileAttachment" {{ !isset($artifact?->id) ? 'required' : '' }}>

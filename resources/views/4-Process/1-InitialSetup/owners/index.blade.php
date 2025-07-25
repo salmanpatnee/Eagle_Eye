@@ -21,7 +21,7 @@
             <x-table.tbody>
                 @foreach ($owners as $owner)
                     <tr>
-                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td><x-table.serial :loop="$loop" :paginator="$owners" /></x-table.td>
                         <x-table.td>{{ $owner->owner_id }}</x-table.td>
                         <x-table.td>{{ $owner->owner_name }}</x-table.td>
                         <x-table.td>{{ $owner->owner_role_id }}</x-table.td>

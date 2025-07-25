@@ -13,7 +13,6 @@
             @csrf
             @if (isset($subDepartment))
                 @method('PUT')
-                <input type="hidden" name="id" value="{{ $subDepartment->id }}">
             @endif
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>

@@ -13,7 +13,7 @@ class BestPracticeController extends Controller
     {
         $bestPractices = BestPractice::select('id', 'best_practices_id', 'best_practices_name', 'best_practices_release_year', 'best_practices_version', 'best_practices_country')
             ->orderBy('sort_order', 'asc')
-            ->get();
+            ->paginate(20);
 
         return view('4-Process.1-InitialSetup.best-practices.index', compact('bestPractices'));
     }

@@ -3,7 +3,7 @@
 @section('title_ar', 'القسم الجهة')
 @section('content')
     <div>
-        <x-table.action-wrapper title="New Department">
+        <x-table.action-wrapper title="{{ $department?->id ? 'Update' : 'New' }} Department">
             <x-action.button label="View" label_ar="منظر" route_name="departments.index" />
         </x-table.action-wrapper>
 
@@ -12,7 +12,6 @@
             @csrf
             @if (isset($department))
                 @method('PUT')
-                <input type="hidden" name="id" value="{{ $department->id }}">
             @endif
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>

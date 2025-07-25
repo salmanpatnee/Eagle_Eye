@@ -19,7 +19,7 @@
             <x-table.tbody>
                 @foreach ($categories as $category)
                     <tr>
-                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td><x-table.serial :loop="$loop" :paginator="$categories" /></x-table.td>
                         <x-table.td>{{ $category->category_id }}</x-table.td>
                         <x-table.td>{{ $category->category_name }}</x-table.td>
                         <x-table.td>{{ $category->Category_source }}</x-table.td>

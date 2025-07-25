@@ -12,7 +12,6 @@
             @csrf
             @if (isset($location))
                 @method('PUT')
-                <input type="hidden" name="id" value="{{ $location->id }}">
             @endif
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
@@ -55,13 +54,13 @@
                             name="location_contact_name" placeholder="Enter Contact Person Name" :value="$location?->location_contact_name" />
                     </div>
                     <div>
-                        <x-form.field label="Contact Person Number" label_ar="رقم الجوال" name="location_contact_number"
-                            placeholder="Enter Contact Person Number" :value="$location?->location_contact_number" />
+                        <x-form.field type="tel" label="Contact Person Number" label_ar="رقم الجوال"
+                            name="location_contact_number" placeholder="Enter Contact Person Number" :value="$location?->location_contact_number" />
                     </div>
                 </x-form.grid-col>
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Contact Person Email" label_ar="البريد الإلكتروني لجهة الاتصال"
+                        <x-form.field type="email" label="Contact Person Email" label_ar="البريد الإلكتروني لجهة الاتصال"
                             name="location_contact_email" placeholder="Enter Contact Person Email" :value="$location?->location_contact_email" />
                     </div>
                 </x-form.grid-col>

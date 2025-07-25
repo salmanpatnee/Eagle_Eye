@@ -22,7 +22,7 @@
             <x-table.tbody>
                 @foreach ($custodians as $custodian)
                     <tr>
-                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td><x-table.serial :loop="$loop" :paginator="$custodians" /></x-table.td>
                         <x-table.td>{{ $custodian->custodian_name_id }}</x-table.td>
                         <x-table.td>{{ $custodian->custodian_name_name }}</x-table.td>
                         <x-table.td>{{ $custodian->custodian_role_id }}</x-table.td>

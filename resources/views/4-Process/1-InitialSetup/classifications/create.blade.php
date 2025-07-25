@@ -13,13 +13,12 @@
             @csrf
             @if (isset($classification))
                 @method('PUT')
-                <input type="hidden" name="id" value="{{ $classification->id }}">
             @endif
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Classification ID" label_ar="رمز التصنيف" name="classification_id"
-                            required="true" :readonly="$classification?->classification_id" placeholder="Enter Classification ID" :value="$classification?->classification_id" />
+                        <x-form.field label="Classification ID" label_ar="رمز التصنيف" name="classification_id" required="true"
+                            :readonly="$classification?->classification_id" placeholder="Enter Classification ID" :value="$classification?->classification_id" />
                     </div>
                     <div>
                         <x-form.field label="Classification Name" label_ar="اسم التصنيف" name="classification_name"

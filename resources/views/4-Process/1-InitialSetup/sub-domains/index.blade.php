@@ -19,7 +19,7 @@
             <x-table.tbody>
                 @foreach ($subDomains as $subDomain)
                     <tr>
-                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td><x-table.serial :loop="$loop" :paginator="$subDomains" /></x-table.td>
                         <x-table.td>{{ $subDomain->sub_domain_id }}</x-table.td>
                         <x-table.td>{{ $subDomain->sub_domain_name }}</x-table.td>
                         <x-table.td>{{ $subDomain->domain->main_domain_id }}</x-table.td>

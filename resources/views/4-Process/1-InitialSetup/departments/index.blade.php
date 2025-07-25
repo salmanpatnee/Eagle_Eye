@@ -4,7 +4,6 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="All Departments">
-
             <x-action.button label="Add Department" label_ar="قسم إضافة" route_name="departments.create" />
         </x-table.action-wrapper>
 
@@ -20,7 +19,7 @@
             <x-table.tbody>
                 @foreach ($departments as $department)
                     <tr>
-                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td> <x-table.serial :loop="$loop" :paginator="$departments" /></x-table.td>
                         <x-table.td>{{ $department->department_id }}</x-table.td>
                         <x-table.td>{{ $department->department_name }}</x-table.td>
                         <x-table.td>{{ $department->location->location_name }}</x-table.td>

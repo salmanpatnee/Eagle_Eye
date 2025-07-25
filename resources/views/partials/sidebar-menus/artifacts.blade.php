@@ -1,1 +1,1 @@
-<x-sidebar-menu-item route_name="assets.index" label_ar="إدارة المقتنيات" label="Artifact Management" />
+<x-sidebar-menu-item route_name="artifacts.index" label_ar="إدارة المقتنيات" label="Artifact Management" />

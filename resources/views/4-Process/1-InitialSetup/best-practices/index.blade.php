@@ -21,7 +21,7 @@
             <x-table.tbody>
                 @foreach ($bestPractices as $bestPractice)
                     <tr>
-                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td><x-table.serial :loop="$loop" :paginator="$bestPractices" /></x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_id }}</x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_name }}</x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_release_year }}</x-table.td>
@@ -39,5 +39,9 @@
                 @endforeach
             </x-table.tbody>
         </x-table.table>
+
+        <x-pagination>
+            {{ $bestPractices->links() }}
+        </x-pagination>
     </div>
 @endsection
