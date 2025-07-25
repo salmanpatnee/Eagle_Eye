@@ -409,31 +409,12 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // ------------Threat Agent Rating--------------
-
-
-    Route::controller(ThreatAgentRatingController::class)->group(function () {
-        Route::get('/threat-agent-rating-list', 'index')->name('threatrating.index');
-        Route::get('/threat-agent-rating-table/{threat_agent_rating_id}', 'show')->name('threatrating.show');
-        Route::get('/threat-agent-rating-input', 'create')->name('threatrating.create');
-        Route::get('/threat-agent-rating/edit/{id}', 'edit')->name('threatrating.edit');
-        Route::post('/threat-agent-rating', 'store')->name('threatrating.store');
-        Route::put('/threat-agent-rating/{threatAgentRating}', 'update')->name('threatrating.update');
-        Route::delete('/threat-agent-rating/delete', 'delete')->name('threatrating.delete');
-    });
+    // ------------Threat Agent Ratings--------------
+    Route::resource('threat-agent-ratings', ThreatAgentRatingController::class);
 
     // ------------Threat Agent Vectors--------------
     Route::resource('threat-agent-vectors', ThreatAgentVectorController::class);
 
-    // Route::controller(ThreatAgentVectorController::class)->group(function () {
-    //     Route::get('threat-agent-vectors', 'index')->name('threatvector.index');
-    //     Route::get('/threat-agent-vectors/{threat_agent_vector_id}', 'show')->name('threatvector.show');;
-    //     Route::get('/threat-agent-vectors/create', 'create')->name('threatvector.create');
-    //     Route::get('/threat-agent-vector/edit/{id}', 'edit')->name('threatvector.edit');
-    //     Route::post('/threat-agent-vector', 'store')->name('threatvector.store');
-    //     Route::put('/threat-agent-vector/{agentVector}', 'update')->name('threatvector.update');
-    //     Route::delete('/threat-agent-vector/delete', 'delete')->name('threatvector.delete');
-    // });
 
 
     // Vulnerability
