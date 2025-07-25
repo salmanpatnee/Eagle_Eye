@@ -436,7 +436,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/users', [UserController::class, 'store'])->name('users.store');
             Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
             Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
-            Route::delete('/users', [UserController::class, 'destroy'])->name('users.destroy');
+            Route::delete('/users/{user}    ', [UserController::class, 'destroy'])->name('users.destroy');
             Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
             Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
         });
@@ -992,7 +992,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/artifacts', 'store')->name('artifacts.store');
         Route::get('/artifacts/{artifact}/edit', 'edit')->name('artifacts.edit');
         Route::put('/artifacts/{artifact}', 'update')->name('artifacts.update');
-        Route::delete('/artifacts/{artifact?}', 'destroy')->name('artifacts.delete');
+        Route::delete('/artifacts/{artifact}', 'destroy')->name('artifacts.destroy');
     });
 
     // Attachments
@@ -1002,8 +1002,10 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::controller(ArtifactAttachmentController::class)->group(function () {
+        Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
         Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
     });
+
 
     // Evidence
 

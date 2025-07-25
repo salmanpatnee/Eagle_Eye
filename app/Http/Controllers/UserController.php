@@ -7,7 +7,6 @@ use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-use function PHPUnit\Framework\isNull;
 
 class UserController extends Controller
 {
@@ -16,7 +15,7 @@ class UserController extends Controller
         $users = User::whereNotIn('id', [1])
             ->with('role')
             ->orderBy('first_name', 'asc')
-            ->get();
+            ->paginate(20);
 
 
         return view('4-Process.1-InitialSetup.users.index', compact('users'));
@@ -24,9 +23,10 @@ class UserController extends Controller
 
     public function create()
     {
+        $user = null;
         $userRoles = UserRole::select('id', 'role_name')->get();
 
-        return view('4-Process.1-InitialSetup.users.create', compact('userRoles'));
+        return view('4-Process.1-InitialSetup.users.create', compact('userRoles', 'user'));
     }
 
     public function store(Request $request)
@@ -42,7 +42,7 @@ class UserController extends Controller
 
         User::create($attributes);
 
-        return redirect(route('users.index'))->with('message', 'User added successfully.');
+        return redirect(route('users.index'))->with('success', 'User added successfully.');
     }
 
     public function show(User $user)
@@ -57,7 +57,7 @@ class UserController extends Controller
         $userRoles = UserRole::select('id', 'role_name')->get();
 
 
-        return view('4-Process.1-InitialSetup.users.edit', compact('user', 'userRoles'));
+        return view('4-Process.1-InitialSetup.users.create', compact('user', 'userRoles'));
     }
 
     public function update(Request $request, User $user)
@@ -78,18 +78,12 @@ class UserController extends Controller
 
         $user->update($attributes);
 
-        return redirect(route('users.index'))->with('message', 'User updated successfully.');
+        return redirect(route('users.index'))->with('success', 'User updated successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(User $user)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        User::where('id', $attributes['record'])->delete();
-
-
-        return redirect(route('users.index'))->with('message', 'User deleted.');
+        $user->delete();
+        return redirect(route('users.index'))->with('success', 'User deleted successfully.');
     }
 }
