@@ -31,8 +31,8 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.select label="Classification" label_ar="التصنيف" name="classification_id" required="true"
-                            placeholder="Enter Classification" :value="$domain?->classification_id" :data="$classifications"
-                            id_key="classification_id" value_key="classification_name" />
+                            :value="$domain?->classification_id" :data="$classifications" id_key="classification_id"
+                            value_key="classification_name" />
                     </div>
 
                     <div>

@@ -1,6 +1,5 @@
 <?php
 
-use App\Exports\ControlsExport;
 use App\Http\Controllers\ArtifactAttachmentController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -121,9 +120,65 @@ use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
-Route::get('/tailadmin', function () {
-    return view('tailadmin');
+// ------------------- INITIAL SETUP -------------------
+
+Route::resource('organizations', OrganizationController::class);
+Route::resource('locations', LocationController::class);
+Route::resource('departments', DepartmentController::class);
+Route::resource('sub-departments', SubDepartmentController::class);
+Route::resource('classifications', ClassificationController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('sub-categories', SubCategoryController::class);
+Route::resource('best-practices', BestPracticeController::class);
+Route::resource('domains', MainDomainController::class);
+Route::resource('sub-domains', SubDomainController::class);
+Route::resource('owner-roles', OwnerRoleController::class);
+Route::resource('owners', OwnerController::class);
+Route::resource('custodian-roles', CustodianRoleController::class);
+Route::resource('custodians', CustodianController::class);
+
+// ------------------- ASSET REGISTRATION -------------------
+
+Route::resource('assets', AssetRegisterController::class);
+Route::resource('asset-status', AssetStatusController::class);
+Route::resource('asset-types', AssetTypeController::class);
+Route::resource('asset-sub-types', AssetSubTypeController::class);
+Route::resource('asset-groups', AssetGroupController::class);
+
+// ------------------- EVIDENCE TRACKING -------------------
+
+Route::resource('artifacts', ArtifactController::class);
+
+// ------------------- USERS -------------------
+
+Route::middleware('superadmin')->group(function () {
+    Route::resource('users', UserController::class);
+    // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
+    // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
 });
+
+// ------------------- THREAT MANAGEMENT -------------------
+
+Route::resource('threat-agents', ThreatAgentController::class);
+Route::resource('threat-agent-types', ThreatAgentTypeController::class);
+Route::resource('threat-agent-sub-types', ThreatAgentSubTypeController::class);
+Route::resource('threat-agent-ratings', ThreatAgentRatingController::class);
+Route::resource('threat-agent-vectors', ThreatAgentVectorController::class);
+
+// ------------------- VULNERABILITY MANAGEMENT -------------------
+
+Route::resource('vulnerabilities', VaMasterController::class);
+Route::resource('vulnerability-types', VaTypeController::class);
+Route::resource('vulnerability-sub-types', VaSubTypeController::class);
+
+// ------------------- RISK IDENTIFICATION -------------------
+
+Route::resource('risk-methodology', RiskMethodologyController::class);
+Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class);
+Route::resource('kpis', RiskKpiController::class);
+Route::resource('kris', RiskKriController::class);
+
+
 
 
 Route::get('/insert-record', function () {
@@ -305,95 +360,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-
-
-    // ------------------- INITIAL SETUP -------------------
-    //     ├── Organization Management
-    //     ├── Location Management
-    //     └── Department Management
-    //     └── Sub-Department Management
-    //     └── Classification Management
-    //     └── Category Management
-    //     └── Sub-Category Management
-    //     └── Best practice Management
-    //     └── Domain Management
-    //     └── Sub-Domain Management
-    //     └── User Management
-    //     └── Options
-    // -----------------------------------------------------
-
-    Route::resource('organizations', OrganizationController::class);
-    Route::resource('locations', LocationController::class);
-    Route::resource('departments', DepartmentController::class);
-    Route::resource('sub-departments', SubDepartmentController::class);
-    Route::resource('classifications', ClassificationController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('sub-categories', SubCategoryController::class);
-    Route::resource('best-practices', BestPracticeController::class);
-    Route::resource('domains', MainDomainController::class);
-    Route::resource('sub-domains', SubDomainController::class);
-    Route::resource('owner-roles', OwnerRoleController::class);
-    Route::resource('owners', OwnerController::class);
-    Route::resource('custodian-roles', CustodianRoleController::class);
-    Route::resource('custodians', CustodianController::class);
-
-
-    Route::middleware(['auth'])->group(function () {
-
-        Route::middleware('superadmin')->group(function () {
-            Route::resource('users', UserController::class);
-            // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
-            // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
-        });
-    });
-
-    // ------------Asset Register--------------
-    Route::resource('assets', AssetRegisterController::class);
-
-    // ------------Asset Status--------------
-    Route::resource('asset-status', AssetStatusController::class);
-
-    // ------------Asset Type--------------
-    Route::resource('asset-types', AssetTypeController::class);
-
-    // ------------Asset Sub-Type--------------
-    Route::resource('asset-sub-types', AssetSubTypeController::class);
-
-    // ------------Asset Groups--------------
-    Route::resource('asset-groups', AssetGroupController::class);
-
-    // ------------Threat Agents--------------
-    Route::resource('threat-agents', ThreatAgentController::class);
-
-    // ------------Threat Agent Types--------------
-    Route::resource('threat-agent-types', ThreatAgentTypeController::class);
-
-    // ------------Threat Agent Sub-Types--------------
-    Route::resource('threat-agent-sub-types', ThreatAgentSubTypeController::class);
-
-    // ------------Threat Agent Ratings--------------
-    Route::resource('threat-agent-ratings', ThreatAgentRatingController::class);
-
-    // ------------Threat Agent Vectors--------------
-    Route::resource('threat-agent-vectors', ThreatAgentVectorController::class);
-
-
-
-    // Vulnerability
-
-
-    // ------------Vulnerability Master--------------
-
-    Route::controller(VaMasterController::class)->group(function () {
-        Route::get('/va-list', 'index')->name('va.index');
-        Route::get('/va-table/{vulnerability:va_id}', 'show')->name('va.show');
-        Route::get('/va-input', 'create')->name('va.create');
-        Route::get('/va/edit/{id}', 'edit')->name('va.edit');
-        Route::post('/va', 'store')->name('va.store');
-        Route::put('/va/{vulnerability}', 'update')->name('va.update');
-        Route::delete('/va/delete', 'delete')->name('va.delete');
-    });
-
     // ------------Vulnerability Register--------------
     Route::controller(VulnerabilityRegisterController::class)->group(function () {
         Route::get('/vulnerability-register', 'index')->name('va.register');
@@ -427,32 +393,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/cvss/delete', 'delete')->name('delete.cvss');
     });
 
-    // ------------Vulnerability Type--------------
 
 
-    Route::controller(VaTypeController::class)->group(function () {
-        Route::get('/va-types-list', 'index')->name('vatype.index');
-        Route::get('/va-types-table/{va_type_id}', 'show')->name('vatype.show');
-        Route::get('/va-types-input', 'create')->name('vatype.create');
-        Route::get('/va-type/edit/{id}', 'edit')->name('vatype.edit');
-        Route::post('/va-type', 'store')->name('vatype.store');
-        Route::put('/va-type/{vulnerabilityType}', 'update')->name('vatype.update');
-        Route::delete('/va-type/delete', 'delete')->name('vatype.delete');
-    });
-
-
-    // ------------Vulnerability Sub-Type--------------
-
-
-    Route::controller(VaSubTypeController::class)->group(function () {
-        Route::get('/va-sub-type-list', 'index')->name('vasubtype.index');
-        Route::get('/va-sub-type-table/{vulnerabilitySubType:va_sub_type_id}', 'show')->name('vasubtype.show');
-        Route::get('/va-sub-type-input', 'create')->name('vasubtype.create');
-        Route::get('/va-sub-type/edit/{id}', 'edit')->name('vasubtype.edit');
-        Route::post('/va-sub-type', 'store')->name('vasubtype.store');
-        Route::put('/va-sub-type/{vulnerabilitySubType}', 'update')->name('vasubtype.update');
-        Route::delete('/va-sub-type/delete', 'delete')->name('vasubtype.delete');
-    });
 
 
 
@@ -472,10 +414,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // ------------Risk Methodology--------------
 
-    Route::resource('risk-methodology', RiskMethodologyController::class)->except(['destroy']);
-    Route::delete('/risk-methodology/delete', [RiskMethodologyController::class, 'destroy'])->name('risk-methodology.destroy');
 
 
     // ------------Risk Type--------------
@@ -520,44 +459,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // ------------Risk KRI--------------
-
-
-    Route::controller(RiskKriController::class)->group(function () {
-        Route::get('/kri-list', 'index')->name('riskkri.index');
-        Route::get('/kri-table/{risk_id}', 'show')->name('riskkri.show');
-        Route::get('/kri-input', 'create')->name('riskkri.create');
-        Route::get('/kri/edit/{id}', 'edit')->name('riskkri.edit');
-        Route::post('/kri', 'store')->name('riskkri.store');
-        Route::put('/kri/{keyRiskIndicator}', 'update')->name('riskkri.update');
-        Route::delete('/kri/delete', 'delete')->name('riskkri.delete');
-    });
-
-    // ------------Risk KRI--------------
-
-
-    Route::controller(RiskKpiController::class)->group(function () {
-        Route::get('/kpi-list', 'index')->name('riskkpi.index');
-        Route::get('/kpi-table/{risk_id}', 'show')->name('riskkpi.show');
-        Route::get('/kpi-input', 'create')->name('riskkpi.create');
-        Route::get('/kpi/edit/{id}', 'edit')->name('riskkpi.edit');
-        Route::post('/kpi', 'store')->name('riskkpi.store');
-        Route::put('/kpi/{keyPerformanceIndicator}', 'update')->name('riskkpi.update');
-        Route::delete('/kpi/delete', 'delete')->name('riskkpi.delete');
-    });
-
-    // ------------Risk Treatment--------------
-
-
-    Route::controller(RiskTreatmentOptionsController::class)->group(function () {
-        Route::get('/risk-treatment-option-list', 'index')->name('risktreatment.index');
-        Route::get('/risk-treatment-option-table/{risk_id}', 'show')->name('risktreatment.show');
-        Route::get('/risk-treatment-option-input', 'create')->name('risktreatment.create');
-        Route::get('/risk-treatment-option/edit/{id}', 'edit')->name('risktreatment.edit');
-        Route::post('/risk-treatment-option', 'store')->name('risktreatment.store');
-        Route::put('/risk-treatment-option/{riskTreatment}', 'update')->name('risktreatment.update');
-        Route::delete('/risk-treatment-option/delete', 'delete')->name('risktreatment.delete');
-    });
 
 
     // ------------Risk Appetite--------------
@@ -724,8 +625,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // Artifacts
-    Route::resource('artifacts', ArtifactController::class);
+
 
     // Attachments
     Route::controller(TempFileUploadController::class)->group(function () {

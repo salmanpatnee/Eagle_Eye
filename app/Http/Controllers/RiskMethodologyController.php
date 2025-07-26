@@ -11,34 +11,24 @@ use App\Models\Risk;
 use App\Models\RiskAcceptance;
 use App\Models\RiskAppetite;
 use App\Models\RiskMethodology;
+use App\Models\RiskTreatment;
 use App\Models\ThreatAgent;
 use App\Models\Vulnerability;
-use Illuminate\Http\Request;
 use Mpdf\Mpdf;
 
 class RiskMethodologyController extends Controller
 {
-    private $_routeName = "risk-methodology";
-    private $_primaryKey = "risk_methodology_id";
 
     public function index()
     {
         $riskMethodologies = RiskMethodology::all();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/risk/risk-methodology/index', compact('routeName', 'riskMethodologies', 'primaryKey'));
+        return view('4-Process\risk-identification\risk-methodology\index', compact('riskMethodologies'));
     }
 
     public function show(RiskMethodology $riskMethodology)
     {
-        $data = $riskMethodology->load('objectives');
-
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-
-        // return view('4-Process/risk/risk-methodology/show', compact('riskMethodology', 'routeName', 'data', 'primaryKey'));
+        $riskMethodology->load('objectives');
 
         $organization = Organization::first();
         $riskAppetites =  RiskAppetite::select('risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name')->orderBy('risk_appetite_id')->get();
@@ -68,13 +58,13 @@ class RiskMethodologyController extends Controller
                 ->header('Content-Type', 'application/pdf')
                 ->header('Content-Disposition', 'attachment; filename="RiskMethodology.pdf"');
         } else {
-            return view('4-Process/risk/risk-methodology/show', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
+            return view('4-Process\risk-identification\risk-methodology\show', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
         }
     }
 
     public function create()
     {
-        $data = $riskMethodology = null;
+        $riskMethodology = null;
         $owners = Owner::select('owner_role_id', 'owner_name')->get();
         $appetites =  RiskAppetite::select('risk_appetite_id', 'risk_score')->get();
         $acceptances = RiskAcceptance::select('risk_acceptance_id', 'risk_acceptance_source')->distinct()->get();
@@ -82,12 +72,11 @@ class RiskMethodologyController extends Controller
         $threats = ThreatAgent::select('threat_agent_id', 'threat_agent_name')->get();
         $vulnerabilities = Vulnerability::select('va_id', 'va_name')->get();
         $risks = Risk::select('risk_id', 'risk_name')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $riskTreatments =  RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')->get();
         $objectives = Objective::select('id', 'objective_id', 'objective')->get();
         $objectiveIds = [];
 
-        return view('4-Process/risk/risk-methodology/create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectives', 'objectiveIds'));
+        return view('4-Process\risk-identification\risk-methodology\create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'owners', 'appetites', 'acceptances', 'objectives', 'objectiveIds', 'riskTreatments'));
     }
 
     public function store(RiskMethodologyRequest $request)
@@ -99,18 +88,14 @@ class RiskMethodologyController extends Controller
 
         $methodology = RiskMethodology::create($attributes);
 
-        if ($objectives && $objectivesArray = json_decode($objectives, true)) {
+        $methodology->objectives()->attach($objectives ?? []);
 
-            $methodology->objectives()
-                ->attach($objectivesArray);
-        }
-
-        return redirect()->route($this->_routeName . '.index')->with('success', 'Risk Methodology Saved Successfully.');
+        return redirect()->route('risk-methodology.index')->with('success', 'Risk Methodologyology Saved Successfully.');
     }
 
     public function edit(RiskMethodology $riskMethodology)
     {
-        $data = $riskMethodology;
+        $riskMethodology;
         $owners = Owner::select('owner_role_id', 'owner_name')->get();
         $appetites =  RiskAppetite::select('risk_appetite_id', 'risk_score')->get();
         $acceptances = RiskAcceptance::select('risk_acceptance_id', 'risk_acceptance_source')->distinct()->get();
@@ -118,12 +103,12 @@ class RiskMethodologyController extends Controller
         $threats = ThreatAgent::select('threat_agent_id', 'threat_agent_name')->get();
         $vulnerabilities = Vulnerability::select('va_id', 'va_name')->get();
         $risks = Risk::select('risk_id', 'risk_name')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $riskTreatments =  RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')->get();
+
         $objectives = Objective::select('id', 'objective_id', 'objective')->get();
         $objectiveIds = $riskMethodology->objectives()->pluck('objectives.objective_id')->toArray();
 
-        return view('4-Process/risk/risk-methodology/create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'routeName', 'data', 'primaryKey', 'owners', 'appetites', 'acceptances', 'objectiveIds', 'objectives'));
+        return view('4-Process\risk-identification\risk-methodology\create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'riskTreatments', 'owners', 'appetites', 'acceptances', 'objectiveIds', 'objectives'));
     }
 
     public function update(RiskMethodology $riskMethodology, RiskMethodologyRequest $request)
@@ -135,25 +120,17 @@ class RiskMethodologyController extends Controller
 
         $riskMethodology->update($attributes);
 
-        if ($objectives && $objectivesArray = json_decode($objectives, true)) {
+        $riskMethodology->objectives()->sync($objectives ?? []);
 
-            $riskMethodology->objectives()
-                ->sync($objectivesArray);
-        }
-
-        return redirect()->route($this->_routeName . '.index')->with('success', 'Risk Method saved successfully.');
+        return redirect()->route('risk-methodology.index')->with('success', 'Risk Methodology saved successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(RiskMethodology $riskMethodology)
     {
-        $attributes = $request->validate([
-            'record' => ['required'],
-        ]);
 
-        $data = RiskMethodology::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
-        $data->objectives()->detach(); // Detach the objectives relationship before deleting the record
-        $data->delete();
+        $riskMethodology->objectives()->detach(); // Detach the objectives relationship before deleting the record
+        $riskMethodology->delete();
 
-        return redirect(route($this->_routeName . '.index'));
+        return redirect()->route('risk-methodology.index')->with('success', 'Risk Methodology deleted successfully.');
     }
 }

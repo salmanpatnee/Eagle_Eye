@@ -177,7 +177,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ route('threat-agent-vectors.index') }}" class="boxhyperlink">
+        <a href="{{ route('threat-agents.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -189,7 +189,7 @@
                 </div>
             </div>
         </a>
-        <a href="/va-list" class="boxhyperlink">
+        <a href="{{ route('vulnerabilities.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -204,7 +204,7 @@
     </div>
 
     <div class="processes">
-        <a href="/risk-methodology" class="boxhyperlink">
+        <a href="{{ route('risk-methodology.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

@@ -36,8 +36,8 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.select label="Threat Agent Types" label_ar="النوع لعامل التهديد" name="threat_agent_type_id"
-                            required="true" placeholder="Enter Classification" :value="$threatAgentSubType?->threat_agent_type_id" :data="$threatAgentTypes"
-                            id_key="threat_agent_type_id" value_key="threat_agent_type_name" />
+                            required="true" :value="$threatAgentSubType?->threat_agent_type_id" :data="$threatAgentTypes" id_key="threat_agent_type_id"
+                            value_key="threat_agent_type_name" />
                     </div>
                     <div>
 
