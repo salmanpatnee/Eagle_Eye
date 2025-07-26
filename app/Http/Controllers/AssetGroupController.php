@@ -14,14 +14,14 @@ class AssetGroupController extends Controller
     public function index()
     {
         $assetGroups = AssetGroup::with('owner', 'classification')->paginate(20);
-        return view('4-Process/asset-groups/index', compact('assetGroups'));
+        return view('4-Process/assets/asset-groups/index', compact('assetGroups'));
     }
 
 
     public function show(AssetGroup $assetGroup)
     {
         $assetGroup->load('owner', 'classification', 'custodians');
-        return view('4-Process/asset-groups/show', compact('assetGroup'));
+        return view('4-Process/assets/asset-groups/show', compact('assetGroup'));
     }
 
     public function create()
@@ -31,7 +31,7 @@ class AssetGroupController extends Controller
         $classifications = DB::table('classification_table')->get();
         $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->get();
         $custodianIds = [];
-        return view('4-Process/asset-groups/create', compact('assetGroup', 'owners', 'classifications', 'custodians', 'custodianIds'));
+        return view('4-Process/assets/asset-groups/create', compact('assetGroup', 'owners', 'classifications', 'custodians', 'custodianIds'));
     }
 
     // To store the edited data into the table
@@ -70,7 +70,7 @@ class AssetGroupController extends Controller
         $custodianIds = $assetGroup->custodians()->pluck('custodian_role_id')->toArray();
 
 
-        return view('4-Process/asset-groups/create', compact('assetGroup', 'owners', 'classifications', 'custodians', 'custodianIds'));
+        return view('4-Process/assets/asset-groups/create', compact('assetGroup', 'owners', 'classifications', 'custodians', 'custodianIds'));
     }
 
 
