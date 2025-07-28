@@ -167,11 +167,13 @@ Route::resource('vulnerability-sub-types', VaSubTypeController::class);
 // ------------------- RISK IDENTIFICATION -------------------
 
 Route::resource('risk-methodology', RiskMethodologyController::class);
+Route::resource('risk-groups', RiskGroupController::class);
 Route::resource('risk-types', RiskTypeController::class);
 Route::resource('risk-sub-types', RiskSubTypeController::class);
 Route::resource('kris', RiskKriController::class);
 Route::resource('kpis', RiskKpiController::class);
 Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class);
+
 
 
 Route::get('/insert-record', function () {
@@ -410,18 +412,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    // ------------Risk Group--------------
-
-
-    Route::controller(RiskGroupController::class)->group(function () {
-        Route::get('/risk-group-list', 'index')->name('riskgroup.index');
-        Route::get('/risk-group-table/{riskGroup:risk_group_id}', 'show')->name('riskgroup.show');
-        Route::get('/risk-group-input', 'create')->name('riskgroup.create');
-        Route::get('/risk-group/edit/{id}', 'edit')->name('riskgroup.edit');
-        Route::post('/risk-group', 'store')->name('riskgroup.store');
-        Route::put('/risk-group/{riskGroup}', 'update')->name('riskgroup.update');
-        Route::delete('/risk-group/delete', 'delete')->name('riskgroup.delete');
-    });
 
 
 
