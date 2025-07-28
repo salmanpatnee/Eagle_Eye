@@ -35,7 +35,7 @@ class RiskIdentificationController extends Controller
 
 
 
-        return view('4-Process\risk-identification\risks\index', compact('risks', 'riskNames', 'riskGroups', 'owners'));
+        return view('4-Process\risk-identification\risks\index', compact('risks', 'riskNames', 'riskGroups', 'owners', 'risk', 'group', 'owner'));
     }
 
     public function show(Risk $risk)

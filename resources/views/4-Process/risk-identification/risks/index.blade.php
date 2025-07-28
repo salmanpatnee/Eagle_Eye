@@ -9,6 +9,27 @@
             <x-action.button label="Add Risk" label_ar="إضافة المخاطر" route_name="risks.create" />
         </x-table.action-wrapper>
 
+        <form action="{{ route('risks.index') }}" method="GET">
+            <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
+                <x-form.grid-3-col>
+                    <div>
+                        <x-form.select label="Risk" label_ar="المخاطر" name="risk" placeholder="Select Risk"
+                            :data="$riskNames" id_key="risk_id" value_key="risk_name" onchange="this.form.submit()"
+                            :value="$risk" />
+                    </div>
+                    <div>
+                        <x-form.select label="Risk Group" label_ar="مجموعة المخاطر" name="group"
+                            placeholder="Select Risk Group" :value="$group" :data="$riskGroups" id_key="risk_group_id"
+                            value_key="risk_group_name" onchange="this.form.submit()" />
+                    </div>
+                    <div>
+                        <x-form.select label="Owner" label_ar="صاحب الضوابط" name="owner" placeholder="Select Owner"
+                            :value="$owner" :data="$owners" id_key="owner_role_id" value_key="owner_name"
+                            onchange="this.form.submit()" />
+                    </div>
+                </x-form.grid-3-col>
+            </div>
+        </form>
 
         <x-table.table>
             <x-table.thead>
