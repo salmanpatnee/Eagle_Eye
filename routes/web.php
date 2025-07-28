@@ -52,7 +52,6 @@ use App\Http\Controllers\AuditFindingController;
 use App\Http\Controllers\AuditorFormController;
 use App\Http\Controllers\AuditeeController;
 use App\Http\Controllers\EvidenceController;
-use App\Http\Controllers\Location;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\SubDepartmentController;
@@ -72,7 +71,6 @@ use App\Http\Controllers\AssetTypeController;
 use App\Http\Controllers\AssetSubTypeController;
 use App\Http\Controllers\AssetGroupController;
 use App\Http\Controllers\ControlSmartSearch;
-use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\TempFileUploadController;
 use App\Http\Controllers\ThreatAgentController;
 use App\Http\Controllers\ThreatAgentSubTypeController;
@@ -92,7 +90,6 @@ use App\Http\Controllers\AssetSmartSearch;
 use App\Http\Controllers\AuditPlanReportController;
 use App\Http\Controllers\CMSController;
 use App\Http\Controllers\DataUploaderController;
-use App\Http\Controllers\ExportController;
 use App\Http\Controllers\HumanResourceController;
 use App\Http\Controllers\KPICategoryController;
 use App\Http\Controllers\KPIStandardController;
@@ -110,15 +107,11 @@ use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\RegulatoryReportController;
 use App\Http\Controllers\ResourceController;
-use App\Http\Controllers\SamaRegulatoryReportController;
 use App\Http\Controllers\ThirdPartyController;
 use App\Http\Controllers\TPTExpertsControl;
 use App\Http\Controllers\VulnerabilityRegisterController;
 use App\Models\ControlMaster;
-use App\Models\UserRole;
 use Illuminate\Support\Facades\DB;
-use Mpdf\Mpdf;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 
 // ------------------- INITIAL SETUP -------------------
 
@@ -174,6 +167,7 @@ Route::resource('vulnerability-sub-types', VaSubTypeController::class);
 // ------------------- RISK IDENTIFICATION -------------------
 
 Route::resource('risk-methodology', RiskMethodologyController::class);
+Route::resource('risk-types', RiskTypeController::class);
 Route::resource('risk-sub-types', RiskSubTypeController::class);
 Route::resource('kris', RiskKriController::class);
 Route::resource('kpis', RiskKpiController::class);
@@ -225,10 +219,6 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/control-smart-search', [ControlSmartSearch::class, 'index'])->name('control.smart.search.index');
-
-
-
-
 
 
     // Experts
@@ -416,18 +406,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    // ------------Risk Type--------------
-
-
-    Route::controller(RiskTypeController::class)->group(function () {
-        Route::get('/risk-type-list', 'index')->name('risktype.index');
-        Route::get('/risk-type-table/{risk_id}', 'show')->name('risktype.show');;
-        Route::get('/risk-type-input', 'create')->name('risktype.create');
-        Route::get('/risk-type/edit/{id}', 'edit')->name('risktype.edit');
-        Route::post('/risk-type', 'store')->name('risktype.store');
-        Route::put('/risk-type/{riskType}', 'update')->name('risktype.update');
-        Route::delete('/risk-type/delete', 'delete')->name('risktype.delete');
-    });
 
 
 
