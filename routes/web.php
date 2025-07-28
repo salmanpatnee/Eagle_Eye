@@ -166,6 +166,7 @@ Route::resource('vulnerability-sub-types', VaSubTypeController::class);
 
 // ------------------- RISK IDENTIFICATION -------------------
 
+Route::resource('risks', RiskIdentificationController::class);
 Route::resource('risk-methodology', RiskMethodologyController::class);
 Route::resource('risk-groups', RiskGroupController::class);
 Route::resource('risk-types', RiskTypeController::class);
@@ -389,38 +390,11 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    // Risk
-
-    // ------------Risk Identification--------------
-
-
-    Route::controller(RiskIdentificationController::class)->group(function () {
-        Route::get('/risk-identification-list', 'index')->name('riskmaster.index');
-        Route::get('/risk-identification-table/{risk:risk_id}', 'show')->name('riskmaster.show');
-        Route::get('/risk-identification-input', 'create')->name('riskmaster.create');
-        Route::get('/risk-identification/edit/{risk:risk_id}', 'edit')->name('riskmaster.edit');
-        Route::post('/risk-identification', 'store')->name('riskmaster.store');
-        Route::put('/risk-identification/{risk}', 'update')->name('riskmaster.update');
-        Route::delete('/risk-identification/delete', 'delete')->name('riskmaster.delete');
-    });
 
 
 
 
 
-
-
-
-
-
-
-
-
-    // ------------Risk Appetite--------------
-
-
-    // Route::resource('risk-appetites', RiskAppetiteController::class)->except(['destroy']);
-    // Route::delete('/risk-appetites/delete', [RiskAppetiteController::class, 'destroy'])->name('risk-appetites.destroy');
 
     Route::controller(RiskAppetiteController::class)->group(function () {
         Route::get('/risk-appetites', 'index')->name('risk-appetites.index');

@@ -11,7 +11,9 @@
             <li
                 class="flex items-center gap-2 border-b border-gray-200 px-3 py-2.5 text-base text-left font-medium text-gray-600 last:border-b-0">
                 <span>
-                    {{ $item[$id_key] ?? ($item->{$id_key} ?? '') }} -
+                    @if (!empty($id_key))
+                        {{ $item[$id_key] ?? ($item->{$id_key} ?? '') }} -
+                    @endif
                     {{ $item[$value_key] ?? ($item->{$value_key} ?? '') }}
                 </span>
             </li>

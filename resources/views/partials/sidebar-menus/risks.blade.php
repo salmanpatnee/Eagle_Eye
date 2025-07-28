@@ -1,3 +1,4 @@
+<x-sidebar-menu-item route_name="risks.index" label_ar="تحديد المخاطر" label="Risk Identification" />
 <x-sidebar-menu-item route_name="risk-methodology.index" label_ar="منهجية المخاطر" label="Risk Methodology" />
 <x-sidebar-menu-item route_name="risk-groups.index" label_ar="مجموعة المخاطر" label="Risk Groups" />
 <x-sidebar-menu-item route_name="risk-types.index" label_ar="النوع للمخاطر" label="Risk Types" />
