@@ -174,6 +174,8 @@ Route::resource('risk-sub-types', RiskSubTypeController::class);
 Route::resource('kris', RiskKriController::class);
 Route::resource('kpis', RiskKpiController::class);
 Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class);
+Route::resource('risk-appetites', RiskAppetiteController::class);
+
 
 
 
@@ -385,26 +387,6 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/cvss/delete', 'delete')->name('delete.cvss');
     });
 
-
-
-
-
-
-
-
-
-
-
-
-    Route::controller(RiskAppetiteController::class)->group(function () {
-        Route::get('/risk-appetites', 'index')->name('risk-appetites.index');
-        Route::get('/risk-appetites/create', 'create')->name('risk-appetites.create');
-        Route::get('/risk-appetites/{risk_appetite:risk_appetite_id}', 'show')->name('risk-appetites.show');
-        Route::get('/risk-appetites/edit/{risk_appetite:risk_appetite_id}', 'edit')->name('risk-appetites.edit');
-        // Route::post('/risk-appetite', 'storeOrUpdate')->name('RiskAppetite.store');
-        Route::put('/risk-appetites/{risk_appetite:risk_appetite_id}', 'storeOrUpdate')->name('risk-appetites.update');
-        Route::delete('/risk-appetites/delete', 'destroy')->name('risk-appetites.delete');
-    });
 
 
     // ------------Risk Inherent--------------

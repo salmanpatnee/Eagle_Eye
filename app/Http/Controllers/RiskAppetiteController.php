@@ -14,16 +14,12 @@ class RiskAppetiteController extends Controller
 
     public function index()
     {
-        $data = $result =  RiskAppetite::select('risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name')->orderBy('risk_appetite_id')->get();
+        $result = RiskAppetite::select('risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name')->orderBy('risk_appetite_id')->get();
         $impacts = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Catastrophic'];
         $riskAppetite = null;
-
         $riskAppetites = RiskAppetite::all();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
 
-        
-        return view('4-Process/7-Risk/5-RiskAppetiteList', compact('riskAppetites', 'routeName',  'primaryKey', 'data', 'result', 'impacts', 'riskAppetite'));
+        return view('4-Process\risk-identification\risk-appetites\index', compact('riskAppetites', 'result', 'impacts', 'riskAppetite'));
     }
 
     public function create()
@@ -53,9 +49,9 @@ class RiskAppetiteController extends Controller
 
     // To edit the table
     public function edit(RiskAppetite $risk_appetite)
-    {   
+    {
         $data = $result =  RiskAppetite::select('risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name')->orderBy('risk_appetite_id')->get();
-        $impacts = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Catastrophic', ];
+        $impacts = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Catastrophic',];
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
