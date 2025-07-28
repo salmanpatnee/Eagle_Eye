@@ -400,7 +400,7 @@
                 </div>
             </div>
         </a>
-        <a href="/risk-identification-list" class="boxhyperlink">
+        <a href="/risks.index" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

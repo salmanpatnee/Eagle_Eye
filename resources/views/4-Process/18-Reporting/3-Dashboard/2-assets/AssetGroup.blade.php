@@ -126,7 +126,7 @@
                         <tbody id="table_body">
                             {{-- @foreach ($risks as $risk)
                                 <tr>
-                                    <td> <a href="{{ route('riskmaster.show', $risk->risk_id) }}"
+                                    <td> <a href="{{ route('risks.show', $risk->risk_id) }}"
                                             >{{ $risk->risk_id }}</a>
                                     </td>
                                     <td>

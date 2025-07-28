@@ -99,7 +99,7 @@
                             {{ $loop->index + 1 }}
                         </x-table.td>
                         <x-table.td>
-                            <a href="{{ route('riskmaster.show', $row->risk_id) }}" target="_blank" class="text-dark">
+                            <a href="{{ route('risks.show', $row->risk_id) }}" target="_blank" class="text-dark">
                                 {{ $row->risk }}
                             </a>
                         </x-table.td>

@@ -101,7 +101,7 @@
                             @foreach ($riskDetails as $risk)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('riskmaster.show', $risk->risk_id) }} "
+                                        <a href="{{ route('risks.show', $risk->risk_id) }} "
                                             target="_blank">{{ $risk->risk_id }}
                                         </a>
                                     </td>

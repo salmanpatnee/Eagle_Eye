@@ -36,10 +36,10 @@
                         <p>اسم الموقع</p>
                         <p>Risk Consequences</p>
                     </th>
-                  
-                 
-                 
-                   
+
+
+
+
                 </tr>
 
             </thead>
@@ -47,7 +47,7 @@
                 @foreach ($assetregister as $row)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td><a href="{{ route('riskmaster.show', $row->risk_id) }}">{{ $row->risk_id }}</a>
+                        <td><a href="{{ route('risks.show', $row->risk_id) }}">{{ $row->risk_id }}</a>
                         </td>
                         <td>{{ $row->risk_name }}</td>
                         <td>{{ $row->risk_group_name }}</td>

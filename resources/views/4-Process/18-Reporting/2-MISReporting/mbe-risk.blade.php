@@ -39,7 +39,7 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td>
-                            <a href="{{ route('riskmaster.show', $row->risk_id) }}">
+                            <a href="{{ route('risks.show', $row->risk_id) }}">
                                 {{ $row->risk_id }}
                             </a>
                         </td>

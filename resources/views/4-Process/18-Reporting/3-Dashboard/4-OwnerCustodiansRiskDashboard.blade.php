@@ -122,8 +122,7 @@
                                 <tr>
                                     <td> {{ $loop->index + 1 }}
                                     </td>
-                                    <td> <a
-                                            href="{{ route('riskmaster.show', $risk->risk_id) }}">{{ $risk->risk_id }}</a>
+                                    <td> <a href="{{ route('risks.show', $risk->risk_id) }}">{{ $risk->risk_id }}</a>
                                     </td>
                                     <td>
                                         @if ($risk->risk_assessment_id)
