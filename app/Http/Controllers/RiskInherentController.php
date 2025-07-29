@@ -2,35 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RiskAppetite;
 use App\Models\RiskInherent;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class RiskInherentController extends Controller
 {
-    private $_routeName = "RiskInherent";
-    private $_primaryKey = "risk_inherent_id";
 
-    // To add data into the table
+    public function index()
+    {
+        $riskInherents = RiskInherent::paginate(20);
+
+        return view('4-Process\risk-identification\risk-inherents\index', compact('riskInherents'));
+    }
+
+    public function show(RiskInherent $riskInherent)
+    {
+        return view('4-Process\risk-identification\risk-inherents\show', compact('riskInherent'));
+    }
+
     public function create()
     {
-        $data = $RiskInherent = null;
-        $RiskAppetite = DB::table('risk_appetite_table')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/7-Risk/6-RiskInherentForm', compact('RiskInherent', 'RiskAppetite', 'routeName', 'data', 'primaryKey'));
-    }
+        $riskInherent = null;
+        $riskAppetites = RiskAppetite::select('id', 'risk_appetite_id', 'risk_appetite_name')->get();
 
-    // To edit the table
-    public function edit($id)
-    {
-        $data = $RiskInherent = DB::table('risk_inherent_table')->where('risk_inherent_id', $id)->first();
-        $RiskAppetite = DB::table('risk_appetite_table')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/7-Risk/6-RiskInherentForm', compact('RiskInherent', 'RiskAppetite', 'routeName', 'data', 'primaryKey'));
+        return view('4-Process\risk-identification\risk-inherents\create', compact('riskInherent', 'riskAppetites'));
     }
-
 
     public function store(Request $request)
     {
@@ -47,10 +44,16 @@ class RiskInherentController extends Controller
         RiskInherent::create($attributes);
 
 
-        return redirect()->route('risk-inherent.index')->with('success', 'Risk Inherent Saved Successfully.');
+        return redirect()->route('risk-inherents.index')->with('success', 'Risk Inherent Saved Successfully.');
     }
 
-    // To store the edited data into the table
+    public function edit(RiskInherent $riskInherent)
+    {
+        $riskAppetites = RiskAppetite::select('id', 'risk_appetite_id', 'risk_appetite_name')->get();
+
+        return view('4-Process\risk-identification\risk-inherents\create', compact('riskInherent', 'riskAppetites'));
+    }
+
     public function update(RiskInherent $riskInherent, Request $request)
     {
         // Validation
@@ -65,71 +68,12 @@ class RiskInherentController extends Controller
 
         $riskInherent->update($attributes);
 
-        return redirect()->route('risk-inherent.index')->with('success', 'Risk Inherent Saved Successfully.');
+        return redirect()->route('risk-inherents.index')->with('success', 'Risk Inherent Saved Successfully.');
     }
 
-    //--------------------------------------------------------------------//
-
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
+    public function destroy(RiskInherent $riskInherent)
     {
-        $columns = DB::table('risk_inherent_table')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/7-Risk/6-RiskInherentList', compact('columns', 'routeName', 'primaryKey'));
-    }
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
-    {
-        $attributes = $request->validate([
-            'record' => ['required'],
-        ]);
-
-
-        $data = RiskInherent::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
-
-        $data->delete();
-
-        return redirect(route($this->_routeName . '.index'));
-
-        $selecteddelete = $request->input('selecteddelete');
-
-        if (!empty($selecteddelete)) {
-            DB::table('risk_inherent_table')->whereIn('risk_inherent_id', $selecteddelete)->delete();
-        }
-        return redirect('/risk-inherent-list');
-    }
-
-
-
-    // 4.Controller - DETAILED TABLE
-    public function show($risk_inherent_id)
-    {
-        // Fetch data from the database based on department_id
-        $data = $risk_inherent_id = DB::table('risk_inherent_table')
-            ->join('risk_appetite_table', 'risk_inherent_table.risk_appetite_id', '=', 'risk_appetite_table.risk_appetite_id')
-            ->where('risk_inherent_table.risk_inherent_id', $risk_inherent_id)
-            ->first();
-
-        if (!$risk_inherent_id) {
-            abort(404);
-        }
-
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/7-Risk/6-RiskInherentTable', compact('risk_inherent_id', 'routeName', 'data', 'primaryKey'));
-    }
-
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $data = DB::table('risk_appetite_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        return view('4-Process/7-Risk/6-RiskInherentForm', compact('data'));
+        $riskInherent->delete();
+        return redirect()->route('risk-inherents.index')->with('success', 'Risk Inherent Deleted Successfully.');
     }
 }

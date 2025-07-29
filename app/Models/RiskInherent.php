@@ -13,5 +13,8 @@ class RiskInherent extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    
+    public function riskAppetite()
+    {
+        return $this->belongsTo(RiskAppetite::class, 'risk_appetite_id', 'risk_appetite_id');
+    }
 }

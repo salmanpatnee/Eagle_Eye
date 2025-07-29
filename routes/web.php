@@ -175,6 +175,7 @@ Route::resource('kris', RiskKriController::class);
 Route::resource('kpis', RiskKpiController::class);
 Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class);
 Route::resource('risk-appetites', RiskAppetiteController::class);
+Route::resource('risk-inherents', RiskInherentController::class);
 
 
 
@@ -389,17 +390,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    // ------------Risk Inherent--------------
 
-    Route::controller(RiskInherentController::class)->group(function () {
-        Route::get('/risk-inherent-list', 'index')->name('risk-inherent.index');
-        Route::get('/risk-inherent-table/{risk_id}', 'show')->name('RiskInherent.show');
-        Route::get('/risk-inherent-input', 'create')->name('RiskInherent.create');
-        Route::get('/risk-inherent/edit/{id}', 'edit')->name('RiskInherent.edit');
-        Route::post('/risk-inherent', 'store')->name('RiskInherent.store');
-        Route::put('/risk-inherent/{riskInherent}', 'update')->name('RiskInherent.update');
-        Route::delete('/risk-inherent/delete', 'delete')->name('RiskInherent.delete');
-    });
 
 
 
