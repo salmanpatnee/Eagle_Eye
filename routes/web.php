@@ -179,6 +179,7 @@ Route::resource('risk-inherents', RiskInherentController::class);
 
 // ------------------- CONTROL IDENTIFICATION -------------------
 
+Route::resource('controls', ControlController::class);
 Route::resource('control-types', ControlTypeController::class);
 
 
@@ -410,20 +411,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // Control
 
-    // ------------Control Identification--------------
-
-
-    Route::controller(ControlController::class)->group(function () {
-        Route::get('/control-identification-list', 'index')->name('controlmaster.index');
-        Route::get('/control-identification-table/{control:control_id}', 'show')->name('controlmaster.show');
-        Route::get('/control-identification-input', 'create')->name('controlmaster.create');
-        Route::get('/control-identification/edit/{control:control_id}', 'edit')->name('controlmaster.edit');
-        Route::post('/control-identification', 'store')->name('controlmaster.store');
-        Route::put('/control-identification/{control}', 'update')->name('controlmaster.update');
-        Route::delete('/control-identification/delete', 'delete')->name('controlmaster.delete');
-    });
 
 
 

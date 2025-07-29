@@ -14,6 +14,11 @@ class ControlMaster extends Model
     protected $guarded = [];
     public $timestamps = false;
 
+    public function setIsParentControlAttribute($value)
+    {
+        $this->attributes['is_parent_control'] = ($value === 'yes' || $value === 1 || $value === true) ? 1 : 0;
+    }
+
     public function scopeFilter($query, array $filters)
     {
 
@@ -71,13 +76,14 @@ class ControlMaster extends Model
         }
     }
 
-    public function scopeOrderControls($query, $tablePrefix = 'control_master_table') {
+    public function scopeOrderControls($query, $tablePrefix = 'control_master_table')
+    {
         $query->orderBy('b.sort_order')
-        ->orderBy(DB::raw("CAST(SUBSTRING_INDEX(control_master_table.control_id, '-', 1) AS UNSIGNED)"))
-        ->orderBy(DB::raw("CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_master_table.control_id, '-', 3), '-', -1) AS UNSIGNED)"))
-        ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_master_table.control_id, '-', 4), '-', -1) AS UNSIGNED), 0)"))
-        ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_master_table.control_id, '-', 5), '-', -1) AS UNSIGNED), 0)"))
-        ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_master_table.control_id, '-', 6), '-', -1) AS UNSIGNED), 0)"));
+            ->orderBy(DB::raw("CAST(SUBSTRING_INDEX(control_master_table.control_id, '-', 1) AS UNSIGNED)"))
+            ->orderBy(DB::raw("CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_master_table.control_id, '-', 3), '-', -1) AS UNSIGNED)"))
+            ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_master_table.control_id, '-', 4), '-', -1) AS UNSIGNED), 0)"))
+            ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_master_table.control_id, '-', 5), '-', -1) AS UNSIGNED), 0)"))
+            ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_master_table.control_id, '-', 6), '-', -1) AS UNSIGNED), 0)"));
     }
 
     public function classification()
@@ -109,72 +115,72 @@ class ControlMaster extends Model
     {
         return $this->belongsToMany(
             BestPractice::class,
-            'control_master_table_vs_best_practice_table',  
-            'control_id',                
-            'best_practice_id',                                  
-            'control_id',                           
-            'best_practices_id'  
-        );                                 
+            'control_master_table_vs_best_practice_table',
+            'control_id',
+            'best_practice_id',
+            'control_id',
+            'best_practices_id'
+        );
     }
 
     public function categories()
     {
         return $this->belongsToMany(
             Category::class,
-            'control_master_table_vs_category_table',  
-            'control_id',                
-            'category_id',                                  
-            'control_id',                           
-            'category_id'  
-        );                                 
+            'control_master_table_vs_category_table',
+            'control_id',
+            'category_id',
+            'control_id',
+            'category_id'
+        );
     }
 
     public function custodians()
     {
         return $this->belongsToMany(
             Custodian::class,
-            'control_master_table_vs_custodian_role_table',  
-            'control_id',                
-            'custodian_id',                                  
-            'control_id',                           
+            'control_master_table_vs_custodian_role_table',
+            'control_id',
+            'custodian_id',
+            'control_id',
             'custodian_role_id'
-        );                                   
+        );
     }
 
     public function domains()
     {
         return $this->belongsToMany(
             Domain::class,
-            'control_master_table_vs_domain_table',  
-            'control_id',                
-            'main_domain_id',                                  
-            'control_id',                           
+            'control_master_table_vs_domain_table',
+            'control_id',
+            'main_domain_id',
+            'control_id',
             'main_domain_id'
-        );                                   
+        );
     }
 
     public function subDomains()
     {
         return $this->belongsToMany(
             SubDomain::class,
-            'control_master_table_vs_sub_domain_table',  
-            'control_id',                
-            'sub_domain_id',                                  
-            'control_id',                           
+            'control_master_table_vs_sub_domain_table',
+            'control_id',
+            'sub_domain_id',
+            'control_id',
             'sub_domain_id'
-        );                                   
+        );
     }
 
     public function risks()
     {
         return $this->belongsToMany(
             Risk::class,
-            'risk_vs_control_table',  
-            'control_id',                
-            'risk_id',                                  
-            'control_id',                           
+            'risk_vs_control_table',
+            'control_id',
+            'risk_id',
+            'control_id',
             'risk_id'
-        );                                   
+        );
     }
 
 
@@ -188,7 +194,8 @@ class ControlMaster extends Model
         return $this->belongsTo(SubDomain::class, 'sub_domain_id', 'sub_domain_id');
     }
 
-    public function findings(){
+    public function findings()
+    {
         return $this->belongsToMany(AuditFinding::class, 'audit_finding_vs_control_table', 'control_id', 'audit_finding_id', 'control_id', 'audit_finding_id');
     }
 
