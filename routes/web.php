@@ -177,7 +177,9 @@ Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class)
 Route::resource('risk-appetites', RiskAppetiteController::class);
 Route::resource('risk-inherents', RiskInherentController::class);
 
+// ------------------- CONTROL IDENTIFICATION -------------------
 
+Route::resource('control-types', ControlTypeController::class);
 
 
 Route::get('/insert-record', function () {
@@ -424,18 +426,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // ------------Control Type--------------
 
-
-    Route::controller(ControlTypeController::class)->group(function () {
-        Route::get('/control-type-list', 'index')->name('controltype.index');
-        Route::get('/control-type-table/{contro_type_id}', 'show')->name('controltype.show');
-        Route::get('/control-type-input', 'create')->name('controltype.create');
-        Route::get('/control-type/edit/{id}', 'edit')->name('controltype.edit');
-        Route::post('/control-type', 'store')->name('controltype.store');
-        Route::put('/control-type/{controlType}', 'update')->name('controltype.update');
-        Route::delete('/control-type/delete', 'delete')->name('controltype.delete');
-    });
 
 
     // Audit Plan
