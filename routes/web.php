@@ -181,6 +181,8 @@ Route::resource('risk-inherents', RiskInherentController::class);
 
 Route::resource('controls', ControlController::class);
 Route::resource('control-types', ControlTypeController::class);
+Route::resource('kpi-standards', KPIStandardController::class);
+
 
 
 Route::get('/insert-record', function () {
@@ -633,15 +635,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/kpi-categories/', 'destroy')->name('kpi-categories.delete');
     });
 
-    Route::controller(KPIStandardController::class)->group(function () {
-        Route::get('/kpi-standards', 'index')->name('kpi-standards.index');
-        Route::get('/kpi-standards/create', 'create')->name('kpi-standards.create');
-        Route::get('/kpi-standards/{kpi:kpi_id}', 'show')->name('kpi-standards.show');
-        Route::post('/kpi-standards', 'store')->name('kpi-standards.store');
-        Route::get('/kpi-standards/edit/{kpi:kpi_id}', 'edit')->name('kpi-standards.edit');
-        Route::put('/kpi-standards/{kpi:id}', 'update')->name('kpi-standards.update');
-        Route::delete('/kpi-standards/', 'destroy')->name('kpi-standards.delete');
-    });
+
 
 
     Route::controller(KPIStandardReportController::class)->group(function () {

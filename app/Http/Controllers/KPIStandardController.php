@@ -10,42 +10,26 @@ use Illuminate\Http\Request;
 
 class KPIStandardController extends Controller
 {
-
-    private $_routeName = "kpi-standards";
-    private $_primaryKey = "kpi_id";
-
-
     public function index()
     {
-        $kpis = KPIStandards::with('category', 'bestPractice')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/KpiStandards/index', compact('kpis', 'routeName', 'primaryKey'));
+        $kpis = KPIStandards::with('category', 'bestPractice')->paginate(20);
+        return view('4-Process\control-identification\control-kpis\index', compact('kpis'));
     }
 
-    public function show(KPIStandards $kpi)
+    public function show(KPIStandards $kpiStandard)
     {
-        $data = $kpi->load('category', 'bestPractice');
+        $kpiStandard->load('category', 'bestPractice');
 
-
-
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/KpiStandards/show', compact('kpi', 'data', 'routeName', 'primaryKey'));
+        return view('4-Process\control-identification\control-kpis\show', compact('kpiStandard'));
     }
 
     public function create()
     {
-
-        $data = $kpi = null;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $kpiStandard = null;
         $categories =  Category::select('category_id', 'category_name')->get();
         $bestPractices =  BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $frequencyUnits = KPIStandards::FREQUENCY_UNITS;
-        return view('4-Process/KpiStandards/create', compact('kpi', 'data', 'routeName', 'primaryKey', 'categories', 'bestPractices', 'frequencyUnits'));
+        return view('4-Process\control-identification\control-kpis\create', compact('kpiStandard', 'categories', 'bestPractices', 'frequencyUnits'));
     }
 
     public function store(Request $request)
@@ -56,7 +40,7 @@ class KPIStandardController extends Controller
             'best_practice_id' => 'nullable',
             'kpi_name' => 'required',
             'kpi_value' => 'nullable',
-            'reference' => 'nullable',
+            'reference' => 'required',
             'remarks' => 'nullable',
             'priority' => 'nullable|numeric',
             'kpi_frequency_value' => 'nullable|string',
@@ -71,49 +55,39 @@ class KPIStandardController extends Controller
             ->with('success', 'Standard saved successfully.');
     }
 
-    public function edit(KPIStandards $kpi)
+    public function edit(KPIStandards $kpiStandard)
     {
-        $data = $kpi;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
         $categories =  Category::select('category_id', 'category_name')->get();
         $bestPractices =  BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $frequencyUnits = KPIStandards::FREQUENCY_UNITS;
 
-        return view('4-Process/KpiStandards/create', compact('kpi', 'data', 'routeName', 'primaryKey', 'categories', 'bestPractices', 'frequencyUnits'));
+        return view('4-Process\control-identification\control-kpis\create', compact('kpiStandard', 'categories', 'bestPractices', 'frequencyUnits'));
     }
 
-
-    public function update(KPIStandards $kpi, Request $request)
+    public function update(KPIStandards $kpiStandard, Request $request)
     {
         $attributes = $request->validate([
-            'kpi_id' => ['required', 'unique:kpi_standards,kpi_id,' . $kpi->id],
+            'kpi_id' => ['required', 'unique:kpi_standards,kpi_id,' . $kpiStandard->id],
             'category_id' => 'required',
             'best_practice_id' => 'nullable',
             'kpi_name' => 'required',
             'kpi_value' => 'nullable',
-            'reference' => 'nullable',
+            'reference' => 'required',
             'remarks' => 'nullable',
             'priority' => 'nullable|numeric',
             'kpi_frequency_value' => 'nullable|string',
             'kpi_frequency_unit' => 'nullable|string',
         ]);
 
-        $kpi->update($attributes);
+        $kpiStandard->update($attributes);
 
         return redirect(route('kpi-standards.index'))
             ->with('success', 'Category saved successfully.');
     }
 
-
-
-    public function destroy(Request $request)
+    public function destroy(KPIStandards $kpiStandard)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        KPIStandards::where('kpi_id', $attributes['record'])->delete();
+        $kpiStandard->delete();
 
         return redirect(route('kpi-standards.index'))
             ->with('success', 'Standard deleted successfully.');
