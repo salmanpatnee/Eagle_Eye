@@ -112,10 +112,10 @@
                 <tbody class="tablebody">
                     @forelse ($controlsWithAuditFindings as $row)
                         <tr style="border: 1px solid #000;">
-                            <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">{{ $loop->index + 1 }}</td>
                             <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
-                                <a href="{{ route('controlmaster.show', $row->control_id) }}"
-                                    style="text-decoration: none;">
+                                {{ $loop->index + 1 }}</td>
+                            <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
+                                <a href="{{ route('controls.show', $row->control_id) }}" style="text-decoration: none;">
                                     {{ $row->control_id }}
                                 </a>
                             </td>

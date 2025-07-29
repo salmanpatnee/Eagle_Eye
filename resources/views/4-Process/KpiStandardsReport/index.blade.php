@@ -55,14 +55,14 @@
         {{-- <div class="herosecleft" style="margin-bottom: 2em;">
             <div class="cveButton">
 
-                <a href="{{ route('control-risk.index') }}">
+                <a href="{{ route('control-vs-risk.index') }}">
                     <div class="rightButton">
                         <p>الضوابط مقابل الأدلة</p>
                         <p>Control vs Risk</p>
                     </div>
                 </a>
 
-                <a href="{{ route('control-risk.index') }}" class="disabled">
+                <a href="{{ route('control-vs-risk.index') }}" class="disabled">
                     <div class="rightButton">
                         <p>الضوابط مقابل الأدلة</p>
                         <p>Risk vs Control</p>
@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <form action="{{ route('risk-treatment.index') }}">
+        <form action="{{ route('risk-vs-control.index') }}">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col">

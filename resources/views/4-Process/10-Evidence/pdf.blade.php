@@ -79,7 +79,8 @@
                     {{ $organizationData->organization_name_english }}</h2>
                 <h2 style="font-weight: bold; font-size: 18px; font-family: 'Roboto'" class="mt-0">Control vs Evidence
                 </h2>
-                <h2 style="font-weight: bold; font-size: 18px; font-family: 'Roboto' margin-bottom:30px;" class="mt-0">
+                <h2 style="font-weight: bold; font-size: 18px; font-family: 'Roboto' margin-bottom:30px;"
+                    class="mt-0">
                     {{ \Carbon\Carbon::now()->format('F j, Y') }}</h2>
             @endif
         </header>
@@ -119,7 +120,7 @@
                             <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
                                 {{ $loop->index + 1 }}</td>
                             <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
-                                <a href="{{ route('controlmaster.show', $evidence->control_id) }}"
+                                <a href="{{ route('controls.show', $evidence->control_id) }}"
                                     style="text-decoration: none;">
                                     {{ $evidence->control_id }}
                                 </a>

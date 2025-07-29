@@ -56,30 +56,30 @@
                 <p class="PageHeadEngTxt">Evidence Report</p>
             </div>
             <div class="ButtonContainer">
-                <a href="{{route('evidences.index')}}" class="MoreButton">
+                <a href="{{ route('evidences.index') }}" class="MoreButton">
                     <p class="ButtonArbTxt">منظر</p>
                     <p class="ButtonEngTxt">View</p>
                 </a>
                 <a href="{{ route($routeName . '.create') }}"
-                class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
-                <p class="ButtonArbTxt">يضيف</p>
-                <p class="ButtonEngTxt">Add</p>
-            </a>
-            <a href="{{ route($routeName. '.edit', $data->$primaryKey) }}"
-                class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
-                <p class="ButtonArbTxt">تحديث</p>
-                <p class="ButtonEngTxt">Update</p>
-            </a>
-            <form method="POST" action="{{ route($routeName.'.delete') }}" id="deleteForm">
-                <input type="hidden" name="record" value="{{ $data->id }}">
-                <button type="button" id="btnDelete"
-                    class="{{ auth()->user()->can('delete-data') && auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}">
-                    <p class="ButtonArbTxt">يمسح</p>
-                    <p class="ButtonEngTxt">Delete</p>
-                </button>
-                @csrf
-                @method('DELETE')
-            </form>
+                    class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
+                    <p class="ButtonArbTxt">يضيف</p>
+                    <p class="ButtonEngTxt">Add</p>
+                </a>
+                <a href="{{ route($routeName . '.edit', $data->$primaryKey) }}"
+                    class="{{ auth()->user()->can('manage-asset') ? 'MoreButton' : 'DisabledButton' }}">
+                    <p class="ButtonArbTxt">تحديث</p>
+                    <p class="ButtonEngTxt">Update</p>
+                </a>
+                <form method="POST" action="{{ route($routeName . '.delete') }}" id="deleteForm">
+                    <input type="hidden" name="record" value="{{ $data->id }}">
+                    <button type="button" id="btnDelete"
+                        class="{{ auth()->user()->can('delete-data') && auth()->user()->can('manage-asset') ? 'DeleteButton' : 'DisabledButton' }}">
+                        <p class="ButtonArbTxt">يمسح</p>
+                        <p class="ButtonEngTxt">Delete</p>
+                    </button>
+                    @csrf
+                    @method('DELETE')
+                </form>
             </div>
         </div>
         <table cellspacing="0">
@@ -141,7 +141,7 @@
                         </div>
                         <p class="sh-tx">{{ $evidence->owner?->owner_name }}</p>
                     </div>
-                    
+
                 </div>
                 <div class="ContentTablebg">
                     <div class="column">
@@ -153,14 +153,13 @@
                     </div>
                 </div>
                 <div class="ContentTable">
-                
+
                     <div class="column">
                         <x-label label="Controls" label_ar="" />
                         <ol class="resource-list">
                             @foreach ($evidence->controls as $control)
                                 <li>
-                                    <a href="{{ route('controlmaster.show', $control->control_id) }}"
-                                        target="_blank">
+                                    <a href="{{ route('controls.show', $control->control_id) }}" target="_blank">
                                         {{ $control->control_name }}
                                     </a>
                                 </li>
@@ -172,8 +171,7 @@
                         <ol class="resource-list">
                             @foreach ($evidence->artifacts as $artifact)
                                 <li>
-                                    <a href="{{ route('artifacts.show', $artifact->id) }}"
-                                        target="_blank">
+                                    <a href="{{ route('artifacts.show', $artifact->id) }}" target="_blank">
                                         {{ $artifact->artifact_name }}
                                     </a>
                                 </li>
@@ -182,23 +180,22 @@
                     </div>
                 </div>
                 <div class="ContentTable">
-                
+
                     <div class="column">
                         <x-label label="Categories" label_ar="اسم الفئة" />
                         <ol class="resource-list">
                             @foreach ($evidence->categories as $category)
                                 <li>
-                                    <a href="{{ route('controlmaster.show', $category->category_id) }}"
-                                        target="_blank">
+                                    <a href="{{ route('controls.show', $category->category_id) }}" target="_blank">
                                         {{ $category->category_name }}
                                     </a>
                                 </li>
                             @endforeach
                         </ol>
                     </div>
-                   
+
                 </div>
- 
+
             </div>
             <div class="ContentTableSection">
                 <div class="ContentTable">
@@ -375,10 +372,10 @@
             window.history.back();
         }
         document.getElementById('btnDelete').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-});
-
+            event.preventDefault();
+            window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
+        });
     </script>
 </body>
+
 </html>

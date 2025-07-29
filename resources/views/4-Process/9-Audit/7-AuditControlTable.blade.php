@@ -226,7 +226,7 @@
                         </td>
                         <td>
                             @foreach ($row->Controls as $control)
-                                <p><a href="{{ route('controlmaster.show', $control->control_id) }}">{{ $control->control_id }}
+                                <p><a href="{{ route('controls.show', $control->control_id) }}">{{ $control->control_id }}
                                         - {{ $control->control_name }}</a> </p>
                             @endforeach
                         </td>

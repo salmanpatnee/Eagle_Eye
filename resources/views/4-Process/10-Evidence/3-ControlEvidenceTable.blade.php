@@ -75,8 +75,6 @@
             border-radius: 10px;
             text-align: center;
         }
-
-        
     </style>
 </head>
 
@@ -103,7 +101,7 @@
                 </div>
             </div>
             <div>
-                <a href="{{route('control.evidence.index')}}?pdf=1" class="btn-report btn btn-primary btn-sm">
+                <a href="{{ route('control.evidence.index') }}?pdf=1" class="btn-report btn btn-primary btn-sm">
                     <p>تنزيل بصيغة بي دي إف</p>
                     Download as PDF
                 </a>
@@ -240,7 +238,7 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td>
-                            <a href="{{ route('controlmaster.show', $evidence->control_id) }}">
+                            <a href="{{ route('controls.show', $evidence->control_id) }}">
                                 {{ $evidence->control_id }}
                             </a>
                         </td>

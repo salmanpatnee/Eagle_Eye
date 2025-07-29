@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\ControlMaster;
 use App\Models\Risk;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class RiskTreatmentTableController extends Controller
+class RiskTreatmentController extends Controller
 {
 
 
-    public function index(Request $request)
+    public function riskVsControl(Request $request)
     {
         $riskId = $request->input('risk') ?? null;
         $controlId = $request->input('control') ?? null;
@@ -45,7 +44,7 @@ class RiskTreatmentTableController extends Controller
             ->get();
 
 
-        return view('4-Process/7-Risk/7-RiskTreatmentTable', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
+        return view('4-Process\risk-identification\risk-treatment\risk-vs-control', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
     }
 
     public function controlVsRisk(Request $request)
@@ -79,6 +78,6 @@ class RiskTreatmentTableController extends Controller
 
 
 
-        return view('4-Process/7-Risk/control-risk', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
+        return view('4-Process\risk-identification\risk-treatment\control-vs-risk', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
     }
 }

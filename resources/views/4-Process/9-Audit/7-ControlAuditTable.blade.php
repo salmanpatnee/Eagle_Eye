@@ -219,7 +219,7 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td>
-                            <a href="{{ route('controlmaster.show', $row->control_id) }}">
+                            <a href="{{ route('controls.show', $row->control_id) }}">
                                 {{ $row->control_id }}
                             </a>
                         </td>

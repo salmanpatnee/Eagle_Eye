@@ -27,7 +27,7 @@ use App\Http\Controllers\NcaOsmaccIdentificationController;
 use App\Http\Controllers\NcaOsmaccAssessmentController;
 use App\Http\Controllers\NcaDccAssessmentController;
 use App\Http\Controllers\MisReportsController;
-use App\Http\Controllers\RiskTreatmentTableController;
+use App\Http\Controllers\RiskTreatmentController;
 use App\Http\Controllers\RiskAssetGroupTableController;
 use App\Http\Controllers\RiskCveController;
 use App\Http\Controllers\CvssController;
@@ -177,11 +177,20 @@ Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class)
 Route::resource('risk-appetites', RiskAppetiteController::class);
 Route::resource('risk-inherents', RiskInherentController::class);
 
+// ------------------- RISK TREATMENT -------------------
+
+Route::controller(RiskTreatmentController::class)->group(function () {
+    Route::get('/risk-vs-control', 'riskVsControl')->name('risk-vs-control.index');
+    Route::get('/control-vs-risk', 'controlVsRisk')->name('control-vs-risk.index');
+});
+
+
 // ------------------- CONTROL IDENTIFICATION -------------------
 
 Route::resource('controls', ControlController::class);
 Route::resource('control-types', ControlTypeController::class);
 Route::resource('kpi-standards', KPIStandardController::class);
+
 
 
 
@@ -889,10 +898,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::controller(RiskTreatmentTableController::class)->group(function () {
-        Route::get('/risk-treatment', 'index')->name('risk-treatment.index');
-        Route::get('/control-risk', 'controlVsRisk')->name('control-risk.index');
-    });
+
 
     Route::controller(RiskAssetGroupTableController::class)->group(function () {
         Route::get('/risk-asset-group', 'index')->name('riskvsassetgroup');
