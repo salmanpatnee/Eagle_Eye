@@ -207,6 +207,13 @@ Route::controller(RiskStatusController::class)->group(function () {
     Route::get('/risk-status', 'index')->name('risk-status.index');
 });
 
+// ------------------- VULNERABILITY REGISTER -------------------
+
+Route::controller(VulnerabilityRegisterController::class)->group(function () {
+    Route::get('/vulnerability-register', 'index')->name('va.register');
+    Route::get('/vulnerability-register-excel', 'generateExcelReport')->name('va.register.excel');
+});
+
 // ------------------- CONTROL IDENTIFICATION -------------------
 
 Route::resource('controls', ControlController::class);
@@ -391,11 +398,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    // ------------Vulnerability Register--------------
-    Route::controller(VulnerabilityRegisterController::class)->group(function () {
-        Route::get('/vulnerability-register', 'index')->name('va.register');
-        Route::get('/vulnerability-register-excel', 'generateExcelReport')->name('va.register.excel');
-    });
+
 
 
     // ------------Vulnerability CVE--------------
