@@ -19,14 +19,14 @@ class ArtifactController extends Controller
             ->withCount('attachments')
             ->paginate(20);
 
-        return view('4-Process/artifacts/index', compact('artifacts'));
+        return view('4-Process/evidence-management/artifacts/index', compact('artifacts'));
     }
 
     public function show(Artifact $artifact)
     {
         $artifact->load('attachments', 'classification', 'category');
 
-        return view('4-Process/artifacts/show', compact('artifact'));
+        return view('4-Process/evidence-management/artifacts/show', compact('artifact'));
     }
 
     public function create()
@@ -43,7 +43,7 @@ class ArtifactController extends Controller
             ->get();
 
 
-        return view('4-Process/artifacts/create', compact('classifications', 'categories', 'artifact'));
+        return view('4-Process/evidence-management/artifacts/create', compact('classifications', 'categories', 'artifact'));
     }
 
     public function store(Request $request)
@@ -104,7 +104,7 @@ class ArtifactController extends Controller
             ->get();
 
 
-        return view('4-Process/artifacts/create', compact('artifact', 'classifications', 'categories'));
+        return view('4-Process/evidence-management/artifacts/create', compact('artifact', 'classifications', 'categories'));
     }
 
     public function update(Artifact $artifact, Request $request)

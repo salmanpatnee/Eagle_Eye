@@ -220,7 +220,15 @@ Route::resource('controls', ControlController::class);
 Route::resource('control-types', ControlTypeController::class);
 Route::resource('kpi-standards', KPIStandardController::class);
 
+// ------------------- EVIDENCE MANAGEMENT -------------------
 
+Route::resource('evidences', EvidenceController::class);
+
+Route::controller(EvidenceController::class)->group(function () {
+    Route::get('/evidence-list/view/{evidence:evidence_id}', 'viewevilist')->name('evidence.view');
+    Route::patch('/evidence-list/update_attachment', 'update_attachment')->name('evidence.update.attachment');
+    Route::post('/evidence-list/delete-attachment', 'delete_attachment')->name('evidence.delete.attachment');
+});
 
 
 Route::get('/insert-record', function () {
@@ -532,21 +540,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // Evidence
 
-    Route::controller(EvidenceController::class)->group(function () {
-        Route::get('/evidences', 'index')->name('evidences.index');
-        Route::get('/evidences/create', 'create')->name('evidences.create');
-        Route::get('/evidences/{evidence:evidence_id}', 'show')->name('evidences.show');
-        Route::post('/evidences', 'store')->name('evidences.store');
-        Route::get('/evidences/edit/{evidence:evidence_id}', 'edit')->name('evidences.edit');
-        Route::put('/evidences/{evidence:evidence_id}', 'update')->name('evidences.update');
-        Route::delete('/evidences', 'destroy')->name('evidences.delete');
-
-        Route::get('/evidence-list/view/{evidence:evidence_id}', 'viewevilist')->name('evidence.view');
-        Route::patch('/evidence-list/update_attachment', 'update_attachment')->name('evidence.update.attachment');
-        Route::post('/evidence-list/delete-attachment', 'delete_attachment')->name('evidence.delete.attachment');
-    });
 
     Route::controller(ControlEvidenceController::class)->group(function () {
         Route::get('/control-evidence', 'controlVsEvidence')->name('control.evidence.index');
@@ -663,10 +657,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/control-vs-risk-dashboard', [DashboardController::class, 'controlRisksReport'])->name('control-vs-risk-dashboard');
     Route::get('/risk-vs-asset-dashboard', [DashboardController::class, 'riskAssetsReport'])->name('risk-vs-asset-dashboard');
 
-    // BY PASS
-    // Route::get('/dashboard', function () {
-    //     return view('4-Process/18-Reporting/3-Dashboard/0-MainDashboard');
-    // });
+
 
     Route::controller(OCDController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('compliance-dashboard.index');

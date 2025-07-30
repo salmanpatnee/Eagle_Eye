@@ -52,7 +52,7 @@ class OCDController extends Controller
 
         $riskStatus = $this->reportService->getRiskStatusData();
 
-        $risk - vs - asset - group . index = $this->reportService->getAssetGroupRiskStatus();
+        // $risk - vs - asset - group . index = $this->reportService->getAssetGroupRiskStatus();
         // return $risk-vs-asset-group.index;
 
         $assetCountByTech = $this->reportService->getAssetCountByTech();

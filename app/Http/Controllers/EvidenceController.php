@@ -14,35 +14,19 @@ use App\Models\Owner;
 
 class EvidenceController extends Controller
 {
-    private $_routeName = "evidences";
-    private $_primaryKey = "evidence_id";
-
 
     public function index()
     {
-        $evidences = Evidence::all();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $evidences = Evidence::paginate(20);
 
-        return view('4-Process/10-Evidence/index', compact(
-            'evidences',
-            'routeName',
-            'primaryKey'
-        ));
+        return view('4-Process\evidence-management\evidences\index', compact('evidences'));
     }
 
     public function show(Evidence $evidence)
     {
-        $data=$evidence->load('classification', 'owner', 'controls', 'artifacts', 'categories');
+        $evidence->load('classification', 'owner', 'controls', 'artifacts', 'categories');
 
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/10-Evidence/show', compact(
-            'evidence',
-            'routeName',
-            'data',
-            'primaryKey'
-        ));
+        return view('4-Process\evidence-management\evidences\show', compact('evidence'));
     }
 
     public function create()
@@ -59,9 +43,6 @@ class EvidenceController extends Controller
             ->distinct()
             ->get();
 
-        // $bestPractices = BestPractice::Select('id', 'best_practices_id', 'best_practices_name')
-        //     ->distinct()
-        //     ->get();
 
         $artifacts = Artifact::select('id', 'artifact_id', 'artifact_name')
             ->distinct()
@@ -71,21 +52,21 @@ class EvidenceController extends Controller
             ->distinct()
             ->get();
 
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        
-        return view('4-Process/10-Evidence/create', compact(
+        $selectedArtifactIds = $selectedControlIds = $categoryIds = [];
+        $evidence = null;
+
+        return view('4-Process\evidence-management\evidences\create', compact(
             'classifications',
             'categories',
             'owners',
             'artifacts',
             'controls',
-            'routeName',
-            
-            'primaryKey'
+            'selectedArtifactIds',
+            'selectedControlIds',
+            'categoryIds',
+            'evidence'
         ));
     }
-
 
     public function store(Request $request)
     {
@@ -132,20 +113,9 @@ class EvidenceController extends Controller
 
         $evidence = Evidence::create($attributes);
 
-        if ($controls && $controlsArray = json_decode($controls, true)) {
-            $evidence->controls()
-                ->attach($controlsArray);
-        }
-
-        if ($attachments && $attachmentsArray = json_decode($attachments, true)) {
-            $evidence->artifacts()
-                ->attach($attachmentsArray);
-        }
-
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $evidence->categories()
-                ->attach($categoriesArray);
-        }
+        $evidence->controls()->attach($controls ?? []);
+        $evidence->artifacts()->attach($attachments ?? []);
+        $evidence->categories()->attach($categories ?? []);
 
 
         return redirect(route('evidences.index'))
@@ -176,6 +146,7 @@ class EvidenceController extends Controller
             ->select('e.evidence_id', 'e.evidence_name', 'a.artifact_id', 'a.artifact_name', 'aa.name', 'aa.path')
             ->get();
 
+
         $selectedArtifactIds = $artifacts->pluck('artifact_id')->toArray();
 
         $controls = ControlMaster::select('id', 'control_id', 'control_name')
@@ -196,10 +167,8 @@ class EvidenceController extends Controller
             ->distinct()
             ->get();
 
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        $data=$evidence;
-        return view('4-Process/10-Evidence/edit', compact(
+
+        return view('4-Process\evidence-management\evidences\create', compact(
             'evidence',
             'artifacts',
             'categories',
@@ -209,12 +178,8 @@ class EvidenceController extends Controller
             'classifications',
             'owners',
             'controls',
-            'routeName',
-            'data',
-            'primaryKey'
         ));
     }
-
 
     public function update(Evidence $evidence, Request $request)
     {
@@ -260,77 +225,24 @@ class EvidenceController extends Controller
 
         $evidence->update($attributes);
 
-        if ($controls && $controlsArray = json_decode($controls, true)) {
-            $evidence->controls()->sync($controlsArray);
-        }
-
-        if ($attachments && $attachmentsArray = json_decode($attachments, true)) {
-            $evidence->artifacts()->sync($attachmentsArray);
-        }
-
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $evidence->categories()
-                ->sync($categoriesArray);
-        }
+        $evidence->controls()->sync($controls ?? []);
+        $evidence->artifacts()->sync($attachments ?? []);
+        $evidence->categories()->sync($categories ?? []);
 
 
         return redirect(route('evidences.index'))
             ->with('success', 'Evidences updated.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Evidence $evidence)
     {
-        $attributes = $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $data = Evidence::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
-        $data->controls()->detach();
-        $data->artifacts()->detach();
-        $data->delete();
-        $data->delete();
-
-        return redirect(route($this->_routeName . '.index'));
-
-        $selectedEvidenceIds = $request->input('selectedEvidence');
-
-        if (count($selectedEvidenceIds)) {
-            foreach ($selectedEvidenceIds as $evidenceId) {
-                $evidence = Evidence::find($evidenceId);
-
-                $evidence->controls()->detach();
-                $evidence->artifacts()->detach();
-                $evidence->delete();
-            }
-        }
-
-        return redirect(route('evidences.index'));
+        $evidence->controls()->detach();
+        $evidence->categories()->detach();
+        $evidence->artifacts()->detach();
+        $evidence->delete();
+        return redirect(route('evidences.index'))
+            ->with('success', 'Evidences deleted.');
     }
-
-    public function viewevilist(Evidence $evidence)
-    {
-
-        $evidence = DB::table('evidence_table as e')
-            ->select('e.id', 'e.evidence_id', 'e.evidence_name', 'a.id as artifact_id', 'a.artifact_id', 'a.artifact_name', 'af.id as attachment_file_id', 'af.name', 'af.path')
-            ->join('evidence_vs_artifact_table as eva', 'e.evidence_id', '=', 'eva.evidence_id')
-            ->join('artifact_table as a', 'eva.artifact_id', '=', 'a.artifact_id')
-            ->join('attachments as af', 'a.id', '=', 'af.artifact_id')
-            ->join('evidence_vs_control_table as ec', 'e.evidence_id', '=', 'ec.evidence_id')
-            ->join('control_master_table as cmt', 'ec.control_id', '=', 'cmt.control_id')
-            ->where('e.evidence_id', '=', $evidence->evidence_id)
-            ->get();
-
-        $attachments = DB::table('artifact_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-
-        return view('4-Process/10-Evidence/1-EvidenceViewTable', compact('evidence', 'attachments'));
-    }
-
-
-
-
 
     public function delete_attachment(Request $request)
     {
@@ -345,21 +257,6 @@ class EvidenceController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to delete resource.'], 500);
         }
-
-
-        /* To remove files from storage. */
-        /*
-    try {
-        $parts = explode("/", $attachment_file->path);
-        Storage::deleteDirectory('files/' . $parts[0]);
-        
-        $attachment_file->delete();
-
-        return response()->json(['message' => 'Attachment deleted successfully.'], 200);
-    } catch (\Exception $e) {
-        return response()->json(['message' => 'Failed to delete resource.'], 500);
-    }
-    */
     }
 
     public function update_attachment(Request $request)
@@ -383,34 +280,7 @@ class EvidenceController extends Controller
             ]);
         }
 
-        /*
-    $tempFiles = TempFile::all();
 
-    if ($validator->fails()) {
-        foreach ($tempFiles as $tempFile) {
-            Storage::deleteDirectory('files/tmp/' . $tempFile->folder);
-            $tempFile->delete();
-        }
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
-
-    $AttachId = $request->input('AttachId');
-
-   
-    foreach ($tempFiles as $tempFile) {
-        Storage::copy('files/tmp/' . $tempFile->folder . '/' . $tempFile->file, 'files/' . $tempFile->folder . '/' . $tempFile->file);
-
-        Attachment::create([
-            'artifact_id' => $AttachId,
-            'name'          => $tempFile->file,
-            'path'          => $tempFile->folder . '/' . $tempFile->file
-        ]);
-
-        Storage::deleteDirectory('files/tmp/' . $tempFile->folder);
-        $tempFile->delete();
-
-    }
-    */
 
         return redirect()->back()->with('success', 'Attachment has been saved.');
     }
