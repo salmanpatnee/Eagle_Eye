@@ -7,8 +7,7 @@ use App\Models\RiskTreatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 class RiskRegisterController extends Controller
 {
@@ -136,7 +135,7 @@ class RiskRegisterController extends Controller
             ->get();
     }
 
-    public function riskregister(Request $request)
+    public function index(Request $request)
     {
 
         $riskId = $request->input('risk') ?? null;
@@ -144,8 +143,6 @@ class RiskRegisterController extends Controller
         $evalutionDate = $request->input('evalutionDate') ?? null;
 
         $riskRegister = $this->getRiskRegister($riskId, $riskTreatment, $evalutionDate);
-
-
 
         $riskTreatments = RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')
             ->get();
@@ -177,8 +174,8 @@ class RiskRegisterController extends Controller
                 ->header('Content-Type', 'application/pdf')
                 ->header('Content-Disposition', 'attachment; filename="' . "Risk-Register.pdf" . '"');
         } else {
-            // return $riskRegister;
-            return view("4-Process/18-Reporting/2-MISReporting/11-RiskRegisterTwo", compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
+
+            return view("4-Process/risk-identification/risk-register\index", compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
         }
     }
 

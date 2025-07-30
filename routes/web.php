@@ -193,6 +193,13 @@ Route::controller(RiskAssetGroupTableController::class)->group(function () {
     Route::get('/asset-group-vs-risk', 'assetGroupVsRisk')->name('asset-group-vs-risk.index');
 });
 
+// ------------------- RISK REGISTER -------------------
+
+Route::controller(RiskRegisterController::class)->group(function () {
+    Route::get('/risk-register', 'index')->name('risk-register.index');
+    Route::get('/risk-register-excel', 'getRiskRegisterExcel')->name('risk.register.excel');
+});
+
 // ------------------- CONTROL IDENTIFICATION -------------------
 
 Route::resource('controls', ControlController::class);
@@ -878,17 +885,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/list-implemented-controls', 'controlImple');
         Route::get('/list-not-implemented-controls', 'controlNotImple');
         Route::get('/list-pending-controls', 'controlPending');
-    });
-
-
-
-
-
-
-
-    Route::controller(RiskRegisterController::class)->group(function () {
-        Route::get('/risk-register', 'riskregister')->name('risk-register.index');
-        Route::get('/risk-register-excel', 'getRiskRegisterExcel')->name('risk.register.excel');
     });
 });
 
