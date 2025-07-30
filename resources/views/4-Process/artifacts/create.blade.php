@@ -10,27 +10,7 @@
             <x-action.button label="View" label_ar="منظر" route_name="artifacts.index" />
         </x-table.action-wrapper>
 
-        @if ($errors->any())
-            <div class="alert alert-danger mb-4">
-                <ul class="list-disc pl-5 text-sm text-red-600">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
-        @if (session('success'))
-            <div class="alert alert-success mb-4 text-green-700">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger mb-4 text-red-700">
-                {{ session('error') }}
-            </div>
-        @endif
 
         <form action="{{ isset($artifact) ? route('artifacts.update', $artifact->id) : route('artifacts.store') }}"
             method="POST" enctype="multipart/form-data">
@@ -57,8 +37,7 @@
                         <div class="relative">
                             <input type="date" id="artifact_creation_date" name="artifact_creation_date" required
                                 value="{{ old('artifact_creation_date', $artifact?->artifact_creation_date) }}"
-                                class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden"
-                                onclick="this.showPicker()" />
+                                class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
                         </div>
                     </div>

@@ -176,6 +176,8 @@ Route::resource('kpis', RiskKpiController::class);
 Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class);
 Route::resource('risk-appetites', RiskAppetiteController::class);
 Route::resource('risk-inherents', RiskInherentController::class);
+Route::resource('risk-acceptances', RiskAcceptanceController::class);
+
 
 // ------------------- RISK TREATMENT -------------------
 
@@ -407,30 +409,6 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/cvss/{id}', 'storeOrUpdate')->name('cvss.update');
         Route::delete('/cvss/delete', 'delete')->name('delete.cvss');
     });
-
-
-
-
-
-
-
-    // ------------Risk Acceptance--------------
-
-
-    Route::controller(RiskAcceptanceController::class)->group(function () {
-        Route::post('/risk-acceptance-input/post', 'store')->name('risk-acceptance.store');
-        Route::get('/risk-acceptance-input', 'view')->name('risk-acceptance.create');
-        Route::get('/risk-acceptance-list', 'index')->name('risk-acceptance.index');
-        Route::delete('/risk-acceptance/delete', 'delete')->name('risk-acceptance.delete');
-        Route::get('/risk-acceptance-table/{riskAcceptance:risk_acceptance_id}', 'show')->name('risk-acceptance.show');
-        Route::get('/risk-acceptance/edit/{riskAcceptance:risk_acceptance_id}', 'edit')->name('risk-acceptance.edit');
-        Route::put('/risk-acceptance/{riskAcceptance}', 'update')->name('risk-acceptance.update');
-    });
-
-
-
-
-
 
 
 

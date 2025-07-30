@@ -11,7 +11,31 @@ class RiskAcceptanceController extends Controller
     private $_routeName = "risk-acceptance";
     private $_primaryKey = "risk_acceptance_id";
 
-    // 1.Controller - DATA ENTER INTO THE DATABASE TABLE
+    public function index()
+    {
+        $riskAcceptances = RiskAcceptance::with('control')->paginate(20);
+
+        return view('4-Process\risk-identification\risk-acceptances\index', compact('riskAcceptances'));
+    }
+
+    public function show(RiskAcceptance $riskAcceptance)
+    {
+        $riskAcceptance->load('control');
+
+        return view('4-Process\risk-identification\risk-acceptances\show', compact('riskAcceptance'));
+    }
+
+    public function create()
+    {
+        $riskAcceptance = null;
+        $controls = DB::table('control_master_table')
+            ->select('control_id', 'control_name')
+            ->distinct()
+            ->get();
+
+        return view('4-Process\risk-identification\risk-acceptances\create', compact('riskAcceptance', 'controls'));
+    }
+
     public function store(Request $request)
     {
         $attributes = $request->validate([
@@ -26,9 +50,17 @@ class RiskAcceptanceController extends Controller
 
         RiskAcceptance::create($attributes);
 
+        return redirect(route('risk-acceptances.index'))->with('success', 'Risk Acceptance has been saved.');
+    }
 
+    public function edit(RiskAcceptance $riskAcceptance)
+    {
+        $controls = DB::table('control_master_table')
+            ->select('control_id', 'control_name')
+            ->distinct()
+            ->get();
 
-        return redirect('/risk-acceptance-list')->with('success', 'Location information has been saved.');
+        return view('4-Process\risk-identification\risk-acceptances\create', compact('riskAcceptance', 'controls'));
     }
 
     public function update(RiskAcceptance $riskAcceptance, Request $request)
@@ -45,79 +77,13 @@ class RiskAcceptanceController extends Controller
 
         $riskAcceptance->update($attributes);
 
-        return redirect('/risk-acceptance-list')->with('success', 'Location information has been saved.');
+        return redirect(route('risk-acceptances.index'))->with('success', 'Risk Acceptance has been saved.');
     }
 
-
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
+    public function destroy(RiskAcceptance $riskAcceptance)
     {
-        $riskAcceptances = RiskAcceptance::with('control')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $riskAcceptance->delete();
 
-
-        return view('4-Process/7-Risk/11-RiskAcceptanceList', compact('riskAcceptances', 'routeName', 'primaryKey'));
-    }
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
-    {
-        $attributes = $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $data = RiskAcceptance::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
-        $data->delete();
-
-        return redirect(route($this->_routeName . '.index'));
-
-        $selecteddelete = $request->input('selecteddelete');
-
-        if (!empty($selecteddelete)) {
-            DB::table('risk_acceptance_table')->whereIn('id', $selecteddelete)->delete();
-        }
-        return redirect('/risk-acceptance-list');
-    }
-
-
-
-    // 4.Controller - DETAILED TABLE
-    public function show(RiskAcceptance $riskAcceptance)
-    {
-        $data = $riskAcceptance->load('control');
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-
-        return view('4-Process/7-Risk/11-RiskAcceptanceTable', compact('riskAcceptance', 'routeName', 'data', 'primaryKey'));
-    }
-
-
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $controlNames = DB::table('control_master_table')
-            ->select('control_id', 'control_name')
-            ->distinct()
-            ->get();
-        $data=$riskAcceptance = null;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/7-Risk/11-RiskAcceptanceForm', compact('controlNames', 'riskAcceptance','routeName', 'data', 'primaryKey'));
-    }
-
-    public function edit(RiskAcceptance $riskAcceptance)
-    {
-        $data = $controlNames = DB::table('control_master_table')
-            ->select('control_id', 'control_name')
-            ->distinct()
-            ->get();
-
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/7-Risk/11-RiskAcceptanceForm', compact('controlNames', 'riskAcceptance', 'routeName', 'data', 'primaryKey'));
+        return redirect(route('risk-acceptances.index'))->with('success', 'Risk Acceptance has been deleted.');
     }
 }

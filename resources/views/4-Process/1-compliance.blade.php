@@ -281,7 +281,7 @@
         </a>
     </div>
     <div class="processes">
-        <a href="/risk-acceptance-list" class="boxhyperlink">
+        <a href="{{ route('risk-acceptances.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
