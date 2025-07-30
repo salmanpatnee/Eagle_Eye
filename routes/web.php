@@ -107,6 +107,7 @@ use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\RegulatoryReportController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\RiskStatusController;
 use App\Http\Controllers\ThirdPartyController;
 use App\Http\Controllers\TPTExpertsControl;
 use App\Http\Controllers\VulnerabilityRegisterController;
@@ -198,6 +199,12 @@ Route::controller(RiskAssetGroupTableController::class)->group(function () {
 Route::controller(RiskRegisterController::class)->group(function () {
     Route::get('/risk-register', 'index')->name('risk-register.index');
     Route::get('/risk-register-excel', 'getRiskRegisterExcel')->name('risk.register.excel');
+});
+
+// ------------------- RISK STATUS -------------------
+
+Route::controller(RiskStatusController::class)->group(function () {
+    Route::get('/risk-status', 'index')->name('risk-status.index');
 });
 
 // ------------------- CONTROL IDENTIFICATION -------------------

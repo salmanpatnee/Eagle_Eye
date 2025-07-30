@@ -293,7 +293,7 @@
                 </div>
             </div>
         </a>
-        <a href="/risk-register" class="boxhyperlink">
+        <a href="{{ route('risk-register.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -305,7 +305,7 @@
                 </div>
             </div>
         </a>
-        <a href="/mis-risk-register" class="boxhyperlink">
+        <a href="{{ route('risk-status.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

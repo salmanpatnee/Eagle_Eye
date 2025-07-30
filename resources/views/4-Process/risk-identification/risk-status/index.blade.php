@@ -1,4 +1,4 @@
-@extends('4-Process.7-Risk.layout.app-full')
+@extends('layouts.app-full')
 @section('title', 'Risk Status')
 @section('title_ar', 'حالة المخاطر')
 
