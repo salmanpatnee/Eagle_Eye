@@ -815,7 +815,7 @@
 
     <!------------- Asset Groups Vs Risks ---------------->
     <script>
-        const riskVsAssetGroup = @json($riskVsAssetGroup);
+        const risk - vs - asset - group.index = @json($risk - vs - asset - group . index);
         const assetGroupId = riskVsasset - groups.assetGroupId
         const assetGroups = riskVsasset - groups.assetGroupName
         const risk_count = riskVsasset - groups.risk_count

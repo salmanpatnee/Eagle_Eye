@@ -179,11 +179,17 @@ Route::resource('risk-inherents', RiskInherentController::class);
 
 // ------------------- RISK TREATMENT -------------------
 
-Route::controller(RiskTreatmentController::class)->group(function () {
+Route::prefix('risk-treatment')->controller(RiskTreatmentController::class)->group(function () {
     Route::get('/risk-vs-control', 'riskVsControl')->name('risk-vs-control.index');
     Route::get('/control-vs-risk', 'controlVsRisk')->name('control-vs-risk.index');
 });
 
+// ------------------- RISK ON ASSET GROUP -------------------
+
+Route::controller(RiskAssetGroupTableController::class)->group(function () {
+    Route::get('/risk-vs-asset-group', 'riskVsAssetGroup')->name('risk-vs-asset-group.index');
+    Route::get('/asset-group-vs-risk', 'assetGroupVsRisk')->name('asset-group-vs-risk.index');
+});
 
 // ------------------- CONTROL IDENTIFICATION -------------------
 
@@ -900,10 +906,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::controller(RiskAssetGroupTableController::class)->group(function () {
-        Route::get('/risk-asset-group', 'index')->name('riskvsassetgroup');
-        Route::get('/asset-risk-group', 'assetVsRisk')->name('assetgroupvsrisk');
-    });
+
 
     Route::controller(RiskRegisterController::class)->group(function () {
         Route::get('/risk-register', 'riskregister')->name('risk-register.index');

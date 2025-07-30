@@ -52,8 +52,8 @@ class OCDController extends Controller
 
         $riskStatus = $this->reportService->getRiskStatusData();
 
-        $riskVsAssetGroup = $this->reportService->getAssetGroupRiskStatus();
-        // return $riskVsAssetGroup;
+        $risk - vs - asset - group . index = $this->reportService->getAssetGroupRiskStatus();
+        // return $risk-vs-asset-group.index;
 
         $assetCountByTech = $this->reportService->getAssetCountByTech();
 
@@ -70,7 +70,7 @@ class OCDController extends Controller
 
         return view(
             '4-Process/18-Reporting/3-Dashboard/index',
-            compact('eccComplianceStatus', 'samaComplianceStatus', 'assetGroupOverview', 'bestPracticesComplainceStatus', 'ownerControlsStatus', 'assetTechData', 'evidenceSummary', 'riskStatus', 'riskVsAssetGroup', 'riskCountByTech', 'controlCountByTech', 'assetCountByTech', 'samaControlCountByTech', 'samaControlCountByMaturityLevel', 'heatmap')
+            compact('eccComplianceStatus', 'samaComplianceStatus', 'assetGroupOverview', 'bestPracticesComplainceStatus', 'ownerControlsStatus', 'assetTechData', 'evidenceSummary', 'riskStatus', 'risk-vs-asset-group.index', 'riskCountByTech', 'controlCountByTech', 'assetCountByTech', 'samaControlCountByTech', 'samaControlCountByMaturityLevel', 'heatmap')
         );
     }
 

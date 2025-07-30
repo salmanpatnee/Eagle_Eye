@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\AssetGroup;
 use App\Models\Risk;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class RiskAssetGroupTableController extends Controller
 {
 
-    public function assetVsRisk(Request $request)
+    public function assetGroupVsRisk(Request $request)
     {
         $riskId = $request->input('risk') ?? null;
         $assetGroupId = $request->input('assetGroup') ?? null;
@@ -36,10 +35,10 @@ class RiskAssetGroupTableController extends Controller
             ->get();
 
 
-        return view('4-Process/7-Risk/14-AssetGroupRisk', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
+        return view('4-Process\risk-identification\risk-asset-group\asset-group-vs-risk', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
     }
 
-    public function index(Request $request)
+    public function riskVsAssetGroup(Request $request)
     {
         $riskId = $request->input('risk') ?? null;
         $assetGroupId = $request->input('assetGroup') ?? null;
@@ -64,6 +63,6 @@ class RiskAssetGroupTableController extends Controller
             ->get();
 
 
-        return view('4-Process/7-Risk/14-RiskAssetGroup', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
+        return view('4-Process\risk-identification\risk-asset-group\risk-vs-asset-group', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
     }
 }

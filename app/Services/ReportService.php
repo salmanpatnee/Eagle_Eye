@@ -73,23 +73,22 @@ class ReportService
     {
         $samaControlCountByMaturityLevel  = $this->reportRepository->getSamaControlCountByMaturityLevel();
 
-         // Initialize arrays
-         $totalControls = [0, 0, 0, 0, 0];  // Assuming levels are from 1 to 5
-         $controlMaturityLevels = [1, 2, 3, 4, 5];
- 
-         // Populate the totalControls array with the counts from the query results
-         foreach ($samaControlCountByMaturityLevel as $row) {
-             $maturityLevel = $row->control_maturity_level;
-             $totalControls[$maturityLevel - 1] = $row->total_controls;  // Store the count for the respective level
-         }
- 
- 
-         // Format the response
-         return [
-             'total_controls' => $totalControls,
-             'control_maturity_level' => $controlMaturityLevels,
-         ];
+        // Initialize arrays
+        $totalControls = [0, 0, 0, 0, 0];  // Assuming levels are from 1 to 5
+        $controlMaturityLevels = [1, 2, 3, 4, 5];
 
+        // Populate the totalControls array with the counts from the query results
+        foreach ($samaControlCountByMaturityLevel as $row) {
+            $maturityLevel = $row->control_maturity_level;
+            $totalControls[$maturityLevel - 1] = $row->total_controls;  // Store the count for the respective level
+        }
+
+
+        // Format the response
+        return [
+            'total_controls' => $totalControls,
+            'control_maturity_level' => $controlMaturityLevels,
+        ];
     }
 
     public function getControlOwnersData()
@@ -109,14 +108,14 @@ class ReportService
 
     public function getAssetGroupRiskStatus()
     {
-        $riskVsAssetGroup = $this->reportRepository->getAssetGroupRiskStatus();
+        $risk - vs - asset - group . index = $this->reportRepository->getAssetGroupRiskStatus();
 
         return [
-            'assetGroupId' => $riskVsAssetGroup->pluck('asset_group_id'),
-            'assetGroupName' => $riskVsAssetGroup->pluck('asset_group_name'),
-            'risk_count' => $riskVsAssetGroup->pluck('risk_count'),
-            'open_risks' => $riskVsAssetGroup->pluck('open_risks'),
-            'closed_risks' => $riskVsAssetGroup->pluck('closed_risks'),
+            'assetGroupId' => $risk - vs - asset - group . index->pluck('asset_group_id'),
+            'assetGroupName' => $risk - vs - asset - group . index->pluck('asset_group_name'),
+            'risk_count' => $risk - vs - asset - group . index->pluck('risk_count'),
+            'open_risks' => $risk - vs - asset - group . index->pluck('open_risks'),
+            'closed_risks' => $risk - vs - asset - group . index->pluck('closed_risks'),
         ];
     }
 
@@ -124,6 +123,5 @@ class ReportService
     {
         $heatmap =  $this->reportRepository->getHeatmapData();
         return $heatmap->pluck('risk_appetites');
-
     }
 }
