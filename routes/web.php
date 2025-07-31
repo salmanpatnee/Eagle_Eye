@@ -231,6 +231,12 @@ Route::controller(EvidenceController::class)->group(function () {
 });
 
 
+Route::controller(ControlEvidenceController::class)->group(function () {
+    Route::get('/control-vs-evidence', 'controlVsEvidence')->name('control-vs-evidence.index');
+    Route::get('/evidence-vs-control', 'evidenceVsControl')->name('evidence-vs-control.index');
+});
+
+
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
     // $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->get()->pluck('control_id');
@@ -542,10 +548,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::controller(ControlEvidenceController::class)->group(function () {
-        Route::get('/control-evidence', 'controlVsEvidence')->name('control.evidence.index');
-        Route::get('/evidence-control', 'evicontshow')->name('evidence.control.index');
-    });
+
 
 
 

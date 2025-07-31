@@ -491,7 +491,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ route('control.evidence.index') }}" class="boxhyperlink">
+        <a href="{{ route('control-vs-evidence.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
