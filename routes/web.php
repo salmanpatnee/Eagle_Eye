@@ -245,20 +245,9 @@ Route::resource('control-assessment-findings', ControlAssessmentFindingControlle
 Route::controller(ControlAssessmentFindingController::class)->group(function () {
     Route::get('/control-assessment-findings/create/{controlAssessment}', 'create')->name('control-assessment-findings.create');
     Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
+    Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
+    Route::post('/bestpractice-controlls/', 'get_controls_by_bestpractice');
 });
-
-// Route::controller(ControlAssessmentFindingController::class)->group(function () {
-//     Route::get('/control-assessment-findings', 'index')->name('control-assessment-findings.index');
-//     Route::get('/control-assessment-findings/{controlAssessmentFinding}', 'show')->name('control-assessment-findings.show');
-//     Route::get('/control-assessment-findings/create/{controlAssessment}', 'create')->name('control-assessment-findings.create');
-//     Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
-//     Route::get('/control-assessment-findings/edit/{controlAssessmentFinding}', 'edit')->name('control-assessment-findings.edit');
-//     Route::put('/control-assessment-findings/{controlAssessmentFinding}', 'update')->name('control-assessment-findings.update');
-//     Route::delete('/control-assessment-findings/{controlAssessmentFinding}', 'destroy')->name('control-assessment-findings.destroy');
-
-//     Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
-//     Route::post('/bestpractice-controlls/', 'get_controls_by_bestpractice');
-// });
 
 
 Route::get('/insert-record', function () {

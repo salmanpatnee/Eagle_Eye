@@ -146,33 +146,35 @@ class ControlAssessmentFindingController extends Controller
             ->get();
 
         if (count($results)) {
-            $html = "<table>";
-            $html .= "<thead>";
+
+            $html = "<div class='max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar'><table class='text-white w-full min-w-[970px]'>";
+            $html .= "<thead class='bg-brand-950 border-brand-500 border-y text-left'>";
             $html .= "<tr>";
-            $html .= "<th>Evidence ID</th>";
-            $html .= "<th>Evidence Name</th>";
-            $html .= "<th>Artifacts</th>";
+            $html .= "<th class='px-3 py-3 whitespace-nowrap'><span class='block'>Evidence ID</span></th>";
+            $html .= "<th class='px-3 py-3 whitespace-nowrap'><span class='block'>Evidence Name</span></th>";
+            $html .= "<th class='px-3 py-3 whitespace-nowrap'><span class='block'>Artifacts</span></th>";
             $html .= "</tr>";
             $html .= "</thead>";
-            $html .= "<tbody>";
+            $html .= "<tbody class='divide-y divide-gray-100'>";
 
             $id = "";
 
             foreach ($results as $row) {
 
+                $row_id = $id != $row->evidence_id ? $row->id : '';
                 $evidence_id = $id != $row->evidence_id ? $row->evidence_id : '';
                 $evidence_name = $id != $row->evidence_id ? $row->evidence_name : '';
 
                 $html .= "<tr>";
-                $html .= "<td><a target='_blank' href='/evidences/{$evidence_id}'>{$evidence_id}</a></td>";
-                $html .= "<td>{$evidence_name}</td>";
-                $html .= "<td><a target='_blank' href='/artifacts/{$row->id}'>View</a></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/evidences/{$row_id}'>{$evidence_id}</a></span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'>{$evidence_name}</span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/artifacts/{$row->id}'>View</a></span></td>";
                 $html .= "</tr>";
                 $id = $row->evidence_id;
             }
 
             $html .= "</tbody>";
-            $html .= "</table>";
+            $html .= "</table></div>";
         } else {
             $html = "No result";
         }

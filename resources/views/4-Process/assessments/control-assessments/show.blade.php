@@ -10,8 +10,8 @@
         </x-table.action-wrapper>
 
 
-        <div class="border-gray-100 border-t p-3">
 
+        <div class="border-gray-100 border-t p-3">
             <x-info-row>
                 <x-info-col label="Control Assessment ID" label_ar="رمز تقييم الضوابط">
                     {{ $controlAssessment->control_assessment_id }}

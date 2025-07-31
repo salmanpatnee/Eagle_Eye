@@ -7,7 +7,7 @@
         <x-table.action-wrapper title="{{ isset($controlAssessmentFinding) ? 'Update' : 'New' }} Control Assessment Finding">
             <x-action.button label="View" label_ar="منظر" route_name="control-assessments.index" />
         </x-table.action-wrapper>
-
+        <h1 class="text-2xl text-center bg-brand-950 text-white py-2 font-medium">Control Assessment Master</h1>
         <div class="border-gray-100 border-t p-3">
             <x-info-row>
                 <x-info-col label="Control Assessment ID" label_ar="رمز تقييم الضوابط">
@@ -36,7 +36,7 @@
                 </x-info-col>
             </x-info-row>
         </div>
-
+        <h1 class="text-2xl text-center bg-brand-950 text-white py-2 font-medium">Control Assessment Finding</h1>
         <form
             action="{{ isset($controlAssessmentFinding) ? route('control-assessment-findings.update', $controlAssessmentFinding->id) : route('control-assessment-findings.store', $controlAssessment->id) }}"
             method="POST">
@@ -61,7 +61,8 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.select label="Controls" label_ar="اسم الضوابط" name="control_id" :value="$controlAssessmentFinding?->control_id ?? old('control_id', 'Internal')"
-                            :data="$controls" id_key="control_id" value_key="control_name" required="true" />
+                            :data="$controls" id_key="control_id" value_key="control_name" required="true"
+                            id="control_dropdown" />
                     </div>
 
                     <div>
@@ -69,6 +70,10 @@
                             :data="$categories" id_key="category_id" value_key="category_name" required="true" />
                     </div>
                 </x-form.grid-col>
+
+                <div id="evidenve_vs_control_content">
+
+                </div>
 
                 <x-form.textarea-field label="Control Assessment Finding Description" label_ar="وصف تقييم الضوابط"
                     name="control_finding_description" placeholder="Enter Control Assessment Finding Description"
@@ -186,3 +191,31 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#control_id").change(function() {
+                var selectedValue = $(this).val();
+                console.log("Selected value:", selectedValue);
+                $.ajax({
+                    url: '/evidence-conroller',
+                    type: 'POST',
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {
+                        selectedValue: selectedValue
+                    },
+                    success: function(response) {
+                        $("#evidenve_vs_control_content").html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error); // Handle any errors
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

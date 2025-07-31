@@ -51,9 +51,7 @@
                             <x-table.serial :loop="$loop" :paginator="$controlAssessments" />
                         </x-table.td>
                         <x-table.td>
-                            <a href="{{ route('control-assessments.show', $controlAssessment->id) }}">
-                                {{ $controlAssessment->control_assessment_id }}
-                            </a>
+                            {{ $controlAssessment->control_assessment_id }}
                         </x-table.td>
                         <x-table.td>
                             {{ $controlAssessment->control_assessment_name }}
@@ -88,8 +86,8 @@
                                 param="{{ $controlAssessment->id }}" />
                             <x-action.view route_name="control-assessments.show" param="{{ $controlAssessment->id }}" />
                             <x-action.edit route_name="control-assessments.edit" param="{{ $controlAssessment->id }}" />
-                            {{-- <x-action.delete route_name="control-assessments.destroy"
-                                param="{{ $controlAssessment->id }}" /> --}}
+                            <x-action.delete route_name="control-assessments.destroy"
+                                param="{{ $controlAssessment->id }}" />
                         </x-table.td>
 
                     </tr>
