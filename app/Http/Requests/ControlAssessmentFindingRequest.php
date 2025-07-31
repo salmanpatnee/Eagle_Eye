@@ -24,13 +24,15 @@ class ControlAssessmentFindingRequest extends FormRequest
      */
     public function rules()
     {
-        $controlAssessmentFindingId = $this->route('controlAssessmentFinding');
+        $controlAssessmentFindingId = $this->route('controlAssessmentFindings');
 
         return [
-            'control_finding_id' => ['required', 
-                Rule::unique('control_assessment_details_table', 'control_finding_id')
-                ->ignore($controlAssessmentFindingId, 'control_finding_id'),],
-                
+            'control_finding_id' => [
+                'required',
+                Rule::unique('control_assessment_details_table', 'id')
+                    ->ignore($controlAssessmentFindingId, 'id'),
+            ],
+
             'control_finding_name' => 'required',
             'control_id' => 'required',
             'categories' => 'nullable',
@@ -46,7 +48,7 @@ class ControlAssessmentFindingRequest extends FormRequest
             'preventive_action_due_date' => 'nullable',
             'control_auditee_name' => 'nullable',
             'control_auditee_department' => 'nullable',
-            'control_auditee_system' => 'nullable', 
+            'control_auditee_system' => 'nullable',
             'lesson_learned' => 'nullable'
         ];
     }

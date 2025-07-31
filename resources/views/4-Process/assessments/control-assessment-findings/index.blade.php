@@ -40,7 +40,7 @@
                     <x-table.th label="Assessment ID" label_ar="رمز تقييم الضوابط" />
                     <x-table.th label="Assessment Name" label_ar="اسم تقييم الضوابط" />
                     <x-table.th label="Start and End Date" label_ar="تاريخ بدءانتهاء" />
-                    <x-table.th label="No of Control Assessed" label_ar="عدد الضوابط التي تم تقييمها" />
+                    <x-table.th label="Control Assessed" label_ar="تقييم الرقابة" />
                     <x-table.th label="Action" label_ar="إجراء " />
                 </tr>
             </x-table.thead>
@@ -62,9 +62,6 @@
                             {{ $controlAssessment->start_end_date }}
                         </x-table.td>
                         <x-table.td>
-                            {{ $controlAssessment->findings->count() }}
-                        </x-table.td>
-                        {{-- <x-table.td>
 
                             <ul class="flex flex-col gap-1.5">
                                 @forelse ($controlAssessment->findings as $finding)
@@ -81,15 +78,15 @@
                                     </li>
                                 @endforelse
                             </ul>
-
-                        </x-table.td> --}}
+                            {{-- <x-table-list :data="$controlAssessment->findings" id_key="" value_key="control_finding_id" /> --}}
+                        </x-table.td>
                         <x-table.td action_col="true">
                             <x-action.add route_name="control-assessment-findings.create"
-                                param="{{ $controlAssessment->id }}" />
+                                param="{{ $controlAssessment->control_assessment_id }}" />
                             <x-action.view route_name="control-assessments.show" param="{{ $controlAssessment->id }}" />
                             <x-action.edit route_name="control-assessments.edit" param="{{ $controlAssessment->id }}" />
-                            {{-- <x-action.delete route_name="control-assessments.destroy"
-                                param="{{ $controlAssessment->id }}" /> --}}
+                            <x-action.delete route_name="control-assessments.destroy"
+                                param="{{ $controlAssessment->id }}" />
                         </x-table.td>
 
                     </tr>

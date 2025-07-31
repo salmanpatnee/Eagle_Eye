@@ -335,6 +335,10 @@ layer(base);
     @apply shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden;
 }
 
+.submit-btn {
+    @apply bg-brand-950 hover:bg-brand-600 shadow-theme-xs inline-flex w-fit items-center rounded-lg p-3 text-sm font-medium text-white transition;
+}
+
 .tableCheckbox:checked ~ span span {
     @apply opacity-100;
 }

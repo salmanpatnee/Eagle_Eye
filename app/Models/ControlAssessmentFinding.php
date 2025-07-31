@@ -12,14 +12,14 @@ class ControlAssessmentFinding extends Model
     protected $table = 'control_assessment_details_table';
     protected $guarded = [];
     public $timestamps = false;
-    protected $primaryKey = 'control_finding_id';
+    // protected $primaryKey = 'control_finding_id';
     public $incrementing = false;
 
     protected $with = ['control'];
 
     public function getRouteKeyName()
     {
-        return $this->primaryKey; 
+        return $this->primaryKey;
     }
 
 
@@ -35,12 +35,14 @@ class ControlAssessmentFinding extends Model
         );
     }
 
-    public function control(){
+    public function control()
+    {
         return $this->belongsTo(ControlMaster::class, 'control_id', 'control_id')
             ->select(['control_id', 'control_name']);
     }
 
-    public function controlAssessment() {
+    public function controlAssessment()
+    {
         return $this->belongsTo(controlAssessment::class, 'control_assessment_id', 'control_assessment_id');
     }
 }

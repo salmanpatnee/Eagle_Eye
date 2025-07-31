@@ -24,18 +24,15 @@ class ControlAssessmentFindingController extends Controller
 
     public function show(ControlAssessmentFinding $controlAssessmentFinding)
     {
-        $data=$controlAssessmentFinding->load('categories');
-        $controlAssessment = ControlAssessment::find($controlAssessmentFinding->control_assessment_id);
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/ControlAssessmentFindings/show', compact('controlAssessment', 'controlAssessmentFinding', 'routeName', 'data', 'primaryKey'));
+        $controlAssessmentFinding->load('categories');
+        return view('4-Process\assessments\control-assessment-findings\show', compact('controlAssessmentFinding'));
     }
 
     public function create(ControlAssessment $controlAssessment, Request $request)
     {
-        $controlAssessment->with(['bestPractice', 'location', 'auditor', 'classification']);
-
+        $controlAssessment->load(['bestPractice', 'location', 'auditor', 'classification']);
+        $controlAssessmentFinding = null;
+        $selectedCategoryIds = [];
         // TODO
         $controls = DB::table('control_master_table as c')
             ->join('control_master_table_vs_best_practice_table as cmp', 'c.control_id', '=', 'cmp.control_id')
@@ -54,10 +51,8 @@ class ControlAssessmentFindingController extends Controller
             ->distinct()
             ->get();
 
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/ControlAssessmentFindings/create', compact('controls', 'categories', 'controlAssessment', 'routeName', 'primaryKey'));
+        return view('4-Process\assessments\control-assessment-findings\create', compact('controls', 'categories', 'controlAssessment', 'controlAssessmentFinding', 'selectedCategoryIds'));
     }
 
     public function store(ControlAssessment $controlAssessment, ControlAssessmentFindingRequest $request)
@@ -69,12 +64,10 @@ class ControlAssessmentFindingController extends Controller
 
         $controlAssessmentFinding = $controlAssessment->findings()->create($attributes);
 
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $controlAssessmentFinding->categories()->attach($categoriesArray);
-        }
+        $controlAssessmentFinding->categories()->attach($categories ?? []);
 
         if ($request->input('submit') === 'exit') {
-            return redirect(route('control-assessments.index'));
+            return redirect(route('control-assessments.index'))->with('success', 'Control Assessment Finding added successfully.');
         }
 
         return redirect()->back();
@@ -82,8 +75,8 @@ class ControlAssessmentFindingController extends Controller
 
     public function edit(ControlAssessmentFinding $controlAssessmentFinding)
     {
-        $data=$controlAssessmentFinding;
-        $controlAssessment = ControlAssessment::find($controlAssessmentFinding->control_assessment_id);
+        $controlAssessmentFinding->load('categories');
+        $controlAssessment = $controlAssessmentFinding->controlAssessment->load(['bestPractice', 'auditor', 'classification']);
 
         $controls = DB::table('control_master_table as c')
             ->join('control_master_table_vs_best_practice_table as cmp', 'c.control_id', '=', 'cmp.control_id')
@@ -101,17 +94,10 @@ class ControlAssessmentFindingController extends Controller
             ->distinct()
             ->get();
 
-        $selectedCategoryIds = DB::table('category_table as c')
-            ->join('control_assessment_detail_vs_category_table as cvc', 'c.category_id', '=', 'cvc.category_id')
-            ->join('control_assessment_details_table as cad', 'cvc.control_assessment_finding_id', '=', 'cad.control_finding_id')
-            ->where('cad.control_finding_id', $controlAssessmentFinding->control_finding_id)
-            ->pluck('c.category_id')
-            ->toArray();
+        $selectedCategoryIds =  $controlAssessmentFinding->categories->pluck('category_id')->toArray();
 
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/ControlAssessmentFindings/edit', compact('controls', 'categories', 'controlAssessment', 'controlAssessmentFinding', 'selectedCategoryIds','routeName', 'data', 'primaryKey'));
+        return view('4-Process\assessments\control-assessment-findings\create', compact('controls', 'categories', 'controlAssessment', 'controlAssessmentFinding', 'selectedCategoryIds'));
     }
 
     public function update(ControlAssessmentFinding $controlAssessmentFinding, ControlAssessmentFindingRequest $request)
@@ -123,17 +109,13 @@ class ControlAssessmentFindingController extends Controller
 
         $controlAssessmentFinding->update($attributes);
 
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $controlAssessmentFinding->categories()->sync($categoriesArray);
-        }
+        $controlAssessmentFinding->categories()->sync($categories ?? []);
 
-        return redirect(route('control-assessments.index'));
+        return redirect(route('control-assessments.index'))->with('success', 'Control Assessment Finding updated successfully.');
     }
 
     public function destroy(ControlAssessmentFinding $controlAssessmentFinding)
     {
-
-        
         $controlAssessmentFinding->categories()->detach();
         $controlAssessmentFinding->delete();
 

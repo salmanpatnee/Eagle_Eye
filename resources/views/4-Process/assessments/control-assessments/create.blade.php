@@ -2,9 +2,7 @@
 @section('title', 'Control Assessment')
 @section('title_ar', 'تقييم الضوابط')
 @section('content')
-    @php
-        $yesNoOptions = ['Yes', 'No'];
-    @endphp
+
     <div>
         <x-table.action-wrapper title="{{ isset($controlAssessment) ? 'Update' : 'New' }} Control Assessment">
             <x-action.button label="View" label_ar="منظر" route_name="control-assessments.index" />
