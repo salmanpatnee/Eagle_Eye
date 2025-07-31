@@ -236,6 +236,24 @@ Route::controller(ControlEvidenceController::class)->group(function () {
     Route::get('/evidence-vs-control', 'evidenceVsControl')->name('evidence-vs-control.index');
 });
 
+// ------------------- CONTROL ASSESSMENT -------------------
+
+Route::resource('control-assessments', ControlAssessmentController::class);
+
+
+Route::controller(ControlAssessmentFindingController::class)->group(function () {
+    Route::get('/control-assessment-findings', 'index')->name('control-assessment-findings.index');
+    Route::get('/control-assessment-findings/{controlAssessmentFinding}', 'show')->name('control-assessment-findings.show');
+    Route::get('/control-assessment-findings/create/{controlAssessment}', 'create')->name('control-assessment-findings.create');
+    Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
+    Route::get('/control-assessment-findings/edit/{controlAssessmentFinding}', 'edit')->name('control-assessment-findings.edit');
+    Route::put('/control-assessment-findings/{controlAssessmentFinding}', 'update')->name('control-assessment-findings.update');
+    Route::delete('/control-assessment-findings/{controlAssessmentFinding}', 'destroy')->name('control-assessment-findings.destroy');
+
+    Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
+    Route::post('/bestpractice-controlls/', 'get_controls_by_bestpractice');
+});
+
 
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
@@ -567,35 +585,7 @@ Route::middleware(['auth'])->group(function () {
     // Risk Assessment
 
 
-    // Control Assessment
 
-    // ------------Control Assessment Master--------------
-
-    Route::controller(ControlAssessmentController::class)->group(function () {
-        Route::get('/control-assessments', 'index')->name('control-assessments.index');
-        Route::get('/control-assessments/create', 'create')->name('control-assessments.create');
-        Route::post('/control-assessments', 'store')->name('control-assessments.store');
-        Route::get('/control-assessments/{controlAssessment}', 'show')->name('control-assessments.show');
-        Route::get('/control-assessments/edit/{controlAssessment}', 'edit')->name('control-assessments.edit');
-        Route::put('/control-assessments/{controlAssessment}', 'update')->name('control-assessments.update');
-        Route::delete('/control-assessments', 'destroy')->name('control-assessments.destroy');
-    });
-
-
-    // ------------Control Assessment Finding--------------
-
-    Route::controller(ControlAssessmentFindingController::class)->group(function () {
-        Route::get('/control-assessment-findings', 'index')->name('control-assessment-findings.index');
-        Route::get('/control-assessment-findings/{controlAssessmentFinding}', 'show')->name('control-assessment-findings.show');
-        Route::get('/control-assessment-findings/create/{controlAssessment}', 'create')->name('control-assessment-findings.create');
-        Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
-        Route::get('/control-assessment-findings/edit/{controlAssessmentFinding}', 'edit')->name('control-assessment-findings.edit');
-        Route::put('/control-assessment-findings/{controlAssessmentFinding}', 'update')->name('control-assessment-findings.update');
-        Route::delete('/control-assessment-findings/{controlAssessmentFinding}', 'destroy')->name('control-assessment-findings.destroy');
-
-        Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
-        Route::post('/bestpractice-controlls/', 'get_controls_by_bestpractice');
-    });
 
 
     // Risk Assessment

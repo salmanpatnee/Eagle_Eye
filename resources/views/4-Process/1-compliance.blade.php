@@ -243,7 +243,7 @@
 
     </div>
     <div class="processes">
-        <a href="/control-identification-list" class="boxhyperlink">
+        <a href="{{ route('controls.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -524,7 +524,7 @@
                 </div>
             </div>
         </a>
-        <a href="/control-identification-list" class="boxhyperlink">
+        <a href="{{ route('controls.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

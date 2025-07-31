@@ -10,8 +10,6 @@ use App\Models\Domain;
 use App\Models\SubDomain;
 use Mpdf\Mpdf;
 
-use function PHPUnit\Framework\isNull;
-
 class ControlEvidenceController extends Controller
 {
     public function controlVsEvidence(Request $request)

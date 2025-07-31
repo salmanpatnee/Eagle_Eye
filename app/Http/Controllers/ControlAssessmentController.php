@@ -7,7 +7,6 @@ use App\Models\Auditor;
 use App\Models\BestPractice;
 use App\Models\Classification;
 use App\Models\ControlAssessment;
-use App\Models\ControlAssessmentFinding;
 use App\Models\ControlMaster;
 use App\Models\Location;
 use Illuminate\Http\Request;
@@ -15,9 +14,6 @@ use Illuminate\Support\Facades\DB;
 
 class ControlAssessmentController extends Controller
 {
-    private $_routeName = "control-assessments";
-    private $_primaryKey = "control_assessment_id";
-
     public function index(Request $request)
     {
 
@@ -28,6 +24,7 @@ class ControlAssessmentController extends Controller
         $controlAssessments = ControlAssessment::with('findings')
             ->withCount('findings')
             ->select(
+                'id',
                 'control_assessment_id',
                 'control_assessment_name'
             )
@@ -46,30 +43,29 @@ class ControlAssessmentController extends Controller
             ->when($startEndDate, function ($query) use ($startEndDate) {
                 return $query->orWhere('control_assessment_end_date', $startEndDate);
             })
-            ->get();
+            ->paginate(20);
 
 
         $assessments = ControlAssessment::selectRaw("DISTINCT CONCAT(control_assessment_id, ' - ', control_assessment_name) as name, control_assessment_id")
             ->get();
 
-        $controls = ControlMaster::selectRaw("DISTINCT control_master_table.control_id, CONCAT(control_master_table.control_id, ' - ', control_master_table.control_name) as name")
+        $controls = ControlMaster::selectRaw("DISTINCT control_master_table.control_id, control_master_table.control_name")
             ->join('control_assessment_details_table', 'control_master_table.control_id', '=', 'control_assessment_details_table.control_id')
             ->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/13-ControlAssessment/index', compact('controlAssessments', 'assessments', 'controls', 'routeName', 'primaryKey'));
+
+        return view('4-Process\assessments\control-assessments\index', compact('controlAssessments', 'assessments', 'controls', 'controlAssessmentId', 'controlId', 'startEndDate'));
     }
 
     public function show(ControlAssessment $controlAssessment)
     {
-        $data = $controlAssessment->load(['bestPractice', 'location', 'auditor', 'classification',  'findings']);
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/13-ControlAssessment/show', compact('controlAssessment', 'routeName', 'data', 'primaryKey'));
+        $controlAssessment->load(['bestPractice', 'location', 'auditor', 'classification',  'findings']);
+
+        return view('4-Process\assessments\control-assessments\show', compact('controlAssessment'));
     }
 
     public function create()
     {
+        $controlAssessment = null;
         $bestPractices = BestPractice::select('id', 'best_practices_id', 'best_practices_name', 'sort_order')
             ->distinct()
             ->orderBy('sort_order')
@@ -87,10 +83,7 @@ class ControlAssessmentController extends Controller
             ->distinct()
             ->get();
 
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/13-ControlAssessment/create', compact('bestPractices', 'locations', 'auditors', 'classifications', 'routeName', 'primaryKey'));
+        return view('4-Process\assessments\control-assessments\create', compact('bestPractices', 'locations', 'auditors', 'classifications', 'controlAssessment'));
     }
 
     public function store(ControlAssessmentRequest $request)
@@ -99,7 +92,7 @@ class ControlAssessmentController extends Controller
 
         $controlAssessment = ControlAssessment::create($attributes);
 
-        return redirect(route('control-assessment-findings.create', $controlAssessment->control_assessment_id));
+        return redirect(route('control-assessment-findings.create', $controlAssessment->id))->with('success', 'Control Assessment saved successfully.');
     }
 
     public function edit(ControlAssessment $controlAssessment)
@@ -120,11 +113,7 @@ class ControlAssessmentController extends Controller
             ->distinct()
             ->get();
 
-        $data = $controlAssessment;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/13-ControlAssessment/edit', compact('controlAssessment', 'bestPractices', 'locations', 'auditors', 'classifications', 'routeName', 'data', 'primaryKey'));
+        return view('4-Process\assessments\control-assessments\create', compact('controlAssessment', 'bestPractices', 'locations', 'auditors', 'classifications'));
     }
 
     public function update(ControlAssessment $controlAssessment, Request $request)
@@ -133,48 +122,20 @@ class ControlAssessmentController extends Controller
 
         $controlAssessment->update($attributes);
 
-        return redirect(route('control-assessments.index'));
+        return redirect(route('control-assessments.index'))->with('success', 'Control Assessment updated successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(ControlAssessment $controlAssessment)
     {
-        $attributes = $request->validate([
-            'record' => ['required'],
-        ]);
 
-        $data = ControlAssessment::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
-        $findings = $data->findings();
+        $findings = $controlAssessment->findings();
 
         foreach ($findings as $finding) {
             $finding->categories()->detach();
             $finding->delete();
         }
 
-        $data->delete();
-
-        return redirect(route($this->_routeName . '.index'));
-
-        $assessments = $request->input('assessments');
-
-        if ($assessments) {
-            $assessmentIds = explode(',', $assessments);
-
-            foreach ($assessmentIds as $assessmentId) {
-                $assessment = ControlAssessment::find($assessmentId);
-
-                if ($assessment) {
-                    $findings = ControlAssessmentFinding::where('control_assessment_id', $assessmentId)->get();
-
-                    foreach ($findings as $finding) {
-                        $finding->categories()->detach();
-                        $finding->delete();
-                    }
-
-                    $assessment->delete();
-                }
-            }
-        }
-
-        return redirect(route('control-assessments.index'));
+        $controlAssessment->delete();
+        return redirect(route('control-assessments.index'))->with('success', 'Control Assessment deleted successfully.');
     }
 }
