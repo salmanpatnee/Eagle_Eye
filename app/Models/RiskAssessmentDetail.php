@@ -14,13 +14,20 @@ class RiskAssessmentDetail extends Model
 
     protected $with = ['risk'];
 
-    public function risk(){
+    public function risk()
+    {
         return $this->belongsTo(Risk::class, 'risk_id', 'risk_id')
             ->select(['risk_id', 'risk_name']);
-    } 
+    }
 
-    public function treatment(){
+    public function treatment()
+    {
         return $this->belongsTo(RiskTreatment::class, 'risk_treatment_id', 'risk_treatment_id')
             ->select(['risk_treatment_id', 'risk_treatment_name']);
+    }
+
+    public function riskAssessment()
+    {
+        return $this->belongsTo(RiskAssessment::class, 'risk_assessment_id', 'risk_assessment_id');
     }
 }

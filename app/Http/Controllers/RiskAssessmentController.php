@@ -171,92 +171,93 @@ class RiskAssessmentController extends Controller
         return redirect(route('risk-assessments.index'))->with('success', 'Risk Assessment deleted successfully.');
     }
 
-    // public function get_control_by_risk(Request $request)
-    // {
-    //     $riskId = $request->selectedValue;
+    public function get_control_by_risk(Request $request)
+    {
+        $riskId = $request->selectedValue;
 
-    //     $latestAssessmentSubquery = DB::table('control_assessment_details_table')
-    //         ->select('control_id', DB::raw('MAX(id) AS latest_id'))
-    //         ->groupBy('control_id');
+        $latestAssessmentSubquery = DB::table('control_assessment_details_table')
+            ->select('control_id', DB::raw('MAX(id) AS latest_id'))
+            ->groupBy('control_id');
 
-    //     $controls = DB::table('control_master_table as c')
-    //         ->join('risk_vs_control_table as rvc', 'c.control_id', '=', 'rvc.control_id')
-    //         ->join('risk_master_table as r', 'rvc.risk_id', '=', 'r.risk_id')
-    //         ->leftJoinSub($latestAssessmentSubquery, 'latest_cad', function ($join) {
-    //             $join->on('c.control_id', '=', 'latest_cad.control_id');
-    //         })
-    //         ->leftJoin('control_assessment_details_table as cad', function ($join) {
-    //             $join->on('latest_cad.control_id', '=', 'cad.control_id')
-    //                 ->on('latest_cad.latest_id', '=', 'cad.id');
-    //         })
-    //         ->select('c.control_id', 'c.control_name', DB::raw('COALESCE(cad.control_implementation_status, "Not Implemented") AS status'))
-    //         ->where('r.risk_id', $riskId)
-    //         ->get();
+        $controls = DB::table('control_master_table as c')
+            ->join('risk_vs_control_table as rvc', 'c.control_id', '=', 'rvc.control_id')
+            ->join('risk_master_table as r', 'rvc.risk_id', '=', 'r.risk_id')
+            ->leftJoinSub($latestAssessmentSubquery, 'latest_cad', function ($join) {
+                $join->on('c.control_id', '=', 'latest_cad.control_id');
+            })
+            ->leftJoin('control_assessment_details_table as cad', function ($join) {
+                $join->on('latest_cad.control_id', '=', 'cad.control_id')
+                    ->on('latest_cad.latest_id', '=', 'cad.id');
+            })
+            ->select('c.id', 'c.control_id', 'c.control_name', DB::raw('COALESCE(cad.control_implementation_status, "Not Implemented") AS status'))
+            ->where('r.risk_id', $riskId)
+            ->get();
 
-    //     $counts = DB::table('control_master_table as c')
-    //         ->join('risk_vs_control_table as rvc', 'c.control_id', '=', 'rvc.control_id')
-    //         ->join('risk_master_table as r', 'rvc.risk_id', '=', 'r.risk_id')
-    //         ->leftJoinSub($latestAssessmentSubquery, 'latest_cad', function ($join) {
-    //             $join->on('c.control_id', '=', 'latest_cad.control_id');
-    //         })
-    //         ->leftJoin('control_assessment_details_table as cad', function ($join) {
-    //             $join->on('latest_cad.control_id', '=', 'cad.control_id')
-    //                 ->on('latest_cad.latest_id', '=', 'cad.id');
-    //         })
-    //         ->where('r.risk_id', $riskId)
-    //         ->select(
-    //             DB::raw('COUNT(DISTINCT c.control_id) AS total_controls'),
-    //             DB::raw('COUNT(DISTINCT CASE WHEN cad.control_implementation_status = "Implemented" THEN c.control_id END) AS implemented_controls')
-    //         )
-    //         ->first();
+        $counts = DB::table('control_master_table as c')
+            ->join('risk_vs_control_table as rvc', 'c.control_id', '=', 'rvc.control_id')
+            ->join('risk_master_table as r', 'rvc.risk_id', '=', 'r.risk_id')
+            ->leftJoinSub($latestAssessmentSubquery, 'latest_cad', function ($join) {
+                $join->on('c.control_id', '=', 'latest_cad.control_id');
+            })
+            ->leftJoin('control_assessment_details_table as cad', function ($join) {
+                $join->on('latest_cad.control_id', '=', 'cad.control_id')
+                    ->on('latest_cad.latest_id', '=', 'cad.id');
+            })
+            ->where('r.risk_id', $riskId)
+            ->select(
+                DB::raw('COUNT(DISTINCT c.control_id) AS total_controls'),
+                DB::raw('COUNT(DISTINCT CASE WHEN cad.control_implementation_status = "Implemented" THEN c.control_id END) AS implemented_controls')
+            )
+            ->first();
 
-    //     $status = "Open";
-    //     $statusAr = "يفتح";
+        $status = "Open";
+        $statusAr = "يفتح";
 
-    //     if ($counts->total_controls == $counts->implemented_controls) {
-    //         $status = "Close";
-    //         $statusAr = "يغلق";
-    //     }
-
-
-
-    //     if (count($controls)) {
-    //         $html = "<table>";
-    //         $html .= "<thead>";
-    //         $html .= "<tr>";
-    //         $html .= "<th>Control ID</th>";
-    //         $html .= "<th>Control Name</th>";
-    //         $html .= "<th>Status</th>";
-    //         $html .= "</tr>";
-    //         $html .= "</thead>";
-    //         $html .= "<tbody>";
-
-    //         $id = "";
-
-    //         foreach ($controls as $control) {
-
-    //             $control_id = $id != $control->control_id ? $control->control_id : '';
-    //             $control_name = $id != $control->control_id ? $control->control_name : '';
-
-    //             $html .= "<tr>";
-    //             $html .= "<td><a href='/control-identification-table/" . $control_id . "' target='_blank'>{$control_id}</a></td>";
-    //             $html .= "<td>{$control_name}</td>";
-    //             $html .= "<td>{$control->status}</td>";
-    //             $html .= "</tr>";
-    //             $id = $control->control_id;
-    //         }
-
-    //         $html .= "</tbody>";
-    //         $html .= "</table>";
+        if ($counts->total_controls == $counts->implemented_controls) {
+            $status = "Close";
+            $statusAr = "يغلق";
+        }
 
 
-    //         $html .= '<div class="column"><div class="FieldHead" style="width: 480px;"><p class="FieldHeadEngTxt">Risk Status</p><p class="FieldHeadArbTxt">حالة المخاطر</p></div>';
-    //         $html .= '<p class="status-para"><span class="status ' . $status . '">' . $status . '</span> <span class="status ' . $status . '">' . $statusAr . '</span></p></div>';
-    //         $html .= "<input type='hidden' name='status' value='" . $status . "'>";
-    //     } else {
-    //         $html = "No result";
-    //     }
 
-    //     return response()->json($html);
-    // }
+        if (count($controls)) {
+            $html = "<div class='max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar'><table class='text-white w-full min-w-[970px]'>";
+            $html .= "<thead class='bg-brand-950 border-brand-500 border-y text-left'>";
+            $html .= "<tr>";
+            $html .= "<th class='px-3 py-3 whitespace-nowrap'><span class='block'>Control ID</span></th>";
+            $html .= "<th class='px-3 py-3 whitespace-nowrap'><span class='block'>Control Name</span></th>";
+            $html .= "<th class='px-3 py-3 whitespace-nowrap'><span class='block'>Status</span></th>";
+            $html .= "</tr>";
+            $html .= "</thead>";
+            $html .= "<tbody class='divide-y divide-gray-100'>";
+
+            $id = "";
+
+            foreach ($controls as $control) {
+
+                $row_id = $id != $control->control_id ? $control->id : '';
+                $control_id = $id != $control->control_id ? $control->control_id : '';
+                $control_name = $id != $control->control_id ? $control->control_name : '';
+
+                $html .= "<tr>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a href='/controls/" . $row_id . "' target='_blank'>{$control_id}</a></span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'>{$control_name}</span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'>{$control->status}</span></td>";
+                $html .= "</tr>";
+                $id = $control->control_id;
+            }
+
+            $html .= "</tbody>";
+            $html .= "</table>";
+
+
+            // $html .= '<div class="column"><div class="FieldHead" style="width: 480px;"><p class="FieldHeadEngTxt">Risk Status</p><p class="FieldHeadArbTxt">حالة المخاطر</p></div>';
+            // $html .= '<p class="status-para"><span class="status ' . $status . '">' . $status . '</span> <span class="status ' . $status . '">' . $statusAr . '</span></p></div>';
+            // $html .= "<input type='hidden' name='status' value='" . $status . "'>";
+        } else {
+            $html = "No result";
+        }
+
+        return response()->json($html);
+    }
 }

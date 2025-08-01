@@ -11,16 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class ControlAssessmentFindingController extends Controller
 {
-    private $_routeName = "control-assessment-findings";
-    private $_primaryKey = "control_finding_id";
 
-    public function index()
-    {
-        $controlAssessmentFindings = ControlAssessmentFinding::all();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        return view('4-Process/ControlAssessmentFindings/index', compact('controlAssessmentFindings', 'routeName', 'primaryKey'));
-    }
+    // public function index()
+    // {
+    //     $controlAssessmentFindings = ControlAssessmentFinding::all();
+    //     $routeName = $this->_routeName;
+    //     $primaryKey = $this->_primaryKey;
+    //     return view('4-Process/ControlAssessmentFindings/index', compact('controlAssessmentFindings', 'routeName', 'primaryKey'));
+    // }
 
     public function show(ControlAssessmentFinding $controlAssessmentFinding)
     {
