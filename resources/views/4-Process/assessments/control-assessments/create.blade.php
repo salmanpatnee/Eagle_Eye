@@ -19,7 +19,7 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.field label="Control Assessment ID" label_ar="رمز تقييم الضوابط" name="control_assessment_id"
-                            required="true" placeholder="Enter Control Assessment ID" :value="$controlAssessment?->control_assessment_id ?? old('control_assessment_id')" />
+                            required="true" :readonly="$controlAssessment?->control_assessment_id" placeholder="Enter Control Assessment ID" :value="$controlAssessment?->control_assessment_id ?? old('control_assessment_id')" />
                     </div>
                     <div>
                         <x-form.field label="Control Assessment Name" label_ar="اسم تقييم الضوابط"

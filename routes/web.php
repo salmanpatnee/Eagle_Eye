@@ -239,9 +239,7 @@ Route::controller(ControlEvidenceController::class)->group(function () {
 // ------------------- CONTROL ASSESSMENT -------------------
 
 Route::resource('control-assessments', ControlAssessmentController::class);
-
 Route::resource('control-assessment-findings', ControlAssessmentFindingController::class)->except(['create', 'store']);
-
 Route::controller(ControlAssessmentFindingController::class)->group(function () {
     Route::get('/control-assessment-findings/create/{controlAssessment}', 'create')->name('control-assessment-findings.create');
     Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
@@ -251,6 +249,26 @@ Route::controller(ControlAssessmentFindingController::class)->group(function () 
 // ------------------- CONTROL SMART SEARCH -------------------
 
 Route::get('/control-smart-search', ControlSmartSearch::class)->name('control-smart-search.index');
+
+
+
+// ------------RISK ASSESSMENTS--------------
+
+Route::resource('risk-assessments', RiskAssessmentController::class);
+
+
+Route::controller(RiskAssessmentFindingController::class)->group(function () {
+    Route::get('/risk-assessment-findings/create/{riskAssessment:risk_assessment_id}', 'create')->name('risk-assessment-findings.create');
+    Route::get('/risk-assessment-finding-table/{riskAssessmentDetail:risk_finding_id}', 'show')->name('risk-assessment-findings.show');
+    Route::post('/risk-assessment-finding-input/{riskAssessment:risk_assessment_id}', 'store')->name('risk-assessment-findings.store');
+    Route::get('/risk-assessment-findings/edit/{riskAssessmentDetail:risk_finding_id}', 'edit')->name('risk-assessment-findings.edit');
+    Route::put('/risk-assessment-findings/{riskAssessmentDetail}', 'update')->name('risk-assessment-findings.update');
+    Route::delete('/risk-assessment-findings/{riskAssessmentDetail:risk_finding_id}', 'destroy')->name('risk-assessment-findings.destroy');
+
+    Route::get('/risk-assessment-finding-input', 'view')->name('risk.riskAssfind');
+    Route::get('/risk-assessment-finding-list', 'index');
+    Route::delete('/risk-assessment-finding/delete', 'delete')->name('delete.riskAssfind');
+});
 
 
 Route::get('/insert-record', function () {
@@ -562,46 +580,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
-
-    // Risk Assessment
-
-
-
-
-
-    // Risk Assessment
-
-
-    // ------------Risk Assessment Master--------------
-
-
-    Route::controller(RiskAssessmentController::class)->group(function () {
-        Route::get('/risk-assessments', 'index')->name('risk-assessments.index');
-        Route::get('/risk-assessment-input', 'create')->name('risk.riskAss');
-        Route::get('/risk-assessment-table/{riskAssessment:risk_assessment_id}', 'show')->name('risk-assessments.show');
-        Route::post('/risk-assessment-input/post', 'store');
-        Route::get('/risk-assessments/edit/{riskAssessment:risk_assessment_id}', 'edit')->name('risk-assessments.edit');
-        Route::put('/risk-assessments/{riskAssessment}', 'update')->name('risk-assessments.update');
-        Route::delete('/risk-assessment', 'destroy')->name('risk-assessments.destroy');
-        Route::post('/risk-control/', 'get_control_by_risk');
-    });
-
-    // ------------Risk Assessment Finding--------------
-
-
-    Route::controller(RiskAssessmentFindingController::class)->group(function () {
-        Route::get('/risk-assessment-findings/create/{riskAssessment:risk_assessment_id}', 'create')->name('risk-assessment-findings.create');
-        Route::get('/risk-assessment-finding-table/{riskAssessmentDetail:risk_finding_id}', 'show')->name('risk-assessment-findings.show');
-        Route::post('/risk-assessment-finding-input/{riskAssessment:risk_assessment_id}', 'store')->name('risk-assessment-findings.store');
-        Route::get('/risk-assessment-findings/edit/{riskAssessmentDetail:risk_finding_id}', 'edit')->name('risk-assessment-findings.edit');
-        Route::put('/risk-assessment-findings/{riskAssessmentDetail}', 'update')->name('risk-assessment-findings.update');
-        Route::delete('/risk-assessment-findings/{riskAssessmentDetail:risk_finding_id}', 'destroy')->name('risk-assessment-findings.destroy');
-
-        Route::get('/risk-assessment-finding-input', 'view')->name('risk.riskAssfind');
-        Route::get('/risk-assessment-finding-list', 'index');
-        Route::delete('/risk-assessment-finding/delete', 'delete')->name('delete.riskAssfind');
-    });
 
     Route::controller(KPICategoryController::class)->group(function () {
         Route::get('/kpi-references', 'report')->name('kpi-references.index');
