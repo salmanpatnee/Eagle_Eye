@@ -181,34 +181,4 @@ class ControlAssessmentFindingController extends Controller
         return response()->json($html);
         // return $html;
     }
-
-    public function get_controls_by_bestpractice(Request $request)
-    {
-
-        $results = DB::table('control_master_table as c')
-            ->join('control_master_table_vs_best_practice_table as cmp', 'c.control_id', '=', 'cmp.control_id')
-            ->join('best_practice_table as bpt', 'cmp.best_practices_id', '=', 'bpt.best_practices_id')
-            ->leftJoin('control_assessment_details_table as cadt', function ($join) use ($request) {
-                $join->on('c.control_id', '=', 'cadt.control_id')
-                    ->where('cadt.control_assessment_id', '=', $request->controlAssessmentId);
-            })
-            ->where('bpt.best_practices_name', $request->bestPracticeName)
-            ->whereNull('cadt.control_assessment_id')
-            ->select('c.control_id', 'c.control_name')
-            ->get();
-
-
-        if (count($results)) {
-            $html = "";
-
-            foreach ($results as $row) {
-
-                $html .= "<option value='{$row->control_id}'>{$row->control_id} - {$row->control_name}</option>";
-            }
-        } else {
-            $html = "No result";
-        }
-
-        return response()->json($html);
-    }
 }
