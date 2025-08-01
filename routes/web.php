@@ -248,6 +248,10 @@ Route::controller(ControlAssessmentFindingController::class)->group(function () 
     Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
 });
 
+// ------------------- CONTROL SMART SEARCH -------------------
+
+Route::get('/control-smart-search', ControlSmartSearch::class)->name('control-smart-search.index');
+
 
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
@@ -293,7 +297,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    Route::get('/control-smart-search', [ControlSmartSearch::class, 'index'])->name('control.smart.search.index');
+
 
 
     // Experts
@@ -560,22 +564,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-
-
-
-
-
-
-
-    // Route::get('/attachment-list', function () {
-    //     return view('4-Process/11-Attachment/1-AttachmentList');
-    // });
-
-    Route::get('/attachment-table/att-001', function () {
-        return view('4-Process/11-Attachment/1-AttachmentTable');
-    });
-
-
     // Risk Assessment
 
 
@@ -756,9 +744,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    Route::get('/risk-status-register', function () {
-        return view('4-Process/20-RiskRegister/1-RiskRegisterReport');
-    });
+
 
     Route::get('/frameworks', function () {
         return view('4-Process/framework');

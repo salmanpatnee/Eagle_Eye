@@ -9,6 +9,7 @@
     'id_key' => '',
     'value_key' => '',
     'attributes' => [],
+    'hide_keys' => false,
 ])
 
 <x-form.label label="{{ $label }}" label_ar="{{ $label_ar }}" for="{{ $name }}" />
@@ -32,7 +33,12 @@
             @foreach ($data as $row)
                 <option value="{{ $row->$id_key }}" class="text-gray-700"
                     @if (old($name, $value) == $row->$id_key) selected @endif>
-                    {{ $row->$id_key }} - {{ $row->$value_key }}</option>
+                    @if ($hide_keys)
+                        {{ $row->$value_key }}
+                    @else
+                        {{ $row->$id_key }} - {{ $row->$value_key }}
+                    @endif
+                </option>
             @endforeach
         @endif
     </select>
