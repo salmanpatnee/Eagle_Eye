@@ -4,14 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Auditor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class AuditorFormController extends Controller
 {
-    private $_routeName = "auditors";
-    private $_primaryKey = "auditor_id";
 
-    // 1.Controller - DATA ENTER INTO THE DATABASE TABLE
+    public function index()
+    {
+        $auditors = Auditor::paginate(20);
+
+        return view('4-Process\audit-management\auditors\index', compact('auditors'));
+    }
+
+    public function show(Auditor $auditor)
+    {
+        return view('4-Process\audit-management\auditors\show', compact('auditor'));
+    }
+
+    public function create()
+    {
+        $auditor = null;
+
+        return view('4-Process\audit-management\auditors\create', compact('auditor'));
+    }
+
     public function store(Request $request)
     {
         $attributes = $request->validate([
@@ -25,7 +40,12 @@ class AuditorFormController extends Controller
 
         Auditor::create($attributes);
 
-        return redirect('/auditor-list')->with('success', 'Location information has been saved.');
+        return redirect(route('auditors.index'))->with('success', 'Auditor information has been saved.');
+    }
+
+    public function edit(Auditor $auditor)
+    {
+        return view('4-Process\audit-management\auditors\create', compact('auditor'));
     }
 
     public function update(Auditor $auditor, Request $request)
@@ -41,63 +61,13 @@ class AuditorFormController extends Controller
 
         $auditor->update($attributes);
 
-        return redirect('/auditor-list')->with('success', 'Location information has been saved.');
-    }
-
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
-    {
-        $columns = DB::table('auditor_table')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/9-Audit/2-AuditorList', compact('columns', 'routeName', 'primaryKey'));
-    }
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
-    {
-        $attributes = $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $data = Auditor::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
-        $data->delete();
-
-        return redirect(route($this->_routeName . '.index'));
-
-        $selecteddelete = $request->input('selecteddelete');
-
-        if (!empty($selecteddelete)) {
-            DB::table('auditor_table')->whereIn('auditor_id', $selecteddelete)->delete();
-        }
-        return redirect('/auditor-list');
+        return redirect(route('auditors.index'))->with('success', 'Auditor information has been updated.');
     }
 
 
-
-    // 4.Controller - DETAILED TABLE
-    public function show($auditor_id)
+    public function destroy(Auditor $auditor)
     {
-        // Fetch data from the database based on department_id
-        $data=$auditor_id = DB::table('auditor_table')->where('auditor_id', $auditor_id)->first();
-
-        if (!$auditor_id) {
-            abort(404);
-        }
-
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/9-Audit/2-AuditorTable', compact('auditor_id', 'routeName', 'data', 'primaryKey'));
-    }
-
-    public function edit(Auditor $auditor, Request $request)
-    {
-        $data=$auditor;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/9-Audit/2-AuditorEditForm', compact('auditor', 'routeName', 'data', 'primaryKey'));
+        $auditor->delete();
+        return redirect(route('auditors.index'))->with('success', 'Auditor has been deleted.');
     }
 }

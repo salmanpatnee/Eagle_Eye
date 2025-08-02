@@ -268,6 +268,7 @@ Route::controller(RiskAssessmentFindingController::class)->group(function () {
 
 // ------------AUDIT MANAGEMENT--------------
 
+Route::resource('auditors', AuditorFormController::class);
 Route::resource('auditees', AuditeeController::class);
 
 
@@ -530,21 +531,9 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // Auditor
 
 
 
-    Route::controller(AuditorFormController::class)->group(function () {
-        Route::get('/auditor-list', 'index')->name('auditors.index');
-        Route::get('/auditor-table/{auditor_id}', 'show')->name('auditors.show');
-        Route::post('/auditor-input/post', 'store')->name('auditors.store');
-        Route::get('/auditor/{auditor:auditor_id}/edit', 'edit')->name('auditors.edit');
-        Route::patch('/auditor/{auditor}', 'update')->name('auditors.updated');
-        Route::delete('/auditor/delete', 'delete')->name('auditors.delete');
-        Route::get('/auditor-input', function () {
-            return view('4-Process/9-Audit/2-AuditorForm');
-        })->name('auditors.create');
-    });
 
     // Route::get('/auditor-input', function () {
     //     return view('4-Process/9-Audit/2-AuditorForm')->name('auditors.create');;
