@@ -279,7 +279,9 @@ Route::controller(AuditPlanReportController::class)->group(function () {
     Route::get('/audit-plan-summarize-excel-report', 'generateSummarizeExcelReport')->name('audit.plan.summarize.excel.report');
 });
 
+// ------------AUDIT ASSESSMENTS--------------
 
+Route::resource('audit-assessments', AuditMaterController::class);
 
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
@@ -484,20 +486,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/cvss/{id}', 'storeOrUpdate')->name('cvss.update');
         Route::delete('/cvss/delete', 'delete')->name('delete.cvss');
     });
-    // Audit Master
 
-    Route::controller(AuditMaterController::class)->group(function () {
-        Route::get('/audit-registration', 'index')->name('audit-registrations.index');
-        Route::get('/audit-registration-table/{audit:audit_id}', 'show')->name('audit-registrations.show');
-        Route::get('/audit-registration/create', 'create')->name('audit-registrations.create');
-
-        Route::post('/audit-registration-input/post', 'store');
-        Route::get('/audit-registration/{audit:audit_id}/edit', 'edit')->name('audit-registrations.edit');
-        Route::patch('/audit-registration/{audit}', 'update')->name('audit-registrations.update');
-        Route::delete('/audit-registration', 'destroy')->name('audit-registrations.destroy');
-
-        // Route::delete('/audit-registration/delete', 'delete')->name('delete.auditMaster');
-    });
 
 
 

@@ -596,7 +596,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ route('audit.plan.report.index') }}" class="boxhyperlink">
+        <a href="{{ route('audit-plan-report.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
@@ -609,7 +609,7 @@
             </div>
         </a>
 
-        <a href="{{ route('audit-registrations.index') }}" class="boxhyperlink">
+        <a href="{{ route('audit-assessments.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
