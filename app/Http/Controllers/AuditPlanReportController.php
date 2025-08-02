@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Mpdf\Mpdf;
 
-class AuditPlanReportController extends Controller 
+class AuditPlanReportController extends Controller
 {
     public function index(Request $request)
     {
@@ -17,15 +17,15 @@ class AuditPlanReportController extends Controller
         $audit_start_date = request('audit_start_date');
 
         $teamResponsible = $this->getTeamResponsibleData();
-        
+
         $path = '4-Process/AuditPlanReport';
         $auditPlans = $this->getAuditPlanData($team, $audit_start_date);
-         
+
 
         if (request()->has('pdf')) {
             $this->generatePdf($path, $auditPlans, 'Audit-Plan.pdf');
         } else {
-            return view("{$path}/index", compact('auditPlans', 'teamResponsible'));
+            return view("4-Process/audit-management/audit-plan-report/index", compact('auditPlans', 'teamResponsible', 'team', 'audit_start_date'));
         }
     }
 
@@ -33,7 +33,7 @@ class AuditPlanReportController extends Controller
     {
         $team = request('team_responsible');
         $audit_start_date = request('audit_start_date');
-       
+
         $teamResponsible = $this->getTeamResponsibleData();
 
         $path = '4-Process/AuditPlanReport';
@@ -218,7 +218,8 @@ class AuditPlanReportController extends Controller
         return response()->download($outputFilePath)->deleteFileAfterSend(true);
     }
 
-    private function getTeamResponsibleData() {
+    private function getTeamResponsibleData()
+    {
         return Auditor::select('auditor_organization')->distinct()->get();
     }
 
@@ -238,8 +239,10 @@ class AuditPlanReportController extends Controller
 
         return $query->get()->map(function ($plan) {
             return [
+                'id' => $plan->id,
                 'audit_id' => $plan->audit_id,
                 'audit_name' => $plan->audit_name,
+                'auditor_row_id' => optional($plan->auditor)->id,
                 'auditor_id' => optional($plan->auditor)->auditor_id,
                 'auditor_organization' => optional($plan->auditor)->auditor_organization,
                 'auditor' => trim(optional($plan->auditor)->auditor_first_name . ' ' . optional($plan->auditor)->auditor_last_name),

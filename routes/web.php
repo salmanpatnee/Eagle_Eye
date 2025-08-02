@@ -272,6 +272,14 @@ Route::resource('audit-plans', AuditPlanController::class);
 Route::resource('auditors', AuditorFormController::class);
 Route::resource('auditees', AuditeeController::class);
 
+Route::controller(AuditPlanReportController::class)->group(function () {
+    Route::get('/audit-plan-report', 'index')->name('audit-plan-report.index');
+    Route::get('/audit-plan-summarize-report', 'summarizeReport')->name('audit.plan.report.summarize');
+    Route::get('/audit-plan-excel-report', 'generateExcelReport')->name('audit.plan.excel.report');
+    Route::get('/audit-plan-summarize-excel-report', 'generateSummarizeExcelReport')->name('audit.plan.summarize.excel.report');
+});
+
+
 
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
@@ -476,19 +484,6 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/cvss/{id}', 'storeOrUpdate')->name('cvss.update');
         Route::delete('/cvss/delete', 'delete')->name('delete.cvss');
     });
-
-
-
-
-
-    // Audit Plan Report
-    Route::controller(AuditPlanReportController::class)->group(function () {
-        Route::get('/audit-plan-report', 'index')->name('audit.plan.report.index');
-        Route::get('/audit-plan-summarize-report', 'summarizeReport')->name('audit.plan.report.summarize');
-        Route::get('/audit-plan-excel-report', 'generateExcelReport')->name('audit.plan.excel.report');
-        Route::get('/audit-plan-summarize-excel-report', 'generateSummarizeExcelReport')->name('audit.plan.summarize.excel.report');
-    });
-
     // Audit Master
 
     Route::controller(AuditMaterController::class)->group(function () {
