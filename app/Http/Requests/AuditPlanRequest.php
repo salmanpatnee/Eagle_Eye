@@ -24,12 +24,14 @@ class AuditPlanRequest extends FormRequest
      */
     public function rules()
     {
-        $auditPlan = $this->route('auditPlan');
+        $auditPlan = $this->route('audit_plan');
 
         return [
-             'audit_id' => ['required', 
+            'audit_id' => [
+                'required',
                 Rule::unique('audit_plan_table', 'audit_id')
-                ->ignore($auditPlan, 'audit_id'),],
+                    ->ignore(optional($auditPlan)->audit_id, 'audit_id'),
+            ],
             'audit_name' => ['required'],
             'audit_description' => ['nullable'],
             'audit_sponsor' => ['nullable'],
