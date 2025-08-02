@@ -266,6 +266,10 @@ Route::controller(RiskAssessmentFindingController::class)->group(function () {
     Route::post('/risk-assessment-finding-input/{riskAssessment}', 'store')->name('risk-assessment-findings.store');
 });
 
+// ------------AUDIT MANAGEMENT--------------
+
+Route::resource('auditees', AuditeeController::class);
+
 
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
@@ -547,19 +551,6 @@ Route::middleware(['auth'])->group(function () {
     // });
 
 
-
-    // Auditee
-
-
-    Route::controller(AuditeeController::class)->group(function () {
-        Route::get('/auditee-list', 'index')->name('auditees.index');
-        Route::get('/auditee-table/{auditee:auditee_id}', 'show')->name('auditees.show');
-        Route::post('/auditee-input/post', 'store')->name('auditees.store');
-        Route::get('/auditee-input', 'view')->name('auditees.create');
-        Route::get('/auditee/{auditee:auditee_id}/edit', 'edit')->name('auditees.edit');
-        Route::patch('/auditee/{auditee}', 'update')->name('auditees.update');
-        Route::delete('/auditee/delete', 'delete')->name('auditees.delete');
-    });
 
 
 

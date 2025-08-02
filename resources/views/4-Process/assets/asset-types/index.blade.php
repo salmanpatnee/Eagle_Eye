@@ -19,20 +19,20 @@
                 <x-table.th label="Action" label_ar="إجراء " />
             </x-table.thead>
             <x-table.tbody>
-                @foreach ($assetTypes as $AssetType)
+                @foreach ($assetTypes as $assetType)
                     <tr>
                         <x-table.td>
                             {{ $loop->index + 1 }}
                         </x-table.td>
                         <x-table.td>
-                            {{ $AssetType->asset_type_id }}
+                            {{ $assetType->asset_type_id }}
                         </x-table.td>
-                        <x-table.td>{{ $AssetType->asset_type_name }}</x-table.td>
-                        <x-table.td>{{ $AssetType->asset_type_description }}</x-table.td>
+                        <x-table.td>{{ $assetType->asset_type_name }}</x-table.td>
+                        <x-table.td>{{ $assetType->asset_type_description }}</x-table.td>
                         <x-table.td action_col="true">
-                            <x-action.view route_name="asset-types.show" param="{{ $AssetType->id }}" />
-                            <x-action.edit route_name="asset-types.edit" param="{{ $AssetType->id }}" />
-                            <x-action.delete route_name="asset-types.destroy" param="{{ $AssetType->id }}" />
+                            <x-action.view route_name="asset-types.show" param="{{ $assetType->id }}" />
+                            <x-action.edit route_name="asset-types.edit" param="{{ $assetType->id }}" />
+                            <x-action.delete route_name="asset-types.destroy" param="{{ $assetType->id }}" />
                         </x-table.td>
                     </tr>
                 @endforeach

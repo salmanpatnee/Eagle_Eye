@@ -12,4 +12,9 @@ class Auditee extends Model
     protected $table = 'auditee_table';
     protected $guarded = [];
     public $timestamps = false;
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'auditee_department', 'department_id');
+    }
 }

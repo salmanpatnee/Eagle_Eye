@@ -3,15 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auditee;
+use App\Models\Department;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class AuditeeController extends Controller
 {
-    private $_routeName = "auditees";
-    private $_primaryKey = "auditee_id";
 
-    // 1.Controller - DATA ENTER INTO THE DATABASE TABLE
+    public function index()
+    {
+        $auditees = Auditee::with('department')->paginate(20);
+        return view('4-Process\audit-management\auditee\index', compact('auditees'));
+    }
+
+    public function show(Auditee $auditee)
+    {
+        $auditee->load('department');
+        return view('4-Process\audit-management\auditee\show', compact('auditee'));
+    }
+
+    public function create()
+    {
+        $auditee = null;
+        $departments = Department::select('department_id', 'department_name')->distinct()->get();
+
+        return view('4-Process\audit-management\auditee\create', compact('departments', 'auditee'));
+    }
+
     public function store(Request $request)
     {
         $attributes = $request->validate([
@@ -23,10 +40,16 @@ class AuditeeController extends Controller
 
         Auditee::create($attributes);
 
-        return redirect('/auditee-list')->with('success', 'Location information has been saved.');
+        return redirect(route('auditees.index'))->with('success', 'Auditee information has been saved.');
     }
 
-    // 1.Controller - DATA ENTER INTO THE DATABASE TABLE
+    public function edit(Auditee $auditee)
+    {
+        $departments = Department::select('department_id', 'department_name')->distinct()->get();
+
+        return view('4-Process\audit-management\auditee\create', compact('departments', 'auditee'));
+    }
+
     public function update(Auditee $auditee, Request $request)
     {
         $attributes = $request->validate([
@@ -38,77 +61,13 @@ class AuditeeController extends Controller
 
         $auditee->update($attributes);
 
-        return redirect('/auditee-list')->with('success', 'Location information has been saved.');
+        return redirect(route('auditees.index'))->with('success', 'Auditee information has been saved.');
     }
 
 
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
+    public function destroy(Auditee $auditee)
     {
-        $columns = DB::table('auditee_table')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/9-Audit/4-AuditeeList', compact('columns', 'routeName', 'primaryKey'));
-    }
-
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
-    {
-
-        $attributes = $request->validate([
-            'record' => ['required'],
-        ]);
-
-        $data = Auditee::where('id', $attributes['record'])->orWhere($this->_primaryKey, $attributes['record'])->first();
-        $data->delete();
-
-        return redirect(route($this->_routeName . '.index'));
-
-        $selecteddelete = $request->input('selecteddelete');
-
-        if (!empty($selecteddelete)) {
-            DB::table('auditee_table')->whereIn('auditee_id', $selecteddelete)->delete();
-        }
-        return redirect('/auditee-list');
-    }
-
-
-
-    // 4.Controller - DETAILED TABLE
-    public function show(Auditee $auditee)
-    {
-        $data = $auditee;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/9-Audit/4-AuditeeTable', compact('auditee', 'routeName', 'data', 'primaryKey'));
-    }
-
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $DepartNames = DB::table('department_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/9-Audit/4-AuditeeForm', compact('DepartNames', 'routeName', 'primaryKey'));
-    }
-
-    public function edit(Auditee $auditee)
-    {
-        $data = $auditee;
-        $DepartNames = DB::table('department_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/9-Audit/4-AuditeeEditForm', compact('DepartNames', 'auditee', 'routeName', 'data', 'primaryKey'));
+        $auditee->delete();
+        return redirect(route('auditees.index'))->with('success', 'Auditee has been deleted.');
     }
 }
