@@ -288,6 +288,11 @@ Route::controller(AuditFindingController::class)->group(function () {
     Route::post('/audit-findings/{auditAssessment}', 'store')->name('audit-findings.store');
 });
 
+Route::controller(ControlAuditFindingController::class)->group(function () {
+    Route::get('/control-vs-audit-finding', 'controlVsAuditFinding')->name('control-vs-audit.index');
+    Route::get('/audit-finding-vs-control', 'auditFindingVsControl')->name('audit-vs-control.index');
+});
+
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
     // $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->get()->pluck('control_id');
@@ -491,30 +496,6 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/cvss/{id}', 'storeOrUpdate')->name('cvss.update');
         Route::delete('/cvss/delete', 'delete')->name('delete.cvss');
     });
-
-
-
-
-
-
-    Route::controller(ControlAuditFindingController::class)->group(function () {
-        Route::get('/controls-audit-findings', 'index')->name('control-vs-audit');
-        Route::get('/audit-findings-controls', 'auditVsControls')->name('audit-vs-control');
-    });
-
-
-
-
-
-
-    // Route::get('/auditor-input', function () {
-    //     return view('4-Process/9-Audit/2-AuditorForm')->name('auditors.create');;
-    // });
-
-
-
-
-
 
     // Attachments
     Route::controller(TempFileUploadController::class)->group(function () {

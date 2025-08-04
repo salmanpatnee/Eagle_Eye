@@ -626,7 +626,7 @@
     </div>
     <div class="processes">
         <div class="spacebox"></div>
-        <a href="/controls-audit-findings" class="boxhyperlink">
+        <a href="{{ route('control-vs-audit.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

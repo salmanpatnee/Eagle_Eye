@@ -10,7 +10,7 @@ use Mpdf\Mpdf;
 
 class ControlAuditFindingController extends Controller
 {
-    public function index(Request $request)
+    public function controlVsAuditFinding(Request $request)
     {
         $auditFindingId = $request->input('audit_finding_id') ?? null;
         $controlId = $request->input('control_id') ?? null;
@@ -37,27 +37,25 @@ class ControlAuditFindingController extends Controller
             })
             ->get();
 
-            if (request()->has('pdf')) {
-                
-                $mpdf = new Mpdf();
-                
-                $html = view("4-Process/9-Audit/7-ControlAuditPdf", compact('controlsWithAuditFindings'))->render();
-                
-    
-                $mpdf->WriteHTML($html);
-    
-                // Set the headers to prompt the file download
-                return response($mpdf->Output("Control-vs-Audit.pdf", 'D'))
-                    ->header('Content-Type', 'application/pdf')
-                    ->header('Content-Disposition', 'attachment; filename="' . "Control-vs-Audit.pdf" . '"');
-            } else {
-                return view('4-Process/9-Audit/7-ControlAuditTable', compact('controlsWithAuditFindings', 'controls', 'findings'));
-            }
+        if (request()->has('pdf')) {
+
+            $mpdf = new Mpdf();
+
+            $html = view("4-Process/9-Audit/7-ControlAuditPdf", compact('controlsWithAuditFindings'))->render();
 
 
+            $mpdf->WriteHTML($html);
+
+            // Set the headers to prompt the file download
+            return response($mpdf->Output("Control-vs-Audit.pdf", 'D'))
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="' . "Control-vs-Audit.pdf" . '"');
+        } else {
+            return view('4-Process/audit-management/control-vs-audit-finding/control-vs-audit-finding', compact('controlsWithAuditFindings', 'controls', 'findings', 'auditFindingId', 'controlId'));
+        }
     }
 
-    public function auditVsControls(Request $request)
+    public function auditFindingVsControl(Request $request)
     {
         $controlId = $request->input('control_id') ?? null;
         $auditFindingId = $request->input('audit_finding_id') ?? null;
@@ -83,23 +81,22 @@ class ControlAuditFindingController extends Controller
             })
             ->get();
 
-            if (request()->has('pdf')) {
-                
-                $mpdf = new Mpdf();
-                
-                $html = view("4-Process/9-Audit/7-AuditControlPdf", compact('auditFindingsWithControls'))->render();
-                
-    
-                $mpdf->WriteHTML($html);
-    
-                // Set the headers to prompt the file download
-                return response($mpdf->Output("Audit-vs-Control.pdf", 'D'))
-                    ->header('Content-Type', 'application/pdf')
-                    ->header('Content-Disposition', 'attachment; filename="' . "Audit-vs-Control.pdf" . '"');
-            } else {
-                
-                return view('4-Process/9-Audit/7-AuditControlTable', compact('auditFindingsWithControls', 'controls', 'findings'));
-            }
-            
+        if (request()->has('pdf')) {
+
+            $mpdf = new Mpdf();
+
+            $html = view("4-Process/9-Audit/7-AuditControlPdf", compact('auditFindingsWithControls'))->render();
+
+
+            $mpdf->WriteHTML($html);
+
+            // Set the headers to prompt the file download
+            return response($mpdf->Output("Audit-vs-Control.pdf", 'D'))
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="' . "Audit-vs-Control.pdf" . '"');
+        } else {
+
+            return view('4-Process\audit-management\control-vs-audit-finding\audit-finding-vs-control', compact('auditFindingsWithControls', 'controls', 'findings', 'auditFindingId', 'controlId'));
+        }
     }
 }
