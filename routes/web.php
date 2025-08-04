@@ -296,18 +296,9 @@ Route::controller(ControlAuditFindingController::class)->group(function () {
 
 // ------------VULNERABILITY ASSESSMENT / PENETRATION TEST TRACKING--------------
 
+Route::resource('third-party', ThirdPartyController::class);
 Route::resource('tpt-experts', TPTExpertsControl::class);
 
-
-Route::controller(ThirdPartyController::class)->group(function () {
-    Route::get('/third-party', 'index')->name('third-party.index');
-    Route::get('/third-party/create', 'create')->name('third-party.create');
-    Route::get('/third-party/{thirdParty:tpt_id}', 'show')->name('third-party.show');
-    Route::get('/third-party/edit/{thirdParty:tpt_id}', 'edit')->name('third-party.edit');
-    Route::post('/third-party', 'store')->name('third-party.store');
-    Route::put('/third-party/{thirdParty}', 'update')->name('third-party.update');
-    Route::delete('/third-party/delete', 'destroy')->name('third-party.delete');
-});
 
 Route::controller(PatchController::class)->group(function () {
     Route::get('/patch', 'index')->name('patch.index');

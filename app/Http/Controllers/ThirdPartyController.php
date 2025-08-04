@@ -8,41 +8,30 @@ use Illuminate\Http\Request;
 
 class ThirdPartyController extends Controller
 {
-    private $_routeName = "third-party";
-    private $_primaryKey = "tpt_id";
+
 
 
     public function index(Request $request)
     {
-        $thirdParties = ThirdParty::all();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $thirdParties = ThirdParty::paginate(20);
 
-        return view('4-Process/ThirdParty/index', compact('thirdParties', 'routeName',  'primaryKey'));
+        return view('4-Process\vulnerability-management\third-party\index', compact('thirdParties'));
     }
 
     public function show(ThirdParty $thirdParty)
     {
         $thirdParty->load('experties');
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        $data = $thirdParty;
 
-        return view('4-Process/ThirdParty/show', compact('thirdParty', 'routeName', 'data', 'primaryKey'));
+        return view('4-Process\vulnerability-management\third-party\show', compact('thirdParty'));
     }
 
     public function create()
     {
+        $thirdParty = null;
         $experties = TPTExpert::select('tpt_experties_id', 'tpt_experties_name')->get();
+        $selectedExpertIds = [];
 
- 
-
-        $data = $thirdParty = null;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-
-        return view('4-Process/ThirdParty/create', compact('thirdParty', 'data', 'routeName', 'primaryKey', 'experties'));
+        return view('4-Process\vulnerability-management\third-party\create', compact('thirdParty', 'experties', 'selectedExpertIds'));
     }
 
     public function store(Request $request)
@@ -57,17 +46,11 @@ class ThirdPartyController extends Controller
             'experties' => 'nullable',
         ]);
 
-        $experties = $attributes['experties'];
+        $experties = $attributes['experties'] ?? [];
         unset($attributes['experties']);
 
-   
-
         $thirdParty = ThirdParty::create($attributes);
-
-        if ($experties && $expertiesArray = json_decode($experties, true)) {
-            $thirdParty->experties()
-                ->attach($expertiesArray);
-        }
+        $thirdParty->experties()->attach($experties ?? []);
 
 
         return redirect(route('third-party.index'))
@@ -77,13 +60,9 @@ class ThirdPartyController extends Controller
     public function edit(ThirdParty $thirdParty)
     {
         $experties = TPTExpert::select('tpt_experties_id', 'tpt_experties_name')->get();
-        $expertyIds = $thirdParty->experties->pluck('tpt_experties_id')->toArray();
+        $selectedExpertIds = $thirdParty->experties->pluck('tpt_experties_id')->toArray();
 
-        $data = $thirdParty;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/ThirdParty/create', compact('thirdParty', 'data', 'routeName', 'primaryKey', 'experties', 'expertyIds'));
+        return view('4-Process\vulnerability-management\third-party\create', compact('thirdParty', 'experties', 'selectedExpertIds'));
     }
 
     public function update(ThirdParty $thirdParty, Request $request)
@@ -94,37 +73,26 @@ class ThirdPartyController extends Controller
             'tpt_contact_person_name' => 'nullable',
             'tpt_address' => 'nullable',
             'tpt_country_origin' => 'nullable',
-            'tpt_established_date' => 'date|nullable', 
+            'tpt_established_date' => 'date|nullable',
             'experties' => 'nullable',
         ]);
 
         $experties = $attributes['experties'];
         unset($attributes['experties']);
-        
+
         $thirdParty->update($attributes);
 
-
-        if ($experties && $expertiesArray = json_decode($experties, true)) {
-            $thirdParty->experties()
-                ->sync($expertiesArray);
-        }
-
-
+        $thirdParty->experties()->attach($experties ?? []);
 
         return redirect(route('third-party.index'))
             ->with('success', 'Third Party saved successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(ThirdParty $thirdParty)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-
-        ThirdParty::where('tpt_id', $attributes['record'])->delete();
-
+        $thirdParty->experties()->detach();
+        $thirdParty->delete();
         return redirect(route('third-party.index'))
-            ->with('success', 'Expert deleted successfully.');
+            ->with('success', 'Third Party deleted successfully.');
     }
 }
