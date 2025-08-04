@@ -713,7 +713,7 @@
         </div>
     </div>
     <div class="processes">
-        <a href="{{ route('patch.index') }}" class="boxhyperlink">
+        <a href="{{ route('patches.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

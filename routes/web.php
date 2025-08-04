@@ -296,20 +296,21 @@ Route::controller(ControlAuditFindingController::class)->group(function () {
 
 // ------------VULNERABILITY ASSESSMENT / PENETRATION TEST TRACKING--------------
 
+Route::resource('va-pen-tests', PenTestController::class);
 Route::resource('patches', PatchController::class);
 Route::resource('third-party', ThirdPartyController::class);
 Route::resource('tpt-experts', TPTExpertsControl::class);
 
 
-Route::controller(PenTestController::class)->group(function () {
-    Route::get('/va-pen-test', 'index')->name('pen-test.index');
-    Route::get('/va-pen-test/create', 'create')->name('pen-test.create');
-    Route::get('/va-pen-test/{penTest:va_pt_test_id}', 'show')->name('pen-test.show');
-    Route::get('/va-pen-test/edit/{penTest:va_pt_test_id}', 'edit')->name('pen-test.edit');
-    Route::post('/va-pen-test', 'store')->name('pen-test.store');
-    Route::put('/va-pen-test/{penTest}', 'update')->name('pen-test.update');
-    Route::delete('/va-pen-test/delete', 'destroy')->name('pen-test.delete');
-});
+// Route::controller(PenTestController::class)->group(function () {
+//     Route::get('/va-pen-test', 'index')->name('pen-test.index');
+//     Route::get('/va-pen-test/create', 'create')->name('pen-test.create');
+//     Route::get('/va-pen-test/{penTest:va_pt_test_id}', 'show')->name('pen-test.show');
+//     Route::get('/va-pen-test/edit/{penTest:va_pt_test_id}', 'edit')->name('pen-test.edit');
+//     Route::post('/va-pen-test', 'store')->name('pen-test.store');
+//     Route::put('/va-pen-test/{penTest}', 'update')->name('pen-test.update');
+//     Route::delete('/va-pen-test/delete', 'destroy')->name('pen-test.delete');
+// });
 
 Route::controller(PenTestFindingsController::class)->group(function () {
     Route::get('/va-pen-test-findings', 'index')->name('pen-test-findings.index');
