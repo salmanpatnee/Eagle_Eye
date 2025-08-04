@@ -293,6 +293,69 @@ Route::controller(ControlAuditFindingController::class)->group(function () {
     Route::get('/audit-finding-vs-control', 'auditFindingVsControl')->name('audit-vs-control.index');
 });
 
+
+// ------------VULNERABILITY ASSESSMENT / PENETRATION TEST TRACKING--------------
+
+Route::resource('tpt-experts', TPTExpertsControl::class);
+
+
+Route::controller(ThirdPartyController::class)->group(function () {
+    Route::get('/third-party', 'index')->name('third-party.index');
+    Route::get('/third-party/create', 'create')->name('third-party.create');
+    Route::get('/third-party/{thirdParty:tpt_id}', 'show')->name('third-party.show');
+    Route::get('/third-party/edit/{thirdParty:tpt_id}', 'edit')->name('third-party.edit');
+    Route::post('/third-party', 'store')->name('third-party.store');
+    Route::put('/third-party/{thirdParty}', 'update')->name('third-party.update');
+    Route::delete('/third-party/delete', 'destroy')->name('third-party.delete');
+});
+
+Route::controller(PatchController::class)->group(function () {
+    Route::get('/patch', 'index')->name('patch.index');
+    Route::get('/patch/create', 'create')->name('patch.create');
+    Route::get('/patch/{patch:patch_id}', 'show')->name('patch.show');
+    Route::get('/patch/edit/{patch:patch_id}', 'edit')->name('patch.edit');
+    Route::post('/patch', 'store')->name('patch.store');
+    Route::put('/patch/{patch}', 'update')->name('patch.update');
+    Route::delete('/patch/delete', 'destroy')->name('patch.delete');
+});
+
+Route::controller(PenTestController::class)->group(function () {
+    Route::get('/va-pen-test', 'index')->name('pen-test.index');
+    Route::get('/va-pen-test/create', 'create')->name('pen-test.create');
+    Route::get('/va-pen-test/{penTest:va_pt_test_id}', 'show')->name('pen-test.show');
+    Route::get('/va-pen-test/edit/{penTest:va_pt_test_id}', 'edit')->name('pen-test.edit');
+    Route::post('/va-pen-test', 'store')->name('pen-test.store');
+    Route::put('/va-pen-test/{penTest}', 'update')->name('pen-test.update');
+    Route::delete('/va-pen-test/delete', 'destroy')->name('pen-test.delete');
+});
+
+Route::controller(PenTestFindingsController::class)->group(function () {
+    Route::get('/va-pen-test-findings', 'index')->name('pen-test-findings.index');
+    Route::get('/va-pen-test-findings/create/{penTest:va_pt_test_id}', 'create')->name('pen-test-findings.create');
+    Route::get('/va-pen-test-findings/{penTestFinding:va_pt_finding_id}', 'show')->name('pen-test-findings.show');
+    Route::get('/va-pen-test-findings/edit/{penTestFinding:va_pt_finding_id}', 'edit')->name('pen-test-findings.edit');
+    Route::post('/va-pen-test-findings/{penTest}', 'store')->name('pen-test-findings.store');
+    Route::put('/va-pen-test-findings/{penTestFinding}', 'update')->name('pen-test-findings.update');
+    Route::delete('/va-pen-test-findings/delete', 'destroy')->name('pen-test-findings.delete');
+    Route::post('/upload-poc', 'uploadPoc')->name('pen-test-findings.upload');
+    Route::delete('/delete-temp-poc', 'deleteTempPoc')->name('pen-test-findings.poc.temp.destroy');
+    Route::delete('/delete-poc/{attachment}', 'deletePoc')->name('pen-test-findings.poc.destroy');
+});
+
+Route::controller(PenTestDashboardController::class)->group(function () {
+    Route::get('/va-pen-test-list', 'list')->name('pen-test-dashboard.index');
+    Route::get('/va-pen-test-dashboard/{penTest:va_pt_test_id}', 'index')->name('pen-test-dashboard');
+    Route::get('/va-pen-test-level/{penTest:va_pt_test_id}/{level}', 'level')->name('pen-test-level');
+    Route::get('/va-pen-test-level-status/{penTest:va_pt_test_id}', 'levelStatus')->name('pen-test-level-status');
+    Route::get('/va-pen-test-status/{penTest:va_pt_test_id}/{status}', 'status')->name('pen-test-status');
+    Route::get('/va-pen-test-level-records/{penTest:va_pt_test_id}', 'levelRecords')->name('pen-test-level-records');
+});
+
+Route::controller(PenTestReportController::class)->group(function () {
+    Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
+    Route::get('/va-asset-vs-risk', 'assetVsRisk')->name('pen-test-asset-vs-risk');
+});
+
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
     // $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->get()->pluck('control_id');
@@ -897,41 +960,6 @@ Route::get('/resource/template/{resource}', [ProcessResourceController::class, '
 Route::get('/resource/{process:process_id}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');
 Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destroy'])->name('process.resource.destroy');
 
-// Route::prefix('process')->group(function () {
-//     Route::get('{process:process_id}', [ResourceController::class, 'create'])->name('resource.create');
-
-//     Route::view('/cybersecurity-governance', '4-Process/17-GrcDomain/1-CybersecurityStrategy');
-//     Route::view('/cybersecurity-strategy', '4-Process/17-GrcDomain/2-CybersecurityManagement');
-//     Route::view('/cybersecurity-policies', '4-Process/17-GrcDomain/3-CybersecurityPoliciesAndProcedure');
-//     Route::view('/cybersecurity-roles-and-responsibilities', '4-Process/17-GrcDomain/4-CybersecurityRiskManagement');
-//     Route::view('/cybersecurity-project-management', '4-Process/17-GrcDomain/5-CybersecurityItProjectManagement');
-//     Route::view('/cybersecurity-awareness', '4-Process/17-GrcDomain/6-ComplianceCybersecurityStandard');
-//     Route::view('/cybersecurity-training', '4-Process/17-GrcDomain/28-PeriodicalCybersecurityReview');
-//     Route::view('/cybersecurity-risk-management', '4-Process/17-GrcDomain/29-CybersecurityHR');
-//     Route::view('/cybersecurity-regulatory-compliance', '4-Process/17-GrcDomain/30-CybersecurityAwarenessTraining');
-//     Route::view('/cybersecurity-review', '4-Process/17-GrcDomain/7-CybersecurityAssetManagement');
-//     Route::view('/cybersecurity-audit', '4-Process/17-GrcDomain/8-IdentityAccessManagement');
-//     Route::view('/human-resources', '4-Process/17-GrcDomain/9-InformationSystemProcessing');
-//     Route::view('/physical-security', '4-Process/17-GrcDomain/10-EmailProtection');
-//     Route::view('/asset-management', '4-Process/17-GrcDomain/11-NetworkSecurityManagement');
-//     Route::view('/cybersecurity-architecture', '4-Process/17-GrcDomain/12-MobileDeviceSecurity');
-//     Route::view('/identity-and-access-management', '4-Process/17-GrcDomain/13-DataInformationSecurity');
-//     Route::view('/application-security', '4-Process/17-GrcDomain/14-Cryptography');
-//     Route::view('/change-management', '4-Process/17-GrcDomain/change-management');
-//     Route::view('/infrastructure-security', '4-Process/17-GrcDomain/16-VulnerabilitManagement');
-//     Route::view('/cryptography', '4-Process/17-GrcDomain/17-PenetrationTesting');
-//     Route::view('/bring-your-own-device', '4-Process/17-GrcDomain/18-CybersecurityEventLogs');
-//     Route::view('/secure-disposal', '4-Process/17-GrcDomain/19-CybersecurityIncidentManagement');
-//     Route::view('/payment-system', '4-Process/17-GrcDomain/20-PhysicalSecurity');
-//     Route::view('/electronic-banking', '4-Process/17-GrcDomain/21-WebApplicationSecurity');
-//     Route::view('/cybersecurity-event-management', '4-Process/17-GrcDomain/22-CybersecurityResilience');
-//     Route::view('/cybersecurity-incident-management', '4-Process/17-GrcDomain/23-ThirdPartyCybersecurity');
-//     Route::view('/threat-management', '4-Process/17-GrcDomain/24-CloudComputing');
-//     Route::view('/vulnerability-management', '4-Process/17-GrcDomain/25-IndustrialControls');
-//     Route::view('/contract-and-vendor', '4-Process/17-GrcDomain/26-ChangeManagement');
-//     Route::view('/outsourcing', '4-Process/17-GrcDomain/27-SecureDataDisposal');
-//     Route::view('/cloud-computing', '4-Process/17-GrcDomain/31-CloudComputing');
-// });
 
 
 // Hot Topics
@@ -1033,74 +1061,7 @@ Route::view('/management-review-27001', '4-Process/iso-27001/management-review')
 Route::get('/generate-ppt', [PresentationController::class, 'generateChart'])->name('generate.ppt');
 Route::get('/pen-test-generate-ppt/{va_pt_test_id}', [PresentationController::class, 'generatePenTestChart'])->name('pen-test.generate.ppt');
 
-Route::controller(TPTExpertsControl::class)->group(function () {
 
-    Route::get('/tpt-experts', 'index')->name('tpt-experts.index');
-    Route::get('/tpt-experts/{expert:tpt_experties_id}', 'show')->name('tpt-experts.show');
-    Route::get('/tpt-experts-input', 'create')->name('tpt-experts.create');
-    Route::get('/tpt-experts/edit/{expert:tpt_experties_id}', 'edit')->name('tpt-experts.edit');
-    Route::post('/tpt-experts', 'store')->name('tpt-experts.store');
-    Route::put('/tpt-experts/{expert}', 'update')->name('tpt-experts.update');
-    Route::delete('/tpt-experts/delete', 'destroy')->name('tpt-experts.delete');
-});
-
-Route::controller(ThirdPartyController::class)->group(function () {
-    Route::get('/third-party', 'index')->name('third-party.index');
-    Route::get('/third-party/create', 'create')->name('third-party.create');
-    Route::get('/third-party/{thirdParty:tpt_id}', 'show')->name('third-party.show');
-    Route::get('/third-party/edit/{thirdParty:tpt_id}', 'edit')->name('third-party.edit');
-    Route::post('/third-party', 'store')->name('third-party.store');
-    Route::put('/third-party/{thirdParty}', 'update')->name('third-party.update');
-    Route::delete('/third-party/delete', 'destroy')->name('third-party.delete');
-});
-
-Route::controller(PatchController::class)->group(function () {
-    Route::get('/patch', 'index')->name('patch.index');
-    Route::get('/patch/create', 'create')->name('patch.create');
-    Route::get('/patch/{patch:patch_id}', 'show')->name('patch.show');
-    Route::get('/patch/edit/{patch:patch_id}', 'edit')->name('patch.edit');
-    Route::post('/patch', 'store')->name('patch.store');
-    Route::put('/patch/{patch}', 'update')->name('patch.update');
-    Route::delete('/patch/delete', 'destroy')->name('patch.delete');
-});
-
-Route::controller(PenTestController::class)->group(function () {
-    Route::get('/va-pen-test', 'index')->name('pen-test.index');
-    Route::get('/va-pen-test/create', 'create')->name('pen-test.create');
-    Route::get('/va-pen-test/{penTest:va_pt_test_id}', 'show')->name('pen-test.show');
-    Route::get('/va-pen-test/edit/{penTest:va_pt_test_id}', 'edit')->name('pen-test.edit');
-    Route::post('/va-pen-test', 'store')->name('pen-test.store');
-    Route::put('/va-pen-test/{penTest}', 'update')->name('pen-test.update');
-    Route::delete('/va-pen-test/delete', 'destroy')->name('pen-test.delete');
-});
-
-
-Route::controller(PenTestFindingsController::class)->group(function () {
-    Route::get('/va-pen-test-findings', 'index')->name('pen-test-findings.index');
-    Route::get('/va-pen-test-findings/create/{penTest:va_pt_test_id}', 'create')->name('pen-test-findings.create');
-    Route::get('/va-pen-test-findings/{penTestFinding:va_pt_finding_id}', 'show')->name('pen-test-findings.show');
-    Route::get('/va-pen-test-findings/edit/{penTestFinding:va_pt_finding_id}', 'edit')->name('pen-test-findings.edit');
-    Route::post('/va-pen-test-findings/{penTest}', 'store')->name('pen-test-findings.store');
-    Route::put('/va-pen-test-findings/{penTestFinding}', 'update')->name('pen-test-findings.update');
-    Route::delete('/va-pen-test-findings/delete', 'destroy')->name('pen-test-findings.delete');
-    Route::post('/upload-poc', 'uploadPoc')->name('pen-test-findings.upload');
-    Route::delete('/delete-temp-poc', 'deleteTempPoc')->name('pen-test-findings.poc.temp.destroy');
-    Route::delete('/delete-poc/{attachment}', 'deletePoc')->name('pen-test-findings.poc.destroy');
-});
-
-Route::controller(PenTestDashboardController::class)->group(function () {
-    Route::get('/va-pen-test-list', 'list')->name('pen-test-dashboard.index');
-    Route::get('/va-pen-test-dashboard/{penTest:va_pt_test_id}', 'index')->name('pen-test-dashboard');
-    Route::get('/va-pen-test-level/{penTest:va_pt_test_id}/{level}', 'level')->name('pen-test-level');
-    Route::get('/va-pen-test-level-status/{penTest:va_pt_test_id}', 'levelStatus')->name('pen-test-level-status');
-    Route::get('/va-pen-test-status/{penTest:va_pt_test_id}/{status}', 'status')->name('pen-test-status');
-    Route::get('/va-pen-test-level-records/{penTest:va_pt_test_id}', 'levelRecords')->name('pen-test-level-records');
-});
-
-Route::controller(PenTestReportController::class)->group(function () {
-    Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
-    Route::get('/va-asset-vs-risk', 'assetVsRisk')->name('pen-test-asset-vs-risk');
-});
 
 // Asset Data Uploader
 Route::get('/upload-assets', [DataUploaderController::class, 'create'])->name('upload.assets.create');
