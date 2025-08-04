@@ -26,7 +26,7 @@ class ControlAssessmentFindingController extends Controller
         return view('4-Process\assessments\control-assessment-findings\show', compact('controlAssessmentFinding'));
     }
 
-    public function create(ControlAssessment $controlAssessment, Request $request)
+    public function create(ControlAssessment $controlAssessment)
     {
         $controlAssessment->load(['bestPractice', 'location', 'auditor', 'classification']);
         $controlAssessmentFinding = null;

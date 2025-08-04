@@ -112,10 +112,9 @@
                             </x-table.td>
                             <x-table.td action_col="true">
 
-                                {{-- <x-action.view route_name="audit-assessment-findings.show" param="{{ $finding->id }}" />
-                                <x-action.edit route_name="audit-assessment-findings.edit" param="{{ $finding->id }}" />
-                                <x-action.delete route_name="audit-assessment-findings.destroy"
-                                    param="{{ $finding->id }}" /> --}}
+                                <x-action.view route_name="audit-findings.show" param="{{ $finding->id }}" />
+                                <x-action.edit route_name="audit-findings.edit" param="{{ $finding->id }}" />
+                                <x-action.delete route_name="audit-findings.destroy" param="{{ $finding->id }}" />
                             </x-table.td>
                         </tr>
                     @endforeach

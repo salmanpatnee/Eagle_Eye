@@ -18,18 +18,23 @@ use Illuminate\Support\Facades\DB;
 
 class AuditFindingController extends Controller
 {
-    private $_routeName = "audit-findings";
-    private $_primaryKey = "audit_finding_id";
-
-    public function create(Audit $audit, Request $request)
+    public function show(AuditFinding $auditFinding)
     {
-        $audit->load(['bestPractice.controls', 'location', 'auditor', 'classification']);
-        $controls = $audit->bestPractice->controls;
+        $auditFinding->load('categories', 'controls', 'audit', 'domain', 'auditee', 'department', 'owner', 'custodians', 'assets', 'assetsGroups');
 
+        return view('4-Process/assessments/audit-assessment-findings/show', compact('auditFinding'));
+    }
+
+    public function create(Audit $auditAssessment)
+    {
+        $auditAssessment->load(['bestPractice.controls', 'location', 'auditor', 'classification']);
+        $controls = $auditAssessment->bestPractice->controls;
+        $auditFinding = null;
+        $assetIds = $assetGroupIds = $custodianRoleIds = $controlIds = $categoryIds = [];
 
         $assessedControlIds = DB::table('audit_finding_vs_control_table')
             ->join('audit_findings_table', 'audit_finding_vs_control_table.audit_finding_id', '=', 'audit_findings_table.audit_finding_id')
-            ->where('audit_findings_table.audit_id', $audit->audit_id) // Filter by current audit
+            ->where('audit_findings_table.audit_id', $auditAssessment->audit_id) // Filter by current audit
             ->pluck('audit_finding_vs_control_table.control_id');
 
         $statues = AuditFinding::STATUSES;
@@ -49,39 +54,10 @@ class AuditFindingController extends Controller
         $assets = Asset::select('id', 'asset_id', 'asset_name')->get();
         $assetGroups = AssetGroup::select('id', 'asset_group_id', 'asset_group_name')->get();
 
-        return view('4-Process/9-Audit/3-AuditFindingForm', compact('controls', 'categories', 'audit', 'departments', 'domains', 'auditees', 'statues', 'owners', 'custodians', 'assets', 'assetGroups'));
+        return view('4-Process/assessments/audit-assessment-findings/create', compact('controls', 'categories', 'auditAssessment', 'departments', 'domains', 'auditees', 'statues', 'owners', 'custodians', 'assets', 'assetGroups', 'auditFinding', 'assetIds', 'assetGroupIds', 'custodianRoleIds', 'controlIds', 'categoryIds'));
     }
 
-    public function edit(AuditFinding $auditFinding, Request $request)
-    {
-        $auditFinding->load('categories', 'controls', 'audit', 'domain', 'auditee', 'department');
-
-        // TODO
-        // Many to Many controls
-
-        $controls = ControlMaster::all();
-        $statues = AuditFinding::STATUSES;
-        $owners = Owner::select('owner_name', 'owner_role_id')->get();
-        $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->distinct()->get();
-
-        $categories = Category::select('id', 'category_id', 'category_name')
-            ->distinct()
-            ->get();
-        $departments = Department::select('id', 'department_id', 'department_name')->get();
-        $domains = Domain::select('id', 'main_domain_id', 'main_domain_name')->get();
-        $auditees = Auditee::select('id', 'auditee_id', 'auditee_first_name', 'auditee_last_name')->get();
-        $controlIds = $auditFinding->controls()->pluck('control_master_table.control_id')->toArray();
-        $categoryIds = $auditFinding->categories()->pluck('category_table.category_id')->toArray();
-        $custodianRoleIds = $auditFinding->custodians()->pluck('custodian_table.custodian_role_id')->toArray();
-        $assets = Asset::select('id', 'asset_id', 'asset_name')->get();
-        $assetGroups = AssetGroup::select('id', 'asset_group_id', 'asset_group_name')->get();
-        $assetIds = $auditFinding->assets()->pluck('asset_register_table.asset_id')->toArray();
-        $assetGroupIds = $auditFinding->assetsGroups()->pluck('asset_group_table.asset_group_id')->toArray();
-
-        return view('4-Process/9-Audit/3-AuditFindingEditForm', compact('controls', 'categories', 'departments', 'domains', 'auditees', 'auditFinding', 'controlIds', 'categoryIds', 'statues', 'owners', 'custodians', 'custodianRoleIds', 'assets', 'assetGroups', 'assetIds', 'assetGroupIds'));
-    }
-
-    public function store(Audit $audit, Request $request)
+    public function store(Audit $auditAssessment, Request $request)
     {
         $attributes = $request->validate([
             'audit_finding_id' => ['required', 'unique:audit_findings_table'],
@@ -109,13 +85,13 @@ class AuditFindingController extends Controller
             'assetsGroups' => ['nullable'],
         ]);
 
-        $custodians = $attributes['custodians'];    
+        $custodians = $attributes['custodians'] ?? [];
         unset($attributes['custodians']);
 
-        $assets = $attributes['assets'];
+        $assets = $attributes['assets'] ?? [];
         unset($attributes['assets']);
 
-        $assetsGroups = $attributes['assetsGroups'];
+        $assetsGroups = $attributes['assetsGroups'] ?? [];
         unset($attributes['assetsGroups']);
 
         $categories = $attributes['categories'];
@@ -124,33 +100,48 @@ class AuditFindingController extends Controller
         $controls = $attributes['controls'];
         unset($attributes['controls']);
 
-        $auditFinding = $audit->findings()->create($attributes);
+        $auditFinding = $auditAssessment->findings()->create($attributes);
 
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $auditFinding->categories()->attach($categoriesArray);
-        }
+        $auditFinding->categories()->attach($categories ?? []);
+        $auditFinding->controls()->attach($controls ?? []);
+        $auditFinding->custodians()->attach($custodians ?? []);
+        $auditFinding->assets()->attach($assets ?? []);
+        $auditFinding->assetsGroups()->attach($assetsGroups ?? []);
 
-        if ($controls && $controlsArray = json_decode($controls, true)) {
-            $auditFinding->controls()->attach($controlsArray);
-        }
-
-        if ($custodians && $custodiansArray = json_decode($custodians, true)) {
-            $auditFinding->custodians()->attach($custodiansArray);
-        }
-
-        if ($assets && $assetsArray = json_decode($assets, true)) {
-            $auditFinding->assets()->attach($assetsArray);
-        }
-
-        if ($assetsGroups && $assetsGroupsArray = json_decode($assetsGroups, true)) {
-            $auditFinding->assetsGroups()->attach($assetsGroupsArray);
-        }   
 
         if ($request->input('submit') === 'exit') {
-            return redirect(route('audit-registrations.index'));
+            return redirect(route('audit-assessments.index'))->with('success', 'Audit Finding created successfully.');
         }
 
         return redirect()->back();
+    }
+
+
+    public function edit(AuditFinding $auditFinding, Request $request)
+    {
+        $auditFinding->load('categories', 'controls', 'audit', 'domain', 'auditee', 'department');
+        $auditAssessment = $auditFinding->audit;
+        $auditAssessment->load(['bestPractice.controls', 'location', 'auditor', 'classification']);
+        $controls = ControlMaster::all();
+        $statues = AuditFinding::STATUSES;
+        $owners = Owner::select('owner_name', 'owner_role_id')->get();
+        $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->distinct()->get();
+
+        $categories = Category::select('id', 'category_id', 'category_name')
+            ->distinct()
+            ->get();
+        $departments = Department::select('id', 'department_id', 'department_name')->get();
+        $domains = Domain::select('id', 'main_domain_id', 'main_domain_name')->get();
+        $auditees = Auditee::select('id', 'auditee_id', 'auditee_first_name', 'auditee_last_name')->get();
+        $controlIds = $auditFinding->controls()->pluck('control_master_table.control_id')->toArray();
+        $categoryIds = $auditFinding->categories()->pluck('category_table.category_id')->toArray();
+        $custodianRoleIds = $auditFinding->custodians()->pluck('custodian_table.custodian_role_id')->toArray();
+        $assets = Asset::select('id', 'asset_id', 'asset_name')->get();
+        $assetGroups = AssetGroup::select('id', 'asset_group_id', 'asset_group_name')->get();
+        $assetIds = $auditFinding->assets()->pluck('asset_register_table.asset_id')->toArray();
+        $assetGroupIds = $auditFinding->assetsGroups()->pluck('asset_group_table.asset_group_id')->toArray();
+
+        return view('4-Process/assessments/audit-assessment-findings/create', compact('controls', 'categories', 'departments', 'domains', 'auditees', 'auditFinding', 'controlIds', 'categoryIds', 'statues', 'owners', 'custodians', 'custodianRoleIds', 'assets', 'assetGroups', 'assetIds', 'assetGroupIds', 'auditAssessment'));
     }
 
     public function update(AuditFinding $auditFinding, Request $request)
@@ -176,7 +167,7 @@ class AuditFindingController extends Controller
             'audit_finding_status' => ['nullable'],
             'closure_expected_date' => ['nullable'],
             'owner_id' => ['nullable'],
-            'custodians' => ['nullable'], 
+            'custodians' => ['nullable'],
             'assets' => ['nullable'],
             'assetsGroups' => ['nullable'],
         ]);
@@ -198,94 +189,26 @@ class AuditFindingController extends Controller
 
         $auditFinding->update($attributes);
 
-        if ($categories && $categoriesArray = json_decode($categories, true)) {
-            $auditFinding->categories()->sync($categoriesArray);
-        }
+        $auditFinding->categories()->sync($categories ?? []);
+        $auditFinding->controls()->sync($controls ?? []);
+        $auditFinding->custodians()->sync($custodians ?? []);
+        $auditFinding->assets()->sync($assets ?? []);
+        $auditFinding->assetsGroups()->sync($assetsGroups ?? []);
 
-        if ($controls && $controlsArray = json_decode($controls, true)) {
-            $auditFinding->controls()->sync($controlsArray);
-        }
-
-        if ($custodians && $custodiansArray = json_decode($custodians, true)) {
-            $auditFinding->custodians()->sync($custodiansArray);
-        }
-
-        if ($assets && $assetsArray = json_decode($assets, true)) {
-            $auditFinding->assets()->sync($assetsArray);
-        }
-
-        if ($assetsGroups && $assetsGroupsArray = json_decode($assetsGroups, true)) {
-            $auditFinding->assetsGroups()->sync($assetsGroupsArray);
-        }
-
-
-        
-
-        return redirect(route('audit-registrations.index'));
+        return redirect(route('audit-assessments.index'))->with('success', 'Audit Finding updated successfully.');
     }
 
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
-    {
-        $columns = DB::table('audit_findings_table')->get();
-        return view('4-Process/9-Audit/3-AuditFindingList', compact('columns'));
-    }
-
-    // 3.Controller - DELETE RECORD FROM LIST
     public function destroy(AuditFinding $auditFinding)
     {
 
         $auditFinding->categories()->detach();
         $auditFinding->controls()->detach();
+        $auditFinding->custodians()->detach();
+        $auditFinding->assets()->detach();
+        $auditFinding->assetsGroups()->detach();
+
         $auditFinding->delete();
 
-        return redirect()->route('audit-registrations.index');
-    }
-
-
-
-    // 4.Controller - DETAILED TABLE
-    public function show(AuditFinding $auditFinding)
-    {
-        $auditFinding->load('categories', 'controls', 'audit', 'domain', 'auditee', 'department', 'owner', 'custodians', 'assets', 'assetsGroups');
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-
-        return view('4-Process/9-Audit/3-AuditFindingTable', compact('auditFinding', 'routeName', 'primaryKey'));
-    }
-
-
-
-
-
-    // 6.Controller - FIELD RELATED TO THE ANOTHER TABLE
-    public function view()
-    {
-        $AuditNames = DB::table('audit_master_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $AuditCatNames = DB::table('category_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $ControlNames = DB::table('control_master_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $DomainNames = DB::table('domain_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $AuditeeNames = DB::table('auditee_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        $AuditeeDepartNames = DB::table('department_table')
-            ->select('*')
-            ->distinct()
-            ->get();
-        return view('4-Process/9-Audit/3-AuditFindingForm', compact('AuditNames', 'AuditCatNames', 'ControlNames', 'DomainNames', 'AuditeeNames', 'AuditeeDepartNames'));
+        return redirect()->route('audit-assessments.index')->with('success', 'Audit Finding deleted successfully.');
     }
 }

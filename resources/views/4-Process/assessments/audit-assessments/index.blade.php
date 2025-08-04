@@ -63,7 +63,7 @@
                         </x-table.td>
 
                         <x-table.td action_col="true">
-                            {{-- <x-action.add route_name="audit-assessment-findings.create" param="{{ $audit->id }}" /> --}}
+                            <x-action.add route_name="audit-findings.create" param="{{ $audit->id }}" />
                             <x-action.view route_name="audit-assessments.show" param="{{ $audit->id }}" />
                             <x-action.edit route_name="audit-assessments.edit" param="{{ $audit->id }}" />
                             <x-action.delete route_name="audit-assessments.destroy" param="{{ $audit->id }}" />

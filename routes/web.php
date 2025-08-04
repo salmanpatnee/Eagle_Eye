@@ -282,6 +282,11 @@ Route::controller(AuditPlanReportController::class)->group(function () {
 // ------------AUDIT ASSESSMENTS--------------
 
 Route::resource('audit-assessments', AuditMaterController::class);
+Route::resource('audit-findings', AuditFindingController::class)->except(['index', 'create', 'store']);
+Route::controller(AuditFindingController::class)->group(function () {
+    Route::get('/audit-findings/create/{auditAssessment}', 'create')->name('audit-findings.create');
+    Route::post('/audit-findings/{auditAssessment}', 'store')->name('audit-findings.store');
+});
 
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
@@ -490,16 +495,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::controller(AuditFindingController::class)->group(function () {
-        Route::get('/audit-findings/create/{audit:audit_id}', 'create')->name('audit-findings.create');
-        Route::get('/audit-findings/{auditFinding:audit_finding_id}', 'show')->name('audit-findings.show');
-        Route::post('/audit-findings/{audit:audit_id}', 'store')->name('audit-findings.store');
-        Route::get('/audit-findings/{auditFinding:audit_finding_id}/edit', 'edit')->name('audit-findings.edit');
-        Route::patch('/audit-findings/{auditFinding}', 'update')->name('audit-findings.update');
-        Route::delete('/audit-findings/{auditFinding}', 'destroy')->name('audit-findings.destroy');
-        Route::get('/audit-finding-input', 'view');
-        Route::get('/audit-finding-list', 'index');
-    });
+
 
     Route::controller(ControlAuditFindingController::class)->group(function () {
         Route::get('/controls-audit-findings', 'index')->name('control-vs-audit');
