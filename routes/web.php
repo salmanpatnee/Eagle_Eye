@@ -296,19 +296,10 @@ Route::controller(ControlAuditFindingController::class)->group(function () {
 
 // ------------VULNERABILITY ASSESSMENT / PENETRATION TEST TRACKING--------------
 
+Route::resource('patches', PatchController::class);
 Route::resource('third-party', ThirdPartyController::class);
 Route::resource('tpt-experts', TPTExpertsControl::class);
 
-
-Route::controller(PatchController::class)->group(function () {
-    Route::get('/patch', 'index')->name('patch.index');
-    Route::get('/patch/create', 'create')->name('patch.create');
-    Route::get('/patch/{patch:patch_id}', 'show')->name('patch.show');
-    Route::get('/patch/edit/{patch:patch_id}', 'edit')->name('patch.edit');
-    Route::post('/patch', 'store')->name('patch.store');
-    Route::put('/patch/{patch}', 'update')->name('patch.update');
-    Route::delete('/patch/delete', 'destroy')->name('patch.delete');
-});
 
 Route::controller(PenTestController::class)->group(function () {
     Route::get('/va-pen-test', 'index')->name('pen-test.index');

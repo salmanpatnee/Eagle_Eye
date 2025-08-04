@@ -8,39 +8,27 @@ use Illuminate\Http\Request;
 
 class PatchController extends Controller
 {
-    private $_routeName = "patch";
-    private $_primaryKey = "patch_id";
 
     public function index(Request $request)
     {
-        $patches = Patch::with('thirdParty')->get();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $patches = Patch::with('thirdParty')->paginate(20);
 
-        return view('4-Process/patch/index', compact('patches', 'routeName',  'primaryKey'));
+        return view('4-Process\vulnerability-management\patches\index', compact('patches'));
     }
 
     public function show(Patch $patch)
     {
         $patch->load('thirdParty');
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        $data = $patch;
 
-        return view('4-Process/patch/show', compact('patch', 'routeName', 'data', 'primaryKey'));
+        return view('4-Process\vulnerability-management\patches\show', compact('patch'));
     }
 
     public function create()
     {
         $thirdParties = ThirdParty::select('tpt_id', 'tpt_name')->get();
+        $patch = null;
 
-
-        $data = $patch = null;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-
-        return view('4-Process/patch/create', compact('patch', 'data', 'routeName', 'primaryKey', 'thirdParties'));
+        return view('4-Process\vulnerability-management\patches\create', compact('patch', 'thirdParties'));
     }
 
     public function store(Request $request)
@@ -54,7 +42,7 @@ class PatchController extends Controller
 
         Patch::create($attributes);
 
-        return redirect(route('patch.index'))
+        return redirect(route('patches.index'))
             ->with('success', 'Patch saved successfully.');
     }
 
@@ -62,11 +50,7 @@ class PatchController extends Controller
     {
         $thirdParties = ThirdParty::select('tpt_id', 'tpt_name')->get();
 
-        $data = $patch;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('4-Process/patch/create', compact('patch', 'data', 'routeName', 'primaryKey', 'thirdParties'));
+        return view('4-Process\vulnerability-management\patches\create', compact('patch', 'thirdParties'));
     }
 
     public function update(Patch $patch, Request $request)
@@ -80,20 +64,14 @@ class PatchController extends Controller
 
         $patch->update($attributes);
 
-        return redirect(route('patch.index'))
+        return redirect(route('patches.index'))
             ->with('success', 'Patch saved successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Patch $patch)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-
-        Patch::where('patch_id', $attributes['record'])->delete();
-
-        return redirect(route('patch.index'))
+        $patch->delete();
+        return redirect(route('patches.index'))
             ->with('success', 'Patch deleted successfully.');
     }
 }
