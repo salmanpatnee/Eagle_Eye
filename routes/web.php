@@ -116,11 +116,20 @@ use Illuminate\Support\Facades\DB;
 
 Route::middleware(['guest'])->group(function () {
 
+    Route::view('/', 'welcome')->name('welcome');
+
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-
-    Route::view('/', 'welcome')->name('welcome');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::view('/home', 'home')->name('home');
+    Route::view('/compliance', '4-Process/compliance')->name('compliance');
+
+
+    Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
+});
+
 
 
 // ------------------- INITIAL SETUP -------------------
@@ -367,7 +376,7 @@ Route::get('/insert-record', function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
+
 
 
     // Route::post('/att', [ArtifactController::class, 'add'])->name('att.store');
@@ -390,15 +399,7 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/risk-identification-table/{risk_id}', 'show');
     });
 
-    // Process
 
-
-
-
-
-    Route::get('/compliance', function () {
-        return view('4-Process/1-compliance');
-    })->name('compliance');
 
 
     // Organization
@@ -452,9 +453,7 @@ Route::middleware(['auth'])->group(function () {
         return view('3-People/3-ExpertRoleInput');
     });
 
-    Route::get('/home', function () {
-        return view('2-ThreePs/2-HomePage');
-    })->name('home');
+
 
 
     // ------------Expertise---------------
