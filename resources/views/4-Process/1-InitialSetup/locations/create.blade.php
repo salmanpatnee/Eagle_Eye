@@ -66,7 +66,7 @@
                 </x-form.grid-col>
 
                 <div class="flex justify-end">
-                    <x-form.submit label="Location" label_ar="جهة" :isUpdate="$location?->location_id" />
+                    <x-form.submit label="Location" label_ar="الموقع" :isUpdate="$location?->location_id" />
                 </div>
             </div>
         </form>

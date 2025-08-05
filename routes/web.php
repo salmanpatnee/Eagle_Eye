@@ -305,6 +305,7 @@ Route::controller(PenTestFindingsController::class)->group(function () {
     Route::delete('/delete-temp-poc', 'deleteTempPoc')->name('va-pen-test-findings.poc.temp.destroy');
     Route::delete('/delete-poc/{attachment}', 'deletePoc')->name('va-pen-test-findings.poc.destroy');
 });
+
 Route::resource('patches', PatchController::class);
 Route::resource('third-party', ThirdPartyController::class);
 Route::resource('tpt-experts', TPTExpertsControl::class);
@@ -314,6 +315,12 @@ Route::controller(PenTestReportController::class)->group(function () {
     Route::get('/va-asset-vs-risk', 'assetVsRisk')->name('pen-test-asset-vs-risk.index');
     // Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
 });
+
+
+// ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
+
+Route::resource('cms/process', CMSController::class);
+
 
 
 Route::controller(PenTestDashboardController::class)->group(function () {
@@ -903,16 +910,7 @@ Route::prefix('cs-induction')->group(function () {
     Route::view('/cybersecurity-regulatory-compliance', '4-Process/17-GrcDomain/30-CybersecurityAwarenessTrainingCsIndu');
 });
 
-// Process
 
-
-Route::get('/process/list', [CMSController::class, 'processIndex'])->name('process.index');
-Route::get('/process/create', [CMSController::class, 'processCreate'])->name('process.create');
-Route::get('/process/cms/{process:process_id}', [CMSController::class, 'processShow'])->name('process.show');
-Route::post('/process', [CMSController::class, 'processStore'])->name('process.store');
-Route::get('/process/edit/{process}', [CMSController::class, 'processEdit'])->name('process.edit');
-Route::PUT('/process/{process}', [CMSController::class, 'processUpdate'])->name('process.update');
-Route::delete('/process', [CMSController::class, 'processDelete'])->name('process.destroy');
 
 
 

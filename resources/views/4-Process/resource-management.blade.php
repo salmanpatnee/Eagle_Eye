@@ -6,7 +6,7 @@
 </div>
 <div class="processes">
     <div class="spacebox"></div>
-    <a href="{{route('process.index')}}" class="boxhyperlink">
+    <a href="{{ route('process.index') }}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
@@ -19,5 +19,5 @@
         </div>
     </a>
     <div class="spacebox"></div>
-   
+
 </div>

@@ -1,205 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts/cms')
+@section('title', 'Process')
+@section('title_ar', 'العملية')
+@section('content')
+    <div>
+        <x-table.action-wrapper title="Process Details">
+            <x-action.button label="View" label_ar="منظر" route_name="process.index" />
+            <x-action.button label="Edit" label_ar="تحرير" route_name="process.edit" route_param="{{ $process->id }}" />
+        </x-table.action-wrapper>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div class="border-gray-100 border-t p-3">
+            <x-info-row>
+                <x-info-col label="Process ID" label_ar="رمز العملية">
+                    {{ $process->process_id }}
+                </x-info-col>
 
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool">
-    <meta name="description" content="Zain Cloud GRC Tool">
-    <!-- Boxicons Icons-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/6-Header/headertwo.css') }}">
-</head>
+                <x-info-col label="Process Name" label_ar="اسم العملية">
+                    {{ $process->title }}
+                </x-info-col>
+            </x-info-row>
 
-<body>
+            <x-info-row>
+                <x-info-col label="Process Name Arabic" label_ar="اسم العملية عربي">
+                    <span dir="rtl" style="padding-right: .5em">{{ $process->title_ar }}</span>
+                </x-info-col>
 
+            </x-info-row>
 
-    <!-- SIDEBAR -->
-    <div class="headersec">
-        <div class="headerleft">
-            @include('4-Process/headerleft')
-            <div class="headertext">
-                <p>نظام إدارة المحتوى: العملية</p>
-                <p>CMS: Process</p>
-            </div>
-
+            <x-info-col-lg label="Process Description" label_ar="وصف العملية">
+                {{ $process->description ?? '—' }}
+            </x-info-col-lg>
         </div>
-        <div class="text-center d-flex gap-3">
-            @include('partials.roles')
-            @include('4-Process/backbutton')
-        </div>
-    </div>
 
-    <div class="wrapper">
-        @include('4-Process/cms/process/sidebar')
-        <!-- SIDEBAR -->
-
-
-
-        <div class="IndiTable">
-
-            <div class="TableHeading">
-                <div class="PageHead">
-                    <p class="PageHeadArbTxt">العملية </p>
-                    <p class="PageHeadEngTxt">Process</p>
-                </div>
-                <div class="ButtonContainer">
-                    <a href="{{ route('process.index') }}" class="MoreButton">
-                        <p class="ButtonArbTxt">منظر</p>
-                        <p class="ButtonEngTxt">View</p>
-                    </a>
-
-                    <a href="{{ route('process.create') }}"
-                        class="{{ auth()->user()->can('manage-initial-setup') ? 'MoreButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">يضيف</p>
-                        <p class="ButtonEngTxt">Add</p>
-                    </a>
-                    <a href="{{ route('process.edit', $process?->id) }}"
-                        class="{{ auth()->user()->can('manage-initial-setup') ? 'MoreButton' : 'DisabledButton' }}">
-                        <p class="ButtonArbTxt">تحديث</p>
-                        <p class="ButtonEngTxt">Update</p>
-                    </a>
-                    <form method="POST" action="{{ route('process.destroy') }}" id="deleteForm">
-                        <input type="hidden" name="record" value="{{ $process->id }}">
-                        <button type="button" id="btnDelete"
-                            class="{{ auth()->user()->can('manage-initial-setup') ? 'DeleteButton' : 'DisabledButton' }}">
-                            <p class="ButtonArbTxt">يمسح</p>
-                            <p class="ButtonEngTxt">Delete</p>
-                        </button>
-                        @csrf
-                        @method('DELETE')
-                    </form>
-
-                </div>
-            </div>
-
-            <table cellspacing="0">
-                <div class="ContentTableSection">
-                    <div class="ContentTable">
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Process ID</p>
-                                <p class="FieldHeadArbTxt">رمز العملية</p>
-                            </div>
-                            <p class="sh-tx">{{ $process->process_id }}</p>
-                        </div>
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Process Name</p>
-                                <p class="FieldHeadArbTxt">اسم العملية</p>
-                            </div>
-                            <p class="sh-tx">{{ $process->title }}</p>
-                        </div>
-                    </div>
-
-                    <div class="ContentTable">
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Process Name Arabic</p>
-                                <p class="FieldHeadArbTxt">اسم العملية عربي</p>
-                            </div>
-                            <p class="sh-tx" dir="rtl" style="padding-right: .5em">{{ $process->title_ar }}</p>
-                        </div>
-                        <div class="column">
-                            {{-- <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Process City</p>
-                                <p class="FieldHeadArbTxt">المدينة العملية</p>
-                            </div>
-                            <p class="sh-tx">{{ $process->process_city }}</p> --}}
-                        </div>
-                    </div>
-                    <div class="ContentTablebg">
-                        <div class="column">
-                            <div class="FieldHead">
-                                <p class="FieldHeadEngTxt">Process Description</p>
-                                <p class="FieldHeadArbTxt">وصف العملية</p>
-                            </div>
-                            <p class="bg-tx">{{ $process->description }}</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </table>
-            <div class="ListTable" id="attachments">
-                <table cellspacing="0">
-                    <tr>
-                        <th>
-                            <p class="ListHeadArbTxt">رمز </p>
-                            <p class="ListHeadEngTxt">S.No</p>
-                        </th>
-                        <th>
-                            <p class="ListHeadArbTxt">اسم المورد</p>
-                            <p class="ListHeadEngTxt">Resource Name</p>
-                        </th>
-                        <th>
-                            <p class="ListHeadArbTxt">نوع المورد</p>
-                            <p class="ListHeadEngTxt">Resource Type</p>
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @forelse ($process->resources as $resource)
+        <div>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="S.No" label_ar="رقم" />
+                    <x-table.th label="Resource Name" label_ar="اسم المورد" />
+                    <x-table.th label="Resource Type" label_ar="نوع المورد" />
+                    <x-table.th label="Action" label_ar="إجراء " />
+                </x-table.thead>
+                <x-table.tbody>
+                    @foreach ($process->resources as $resource)
                         <tr>
-                            <td>{{ $loop->index + 1 }}</td>
-                            <td>
+                            <x-table.td> {{ $loop->index + 1 }}</x-table.td>
+                            <x-table.td>
                                 {{ $resource->file_name }}
-                            </td>
-                            <td>
+                            </x-table.td>
+                            <x-table.td>
                                 {{ ucfirst($resource->resource_type) }}
-                            </td>
-                            <td class="flex items-center justify-end">
-                                {{-- <small class="me-1">
-                                    <a href="{{ asset('storage/' . $resource->path) }}" download>View</a>
-                                </small> --}}
-                                <small>
-                                    <form method="POST"
-                                        action="{{ route('process.resource.destroy', $resource->id) }}">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn-transparent" type="submit">Delete</button>
-                                    </form>
-                                </small>
-                            </td>
+                            </x-table.td>
+
+                            <x-table.td action_col="true">
+                                <x-action.delete route_name="process.resource.destroy" param="{{ $resource->id }}" />
+                            </x-table.td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="text-center">
-                                <p>No resources found</p>
-                            </td>
-                        </tr>
-                    @endforelse
-                </table>
-            </div>
+                    @endforeach
+                </x-table.tbody>
+            </x-table.table>
         </div>
-
     </div>
-    @include('components.delete-confirmation-modal')
-
-
-
-    <script src="{{ asset('Css/4-Process/1-Form/1-Form.js') }}" async></script>
-    <script src="{{ asset('/Css/7-Sidebar/2-Sidebar.js') }}" async></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-        document.getElementById('btnDelete').addEventListener('click', function(event) {
-            event.preventDefault();
-            window.deleteConfirmationModal.show(document.getElementById('deleteForm'));
-        });
-    </script>
-
-
-</body>
-
-</html>
+@endsection
