@@ -321,7 +321,8 @@ Route::controller(PenTestReportController::class)->group(function () {
 
 Route::resource('cms/process', CMSController::class);
 
-
+Route::get('/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
+Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
 
 Route::controller(PenTestDashboardController::class)->group(function () {
     Route::get('/va-pen-test-list', 'list')->name('pen-test-dashboard.index');
@@ -914,8 +915,7 @@ Route::prefix('cs-induction')->group(function () {
 
 
 
-Route::get('/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
-Route::post('/upload-resource', [ResourceController::class, 'upload'])->name('upload.resource');
+
 
 Route::get('/process', [ProcessController::class, 'index']);
 Route::get('/process/{process:process_id}', [ProcessController::class, 'show'])->name('process.view.show');

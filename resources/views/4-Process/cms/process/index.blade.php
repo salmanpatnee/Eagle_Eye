@@ -22,6 +22,10 @@
                         <x-table.td>{{ $row->process_id }}</x-table.td>
                         <x-table.td>{{ $row->title }}</x-table.td>
                         <x-table.td action_col="true">
+                            <a href="{{ route('resource.create', $row->id) }}"
+                                class="inline-flex items-center justify-center p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-blue-600 transition-colors">
+                                <x-icons.media />
+                            </a>
                             <x-action.view route_name="process.show" param="{{ $row->id }}" />
                             <x-action.edit route_name="process.edit" param="{{ $row->id }}" />
                             <x-action.delete route_name="process.destroy" param="{{ $row->id }}" />

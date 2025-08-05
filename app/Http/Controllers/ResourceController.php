@@ -13,7 +13,7 @@ class ResourceController extends Controller
         return view('4-Process/cms/resources/create', compact('process'));
     }
 
-    public function upload(Request $request)
+    public function store(Request $request)
     {
         try {
             $validatedData = $request->validate([
