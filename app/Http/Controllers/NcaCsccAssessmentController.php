@@ -18,7 +18,7 @@ class NcaCsccAssessmentController extends Controller
             ->get();
 
 
-        return view('4-Process/18-Reporting/1-RegulatoryReporting/3-NcaCsccAssessmentReport', ['data' => $data]);
+        return view('process/18-Reporting/1-RegulatoryReporting/3-NcaCsccAssessmentReport', ['data' => $data]);
     }
 
     public function show(string $control_id)
@@ -30,7 +30,7 @@ class NcaCsccAssessmentController extends Controller
             ->where('master.id', '=', $control->id)
             ->get();
 
-        return view('4-Process/18-Reporting/1-RegulatoryReporting/1-NcaEccAssessmentReportShow', [
+        return view('process/18-Reporting/1-RegulatoryReporting/1-NcaEccAssessmentReportShow', [
             'report' => $report[0]
         ]);
     }

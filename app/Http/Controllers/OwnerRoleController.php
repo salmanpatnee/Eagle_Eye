@@ -12,24 +12,24 @@ class OwnerRoleController extends Controller
     public function index()
     {
         $ownerRoles = OwnerRole::paginate(20);
-        return view('4-Process/1-InitialSetup/owner-roles/index', compact('ownerRoles'));
+        return view('process/1-InitialSetup/owner-roles/index', compact('ownerRoles'));
     }
 
     public function show(OwnerRole $ownerRole)
     {
-        return view('4-Process/1-InitialSetup/owner-roles/show', compact('ownerRole'));
+        return view('process/1-InitialSetup/owner-roles/show', compact('ownerRole'));
     }
 
     public function create()
     {
         $ownerRole = null;
-        return view('4-Process/1-InitialSetup/owner-roles/create', compact('ownerRole'));
+        return view('process/1-InitialSetup/owner-roles/create', compact('ownerRole'));
     }
 
     // To edit the table
     public function edit(OwnerRole $ownerRole)
     {
-        return view('4-Process/1-InitialSetup/owner-roles/create', compact('ownerRole'));
+        return view('process/1-InitialSetup/owner-roles/create', compact('ownerRole'));
     }
 
 

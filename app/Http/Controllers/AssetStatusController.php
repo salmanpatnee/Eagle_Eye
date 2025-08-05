@@ -14,19 +14,19 @@ class AssetStatusController extends Controller
     public function index()
     {
         $assetStatus = AssetStatus::all();
-        return view('4-Process/assets/asset-status/index', compact('assetStatus'));
+        return view('process/assets/asset-status/index', compact('assetStatus'));
     }
 
     public function show(AssetStatus $assetStatus)
     {
-        return view('4-Process/assets/asset-status/show', compact('assetStatus'));
+        return view('process/assets/asset-status/show', compact('assetStatus'));
     }
 
     // To add data into the table
     public function create()
     {
         $assetStatus = null;
-        return view('4-Process/assets/asset-status/create', compact('assetStatus'));
+        return view('process/assets/asset-status/create', compact('assetStatus'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class AssetStatusController extends Controller
     // To edit the table
     public function edit(AssetStatus $assetStatus)
     {
-        return view('4-Process/assets/asset-status/create', compact('assetStatus'));
+        return view('process/assets/asset-status/create', compact('assetStatus'));
     }
 
     public function update(AssetStatus $assetStatus, Request $request)

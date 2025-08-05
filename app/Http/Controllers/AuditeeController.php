@@ -12,13 +12,13 @@ class AuditeeController extends Controller
     public function index()
     {
         $auditees = Auditee::with('department')->paginate(20);
-        return view('4-Process\audit-management\auditee\index', compact('auditees'));
+        return view('process\audit-management\auditee\index', compact('auditees'));
     }
 
     public function show(Auditee $auditee)
     {
         $auditee->load('department');
-        return view('4-Process\audit-management\auditee\show', compact('auditee'));
+        return view('process\audit-management\auditee\show', compact('auditee'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class AuditeeController extends Controller
         $auditee = null;
         $departments = Department::select('department_id', 'department_name')->distinct()->get();
 
-        return view('4-Process\audit-management\auditee\create', compact('departments', 'auditee'));
+        return view('process\audit-management\auditee\create', compact('departments', 'auditee'));
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class AuditeeController extends Controller
     {
         $departments = Department::select('department_id', 'department_name')->distinct()->get();
 
-        return view('4-Process\audit-management\auditee\create', compact('departments', 'auditee'));
+        return view('process\audit-management\auditee\create', compact('departments', 'auditee'));
     }
 
     public function update(Auditee $auditee, Request $request)

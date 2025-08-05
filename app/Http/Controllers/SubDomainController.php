@@ -18,7 +18,7 @@ class SubDomainController extends Controller
         $subDomains = SubDomain::select('id',  'sub_domain_id', 'sub_domain_name', 'main_domain_id')->with('domain')
             ->paginate(20);
 
-        return view('4-Process.1-InitialSetup.sub-domains.index', compact('subDomains'));
+        return view('process.1-InitialSetup.sub-domains.index', compact('subDomains'));
     }
 
 
@@ -26,7 +26,7 @@ class SubDomainController extends Controller
     {
         $subDomain->load('classification', 'bestPractices', 'categories', 'domain');
 
-        return view('4-Process.1-InitialSetup.sub-domains.show', compact('subDomain'));
+        return view('process.1-InitialSetup.sub-domains.show', compact('subDomain'));
     }
 
     public function create()
@@ -39,7 +39,7 @@ class SubDomainController extends Controller
         $categoryIds = [];
         $bestPracticeIds = [];
 
-        return view('4-Process.1-InitialSetup.sub-domains.create', compact('subDomain', 'classifications', 'categories', 'domains', 'bestPractices', 'bestPracticeIds', 'categoryIds'));
+        return view('process.1-InitialSetup.sub-domains.create', compact('subDomain', 'classifications', 'categories', 'domains', 'bestPractices', 'bestPracticeIds', 'categoryIds'));
     }
 
     public function store(Request $request)
@@ -81,7 +81,7 @@ class SubDomainController extends Controller
         $bestPracticeIds =  $subDomain->bestPractices->pluck('best_practices_id')->toArray();
         $categoryIds =  $subDomain->categories()->pluck('category_table.category_id')->toArray();
 
-        return view('4-Process.1-InitialSetup.sub-domains.create', compact('subDomain', 'classifications', 'domains', 'bestPractices', 'categories', 'bestPracticeIds', 'categoryIds'));
+        return view('process.1-InitialSetup.sub-domains.create', compact('subDomain', 'classifications', 'domains', 'bestPractices', 'categories', 'bestPracticeIds', 'categoryIds'));
     }
 
     public function update(SubDomain $subDomain, Request $request)

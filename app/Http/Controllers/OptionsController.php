@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 
 class OptionsController extends Controller
 {
-    public function create() {
+    public function create()
+    {
 
         $options = Option::all();
 
-        return view('4-Process.1-InitialSetup.options.create', compact('options'));
+        return view('process.1-InitialSetup.options.create', compact('options'));
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
         $attributes = $request->validate([
             'system_expired_at' => 'nullable|date'
@@ -25,6 +27,5 @@ class OptionsController extends Controller
         $option->save();
 
         return redirect()->back()->with('success', 'System Expiry Date updated successfully!');
-       
     }
 }

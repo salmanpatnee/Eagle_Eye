@@ -12,14 +12,14 @@ class RiskSubTypeController extends Controller
     public function index()
     {
         $riskSubTypes = RiskSubType::paginate(20);
-        return view('4-Process\risk-identification\risk-sub-types\index', compact('riskSubTypes'));
+        return view('process\risk-identification\risk-sub-types\index', compact('riskSubTypes'));
     }
 
     public function show(RiskSubType $riskSubType)
     {
         $riskSubType->load('type');
 
-        return view('4-Process\risk-identification\risk-sub-types\show', compact('riskSubType'));
+        return view('process\risk-identification\risk-sub-types\show', compact('riskSubType'));
     }
 
     public function create()
@@ -27,7 +27,7 @@ class RiskSubTypeController extends Controller
         $riskSubType = null;
         $riskTypes = RiskType::select('risk_type_id', 'risk_type_name')->distinct()->get();
 
-        return view('4-Process\risk-identification\risk-sub-types\create', compact('riskSubType', 'riskTypes'));
+        return view('process\risk-identification\risk-sub-types\create', compact('riskSubType', 'riskTypes'));
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class RiskSubTypeController extends Controller
     {
         $riskTypes = RiskType::select('risk_type_id', 'risk_type_name')->distinct()->get();
 
-        return view('4-Process\risk-identification\risk-sub-types\create', compact('riskSubType', 'riskTypes'));
+        return view('process\risk-identification\risk-sub-types\create', compact('riskSubType', 'riskTypes'));
     }
 
     public function update(RiskSubType $riskSubType, Request $request)

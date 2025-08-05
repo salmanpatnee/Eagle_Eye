@@ -16,25 +16,25 @@ class LocationController extends Controller
     {
         $locations = Location::all();
 
-        return view('4-Process.1-InitialSetup.locations.index', compact('locations'));
+        return view('process.1-InitialSetup.locations.index', compact('locations'));
     }
 
     public function show(Location $location)
     {
-        return view('4-Process/1-InitialSetup/locations.show', compact('location'));
+        return view('process/1-InitialSetup/locations.show', compact('location'));
     }
 
 
     public function create()
     {
         $location = null;
-        return view('4-Process.1-InitialSetup.locations.create', compact('location'));
+        return view('process.1-InitialSetup.locations.create', compact('location'));
     }
 
     public function edit(Location $location)
     {
 
-        return view('4-Process.1-InitialSetup.locations.create', compact('location'));
+        return view('process.1-InitialSetup.locations.create', compact('location'));
     }
 
 

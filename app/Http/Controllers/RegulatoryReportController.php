@@ -13,7 +13,7 @@ class RegulatoryReportController extends Controller
 {
     public function index()
     {
-        return view('4-Process/19-NCAReporting/index');
+        return view('process/19-NCAReporting/index');
     }
 
     /**
@@ -35,7 +35,7 @@ class RegulatoryReportController extends Controller
             ->get();
 
 
-        return view('4-Process/19-NCAReporting/create', compact('controlAssessments', 'bestPracticeId'));
+        return view('process/19-NCAReporting/create', compact('controlAssessments', 'bestPracticeId'));
     }
 
     public function show()
@@ -63,7 +63,7 @@ class RegulatoryReportController extends Controller
     {
         $controlAssessmentId = request('controlAssessmentId');
         $report = $this->getReport("NCA-ECC-2018", $controlAssessmentId);
-        $path = "4-Process/19-NCAReporting/ecc";
+        $path = "process/19-NCAReporting/ecc";
 
         if (request()->has('pdf')) {
             $this->generatePdf($path, $report, 'NCA-ECC-Report.pdf');
@@ -78,7 +78,7 @@ class RegulatoryReportController extends Controller
         $report = $this->getReport("NCA-ECC-2024", $controlAssessmentId);
 
 
-        $path = "4-Process/19-NCAReporting/ecc2";
+        $path = "process/19-NCAReporting/ecc2";
 
         if (request()->has('pdf')) {
             $this->generatePdf($path, $report, 'NCA-ECC-Report.pdf');
@@ -91,7 +91,7 @@ class RegulatoryReportController extends Controller
     {
         $controlAssessmentId = request('controlAssessmentId');
         $report = $this->getReport("NCA-CSCC-2019", $controlAssessmentId);
-        $path = "4-Process/19-NCAReporting/cscc";
+        $path = "process/19-NCAReporting/cscc";
 
         if (request()->has('pdf')) {
             $this->generatePdf($path, $report, 'NCA-CSCC-Report.pdf');
@@ -106,7 +106,7 @@ class RegulatoryReportController extends Controller
         $controlAssessmentId = request('controlAssessmentId');
         $cloudControlType = request('cloudControlType');
 
-        $path = "4-Process/19-NCAReporting/ccc";
+        $path = "process/19-NCAReporting/ccc";
 
         if ($cloudControlType === 'csp') {
             $template = "{$path}/csp/index";
@@ -132,7 +132,7 @@ class RegulatoryReportController extends Controller
     {
         $controlAssessmentId = request('controlAssessmentId');
         $report = $this->getReport("NCA-TCC-2021", $controlAssessmentId);
-        $path = "4-Process/19-NCAReporting/tcc";
+        $path = "process/19-NCAReporting/tcc";
 
         if (request()->has('pdf')) {
 
@@ -148,7 +148,7 @@ class RegulatoryReportController extends Controller
         $controlAssessmentId = request('controlAssessmentId');
         $isDownloadRequest = request('download');
         $report =  $this->getReport("NCA-OSMACC-2021", $controlAssessmentId);
-        $path = "4-Process/19-NCAReporting/osmacc";
+        $path = "process/19-NCAReporting/osmacc";
 
         if (request()->has('pdf')) {
 
@@ -168,7 +168,7 @@ class RegulatoryReportController extends Controller
     {
         $controlAssessmentId = request('controlAssessmentId');
         $report = $this->getReport("NCA-DCC-2022", $controlAssessmentId);
-        $path = "4-Process/19-NCAReporting/dcc";
+        $path = "process/19-NCAReporting/dcc";
 
         if (request()->has('pdf')) {
             $this->generatePdf($path, $report, 'NCA-DCC-Report.pdf');
@@ -182,7 +182,7 @@ class RegulatoryReportController extends Controller
     {
         $controlAssessmentId = request('controlAssessmentId');
         $report = $this->getReport("SAMA-CSF-2017", $controlAssessmentId);
-        $path = "4-Process/SAMAReporting";
+        $path = "process/SAMAReporting";
 
         if (request()->has('pdf')) {
             $this->generatePdf($path, $report, 'SAMA-Report.pdf');

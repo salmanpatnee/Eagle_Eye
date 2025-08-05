@@ -19,7 +19,7 @@ class KPICategoryController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/KpiCategories/index', compact('kpiCategories', 'routeName', 'primaryKey'));
+        return view('process/KpiCategories/index', compact('kpiCategories', 'routeName', 'primaryKey'));
     }
 
     public function show(KPICategories $category)
@@ -28,7 +28,7 @@ class KPICategoryController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/KpiCategories/show', compact('category', 'data', 'routeName', 'primaryKey'));
+        return view('process/KpiCategories/show', compact('category', 'data', 'routeName', 'primaryKey'));
     }
 
     public function create()
@@ -38,7 +38,7 @@ class KPICategoryController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/KpiCategories/create', compact('category', 'data', 'routeName', 'primaryKey'));
+        return view('process/KpiCategories/create', compact('category', 'data', 'routeName', 'primaryKey'));
     }
 
     public function store(Request $request)
@@ -64,7 +64,7 @@ class KPICategoryController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/KpiCategories/create', compact('category', 'data', 'routeName', 'primaryKey'));
+        return view('process/KpiCategories/create', compact('category', 'data', 'routeName', 'primaryKey'));
     }
 
 
@@ -104,6 +104,6 @@ class KPICategoryController extends Controller
             ->orderBy('category_name')
             ->get();
 
-        return view('4-Process/KpiReferences/index', compact('references'));
+        return view('process/KpiReferences/index', compact('references'));
     }
 }

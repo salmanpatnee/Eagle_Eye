@@ -13,13 +13,13 @@ class ThreatAgentSubTypeController extends Controller
     {
         $threatAgentSubTypes = ThreatAgentSubType::with('type')->get();
 
-        return view('4-Process/threat-management/threat-agent-sub-types/index', compact('threatAgentSubTypes'));
+        return view('process/threat-management/threat-agent-sub-types/index', compact('threatAgentSubTypes'));
     }
 
     public function show(ThreatAgentSubType $threatAgentSubType)
     {
         $threatAgentSubType->load('type');
-        return view('4-Process/threat-management/threat-agent-sub-types/show', compact('threatAgentSubType'));
+        return view('process/threat-management/threat-agent-sub-types/show', compact('threatAgentSubType'));
     }
 
 
@@ -29,7 +29,7 @@ class ThreatAgentSubTypeController extends Controller
         $threatAgentSubType = null;
         $threatAgentTypes = ThreatAgentType::all();
 
-        return view('4-Process/threat-management/threat-agent-sub-types/create', compact('threatAgentSubType', 'threatAgentTypes'));
+        return view('process/threat-management/threat-agent-sub-types/create', compact('threatAgentSubType', 'threatAgentTypes'));
     }
 
 
@@ -55,7 +55,7 @@ class ThreatAgentSubTypeController extends Controller
         $threatAgentSubType->load('type');
         $threatAgentTypes = ThreatAgentType::all();
 
-        return view('4-Process/threat-management/threat-agent-sub-types/create', compact('threatAgentSubType', 'threatAgentTypes'));
+        return view('process/threat-management/threat-agent-sub-types/create', compact('threatAgentSubType', 'threatAgentTypes'));
     }
 
     public function update(ThreatAgentSubType $threatAgentSubType,  Request $request)

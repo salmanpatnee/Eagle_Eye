@@ -12,13 +12,13 @@ class VaMasterController extends Controller
     public function index()
     {
         $vulnerabilities = Vulnerability::with('type', 'subType')->paginate(20);
-        return view('4-Process\vulnerability-management\vulnerabilities/index', compact('vulnerabilities'));
+        return view('process\vulnerability-management\vulnerabilities/index', compact('vulnerabilities'));
     }
 
     public function show(Vulnerability $vulnerability)
     {
         $vulnerability->load('type', 'subType');
-        return view('4-Process\vulnerability-management\vulnerabilities/show', compact('vulnerability'));
+        return view('process\vulnerability-management\vulnerabilities/show', compact('vulnerability'));
     }
 
     public function create()
@@ -27,7 +27,7 @@ class VaMasterController extends Controller
         $vulnerabilityTypes =  VulnerabilityType::all();
         $vulnerabilitySubTypes =  VulnerabilitySubType::all();
 
-        return view('4-Process\vulnerability-management\vulnerabilities/create', compact('vulnerability', 'vulnerabilityTypes', 'vulnerabilitySubTypes'));
+        return view('process\vulnerability-management\vulnerabilities/create', compact('vulnerability', 'vulnerabilityTypes', 'vulnerabilitySubTypes'));
     }
 
     public function store(Request $request)
@@ -50,7 +50,7 @@ class VaMasterController extends Controller
         $vulnerabilityTypes =  VulnerabilityType::all();
         $vulnerabilitySubTypes =  VulnerabilitySubType::all();
 
-        return view('4-Process\vulnerability-management\vulnerabilities/create', compact('vulnerability', 'vulnerabilityTypes', 'vulnerabilitySubTypes'));
+        return view('process\vulnerability-management\vulnerabilities/create', compact('vulnerability', 'vulnerabilityTypes', 'vulnerabilitySubTypes'));
     }
 
     public function update(Vulnerability $vulnerability, Request $request)

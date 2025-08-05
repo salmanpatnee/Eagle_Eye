@@ -137,6 +137,6 @@ class RiskStatusController extends Controller
             ->first();
 
 
-        return view('4-Process\risk-identification\risk-status\index', compact('riskStatus', 'controlsCount', 'risksCount'));
+        return view('process\risk-identification\risk-status\index', compact('riskStatus', 'controlsCount', 'risksCount'));
     }
 }

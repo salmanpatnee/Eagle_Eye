@@ -150,7 +150,7 @@ class RiskRegisterController extends Controller
         $risks = Risk::select('risk_id', 'risk_name')
             ->get();
 
-        $path = "4-Process/18-Reporting/2-MISReporting";
+        $path = "process/18-Reporting/2-MISReporting";
 
         if (request()->has('pdf')) {
             // Increase PCRE backtrack limit
@@ -175,7 +175,7 @@ class RiskRegisterController extends Controller
                 ->header('Content-Disposition', 'attachment; filename="' . "Risk-Register.pdf" . '"');
         } else {
 
-            return view("4-Process/risk-identification/risk-register\index", compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
+            return view("process/risk-identification/risk-register\index", compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
         }
     }
 

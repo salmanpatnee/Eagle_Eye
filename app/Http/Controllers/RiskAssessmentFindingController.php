@@ -15,13 +15,13 @@ class RiskAssessmentFindingController extends Controller
     // public function index()
     // {
     //     $columns = DB::table('risk_assessment_details_table')->get();
-    //     return view('4-Process/12-RiskAssessment/2-RiskAssessmentFindingList', compact('columns'));
+    //     return view('process/12-RiskAssessment/2-RiskAssessmentFindingList', compact('columns'));
     // }
 
 
     public function show(RiskAssessmentDetail $riskAssessmentFinding)
     {
-        return view('4-Process\assessments\risk-assessment-findings\show', compact('riskAssessmentFinding'));
+        return view('process\assessments\risk-assessment-findings\show', compact('riskAssessmentFinding'));
     }
 
     public function create(RiskAssessment $riskAssessment, Request $request)
@@ -31,7 +31,7 @@ class RiskAssessmentFindingController extends Controller
         $risks = Risk::select('id', 'risk_id', 'risk_name')->get();
         $treatments = RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')->get();
 
-        return view('4-Process/assessments/risk-assessment-findings/create', compact('risks', 'riskAssessment', 'treatments', 'riskAssessmentFinding'));
+        return view('process/assessments/risk-assessment-findings/create', compact('risks', 'riskAssessment', 'treatments', 'riskAssessmentFinding'));
     }
 
     public function store(RiskAssessment $riskAssessment, Request $request)
@@ -91,7 +91,7 @@ class RiskAssessmentFindingController extends Controller
 
         $treatments = RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')->get();
 
-        return view('4-Process/assessments/risk-assessment-findings/create', compact('risks', 'riskAssessment', 'riskAssessmentFinding', 'treatments'));
+        return view('process/assessments/risk-assessment-findings/create', compact('risks', 'riskAssessment', 'riskAssessmentFinding', 'treatments'));
     }
 
     public function update(RiskAssessmentDetail $riskAssessmentFinding, Request $request)

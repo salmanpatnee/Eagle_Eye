@@ -14,7 +14,7 @@ class DataUploaderController extends Controller
 {
     public function create()
     {
-        return view('4-Process/assets/asset-register/upload');
+        return view('process/assets/asset-register/upload');
     }
 
     public function uploadAssets(Request $request)
@@ -60,7 +60,7 @@ class DataUploaderController extends Controller
 
     public function createOwner()
     {
-        return view('4-Process/1-InitialSetup/owners/upload');
+        return view('process/1-InitialSetup/owners/upload');
     }
 
     public function uploadOwners(Request $request)
@@ -100,7 +100,7 @@ class DataUploaderController extends Controller
 
     public function createCustodian()
     {
-        return view('4-Process/1-InitialSetup/custodians/upload');
+        return view('process/1-InitialSetup/custodians/upload');
     }
 
     public function uploadCustodian(Request $request)
@@ -140,7 +140,7 @@ class DataUploaderController extends Controller
 
     public function createArtifact()
     {
-        return view('4-Process/11-Attachment/UploadForm');
+        return view('process/11-Attachment/UploadForm');
     }
 
     public function uploadArtifact(Request $request)

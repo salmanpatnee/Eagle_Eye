@@ -35,14 +35,14 @@ class RiskIdentificationController extends Controller
 
 
 
-        return view('4-Process\risk-identification\risks\index', compact('risks', 'riskNames', 'riskGroups', 'owners', 'risk', 'group', 'owner'));
+        return view('process\risk-identification\risks\index', compact('risks', 'riskNames', 'riskGroups', 'owners', 'risk', 'group', 'owner'));
     }
 
     public function show(Risk $risk)
     {
         $risk->load('owner', 'group', 'type', 'subType', 'classification', 'inherent', 'agents', 'vulnerabilities', 'categories', 'assetGroups', 'kris', 'kpis', 'acceptances', 'departments', 'custodians');
 
-        return view('4-Process\risk-identification\risks\show', compact('risk'));
+        return view('process\risk-identification\risks\show', compact('risk'));
     }
 
     public function create()
@@ -66,7 +66,7 @@ class RiskIdentificationController extends Controller
         $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->distinct()->get();
         $threatAgentIds = $vulnerabilityIds = $categoryIds = $assetGroupIds = $kriIds = $kpiIds = $riskAcceptanceIds = $departmentIds = $custodianIds = [];
 
-        return view('4-Process\risk-identification\risks\create', compact('risk', 'threatAgents', 'vulnerabilities', 'categories', 'assetGroups', 'keyRiskIndicators', 'keyPerformancekIndicators', 'riskAcceptances', 'departments', 'riskGroupNames', 'riskOwnerNames', 'riskTypeNames', 'riskSubTypeNames', 'riskClassNames', 'riskInherent', 'custodians', 'threatAgentIds', 'categoryIds', 'vulnerabilityIds',  'kriIds', 'kpiIds', 'riskAcceptanceIds', 'departmentIds', 'custodianIds', 'assetGroupIds',));
+        return view('process\risk-identification\risks\create', compact('risk', 'threatAgents', 'vulnerabilities', 'categories', 'assetGroups', 'keyRiskIndicators', 'keyPerformancekIndicators', 'riskAcceptances', 'departments', 'riskGroupNames', 'riskOwnerNames', 'riskTypeNames', 'riskSubTypeNames', 'riskClassNames', 'riskInherent', 'custodians', 'threatAgentIds', 'categoryIds', 'vulnerabilityIds',  'kriIds', 'kpiIds', 'riskAcceptanceIds', 'departmentIds', 'custodianIds', 'assetGroupIds',));
     }
 
     public function store(Request $request)
@@ -177,7 +177,7 @@ class RiskIdentificationController extends Controller
         $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->distinct()->get();
 
 
-        return view('4-Process\risk-identification\risks\create', compact('risk', 'threatAgentIds', 'categoryIds', 'vulnerabilityIds', 'vulnerabilities', 'kriIds', 'kpiIds', 'riskAcceptanceIds', 'departmentIds', 'custodianIds', 'assetGroupIds', 'categories', 'assetGroups', 'keyRiskIndicators', 'keyPerformancekIndicators', 'riskAcceptances', 'departments', 'riskGroupNames', 'riskOwnerNames', 'riskTypeNames', 'riskSubTypeNames', 'riskClassNames', 'riskInherent', 'threatAgents', 'custodians'));
+        return view('process\risk-identification\risks\create', compact('risk', 'threatAgentIds', 'categoryIds', 'vulnerabilityIds', 'vulnerabilities', 'kriIds', 'kpiIds', 'riskAcceptanceIds', 'departmentIds', 'custodianIds', 'assetGroupIds', 'categories', 'assetGroups', 'keyRiskIndicators', 'keyPerformancekIndicators', 'riskAcceptances', 'departments', 'riskGroupNames', 'riskOwnerNames', 'riskTypeNames', 'riskSubTypeNames', 'riskClassNames', 'riskInherent', 'threatAgents', 'custodians'));
     }
 
     public function update(Risk $risk, Request $request)

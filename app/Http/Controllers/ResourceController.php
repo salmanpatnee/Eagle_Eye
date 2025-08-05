@@ -10,7 +10,7 @@ class ResourceController extends Controller
 {
     public function create(Process $process)
     {
-        return view('4-Process/cms/resources/create', compact('process'));
+        return view('process/cms/resources/create', compact('process'));
     }
 
     public function store(Request $request)

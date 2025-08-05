@@ -38,7 +38,7 @@ class RegulatoryExcelReportController extends Controller
         // return $eccreport;
 
         $mpdf = new Mpdf();
-        $html = view('4-Process/19-NCAReporting/1-NcaEccReportDownload', compact('eccreport'))->render();
+        $html = view('process/19-NCAReporting/1-NcaEccReportDownload', compact('eccreport'))->render();
         $mpdf->WriteHTML($html);
         return response($mpdf->Output('', 'S'))->header('Content-Type', 'application/pdf');
     }
@@ -50,7 +50,7 @@ class RegulatoryExcelReportController extends Controller
         $eccreport =  $this->getReport("NCA-CCC-2020", $controlAssessmentId, $cloudControlType);
 
         // View report
-        // $htmlContent = view('4-Process/19-NCAReporting/1-NcaCccReportPdf', compact('eccreport', 'controlAssessmentId', 'cloudControlType'))->render();
+        // $htmlContent = view('process/19-NCAReporting/1-NcaCccReportPdf', compact('eccreport', 'controlAssessmentId', 'cloudControlType'))->render();
 
         // PDF Template
         $report =  $this->getReport("NCA-TCC-2021", "CA006");
@@ -81,7 +81,7 @@ class RegulatoryExcelReportController extends Controller
 
 
 
-        // return view('4-Process/19-NCAReporting/1-NcaCccReportUpdated', compact('eccreport', 'controlAssessmentId', 'cloudControlType'));
+        // return view('process/19-NCAReporting/1-NcaCccReportUpdated', compact('eccreport', 'controlAssessmentId', 'cloudControlType'));
         return view('pdf.nca-ccc-cst-pdf', compact('report', 'controlAssessmentId', 'cloudControlType'));
     }
 
@@ -1280,7 +1280,7 @@ class RegulatoryExcelReportController extends Controller
             // Log::info($iterationCount . ' ' . $startingRow . ' ' . $rowData->control_id . ' ' . $rowData->control_level_title);
 
             // Tracking the number of rows to skip after each domain entry due to static headers.
-            $add7RowsAt = [20, 29, 51, 102, 110, 125, 131, 157, 160, 162, 183, 187,191,195,203,205,215,223,231,239,265,277,294,315,322,331,337,342,381,398,426,435,444,461,467,493];
+            $add7RowsAt = [20, 29, 51, 102, 110, 125, 131, 157, 160, 162, 183, 187, 191, 195, 203, 205, 215, 223, 231, 239, 265, 277, 294, 315, 322, 331, 337, 342, 381, 398, 426, 435, 444, 461, 467, 493];
             $add9RowsAt = [131, 205, 444];
             if (in_array($iterationCount, $add7RowsAt)) {
                 if (in_array($iterationCount, $add9RowsAt)) {

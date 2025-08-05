@@ -13,7 +13,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/process/2-Table/IndividualTable.css') }}">
 </head>
 
 <body>

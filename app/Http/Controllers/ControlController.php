@@ -47,14 +47,14 @@ class ControlController extends Controller
             // ->get();
             ->paginate(200);
 
-        return view('4-Process\control-identification\controls\index', compact('controls', 'controlNames', 'risks', 'owners', 'bestPractices', 'control', 'owner', 'risk', 'bestPractice'));
+        return view('process\control-identification\controls\index', compact('controls', 'controlNames', 'risks', 'owners', 'bestPractices', 'control', 'owner', 'risk', 'bestPractice'));
     }
 
     public function show(ControlMaster $control)
     {
         $control->load('classification', 'owner', 'type', 'categories', 'bestPractices', 'custodians', 'domains', 'subDomains', 'risks');
 
-        return view('4-Process\control-identification\controls\show', compact('control'));
+        return view('process\control-identification\controls\show', compact('control'));
     }
 
     public function create()
@@ -72,7 +72,7 @@ class ControlController extends Controller
         $controls = ControlMaster::select('control_id', 'control_name')->where('control_id', 'LIKE', 'SAMA-CSF-%')->get();
         $categoryIds =  $bestPracticeIds =  $custodianRoleIds =  $mainDomainIds = $subDomainIds = $riskIds = [];
 
-        return view('4-Process\control-identification\controls\create', compact('control', 'classifications', 'owners', 'controlTypes', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'controls', 'categoryIds', 'bestPracticeIds', 'custodianRoleIds', 'mainDomainIds', 'subDomainIds', 'riskIds'));
+        return view('process\control-identification\controls\create', compact('control', 'classifications', 'owners', 'controlTypes', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'controls', 'categoryIds', 'bestPracticeIds', 'custodianRoleIds', 'mainDomainIds', 'subDomainIds', 'riskIds'));
     }
 
     public function store(Request $request)
@@ -176,7 +176,7 @@ class ControlController extends Controller
 
 
 
-        return view('4-Process\control-identification\controls\create', compact('control', 'classifications', 'owners', 'controlTypes', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'controls', 'categoryIds', 'bestPracticeIds', 'custodianRoleIds', 'mainDomainIds', 'subDomainIds', 'riskIds'));
+        return view('process\control-identification\controls\create', compact('control', 'classifications', 'owners', 'controlTypes', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'controls', 'categoryIds', 'bestPracticeIds', 'custodianRoleIds', 'mainDomainIds', 'subDomainIds', 'riskIds'));
     }
 
     public function update(ControlMaster $control, Request $request)

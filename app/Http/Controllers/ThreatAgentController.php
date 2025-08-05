@@ -14,13 +14,13 @@ class ThreatAgentController extends Controller
     public function index()
     {
         $threatAgents = ThreatAgent::with('rating', 'vectors')->paginate(20);
-        return view('4-Process/threat-management/threats/index', compact('threatAgents'));
+        return view('process/threat-management/threats/index', compact('threatAgents'));
     }
 
     public function show(ThreatAgent $threatAgent)
     {
         $threatAgent->load('type', 'subType', 'rating', 'vectors');
-        return view('4-Process/threat-management/threats/show', compact('threatAgent'));
+        return view('process/threat-management/threats/show', compact('threatAgent'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class ThreatAgentController extends Controller
         $threatAgentVectors = ThreatAgentVector::select('id', 'threat_agent_vector_id', 'threat_agent_vector_name')->distinct()->get();
         $threatAgentVectorIds = [];
 
-        return view('4-Process/threat-management/threats/create', compact('threatAgent', 'threatAgentTypes', 'threatAgentSubTypes', 'threatAgentRatings', 'threatAgentVectors', 'threatAgentVectorIds'));
+        return view('process/threat-management/threats/create', compact('threatAgent', 'threatAgentTypes', 'threatAgentSubTypes', 'threatAgentRatings', 'threatAgentVectors', 'threatAgentVectorIds'));
     }
 
     public function store(Request $request)
@@ -67,7 +67,7 @@ class ThreatAgentController extends Controller
         $threatAgentVectorIds =  $threatAgent->vectors->pluck('threat_agent_vector_id')->toArray();
 
 
-        return view('4-Process/threat-management/threats/create', compact('threatAgent', 'threatAgentTypes', 'threatAgentSubTypes', 'threatAgentRatings', 'threatAgentVectors', 'threatAgentVectorIds'));
+        return view('process/threat-management/threats/create', compact('threatAgent', 'threatAgentTypes', 'threatAgentSubTypes', 'threatAgentRatings', 'threatAgentVectors', 'threatAgentVectorIds'));
     }
 
 

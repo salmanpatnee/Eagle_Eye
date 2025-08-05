@@ -162,7 +162,7 @@ class ControlSmartSearch extends Controller
             'relation'      => $relation,
         ]);
 
-        return view('4-Process\control-identification\control-smart-search\index', [
+        return view('process\control-identification\control-smart-search\index', [
             'controls'          => $controls,
             'controlIds'          => $controlIds,
             'controlNames'      => $controlNames,

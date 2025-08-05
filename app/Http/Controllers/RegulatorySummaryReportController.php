@@ -106,7 +106,7 @@ class RegulatorySummaryReportController extends Controller
         $report = $this->_getReport($bestPracticeId, $controlAssessmentId, $domainId, $subDomainId, $controlId, $ownerId, $statusId);
 
 
-        return view('4-Process/19-NCASummaryReport/ecc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
+        return view('process/19-NCASummaryReport/ecc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
     }
 
     public function csccsummaryreport(Request $request)
@@ -143,9 +143,7 @@ class RegulatorySummaryReportController extends Controller
         $report = $this->_getReport($bestPracticeId, $controlAssessmentId, $domainId, $subDomainId, $controlId, $ownerId, $statusId);
 
 
-        return view('4-Process/19-NCASummaryReport/cscc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
-
-        
+        return view('process/19-NCASummaryReport/cscc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
     }
 
     public function cccsummaryreport(Request $request)
@@ -182,9 +180,7 @@ class RegulatorySummaryReportController extends Controller
         $report = $this->_getReport($bestPracticeId, $controlAssessmentId, $domainId, $subDomainId, $controlId, $ownerId, $statusId, $controlType);
 
 
-        return view('4-Process/19-NCASummaryReport/ccc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId', 'controlType'));
-
-
+        return view('process/19-NCASummaryReport/ccc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId', 'controlType'));
     }
 
     public function tccsummaryreport(Request $request)
@@ -221,9 +217,7 @@ class RegulatorySummaryReportController extends Controller
         $report = $this->_getReport($bestPracticeId, $controlAssessmentId, $domainId, $subDomainId, $controlId, $ownerId, $statusId);
 
 
-        return view('4-Process/19-NCASummaryReport/tcc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
-
-       
+        return view('process/19-NCASummaryReport/tcc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
     }
 
     public function Osmaccsummaryreport(Request $request)
@@ -260,13 +254,12 @@ class RegulatorySummaryReportController extends Controller
         $report = $this->_getReport($bestPracticeId, $controlAssessmentId, $domainId, $subDomainId, $controlId, $ownerId, $statusId);
 
 
-        return view('4-Process/19-NCASummaryReport/osmacc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
-
-
+        return view('process/19-NCASummaryReport/osmacc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
     }
 
     public function Dccsummaryreport(Request $request)
-    {$controlAssessmentId = $request->input('controlAssessmentId') ?? null;
+    {
+        $controlAssessmentId = $request->input('controlAssessmentId') ?? null;
         $domainId = $request->input('domain') ?? null;
         $domains = $subDomains = $controls = [];
         $subDomainId = $request->input('subdomain') ?? null;
@@ -298,8 +291,6 @@ class RegulatorySummaryReportController extends Controller
         $report = $this->_getReport($bestPracticeId, $controlAssessmentId, $domainId, $subDomainId, $controlId, $ownerId, $statusId);
 
 
-        return view('4-Process/19-NCASummaryReport/dcc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
-
-     
+        return view('process/19-NCASummaryReport/dcc', compact('report', 'domains', 'subDomains', 'controls', 'owners', 'controlAssessmentId'));
     }
 }

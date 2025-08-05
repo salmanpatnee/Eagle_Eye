@@ -12,12 +12,12 @@ class RiskTreatmentOptionsController extends Controller
     {
         $riskTreatments = RiskTreatment::get();
 
-        return view('4-Process\risk-identification\risk-treatments\index', compact('riskTreatments'));
+        return view('process\risk-identification\risk-treatments\index', compact('riskTreatments'));
     }
 
     public function show(RiskTreatment $riskTreatmentOption)
     {
-        return view('4-Process\risk-identification\risk-treatments\show', compact('riskTreatmentOption'));
+        return view('process\risk-identification\risk-treatments\show', compact('riskTreatmentOption'));
     }
 
 
@@ -25,7 +25,7 @@ class RiskTreatmentOptionsController extends Controller
     {
         $riskTreatmentOption = null;
 
-        return view('4-Process\risk-identification\risk-treatments\create', compact('riskTreatmentOption'));
+        return view('process\risk-identification\risk-treatments\create', compact('riskTreatmentOption'));
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class RiskTreatmentOptionsController extends Controller
 
     public function edit(RiskTreatment $riskTreatmentOption)
     {
-        return view('4-Process\risk-identification\risk-treatments\create', compact('riskTreatmentOption'));
+        return view('process\risk-identification\risk-treatments\create', compact('riskTreatmentOption'));
     }
 
     public function update(RiskTreatment $riskTreatmentOption, Request $request)

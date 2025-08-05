@@ -17,7 +17,7 @@ class DashboardController extends Controller
             ->groupBy(['dm.main_domain_id', 'dm.main_domain_name'])
             ->get();
 
-        return view('4-Process/18-Reporting/3-Dashboard/1-DomainVsControlDashboard')->with([
+        return view('process/18-Reporting/3-Dashboard/1-DomainVsControlDashboard')->with([
             'domainNames' => json_encode($domains->pluck('main_domain_name')),
             'numberOfControls' => json_encode($domains->pluck('controls'))
         ]);
@@ -32,7 +32,7 @@ class DashboardController extends Controller
             ->groupBy(['cm.control_id', 'cm.control_name'])
             ->get();
 
-        return view('4-Process/18-Reporting/3-Dashboard/2-RiskVsControlDashboard')->with([
+        return view('process/18-Reporting/3-Dashboard/2-RiskVsControlDashboard')->with([
             'controlNames' => json_encode($controls->pluck('control_name')),
             'numberOfRisks' => json_encode($controls->pluck('risks'))
         ]);
@@ -49,7 +49,7 @@ class DashboardController extends Controller
 
         //dd($assetGroups);
 
-        return view('4-Process/18-Reporting/3-Dashboard/3-risk-vs-asset-group.indexDashboard')->with([
+        return view('process/18-Reporting/3-Dashboard/3-risk-vs-asset-group.indexDashboard')->with([
             'assetGroupNames' => json_encode($assetGroups->pluck('asset_group_name')),
             'numberOfRisks' => json_encode($assetGroups->pluck('risks'))
         ]);

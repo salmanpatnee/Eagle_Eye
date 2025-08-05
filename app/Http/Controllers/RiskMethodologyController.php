@@ -23,7 +23,7 @@ class RiskMethodologyController extends Controller
     {
         $riskMethodologies = RiskMethodology::all();
 
-        return view('4-Process\risk-identification\risk-methodology\index', compact('riskMethodologies'));
+        return view('process\risk-identification\risk-methodology\index', compact('riskMethodologies'));
     }
 
     public function show(RiskMethodology $riskMethodology)
@@ -43,7 +43,7 @@ class RiskMethodologyController extends Controller
             $mpdf->WriteHTML($bootstrapCSS, \Mpdf\HTMLParserMode::HEADER_CSS);
 
             // Get the HTML content
-            $html = view("4-Process/risk/risk-methodology/pdf", compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'))->render();
+            $html = view("process/risk/risk-methodology/pdf", compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'))->render();
 
             // Split HTML into smaller chunks (e.g. 500KB each)
             $chunks = str_split($html, 500000);
@@ -58,7 +58,7 @@ class RiskMethodologyController extends Controller
                 ->header('Content-Type', 'application/pdf')
                 ->header('Content-Disposition', 'attachment; filename="RiskMethodology.pdf"');
         } else {
-            return view('4-Process\risk-identification\risk-methodology\show', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
+            return view('process\risk-identification\risk-methodology\show', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
         }
     }
 
@@ -76,7 +76,7 @@ class RiskMethodologyController extends Controller
         $objectives = Objective::select('id', 'objective_id', 'objective')->get();
         $objectiveIds = [];
 
-        return view('4-Process\risk-identification\risk-methodology\create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'owners', 'appetites', 'acceptances', 'objectives', 'objectiveIds', 'riskTreatments'));
+        return view('process\risk-identification\risk-methodology\create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'owners', 'appetites', 'acceptances', 'objectives', 'objectiveIds', 'riskTreatments'));
     }
 
     public function store(RiskMethodologyRequest $request)
@@ -108,7 +108,7 @@ class RiskMethodologyController extends Controller
         $objectives = Objective::select('id', 'objective_id', 'objective')->get();
         $objectiveIds = $riskMethodology->objectives()->pluck('objectives.objective_id')->toArray();
 
-        return view('4-Process\risk-identification\risk-methodology\create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'riskTreatments', 'owners', 'appetites', 'acceptances', 'objectiveIds', 'objectives'));
+        return view('process\risk-identification\risk-methodology\create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'riskTreatments', 'owners', 'appetites', 'acceptances', 'objectiveIds', 'objectives'));
     }
 
     public function update(RiskMethodology $riskMethodology, RiskMethodologyRequest $request)

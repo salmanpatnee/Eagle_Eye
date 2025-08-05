@@ -16,18 +16,18 @@ class CategoryController extends Controller
             ->orderByRaw('SUBSTRING_INDEX(category_id, ".", -1)')
             ->paginate(20);
 
-        return view('4-Process.1-InitialSetup.categories.index', compact('categories'));
+        return view('process.1-InitialSetup.categories.index', compact('categories'));
     }
 
     public function show(Category $category)
     {
-        return view('4-Process.1-InitialSetup.categories.show', compact('category'));
+        return view('process.1-InitialSetup.categories.show', compact('category'));
     }
 
     public function create()
     {
         $category = null;
-        return view('4-Process.1-InitialSetup.categories.create', compact('category'));
+        return view('process.1-InitialSetup.categories.create', compact('category'));
     }
 
     public function store(Request $request)
@@ -48,7 +48,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('4-Process.1-InitialSetup.categories.create', compact('category'));
+        return view('process.1-InitialSetup.categories.create', compact('category'));
     }
 
 

@@ -11,23 +11,23 @@ class CustodianRoleController extends Controller
     public function index()
     {
         $custodianRoles = Custodian::paginate(20);
-        return view('4-Process/1-InitialSetup/custodian-roles/index', compact('custodianRoles'));
+        return view('process/1-InitialSetup/custodian-roles/index', compact('custodianRoles'));
     }
 
     public function show(Custodian $custodianRole)
     {
-        return view('4-Process/1-InitialSetup/custodian-roles/show', compact('custodianRole'));
+        return view('process/1-InitialSetup/custodian-roles/show', compact('custodianRole'));
     }
 
     public function create()
     {
         $custodianRole = null;
-        return view('4-Process/1-InitialSetup/custodian-roles/create', compact('custodianRole'));
+        return view('process/1-InitialSetup/custodian-roles/create', compact('custodianRole'));
     }
 
     public function edit(Custodian $custodianRole)
     {
-        return view('4-Process/1-InitialSetup/custodian-roles/create', compact('custodianRole'));
+        return view('process/1-InitialSetup/custodian-roles/create', compact('custodianRole'));
     }
 
 

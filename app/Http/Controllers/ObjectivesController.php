@@ -17,7 +17,7 @@ class ObjectivesController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/objectives/index', compact('objectives', 'routeName',  'primaryKey'));
+        return view('process/objectives/index', compact('objectives', 'routeName',  'primaryKey'));
     }
 
     public function show(Objective $objective)
@@ -26,7 +26,7 @@ class ObjectivesController extends Controller
         $primaryKey = $this->_primaryKey;
         $data = $objective;
 
-        return view('4-Process/objectives/show', compact('objective', 'routeName', 'data', 'primaryKey'));
+        return view('process/objectives/show', compact('objective', 'routeName', 'data', 'primaryKey'));
     }
 
     public function create()
@@ -35,7 +35,7 @@ class ObjectivesController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/objectives/create', compact('objective', 'data', 'routeName', 'primaryKey'));
+        return view('process/objectives/create', compact('objective', 'data', 'routeName', 'primaryKey'));
     }
 
     public function store(Request $request)
@@ -57,7 +57,7 @@ class ObjectivesController extends Controller
         $routeName = $this->_routeName;
         $primaryKey = $this->_primaryKey;
 
-        return view('4-Process/objectives/create', compact('objective', 'data', 'routeName', 'primaryKey'));
+        return view('process/objectives/create', compact('objective', 'data', 'routeName', 'primaryKey'));
     }
 
     public function update(Objective $objective, Request $request)
@@ -78,7 +78,7 @@ class ObjectivesController extends Controller
         $attributes =  $request->validate([
             'record' => ['required'],
         ]);
-        
+
         Objective::where('id', $attributes['record'])->delete();
 
         return redirect(route('objectives.index'))

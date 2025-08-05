@@ -15,19 +15,19 @@ class OrganizationController extends Controller
         $organizations = Organization::select('id', 'organization_id', 'organization_name_english', 'initiative_owner_contact_number', 'initiative_owner_email')
             ->get();
 
-        return view('4-Process.1-InitialSetup.organizations.index', compact('organizations'));
+        return view('process.1-InitialSetup.organizations.index', compact('organizations'));
     }
 
     public function show(Organization $organization)
     {
-        return view('4-Process.1-InitialSetup.organizations.show', compact('organization'));
+        return view('process.1-InitialSetup.organizations.show', compact('organization'));
     }
 
     public function create()
     {
         $organization = null;
 
-        return view('4-Process.1-InitialSetup.organizations.create', compact('organization'));
+        return view('process.1-InitialSetup.organizations.create', compact('organization'));
     }
 
     public function store(Request $request)
@@ -59,7 +59,7 @@ class OrganizationController extends Controller
 
     public function edit(Organization $organization)
     {
-        return view('4-Process.1-InitialSetup.organizations.create', compact('organization'));
+        return view('process.1-InitialSetup.organizations.create', compact('organization'));
     }
 
     public function update(Organization $organization,  Request $request)

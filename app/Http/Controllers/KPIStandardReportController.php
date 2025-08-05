@@ -12,7 +12,7 @@ class KPIStandardReportController extends Controller
     public function index()
     {
         $report = KPICategories::withCount('standards')->get();
-        return view('4-Process/KpiStandardsReport/index', compact('report'));
+        return view('process/KpiStandardsReport/index', compact('report'));
     }
 
     public function show(Category $category)
@@ -37,6 +37,6 @@ class KPIStandardReportController extends Controller
             },
         ]);
 
-        return view('4-Process/KpiStandardsReport/show', compact('category', 'bestPractices'));
+        return view('process/KpiStandardsReport/show', compact('category', 'bestPractices'));
     }
 }

@@ -12,25 +12,25 @@ class AssetTypeController extends Controller
     public function index()
     {
         $assetTypes = AssetType::paginate(20);
-        return view('4-Process/assets/asset-types/index', compact('assetTypes'));
+        return view('process/assets/asset-types/index', compact('assetTypes'));
     }
 
     public function show(AssetType $assetType)
     {
-        return view('4-Process/assets/asset-types/show', compact('assetType'));
+        return view('process/assets/asset-types/show', compact('assetType'));
     }
 
     // To add data into the table
     public function create()
     {
         $assetType = null;
-        return view('4-Process/assets/asset-types/create', compact('assetType'));
+        return view('process/assets/asset-types/create', compact('assetType'));
     }
 
     // To edit the table
     public function edit(AssetType $assetType)
     {
-        return view('4-Process/assets/asset-types/create', compact('assetType'));
+        return view('process/assets/asset-types/create', compact('assetType'));
     }
 
 

@@ -12,19 +12,19 @@ class RiskKpiController extends Controller
     {
         $keyPerformanceIndicators = KeyPerformanceIndicator::paginate(20);
 
-        return view('4-Process\risk-identification\kpi\index', compact('keyPerformanceIndicators'));
+        return view('process\risk-identification\kpi\index', compact('keyPerformanceIndicators'));
     }
 
     public function show(KeyPerformanceIndicator $kpi)
     {
 
-        return view('4-Process\risk-identification\kpi\show', compact('kpi'));
+        return view('process\risk-identification\kpi\show', compact('kpi'));
     }
 
     public function create()
     {
         $kpi = null;
-        return view('4-Process\risk-identification\kpi\create', compact('kpi'));
+        return view('process\risk-identification\kpi\create', compact('kpi'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class RiskKpiController extends Controller
 
     public function edit(KeyPerformanceIndicator $kpi)
     {
-        return view('4-Process\risk-identification\kpi\create', compact('kpi'));
+        return view('process\risk-identification\kpi\create', compact('kpi'));
     }
 
 

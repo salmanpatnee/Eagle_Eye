@@ -12,18 +12,18 @@ class ThreatAgentRatingController extends Controller
     {
         $threatAgentRatings = ThreatAgentRating::all();
 
-        return view('4-Process/threat-management/threat-agent-ratings/index', compact('threatAgentRatings'));
+        return view('process/threat-management/threat-agent-ratings/index', compact('threatAgentRatings'));
     }
 
     public function show(ThreatAgentRating $threatAgentRating)
     {
-        return view('4-Process/threat-management/threat-agent-ratings/show', compact('threatAgentRating'));
+        return view('process/threat-management/threat-agent-ratings/show', compact('threatAgentRating'));
     }
 
     public function create()
     {
         $threatAgentRating = null;
-        return view('4-Process/threat-management/threat-agent-ratings/create', compact('threatAgentRating'));
+        return view('process/threat-management/threat-agent-ratings/create', compact('threatAgentRating'));
     }
 
     public function store(Request $request)
@@ -42,7 +42,7 @@ class ThreatAgentRatingController extends Controller
 
     public function edit(ThreatAgentRating $threatAgentRating)
     {
-        return view('4-Process/threat-management/threat-agent-ratings/create', compact('threatAgentRating'));
+        return view('process/threat-management/threat-agent-ratings/create', compact('threatAgentRating'));
     }
 
 

@@ -7,8 +7,6 @@ class SamaRegulatoryReportController extends Controller
     public function index()
     {
         $report = [];
-        return view('4-Process/SAMAReporting/index', compact('report'));
+        return view('process/SAMAReporting/index', compact('report'));
     }
-
-    
 }

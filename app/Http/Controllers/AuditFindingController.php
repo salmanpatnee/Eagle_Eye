@@ -22,7 +22,7 @@ class AuditFindingController extends Controller
     {
         $auditFinding->load('categories', 'controls', 'audit', 'domain', 'auditee', 'department', 'owner', 'custodians', 'assets', 'assetsGroups');
 
-        return view('4-Process/assessments/audit-assessment-findings/show', compact('auditFinding'));
+        return view('process/assessments/audit-assessment-findings/show', compact('auditFinding'));
     }
 
     public function create(Audit $auditAssessment)
@@ -54,7 +54,7 @@ class AuditFindingController extends Controller
         $assets = Asset::select('id', 'asset_id', 'asset_name')->get();
         $assetGroups = AssetGroup::select('id', 'asset_group_id', 'asset_group_name')->get();
 
-        return view('4-Process/assessments/audit-assessment-findings/create', compact('controls', 'categories', 'auditAssessment', 'departments', 'domains', 'auditees', 'statues', 'owners', 'custodians', 'assets', 'assetGroups', 'auditFinding', 'assetIds', 'assetGroupIds', 'custodianRoleIds', 'controlIds', 'categoryIds'));
+        return view('process/assessments/audit-assessment-findings/create', compact('controls', 'categories', 'auditAssessment', 'departments', 'domains', 'auditees', 'statues', 'owners', 'custodians', 'assets', 'assetGroups', 'auditFinding', 'assetIds', 'assetGroupIds', 'custodianRoleIds', 'controlIds', 'categoryIds'));
     }
 
     public function store(Audit $auditAssessment, Request $request)
@@ -141,7 +141,7 @@ class AuditFindingController extends Controller
         $assetIds = $auditFinding->assets()->pluck('asset_register_table.asset_id')->toArray();
         $assetGroupIds = $auditFinding->assetsGroups()->pluck('asset_group_table.asset_group_id')->toArray();
 
-        return view('4-Process/assessments/audit-assessment-findings/create', compact('controls', 'categories', 'departments', 'domains', 'auditees', 'auditFinding', 'controlIds', 'categoryIds', 'statues', 'owners', 'custodians', 'custodianRoleIds', 'assets', 'assetGroups', 'assetIds', 'assetGroupIds', 'auditAssessment'));
+        return view('process/assessments/audit-assessment-findings/create', compact('controls', 'categories', 'departments', 'domains', 'auditees', 'auditFinding', 'controlIds', 'categoryIds', 'statues', 'owners', 'custodians', 'custodianRoleIds', 'assets', 'assetGroups', 'assetIds', 'assetGroupIds', 'auditAssessment'));
     }
 
     public function update(AuditFinding $auditFinding, Request $request)

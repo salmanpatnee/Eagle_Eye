@@ -17,13 +17,13 @@ class ControlAssessmentFindingController extends Controller
     //     $controlAssessmentFindings = ControlAssessmentFinding::all();
     //     $routeName = $this->_routeName;
     //     $primaryKey = $this->_primaryKey;
-    //     return view('4-Process/ControlAssessmentFindings/index', compact('controlAssessmentFindings', 'routeName', 'primaryKey'));
+    //     return view('process/ControlAssessmentFindings/index', compact('controlAssessmentFindings', 'routeName', 'primaryKey'));
     // }
 
     public function show(ControlAssessmentFinding $controlAssessmentFinding)
     {
         $controlAssessmentFinding->load('categories');
-        return view('4-Process\assessments\control-assessment-findings\show', compact('controlAssessmentFinding'));
+        return view('process\assessments\control-assessment-findings\show', compact('controlAssessmentFinding'));
     }
 
     public function create(ControlAssessment $controlAssessment)
@@ -50,7 +50,7 @@ class ControlAssessmentFindingController extends Controller
             ->get();
 
 
-        return view('4-Process\assessments\control-assessment-findings\create', compact('controls', 'categories', 'controlAssessment', 'controlAssessmentFinding', 'selectedCategoryIds'));
+        return view('process\assessments\control-assessment-findings\create', compact('controls', 'categories', 'controlAssessment', 'controlAssessmentFinding', 'selectedCategoryIds'));
     }
 
     public function store(ControlAssessment $controlAssessment, ControlAssessmentFindingRequest $request)
@@ -95,7 +95,7 @@ class ControlAssessmentFindingController extends Controller
         $selectedCategoryIds =  $controlAssessmentFinding->categories->pluck('category_id')->toArray();
 
 
-        return view('4-Process\assessments\control-assessment-findings\create', compact('controls', 'categories', 'controlAssessment', 'controlAssessmentFinding', 'selectedCategoryIds'));
+        return view('process\assessments\control-assessment-findings\create', compact('controls', 'categories', 'controlAssessment', 'controlAssessmentFinding', 'selectedCategoryIds'));
     }
 
     public function update(ControlAssessmentFinding $controlAssessmentFinding, ControlAssessmentFindingRequest $request)

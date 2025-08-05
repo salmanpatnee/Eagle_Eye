@@ -11,19 +11,19 @@ class RiskTypeController extends Controller
     {
         $riskTypes = RiskType::paginate(20);
 
-        return view('4-Process\risk-identification\risk-types\index', compact('riskTypes'));
+        return view('process\risk-identification\risk-types\index', compact('riskTypes'));
     }
 
     public function show(RiskType $riskType)
     {
-        return view('4-Process\risk-identification\risk-types\show', compact('riskType'));
+        return view('process\risk-identification\risk-types\show', compact('riskType'));
     }
 
     public function create()
     {
         $riskType = null;
 
-        return view('4-Process\risk-identification\risk-types\create', compact('riskType'));
+        return view('process\risk-identification\risk-types\create', compact('riskType'));
     }
 
     public function store(Request $request)
@@ -42,7 +42,7 @@ class RiskTypeController extends Controller
 
     public function edit(RiskType $riskType)
     {
-        return view('4-Process\risk-identification\risk-types\create', compact('riskType'));
+        return view('process\risk-identification\risk-types\create', compact('riskType'));
     }
 
     public function update(RiskType $riskType, Request $request)

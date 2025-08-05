@@ -29,46 +29,46 @@ class NcaEccAssessmentController extends Controller
         // echo "</pre>";
 
 
-        return view('4-Process/18-Reporting/1-RegulatoryReporting/1-NcaEccAssessmentReport', ['data' => $data]);
+        return view('process/18-Reporting/1-RegulatoryReporting/1-NcaEccAssessmentReport', ['data' => $data]);
     }
-    
-        // BPT-001
+
+    // BPT-001
     public function report($bestpracticetype = 'NCA-CCC-2020')
     {
-     
+
         $reports = [];
 
         $domains = DB::table('domain_table as maindomain')->get();
-         
+
         foreach ($domains as $domain) {
             $reports[$domain->id] = $domain;
-            
-            
+
+
             $sub_domains = DB::table('sub_domain_table as sub_domain')->where('sub_domain.main_domain_id', $domain->main_domain_id)->get();
-            
-            
-            
+
+
+
             foreach ($sub_domains as $sub_domain) {
                 $reports[$domain->id]->{'sub_domains'}[$sub_domain->id] = $sub_domain;
-                
-                
-                
+
+
+
                 $control_sub_domains = DB::table('control_master_table_vs_sub_domain_table as controlsubdomain')
                     ->where('controlsubdomain.sub_domain_id', '=', $sub_domain->sub_domain_id)
                     ->get();
-                
-                
-                
+
+
+
                 foreach ($control_sub_domains as $control_sub_domain) {
                     $control = DB::table('control_master_table as controlmaster')
                         ->join('control_master_table_vs_best_practice_table as controlbestpractice', 'controlbestpractice.control_id', '=', 'controlmaster.control_id')
                         ->join('owner_table as ownertable', 'ownertable.owner_role_id', '=', 'controlmaster.owner_id')
                         ->where('controlbestpractice.best_practices_id', "NCA-CCC-2020")->first();
-                        // ->where('controlmaster.control_id', $control_sub_domain->control_id)->first();
-                        
+                    // ->where('controlmaster.control_id', $control_sub_domain->control_id)->first();
+
                     // dd($control_sub_domain);
-                    
-                    if( !is_null($control) ) {
+
+                    if (!is_null($control)) {
                         $reports[$domain->id]->{'sub_domains'}[$sub_domain->id]->{'controls'}[$control->id] = $control;
                         $control_assessments = DB::table('control_assessment_details_table as controlassessment')
                             ->join('control_assessment_detail_vs_control_master_table as controlassessmentmaster', 'controlassessmentmaster.control_assessment_finding_id', '=', 'controlassessment.control_finding_id')
@@ -83,7 +83,7 @@ class NcaEccAssessmentController extends Controller
         }
         // dd($reports);
 
-        return view('4-Process/18-Reporting/1-RegulatoryReporting/1-NcaEccAssessmentReportShow', [
+        return view('process/18-Reporting/1-RegulatoryReporting/1-NcaEccAssessmentReportShow', [
             'reports' => $reports
         ]);
     }

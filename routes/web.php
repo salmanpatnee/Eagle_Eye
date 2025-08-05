@@ -124,12 +124,9 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::view('/home', 'home')->name('home');
-    Route::view('/compliance', '4-Process/compliance')->name('compliance');
-
-
+    Route::view('/compliance', 'process/compliance')->name('compliance');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 });
-
 
 
 // ------------------- INITIAL SETUP -------------------
@@ -352,26 +349,26 @@ Route::controller(PenTestDashboardController::class)->group(function () {
 });
 
 
-Route::get('/insert-record', function () {
-    $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
-    // $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->get()->pluck('control_id');
-    // return $controlIds;
+// Route::get('/insert-record', function () {
+//     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
+//     // $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->get()->pluck('control_id');
+//     // return $controlIds;
 
-    foreach ($controlIds as $controlId) {
-        // DB::table('control_master_table_vs_custodian_role_table')->insert([
-        //     'control_id' => $controlId,
-        //     'custodian_id' => '1-2.MNGT-CSTD'
-        // ]);
+//     foreach ($controlIds as $controlId) {
+//         // DB::table('control_master_table_vs_custodian_role_table')->insert([
+//         //     'control_id' => $controlId,
+//         //     'custodian_id' => '1-2.MNGT-CSTD'
+//         // ]);
 
-        DB::table('control_master_table_vs_custodian_role_table')
-            ->where('control_id', $controlId)
-            ->update([
-                'custodian_id' => '3-1.BCM-CSTD'
-            ]);
-    }
-    return "Done";
-    return $controlIds;
-});
+//         DB::table('control_master_table_vs_custodian_role_table')
+//             ->where('control_id', $controlId)
+//             ->update([
+//                 'custodian_id' => '3-1.BCM-CSTD'
+//             ]);
+//     }
+//     return "Done";
+//     return $controlIds;
+// });
 
 
 
@@ -399,18 +396,10 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/risk-identification-table/{risk_id}', 'show');
     });
 
-
-
-
     // Organization
     Route::get('/expert-organization-input', function () {
         return view('3-People/9-ExpertOrganization');
     });
-
-
-
-
-
 
     Route::controller(ExpertOrganizationController::class)->group(function () {
         Route::post('/expert-organization-input/post', 'store');
@@ -421,8 +410,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // ------------Industry---------------
-
-
 
     Route::controller(IndustryController::class)->group(function () {
         Route::post('/expert-industry-input/post', 'store');
@@ -611,23 +598,23 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/cs-strategy-dashboard', function () {
-        return view('4-Process/18-Reporting/3-Dashboard/5-OCDCSGOV');
+        return view('process/18-Reporting/3-Dashboard/5-OCDCSGOV');
     });
 
     Route::get('/cs-defense-dashboard', function () {
-        return view('4-Process/18-Reporting/3-Dashboard/6-OCDCSDEF');
+        return view('process/18-Reporting/3-Dashboard/6-OCDCSDEF');
     });
 
     Route::get('/cs-resilience-dashboard', function () {
-        return view('4-Process/18-Reporting/3-Dashboard/7-OCDCSRES');
+        return view('process/18-Reporting/3-Dashboard/7-OCDCSRES');
     });
 
     Route::get('/cs-third-party-dashboard', function () {
-        return view('4-Process/18-Reporting/3-Dashboard/8-OCDCSTPT');
+        return view('process/18-Reporting/3-Dashboard/8-OCDCSTPT');
     });
 
     Route::get('/cs-ics-dashboard', function () {
-        return view('4-Process/18-Reporting/3-Dashboard/9-OCDCSICS');
+        return view('process/18-Reporting/3-Dashboard/9-OCDCSICS');
     });
 
 
@@ -641,14 +628,14 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/dashboard-two', function () {
-        return view('4-Process/18-Reporting/3-Dashboard/0-DashboardTwo');
+        return view('process/18-Reporting/3-Dashboard/0-DashboardTwo');
     });
 
     // Regulatory Reports New
 
     Route::get('/regulatory-reports', function () {
 
-        return view('4-Process/18-Reporting/1-RegulatoryReportsNew/1-RegulatoryReport');
+        return view('process/18-Reporting/1-RegulatoryReportsNew/1-RegulatoryReport');
     });
 
     Route::controller(RegulatorySummaryReportController::class)->group(function () {
@@ -694,11 +681,11 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/frameworks', function () {
-        return view('4-Process/framework');
+        return view('process/framework');
     });
 
     Route::get('/personal-data-frameworks', function () {
-        return view('4-Process/PdplFramework');
+        return view('process/PdplFramework');
     });
 
 
@@ -761,7 +748,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/mis-reporting', function () {
-        return view('4-Process/18-Reporting/2-MISReporting/0-MisReporting');
+        return view('process/18-Reporting/2-MISReporting/0-MisReporting');
     });
 
     Route::controller(MisReportsController::class)->group(function () {
@@ -826,88 +813,88 @@ Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->
 
 
 Route::get('/data-governance', function () {
-    return view('4-Process/17-GrcDomain/data-governance');
+    return view('process/17-GrcDomain/data-governance');
 });
 Route::get('/data-catalog', function () {
-    return view('4-Process/17-GrcDomain/data-catalog');
+    return view('process/17-GrcDomain/data-catalog');
 });
 Route::get('/data-quality', function () {
-    return view('4-Process/17-GrcDomain/data-quality');
+    return view('process/17-GrcDomain/data-quality');
 });
 Route::get('/data-operations', function () {
-    return view('4-Process/17-GrcDomain/data-operations');
+    return view('process/17-GrcDomain/data-operations');
 });
 Route::get('/document-content-management', function () {
-    return view('4-Process/17-GrcDomain/document-content-management');
+    return view('process/17-GrcDomain/document-content-management');
 });
 Route::get('/data-architecture-modeling', function () {
-    return view('4-Process/17-GrcDomain/data-architecture-modeling');
+    return view('process/17-GrcDomain/data-architecture-modeling');
 });
 Route::get('/reference-master-data-management', function () {
-    return view('4-Process/17-GrcDomain/reference-master-data-management');
+    return view('process/17-GrcDomain/reference-master-data-management');
 });
 Route::get('/business-intelligence-analytics', function () {
-    return view('4-Process/17-GrcDomain/business-intelligence-analytics');
+    return view('process/17-GrcDomain/business-intelligence-analytics');
 });
 Route::get('/data-sharing-interoperability', function () {
-    return view('4-Process/17-GrcDomain/data-sharing-interoperability');
+    return view('process/17-GrcDomain/data-sharing-interoperability');
 });
 Route::get('/data-value-realization', function () {
-    return view('4-Process/17-GrcDomain/data-value-realization');
+    return view('process/17-GrcDomain/data-value-realization');
 });
 Route::get('/open-data', function () {
-    return view('4-Process/17-GrcDomain/open-data');
+    return view('process/17-GrcDomain/open-data');
 });
 Route::get('/freedom-information', function () {
-    return view('4-Process/17-GrcDomain/freedom-information');
+    return view('process/17-GrcDomain/freedom-information');
 });
 Route::get('/data-classification', function () {
-    return view('4-Process/17-GrcDomain/data-classification');
+    return view('process/17-GrcDomain/data-classification');
 });
 Route::get('/personal-data-protection', function () {
-    return view('4-Process/17-GrcDomain/personal-data-protection');
+    return view('process/17-GrcDomain/personal-data-protection');
 });
 Route::get('/data-security-protection', function () {
-    return view('4-Process/17-GrcDomain/data-security-protection');
+    return view('process/17-GrcDomain/data-security-protection');
 });
 
 
 
-Route::view('/cs-induction', '4-Process/1-CsInduction');
+Route::view('/cs-induction', 'process/1-CsInduction');
 
 Route::prefix('cs-induction')->group(function () {
-    Route::view('/cybersecurity-governance', '4-Process/17-GrcDomain/1-CybersecurityStrategyCsIndu');
-    Route::view('/cybersecurity-strategy', '4-Process/17-GrcDomain/2-CybersecurityManagementCsIndu');
-    Route::view('/cybersecurity-policies', '4-Process/17-GrcDomain/3-CybersecurityPoliciesAndProcedureCsIndu');
-    Route::view('/cybersecurity-roles-and-responsibilities', '4-Process/17-GrcDomain/4-CybersecurityRiskManagementCsIndu');
-    Route::view('/cybersecurity-project-management', '4-Process/17-GrcDomain/5-CybersecurityItProjectManagementCsIndu');
-    Route::view('/cybersecurity-awareness', '4-Process/17-GrcDomain/6-ComplianceCybersecurityStandardCsIndu');
-    Route::view('/cybersecurity-review', '4-Process/17-GrcDomain/7-CybersecurityAssetManagementCsIndu');
-    Route::view('/cybersecurity-audit', '4-Process/17-GrcDomain/8-IdentityAccessManagementCsIndu');
-    Route::view('/human-resources', '4-Process/17-GrcDomain/9-InformationSystemProcessingCsIndu');
-    Route::view('/physical-security', '4-Process/17-GrcDomain/10-EmailProtectionCsIndu');
+    Route::view('/cybersecurity-governance', 'process/17-GrcDomain/1-CybersecurityStrategyCsIndu');
+    Route::view('/cybersecurity-strategy', 'process/17-GrcDomain/2-CybersecurityManagementCsIndu');
+    Route::view('/cybersecurity-policies', 'process/17-GrcDomain/3-CybersecurityPoliciesAndProcedureCsIndu');
+    Route::view('/cybersecurity-roles-and-responsibilities', 'process/17-GrcDomain/4-CybersecurityRiskManagementCsIndu');
+    Route::view('/cybersecurity-project-management', 'process/17-GrcDomain/5-CybersecurityItProjectManagementCsIndu');
+    Route::view('/cybersecurity-awareness', 'process/17-GrcDomain/6-ComplianceCybersecurityStandardCsIndu');
+    Route::view('/cybersecurity-review', 'process/17-GrcDomain/7-CybersecurityAssetManagementCsIndu');
+    Route::view('/cybersecurity-audit', 'process/17-GrcDomain/8-IdentityAccessManagementCsIndu');
+    Route::view('/human-resources', 'process/17-GrcDomain/9-InformationSystemProcessingCsIndu');
+    Route::view('/physical-security', 'process/17-GrcDomain/10-EmailProtectionCsIndu');
 
-    Route::view('/asset-management', '4-Process/17-GrcDomain/11-NetworkSecurityManagementCsIndu');
-    Route::view('/cybersecurity-architecture', '4-Process/17-GrcDomain/12-MobileDeviceSecurityCsIndu');
-    Route::view('/identity-and-access-management', '4-Process/17-GrcDomain/13-DataInformationSecurityCsIndu');
-    Route::view('/change-management', '4-Process/17-GrcDomain/15-BackupRecoveryManagementCsIndu');
-    Route::view('/infrastructure-security', '4-Process/17-GrcDomain/16-VulnerabilitManagementCsIndu');
-    Route::view('/cryptography', '4-Process/17-GrcDomain/17-PenetrationTestingCsIndu');
-    Route::view('/bring-your-own-device', '4-Process/17-GrcDomain/18-CybersecurityEventLogsCsIndu');
-    Route::view('/secure-disposal', '4-Process/17-GrcDomain/19-CybersecurityIncidentManagementCsIndu');
-    Route::view('/payment-system', '4-Process/17-GrcDomain/20-PhysicalSecurityCsIndu');
-    Route::view('/electronic-banking', '4-Process/17-GrcDomain/21-WebApplicationSecurityCsIndu');
+    Route::view('/asset-management', 'process/17-GrcDomain/11-NetworkSecurityManagementCsIndu');
+    Route::view('/cybersecurity-architecture', 'process/17-GrcDomain/12-MobileDeviceSecurityCsIndu');
+    Route::view('/identity-and-access-management', 'process/17-GrcDomain/13-DataInformationSecurityCsIndu');
+    Route::view('/change-management', 'process/17-GrcDomain/15-BackupRecoveryManagementCsIndu');
+    Route::view('/infrastructure-security', 'process/17-GrcDomain/16-VulnerabilitManagementCsIndu');
+    Route::view('/cryptography', 'process/17-GrcDomain/17-PenetrationTestingCsIndu');
+    Route::view('/bring-your-own-device', 'process/17-GrcDomain/18-CybersecurityEventLogsCsIndu');
+    Route::view('/secure-disposal', 'process/17-GrcDomain/19-CybersecurityIncidentManagementCsIndu');
+    Route::view('/payment-system', 'process/17-GrcDomain/20-PhysicalSecurityCsIndu');
+    Route::view('/electronic-banking', 'process/17-GrcDomain/21-WebApplicationSecurityCsIndu');
 
-    Route::view('/cybersecurity-event-management', '4-Process/17-GrcDomain/22-CybersecurityResilienceCsIndu');
-    Route::view('/cybersecurity-incident-management', '4-Process/17-GrcDomain/23-ThirdPartyCybersecurityCsIndu');
-    Route::view('/threat-management', '4-Process/17-GrcDomain/24-CloudComputingCsIndu');
-    Route::view('/vulnerability-management', '4-Process/17-GrcDomain/25-IndustrialControlsCsIndu');
-    Route::view('/contract-and-vendor', '4-Process/17-GrcDomain/26-ChangeManagementCsIndu');
-    Route::view('/outsourcing', '4-Process/17-GrcDomain/27-SecureDataDisposalCsIndu');
-    Route::view('/cloud-computing', '4-Process/17-GrcDomain/31-CloudComputingCsIndu');
-    Route::view('/cybersecurity-training', '4-Process/17-GrcDomain/28-PeriodicalCybersecurityReviewCsIndu');
-    Route::view('/cybersecurity-risk-management', '4-Process/17-GrcDomain/29-CybersecurityHRCsIndu');
-    Route::view('/cybersecurity-regulatory-compliance', '4-Process/17-GrcDomain/30-CybersecurityAwarenessTrainingCsIndu');
+    Route::view('/cybersecurity-event-management', 'process/17-GrcDomain/22-CybersecurityResilienceCsIndu');
+    Route::view('/cybersecurity-incident-management', 'process/17-GrcDomain/23-ThirdPartyCybersecurityCsIndu');
+    Route::view('/threat-management', 'process/17-GrcDomain/24-CloudComputingCsIndu');
+    Route::view('/vulnerability-management', 'process/17-GrcDomain/25-IndustrialControlsCsIndu');
+    Route::view('/contract-and-vendor', 'process/17-GrcDomain/26-ChangeManagementCsIndu');
+    Route::view('/outsourcing', 'process/17-GrcDomain/27-SecureDataDisposalCsIndu');
+    Route::view('/cloud-computing', 'process/17-GrcDomain/31-CloudComputingCsIndu');
+    Route::view('/cybersecurity-training', 'process/17-GrcDomain/28-PeriodicalCybersecurityReviewCsIndu');
+    Route::view('/cybersecurity-risk-management', 'process/17-GrcDomain/29-CybersecurityHRCsIndu');
+    Route::view('/cybersecurity-regulatory-compliance', 'process/17-GrcDomain/30-CybersecurityAwarenessTrainingCsIndu');
 });
 
 
@@ -969,59 +956,59 @@ Route::prefix('ciso-education')->group(function () {
 // Products
 
 Route::get('/product', function () {
-    return view('4-Process/15-ProductSupplier/1-ProductMasterForm');
+    return view('process/15-ProductSupplier/1-ProductMasterForm');
 });
 
 
 Route::prefix('products')->group(function () {
-    Route::view('/anti-phishing-software', '4-Process/15-ProductSupplier/products/anti-phishing-software');
-    Route::view('/anti-ransomware-software', '4-Process/15-ProductSupplier/products/anti-ransomware-software');
-    Route::view('/application-whitelisting', '4-Process/15-ProductSupplier/products/application-whitelisting');
-    Route::view('/backup-recovery', '4-Process/15-ProductSupplier/products/backup-recovery');
-    Route::view('/brand-protection', '4-Process/15-ProductSupplier/products/brand-protection');
-    Route::view('/casb', '4-Process/15-ProductSupplier/products/casb');
-    Route::view('/container-kubernetes-security', '4-Process/15-ProductSupplier/products/container-kubernetes-security');
-    Route::view('/data-classification', '4-Process/15-ProductSupplier/products/data-classification');
-    Route::view('/data-loss-prevention', '4-Process/15-ProductSupplier/products/data-loss-prevention');
-    Route::view('/database-activity-monitoring', '4-Process/15-ProductSupplier/products/database-activity-monitoring');
-    Route::view('/distributed-denial-of-service-of-attack', '4-Process/15-ProductSupplier/products/distributed-denial-of-service-of-attack');
-    Route::view('/email-security', '4-Process/15-ProductSupplier/products/email-security');
-    Route::view('/encryption', '4-Process/15-ProductSupplier/products/encryption');
-    Route::view('/end-point-detection-response', '4-Process/15-ProductSupplier/products/end-point-detection-response');
-    Route::view('/extended-detection-protection-response', '4-Process/15-ProductSupplier/products/extended-detection-protection-response');
-    Route::view('/identity-access-management', '4-Process/15-ProductSupplier/products/identity-access-management');
-    Route::view('/iot-security', '4-Process/15-ProductSupplier/products/iot-security');
-    Route::view('/multi-factor-authentication', '4-Process/15-ProductSupplier/products/multi-factor-authentication');
-    Route::view('/network-access-control', '4-Process/15-ProductSupplier/products/network-access-control');
-    Route::view('/next-generation-firewall', '4-Process/15-ProductSupplier/products/next-generation-firewall');
-    Route::view('/penetration-testing', '4-Process/15-ProductSupplier/products/penetration-testing');
-    Route::view('/privilege-access-management', '4-Process/15-ProductSupplier/products/privilege-access-management');
-    Route::view('/siem-solution', '4-Process/15-ProductSupplier/products/siem-solution');
-    Route::view('/threat-intelligence', '4-Process/15-ProductSupplier/products/threat-intelligence');
-    Route::view('/unified-threat-management', '4-Process/15-ProductSupplier/products/unified-threat-management');
-    Route::view('/user-entity-behavior-analytics', '4-Process/15-ProductSupplier/products/user-entity-behavior-analytics');
-    Route::view('/web-application-firewall', '4-Process/15-ProductSupplier/products/web-application-firewall');
-    Route::view('/wifi-security', '4-Process/15-ProductSupplier/products/wifi-security');
-    Route::view('/zero-day-attack', '4-Process/15-ProductSupplier/products/zero-day-attack');
-    Route::view('/zero-trust', '4-Process/15-ProductSupplier/products/zero-trust');
+    Route::view('/anti-phishing-software', 'process/15-ProductSupplier/products/anti-phishing-software');
+    Route::view('/anti-ransomware-software', 'process/15-ProductSupplier/products/anti-ransomware-software');
+    Route::view('/application-whitelisting', 'process/15-ProductSupplier/products/application-whitelisting');
+    Route::view('/backup-recovery', 'process/15-ProductSupplier/products/backup-recovery');
+    Route::view('/brand-protection', 'process/15-ProductSupplier/products/brand-protection');
+    Route::view('/casb', 'process/15-ProductSupplier/products/casb');
+    Route::view('/container-kubernetes-security', 'process/15-ProductSupplier/products/container-kubernetes-security');
+    Route::view('/data-classification', 'process/15-ProductSupplier/products/data-classification');
+    Route::view('/data-loss-prevention', 'process/15-ProductSupplier/products/data-loss-prevention');
+    Route::view('/database-activity-monitoring', 'process/15-ProductSupplier/products/database-activity-monitoring');
+    Route::view('/distributed-denial-of-service-of-attack', 'process/15-ProductSupplier/products/distributed-denial-of-service-of-attack');
+    Route::view('/email-security', 'process/15-ProductSupplier/products/email-security');
+    Route::view('/encryption', 'process/15-ProductSupplier/products/encryption');
+    Route::view('/end-point-detection-response', 'process/15-ProductSupplier/products/end-point-detection-response');
+    Route::view('/extended-detection-protection-response', 'process/15-ProductSupplier/products/extended-detection-protection-response');
+    Route::view('/identity-access-management', 'process/15-ProductSupplier/products/identity-access-management');
+    Route::view('/iot-security', 'process/15-ProductSupplier/products/iot-security');
+    Route::view('/multi-factor-authentication', 'process/15-ProductSupplier/products/multi-factor-authentication');
+    Route::view('/network-access-control', 'process/15-ProductSupplier/products/network-access-control');
+    Route::view('/next-generation-firewall', 'process/15-ProductSupplier/products/next-generation-firewall');
+    Route::view('/penetration-testing', 'process/15-ProductSupplier/products/penetration-testing');
+    Route::view('/privilege-access-management', 'process/15-ProductSupplier/products/privilege-access-management');
+    Route::view('/siem-solution', 'process/15-ProductSupplier/products/siem-solution');
+    Route::view('/threat-intelligence', 'process/15-ProductSupplier/products/threat-intelligence');
+    Route::view('/unified-threat-management', 'process/15-ProductSupplier/products/unified-threat-management');
+    Route::view('/user-entity-behavior-analytics', 'process/15-ProductSupplier/products/user-entity-behavior-analytics');
+    Route::view('/web-application-firewall', 'process/15-ProductSupplier/products/web-application-firewall');
+    Route::view('/wifi-security', 'process/15-ProductSupplier/products/wifi-security');
+    Route::view('/zero-day-attack', 'process/15-ProductSupplier/products/zero-day-attack');
+    Route::view('/zero-trust', 'process/15-ProductSupplier/products/zero-trust');
 });
 
 // ISO-27001
-Route::view('/scope-of-isms', '4-Process/iso-27001/scope-of-isms');
-Route::view('/isms', '4-Process/iso-27001/isms');
-Route::view('/asset-inventory', '4-Process/iso-27001/asset-inventory');
-Route::view('/risk-assessment-methodology', '4-Process/iso-27001/risk-assessment-methodology');
-Route::view('/risk-assessment', '4-Process/iso-27001/risk-assessment');
-Route::view('/risk-treatment-iso-27001', '4-Process/iso-27001/risk-treatment');
-Route::view('/risk-register-iso-27001', '4-Process/iso-27001/risk-register');
-Route::view('/statement-of-applicability', '4-Process/iso-27001/statement-of-applicability');
-Route::view('/project-management-security-framework', '4-Process/iso-27001/project-management-security-framework');
-Route::view('/network-security-framework', '4-Process/iso-27001/network-security-framework');
-Route::view('/secure-coding-framework', '4-Process/iso-27001/secure-coding-framework');
-Route::view('/hr-framework', '4-Process/iso-27001/hr-framework');
-Route::view('/third-party-security-framework', '4-Process/iso-27001/third-party-security-framework');
-Route::view('/internal-audit-27001', '4-Process/iso-27001/internal-audit');
-Route::view('/management-review-27001', '4-Process/iso-27001/management-review');
+Route::view('/scope-of-isms', 'process/iso-27001/scope-of-isms');
+Route::view('/isms', 'process/iso-27001/isms');
+Route::view('/asset-inventory', 'process/iso-27001/asset-inventory');
+Route::view('/risk-assessment-methodology', 'process/iso-27001/risk-assessment-methodology');
+Route::view('/risk-assessment', 'process/iso-27001/risk-assessment');
+Route::view('/risk-treatment-iso-27001', 'process/iso-27001/risk-treatment');
+Route::view('/risk-register-iso-27001', 'process/iso-27001/risk-register');
+Route::view('/statement-of-applicability', 'process/iso-27001/statement-of-applicability');
+Route::view('/project-management-security-framework', 'process/iso-27001/project-management-security-framework');
+Route::view('/network-security-framework', 'process/iso-27001/network-security-framework');
+Route::view('/secure-coding-framework', 'process/iso-27001/secure-coding-framework');
+Route::view('/hr-framework', 'process/iso-27001/hr-framework');
+Route::view('/third-party-security-framework', 'process/iso-27001/third-party-security-framework');
+Route::view('/internal-audit-27001', 'process/iso-27001/internal-audit');
+Route::view('/management-review-27001', 'process/iso-27001/management-review');
 
 
 

@@ -29,14 +29,14 @@ class AssetRegisterController extends Controller
 
 
 
-        return view('4-Process/assets/asset-register/index', compact('assets', 'categories', 'assetOptions', 'asset', 'category'));
+        return view('process/assets/asset-register/index', compact('assets', 'categories', 'assetOptions', 'asset', 'category'));
     }
 
     public function show(Asset $asset)
     {
         $asset->load('categories', 'assetGroup', 'owner', 'assetType', 'assetSubType', 'owner', 'assetStatus', 'classification');
 
-        return view('4-Process/assets/asset-register/show', compact('asset'));
+        return view('process/assets/asset-register/show', compact('asset'));
     }
 
     // To add data into the table
@@ -52,7 +52,7 @@ class AssetRegisterController extends Controller
         $assetStatus = DB::table('asset_status_table')->get();
         $classifications = DB::table('classification_table')->get();
         $categoryIds = [];
-        return view('4-Process/assets/asset-register/create', compact('asset', 'categories', 'assetGroups', 'assetOwners', 'assetTypes', 'assetSubTypes', 'locations', 'assetStatus', 'classifications', 'categoryIds'));
+        return view('process/assets/asset-register/create', compact('asset', 'categories', 'assetGroups', 'assetOwners', 'assetTypes', 'assetSubTypes', 'locations', 'assetStatus', 'classifications', 'categoryIds'));
     }
 
     // To store the edited data into the table
@@ -145,7 +145,7 @@ class AssetRegisterController extends Controller
 
         $categoryIds = $asset->categories->pluck('category_id')->toArray();
 
-        return view('4-Process/assets/asset-register/create', compact('categoryIds', 'asset',  'categories', 'assetGroups', 'assetOwners', 'assetTypes', 'assetSubTypes', 'locations', 'assetStatus', 'classifications'));
+        return view('process/assets/asset-register/create', compact('categoryIds', 'asset',  'categories', 'assetGroups', 'assetOwners', 'assetTypes', 'assetSubTypes', 'locations', 'assetStatus', 'classifications'));
     }
 
 

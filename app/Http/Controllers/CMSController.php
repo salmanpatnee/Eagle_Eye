@@ -12,20 +12,20 @@ class CMSController extends Controller
     {
         $process = Process::select('id', 'process_id', 'title')->paginate(20);
 
-        return view('4-Process/cms/process/index', compact('process'));
+        return view('process/cms/process/index', compact('process'));
     }
 
     public function show(Process $process)
     {
         $process->load('resources');
 
-        return view('4-Process/cms/process/show', compact('process'));
+        return view('process/cms/process/show', compact('process'));
     }
 
     public function create()
     {
         $process = null;
-        return view('4-Process/cms/process/create', compact('process'));
+        return view('process/cms/process/create', compact('process'));
     }
 
     public function store(Request $request)
@@ -45,7 +45,7 @@ class CMSController extends Controller
 
     public function edit(Request $request, Process $process)
     {
-        return view('4-Process/cms/process/create', compact('process'));
+        return view('process/cms/process/create', compact('process'));
     }
 
     public function update(Request $request, Process $process)

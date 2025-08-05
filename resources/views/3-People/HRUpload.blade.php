@@ -13,7 +13,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/process/2-Table/IndividualTable.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/6-Header/headertwo.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/report.css') }}">
     <style>
@@ -29,17 +29,17 @@
     <!-- SIDEBAR -->
     <div class="headersec">
         <div class="headerleft">
-            @include('4-Process/headerleft')
+            @include('process/headerleft')
             <div class="dheadertext" style="line-height: 1em">
                 <p>موارد الخبراء</p>
                 <p>Expert Resources</p>
             </div>
 
-            {{-- @include('4-Process/assets/assetheader') --}}
+            {{-- @include('process/assets/assetheader') --}}
         </div>
         <div class="text-center d-flex gap-3">
             @include('partials.roles')
-            @include('4-Process/backbutton')
+            @include('process/backbutton')
         </div>
     </div>
     <div class="wrapper">
@@ -99,7 +99,7 @@
 
 
 
-    <script src="/Css/4-Process/1-Form/1-Form.js"></script>
+    <script src="/Css/process/1-Form/1-Form.js"></script>
     <script src="/Css/7-Sidebar/2-Sidebar.js"></script>
     <script>
         document.getElementById('btnUpdate').addEventListener('click', function(event) {

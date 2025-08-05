@@ -11,12 +11,12 @@ class ThreatAgentTypeController extends Controller
     {
         $threatAgentTypes = ThreatAgentType::paginate(20);
 
-        return view('4-Process/threat-management/threat-agent-types/index', compact('threatAgentTypes'));
+        return view('process/threat-management/threat-agent-types/index', compact('threatAgentTypes'));
     }
 
     public function show(ThreatAgentType $threatAgentType)
     {
-        return view('4-Process/threat-management/threat-agent-types/show', compact('threatAgentType'));
+        return view('process/threat-management/threat-agent-types/show', compact('threatAgentType'));
     }
 
 
@@ -24,7 +24,7 @@ class ThreatAgentTypeController extends Controller
     {
         $threatAgentType = null;
 
-        return view('4-Process/threat-management/threat-agent-types/create', compact('threatAgentType'));
+        return view('process/threat-management/threat-agent-types/create', compact('threatAgentType'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class ThreatAgentTypeController extends Controller
 
     public function edit(ThreatAgentType $threatAgentType)
     {
-        return view('4-Process/threat-management/threat-agent-types/create', compact('threatAgentType'));
+        return view('process/threat-management/threat-agent-types/create', compact('threatAgentType'));
     }
 
 

@@ -13,19 +13,19 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/process/2-Table/IndividualTable.css') }}">
     @yield('css')
 </head>
 
 <body>
-    
+
     @include('partials.sidebar')
-    
-    
+
+
     @yield('content')
 
 
-    <script src="/Css/4-Process/1-Form/1-Form.js"></script>
+    <script src="/Css/process/1-Form/1-Form.js"></script>
     <script src="/Css/7-Sidebar/2-Sidebar.js"></script>
     @yield('js')
 </body

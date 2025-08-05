@@ -15,14 +15,14 @@ class ThirdPartyController extends Controller
     {
         $thirdParties = ThirdParty::paginate(20);
 
-        return view('4-Process\vulnerability-management\third-party\index', compact('thirdParties'));
+        return view('process\vulnerability-management\third-party\index', compact('thirdParties'));
     }
 
     public function show(ThirdParty $thirdParty)
     {
         $thirdParty->load('experties');
 
-        return view('4-Process\vulnerability-management\third-party\show', compact('thirdParty'));
+        return view('process\vulnerability-management\third-party\show', compact('thirdParty'));
     }
 
     public function create()
@@ -31,7 +31,7 @@ class ThirdPartyController extends Controller
         $experties = TPTExpert::select('tpt_experties_id', 'tpt_experties_name')->get();
         $selectedExpertIds = [];
 
-        return view('4-Process\vulnerability-management\third-party\create', compact('thirdParty', 'experties', 'selectedExpertIds'));
+        return view('process\vulnerability-management\third-party\create', compact('thirdParty', 'experties', 'selectedExpertIds'));
     }
 
     public function store(Request $request)
@@ -62,7 +62,7 @@ class ThirdPartyController extends Controller
         $experties = TPTExpert::select('tpt_experties_id', 'tpt_experties_name')->get();
         $selectedExpertIds = $thirdParty->experties->pluck('tpt_experties_id')->toArray();
 
-        return view('4-Process\vulnerability-management\third-party\create', compact('thirdParty', 'experties', 'selectedExpertIds'));
+        return view('process\vulnerability-management\third-party\create', compact('thirdParty', 'experties', 'selectedExpertIds'));
     }
 
     public function update(ThirdParty $thirdParty, Request $request)

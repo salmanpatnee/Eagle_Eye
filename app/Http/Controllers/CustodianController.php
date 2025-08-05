@@ -12,28 +12,28 @@ class CustodianController extends Controller
     public function index()
     {
         $custodians = CustodianName::with('role')->paginate(20);
-        return view('4-Process/1-InitialSetup/custodians/index', compact('custodians'));
+        return view('process/1-InitialSetup/custodians/index', compact('custodians'));
     }
 
     public function show(CustodianName $custodian)
     {
         $custodian->load('role');
 
-        return view('4-Process/1-InitialSetup/custodians/show', compact('custodian'));
+        return view('process/1-InitialSetup/custodians/show', compact('custodian'));
     }
 
     public function create()
     {
         $custodian = null;
         $custodianRoles = DB::table('custodian_table')->get();
-        return view('4-Process/1-InitialSetup/custodians/create', compact('custodian', 'custodianRoles'));
+        return view('process/1-InitialSetup/custodians/create', compact('custodian', 'custodianRoles'));
     }
 
     // To edit the table
     public function edit(CustodianName $custodian)
     {
         $custodianRoles = DB::table('custodian_table')->get();
-        return view('4-Process/1-InitialSetup/custodians/create', compact('custodian', 'custodianRoles'));
+        return view('process/1-InitialSetup/custodians/create', compact('custodian', 'custodianRoles'));
     }
 
 

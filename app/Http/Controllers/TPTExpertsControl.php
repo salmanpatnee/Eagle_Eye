@@ -11,19 +11,19 @@ class TPTExpertsControl extends Controller
     {
         $tptExperties = TPTExpert::paginate(20);
 
-        return view('4-Process/vulnerability-management/third-party-experties/index', compact('tptExperties'));
+        return view('process/vulnerability-management/third-party-experties/index', compact('tptExperties'));
     }
 
     public function show(TPTExpert $tptExpert)
     {
-        return view('4-Process/vulnerability-management/third-party-experties/show', compact('tptExpert'));
+        return view('process/vulnerability-management/third-party-experties/show', compact('tptExpert'));
     }
 
     public function create()
     {
         $tptExpert = null;
 
-        return view('4-Process/vulnerability-management/third-party-experties/create', compact('tptExpert'));
+        return view('process/vulnerability-management/third-party-experties/create', compact('tptExpert'));
     }
 
     public function store(Request $request)
@@ -42,7 +42,7 @@ class TPTExpertsControl extends Controller
 
     public function edit(TPTExpert $tptExpert)
     {
-        return view('4-Process/vulnerability-management/third-party-experties/create', compact('tptExpert'));
+        return view('process/vulnerability-management/third-party-experties/create', compact('tptExpert'));
     }
 
     public function update(TPTExpert $tptExpert, Request $request)

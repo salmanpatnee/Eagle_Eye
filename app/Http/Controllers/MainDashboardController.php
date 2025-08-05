@@ -35,18 +35,11 @@ class MainDashboardController extends Controller
         ];
 
 
-        if(request()->ajax()){
+        if (request()->ajax()) {
 
-                return response()->json($finalData);
+            return response()->json($finalData);
         }
-        
-        return view('4-Process/18-Reporting/3-Dashboard/0-Dashboard', $finalData);
 
-
-        
-        
+        return view('process/18-Reporting/3-Dashboard/0-Dashboard', $finalData);
     }
-
-
-    
 }

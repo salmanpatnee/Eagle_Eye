@@ -18,14 +18,14 @@ class AuditPlanReportController extends Controller
 
         $teamResponsible = $this->getTeamResponsibleData();
 
-        $path = '4-Process/AuditPlanReport';
+        $path = 'process/AuditPlanReport';
         $auditPlans = $this->getAuditPlanData($team, $audit_start_date);
 
 
         if (request()->has('pdf')) {
             $this->generatePdf($path, $auditPlans, 'Audit-Plan.pdf');
         } else {
-            return view("4-Process/audit-management/audit-plan-report/index", compact('auditPlans', 'teamResponsible', 'team', 'audit_start_date'));
+            return view("process/audit-management/audit-plan-report/index", compact('auditPlans', 'teamResponsible', 'team', 'audit_start_date'));
         }
     }
 
@@ -36,7 +36,7 @@ class AuditPlanReportController extends Controller
 
         $teamResponsible = $this->getTeamResponsibleData();
 
-        $path = '4-Process/AuditPlanReport';
+        $path = 'process/AuditPlanReport';
         $auditPlanSummary = $this->getAuditPlanSummary($team, $audit_start_date);
         if (request()->has('pdf')) {
             $this->generatePdf($path, $auditPlanSummary, 'Audit-Plan-Summary.pdf', 'summaryPdf');

@@ -45,7 +45,7 @@ class RCDBController extends Controller
     {
         $ownerRisksGraph = $this->_getOwnerRisksCount();
 
-        return view('4-Process/18-Reporting/3-Dashboard/5-RiskComplianceDashboard', compact('ownerRisksGraph'));
+        return view('process/18-Reporting/3-Dashboard/5-RiskComplianceDashboard', compact('ownerRisksGraph'));
     }
 
     public function show(Owner $owner)
@@ -98,7 +98,7 @@ class RCDBController extends Controller
             return response()->json($riskDetails);
         }
 
-        return view('4-Process/18-Reporting/3-Dashboard/5-RiskOwnerDashboard', compact('ownerRisksGraph', 'riskDetails', 'ownerId'));
+        return view('process/18-Reporting/3-Dashboard/5-RiskOwnerDashboard', compact('ownerRisksGraph', 'riskDetails', 'ownerId'));
     }
 
     public function riskControls(Risk $risk)
@@ -192,6 +192,6 @@ class RCDBController extends Controller
         if (request()->wantsJson()) {
             return response()->json($controlDetails);
         }
-        return view('4-Process/18-Reporting/3-Dashboard/5-RiskControlDashboard', compact('riskId', 'riskName', 'controlCounts', 'controlDetails'));
+        return view('process/18-Reporting/3-Dashboard/5-RiskControlDashboard', compact('riskId', 'riskName', 'controlCounts', 'controlDetails'));
     }
 }

@@ -49,14 +49,14 @@ class AuditMaterController extends Controller
             ->join('audit_finding_vs_control_table as avc', 'cm.control_id', '=', 'avc.control_id')
             ->get();
 
-        return view('4-Process/assessments/audit-assessments/index', compact('audits', 'auditNames', 'controlNames', 'auditId', 'controlId', 'startEndDate'));
+        return view('process/assessments/audit-assessments/index', compact('audits', 'auditNames', 'controlNames', 'auditId', 'controlId', 'startEndDate'));
     }
 
     public function show(Audit $auditAssessment)
     {
         $auditAssessment->load('location', 'auditor', 'classification', 'findings', 'bestPractice');
 
-        return view('4-Process/assessments/audit-assessments/show', compact('auditAssessment'));
+        return view('process/assessments/audit-assessments/show', compact('auditAssessment'));
     }
 
     public function create()
@@ -87,7 +87,7 @@ class AuditMaterController extends Controller
             ->get();
 
 
-        return view('4-Process\assessments\audit-assessments\create', compact(
+        return view('process\assessments\audit-assessments\create', compact(
             'classifications',
             'locations',
             'auditors',
@@ -150,7 +150,7 @@ class AuditMaterController extends Controller
             ->get();
 
 
-        return view('4-Process\assessments\audit-assessments\create', compact(
+        return view('process\assessments\audit-assessments\create', compact(
             'classifications',
             'locations',
             'auditors',

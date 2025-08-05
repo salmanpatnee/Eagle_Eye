@@ -12,18 +12,18 @@ class ThreatAgentVectorController extends Controller
     {
         $threatAgents = ThreatAgentVector::paginate(20);
 
-        return view('4-Process.threat-management.threat-agent-vectors.index', compact('threatAgents'));
+        return view('process.threat-management.threat-agent-vectors.index', compact('threatAgents'));
     }
 
     public function show(ThreatAgentVector $threatAgentVector)
     {
-        return view('4-Process.threat-management.threat-agent-vectors.show', compact('threatAgentVector'));
+        return view('process.threat-management.threat-agent-vectors.show', compact('threatAgentVector'));
     }
 
     public function create()
     {
         $threatAgentVector = null;
-        return view('4-Process.threat-management.threat-agent-vectors.create', compact('threatAgentVector'));
+        return view('process.threat-management.threat-agent-vectors.create', compact('threatAgentVector'));
     }
 
     public function store(Request $request)
@@ -42,7 +42,7 @@ class ThreatAgentVectorController extends Controller
 
     public function edit(ThreatAgentVector $threatAgentVector)
     {
-        return view('4-Process.threat-management.threat-agent-vectors.create', compact('threatAgentVector'));
+        return view('process.threat-management.threat-agent-vectors.create', compact('threatAgentVector'));
     }
 
 

@@ -19,7 +19,7 @@ class RiskAppetiteController extends Controller
         $riskAppetite = null;
         $riskAppetites = RiskAppetite::all();
 
-        return view('4-Process\risk-identification\risk-appetites\index', compact('riskAppetites', 'result', 'impacts', 'riskAppetite'));
+        return view('process\risk-identification\risk-appetites\index', compact('riskAppetites', 'result', 'impacts', 'riskAppetite'));
     }
 
     public function create()
@@ -31,7 +31,7 @@ class RiskAppetiteController extends Controller
         $primaryKey = $this->_primaryKey;
 
 
-        return view('4-Process/7-Risk/5-RiskAppetiteForm', compact('riskAppetite', 'impacts',  'result', 'routeName', 'data', 'primaryKey'));
+        return view('process/7-Risk/5-RiskAppetiteForm', compact('riskAppetite', 'impacts',  'result', 'routeName', 'data', 'primaryKey'));
     }
 
     public function show(RiskAppetite $risk_appetite)
@@ -44,7 +44,7 @@ class RiskAppetiteController extends Controller
         $primaryKey = $this->_primaryKey;
 
 
-        return view('4-Process/7-Risk/5-RiskAppetiteTable', compact('risk_appetite', 'routeName', 'data', 'primaryKey'));
+        return view('process/7-Risk/5-RiskAppetiteTable', compact('risk_appetite', 'routeName', 'data', 'primaryKey'));
     }
 
     // To edit the table
@@ -57,7 +57,7 @@ class RiskAppetiteController extends Controller
 
 
 
-        return view('4-Process/7-Risk/5-RiskAppetiteForm', compact('impacts', 'result', 'routeName', 'data', 'primaryKey'));
+        return view('process/7-Risk/5-RiskAppetiteForm', compact('impacts', 'result', 'routeName', 'data', 'primaryKey'));
     }
 
     // To store the edited data into the table

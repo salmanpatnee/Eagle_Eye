@@ -53,14 +53,14 @@ class ControlAssessmentController extends Controller
             ->join('control_assessment_details_table', 'control_master_table.control_id', '=', 'control_assessment_details_table.control_id')
             ->get();
 
-        return view('4-Process\assessments\control-assessments\index', compact('controlAssessments', 'assessments', 'controls', 'controlAssessmentId', 'controlId', 'startEndDate'));
+        return view('process\assessments\control-assessments\index', compact('controlAssessments', 'assessments', 'controls', 'controlAssessmentId', 'controlId', 'startEndDate'));
     }
 
     public function show(ControlAssessment $controlAssessment)
     {
         $controlAssessment->load(['bestPractice', 'location', 'auditor', 'classification',  'findings']);
 
-        return view('4-Process\assessments\control-assessments\show', compact('controlAssessment'));
+        return view('process\assessments\control-assessments\show', compact('controlAssessment'));
     }
 
     public function create()
@@ -83,7 +83,7 @@ class ControlAssessmentController extends Controller
             ->distinct()
             ->get();
 
-        return view('4-Process\assessments\control-assessments\create', compact('bestPractices', 'locations', 'auditors', 'classifications', 'controlAssessment'));
+        return view('process\assessments\control-assessments\create', compact('bestPractices', 'locations', 'auditors', 'classifications', 'controlAssessment'));
     }
 
     public function store(ControlAssessmentRequest $request)
@@ -113,7 +113,7 @@ class ControlAssessmentController extends Controller
             ->distinct()
             ->get();
 
-        return view('4-Process\assessments\control-assessments\create', compact('controlAssessment', 'bestPractices', 'locations', 'auditors', 'classifications'));
+        return view('process\assessments\control-assessments\create', compact('controlAssessment', 'bestPractices', 'locations', 'auditors', 'classifications'));
     }
 
     public function update(ControlAssessment $controlAssessment, Request $request)

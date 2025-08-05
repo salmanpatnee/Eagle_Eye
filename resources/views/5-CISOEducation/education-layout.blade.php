@@ -12,7 +12,7 @@
     <!-- Boxicons Icons-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('/css/6-Header/1-MainPageHeader.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/1-Process.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/process/1-Process.css') }}">
     <style>
         section.product-detail-page {
             width: 1200px;

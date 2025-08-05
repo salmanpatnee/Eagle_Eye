@@ -32,7 +32,7 @@ class OCDController extends Controller
 
     public function dashboard()
     {
-        return view('4-Process/18-Reporting/3-Dashboard/4-Dashboard');
+        return view('process/18-Reporting/3-Dashboard/4-Dashboard');
     }
 
     public function index()
@@ -69,7 +69,7 @@ class OCDController extends Controller
 
 
         return view(
-            '4-Process/18-Reporting/3-Dashboard/index',
+            'process/18-Reporting/3-Dashboard/index',
             compact('eccComplianceStatus', 'samaComplianceStatus', 'assetGroupOverview', 'bestPracticesComplainceStatus', 'ownerControlsStatus', 'assetTechData', 'evidenceSummary', 'riskStatus', 'risk-vs-asset-group.index', 'riskCountByTech', 'controlCountByTech', 'assetCountByTech', 'samaControlCountByTech', 'samaControlCountByMaturityLevel', 'heatmap')
         );
     }
@@ -101,7 +101,7 @@ class OCDController extends Controller
     ")
             ->first();
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-SAMAControlDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/4-SAMAControlDashboard', compact(
             'controls',
             'level'
         ));
@@ -161,7 +161,7 @@ class OCDController extends Controller
             return response()->json($controls);
         }
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-ControlOwnerDashboard', compact('controls'));
+        return view('process/18-Reporting/3-Dashboard/4-ControlOwnerDashboard', compact('controls'));
 
         return $controls;
     }
@@ -214,7 +214,7 @@ class OCDController extends Controller
         $not_implemented_count = $result->pluck('not_implemented');
         $not_applicable_count = $result->pluck('not_applicable');
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-DomainControlDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/4-DomainControlDashboard', compact(
             'domain_names',
             'domain_ids',
             'countrols_count',
@@ -269,7 +269,7 @@ class OCDController extends Controller
         $not_implemented = $result->pluck('not_implemented');
 
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-SubDomainControlDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/4-SubDomainControlDashboard', compact(
             'sub_domain_id',
             'subdomain_names',
             'controls_count',
@@ -362,7 +362,7 @@ class OCDController extends Controller
             return response()->json($controls);
         }
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-ControlOwnerDashboard', compact('controls'));
+        return view('process/18-Reporting/3-Dashboard/4-ControlOwnerDashboard', compact('controls'));
 
         return $controls;
     }
@@ -458,7 +458,7 @@ class OCDController extends Controller
 
         $totalControlsCount = count($controls);
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-OwnerControlDashboard', compact('controls', 'controlsCount', 'totalControlsCount', 'ownerId', 'owner'));
+        return view('process/18-Reporting/3-Dashboard/4-OwnerControlDashboard', compact('controls', 'controlsCount', 'totalControlsCount', 'ownerId', 'owner'));
     }
 
     function riskDomain()
@@ -502,7 +502,7 @@ class OCDController extends Controller
         $totalRisksClose = $domainRisksCount->pluck('close_risks');
 
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-DomainRiskDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/4-DomainRiskDashboard', compact(
             'domainIds',
             'domainNames',
             'totalRisks',
@@ -551,7 +551,7 @@ class OCDController extends Controller
         $totalRisksClose = $domainRisksCount->pluck('close_risks');
 
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-SubdomainRiskDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/4-SubdomainRiskDashboard', compact(
             'domainIds',
             'domainNames',
             'totalRisks',
@@ -604,7 +604,7 @@ class OCDController extends Controller
         $totalRisksClose = $ownerRisksCount->pluck('closed_risks');
 
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-OwnerRiskDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/4-OwnerRiskDashboard', compact(
             'ownerId',
             'ownerNames',
             'totalRisks',
@@ -695,7 +695,7 @@ class OCDController extends Controller
         $totalRisksClose = $ownerRisksCount->pluck('closed_risks');
 
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-OwnerCustodiansRiskDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/4-OwnerCustodiansRiskDashboard', compact(
             'risks',
             'ownerId',
             'ownerNames',
@@ -718,7 +718,7 @@ class OCDController extends Controller
         $assetTypeLabels = $assets->pluck('asset_type_name');
         $assetsCount = $assets->pluck('total_assets');
 
-        return view('4-Process/18-Reporting/3-Dashboard/4-AssetTypelDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/4-AssetTypelDashboard', compact(
             'assetTypeIds',
             'assetTypeLabels',
             'assetsCount',
@@ -744,7 +744,7 @@ class OCDController extends Controller
         $domainIds = $domainVsEvidence->pluck('main_domain_id');
         $evidenceCount = $domainVsEvidence->pluck('evidence_count');
 
-        return view('4-Process/18-Reporting/3-Dashboard/1-evidence/DomainlDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/1-evidence/DomainlDashboard', compact(
             'domains',
             'domainIds',
             'evidenceCount'
@@ -768,7 +768,7 @@ class OCDController extends Controller
         $subdomainIds = $subdomainVsEvidence->pluck('sub_domain_id');
         $evidenceCount = $subdomainVsEvidence->pluck('evidence_count');
 
-        return view('4-Process/18-Reporting/3-Dashboard/1-evidence/SubDomainlDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/1-evidence/SubDomainlDashboard', compact(
             'subdomains',
             'subdomainIds',
             'evidenceCount'
@@ -837,7 +837,7 @@ class OCDController extends Controller
             return response()->json($controls);
         }
 
-        return view('4-Process/18-Reporting/3-Dashboard/1-evidence/ControlDashboard', compact(
+        return view('process/18-Reporting/3-Dashboard/1-evidence/ControlDashboard', compact(
             'controls',
             'controlsCount',
             'subdomainId'
@@ -936,7 +936,7 @@ class OCDController extends Controller
         $openRisks = $assetRisksCount->pluck('open_risks');
         $closedRisks = $assetRisksCount->pluck('closed_risks');
 
-        return view('4-Process/18-Reporting/3-Dashboard/2-assets/AssetGroup', compact(
+        return view('process/18-Reporting/3-Dashboard/2-assets/AssetGroup', compact(
             'assetId',
             'assetName',
             'riskCount',
