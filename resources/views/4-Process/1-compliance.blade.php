@@ -725,7 +725,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ route('pen-test-asset-vs-risk') }}" class="boxhyperlink">
+        <a href="{{ route('pen-test-asset-vs-risk.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

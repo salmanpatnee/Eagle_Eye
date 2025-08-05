@@ -3,7 +3,7 @@
     'class' => '',
 ])
 
-<td {{ $attributes->merge(['class' => "px-3 py-3 whitespace-nowrap $class"]) }}>
+<td {{ $attributes->merge(['class' => "px-3 py-3 whitespace-nowrap $class"]) }} style="vertical-align: top;">
     @if ($action_col === 'true')
         <div class="flex">
             {{ $slot }}

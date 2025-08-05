@@ -310,6 +310,10 @@ Route::resource('third-party', ThirdPartyController::class);
 Route::resource('tpt-experts', TPTExpertsControl::class);
 
 
+Route::controller(PenTestReportController::class)->group(function () {
+    Route::get('/va-asset-vs-risk', 'assetVsRisk')->name('pen-test-asset-vs-risk.index');
+    // Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
+});
 
 
 Route::controller(PenTestDashboardController::class)->group(function () {
@@ -321,10 +325,6 @@ Route::controller(PenTestDashboardController::class)->group(function () {
     Route::get('/va-pen-test-level-records/{penTest:va_pt_test_id}', 'levelRecords')->name('pen-test-level-records');
 });
 
-Route::controller(PenTestReportController::class)->group(function () {
-    Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
-    Route::get('/va-asset-vs-risk', 'assetVsRisk')->name('pen-test-asset-vs-risk');
-});
 
 Route::get('/insert-record', function () {
     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
