@@ -114,6 +114,15 @@ use App\Http\Controllers\VulnerabilityRegisterController;
 use App\Models\ControlMaster;
 use Illuminate\Support\Facades\DB;
 
+Route::middleware(['guest'])->group(function () {
+
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+
+    Route::view('/', 'welcome')->name('welcome');
+});
+
+
 // ------------------- INITIAL SETUP -------------------
 
 Route::resource('organizations', OrganizationController::class);
@@ -355,16 +364,7 @@ Route::get('/insert-record', function () {
     return $controlIds;
 });
 
-Route::middleware(['guest'])->group(function () {
 
-    Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-
-    // Title Page
-    Route::get('/', function () {
-        return view('1-Title.1-TitlePage');
-    })->name('welcome');
-});
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
