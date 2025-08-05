@@ -297,33 +297,20 @@ Route::controller(ControlAuditFindingController::class)->group(function () {
 // ------------VULNERABILITY ASSESSMENT / PENETRATION TEST TRACKING--------------
 
 Route::resource('va-pen-tests', PenTestController::class);
+Route::resource('va-pen-test-findings', PenTestFindingsController::class)->except(['index', 'create', 'store']);
+Route::controller(PenTestFindingsController::class)->group(function () {
+    Route::get('/va-pen-test-findings/create/{penTest}', 'create')->name('va-pen-test-findings.create');
+    Route::post('/va-pen-test-findings/{penTest}', 'store')->name('va-pen-test-findings.store');
+    Route::post('/upload-poc', 'uploadPoc')->name('va-pen-test-findings.upload');
+    Route::delete('/delete-temp-poc', 'deleteTempPoc')->name('va-pen-test-findings.poc.temp.destroy');
+    Route::delete('/delete-poc/{attachment}', 'deletePoc')->name('va-pen-test-findings.poc.destroy');
+});
 Route::resource('patches', PatchController::class);
 Route::resource('third-party', ThirdPartyController::class);
 Route::resource('tpt-experts', TPTExpertsControl::class);
 
 
-// Route::controller(PenTestController::class)->group(function () {
-//     Route::get('/va-pen-test', 'index')->name('pen-test.index');
-//     Route::get('/va-pen-test/create', 'create')->name('pen-test.create');
-//     Route::get('/va-pen-test/{penTest:va_pt_test_id}', 'show')->name('pen-test.show');
-//     Route::get('/va-pen-test/edit/{penTest:va_pt_test_id}', 'edit')->name('pen-test.edit');
-//     Route::post('/va-pen-test', 'store')->name('pen-test.store');
-//     Route::put('/va-pen-test/{penTest}', 'update')->name('pen-test.update');
-//     Route::delete('/va-pen-test/delete', 'destroy')->name('pen-test.delete');
-// });
 
-Route::controller(PenTestFindingsController::class)->group(function () {
-    Route::get('/va-pen-test-findings', 'index')->name('pen-test-findings.index');
-    Route::get('/va-pen-test-findings/create/{penTest:va_pt_test_id}', 'create')->name('pen-test-findings.create');
-    Route::get('/va-pen-test-findings/{penTestFinding:va_pt_finding_id}', 'show')->name('pen-test-findings.show');
-    Route::get('/va-pen-test-findings/edit/{penTestFinding:va_pt_finding_id}', 'edit')->name('pen-test-findings.edit');
-    Route::post('/va-pen-test-findings/{penTest}', 'store')->name('pen-test-findings.store');
-    Route::put('/va-pen-test-findings/{penTestFinding}', 'update')->name('pen-test-findings.update');
-    Route::delete('/va-pen-test-findings/delete', 'destroy')->name('pen-test-findings.delete');
-    Route::post('/upload-poc', 'uploadPoc')->name('pen-test-findings.upload');
-    Route::delete('/delete-temp-poc', 'deleteTempPoc')->name('pen-test-findings.poc.temp.destroy');
-    Route::delete('/delete-poc/{attachment}', 'deletePoc')->name('pen-test-findings.poc.destroy');
-});
 
 Route::controller(PenTestDashboardController::class)->group(function () {
     Route::get('/va-pen-test-list', 'list')->name('pen-test-dashboard.index');
