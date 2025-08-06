@@ -12,10 +12,10 @@ class KPIStandardReportController extends Controller
     public function index()
     {
         $report = KPICategories::withCount('standards')->get();
-        return view('process/KpiStandardsReport/index', compact('report'));
+        return view('process/kpi-standards-report/index', compact('report'));
     }
 
-    public function show(Category $category)
+    public function show(Category $kpiStandardsReport)
     {
         $bestPractice = request('bestPractice') ?? null;
 
@@ -24,7 +24,7 @@ class KPIStandardReportController extends Controller
             ->get();
 
 
-        $category->load([
+        $kpiStandardsReport->load([
             'recommededPriorites' => function ($query) use ($bestPractice) {
                 if ($bestPractice) {
                     $query->where('best_practice_id', $bestPractice);
@@ -37,6 +37,7 @@ class KPIStandardReportController extends Controller
             },
         ]);
 
-        return view('process/KpiStandardsReport/show', compact('category', 'bestPractices'));
+
+        return view('process/kpi-standards-report/show', compact('kpiStandardsReport', 'bestPractices', 'bestPractice'));
     }
 }

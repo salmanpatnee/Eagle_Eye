@@ -74,11 +74,11 @@ class KPICategoryController extends Controller
 
     public function report()
     {
-        $references = Category::select('category_id', 'category_name', 'category_name_ar')
+        $references = Category::select('id', 'category_id', 'category_name', 'category_name_ar')
             ->whereHas('standards')
             ->orderBy('category_name')
             ->get();
 
-        return view('process/KpiReferences/index', compact('references'));
+        return view('process/kpi-references/index', compact('references'));
     }
 }
