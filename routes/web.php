@@ -178,22 +178,10 @@ Route::resource('threat-agent-vectors', ThreatAgentVectorController::class);
 
 Route::resource('vulnerabilities', VaMasterController::class);
 Route::resource('cves', RiskCveController::class);
+Route::resource('cvss', CvssController::class);
 Route::resource('vulnerability-types', VaTypeController::class);
 Route::resource('vulnerability-sub-types', VaSubTypeController::class);
 
-
-// ------------Vulnerability CVSS--------------
-
-
-Route::controller(CvssController::class)->group(function () {
-    Route::get('/cvss-list', 'index')->name('cvss.index');
-    Route::get('/cvss-table/{cvss_id}', 'show');
-    Route::get('/cvss-input', 'create')->name('cvss.create');
-    Route::get('/cvss/edit/{id}', 'edit')->name('cvss.edit');
-    Route::post('/cvss', 'storeOrUpdate')->name('cvss.store');
-    Route::put('/cvss/{id}', 'storeOrUpdate')->name('cvss.update');
-    Route::delete('/cvss/delete', 'delete')->name('delete.cvss');
-});
 
 // ------------------- RISK IDENTIFICATION -------------------
 
