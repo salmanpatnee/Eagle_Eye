@@ -1,4 +1,4 @@
-@extends('process.1-InitialSetup.layout.app')
+@extends('process.initial-setup.layout.app')
 @section('title', 'Best Practices Definition')
 @section('title_ar', 'تعريف أفضل الممارسات')
 @section('content')

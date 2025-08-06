@@ -340,14 +340,10 @@ Route::controller(PenTestReportController::class)->group(function () {
 Route::resource('kpi-categories', KPICategoryController::class);
 Route::controller(KPICategoryController::class)->group(function () {
     Route::get('/kpi-references', 'report')->name('kpi-references.index');
-    // Route::get('/kpi-categories', 'index')->name('kpi-categories.index');
-    // Route::get('/kpi-categories/create', 'create')->name('kpi-categories.create');
-    // Route::get('/kpi-categories/{category:kpi_id}', 'show')->name('kpi-categories.show');
-    // Route::post('/kpi-categories', 'store')->name('kpi-categories.store');
-    // Route::get('/kpi-categories/edit/{category:kpi_id}', 'edit')->name('kpi-categories.edit');
-    // Route::put('/kpi-categories/{category}', 'update')->name('kpi-categories.update');
-    // Route::delete('/kpi-categories/', 'destroy')->name('kpi-categories.delete');
 });
+
+Route::resource('kpi-standards-report', KPIStandardReportController::class);
+
 
 // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
 
@@ -511,12 +507,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
-
-
-
-
-
     // Attachments
     Route::controller(TempFileUploadController::class)->group(function () {
         Route::post('/uploads', 'store')->name('temp.upload.store');
@@ -526,17 +516,6 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ArtifactAttachmentController::class)->group(function () {
         Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
         Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
-    });
-
-
-    Route::controller(KPIStandardReportController::class)->group(function () {
-        Route::get('/kpi-standards-report', 'index')->name('kpi-standards-report.index');
-        Route::get('/kpi-standards-report/{category:category_id}', 'show')->name('kpi-standards-report.show');
-        Route::get('/kpi-standards-report/create', 'create')->name('kpi-standards-report.create');
-        Route::post('/kpi-standards-report', 'store')->name('kpi-standards-report.store');
-        Route::get('/kpi-standards-report/edit/{standard:standard_id}', 'edit')->name('kpi-standards-report.edit');
-        Route::put('/kpi-standards-report/{standard}', 'update')->name('kpi-standards-report.update');
-        Route::delete('/kpi-standards-report/', 'destroy')->name('kpi-standards-report.delete');
     });
 
 
@@ -573,8 +552,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/risk-controls/{risk:risk_id}', 'riskControls')->name('risk-controls.show');
     });
 
-
-
     Route::get('/cs-strategy-dashboard', function () {
         return view('process/18-Reporting/3-Dashboard/5-OCDCSGOV');
     });
@@ -605,9 +582,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    Route::get('/dashboard-two', function () {
-        return view('process/18-Reporting/3-Dashboard/0-DashboardTwo');
-    });
 
     // Regulatory Reports New
 

@@ -33,7 +33,7 @@
     </div>
     <div class="wrapper">
 
-        @include('process.1-InitialSetup._partials.sidebar')
+        @include('process.initial-setup._partials.sidebar')
         <!-- SIDEBAR -->
 
 
