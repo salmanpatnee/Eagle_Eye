@@ -2,29 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CVE;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class RiskCveController extends Controller
 {
-    // To add data into the table
+    public function index()
+    {
+        $cves = CVE::paginate(20);
+
+        return view('process/vulnerability-management/cves/index', compact('cves'));
+    }
+
+    public function show(CVE $cfe)
+    {
+        return view('process/vulnerability-management/cves/show', compact('cfe'));
+    }
+
     public function create()
     {
-        $cve = null;
-        return view('process/6-Vulnerabilities/2-CveForm', compact('cve'));
+        $cfe = null;
+        return view('process/vulnerability-management/cves/create', compact('cfe'));
     }
 
-    // To edit the table
-    public function edit($id)
-    {
-        $cve = DB::table('cve_table')->where('cve_id', $id)->first();
-
-        return view('process/6-Vulnerabilities/2-CveForm', compact('cve'));
-    }
-
-
-    // To store the edited data into the table
-    public function storeOrUpdate(Request $request)
+    public function store(Request $request)
     {
         // Validation
         $attributes = $request->validate([
@@ -35,52 +36,35 @@ class RiskCveController extends Controller
             'cve_ramarks' => 'nullable',
         ]);
 
+        CVE::create($attributes);
 
-        // Update
-        if ($request->has('id')) {
-
-            DB::table('cve_table')
-                ->where('id', $request->input('id'))
-                ->update($attributes);
-        } else {
-            // Insert
-            DB::table('cve_table')->insert($attributes);
-        }
-
-        return redirect()->route('cve.index')->with('success', 'CVE Saved Successfully.');
+        return redirect()->route('cves.index')->with('success', 'CVE Saved Successfully.');
     }
 
-    //----------------------------------------------------------------------------------------------//
-
-    // 2.Controller - SHOW DATA INTO THE LIST
-    public function index()
+    public function edit(CVE $cfe)
     {
-        $columns = DB::table('cve_table')->get();
-        return view('process/6-Vulnerabilities/2-CveList', compact('columns'));
+        return view('process/vulnerability-management/cves/create', compact('cfe'));
     }
 
-    // 3.Controller - DELETE RECORD FROM LIST
-    public function delete(Request $request)
+    public function update(Request $request, CVE $cfe)
     {
-        $selecteddelete = $request->input('selecteddelete');
+        // Validation
+        $attributes = $request->validate([
+            'cve_id' => 'required|unique:cve_table,cve_id,' . $cfe->id . ',id',
+            'cve_name' => 'nullable',
+            'cve_number' => 'nullable',
+            'cve_description' => 'nullable',
+            'cve_ramarks' => 'nullable',
+        ]);
 
-        if (!empty($selecteddelete)) {
-            DB::table('cve_table')->whereIn('cve_id', $selecteddelete)->delete();
-        }
-        return redirect('/cve-list');
+        $cfe->update($attributes);
+
+        return redirect()->route('cves.index')->with('success', 'CVE Saved Successfully.');
     }
 
-
-    // 4.Controller - DETAILED TABLE
-    public function show($cve_id)
+    public function destroy(CVE $cfe)
     {
-        // Fetch data from the database based on department_id
-        $cve_id = DB::table('cve_table')->where('cve_id', $cve_id)->first();
-
-        if (!$cve_id) {
-            abort(404);
-        }
-
-        return view('process/6-Vulnerabilities/2-CveTable', compact('cve_id'));
+        $cfe->delete();
+        return redirect()->route('cves.index')->with('success', 'CVE Deleted Successfully.');
     }
 }
