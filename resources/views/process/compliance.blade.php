@@ -440,7 +440,7 @@
 
         <div class="spacebox"></div>
 
-        <a href="/frameworks" class="boxhyperlink">
+        <a href="{{ route('frameworks') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

@@ -344,6 +344,8 @@ Route::controller(KPICategoryController::class)->group(function () {
 
 Route::resource('kpi-standards-report', KPIStandardReportController::class);
 
+Route::view('/frameworks', 'process/framework')->name('frameworks');
+
 
 // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
 
@@ -632,9 +634,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::get('/frameworks', function () {
-        return view('process/framework');
-    });
+
 
     Route::get('/personal-data-frameworks', function () {
         return view('process/PdplFramework');
