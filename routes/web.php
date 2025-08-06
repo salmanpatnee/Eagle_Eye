@@ -335,6 +335,20 @@ Route::controller(PenTestReportController::class)->group(function () {
 });
 
 
+// ------------REPORTING--------------
+
+Route::resource('kpi-categories', KPICategoryController::class);
+Route::controller(KPICategoryController::class)->group(function () {
+    Route::get('/kpi-references', 'report')->name('kpi-references.index');
+    // Route::get('/kpi-categories', 'index')->name('kpi-categories.index');
+    // Route::get('/kpi-categories/create', 'create')->name('kpi-categories.create');
+    // Route::get('/kpi-categories/{category:kpi_id}', 'show')->name('kpi-categories.show');
+    // Route::post('/kpi-categories', 'store')->name('kpi-categories.store');
+    // Route::get('/kpi-categories/edit/{category:kpi_id}', 'edit')->name('kpi-categories.edit');
+    // Route::put('/kpi-categories/{category}', 'update')->name('kpi-categories.update');
+    // Route::delete('/kpi-categories/', 'destroy')->name('kpi-categories.delete');
+});
+
 // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
 
 Route::resource('cms/process', CMSController::class);
@@ -513,21 +527,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
         Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
     });
-
-
-
-    Route::controller(KPICategoryController::class)->group(function () {
-        Route::get('/kpi-references', 'report')->name('kpi-references.index');
-        Route::get('/kpi-categories', 'index')->name('kpi-categories.index');
-        Route::get('/kpi-categories/create', 'create')->name('kpi-categories.create');
-        Route::get('/kpi-categories/{category:kpi_id}', 'show')->name('kpi-categories.show');
-        Route::post('/kpi-categories', 'store')->name('kpi-categories.store');
-        Route::get('/kpi-categories/edit/{category:kpi_id}', 'edit')->name('kpi-categories.edit');
-        Route::put('/kpi-categories/{category}', 'update')->name('kpi-categories.update');
-        Route::delete('/kpi-categories/', 'destroy')->name('kpi-categories.delete');
-    });
-
-
 
 
     Route::controller(KPIStandardReportController::class)->group(function () {

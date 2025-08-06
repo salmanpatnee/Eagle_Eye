@@ -8,37 +8,23 @@ use Illuminate\Http\Request;
 
 class KPICategoryController extends Controller
 {
-
-    private $_routeName = "kpi-categories";
-    private $_primaryKey = "kpi_id";
-
-
     public function index()
     {
-        $kpiCategories = KPICategories::all();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $kpiCategories = KPICategories::paginate(20);
 
-        return view('process/KpiCategories/index', compact('kpiCategories', 'routeName', 'primaryKey'));
+        return view('process/kpi-categories/index', compact('kpiCategories'));
     }
 
-    public function show(KPICategories $category)
+    public function show(KPICategories $kpiCategory)
     {
-        $data = $category;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('process/KpiCategories/show', compact('category', 'data', 'routeName', 'primaryKey'));
+        return view('process/kpi-categories/show', compact('kpiCategory'));
     }
 
     public function create()
     {
+        $kpiCategory = null;
 
-        $data = $category = null;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('process/KpiCategories/create', compact('category', 'data', 'routeName', 'primaryKey'));
+        return view('process/kpi-categories/create', compact('kpiCategory'));
     }
 
     public function store(Request $request)
@@ -50,34 +36,28 @@ class KPICategoryController extends Controller
             'conclusion' => 'nullable',
         ]);
 
-
-
         KPICategories::create($attributes);
 
         return redirect(route('kpi-categories.index'))
             ->with('success', 'Category saved successfully.');
     }
 
-    public function edit(KPICategories $category)
+    public function edit(KPICategories $kpiCategory)
     {
-        $data = $category;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-
-        return view('process/KpiCategories/create', compact('category', 'data', 'routeName', 'primaryKey'));
+        return view('process/kpi-categories/create', compact('kpiCategory'));
     }
 
 
-    public function update(KPICategories $category, Request $request)
+    public function update(KPICategories $kpiCategory, Request $request)
     {
         $attributes = $request->validate([
-            'kpi_id' => ['required', 'unique:kpi_categories,kpi_id,' . $category->id],
+            'kpi_id' => ['required', 'unique:kpi_categories,kpi_id,' . $kpiCategory->id],
             'kpi_name' => 'required',
             'kpi_name_ar' => 'nullable',
             'conclusion' => 'nullable',
         ]);
 
-        $category->update($attributes);
+        $kpiCategory->update($attributes);
 
         return redirect(route('kpi-categories.index'))
             ->with('success', 'Category saved successfully.');
@@ -85,14 +65,9 @@ class KPICategoryController extends Controller
 
 
 
-    public function destroy(Request $request)
+    public function destroy(KPICategories $kpiCategory)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        KPICategories::where('kpi_id', $attributes['record'])->delete();
-
+        $kpiCategory->delete();
         return redirect(route('kpi-categories.index'))
             ->with('success', 'Category deleted successfully.');
     }
