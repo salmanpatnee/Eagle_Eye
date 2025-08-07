@@ -160,6 +160,16 @@ Route::resource('asset-groups', AssetGroupController::class);
 
 Route::resource('artifacts', ArtifactController::class);
 
+Route::controller(TempFileUploadController::class)->group(function () {
+    Route::post('/uploads', 'store')->name('temp.upload.store');
+    Route::delete('/tmp/delete', 'destroy')->name('temp.upload.destroy');
+});
+
+Route::controller(ArtifactAttachmentController::class)->group(function () {
+    Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
+    Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
+});
+
 // ------------------- USERS -------------------
 
 Route::middleware('superadmin')->group(function () {
@@ -409,17 +419,6 @@ Route::controller(PenTestDashboardController::class)->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-
-
-    // Route::post('/att', [ArtifactController::class, 'add'])->name('att.store');
-
-    // Three Ps
-
-
-
-
-
-
     // Experts
     Route::controller(ExpertController::class)->group(function () {
         Route::get('/people', 'index')->name('experts.index');
@@ -524,18 +523,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/expert-certification-input', function () {
         return view('3-People/6-ExpertCertificationInput');
-    });
-
-
-    // Attachments
-    Route::controller(TempFileUploadController::class)->group(function () {
-        Route::post('/uploads', 'store')->name('temp.upload.store');
-        Route::delete('/tmp/delete', 'destroy')->name('temp.upload.destroy');
-    });
-
-    Route::controller(ArtifactAttachmentController::class)->group(function () {
-        Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
-        Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
     });
 
 
@@ -774,59 +761,6 @@ Route::get('/hr-experts', [HumanResourceController::class, 'show'])->name('hr.ex
 Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
 Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
 
-
-
-
-// Protected routes
-
-
-
-
-Route::get('/data-governance', function () {
-    return view('process/17-GrcDomain/data-governance');
-});
-Route::get('/data-catalog', function () {
-    return view('process/17-GrcDomain/data-catalog');
-});
-Route::get('/data-quality', function () {
-    return view('process/17-GrcDomain/data-quality');
-});
-Route::get('/data-operations', function () {
-    return view('process/17-GrcDomain/data-operations');
-});
-Route::get('/document-content-management', function () {
-    return view('process/17-GrcDomain/document-content-management');
-});
-Route::get('/data-architecture-modeling', function () {
-    return view('process/17-GrcDomain/data-architecture-modeling');
-});
-Route::get('/reference-master-data-management', function () {
-    return view('process/17-GrcDomain/reference-master-data-management');
-});
-Route::get('/business-intelligence-analytics', function () {
-    return view('process/17-GrcDomain/business-intelligence-analytics');
-});
-Route::get('/data-sharing-interoperability', function () {
-    return view('process/17-GrcDomain/data-sharing-interoperability');
-});
-Route::get('/data-value-realization', function () {
-    return view('process/17-GrcDomain/data-value-realization');
-});
-Route::get('/open-data', function () {
-    return view('process/17-GrcDomain/open-data');
-});
-Route::get('/freedom-information', function () {
-    return view('process/17-GrcDomain/freedom-information');
-});
-Route::get('/data-classification', function () {
-    return view('process/17-GrcDomain/data-classification');
-});
-Route::get('/personal-data-protection', function () {
-    return view('process/17-GrcDomain/personal-data-protection');
-});
-Route::get('/data-security-protection', function () {
-    return view('process/17-GrcDomain/data-security-protection');
-});
 
 
 
