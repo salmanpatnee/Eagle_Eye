@@ -125,6 +125,8 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::view('/home', 'home')->name('home');
     Route::view('/compliance', 'process/compliance')->name('compliance');
+    Route::view('/vciso', 'vciso')->name('vciso');
+
     Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 });
 
@@ -412,9 +414,7 @@ Route::middleware(['auth'])->group(function () {
     // Route::post('/att', [ArtifactController::class, 'add'])->name('att.store');
 
     // Three Ps
-    Route::get('/vciso', function () {
-        return view('2-ThreePs.1-ThreePs');
-    });
+
 
 
 
