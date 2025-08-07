@@ -343,8 +343,26 @@ Route::controller(KPICategoryController::class)->group(function () {
 });
 
 Route::resource('kpi-standards-report', KPIStandardReportController::class);
-
 Route::view('/frameworks', 'process/framework')->name('frameworks');
+
+
+// ------------ISO-27001--------------
+
+Route::view('/scope-of-isms', 'process/iso-27001/scope-of-isms');
+Route::view('/isms', 'process/iso-27001/isms');
+Route::view('/asset-inventory', 'process/iso-27001/asset-inventory');
+Route::view('/risk-assessment-methodology', 'process/iso-27001/risk-assessment-methodology');
+Route::view('/risk-assessment', 'process/iso-27001/risk-assessment');
+Route::view('/risk-treatment-iso-27001', 'process/iso-27001/risk-treatment');
+Route::view('/risk-register-iso-27001', 'process/iso-27001/risk-register');
+Route::view('/statement-of-applicability', 'process/iso-27001/statement-of-applicability');
+Route::view('/project-management-security-framework', 'process/iso-27001/project-management-security-framework');
+Route::view('/network-security-framework', 'process/iso-27001/network-security-framework');
+Route::view('/secure-coding-framework', 'process/iso-27001/secure-coding-framework');
+Route::view('/hr-framework', 'process/iso-27001/hr-framework');
+Route::view('/third-party-security-framework', 'process/iso-27001/third-party-security-framework');
+Route::view('/internal-audit-27001', 'process/iso-27001/internal-audit');
+Route::view('/management-review-27001', 'process/iso-27001/management-review');
 
 
 // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
@@ -945,22 +963,7 @@ Route::prefix('products')->group(function () {
     Route::view('/zero-trust', 'process/15-ProductSupplier/products/zero-trust');
 });
 
-// ISO-27001
-Route::view('/scope-of-isms', 'process/iso-27001/scope-of-isms');
-Route::view('/isms', 'process/iso-27001/isms');
-Route::view('/asset-inventory', 'process/iso-27001/asset-inventory');
-Route::view('/risk-assessment-methodology', 'process/iso-27001/risk-assessment-methodology');
-Route::view('/risk-assessment', 'process/iso-27001/risk-assessment');
-Route::view('/risk-treatment-iso-27001', 'process/iso-27001/risk-treatment');
-Route::view('/risk-register-iso-27001', 'process/iso-27001/risk-register');
-Route::view('/statement-of-applicability', 'process/iso-27001/statement-of-applicability');
-Route::view('/project-management-security-framework', 'process/iso-27001/project-management-security-framework');
-Route::view('/network-security-framework', 'process/iso-27001/network-security-framework');
-Route::view('/secure-coding-framework', 'process/iso-27001/secure-coding-framework');
-Route::view('/hr-framework', 'process/iso-27001/hr-framework');
-Route::view('/third-party-security-framework', 'process/iso-27001/third-party-security-framework');
-Route::view('/internal-audit-27001', 'process/iso-27001/internal-audit');
-Route::view('/management-review-27001', 'process/iso-27001/management-review');
+
 
 
 
