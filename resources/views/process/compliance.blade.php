@@ -384,7 +384,7 @@
                 </div>
             </div>
         </a>
-        <a href="/mis-reporting" class="boxhyperlink">
+        <a href="{{ route('mis-report.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>

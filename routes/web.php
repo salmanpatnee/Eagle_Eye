@@ -145,12 +145,28 @@ Route::resource('domains', MainDomainController::class);
 Route::resource('sub-domains', SubDomainController::class);
 Route::resource('owner-roles', OwnerRoleController::class);
 Route::resource('owners', OwnerController::class);
+
+// Owner Data Uploader
+Route::get('/upload-owners', [DataUploaderController::class, 'createOwner'])->name('upload.owner.create');
+Route::post('/upload-owners', [DataUploaderController::class, 'uploadOwners'])->name('upload.owners.store');
+
 Route::resource('custodian-roles', CustodianRoleController::class);
 Route::resource('custodians', CustodianController::class);
+
+// Custodian Data Uploader
+Route::get('/upload-custodians', [DataUploaderController::class, 'createCustodian'])->name('upload.custodians.create');
+Route::post('/upload-custodians', [DataUploaderController::class, 'uploadCustodian'])->name('upload.custodians.store');
+
+
 
 // ------------------- ASSET REGISTRATION -------------------
 
 Route::resource('assets', AssetRegisterController::class);
+
+// Asset Data Uploader
+Route::get('/upload-assets', [DataUploaderController::class, 'create'])->name('upload.assets.create');
+Route::post('/upload-assets', [DataUploaderController::class, 'uploadAssets'])->name('upload.assets.store');
+
 Route::resource('asset-status', AssetStatusController::class);
 Route::resource('asset-types', AssetTypeController::class);
 Route::resource('asset-sub-types', AssetSubTypeController::class);
@@ -159,6 +175,10 @@ Route::resource('asset-groups', AssetGroupController::class);
 // ------------------- EVIDENCE TRACKING -------------------
 
 Route::resource('artifacts', ArtifactController::class);
+
+// Artifact Data Uploader
+Route::get('/upload-artifacts', [DataUploaderController::class, 'createArtifact'])->name('upload.artifact.create');
+Route::post('/upload-artifacts', [DataUploaderController::class, 'uploadArtifact'])->name('upload.artifact.store');
 
 Route::controller(TempFileUploadController::class)->group(function () {
     Route::post('/uploads', 'store')->name('temp.upload.store');
@@ -353,6 +373,10 @@ Route::resource('kpi-categories', KPICategoryController::class);
 Route::controller(KPICategoryController::class)->group(function () {
     Route::get('/kpi-references', 'report')->name('kpi-references.index');
 });
+
+
+Route::view('/mis-reporting', 'process/reporting/mis-reporting')->name('mis-report.index');
+
 
 Route::resource('kpi-standards-report', KPIStandardReportController::class);
 Route::view('/frameworks', 'process/framework')->name('frameworks');
@@ -704,9 +728,7 @@ Route::middleware(['auth'])->group(function () {
     // ------------------MIS Reports-------------------------
 
 
-    Route::get('/mis-reporting', function () {
-        return view('process/18-Reporting/2-MISReporting/0-MisReporting');
-    });
+
 
     Route::controller(MisReportsController::class)->group(function () {
         Route::get('/management-by-exceptions', 'mbe')->name('mbe.index');
@@ -802,11 +824,6 @@ Route::prefix('cs-induction')->group(function () {
 });
 
 
-
-
-
-
-
 Route::get('/process', [ProcessController::class, 'index']);
 Route::get('/process/{process:process_id}', [ProcessController::class, 'show'])->name('process.view.show');
 Route::get('/resource/{process:process_id}/videos/', [ProcessResourceController::class, 'videos'])->name('process.resource.videos');
@@ -900,28 +917,8 @@ Route::prefix('products')->group(function () {
 
 
 
+Route::resource('objectives', ObjectivesController::class)->except(['destroy']);
+Route::delete('/objectives/delete', [ObjectivesController::class, 'destroy'])->name('objectives.destroy');
 
 Route::get('/generate-ppt', [PresentationController::class, 'generateChart'])->name('generate.ppt');
 Route::get('/pen-test-generate-ppt/{va_pt_test_id}', [PresentationController::class, 'generatePenTestChart'])->name('pen-test.generate.ppt');
-
-
-
-// Asset Data Uploader
-Route::get('/upload-assets', [DataUploaderController::class, 'create'])->name('upload.assets.create');
-Route::post('/upload-assets', [DataUploaderController::class, 'uploadAssets'])->name('upload.assets.store');
-
-
-// Owner Data Uploader
-Route::get('/upload-owners', [DataUploaderController::class, 'createOwner'])->name('upload.owner.create');
-Route::post('/upload-owners', [DataUploaderController::class, 'uploadOwners'])->name('upload.owners.store');
-
-// Custodian Data Uploader
-Route::get('/upload-custodians', [DataUploaderController::class, 'createCustodian'])->name('upload.custodians.create');
-Route::post('/upload-custodians', [DataUploaderController::class, 'uploadCustodian'])->name('upload.custodians.store');
-
-// Artifact Data Uploader
-Route::get('/upload-artifacts', [DataUploaderController::class, 'createArtifact'])->name('upload.artifact.create');
-Route::post('/upload-artifacts', [DataUploaderController::class, 'uploadArtifact'])->name('upload.artifact.store');
-
-Route::resource('objectives', ObjectivesController::class)->except(['destroy']);
-Route::delete('/objectives/delete', [ObjectivesController::class, 'destroy'])->name('objectives.destroy');

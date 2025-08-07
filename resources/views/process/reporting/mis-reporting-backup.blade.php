@@ -143,17 +143,17 @@
         }
 
         .mhsbutton {
-    background-color: #203864;
-    max-width: 300px;
-    border-radius: 10px;
-    /* margin-inline: 420px; */
-    /* padding-block: 10px; */
-    line-height: 25px;
-    transition: 0.3s;
-    margin: auto;
-    padding: 20px;
-    width: 260px;
-}
+            background-color: #203864;
+            max-width: 300px;
+            border-radius: 10px;
+            /* margin-inline: 420px; */
+            /* padding-block: 10px; */
+            line-height: 25px;
+            transition: 0.3s;
+            margin: auto;
+            padding: 20px;
+            width: 260px;
+        }
 
         .mhsbutton:hover {
             transform: scale(1.1);
@@ -167,12 +167,14 @@
         .flex {
             display: flex;
         }
+
         .justify-center {
-    justify-items: center;
-}
-.align-center {
-    align-items: center;
-}
+            justify-items: center;
+        }
+
+        .align-center {
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -224,7 +226,7 @@
                     </a>
                 </div>
                 <div class="mhsbutton">
-                    <a href="{{route('mbe.index')}}">
+                    <a href="{{ route('mbe.index') }}">
                         <div>
                             <p>إدارة بواسطة الاستثناءات
                             </p>

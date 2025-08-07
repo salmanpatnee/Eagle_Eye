@@ -193,6 +193,10 @@ layer(base);
     }
 }
 
+.report-head {
+    @apply mb-6 flex flex-row-reverse justify-between bg-blue-500/[0.08] px-6 py-2.5 text-center text-2xl font-bold;
+}
+
 .select2-selection__choice__display {
     @apply text-sm text-gray-800;
 }
