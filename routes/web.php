@@ -376,6 +376,7 @@ Route::controller(KPICategoryController::class)->group(function () {
 
 
 Route::view('/mis-reporting', 'process/reporting/mis-reporting')->name('mis-report.index');
+Route::get('/asset-smart-search', AssetSmartSearch::class)->name('asset-smart-search.index');
 
 
 Route::resource('kpi-standards-report', KPIStandardReportController::class);
@@ -776,7 +777,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::get('/asset-smart-search', [AssetSmartSearch::class, 'show'])->name('asset.smart.search');
+
 
 
 Route::get('/hr-experts', [HumanResourceController::class, 'show'])->name('hr.expert');
