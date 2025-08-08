@@ -13,7 +13,7 @@
                         title_ar="البحث الذكي عن الأصول" />
                 </div>
                 <div class="max-w-[380px] w-full mx-auto">
-                    <x-report-card route_name="" title="Management by Exceptions (MBE)"
+                    <x-report-card route_name="exceptions-report.index" title="Management by Exceptions (MBE)"
                         title_ar="إدارة بواسطة الاستثناءات" />
                 </div>
             </div>

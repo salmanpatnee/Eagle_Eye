@@ -90,6 +90,7 @@ use App\Http\Controllers\AssetSmartSearch;
 use App\Http\Controllers\AuditPlanReportController;
 use App\Http\Controllers\CMSController;
 use App\Http\Controllers\DataUploaderController;
+use App\Http\Controllers\ExceptionReportsController;
 use App\Http\Controllers\HumanResourceController;
 use App\Http\Controllers\KPICategoryController;
 use App\Http\Controllers\KPIStandardController;
@@ -374,10 +375,55 @@ Route::controller(KPICategoryController::class)->group(function () {
     Route::get('/kpi-references', 'report')->name('kpi-references.index');
 });
 
-
 Route::view('/mis-reporting', 'process/reporting/mis-reporting')->name('mis-report.index');
 Route::get('/asset-smart-search', AssetSmartSearch::class)->name('asset-smart-search.index');
 
+Route::controller(ExceptionReportsController::class)->group(function () {
+    Route::get('/management-by-exceptions', 'exceptions_report')->name('exceptions-report.index');
+    Route::get('/management-by-exceptions-risk', 'risk_exceptions_report')->name('risk-exceptions-report.index');
+    Route::get('/management-by-exceptions-asset', 'asset_exceptions_report')->name('asset-exceptions-report.index');
+});
+
+Route::controller(MisReportsController::class)->group(function () {
+
+    Route::get('/mbe-pdf', 'downloadPdf')->name('mbe.pdf');
+
+    Route::get('/list-critical-assets', 'listcritical');
+    Route::get('/risk-critical-assets', 'riskcritical');
+    Route::get('/control-critical-assets', 'controlcritical');
+    Route::get('/control-critical-assets-download', 'downloadPDF')->name('criticalpdf');
+    Route::get('/list-cloud-assets', 'listcloud');
+    Route::get('/risk-cloud-assets', 'riskcloud');
+    Route::get('/control-cloud-assets', 'controlcloud');
+    Route::get('/list-telework-assets', 'listtelework');
+    Route::get('/risk-telework-assets', 'risktelework');
+    Route::get('/control-telework-assets', 'controltelework');
+    Route::get('/list-social-media-assets', 'listSocialMedia');
+    Route::get('/risk-social-media-assets', 'riskSocialMedia');
+    Route::get('/control-social-media-assets', 'controlSocialMedia');
+    Route::get('/list-data-privacy-assets', 'listDataPrivacy');
+    Route::get('/risk-data-privacy-assets', 'riskDataPrivacy');
+    Route::get('/control-data-privacy-assets', 'controlDataPrivacy');
+    Route::get('/list-pii-assets', 'listPii');
+    Route::get('/risk-pii-assets', 'riskPii');
+    Route::get('/control-pii-assets', 'controlPii');
+    Route::get('/list-payment-assets', 'listPayment');
+    Route::get('/risk-payment-assets', 'riskPayment');
+    Route::get('/control-payment-assets', 'controlPayment');
+    Route::get('/list-pci-assets', 'listPci');
+    Route::get('/risk-pci-assets', 'riskPci');
+    Route::get('/control-pci-assets', 'controlPci');
+    Route::get('/list-e-commerce-assets', 'listEcom');
+    Route::get('/risk-e-commerce-assets', 'riskEcom');
+    Route::get('/control-e-commerce-assets', 'controlEcom');
+    Route::get('/list-e-banking-assets', 'listEbank');
+    Route::get('/risk-e-banking-assets', 'riskEbank');
+    Route::get('/control-e-banking-assets', 'controlEbank');
+    Route::get('/mis-risk-register', 'riskReg');
+    Route::get('/list-implemented-controls', 'controlImple');
+    Route::get('/list-not-implemented-controls', 'controlNotImple');
+    Route::get('/list-pending-controls', 'controlPending');
+});
 
 Route::resource('kpi-standards-report', KPIStandardReportController::class);
 Route::view('/frameworks', 'process/framework')->name('frameworks');
@@ -728,52 +774,6 @@ Route::middleware(['auth'])->group(function () {
 
     // ------------------MIS Reports-------------------------
 
-
-
-
-    Route::controller(MisReportsController::class)->group(function () {
-        Route::get('/management-by-exceptions', 'mbe')->name('mbe.index');
-        Route::get('/management-by-exceptions-risk', 'mbe_risks')->name('mbe-risk.index');
-        Route::get('/management-by-exceptions-asset', 'mbe_assets')->name('mbe-asset.index');
-
-        Route::get('/mbe-pdf', 'downloadPdf')->name('mbe.pdf');
-
-        Route::get('/list-critical-assets', 'listcritical');
-        Route::get('/risk-critical-assets', 'riskcritical');
-        Route::get('/control-critical-assets', 'controlcritical');
-        Route::get('/control-critical-assets-download', 'downloadPDF')->name('criticalpdf');
-        Route::get('/list-cloud-assets', 'listcloud');
-        Route::get('/risk-cloud-assets', 'riskcloud');
-        Route::get('/control-cloud-assets', 'controlcloud');
-        Route::get('/list-telework-assets', 'listtelework');
-        Route::get('/risk-telework-assets', 'risktelework');
-        Route::get('/control-telework-assets', 'controltelework');
-        Route::get('/list-social-media-assets', 'listSocialMedia');
-        Route::get('/risk-social-media-assets', 'riskSocialMedia');
-        Route::get('/control-social-media-assets', 'controlSocialMedia');
-        Route::get('/list-data-privacy-assets', 'listDataPrivacy');
-        Route::get('/risk-data-privacy-assets', 'riskDataPrivacy');
-        Route::get('/control-data-privacy-assets', 'controlDataPrivacy');
-        Route::get('/list-pii-assets', 'listPii');
-        Route::get('/risk-pii-assets', 'riskPii');
-        Route::get('/control-pii-assets', 'controlPii');
-        Route::get('/list-payment-assets', 'listPayment');
-        Route::get('/risk-payment-assets', 'riskPayment');
-        Route::get('/control-payment-assets', 'controlPayment');
-        Route::get('/list-pci-assets', 'listPci');
-        Route::get('/risk-pci-assets', 'riskPci');
-        Route::get('/control-pci-assets', 'controlPci');
-        Route::get('/list-e-commerce-assets', 'listEcom');
-        Route::get('/risk-e-commerce-assets', 'riskEcom');
-        Route::get('/control-e-commerce-assets', 'controlEcom');
-        Route::get('/list-e-banking-assets', 'listEbank');
-        Route::get('/risk-e-banking-assets', 'riskEbank');
-        Route::get('/control-e-banking-assets', 'controlEbank');
-        Route::get('/mis-risk-register', 'riskReg');
-        Route::get('/list-implemented-controls', 'controlImple');
-        Route::get('/list-not-implemented-controls', 'controlNotImple');
-        Route::get('/list-pending-controls', 'controlPending');
-    });
 });
 
 
