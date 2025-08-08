@@ -14,14 +14,14 @@ class MainDomainController extends Controller
     {
         $domains = Domain::select('id', 'main_domain_id', 'main_domain_name', 'main_domain_description')->paginate(20);
 
-        return view('process.1-InitialSetup.domains.index', compact('domains'));
+        return view('process.Initial-setup.domains.index', compact('domains'));
     }
 
     public function show(Domain $domain)
     {
         $domain->load('bestPractices');
 
-        return view('process.1-InitialSetup.domains.show', compact('domain'));
+        return view('process.Initial-setup.domains.show', compact('domain'));
     }
 
     public function create()
@@ -30,7 +30,7 @@ class MainDomainController extends Controller
         $classifications = Classification::select('classification_id', 'classification_name')->get();
         $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $bestPracticeIds = [];
-        return view('process.1-InitialSetup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
+        return view('process.Initial-setup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
     }
 
     public function store(Request $request)
@@ -63,7 +63,7 @@ class MainDomainController extends Controller
         $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $bestPracticeIds =  $domain->bestPractices->pluck('best_practices_id')->toArray();
 
-        return view('process.1-InitialSetup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
+        return view('process.Initial-setup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
     }
 
     public function update(Domain $domain, Request $request)

@@ -25,14 +25,14 @@
         <div class="headersec">
             <div class="headerleft">
                 @include('process/headerleft')
-                @include('process/1-InitialSetup/roleheader')
+                @include('process/initial-setup/roleheader')
             </div>
             <div class="text-center d-flex gap-3">
                 @include('partials.roles')
                 @include('process/backbutton')
             </div>
         </div>
-        @include('process/1-InitialSetup/_partials/sidebar')
+        @include('process/initial-setup/_partials/sidebar')
 
         <!-- CONTENT -->
         <div class="IndiTable">

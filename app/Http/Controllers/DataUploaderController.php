@@ -60,7 +60,7 @@ class DataUploaderController extends Controller
 
     public function createOwner()
     {
-        return view('process/1-InitialSetup/owners/upload');
+        return view('process/initial-setup/owners/upload');
     }
 
     public function uploadOwners(Request $request)
@@ -100,7 +100,7 @@ class DataUploaderController extends Controller
 
     public function createCustodian()
     {
-        return view('process/1-InitialSetup/custodians/upload');
+        return view('process/initial-setup/custodians/upload');
     }
 
     public function uploadCustodian(Request $request)

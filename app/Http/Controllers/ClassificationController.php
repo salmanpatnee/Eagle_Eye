@@ -13,19 +13,19 @@ class ClassificationController extends Controller
     {
         $classifications = Classification::select('id', 'classification_id', 'classification_name', 'classification_source')->get();
 
-        return view('process.1-InitialSetup.classifications.index', compact('classifications'));
+        return view('process.Initial-setup.classifications.index', compact('classifications'));
     }
 
     public function show(Classification $classification)
     {
 
-        return view('process.1-InitialSetup.classifications.show', compact('classification'));
+        return view('process.Initial-setup.classifications.show', compact('classification'));
     }
 
     public function create()
     {
         $classification = null;
-        return view('process.1-InitialSetup.classifications.create', compact('classification'));
+        return view('process.Initial-setup.classifications.create', compact('classification'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class ClassificationController extends Controller
 
     public function edit(Classification $classification)
     {
-        return view('process.1-InitialSetup.classifications.create', compact('classification'));
+        return view('process.Initial-setup.classifications.create', compact('classification'));
     }
 
 

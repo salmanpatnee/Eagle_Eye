@@ -18,7 +18,7 @@ class UserController extends Controller
             ->paginate(20);
 
 
-        return view('process.1-InitialSetup.users.index', compact('users'));
+        return view('process.Initial-setup.users.index', compact('users'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class UserController extends Controller
         $user = null;
         $userRoles = UserRole::select('id', 'role_name')->get();
 
-        return view('process.1-InitialSetup.users.create', compact('userRoles', 'user'));
+        return view('process.Initial-setup.users.create', compact('userRoles', 'user'));
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('process.1-InitialSetup.users.show', [
+        return view('process.Initial-setup.users.show', [
             'user'    => $user
         ]);
     }
@@ -57,7 +57,7 @@ class UserController extends Controller
         $userRoles = UserRole::select('id', 'role_name')->get();
 
 
-        return view('process.1-InitialSetup.users.create', compact('user', 'userRoles'));
+        return view('process.Initial-setup.users.create', compact('user', 'userRoles'));
     }
 
     public function update(Request $request, User $user)

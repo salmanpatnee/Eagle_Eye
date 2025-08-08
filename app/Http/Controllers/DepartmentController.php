@@ -14,21 +14,21 @@ class DepartmentController extends Controller
     {
         $departments = Department::select('id', 'department_id', 'department_name', 'location_id')->with('location')->paginate(20);
 
-        return view('process.1-InitialSetup.departments.index', compact('departments'));
+        return view('process.Initial-setup.departments.index', compact('departments'));
     }
 
     public function show(Department $department)
     {
         $department->load('location');
 
-        return view('process.1-InitialSetup.departments.show', compact('department'));
+        return view('process.Initial-setup.departments.show', compact('department'));
     }
 
     public function create()
     {
         $department = null;
         $locations = Location::select('id', 'location_id', 'location_name')->get();
-        return view('process.1-InitialSetup.departments.create', compact('department', 'locations'));
+        return view('process.Initial-setup.departments.create', compact('department', 'locations'));
     }
 
     public function store(Request $request)
@@ -53,7 +53,7 @@ class DepartmentController extends Controller
         $locations = Location::select('id', 'location_id', 'location_name')->get();
 
 
-        return view('process.1-InitialSetup.departments.create', compact('department', 'locations'));
+        return view('process.Initial-setup.departments.create', compact('department', 'locations'));
     }
 
     public function update(Department $department, Request $request)

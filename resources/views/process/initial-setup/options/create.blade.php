@@ -29,7 +29,7 @@
     <div class="headersec">
         <div class="headerleft">
             @include('process/headerleft')
-            @include('process/1-InitialSetup/initialheader')
+            @include('process/initial-setup/initialheader')
         </div>
         @include('partials.roles')
         @include('process/backbutton')

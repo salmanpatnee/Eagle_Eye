@@ -24,7 +24,7 @@
     <div class="headersec">
         <div class="headerleft">
             @include('process/headerleft')
-            @include('process/1-InitialSetup/initialheader')
+            @include('process/initial-setup/initialheader')
         </div>
         <div class="text-center d-flex gap-3">
             @include('partials.roles')

@@ -13,7 +13,7 @@ class OwnerController extends Controller
         // $owners = Owner::with('department', 'role')->get();
         $owners = Owner::with('department', 'role')->paginate(20);
 
-        return view('process/1-InitialSetup/owners/index', compact('owners'));
+        return view('process/initial-setup/owners/index', compact('owners'));
     }
 
 
@@ -21,7 +21,7 @@ class OwnerController extends Controller
     public function show(Owner $owner)
     {
         $owner->load('department', 'role');
-        return view('process/1-InitialSetup/owners/show', compact('owner'));
+        return view('process/initial-setup/owners/show', compact('owner'));
     }
 
 
@@ -31,7 +31,7 @@ class OwnerController extends Controller
         $owner = null;
         $ownerRoles = DB::table('owner_role_table')->get();
         $departments = DB::table('department_table')->get();
-        return view('process/1-InitialSetup/owners/create', compact('owner', 'ownerRoles', 'departments'));
+        return view('process/initial-setup/owners/create', compact('owner', 'ownerRoles', 'departments'));
     }
 
     // To edit the table
@@ -41,7 +41,7 @@ class OwnerController extends Controller
         $departments = DB::table('department_table')->get();
 
 
-        return view('process/1-InitialSetup/owners/create', compact('owner', 'ownerRoles', 'departments'));
+        return view('process/initial-setup/owners/create', compact('owner', 'ownerRoles', 'departments'));
     }
 
 

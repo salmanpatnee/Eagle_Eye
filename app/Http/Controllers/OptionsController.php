@@ -12,7 +12,7 @@ class OptionsController extends Controller
 
         $options = Option::all();
 
-        return view('process.1-InitialSetup.options.create', compact('options'));
+        return view('process.Initial-setup.options.create', compact('options'));
     }
 
     public function update(Request $request)

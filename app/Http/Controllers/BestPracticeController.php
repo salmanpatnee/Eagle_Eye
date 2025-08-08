@@ -15,12 +15,12 @@ class BestPracticeController extends Controller
             ->orderBy('sort_order', 'asc')
             ->paginate(20);
 
-        return view('process.1-InitialSetup.best-practices.index', compact('bestPractices'));
+        return view('process.Initial-setup.best-practices.index', compact('bestPractices'));
     }
 
     public function show(BestPractice $bestPractice)
     {
-        return view('process.1-InitialSetup.best-practices.show', compact('bestPractice'));
+        return view('process.Initial-setup.best-practices.show', compact('bestPractice'));
     }
 
     public function create()
@@ -28,7 +28,7 @@ class BestPracticeController extends Controller
         $bestPractice = null;
         $categories = Category::select('id', 'category_id', 'category_name')->get();
 
-        return view('process.1-InitialSetup.best-practices.create', compact('bestPractice', 'categories'));
+        return view('process.Initial-setup.best-practices.create', compact('bestPractice', 'categories'));
     }
 
     public function store(Request $request)
@@ -54,7 +54,7 @@ class BestPracticeController extends Controller
 
     public function edit(BestPractice $bestPractice)
     {
-        return view('process.1-InitialSetup.best-practices.create', compact('bestPractice'));
+        return view('process.Initial-setup.best-practices.create', compact('bestPractice'));
     }
 
 
