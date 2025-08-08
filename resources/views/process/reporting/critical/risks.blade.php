@@ -1,0 +1,41 @@
+@extends('layouts.mis')
+@section('title', 'Management Information System Reports')
+@section('title_ar', 'تقارير نظم المعلومات الإدارية')
+@section('content')
+    <div>
+        <x-table.action-wrapper title="Risk Related to Critical Assets">
+
+        </x-table.action-wrapper>
+
+        <x-table.table>
+            <x-table.thead>
+                <x-table.th label="S.No" />
+                <x-table.th label="Risk ID" label_ar="رمز المخاطر" />
+                <x-table.th label="Risk Name" label_ar="اسم المخاطر" />
+                <x-table.th label="Risk Group Name" label_ar="اسم مجموعة المخاطر" />
+                <x-table.th label="Risk Inherent Score" label_ar="درجة المخاطر المتأصلة" />
+                <x-table.th label="Risk Consequences" label_ar="عواقب المخاطر" />
+            </x-table.thead>
+
+            <x-table.tbody>
+
+                @forelse ($riskAssets as $riskAsset)
+                    <tr>
+                        <x-table.td class="text-center">
+                            {{ $loop->index + 1 }}
+                        </x-table.td>
+                        <x-table.td>
+                            <a href="{{ route('risks.show', $riskAsset->rid) }}">
+                                {{ $riskAsset->risk_id }}
+                            </a>
+                        </x-table.td>
+                        <x-table.td>{{ $riskAsset->risk_name }}</x-table.td>
+                        <x-table.td>{{ $riskAsset->risk_group_name }}</x-table.td>
+                        <x-table.td>{{ $riskAsset->risk_inherent_score }}</x-table.td>
+                        <x-table.td>{{ $riskAsset->risk_consequences }}</x-table.td>
+                    </tr>
+                @endforeach
+            </x-table.tbody>
+        </x-table.table>
+    </div>
+@endsection

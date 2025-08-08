@@ -25,10 +25,11 @@
         </h2>
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of Critical Assets" title_ar="قائمة الأصول الحرجة" />
-                <x-report-card route_name="" title="Risk Related to Critical Assets"
+                <x-report-card route_name="mis-critical-assets.index" title="List of Critical Assets"
+                    title_ar="قائمة الأصول الحرجة" />
+                <x-report-card route_name="mis-critical-risk-assets.index" title="Risk Related to Critical Assets"
                     title_ar="المخاطر المتعلقة بالأصول الحرجة" />
-                <x-report-card route_name="" title="Controls Related to Critical Assets"
+                <x-report-card route_name="mis-critical-control-assets.index" title="Controls Related to Critical Assets"
                     title_ar="الضوابط المتعلقة بالأصول الحرجة" />
             </div>
         </div>
@@ -40,10 +41,11 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of Cloud Assets" title_ar="قائمة الأصول الحساسة" />
-                <x-report-card route_name="" title="Risk Related to Cloud Assets"
+                <x-report-card route_name="mis-cloud-assets.index" title="List of Cloud Assets"
+                    title_ar="قائمة الأصول الحساسة" />
+                <x-report-card route_name="mis-cloud-risk-assets.index" title="Risk Related to Cloud Assets"
                     title_ar="المخاطر المتعلقة بالأصول الحساسة" />
-                <x-report-card route_name="" title="Controls Related to Cloud Assets"
+                <x-report-card route_name="mis-cloud-control-assets.index" title="Controls Related to Cloud Assets"
                     title_ar="الضوابط المتعلقة بالأصول الحساسة" />
             </div>
         </div>
@@ -55,10 +57,11 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of Telework Assets" title_ar="قائمة أصول العمل عن بعد" />
-                <x-report-card route_name="" title="Risk Related to Telework Assets"
+                <x-report-card route_name="mis-telework-assets.index" title="List of Telework Assets"
+                    title_ar="قائمة أصول العمل عن بعد" />
+                <x-report-card route_name="mis-telework-risk-assets.index" title="Risk Related to Telework Assets"
                     title_ar="المخاطر المتعلقة  أصول العمل عن بعد" />
-                <x-report-card route_name="" title="Controls Related to Telework Assets"
+                <x-report-card route_name="mis-telework-control-assets.index" title="Controls Related to Telework Assets"
                     title_ar="الضوابط المتعلقة  أصول العمل عن بعد" />
             </div>
         </div>
@@ -71,10 +74,11 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of Social Media Assets" title_ar="قائمة أصول التواصل الاجتماعي" />
-                <x-report-card route_name="" title="Risk Related to Social Media Assets"
+                <x-report-card route_name="mis-social-assets.index" title="List of Social Media Assets"
+                    title_ar="قائمة أصول التواصل الاجتماعي" />
+                <x-report-card route_name="mis-social-risk-assets.index" title="Risk Related to Social Media Assets"
                     title_ar="المخاطر المتعلقة  أصول التواصل الاجتماعي" />
-                <x-report-card route_name="" title="Controls Related to Social Media Assets"
+                <x-report-card route_name="mis-social-control-assets.index" title="Controls Related to Social Media Assets"
                     title_ar="الضوابط المتعلقة  أصول التواصل الاجتماعي" />
             </div>
         </div>
@@ -87,10 +91,11 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of Data Privacy Assets" title_ar="قائمة أصول خصوصية البيانات" />
-                <x-report-card route_name="" title="Risk Related to Data Privacy Assets"
+                <x-report-card route_name="mis-data-assets.index" title="List of Data Privacy Assets"
+                    title_ar="قائمة أصول خصوصية البيانات" />
+                <x-report-card route_name="mis-data-risk-assets.index" title="Risk Related to Data Privacy Assets"
                     title_ar="المخاطر المتعلقة  أصول خصوصية البيانات" />
-                <x-report-card route_name="" title="Controls Related to Data Privacy Assets"
+                <x-report-card route_name="mis-data-control-assets.index" title="Controls Related to Data Privacy Assets"
                     title_ar="الضوابط المتعلقة  أصول خصوصية البيانات" />
             </div>
         </div>

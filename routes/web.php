@@ -382,28 +382,32 @@ Route::controller(ExceptionReportsController::class)->group(function () {
     Route::get('/management-by-exceptions', 'exceptions_report')->name('exceptions-report.index');
     Route::get('/management-by-exceptions-risk', 'risk_exceptions_report')->name('risk-exceptions-report.index');
     Route::get('/management-by-exceptions-asset', 'asset_exceptions_report')->name('asset-exceptions-report.index');
+    // Route::get('/mbe-pdf', 'downloadPdf')->name('mbe.pdf');
 });
 
-Route::controller(MisReportsController::class)->group(function () {
+Route::prefix('mis')->controller(MisReportsController::class)->group(function () {
 
-    Route::get('/mbe-pdf', 'downloadPdf')->name('mbe.pdf');
+    Route::get('/critical-assets', 'criticalAssets')->name('mis-critical-assets.index');
+    Route::get('/risk-critical-assets', 'riskCriticalAssets')->name('mis-critical-risk-assets.index');
+    Route::get('/control-critical-assets', 'controlCriticalAssets')->name('mis-critical-control-assets.index');
+    // Route::get('/control-critical-assets-download', 'downloadPDF')->name('criticalpdf');
 
-    Route::get('/list-critical-assets', 'listcritical');
-    Route::get('/risk-critical-assets', 'riskcritical');
-    Route::get('/control-critical-assets', 'controlcritical');
-    Route::get('/control-critical-assets-download', 'downloadPDF')->name('criticalpdf');
-    Route::get('/list-cloud-assets', 'listcloud');
-    Route::get('/risk-cloud-assets', 'riskcloud');
-    Route::get('/control-cloud-assets', 'controlcloud');
-    Route::get('/list-telework-assets', 'listtelework');
-    Route::get('/risk-telework-assets', 'risktelework');
-    Route::get('/control-telework-assets', 'controltelework');
-    Route::get('/list-social-media-assets', 'listSocialMedia');
-    Route::get('/risk-social-media-assets', 'riskSocialMedia');
-    Route::get('/control-social-media-assets', 'controlSocialMedia');
-    Route::get('/list-data-privacy-assets', 'listDataPrivacy');
-    Route::get('/risk-data-privacy-assets', 'riskDataPrivacy');
-    Route::get('/control-data-privacy-assets', 'controlDataPrivacy');
+    Route::get('cloud-assets', 'cloudAssets')->name('mis-cloud-assets.index');
+    Route::get('risk-cloud-assets', 'riskCloudAssets')->name('mis-cloud-risk-assets.index');
+    Route::get('/control-cloud-assets', 'controlCloudAssets')->name('mis-cloud-control-assets.index');
+
+    Route::get('/telework-assets', 'teleworkAssets')->name('mis-telework-assets.index');
+    Route::get('/risk-telework-assets', 'riskTeleworkAssets')->name('mis-telework-risk-assets.index');
+    Route::get('/control-telework-assets', 'controlTeleworkAssets')->name('mis-telework-control-assets.index');
+
+    Route::get('/social-media-assets', 'socialMediaAssets')->name('mis-social-assets.index');
+    Route::get('/risk-social-media-assets', 'riskSocialMediaAssets')->name('mis-social-risk-assets.index');
+    Route::get('/control-social-media-assets', 'controlSocialMediaAssets')->name('mis-social-control-assets.index');
+
+    Route::get('data-privacy-assets', 'dataPrivacyAssets')->name('mis-data-assets.index');
+    Route::get('/risk-data-privacy-assets', 'riskDataPrivacyAssets')->name('mis-data-risk-assets.index');
+    Route::get('/control-data-privacy-assets', 'controlDataPrivacyAssets')->name('mis-data-control-assets.index');
+
     Route::get('/list-pii-assets', 'listPii');
     Route::get('/risk-pii-assets', 'riskPii');
     Route::get('/control-pii-assets', 'controlPii');
