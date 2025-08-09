@@ -108,11 +108,11 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of PII Assets"
+                <x-report-card route_name="mis-pii-assets.index" title="List of PII Assets"
                     title_ar="قائمة معلومات تحديد الهوية الشخصية الأصول" />
-                <x-report-card route_name="" title="Risk Related to PII Assets"
+                <x-report-card route_name="mis-risk-pii-assets.index" title="Risk Related to PII Assets"
                     title_ar="المخاطر المتعلقة  معلومات تحديد الهوية الشخصية الأصول" />
-                <x-report-card route_name="" title="Controls Related to PII Assets"
+                <x-report-card route_name="mis-control-pii-assets.index" title="Controls Related to PII Assets"
                     title_ar="الضوابط المتعلقة  معلومات تحديد الهوية الشخصية الأصول" />
             </div>
         </div>
@@ -125,10 +125,11 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of Payment Assets" title_ar="قائمة أصول الدفع" />
-                <x-report-card route_name="" title="Risk Related to Payment Assets"
+                <x-report-card route_name="mis-payment-assets.index" title="List of Payment Assets"
+                    title_ar="قائمة أصول الدفع" />
+                <x-report-card route_name="mis-risk-payment-assets.index" title="Risk Related to Payment Assets"
                     title_ar="المخاطر المتعلقة  أصول الدفع" />
-                <x-report-card route_name="" title="Controls Related to Payment Assets"
+                <x-report-card route_name="mis-control-payment-assets.index" title="Controls Related to Payment Assets"
                     title_ar="الضوابط المتعلقة  أصول الدفع" />
             </div>
         </div>
@@ -141,11 +142,13 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of PCI Data Security Standard Assets"
+                <x-report-card route_name="mis-pci-assets.index" title="List of PCI Data Security Standard Assets"
                     title_ar="قائمة معيار أمان بيانات صناعة بطاقات الدفع أصول" />
-                <x-report-card route_name="" title="Risk Related to PCI Data Security Standard Assets"
+                <x-report-card route_name="mis-risk-pci-assets.index"
+                    title="Risk Related to PCI Data Security Standard Assets"
                     title_ar="المخاطر المتعلقة  معيار أمان بيانات صناعة بطاقات الدفع أصول" />
-                <x-report-card route_name="" title="Controls Related to PCI Data Security Standard Assets"
+                <x-report-card route_name="mis-control-pci-assets.index"
+                    title="Controls Related to PCI Data Security Standard Assets"
                     title_ar="الضوابط المتعلقة  معيار أمان بيانات صناعة بطاقات الدفع أصول" />
             </div>
         </div>
@@ -158,12 +161,12 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of E-Commerce Assets"
+                <x-report-card route_name="mis-e-commerce-assets.index" title="List of E-Commerce Assets"
                     title_ar="قائمة أصول التجارة الإلكترونية" />
-                <x-report-card route_name="" title="Risk Related to E-Commerce Assets"
+                <x-report-card route_name="mis-risk-e-commerce-assets.index" title="Risk Related to E-Commerce Assets"
                     title_ar="المخاطر المتعلقة  أصول التجارة الإلكترونية" />
-                <x-report-card route_name="" title="Controls Related to E-Commerce Assets"
-                    title_ar="الضوابط المتعلقة  أصول التجارة الإلكترونية" />
+                <x-report-card route_name="mis-control-e-commerce-assets.index"
+                    title="Controls Related to E-Commerce Assets" title_ar="الضوابط المتعلقة  أصول التجارة الإلكترونية" />
             </div>
         </div>
 
@@ -175,11 +178,12 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="" title="List of E-Banking Assets"
+                <x-report-card route_name="mis-e-banking-assets.index" title="List of E-Banking Assets"
                     title_ar="قائمة الأصول المصرفية الإلكترونية" />
-                <x-report-card route_name="" title="Risk Related to E-Banking Assets"
+                <x-report-card route_name="mis-risk-e-banking-assets.index" title="Risk Related to E-Banking Assets"
                     title_ar="المخاطر المتعلقة  الأصول المصرفية الإلكترونية" />
-                <x-report-card route_name="" title="Controls Related to E-Banking Assets"
+                <x-report-card route_name="mis-control-e-banking-assets.index"
+                    title="Controls Related to E-Banking Assets"
                     title_ar="الضوابط المتعلقة  الأصول المصرفية الإلكترونية" />
             </div>
         </div>

@@ -404,29 +404,34 @@ Route::prefix('mis')->controller(MisReportsController::class)->group(function ()
     Route::get('/risk-social-media-assets', 'riskSocialMediaAssets')->name('mis-social-risk-assets.index');
     Route::get('/control-social-media-assets', 'controlSocialMediaAssets')->name('mis-social-control-assets.index');
 
-    Route::get('data-privacy-assets', 'dataPrivacyAssets')->name('mis-data-assets.index');
+    Route::get('/data-privacy-assets', 'dataPrivacyAssets')->name('mis-data-assets.index');
     Route::get('/risk-data-privacy-assets', 'riskDataPrivacyAssets')->name('mis-data-risk-assets.index');
     Route::get('/control-data-privacy-assets', 'controlDataPrivacyAssets')->name('mis-data-control-assets.index');
 
-    Route::get('/list-pii-assets', 'listPii');
-    Route::get('/risk-pii-assets', 'riskPii');
-    Route::get('/control-pii-assets', 'controlPii');
-    Route::get('/list-payment-assets', 'listPayment');
-    Route::get('/risk-payment-assets', 'riskPayment');
-    Route::get('/control-payment-assets', 'controlPayment');
-    Route::get('/list-pci-assets', 'listPci');
-    Route::get('/risk-pci-assets', 'riskPci');
-    Route::get('/control-pci-assets', 'controlPci');
-    Route::get('/list-e-commerce-assets', 'listEcom');
-    Route::get('/risk-e-commerce-assets', 'riskEcom');
-    Route::get('/control-e-commerce-assets', 'controlEcom');
-    Route::get('/list-e-banking-assets', 'listEbank');
-    Route::get('/risk-e-banking-assets', 'riskEbank');
-    Route::get('/control-e-banking-assets', 'controlEbank');
+    Route::get('/pii-assets', 'piiAssets')->name('mis-pii-assets.index');
+    Route::get('/risk-pii-assets', 'riskPiiAssets')->name('mis-risk-pii-assets.index');
+    Route::get('/control-pii-assets', 'controlPiiAssets')->name('mis-control-pii-assets.index');
+
+    Route::get('/payment-assets', 'paymentAssets')->name('mis-payment-assets.index');
+    Route::get('/risk-payment-assets', 'riskPaymentAssets')->name('mis-risk-payment-assets.index');
+    Route::get('/control-payment-assets', 'controlPaymentAssets')->name('mis-control-payment-assets.index');
+
+    Route::get('/pci-assets', 'pciAssets')->name('mis-pci-assets.index');
+    Route::get('/risk-pci-assets', 'riskPciAssets')->name('mis-risk-pci-assets.index');
+    Route::get('/control-pci-assets', 'controlPciAssets')->name('mis-control-pci-assets.index');
+
+    Route::get('/e-commerce-assets', 'ecomAssets')->name('mis-e-commerce-assets.index');
+    Route::get('/risk-e-commerce-assets', 'riskEcomAssets')->name('mis-risk-e-commerce-assets.index');
+    Route::get('/control-e-commerce-assets', 'controlEcomAssets')->name('mis-control-e-commerce-assets.index');
+
+    Route::get('/e-banking-assets', 'ebankAssets')->name('mis-e-banking-assets.index');
+    Route::get('/risk-e-banking-assets', 'riskEbankAssets')->name('mis-risk-e-banking-assets.index');
+    Route::get('/control-e-banking-assets', 'controlEbankAssets')->name('mis-control-e-banking-assets.index');
+
     Route::get('/mis-risk-register', 'riskReg');
-    Route::get('/list-implemented-controls', 'controlImple');
-    Route::get('/list-not-implemented-controls', 'controlNotImple');
-    Route::get('/list-pending-controls', 'controlPending');
+    Route::get('/implemented-controls', 'controlImple');
+    Route::get('/not-implemented-controls', 'controlNotImple');
+    Route::get('/pending-controls', 'controlPending');
 });
 
 Route::resource('kpi-standards-report', KPIStandardReportController::class);

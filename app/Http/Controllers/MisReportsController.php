@@ -282,4 +282,241 @@ class MisReportsController extends Controller
             return view('process/reporting/data-privacy/controls', compact('result'));
         }
     }
+
+    public function piiAssets()
+    {
+        $result = DB::table('asset_register_table as assetregister')
+            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
+            ->where('data_pii_asset', 'Yes')
+            ->get();
+        return view('process/reporting/pii/assets', compact('result'));
+    }
+
+    public function riskPiiAssets()
+    {
+        $result = DB::table('risk_master_table as riskmaster')
+            ->select(
+                'riskmaster.id as rid',
+                'riskmaster.*',
+                'riskgroup.risk_group_name',
+                'riskinherent.*'
+
+            )
+            ->join('risk_group_table as riskgroup', 'riskgroup.risk_group_id', '=', 'riskmaster.risk_group_id')
+            ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
+            ->where('risk_pii', 'Yes')
+            ->get();
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Risk-PII-Asset.pdf', 'pdf/risk-pii-asset-pdf', 'Risks Related to Personally Identifiable Information Assets');
+        } else {
+
+            return view('process/reporting/pii/risks', compact('result'));
+        }
+    }
+
+    public function controlPiiAssets()
+    {
+        $result = DB::table('control_master_table')
+            ->where('control_pii', 'Yes')
+            ->get();
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Controls-Related-to-PII-Assets.pdf', 'pdf/control-pii-asset-pdf', 'Controls Related to Personally Identifiable Information Assets');
+        } else {
+
+            return view('process/reporting/pii/controls', compact('result'));
+        }
+    }
+
+    public function paymentAssets()
+    {
+        $result = DB::table('asset_register_table as assetregister')
+            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
+            ->where('payment_asset', 'Yes')
+            ->get();
+        return view('process/reporting/payments/assets', compact('result'));
+    }
+
+    public function riskPaymentAssets()
+    {
+        $result = DB::table('risk_master_table as riskmaster')
+            ->select(
+                'riskmaster.id as rid',
+                'riskmaster.*',
+                'riskgroup.risk_group_name',
+                'riskinherent.*'
+
+            )
+            ->join('risk_group_table as riskgroup', 'riskgroup.risk_group_id', '=', 'riskmaster.risk_group_id')
+            ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
+            ->where('risk_payment', 'Yes')
+            ->get();
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Risk-Payment-Asset.pdf', 'pdf/risk-payment-asset-pdf', 'Risks Related to Payment Assets');
+        } else {
+
+            return view('process/reporting/payments/risks', compact('result'));
+        }
+    }
+
+    public function controlPaymentAssets()
+    {
+        $result = DB::table('control_master_table')
+            ->where('control_payment', 'Yes')
+            ->get();
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Controls-Related-to-Payment-Assets.pdf', 'pdf/control-payment-asset-pdf', 'Controls Related to Payment Assets');
+        } else {
+
+            return view('process/reporting/payments/controls', compact('result'));
+        }
+    }
+
+    public function pciAssets()
+    {
+        $result = DB::table('asset_register_table as assetregister')
+            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
+            ->where('pci_dss_asset', 'Yes')
+            ->get();
+        return view('process/reporting/pci/assets', compact('result'));
+    }
+
+    public function riskPciAssets()
+    {
+        $result = DB::table('risk_master_table as riskmaster')
+            ->select(
+                'riskmaster.id as rid',
+                'riskmaster.*',
+                'riskgroup.risk_group_name',
+                'riskinherent.*'
+
+            )
+            ->join('risk_group_table as riskgroup', 'riskgroup.risk_group_id', '=', 'riskmaster.risk_group_id')
+            ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
+            ->where('risk_pci_dss', 'Yes')
+            ->get();
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Risk-PCI-DSS-Asset.pdf', 'pdf/risk-pci-dss-asset-pdf', 'Risks Related to PCI DSS Assets');
+        } else {
+
+            return view('process/reporting/pci/risks', compact('result'));
+        }
+    }
+
+    public function controlPciAssets()
+    {
+        $result = DB::table('control_master_table')
+            ->where('control_pci_dss', 'Yes')
+            ->get();
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Controls-Related-to-PCI-DSS-Assets.pdf', 'pdf/control-pci-dss-asset-pdf', 'Controls Related to PCI DSS Assets');
+        } else {
+
+            return view('process/reporting/pci/controls', compact('result'));
+        }
+    }
+
+    public function ecomAssets()
+    {
+        $result = DB::table('asset_register_table as assetregister')
+            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
+            ->where('e_commerce_asset', 'Yes')
+            ->get();
+        return view('process/reporting/ecommerce/assets', compact('result'));
+    }
+
+    public function riskEcomAssets()
+    {
+        $result = DB::table('risk_master_table as riskmaster')
+            ->select(
+                'riskmaster.id as rid',
+                'riskmaster.*',
+                'riskgroup.risk_group_name',
+                'riskinherent.*'
+
+            )
+            ->join('risk_group_table as riskgroup', 'riskgroup.risk_group_id', '=', 'riskmaster.risk_group_id')
+            ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
+            ->where('risk_e_commerce', 'Yes')
+            ->get();
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Risk-Ecommerce-Asset.pdf', 'pdf/risk-ecommerce-asset-pdf', 'Risks Related to Ecommerce Assets');
+        } else {
+
+            return view('process/reporting/ecommerce/risks', compact('result'));
+        }
+    }
+
+    public function controlEcomAssets()
+    {
+        $result = DB::table('control_master_table')
+            ->where('control_e_commerce', 'Yes')
+            ->get();
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Controls-Related-to-Ecommerce-Assets.pdf', 'pdf/control-ecommerce-asset-pdf', 'Controls Related to Ecommerce Assets');
+        } else {
+
+            return view('process/reporting/ecommerce/controls', compact('result'));
+        }
+    }
+
+    public function ebankAssets()
+    {
+        $result = DB::table('asset_register_table as assetregister')
+            ->join('asset_group_table as assetgroup', 'assetgroup.asset_group_id', '=', 'assetregister.asset_group_id')
+            ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
+            ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
+            ->where('e_banking_asset', 'Yes')
+            ->get();
+
+        return view('process/reporting/ebanking/assets', compact('result'));
+    }
+
+    public function riskEbankAssets()
+    {
+        $result = DB::table('risk_master_table as riskmaster')
+            ->select(
+                'riskmaster.id as rid',
+                'riskmaster.*',
+                'riskgroup.risk_group_name',
+                'riskinherent.*'
+
+            )
+            ->join('risk_group_table as riskgroup', 'riskgroup.risk_group_id', '=', 'riskmaster.risk_group_id')
+            ->join('risk_inherent_table as riskinherent', 'riskinherent.risk_inherent_id', '=', 'riskmaster.risk_inherent_id')
+            ->where('risk_e_banking', 'Yes')
+            ->get();
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Risk-E-Banking-Asset.pdf', 'pdf/risk-e-banking-asset-pdf', 'Risks Related to E-Banking Assets');
+        } else {
+
+            return view('process/reporting/ebanking/risks', compact('result'));
+        }
+    }
+
+    public function controlEbankAssets()
+    {
+        $result = DB::table('control_master_table')
+            ->where('control_e_banking', 'Yes')
+            ->get();
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Controls-Related-to-E-Banking-Assets.pdf', 'pdf/control-e-banking-asset-pdf', 'Controls Related to E-Banking Assets');
+        } else {
+
+            return view('process/reporting/ebanking/controls', compact('result'));
+        }
+    }
 }
