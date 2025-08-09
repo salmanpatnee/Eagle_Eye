@@ -64,6 +64,7 @@
             font-size: 20px;
             padding: 0;
         }
+
         .buttonsec {
             padding-inline: 80px;
             margin-top: 120px;

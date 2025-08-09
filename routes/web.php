@@ -370,9 +370,24 @@ Route::controller(PenTestReportController::class)->group(function () {
 
 // ------------REPORTING--------------
 
-Route::resource('kpi-categories', KPICategoryController::class);
 Route::controller(KPICategoryController::class)->group(function () {
     Route::get('/kpi-references', 'report')->name('kpi-references.index');
+});
+Route::resource('kpi-standards-report', KPIStandardReportController::class);
+Route::resource('kpi-categories', KPICategoryController::class);
+
+Route::controller(RegulatoryReportController::class)->group(function () {
+    Route::get('/nca-regulatory-reports', 'index')->name('nca-regulatory-reports.index');
+    Route::get('/regulatory-report', 'create')->name('regulatory-reports.create');
+    Route::get('/regulatory-reports/generate', 'show')->name('regulatory-reports.show');
+    Route::get('/ecc-regulatory-report', 'ecc')->name('ecc-regulatory-report.show');
+    Route::get('/ecc-2024-regulatory-report', 'ecc_2024')->name('ecc-2024-regulatory-report.show');
+    Route::get('/cscc-regulatory-report', 'cscc')->name('cscc-regulatory-report.show');
+    Route::get('/ccc-regulatory-report', 'ccc')->name('ccc-regulatory-report.show');
+    Route::get('/tcc-regulatory-report', 'tcc')->name('tcc-regulatory-report.show');
+    Route::get('/osmacc-regulatory-report', 'osmacc')->name('osmacc-regulatory-report.show');
+    Route::get('/dcc-regulatory-report', 'dcc')->name('dcc-regulatory-report.show');
+    Route::get('/sama-regulatory-report', 'sama')->name('sama-regulatory-report.show');
 });
 
 Route::view('/mis-reporting', 'process/reporting/mis-reporting')->name('mis-report.index');
@@ -434,7 +449,6 @@ Route::prefix('mis')->controller(MisReportsController::class)->group(function ()
     Route::get('/pending-controls', 'controlPending');
 });
 
-Route::resource('kpi-standards-report', KPIStandardReportController::class);
 Route::view('/frameworks', 'process/framework')->name('frameworks');
 
 
@@ -686,19 +700,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dcc-regulatory-summary', 'Dccsummaryreport')->name('dcc-regulatory-summary.show');
     });
 
-    Route::controller(RegulatoryReportController::class)->group(function () {
-        Route::get('/nca-regulatory-reports', 'index')->name('nca-regulatory-reports.index');
-        Route::get('/regulatory-reports', 'create')->name('regulatory-reports.create');
-        Route::get('/regulatory-reports/generate', 'show')->name('regulatory-reports.show');
-        Route::get('/ecc-regulatory-report', 'ecc')->name('ecc-regulatory-report.show');
-        Route::get('/ecc-2024-regulatory-report', 'ecc_2024')->name('ecc-2024-regulatory-report.show');
-        Route::get('/cscc-regulatory-report', 'cscc')->name('cscc-regulatory-report.show');
-        Route::get('/ccc-regulatory-report', 'ccc')->name('ccc-regulatory-report.show');
-        Route::get('/tcc-regulatory-report', 'tcc')->name('tcc-regulatory-report.show');
-        Route::get('/osmacc-regulatory-report', 'osmacc')->name('osmacc-regulatory-report.show');
-        Route::get('/dcc-regulatory-report', 'dcc')->name('dcc-regulatory-report.show');
-        Route::get('/sama-regulatory-report', 'sama')->name('sama-regulatory-report.show');
-    });
+
 
 
     // Regulatory Report Detail

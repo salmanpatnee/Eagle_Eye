@@ -13,7 +13,7 @@ class RegulatoryReportController extends Controller
 {
     public function index()
     {
-        return view('process/19-NCAReporting/index');
+        return view('process/reporting/nca/index');
     }
 
     /**
@@ -26,6 +26,11 @@ class RegulatoryReportController extends Controller
     {
         $bestPracticeId = request('best_practice');
 
+        $versions = [
+            (object)['value' => 'v1', 'label' => 'Version 1'],
+            (object)['value' => 'v2', 'label' => 'Version 2'],
+        ];
+
         $controlAssessments = ControlAssessment::select(
             'control_assessment_id',
             DB::raw("DATE_FORMAT(control_assessment_start_date, '%d %b %Y') as formatted_start_date"),
@@ -35,7 +40,7 @@ class RegulatoryReportController extends Controller
             ->get();
 
 
-        return view('process/19-NCAReporting/create', compact('controlAssessments', 'bestPracticeId'));
+        return view('process/reporting/nca/create', compact('controlAssessments', 'bestPracticeId', 'versions'));
     }
 
     public function show()
@@ -63,7 +68,7 @@ class RegulatoryReportController extends Controller
     {
         $controlAssessmentId = request('controlAssessmentId');
         $report = $this->getReport("NCA-ECC-2018", $controlAssessmentId);
-        $path = "process/19-NCAReporting/ecc";
+        $path = "process/reporting/nca/ecc";
 
         if (request()->has('pdf')) {
             $this->generatePdf($path, $report, 'NCA-ECC-Report.pdf');
