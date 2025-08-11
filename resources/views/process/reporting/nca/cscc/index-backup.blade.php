@@ -1,21 +1,34 @@
-@extends('layouts/nca-report')
-@section('title', 'NCA-CSCC Assessment and Compliance Reports')
-@section('title_ar', 'تقرير التقييم والامتثال NCA-CSCC')
-
-@section('content')
-
-@section('report-info')
-
-    <p class="font-bold mb-5 rtl:text-right text-2xl text-gray-900" lang="ar" dir="rtl">
-        الهيئة الوطنية للأمن السيبراني - ضوابط الأمن السيبراني للأنظمة الحساسة</p>
-    <p class="text-lg text-gray-900 mb-0">Control Assessment Regulator Reports</p>
-    <p class="text-lg text-gray-900 mb-0">National Cybersecurity Authority - Critical Systems Cybersecurity Controls
-        (NCA-CSCC)</p>
+@extends('pdf.partials.layout')
+@section('title', 'NCA CSCC 2019 Assessment and Compliance')
+@section('action-buttons')
+    <a href="{{ route('cscc-regulatory-summary.show') }}?controlAssessmentId={{ $controlAssessmentId }}" class="btn-report">
+        <p>تقرير ملخص</p>
+        <p>Summary Report</p>
+    </a>
+    {{-- <a href="{{ route('regulatory-reports.create') }}?best_practice=NCA-CSCC-2019" class="btn-report">
+        <p>تقرير مفصل</p>
+        <p>Detailed Report</p>
+    </a> --}}
+    <a href="{{ route('cscc-regulatory-report.excel') }}" class="btn-report">
+        <p>تنزيل بصيغة إكسل</p>
+        <p>Download in Excel</p>
+    </a>
+    <a href="{{ route('cscc-regulatory-report.show') }}?pdf=1" class="btn-report">
+        <p>تنزيل بصيغة بي دي إف</p>
+        <p>Download as PDF</p>
+    </a>
 @endsection
 
-<main class="report text-left max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar">
+@section('header')
+    <h1 class="arabic-text">الهيئة الوطنية للأمن السيبراني - ضوابط الأمن السيبراني للأنظمة الحساسة</h1>
+    <p style="margin-top: 20px">Control Assessment Regulator Reports</p>
+    <p>National Cybersecurity Authority - Critical Systems Cybersecurity Controls (NCA-CSCC)</p>
+@endsection
+@section('content')
 
-    <table class="table mb-0 w-full">
+
+
+    <table class="table mb-0">
         <tbody>
             {{-- Heads --}}
             <tr class="bg-light-gray">
@@ -88,10 +101,9 @@
 
             @foreach ($report as $control)
                 @if ($control->control_id == 'NCA-CSCC-1-1-1')
-                    <x-main-control-alt main_domain="(Cybersecurity Governance)"
-                        main_domain_ar="١- حوكمة الأمن السيبراني" main_domain_id="١-١"
-                        sub_domain="(Cybersecurity Strategy)" sub_domain_ar="إستراتيجية الأمن السيبراني"
-                        control_id="١-١-١"
+                    <x-main-control-alt main_domain="(Cybersecurity Governance)" main_domain_ar="١- حوكمة الأمن السيبراني"
+                        main_domain_id="١-١" sub_domain="(Cybersecurity Strategy)"
+                        sub_domain_ar="إستراتيجية الأمن السيبراني" control_id="١-١-١"
                         description="In addition to the controls within Subcomponent 1.1 of the Cybersecurity Core Controls, the entity's cybersecurity strategy should prioritize supporting the protection of the entity's critical systems."
                         description_ar="بالإضافة للضوابط ضمن المكون الفرعي ١-١ في الضوابط الأساسية للأمن السيبراني، يجب أن تضع إستراتيجية الأمن السيبراني للجهة أولوية لدعم حماية الأنظمة الحساسة الخاصة بالجهة."
                         :control="$control" border_b="true" />
@@ -144,8 +156,8 @@
                     @php
                         $status = getParentStatus($report, 'NCA-CSCC-1-3-2-');
                     @endphp
-                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain=""
-                        sub_domain_ar="" control_id="١-٣-٢"
+                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain="" sub_domain_ar=""
+                        control_id="١-٣-٢"
                         description="In addition to the sub-regulations within Control 1.6.3 in the basic controls for cybersecurity, they must cover the cybersecurity requirements, for application development projects, and software for sensitive systems of the entity, at a minimum; the following:"
                         description_ar="بالإضافة للضوابط الفرعية ضمن الضابط ١-٦-٣ في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني، لمشاريع تطوير التطبيقات، والبرمجيات الخاصة بالأنظمة الحساسة للجهة، بحد أدنى؛ ما يلي:"
                         :control="$control" :status="$status" />
@@ -181,8 +193,8 @@
                         :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-CSCC-1-4-2')
-                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain=""
-                        sub_domain_ar="" control_id="١-٤-٢"
+                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain="" sub_domain_ar=""
+                        control_id="١-٤-٢"
                         description="Referring to Officer 1.8.2 in the basic cybersecurity controls, the application of cybersecurity controls for sensitive systems must be reviewed by parties independent of the cybersecurity department from within the entity, at least once every three years."
                         description_ar="رجوعاً للضابط ١-٨-٢ في الضوابط الأساسية للأمن السيبراني، يجب أن تتم مراجعة تطبيق ضوابط الأمن السيبراني للأنظمة الحساسة؛ من قبل أطراف مستقلة عن الإدارة المعنية بالأمن السيبراني من داخل الجهة، مرة واحدة؛ كل ثلاث سنوات على الأقل."
                         :control="$control" border_b="true" />
@@ -213,9 +225,9 @@
                     @php
                         $status = getParentStatus($report, 'NCA-CSCC-2-1-1-');
                     @endphp
-                    <x-main-control-alt main_domain="(Cybersecurity Defense)"
-                        main_domain_ar="٢- تعزيز الأمن السيبراني" main_domain_id="٢-١"
-                        sub_domain="(Asset Management)" sub_domain_ar="إدارة الأصول " control_id="٢-١-١"
+                    <x-main-control-alt main_domain="(Cybersecurity Defense)" main_domain_ar="٢- تعزيز الأمن السيبراني"
+                        main_domain_id="٢-١" sub_domain="(Asset Management)" sub_domain_ar="إدارة الأصول "
+                        control_id="٢-١-١"
                         description="In addition to the controls within subcomponent 2.1 of the Cybersecurity Core Controls, the cybersecurity requirements for IT asset management should include, at a minimum, the following:"
                         description_ar="بالإضافة للضوابط ضمن المكون الفرعي ٢-١ في الضوابط الأساسية للأمن السيبراني، يجب أن تشمل متطلبات الأمن السيبراني لإدارة الأصول المعلوماتية والتقنية، بحد أدنى؛ مايلي:"
                         :control="$control" border_t="true" theme="bg-teal" :status="$status" />
@@ -359,8 +371,7 @@
                         $status = getParentStatus($report, 'NCA-CSCC-2-4-1-');
                     @endphp
                     <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="٢-٤"
-                        sub_domain="(Networks Security Management)" sub_domain_ar="إدارة أمن الشبكات"
-                        control_id="٢-٤-١"
+                        sub_domain="(Networks Security Management)" sub_domain_ar="إدارة أمن الشبكات" control_id="٢-٤-١"
                         description="In addition to the sub-regulations within the control 2.5.3 in the basic controls for cybersecurity, the cybersecurity requirements for managing the security of sensitive systems networks of the entity shall cover at a minimum the following:"
                         description_ar="بالإضافة للضوابط الفرعية ضمن الضابط ٢-٥-٣ في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني لإدارة أمن شبكات الأنظمة الحساسة للجهة بحد أدنى ما يلي:"
                         :control="$control" theme="bg-teal" :status="$status" />
@@ -425,8 +436,7 @@
                         $status = getParentStatus($report, 'NCA-CSCC-2-5-1-');
                     @endphp
                     <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="٢-٥"
-                        sub_domain="(Mobile Devices Security)" sub_domain_ar="أمن الأجهزة المحمولة "
-                        control_id="٢-٥-١"
+                        sub_domain="(Mobile Devices Security)" sub_domain_ar="أمن الأجهزة المحمولة " control_id="٢-٥-١"
                         description="In addition to the sub-regulations within the control 2.6.3 in the basic controls for cybersecurity, they must cover the cybersecurity requirements, specific to the security of mobile devices, and devices (BYOD) of the entity, at a minimum; the following:"
                         description_ar="بالإضافة للضوابط الفرعية ضمن الضابط ٢-٦-٣ في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني، الخاصة بأمن الأجهزة المحمولة، وأجهزة (BYOD) للجهة، بحد أدنى؛ ما يلي:"
                         :control="$control" theme="bg-teal" :status="$status" />
@@ -459,8 +469,7 @@
                         :control="$control" theme="bg-teal" />
                 @endif
                 @if ($control->control_id == 'NCA-CSCC-2-6-1-2')
-                    <x-sub-control-alt control_id="٢-١-٦-٢"
-                        description="Classification of all sensitive systems data."
+                    <x-sub-control-alt control_id="٢-١-٦-٢" description="Classification of all sensitive systems data."
                         description_ar="تصنيف جميع بيانات الأنظمة الحساسة." :control="$control" theme="bg-teal" />
                 @endif
                 @if ($control->control_id == 'NCA-CSCC-2-6-1-3')
@@ -593,8 +602,7 @@
                         :control="$control" theme="bg-teal" />
                 @endif
                 @if ($control->control_id == 'NCA-CSCC-2-10-1-2')
-                    <x-sub-control-alt control_id="٢-١-١٠-٢"
-                        description="Penetration testing done by a qualified team."
+                    <x-sub-control-alt control_id="٢-١-١٠-٢" description="Penetration testing done by a qualified team."
                         description_ar="عمل اختبار الاختراق من قبل فريق مؤهل. " :control="$control" theme="bg-teal" />
                 @endif
                 @if ($control->control_id == 'NCA-CSCC-2-10-2')
@@ -636,8 +644,8 @@
                 @if ($control->control_id == 'NCA-CSCC-2-11-1-4')
                     <x-sub-control-alt control_id="٤-١-١١-٢"
                         description="Monitor event logs of sensitive systems around the clock."
-                        description_ar="مراقبة سجلات الأحداث، الخاصة بالأنظمة الحساسة على مدار الساعة."
-                        :control="$control" theme="bg-teal" />
+                        description_ar="مراقبة سجلات الأحداث، الخاصة بالأنظمة الحساسة على مدار الساعة." :control="$control"
+                        theme="bg-teal" />
                 @endif
                 @if ($control->control_id == 'NCA-CSCC-2-11-1-5')
                     <x-sub-control-alt control_id="٥-١-١١-٢"
@@ -659,8 +667,7 @@
                     @endphp
 
                     <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="٢-١٢"
-                        sub_domain="(Web Application Security)" sub_domain_ar="حماية تطبيقات الويب "
-                        control_id="٢-١٢-١"
+                        sub_domain="(Web Application Security)" sub_domain_ar="حماية تطبيقات الويب " control_id="٢-١٢-١"
                         description="In addition to the sub-regulations within Control 2.15.3 in the Basic Cybersecurity Controls, they must cover the cybersecurity requirements, to protect external web applications of the entity's sensitive systems, at a minimum; the following:"
                         description_ar="بالإضافة للضوابط الفرعية ضمن الضابط ٢-١٥-٣ في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني، لحماية تطبيقات الويب الخارجية للأنظمة الحساسة للجهة، بحد أدنى؛ ما يلي:"
                         :control="$control" theme="bg-teal" :status="$status" />
@@ -718,8 +725,7 @@
                 @endif
                 @if ($control->control_id == 'NCA-CSCC-2-13-3-3')
                     <x-sub-control-alt control_id="٣-٣-١٣-٢" description="Clarify the safe use policy for users."
-                        description_ar="توضيح سياسة الاستخدام الآمن للمستخدمين." :control="$control"
-                        theme="bg-teal" />
+                        description_ar="توضيح سياسة الاستخدام الآمن للمستخدمين." :control="$control" theme="bg-teal" />
                 @endif
                 @if ($control->control_id == 'NCA-CSCC-2-13-3-4')
                     <x-sub-control-alt control_id="٤-٣-١٣-٢"
@@ -738,8 +744,8 @@
                     @php
                         $status = getParentStatus($report, 'NCA-CSCC-3-1-1-');
                     @endphp
-                    <x-main-control-alt main_domain="(Cybersecurity Resilience)"
-                        main_domain_ar="٣- صمود الأمن السيبراني" main_domain_id="٣-١"
+                    <x-main-control-alt main_domain="(Cybersecurity Resilience)" main_domain_ar="٣- صمود الأمن السيبراني"
+                        main_domain_id="٣-١"
                         sub_domain="(Cybersecurity Resilience aspects of Business Continuity Management  - BCM)"
                         sub_domain_ar="جوانب صمود الأمن السيبراني في إدارة استمرارية الأعمال" control_id="٣-١-١"
                         description="In addition to the sub-regulations within Control 3.1.3 in the basic controls for cybersecurity, the business continuity management in the entity must cover, at a minimum, the following:"
@@ -809,5 +815,4 @@
 
         </tbody>
     </table>
-</main>
 @endsection

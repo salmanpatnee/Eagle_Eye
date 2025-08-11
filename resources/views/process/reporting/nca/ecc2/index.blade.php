@@ -1,28 +1,21 @@
-@extends('pdf.partials.layout')
-@section('title', 'NCA ECC 2024 Assessment and Compliance')
-@section('action-buttons')
-    <a href="{{ route('ecc-regulatory-summary.show') }}?controlAssessmentId={{ $controlAssessmentId }}" class="btn-report">
-        <p>تقرير ملخص</p>
-        <p>Summary Report</p>
-    </a>
-    <a href="{{ route('ecc-2024-regulatory-report.excel') }}" class="btn-report">
-        <p>تنزيل بصيغة إكسل</p>
-        <p>Download in Excel</p>
-    </a>
-    <a href="{{ route('ecc-2024-regulatory-report.show') }}?pdf=1" class="btn-report">
-        <p>تنزيل بصيغة بي دي إف</p>
-        <p>Download as PDF</p>
-    </a>
-@endsection
+@extends('layouts/nca-report')
+@section('title', 'NCA ECC 2018 Assessment and Compliance')
+@section('title_ar', 'تقرير التقييم والامتثال NCA-ECC')
 
-@section('header')
-    <h1 class="arabic-text">الهيئة الوطنية للأمن السيبراني - الضوابط الأساسية للأمن السيبراني</h1>
-    <p style="margin-top: 20px">Control Assessment Regulator Reports</p>
-    <p>National Cybersecurity Authority - Essential Cybersecurity Controls (NCA-ECC 2024)</p>
-@endsection
 @section('content')
 
-    <table class="table mb-0">
+@section('report-info')
+
+    <p class="font-bold mb-5 rtl:text-right text-2xl text-gray-900" lang="ar" dir="rtl">
+        الهيئة الوطنية للأمن السيبراني - الضوابط الأساسية للأمن السيبراني</p>
+    <p class="text-lg text-gray-900 mb-0">Control Assessment Regulator Reports</p>
+    <p class="text-lg text-gray-900 mb-0">National Cybersecurity Authority - Essential Cybersecurity Controls (NCA-ECC 2024)
+    </p>
+@endsection
+
+<main class="report text-left max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar">
+
+    <table class="table mb-0 w-full">
         <tbody>
             <x-main-domain domain="١- حوكمة الأمن السيبراني (Cybersecurity Governance)" />
             <x-sub-domain subdomain="إستراتيجية الأمن السيبراني (Cybersecurity Strategy)" id="١-١" />
@@ -116,8 +109,7 @@
                 @endif
             @endforeach
 
-            <x-sub-domain
-                subdomain="أدوار ومسؤوليات الأمن السيبراني (Cybersecurity Roles and Responsibilities)"
+            <x-sub-domain subdomain="أدوار ومسؤوليات الأمن السيبراني (Cybersecurity Roles and Responsibilities)"
                 id="١-٤" />
             <x-sub-domain-info
                 info_ar="التأكد من تحديد الأدوار والمسؤوليات لجميع الأطراف المشاركة في تنفيذ ضوابط الأمن السيبراني داخل المنظمة."
@@ -274,7 +266,8 @@
                 @if ($control->control_id == 'NCA-ECC2-1-6-4')
                     <x-main-control id="١-٦-٤"
                         details="The cybersecurity requirements in project management must be reviewed periodically."
-                        details_ar="يجب مراجعة متطلبات الأمن السيبراني في إدارة المشاريع بشكل دوري. " :control="$control" />
+                        details_ar="يجب مراجعة متطلبات الأمن السيبراني في إدارة المشاريع بشكل دوري. "
+                        :control="$control" />
                 @endif
             @endforeach
 
@@ -348,7 +341,8 @@
                         :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-1-9-2')
-                    <x-main-control id="١-٩-٢" details="The personnel cybersecurity requirements must be implemented."
+                    <x-main-control id="١-٩-٢"
+                        details="The personnel cybersecurity requirements must be implemented."
                         details_ar="يجب تنفيذ متطلبات الأمن السيبراني للموظفين." :control="$control" />
                 @endif
 
@@ -440,7 +434,8 @@
                         details_ar="يجب أن يغطي برنامج التوعية بالأمن السيبراني أحدث التهديدات السيبرانية وكيفية الحماية منها ويجب أن يتضمن على الأقل الموضوعات التالية:"
                         :control="$control" :status="$status" />
 
-                    <x-sub-control id="١-١٠-٣-١" details="Secure handling of email services, especially phishing emails."
+                    <x-sub-control id="١-١٠-٣-١"
+                        details="Secure handling of email services, especially phishing emails."
                         details_ar="التعامل الآمن مع خدمات البريد الإلكتروني، وخاصة رسائل التصيد الاحتيالي."
                         :control="$control" />
                 @endif
@@ -527,7 +522,8 @@
                 @if ($control->control_id == 'NCA-ECC2-2-1-4')
                     <x-main-control id="٢-١-٤"
                         details="Acceptable use policy of information and technology assets must be implemented."
-                        details_ar="يجب تنفيذ سياسة الاستخدام المقبول لأصول المعلومات والتكنولوجيا." :control="$control" />
+                        details_ar="يجب تنفيذ سياسة الاستخدام المقبول لأصول المعلومات والتكنولوجيا."
+                        :control="$control" />
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-2-1-5')
@@ -575,7 +571,8 @@
                         details_ar="The cybersecurity requirements for identity and access management must include at least the following:"
                         :control="$control" :status="$status" />
 
-                    <x-sub-control id="٢-٢-٣-١" details="Single-factor authentication based on username and password.
+                    <x-sub-control id="٢-٢-٣-١"
+                        details="Single-factor authentication based on username and password.
 "
                         details_ar="المصادقة أحادية العامل بناءً على اسم المستخدم وكلمة المرور" :control="$control" />
                 @endif
@@ -595,17 +592,13 @@
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-2-2-3-4')
-                    <x-sub-control id="٢-٢-٣-٤"
-                        details="Privileged access management."
-                        details_ar="إدارة الوصول المتميز"
-                        :control="$control" />
+                    <x-sub-control id="٢-٢-٣-٤" details="Privileged access management."
+                        details_ar="إدارة الوصول المتميز" :control="$control" />
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-2-2-3-5')
-                    <x-sub-control id="٢-٢-٣-٥"
-                        details="Periodic review of users' identities and access rights."
-                        details_ar="المراجعة الدورية لهويات المستخدمين وحقوق الوصول."
-                        :control="$control" />
+                    <x-sub-control id="٢-٢-٣-٥" details="Periodic review of users' identities and access rights."
+                        details_ar="المراجعة الدورية لهويات المستخدمين وحقوق الوصول." :control="$control" />
                 @endif
 
 
@@ -661,7 +654,8 @@ Cybersecurity requirements for protecting information systems and information pr
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-2-3-3-2')
-                    <x-sub-control id="٢-٣-٣-٢" details="Restricted use and secure handling of external storage media."
+                    <x-sub-control id="٢-٣-٣-٢"
+                        details="Restricted use and secure handling of external storage media."
                         details_ar="الاستخدام المقيد والمعالجة الآمنة لوسائط التخزين الخارجية." :control="$control" />
                 @endif
 
@@ -755,7 +749,8 @@ Cybersecurity requirements for protecting information systems and information pr
                 @endif
             @endforeach
 
-            <x-sub-domain subdomain="إدارة أمن الشبكات (Networks Security Management)" id="٢-٥" theme="bg-teal" />
+            <x-sub-domain subdomain="إدارة أمن الشبكات (Networks Security Management)" id="٢-٥"
+                theme="bg-teal" />
             <x-sub-domain-info info_ar=" To ensure the protection of the organization’s network from cyber risks."
                 info="ضمان حماية شبكة المنظمة من المخاطر السيبرانية." />
 
@@ -808,7 +803,8 @@ Cybersecurity requirements for protecting information systems and information pr
                 @if ($control->control_id == 'NCA-ECC2-2-5-3-5')
                     <x-sub-control id="٥-٣-٥-٢"
                         details="Management and restrictions on network services, protocols, and ports."
-                        details_ar="إدارة القيود المفروضة على خدمات الشبكة والبروتوكولات والمنافذ." :control="$control" />
+                        details_ar="إدارة القيود المفروضة على خدمات الشبكة والبروتوكولات والمنافذ."
+                        :control="$control" />
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-2-5-3-6')
@@ -845,7 +841,8 @@ Cybersecurity requirements for protecting information systems and information pr
                 @endif
             @endforeach
 
-            <x-sub-domain subdomain="أمن الأجهزة المحمولة (Mobile Devices Security) " id="٢-٦" theme="bg-teal" />
+            <x-sub-domain subdomain="أمن الأجهزة المحمولة (Mobile Devices Security) " id="٢-٦"
+                theme="bg-teal" />
             <x-sub-domain-info
                 info_ar="ضمان حماية الأجهزة المحمولة (بما في ذلك أجهزة الكمبيوتر المحمولة والهواتف الذكية والأجهزة اللوحية) من المخاطر الإلكترونية وضمان التعامل الآمن مع معلومات المنظمة (بما في ذلك المعلومات الحساسة) أثناء استخدام سياسة إحضار جهازك الخاص (BYOD)."
                 info="To ensure the protection of mobile devices (including laptops, smartphones, tablets) from cyber risks and to ensure the secure handling of the organization’s information (including sensitive information) while utilizing Bring Your Own Device (BYOD) policy." />
@@ -861,7 +858,8 @@ Cybersecurity requirements for protecting information systems and information pr
                 @if ($control->control_id == 'NCA-ECC2-2-6-2')
                     <x-main-control id="٢-٦-٢"
                         details="The cybersecurity requirements for mobile devices security and BYOD must be implemented."
-                        details_ar="يجب تنفيذ متطلبات الأمن السيبراني لأمن الأجهزة المحمولة و BYOD." :control="$control" />
+                        details_ar="يجب تنفيذ متطلبات الأمن السيبراني لأمن الأجهزة المحمولة و BYOD."
+                        :control="$control" />
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-2-6-3-1')
@@ -1088,8 +1086,8 @@ Cybersecurity requirements for protecting information systems and information pr
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-2-10-3-4')
-                    <x-sub-control id="٤-٣-١٠-٢" details="Security patch management." details_ar="إدارة تصحيحات الأمان."
-                        :control="$control" />
+                    <x-sub-control id="٤-٣-١٠-٢" details="Security patch management."
+                        details_ar="إدارة تصحيحات الأمان." :control="$control" />
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-2-10-3-5')
@@ -1127,7 +1125,8 @@ Cybersecurity requirements for protecting information systems and information pr
                         details="The cybersecurity requirements for penetration testing processes must be implemented."
                         details_ar="يجب تنفيذ متطلبات الأمن السيبراني لعمليات اختبار الاختراق.
 
-" :control="$control" />
+"
+                        :control="$control" />
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-2-11-3-1')
@@ -1224,7 +1223,8 @@ Cybersecurity requirements for protecting information systems and information pr
                 @endif
             @endforeach
 
-            <x-sub-domain subdomain="إدارة حوادث وتهديدات الأمن السيبراني (Cybersecurity Incident and Threat Management)"
+            <x-sub-domain
+                subdomain="إدارة حوادث وتهديدات الأمن السيبراني (Cybersecurity Incident and Threat Management)"
                 id="٢-١٣" theme="bg-teal" />
             <x-sub-domain-info
                 info_ar="ضمان التعرف في الوقت المناسب على حوادث وتهديدات الأمن السيبراني واكتشافها وإدارتها بشكل فعال ومعالجتها لمنع أو تقليل الآثار السلبية على عمليات المنظمة، مع الأخذ في الاعتبار المرسوم الملكي رقم 37140 بتاريخ 14/8/ 1438ه"
@@ -1240,8 +1240,7 @@ Cybersecurity requirements for protecting information systems and information pr
                 @if ($control->control_id == 'NCA-ECC2-2-13-2')
                     <x-main-control id="٢-١٣-٢"
                         details="The requirements for cybersecurity incidents and threat management must be implemented."
-                        details_ar="يجب تنفيذ متطلبات حوادث الأمن السيبراني وإدارة التهديدات."
-                        :control="$control" />
+                        details_ar="يجب تنفيذ متطلبات حوادث الأمن السيبراني وإدارة التهديدات." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-13-3-1')
                     @php
@@ -1249,8 +1248,8 @@ Cybersecurity requirements for protecting information systems and information pr
                     @endphp
                     <x-main-control id="٢-١٣-٣"
                         details="The requirements for cybersecurity incidents and threat management must include at least the following:"
-                        details_ar="خطط الاستجابة لحوادث الأمن السيبراني وإجراءات التصعيد."
-                        :control="$control" :status="$status" />
+                        details_ar="خطط الاستجابة لحوادث الأمن السيبراني وإجراءات التصعيد." :control="$control"
+                        :status="$status" />
                     <x-sub-control id="١-٣-١٣-٢"
                         details="Cybersecurity incident response plans and escalation procedures."
                         details_ar="تصنيف حوادث الأمن السيبراني." :control="$control" />
@@ -1261,20 +1260,18 @@ Cybersecurity requirements for protecting information systems and information pr
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-13-3-3')
                     <x-sub-control id="٣-٣-١٣-٢" details="Cybersecurity incidents reporting to NCA."
-                        details_ar="مشاركة إشعارات الحوادث، ومعلومات التهديد، ومؤشرات الاختراق، والتقارير مع NCA." :control="$control" />
+                        details_ar="مشاركة إشعارات الحوادث، ومعلومات التهديد، ومؤشرات الاختراق، والتقارير مع NCA."
+                        :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-13-3-4')
                     <x-sub-control id="٤-٣-١٣-٢
 "
                         details="Sharing incidents notifications, threat intelligence, breach indicators, and reports with NCA."
-                        details_ar="جمع معلومات استخبارات التهديدات ومعالجتها."
-                        :control="$control" />
+                        details_ar="جمع معلومات استخبارات التهديدات ومعالجتها." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-13-3-5')
-                    <x-sub-control id="٥-٣-١٣-٢"
-                        details="Collecting and handling threat intelligence feeds."
-                        details_ar="جمع معلومات استخبارات التهديدات ومعالجتها."
-                        :control="$control" />
+                    <x-sub-control id="٥-٣-١٣-٢" details="Collecting and handling threat intelligence feeds."
+                        details_ar="جمع معلومات استخبارات التهديدات ومعالجتها." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-13-4')
                     <x-main-control id="٢-١٣-٤"
@@ -1328,7 +1325,8 @@ Cybersecurity requirements for protecting information systems and information pr
                         details_ar="سجلات الدخول والخروج من المنشأة ومراقبة كاميرات المراقبة." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-14-3-3')
-                    <x-sub-control id="٣-٣-١٤-٢" details="Protection of facility entry/exit and surveillance records."
+                    <x-sub-control id="٣-٣-١٤-٢"
+                        details="Protection of facility entry/exit and surveillance records."
                         details_ar="حماية سجلات الدخول والخروج والمراقبة الخاصة بالمنشأة." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-14-3-4')
@@ -1353,7 +1351,8 @@ Cybersecurity requirements for protecting information systems and information pr
                 @endif
             @endforeach
 
-            <x-sub-domain subdomain="حماية تطبيقات الويب (Web Application Security)" id="٢-١٥" theme="bg-teal" />
+            <x-sub-domain subdomain="حماية تطبيقات الويب (Web Application Security)" id="٢-١٥"
+                theme="bg-teal" />
             <x-sub-domain-info info_ar="ضمان حماية تطبيقات الويب الخارجية ضد المخاطر السيبرانية."
                 info="To ensure the protection of external web applications against cyber risks." />
 
@@ -1369,8 +1368,7 @@ Cybersecurity requirements for protecting information systems and information pr
                 @if ($control->control_id == 'NCA-ECC2-2-15-2')
                     <x-main-control id="٢-١٥-٢"
                         details="The cybersecurity requirements for external web applications must be implemented."
-                        details_ar="يجب تنفيذ متطلبات الأمن السيبراني لتطبيقات الويب الخارجية."
-                        :control="$control" />
+                        details_ar="يجب تنفيذ متطلبات الأمن السيبراني لتطبيقات الويب الخارجية." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-15-3-1')
                     @php
@@ -1380,15 +1378,12 @@ Cybersecurity requirements for protecting information systems and information pr
                         details="The cybersecurity requirements for external web applications must include at least the following:"
                         details_ar="يجب أن تتضمن متطلبات الأمن السيبراني لتطبيقات الويب الخارجية ما يلي على الأقل:"
                         :control="$control" :status="$status" />
-                    <x-sub-control id="١-٣-١٥-٢"
-                        details="Use of web application firewall."
+                    <x-sub-control id="١-٣-١٥-٢" details="Use of web application firewall."
                         details_ar="استخدام جدار حماية تطبيقات الويب." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-15-3-2')
-                    <x-sub-control id="٢-٣-١٥-٢"
-                        details="Adoption of the multi-tier architecture principle."
-                        details_ar="اعتماد مبدأ الهندسة المعمارية متعددة الطبقات."
-                        :control="$control" />
+                    <x-sub-control id="٢-٣-١٥-٢" details="Adoption of the multi-tier architecture principle."
+                        details_ar="اعتماد مبدأ الهندسة المعمارية متعددة الطبقات." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-ECC2-2-15-3-3')
                     <x-sub-control id="٣-٣-١٥-٢" details="Use of secure protocols (e.g., HTTPS)."
@@ -1416,7 +1411,8 @@ Cybersecurity requirements for protecting information systems and information pr
             <x-main-domain domain="٣- صمود الأمن السيبراني (Cybersecurity Resilience)" theme="bg-dark" />
             <x-sub-domain subdomain="جوانب صمود الأمن السيبراني في إدارة استمرارية الأعمال" id="٣-١"
                 theme="bg-dark" />
-            <x-sub-domain-info info_ar="ضمان إدراج متطلبات مرونة الأمن السيبراني ضمن إدارة استمرارية الأعمال في المنظمة ومعالجة وتقليل التأثيرات على الأنظمة ومرافق معالجة المعلومات والخدمات الإلكترونية الهامة الناجمة عن الكوارث الناجمة عن حوادث الأمن السيبراني."
+            <x-sub-domain-info
+                info_ar="ضمان إدراج متطلبات مرونة الأمن السيبراني ضمن إدارة استمرارية الأعمال في المنظمة ومعالجة وتقليل التأثيرات على الأنظمة ومرافق معالجة المعلومات والخدمات الإلكترونية الهامة الناجمة عن الكوارث الناجمة عن حوادث الأمن السيبراني."
                 info="To ensure the inclusion of the cybersecurity resiliency requirements within the organization’s business continuity management and to remediate and minimize the impacts on systems, information processing facilities, and critical e-services from disasters caused by cybersecurity incidents." />
 
             @foreach ($report as $control)
@@ -1429,22 +1425,21 @@ Cybersecurity requirements for protecting information systems and information pr
                 @if ($control->control_id == 'NCA-ECC2-3-1-2')
                     <x-main-control id="٣-١-٢"
                         details="The cybersecurity requirements for business continuity management must be implemented."
-                        details_ar="يجب تنفيذ متطلبات الأمن السيبراني لإدارة استمرارية الأعمال."
-                        :control="$control" />
+                        details_ar="يجب تنفيذ متطلبات الأمن السيبراني لإدارة استمرارية الأعمال." :control="$control" />
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-3-1-3-1')
                     @php
                         $status = getParentStatus($report, 'NCA-ECC2-3-1-3-');
                     @endphp
-                    <x-main-control id="٣-١-٣" details="The cybersecurity requirements for business continuity management must include at least the following:"
-                        details_ar="يجب أن تتضمن متطلبات الأمن السيبراني لإدارة استمرارية الأعمال ما يلي على الأقل:" :control="$control"
-                        :status="$status" />
+                    <x-main-control id="٣-١-٣"
+                        details="The cybersecurity requirements for business continuity management must include at least the following:"
+                        details_ar="يجب أن تتضمن متطلبات الأمن السيبراني لإدارة استمرارية الأعمال ما يلي على الأقل:"
+                        :control="$control" :status="$status" />
 
                     <x-sub-control id="١-٣-١-٣"
                         details="Ensuring the continuity of cybersecurity systems and procedures."
-                        details_ar="ضمان استمرارية أنظمة وإجراءات الأمن السيبراني."
-                        :control="$control" />
+                        details_ar="ضمان استمرارية أنظمة وإجراءات الأمن السيبراني." :control="$control" />
                 @endif
 
                 @if ($control->control_id == 'NCA-ECC2-3-1-3-2')
@@ -1466,8 +1461,7 @@ Cybersecurity requirements for protecting information systems and information pr
                 @endif
             @endforeach
 
-            <x-main-domain
-                domain=" (Third-Party and Cloud Computing Cybersecurity)" />
+            <x-main-domain domain=" (Third-Party and Cloud Computing Cybersecurity)" />
             <x-sub-domain subdomain="الأمن السيبراني المتعلق بالأطراف الخارجية (Third-Party Cybersecurity)"
                 id="٤-١" />
             <x-sub-domain-info
@@ -1534,7 +1528,8 @@ Cybersecurity requirements for protecting information systems and information pr
                 @if ($control->control_id == 'NCA-ECC2-4-1-4')
                     <x-main-control id="٤-١-٤"
                         details="The cybersecurity requirements for contracts and agreements with third-parties must be reviewed periodically."
-                        details_ar="يجب مراجعة متطلبات الأمن السيبراني للعقود والاتفاقيات مع أطراف ثالثة بشكل دوري." :control="$control" />
+                        details_ar="يجب مراجعة متطلبات الأمن السيبراني للعقود والاتفاقيات مع أطراف ثالثة بشكل دوري."
+                        :control="$control" />
                 @endif
             @endforeach
 
@@ -1579,7 +1574,7 @@ Cybersecurity requirements for protecting information systems and information pr
                         details_ar="فصل بيئات المنظمة (الخوادم الافتراضية على وجه التحديد) عن البيئات الأخرى المستضافة لدى مزود الخدمة السحابية."
                         :control="$control" />
                 @endif
-                
+
                 @if ($control->control_id == 'NCA-ECC2-4-2-4')
                     <x-main-control id="٤-٢-٤"
                         details="The cybersecurity requirements related to the use of hosting and cloud computing services must be reviewed periodically."
@@ -1589,4 +1584,5 @@ Cybersecurity requirements for protecting information systems and information pr
             @endforeach
         </tbody>
     </table>
+</main>
 @endsection

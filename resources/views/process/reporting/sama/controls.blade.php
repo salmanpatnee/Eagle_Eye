@@ -1,4 +1,4 @@
-<table class="table mb-0">
+<table class="table mb-0 w-full">
     <tbody>
 
         <x-main-domain domain="3.1 Cyber Security Leadership and Governance" />
@@ -808,7 +808,7 @@
                 <x-sub-control id="3.2.1.5.C" details="{{ $control->control_description }}" details_ar=""
                     :control="$control" />
             @endif
-           
+
 
             @if ($control->control_id == 'SAMA-CSF-3.2.1.6')
                 @php

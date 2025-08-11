@@ -1,45 +1,21 @@
-@extends('pdf.partials.layout')
-@section('title', 'NCA CCC CST 2020 Assessment and Compliance')
-@section('action-buttons')
-    <a href="{{ route('ccc-regulatory-summary.show') }}?controlAssessmentId={{ $controlAssessmentId }}&cloudControlType={{ $cloudControlType }}"
-        class="btn-report">
-        <p>تقرير ملخص</p>
-        <p>Summary Report</p>
-    </a>
-    {{-- <a href="{{ route('regulatory-reports.create') }}?best_practice=NCA-CCC-2020" class="btn-report">
-        <p>تقرير مفصل</p>
-        <p>Detailed Report</p>
-    </a> --}}
-    <a href="{{ route('ccc-regulatory-report.excel') }}?cloudControlType=cst"
-    class="btn-report">
-    <p>تنزيل بصيغة إكسل</p>
-    <p>Download in Excel</p>
-</a>
-<a href="{{ route('ccc-regulatory-report.show') }}?pdf=1&cloudControlType=cst" class="btn-report">
-    <p>تنزيل بصيغة بي دي إف</p>
-    <p>Download as PDF</p>
-</a>
-@endsection
+@extends('layouts/nca-report')
+@section('title', 'NCA ECC 2018 Assessment and Compliance')
+@section('title_ar', 'تقرير التقييم والامتثال NCA-ECC')
 
-@section('header')
-    <h1 class="arabic-text">
-        الهيئة الوطنية للأمن السيبراني - التحكم في الأمن السيبراني السحابي
-    </h1>
-    <p style="margin-top: 20px">
-        Control Assessment Regulator Reports
-    </p>
-    <p>
-        National Cybersecurity Authority - Cloud Cybersecurity Controls
-        NCA-CCC CST
-    </p>
-
-
-@endsection
 @section('content')
 
+@section('report-info')
 
+    <p class="font-bold mb-5 rtl:text-right text-2xl text-gray-900" lang="ar" dir="rtl">
+        الهيئة الوطنية للأمن السيبراني - التحكم في الأمن السيبراني السحابي</p>
+    <p class="text-lg text-gray-900 mb-0">Control Assessment Regulator Reports</p>
+    <p class="text-lg text-gray-900 mb-0">National Cybersecurity Authority - Cloud Cybersecurity Controls NCA-CCC CST</p>
+@endsection
 
-    <table class="table mb-0">
+<main class="report text-left max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar">
+
+    <table class="table mb-0 w-full">
+
         <tbody>
             {{-- Heads --}}
             <tr class="bg-light-gray">
@@ -364,13 +340,13 @@
                         description_ar="الالتزام باستخدام طرق وخوارزميات ومفاتيح وأجهزة تشفير محدثة وآمنة، وفقًا للمستوى المتقدم (Advanced) ضمن المعايير الوطنية للتشفير (NCS-1:2020)."
                         :control="$control" theme="bg-teal" border_b="true" />
                 @endif
-                
+
                 @if ($control->control_id == 'NCA-CCC-2-7-T-1-2')
-                <x-sub-control-ccc control_id="2-7-T-1-2"
+                    <x-sub-control-ccc control_id="2-7-T-1-2"
                         description="Encryption of data and information transferred to or transferred out of the cloud according to the relevant law and regulatory requirements"
                         description_ar="تشفير البيانات والمعلومات المنقولة إلى الخدمات السحابية، أو المنقولة منها، بحسب المتطلبات التشريعية والتنظيمية ذات العلاقة."
                         :control="$control" theme="bg-teal" border_b="true" />
-                @endif 
+                @endif
 
                 @if ($control->control_id == 'NCA-CCC-2-9-T-1-1')
                     @php
@@ -389,11 +365,11 @@
                 @endif
 
                 @if ($control->control_id == 'NCA-CCC-2-9-T-1-2')
-                <x-sub-control-ccc control_id="2-9-T-1-2"
+                    <x-sub-control-ccc control_id="2-9-T-1-2"
                         description="Management of CSP-notified vulnerabilities safeguards in place"
                         description_ar="إدارة الثغرات التي تم إشعار المشترك بها عن طريق مقدم الخدمة، ومعالجتها."
                         :control="$control" theme="bg-teal" border_b="true" />
-                @endif 
+                @endif
 
                 @if ($control->control_id == 'NCA-CCC-2-11-T-1-1')
                     @php
@@ -442,23 +418,24 @@
                         description_ar="يجب تطبيق متطلبات الأمن السيبراني، الخاصة بإدارة المفاتيح لدى المشتركين."
                         :control="$control" theme="bg-teal" />
                 @endif --}}
-                
+
                 @if ($control->control_id == 'NCA-CCC-2-15-T-3-1')
-                @php
-                $status = getParentStatus($report, 'NCA-CCC-2-11-T-3-');
-            @endphp
+                    @php
+                        $status = getParentStatus($report, 'NCA-CCC-2-11-T-3-');
+                    @endphp
                     <x-main-control-ccc main_domain="" main_domain_ar="" main_domain_id="" sub_domain=""
                         sub_domain_ar="" control_id="2-15-T-3"
                         description="In addition to the ECC subcontrol 
 2-8-3-2
  cybersecurity requirements for key management within the CST shall cover, at minimum, the following"
                         description_ar="بالإضافة للضابط ٢-٨-٣-٢ في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني، الخاصة بعملية إدارة المفاتيح لدى المشتركين، بحد أدنى ما يلي:"
-                        :control="$control" theme="bg-teal" :status="$status"/>
+                        :control="$control" theme="bg-teal" :status="$status" />
 
                     <x-sub-control-ccc control_id="2-15-T-3-1"
                         description="Ensure well-defined ownership for cryptographic keys"
                         description_ar="تحديد ملاك لمفاتيح التشفير
- (Key Owner)." :control="$control" theme="bg-teal" />
+ (Key Owner)." :control="$control"
+                        theme="bg-teal" />
                 @endif
                 @if ($control->control_id == 'NCA-CCC-2-15-T-3-2')
                     <x-sub-control-ccc control_id="2-15-T-3-2"
@@ -475,17 +452,17 @@
                         :control="$control" theme="bg-teal" border_b="true" />
                 @endif
                 @if ($control->control_id == 'NCA-CCC-3-1-T-1-1')
-                @php
+                    @php
                         $status = getParentStatus($report, 'NCA-CCC-3-1-T-1-');
                     @endphp
 
-                    <x-main-control-ccc main_domain="(Cybersecurity Resilience)" main_domain_ar="3- صمود الأمن السيبراني "
-                        main_domain_id="3-1"
+                    <x-main-control-ccc main_domain="(Cybersecurity Resilience)"
+                        main_domain_ar="3- صمود الأمن السيبراني " main_domain_id="3-1"
                         sub_domain="(Cybersecurity Resilience aspects of Business Continuity Management - BCM)"
                         sub_domain_ar="جوانب صمود الأمن السيبراني في إدارة استمرارية الأعمال" control_id="3-1-T-1"
                         description="In addition to subcontrols in the ECC control 3-1-3, the CST shall cover the following additional subcontrols for cybersecurity requirements for cybersecurity resilience aspects of business continuity management, as a minimum"
                         description_ar="بالإضافة للضوابط الفرعية ضمن الضابط ٣-١-٣ في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني لجوانب صمود الأمن السيبراني في إدارة استمرارية الأعمال لدى المشتركين، بحد أدنى مايلي:"
-                        :control="$control" theme="bg-dark" :status="$status"/>
+                        :control="$control" theme="bg-dark" :status="$status" />
 
                     <x-sub-control-ccc control_id="3-1-T-1-1"
                         description="Developing and implementing disaster recovery and business continuity procedures related to cloud computing, in a secure manner"

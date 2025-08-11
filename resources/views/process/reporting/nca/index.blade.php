@@ -29,7 +29,7 @@
                 </a>
                 <x-report-card route_name="cscc-regulatory-report.show" title="NCA-CSCC Assessment and Compliance Reports"
                     title_ar="تقرير التقييم والامتثال NCA-CSCC" />
-                <a href="/regulatory-report?best_practice=NCA-CSCC-2019">
+                <a href="/regulatory-report?best_practice=NCA-CCC-2020">
                     <div class="bg-brand-950 border border-gray-200 px-3 py-5 rounded-2xl">
                         <div class="bg-gray-100 flex h-12 items-center justify-center mx-auto rounded-xl w-12">
                             <x-icons.report />

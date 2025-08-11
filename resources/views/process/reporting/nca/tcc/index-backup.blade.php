@@ -1,25 +1,35 @@
-@extends('layouts/nca-report')
-@section('title',
-    'NCA-TCC Assessment and
-    Compliance Reports')
-@section('title_ar', 'تقرير التقييم والامتثال NCA-TCC')
-
-@section('content')
-
-@section('report-info')
-
-    <p class="font-bold mb-5 rtl:text-right text-2xl text-gray-900" lang="ar" dir="rtl">
-        الهيئة الوطنية للأمن السيبراني - ضوابط الأمن السيبراني للعمل عن بعد</p>
-    <p class="text-lg text-gray-900 mb-0">Control Assessment Regulator Reports</p>
-    <p class="text-lg text-gray-900 mb-0">National Cybersecurity Authority - Telework Cybersecurity Controls (NCA-TCC)</p>
+@extends('pdf.partials.layout')
+@section('title', 'NCA TCC 2021 Assessment and Compliance')
+@section('action-buttons')
+    <a href="{{ route('tcc-regulatory-summary.show') }}?controlAssessmentId={{ $controlAssessmentId }}" class="btn-report">
+        <p>تقرير ملخص</p>
+        <p>Summary Report</p>
+    </a>
+    {{-- <a href="{{ route('regulatory-reports.create') }}?best_practice=NCA-TCC-2021" class="btn-report">
+        <p>تقرير مفصل</p>
+        <p>Detailed Report</p>
+    </a> --}}
+    <a href="{{ route('tcc-regulatory-report.excel') }}" class="btn-report">
+        <p>تنزيل بصيغة إكسل</p>
+        <p>Download in Excel</p>
+    </a>
+    <a href="{{ route('tcc-regulatory-report.show') }}?pdf=1" class="btn-report">
+        <p>تنزيل بصيغة بي دي إف</p>
+        <p>Download as PDF</p>
+    </a>
 @endsection
 
-<main class="report text-left max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar">
+@section('header')
+    <h1 class="arabic-text">الهيئة الوطنية للأمن السيبراني - ضوابط الأمن السيبراني للعمل عن بعد</h1>
+    <p style="margin-top: 20px">Control Assessment Regulator Reports</p>
+    <p> National Cybersecurity Authority - Telework Cybersecurity Controls
+        (NCA-TCC)</p>
+@endsection
+@section('content')
 
-    <table class="table mb-0 w-full">
 
 
-
+    <table class="table mb-0">
         <tbody>
             {{-- Heads --}}
             <tr class="bg-light-gray">
@@ -96,9 +106,8 @@
                         $status = getParentStatus($report, 'NCA-TCC-1-1-');
                     @endphp
 
-                    <x-main-control-alt main_domain="(Cybersecurity Governance)"
-                        main_domain_ar="١- حوكمة الأمن السيبراني" main_domain_id="١-١"
-                        sub_domain="(Cybersecurity Policies and Procedures)"
+                    <x-main-control-alt main_domain="(Cybersecurity Governance)" main_domain_ar="١- حوكمة الأمن السيبراني"
+                        main_domain_id="١-١" sub_domain="(Cybersecurity Policies and Procedures)"
                         sub_domain_ar="سياسات وإجراءات الأمن السيبراني" control_id="١-١-١"
                         description="Back to the officer 1-3-1In the basic controls of cybersecurity, cybersecurity policies and procedures must include the following:"
                         description_ar="رجوعا للضابط ١-٣-١ في الضوابط الأساسية للأمن السيبراني، يجب أن تشمل سياسات وإجراءات الأمن السيبراني ما يأتي:"
@@ -155,8 +164,7 @@
                         :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-TCC-1-3-1-2')
-                    <x-sub-control-alt control_id="١-٣-١-٢"
-                        description="Safe handling of login identities and passwords."
+                    <x-sub-control-alt control_id="١-٣-١-٢" description="Safe handling of login identities and passwords."
                         description_ar="التعامل الآمن مع هويات الدخول وكلمات المرور." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-TCC-1-3-1-3')
@@ -196,8 +204,8 @@
                         :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-TCC-1-3-2')
-                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain=""
-                        sub_domain_ar="" control_id="١-٣-٢"
+                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain="" sub_domain_ar=""
+                        control_id="١-٣-٢"
                         description="In addition to the sub-controls within the officer 1-10-4In the basic controls of cybersecurity, workers must be trained in the necessary technical skills to ensure the application of cybersecurity requirements and practices when dealing with remote work systems."
                         description_ar="بالإضافة للضوابط الفرعية ضمن الضابط ١-١٠-٤ في الضوابط الأساسية للأمن السيبراني، فإنه يجب تدريب العاملين على المهارات التقنية اللازمة لضمان تطبيق متطلبات وممارسات الأمن السيبراني عند التعامل مع أنظمة العمل عن بعد."
                         :control="$control" border_b="true" />
@@ -297,8 +305,7 @@
                         $status = getParentStatus($report, 'NCA-TCC-2-4-1-');
                     @endphp
                     <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="٢-٤"
-                        sub_domain="(Networks Security Management)" sub_domain_ar="إدارة أمن الشبكات"
-                        control_id="٢-٤-١"
+                        sub_domain="(Networks Security Management)" sub_domain_ar="إدارة أمن الشبكات" control_id="٢-٤-١"
                         description="In addition to the sub-controls within the officer 2-5-3In the basic controls of cybersecurity, the cybersecurity requirements for managing the security of the entity’s networks for remote work must cover, at a minimum, the following:"
                         description_ar="بالإضافة للضوابط الفرعية ضمن الضابط  ٢-٥-٣  في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني لإدارة أمن شبكات الجهة للعمل عن بعد، بحد أدنى، مايلي:"
                         :control="$control" theme="bg-teal" :status="$status" />
@@ -331,8 +338,7 @@
                         $status = getParentStatus($report, 'NCA-TCC-2-5-1-');
                     @endphp
                     <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="٢-٥"
-                        sub_domain="(Mobile Devices Security)" sub_domain_ar="أمن الأجهزة المحمولة "
-                        control_id="٢-٥-١"
+                        sub_domain="(Mobile Devices Security)" sub_domain_ar="أمن الأجهزة المحمولة " control_id="٢-٥-١"
                         description="In addition to the sub-controls within the officer 2-6-3 In the basic controls of cybersecurity, the cybersecurity requirements related to the security of mobile devices for remote work in the entity must cover, at a minimum, the following:"
                         description_ar="بالإضافة للضوابط الفرعية ضمن الضابط  ٢-٦-٣  في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني الخاصة بأمن الأجهزة المحمولة للعمل عن بعد في الجهة، بحد أدنى، مايلي:"
                         :control="$control" theme="bg-teal" :status="$status" />

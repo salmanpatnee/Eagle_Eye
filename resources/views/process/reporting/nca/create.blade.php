@@ -13,6 +13,22 @@
                 <div class="p-2 sm:p-6 space-y-6">
                     <div class="grid grid-cols-1 gap-9 sm:grid-cols-3 md:gap-9 px-4">
                         <div></div>
+                        @if ($bestPracticeId === 'NCA-CCC-2020')
+                            <div class="bg-brand-950 border-4 p-8 rounded-2xl text-white w-full">
+                                <x-form.select label="Control Cloud Type" label_ar="التحكم في نوع السحابة"
+                                    name="cloud_control_type" placeholder="Control Cloud Type" :data="$cloudTypes"
+                                    id_key="value" value_key="label" onchange="this.form.submit()" hide_keys="true"
+                                    class="text-white" />
+                            </div>
+
+                            {{-- <div>
+                                <p>Control Cloud Type</p>
+                                <select name="cloud_control_type" id="cloud_control_type" required>
+                                    <option value="csp">Cloud Service Provider (CSP)</option>
+                                    <option value="cst">Cloud Service Tenants (CST)</option>
+                                </select>
+                            </div> --}}
+                        @endif
                         @if ($bestPracticeId === 'NCA-ECC-2018')
                             <div class="bg-brand-950 border-4 p-8 rounded-2xl text-white w-full">
                                 <x-form.select label="Select Version" label_ar="حدد الإصدار" name="version"

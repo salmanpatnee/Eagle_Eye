@@ -1,38 +1,22 @@
-@extends('pdf.partials.layout')
-@section('title', 'NCA DCC 2022 Assessment and Compliance')
-@section('action-buttons')
-    <a href="{{ route('dcc-regulatory-summary.show') }}?controlAssessmentId={{ $controlAssessmentId }}" class="btn-report">
-        <p>تقرير ملخص</p>
-        <p>Summary Report</p>
-    </a>
-    {{-- <a href="{{ route('regulatory-reports.create') }}?best_practice=NCA-DCC-2022" class="btn-report">
-        <p>تقرير مفصل</p>
-        <p>Detailed Report</p>
-    </a> --}}
-    <a href="{{ route('dcc-regulatory-report.excel') }}" class="btn-report">
-        <p>تنزيل بصيغة إكسل</p>
-        <p>Download in Excel</p>
-    </a>
-    <a href="{{ route('dcc-regulatory-report.show') }}?pdf=1" class="btn-report">
-        <p>تنزيل بصيغة بي دي إف</p>
-        <p>Download as PDF</p>
-    </a>
-@endsection
+@extends('layouts/nca-report')
+@section('title', 'NCA-DCC Assessment and Compliance Reports')
+@section('title_ar', 'تقرير التقييم والامتثال NCA-DCC')
 
-@section('header')
-    <h1 class="arabic-text">
-        الهيئة الوطنية للأمن السيبراني - ضوابط الأمن السيبراني للبيانات
-        التنظيمي
-    </h1>
-    <p style="margin-top: 20px">Control Assessment Regulator Reports</p>
-    <p>National Cybersecurity Authority - Data Cybersecurity Controls
-        (NCA-DCC)</p>
-@endsection
 @section('content')
 
+@section('report-info')
+
+    <p class="font-bold mb-5 rtl:text-right text-2xl text-gray-900" lang="ar" dir="rtl">
+        الهيئة الوطنية للأمن السيبراني - ضوابط الأمن السيبراني للبيانات التنظيمي</p>
+    <p class="text-lg text-gray-900 mb-0">Control Assessment Regulator Reports</p>
+    <p class="text-lg text-gray-900 mb-0">National Cybersecurity Authority - Data Cybersecurity Controls (NCA-DCC)</p>
+@endsection
+
+<main class="report text-left max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar">
+
+    <table class="table mb-0 w-full">
 
 
-    <table class="table mb-0">
         <tbody>
             {{-- Heads --}}
             <tr class="bg-light-gray">
@@ -105,16 +89,17 @@
 
             @foreach ($report as $control)
                 @if ($control->control_id == 'NCA-DCC-1-1-1')
-                    <x-main-control-alt main_domain="(Cybersecurity Governance)" main_domain_ar="١- حوكمة الأمن السيبراني "
-                        main_domain_id="١-١" sub_domain="(Periodical Cybersecurity Review and Audit)"
+                    <x-main-control-alt main_domain="(Cybersecurity Governance)"
+                        main_domain_ar="١- حوكمة الأمن السيبراني " main_domain_id="١-١"
+                        sub_domain="(Periodical Cybersecurity Review and Audit)"
                         sub_domain_ar="المراجعة والتدقيق الدوري للأمن السيبراني" control_id="١-١-١"
                         description="With reference to ECC control 1-8-1, the cybersecurity function in the organization must review the implementation of the Data Cybersecurity Controls periodically as specified for each data classification level."
                         description_ar="رجوعًا للضابط ١-٨-١ في الضوابط الأساسية للأمن السيبراني، فإنه يجب على الإدارة المعنية بالأمن السيبراني في الجهة مراجعة تطبيق ضوابط الأمن السيبراني للبيانات حسب المدة المحددة لكل مستوى."
                         :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-DCC-1-1-2')
-                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain="" sub_domain_ar=""
-                        control_id="١-١-٢"
+                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain=""
+                        sub_domain_ar="" control_id="١-١-٢"
                         description="With reference to ECC control 1-8-2, cybersecurity review and audit must be conducted periodically by independent parties outside the organization’s cybersecurity function as specified for each data classification level."
                         description_ar="رجوعًا للضابط ١-٨-٢ في الضوابط الأساسية للأمن السيبراني، فإنه يجب أن تتم مراجعة تطبيق ضوابط الأمن السيبراني للبيانات من قبل أطراف مستقلة عن الإدارة المعنية بالأمن السيبراني من داخل الجهة حسب المدة المحددة لكل مستوى."
                         :control="$control" border_b="true" />
@@ -155,7 +140,8 @@
                         :control="$control" :status="$status" />
                     <x-sub-control-alt control_id="١-٣-١-١"
                         description="Risks of data leakage and unauthorized access to data during its lifecycle."
-                        description_ar="مخاطر التسريب والوصول غير المصرح به للبيانات خلال دورة حياتها." :control="$control" />
+                        description_ar="مخاطر التسريب والوصول غير المصرح به للبيانات خلال دورة حياتها."
+                        :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-DCC-1-3-1-2')
                     <x-sub-control-alt control_id="١-٣-١-٢"
@@ -210,12 +196,12 @@
                 @if ($control->control_id == 'NCA-DCC-2-1-1-1')
                     <x-sub-control-alt control_id="٢-١-١-٢"
                         description="Prohibiting the sharing of approved lists of privileges with unauthorized persons."
-                        description_ar="منع مشاركة قوائم الصلاحيات المعتمدة مع الأشخاص غير المصرح لهم." :control="$control"
-                        theme="bg-teal" />
+                        description_ar="منع مشاركة قوائم الصلاحيات المعتمدة مع الأشخاص غير المصرح لهم."
+                        :control="$control" theme="bg-teal" />
                 @endif
                 @if ($control->control_id == 'NCA-DCC-2-1-2')
-                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain="" sub_domain_ar=""
-                        control_id="٢-١-٢"
+                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain=""
+                        sub_domain_ar="" control_id="٢-١-٢"
                         description="Managing identities and access rights to view data using Privileged Access Management systems."
                         description_ar="إدارة هويات الدخول وصلاحيات الاطلاع على البيانات باستخدام أنظمة إدارة الصلاحيات الهامة والحساسة (Privileged Access Management).
 "
@@ -266,7 +252,8 @@
                         $status = getParentStatus($report, 'NCA-DCC-2-3-1-');
                     @endphp
                     <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="٢-٣"
-                        sub_domain="(Mobile Devices Security)" sub_domain_ar="أمن الأجهزة المحمولة " control_id="٢-٣-١"
+                        sub_domain="(Mobile Devices Security)" sub_domain_ar="أمن الأجهزة المحمولة "
+                        control_id="٢-٣-١"
                         description="In addition to the subcontrols in ECC control 2-6-3, cybersecurity requirements for mobile devices must cover at least the following:"
                         description_ar="بالإضافة للضوابط الفرعية ضمن الضابط ٢-٦-٣ في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني الخاصة بأمن الأجهزة المحمولة، بحد أدنى، ما يلي:"
                         :control="$control" theme="bg-teal" :status="$status" />
@@ -343,7 +330,8 @@
                         $status = getParentStatus($report, 'NCA-DCC-2-6-1-');
                     @endphp
                     <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="٢-٦"
-                        sub_domain="(Secure Data Disposal)" sub_domain_ar="الإتلاف الآمن للبيانات " control_id="٢-٦-١"
+                        sub_domain="(Secure Data Disposal)" sub_domain_ar="الإتلاف الآمن للبيانات "
+                        control_id="٢-٦-١"
                         description="Cybersecurity requirements for secure data disposal must cover at least the following:"
                         description_ar="يجب أن تغطي متطلبات الإتلاف الآمن للبيانات في الجهة بحد أدنى، ما يلي:"
                         :control="$control" theme="bg-teal" :status="$status" />

@@ -1,42 +1,23 @@
-@extends('pdf.partials.layout')
-@section('title', 'NCA OSMACC 2021 Assessment and Compliance')
-@section('action-buttons')
-    <a href="{{ route('osmacc-regulatory-summary.show') }}?controlAssessmentId={{ $controlAssessmentId }}" class="btn-report">
-        <p>تقرير ملخص</p>
-        <p>Summary Report</p>
-    </a>
-    {{-- <a href="{{ route('regulatory-reports.create') }}?best_practice=NCA-OSMACC-2021" class="btn-report">
-        <p>تقرير مفصل</p>
-        <p>Detailed Report</p>
-    </a> --}}
-    {{-- <a href="{{ url()->full() }}&download=pdf" class="btn-report">
-        <p>تحميل بصيغة </p>
-        <p>Download PDF</p>
-    </a> --}}
-    <a href="{{ route('osmacc-regulatory-report.excel') }}" class="btn-report">
-        <p>تنزيل بصيغة إكسل</p>
-        <p>Download in Excel</p>
-    </a>
-    <a href="{{ route('osmacc-regulatory-report.show') }}?pdf=1" class="btn-report">
-        <p>تنزيل بصيغة بي دي إف</p>
-        <p>Download as PDF</p>
-    </a>
-@endsection
+@extends('layouts/nca-report')
+@section('title', 'NCA-OSMACC Assessment and Compliance Reports')
+@section('title_ar', 'تقرير التقييم والامتثال NCA-OSMACC')
 
-@section('header')
-    <h1 class="arabic-text">
-        الهيئة الوطنية للأمن السيبراني - ضوابط الأمن السيبراني لحساب وسائل
-        التواصل الاجتماعي التنظيمي
-    </h1>
-    <p style="margin-top: 20px">Control Assessment Regulator Reports</p>
-    <p>National Cybersecurity Authority - Organizational Social Media Account
-        Cybersecurity Controls (NCA-OSMACC)</p>
-@endsection
 @section('content')
 
+@section('report-info')
+
+    <p class="font-bold mb-5 rtl:text-right text-2xl text-gray-900" lang="ar" dir="rtl">
+        الهيئة الوطنية للأمن السيبراني - ضوابط الأمن السيبراني لحساب وسائل التواصل الاجتماعي التنظيمي</p>
+    <p class="text-lg text-gray-900 mb-0">Control Assessment Regulator Reports</p>
+    <p class="text-lg text-gray-900 mb-0">National Cybersecurity Authority - Organizational Social Media Account
+        Cybersecurity Controls (NCA-OSMACC)</p>
+@endsection
+
+<main class="report text-left max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar">
+
+    <table class="table mb-0 w-full">
 
 
-    <table class="table mb-0">
         <tbody>
             {{-- Heads --}}
             <tr class="bg-light-gray">
@@ -109,8 +90,9 @@
 
             @foreach ($report as $control)
                 @if ($control->control_id == 'NCA-OSMACC-1-1-1-1')
-                    <x-main-control-alt main_domain="(Cybersecurity Governance)" main_domain_ar="١- حوكمة الأمن السيبراني "
-                        main_domain_id="١-١" sub_domain="(Cybersecurity Policies and Procedures)	"
+                    <x-main-control-alt main_domain="(Cybersecurity Governance)"
+                        main_domain_ar="١- حوكمة الأمن السيبراني " main_domain_id="١-١"
+                        sub_domain="(Cybersecurity Policies and Procedures)	"
                         sub_domain_ar="سياسات وإجراءات الأمن السيبراني" control_id="١-١-١"
                         description="Referring to officer 1-3-1 in the basic controls of cybersecurity, cybersecurity policies and procedures must include the following: 1-1-1-1 Determine and document the cybersecurity requirements and controls for social networking accounts within the cybersecurity policies of the home Eh."
                         description_ar="رجوعــاً للضابــط ١-٣-١ في الضوابــط الأساســية للأمــن الســيبراني، يجــب أن تشــمل سياســات وإجــراءات الأمــن الســيبراني مــا يــأتي:
@@ -158,7 +140,8 @@
                         description_ar="بالإضافـة للضوابـط الفرعيــة ضمــن الضابــط  ١–٩– ٤ في الضوابـط الأساسـية للأمـن السـيبراني، يجـب أن تشـمل متطلبـات الأمـن السـيبراني المتعلقـة بالعاملـين المسـؤولين عـن إدارة حسـابات التواصـل الاجتماعـي للجهـة بحـد أدنى مـا يـأتي:"
                         :control="$control" :status="$status" />
 
-                    <x-sub-control-alt control_id="١-٣-١-١" description="Cybersecurity awareness of social media accounts."
+                    <x-sub-control-alt control_id="١-٣-١-١"
+                        description="Cybersecurity awareness of social media accounts."
                         description_ar="التوعية بالأمن السيبراني لحسابات التواصل الاجتماعي." :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-OSMACC-1-3-1-2')
@@ -187,7 +170,8 @@
                 @if ($control->control_id == 'NCA-OSMACC-1-4-1-2')
                     <x-sub-control-alt control_id="١-٤-١-٢"
                         description="Safe handling of login identities, passwords and security questions."
-                        description_ar="التعامل الآمن مع هويات الدخول وكلمات المرور والأسئلة الأمنية." :control="$control" />
+                        description_ar="التعامل الآمن مع هويات الدخول وكلمات المرور والأسئلة الأمنية."
+                        :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-OSMACC-1-4-1-3')
                     <x-sub-control-alt control_id="١-٤-١-٣"
@@ -222,8 +206,8 @@
                         :control="$control" />
                 @endif
                 @if ($control->control_id == 'NCA-OSMACC-1-4-2')
-                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain="" sub_domain_ar=""
-                        control_id="١-٤-٢"
+                    <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="" sub_domain=""
+                        sub_domain_ar="" control_id="١-٤-٢"
                         description="In addition to the sub-controls within Control 4-10-1 in the basic controls of cybersecurity, the workers responsible for managing the social media accounts of the entity must be trained on the technical skills, plans and procedures necessary to ensure the application of security requirements and practices. He sees me when using social media accounts."
                         description_ar="بالإضافـة للضوابـط الفرعيـة ضمـن الضابـط  ١-١٠-٤ في الضوابـط الأساسـية للأمـن السـيبراني، فإنـه يجـب تدريـب العاملـين المسـؤولين عـن إدارة حسـابات التواصـل الاجتماعـي للجهـة عـلى المهــارات التقنيــة والخطــط والإجــراءات اللازمــة لضــمان تطبيــق متطلبــات وممارســات الأمــن الســيبراني عنــد اســتخدام حســابات التواصــل الاجتماعــي."
                         :control="$control" border_b="true" />
@@ -262,8 +246,8 @@ least once, every year."
                     <x-sub-control-alt control_id="٢-٢-١-١"
                         description="Use social media accounts for entities, not individuals."
                         description_ar="استخدام حسابات التواصل الاجتماعي المخصصة للجهات، وليس الأفراد.
-" :control="$control"
-                        theme="bg-teal" />
+"
+                        :control="$control" theme="bg-teal" />
                 @endif
                 @if ($control->control_id == 'NCA-OSMACC-2-2-1-2')
                     <x-sub-control-alt control_id="٢-٢-١-٢"
@@ -372,7 +356,8 @@ least once, every year."
                         $status = getParentStatus($report, 'NCA-OSMACC-2-4-1-');
                     @endphp
                     <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="٢-٤"
-                        sub_domain="(Mobile Devices Security)" sub_domain_ar="أمن الأجهزة المحمولة " control_id="٢-٤-١"
+                        sub_domain="(Mobile Devices Security)" sub_domain_ar="أمن الأجهزة المحمولة "
+                        control_id="٢-٤-١"
                         description="In addition to the sub-controls within Control 3-6-2 in the basic controls of cybersecurity, the cybersecurity requirements related to the security of mobile devices for the social networking accounts of the entity must cover, at a minimum, the following:"
                         description_ar="بالإضافـة للضوابـط الفرعيـة ضمـن الضابـط  ٢-٦-٣ في الضوابـط الأساسـية للأمـن السـيبراني، يجـب أن تغطــي متطلبــات الأمــن الســيبراني الخاصــة بأمــن الأجهــزة المحمولــة لحســابات التواصــل
 الاجتماعـي للجهـة، بحـد أدنى، مايـلي:"
@@ -473,7 +458,8 @@ to deal with cyber incidents"
                 @if ($control->control_id == 'NCA-OSMACC-3-1-1')
                     <x-main-control-alt main_domain="" main_domain_ar="" main_domain_id="٣-١"
                         sub_domain="(Third-Party and Cloud Computing Cybersecurity)"
-                        sub_domain_ar="3- الأمن السيبراني المتعلق بالأطراف الخارجية والحوسبة السحابية" control_id="٣-١-١"
+                        sub_domain_ar="3- الأمن السيبراني المتعلق بالأطراف الخارجية والحوسبة السحابية"
+                        control_id="٣-١-١"
                         description="The need to use social media management services and automatic monitoring of social media accounts or to protect the entity's identity from impersonation (brand protection) and the related cybersecurity risks must be evaluated."
                         description_ar="يجــب تقييــم مــدى الحاجــة لاســتخدام خدمــات إدارة حســابات التواصــل الاجتماعــي (social media management) والمراقبـة الآليـة لحسـابات التواصـل الاجتماعـي أو لحمايـة هويـة الجهـة
 مـن الانتحـال (brand protection) ومخاطـر الأمـن السـيبراني المتعلقـة بهـا.
