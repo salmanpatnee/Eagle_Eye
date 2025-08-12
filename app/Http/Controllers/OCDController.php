@@ -32,7 +32,7 @@ class OCDController extends Controller
 
     public function dashboard()
     {
-        return view('process/18-Reporting/3-Dashboard/4-Dashboard');
+        return view('process/reporting/dashboard/4-Dashboard');
     }
 
     public function index()
@@ -52,8 +52,8 @@ class OCDController extends Controller
 
         $riskStatus = $this->reportService->getRiskStatusData();
 
-        // $risk - vs - asset - group . index = $this->reportService->getAssetGroupRiskStatus();
-        // return $risk-vs-asset-group.index;
+        $riskVsAssetGroup = $this->reportService->getAssetGroupRiskStatus();
+        // return $riskVsAssetGroup;
 
         $assetCountByTech = $this->reportService->getAssetCountByTech();
 
@@ -69,8 +69,8 @@ class OCDController extends Controller
 
 
         return view(
-            'process/18-Reporting/3-Dashboard/index',
-            compact('eccComplianceStatus', 'samaComplianceStatus', 'assetGroupOverview', 'bestPracticesComplainceStatus', 'ownerControlsStatus', 'assetTechData', 'evidenceSummary', 'riskStatus', 'risk-vs-asset-group.index', 'riskCountByTech', 'controlCountByTech', 'assetCountByTech', 'samaControlCountByTech', 'samaControlCountByMaturityLevel', 'heatmap')
+            'process/reporting/dashboard/index',
+            compact('eccComplianceStatus', 'samaComplianceStatus', 'assetGroupOverview', 'bestPracticesComplainceStatus', 'ownerControlsStatus', 'assetTechData', 'evidenceSummary', 'riskStatus', 'riskVsAssetGroup', 'riskCountByTech', 'controlCountByTech', 'assetCountByTech', 'samaControlCountByTech', 'samaControlCountByMaturityLevel', 'heatmap')
         );
     }
 
@@ -101,7 +101,7 @@ class OCDController extends Controller
     ")
             ->first();
 
-        return view('process/18-Reporting/3-Dashboard/4-SAMAControlDashboard', compact(
+        return view('process/reporting/dashboard/4-SAMAControlDashboard', compact(
             'controls',
             'level'
         ));
@@ -140,7 +140,7 @@ class OCDController extends Controller
                 'o.owner_id',
                 DB::raw('COALESCE(cad_latest.control_implementation_status, "Not Implemented") as status'),
                 'cad_latest.control_assessment_id',
-                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", ct.custodian_name_id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
+                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodian-table/", ct.custodian_name_id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
                 // DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/storage/files/", af.path, "\' >", "View Attachments", "</a>") SEPARATOR "<br>") as evidences')
             )
             ->where('cad.control_maturity_level', $level)->where('c.control_id', 'LIKE', 'SAMA-CSF-%')
@@ -161,7 +161,7 @@ class OCDController extends Controller
             return response()->json($controls);
         }
 
-        return view('process/18-Reporting/3-Dashboard/4-ControlOwnerDashboard', compact('controls'));
+        return view('process/reporting/dashboard/4-ControlOwnerDashboard', compact('controls'));
 
         return $controls;
     }
@@ -214,7 +214,7 @@ class OCDController extends Controller
         $not_implemented_count = $result->pluck('not_implemented');
         $not_applicable_count = $result->pluck('not_applicable');
 
-        return view('process/18-Reporting/3-Dashboard/4-DomainControlDashboard', compact(
+        return view('process/reporting/dashboard/domainControlDashboard', compact(
             'domain_names',
             'domain_ids',
             'countrols_count',
@@ -269,7 +269,7 @@ class OCDController extends Controller
         $not_implemented = $result->pluck('not_implemented');
 
 
-        return view('process/18-Reporting/3-Dashboard/4-SubDomainControlDashboard', compact(
+        return view('process/reporting/dashboard/4-SubDomainControlDashboard', compact(
             'sub_domain_id',
             'subdomain_names',
             'controls_count',
@@ -337,11 +337,12 @@ class OCDController extends Controller
         ) as cad_latest'), 'c.control_id', '=', 'cad_latest.control_id')
             ->select(
                 'c.control_id',
+                'o.id',
                 'o.owner_name',
                 'o.owner_id',
                 DB::raw('COALESCE(cad_latest.control_implementation_status, "Not Implemented") as status'),
                 'cad_latest.control_assessment_id',
-                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", ct.custodian_name_id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
+                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", ct.id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
                 DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/storage/files/", af.path, "\' >", "View Attachments", "</a>") SEPARATOR "<br>") as evidences')
             )
             ->where('d.sub_domain_id', $subdomainId)
@@ -352,6 +353,7 @@ class OCDController extends Controller
             ->groupBy(
                 'c.control_id',
                 'o.owner_name',
+                'o.id',
                 'o.owner_id',
                 'cad_latest.control_assessment_id',
                 'cad_latest.control_implementation_status'
@@ -362,14 +364,14 @@ class OCDController extends Controller
             return response()->json($controls);
         }
 
-        return view('process/18-Reporting/3-Dashboard/4-ControlOwnerDashboard', compact('controls'));
+        return view('process/reporting/dashboard/4-ControlOwnerDashboard', compact('controls'));
 
         return $controls;
     }
 
     function ownerControls($ownerId)
     {
-        $owner = DB::table('owner_table')->select('owner_name', 'owner_id')->where('owner_role_id', '=', $ownerId)->get();
+        $owner = DB::table('owner_table')->select('id', 'owner_name', 'owner_id')->where('owner_role_id', '=', $ownerId)->get();
 
         $status = $this->_getStatusCode();
 
@@ -401,7 +403,7 @@ class OCDController extends Controller
                 'owner_table.owner_name',
                 'c.control_id',
                 DB::raw('COALESCE(cad.control_implementation_status, "Not Implemented") as status'),
-                DB::raw('GROUP_CONCAT(CONCAT("<a href=\'/custodians/", cn.custodian_name_id, "\' >",cn.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
+                DB::raw('GROUP_CONCAT(CONCAT("<a href=\'/custodians/", cn.id, "\' >",cn.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
                 DB::raw('COALESCE(cad.control_assessment_id, "#") as control_assessment_id')
                 // DB::raw('GROUP_CONCAT(cn.custodian_name_name) as custodians')
             )
@@ -433,6 +435,7 @@ class OCDController extends Controller
             )
             ->leftJoin('control_assessment_details_table as cad', 'cad.id', '=', 'cad_max.id')
             ->select(
+                'owner_table.id',
                 'owner_table.owner_id',
                 'owner_table.owner_name',
                 DB::raw('COUNT(c.control_id) as total_controls'),
@@ -445,7 +448,7 @@ class OCDController extends Controller
                              COUNT(CASE WHEN cad.control_implementation_status = "Not Applicable" THEN 1 END) AS not_implemented')
             )
             ->where('owner_table.owner_role_id', $ownerId)
-            ->groupBy('owner_table.owner_id', 'owner_table.owner_name')
+            ->groupBy('owner_table.id', 'owner_table.owner_id', 'owner_table.owner_name')
             ->get();
 
 
@@ -458,7 +461,9 @@ class OCDController extends Controller
 
         $totalControlsCount = count($controls);
 
-        return view('process/18-Reporting/3-Dashboard/4-OwnerControlDashboard', compact('controls', 'controlsCount', 'totalControlsCount', 'ownerId', 'owner'));
+
+
+        return view('process/reporting/dashboard/4-OwnerControlDashboard', compact('controls', 'controlsCount', 'totalControlsCount', 'ownerId', 'owner'));
     }
 
     function riskDomain()
@@ -502,7 +507,7 @@ class OCDController extends Controller
         $totalRisksClose = $domainRisksCount->pluck('close_risks');
 
 
-        return view('process/18-Reporting/3-Dashboard/4-DomainRiskDashboard', compact(
+        return view('process/reporting/dashboard/4-DomainRiskDashboard', compact(
             'domainIds',
             'domainNames',
             'totalRisks',
@@ -551,7 +556,7 @@ class OCDController extends Controller
         $totalRisksClose = $domainRisksCount->pluck('close_risks');
 
 
-        return view('process/18-Reporting/3-Dashboard/4-SubdomainRiskDashboard', compact(
+        return view('process/reporting/dashboard/4-SubdomainRiskDashboard', compact(
             'domainIds',
             'domainNames',
             'totalRisks',
@@ -604,7 +609,7 @@ class OCDController extends Controller
         $totalRisksClose = $ownerRisksCount->pluck('closed_risks');
 
 
-        return view('process/18-Reporting/3-Dashboard/4-OwnerRiskDashboard', compact(
+        return view('process/reporting/dashboard/4-OwnerRiskDashboard', compact(
             'ownerId',
             'ownerNames',
             'totalRisks',
@@ -683,7 +688,7 @@ class OCDController extends Controller
                 'la.risk_assessment_id',
                 'o.owner_name',
                 'o.owner_id',
-                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", cu.custodian_name_id, "\' >",cu.custodian_name_name, "</a>") SEPARATOR "<br>") AS custodians')
+                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodian-table/", cu.custodian_name_id, "\' >",cu.custodian_name_name, "</a>") SEPARATOR "<br>") AS custodians')
 
             )
             ->get();
@@ -695,7 +700,7 @@ class OCDController extends Controller
         $totalRisksClose = $ownerRisksCount->pluck('closed_risks');
 
 
-        return view('process/18-Reporting/3-Dashboard/4-OwnerCustodiansRiskDashboard', compact(
+        return view('process/reporting/dashboard/4-OwnerCustodiansRiskDashboard', compact(
             'risks',
             'ownerId',
             'ownerNames',
@@ -718,7 +723,7 @@ class OCDController extends Controller
         $assetTypeLabels = $assets->pluck('asset_type_name');
         $assetsCount = $assets->pluck('total_assets');
 
-        return view('process/18-Reporting/3-Dashboard/4-AssetTypelDashboard', compact(
+        return view('process/reporting/dashboard/4-AssetTypelDashboard', compact(
             'assetTypeIds',
             'assetTypeLabels',
             'assetsCount',
@@ -744,7 +749,7 @@ class OCDController extends Controller
         $domainIds = $domainVsEvidence->pluck('main_domain_id');
         $evidenceCount = $domainVsEvidence->pluck('evidence_count');
 
-        return view('process/18-Reporting/3-Dashboard/1-evidence/DomainlDashboard', compact(
+        return view('process/reporting/dashboard/1-evidence/DomainlDashboard', compact(
             'domains',
             'domainIds',
             'evidenceCount'
@@ -768,7 +773,7 @@ class OCDController extends Controller
         $subdomainIds = $subdomainVsEvidence->pluck('sub_domain_id');
         $evidenceCount = $subdomainVsEvidence->pluck('evidence_count');
 
-        return view('process/18-Reporting/3-Dashboard/1-evidence/SubDomainlDashboard', compact(
+        return view('process/reporting/dashboard/1-evidence/SubDomainlDashboard', compact(
             'subdomains',
             'subdomainIds',
             'evidenceCount'
@@ -797,13 +802,15 @@ class OCDController extends Controller
 
 
         $controls = ControlMaster::select(
+            'control_master_table.id',
             'control_master_table.control_id',
             'control_master_table.control_name',
+            'owner_table.id as oid',
             'owner_table.owner_id',
             DB::raw('COALESCE(cad.control_implementation_status, "Not Implemented") as status'),
             'owner_table.owner_name'
         )
-            ->selectRaw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", custodian_name_table.custodian_name_id, "\' >", custodian_name_table.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
+            ->selectRaw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", custodian_name_table.id, "\' >", custodian_name_table.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
             ->selectRaw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/storage/files/", artifact_attachments.path, "\' >", "View Attachments", "</a>") SEPARATOR "<br>") as evidences')
             ->join('control_master_table_vs_sub_domain_table', 'control_master_table.control_id', '=', 'control_master_table_vs_sub_domain_table.control_id')
             ->join('sub_domain_table', 'control_master_table_vs_sub_domain_table.sub_domain_id', '=', 'sub_domain_table.sub_domain_id')
@@ -825,9 +832,11 @@ class OCDController extends Controller
                 return $query->whereRaw('COALESCE(cad.control_implementation_status, "Not Implemented") = ?', [$status]);
             })
             ->groupBy(
+                'control_master_table.id',
                 'control_master_table.control_id',
                 'control_master_table.control_name',
                 'cad.control_implementation_status',
+                'owner_table.id',
                 'owner_table.owner_name',
                 'owner_table.owner_id'
             )
@@ -837,7 +846,9 @@ class OCDController extends Controller
             return response()->json($controls);
         }
 
-        return view('process/18-Reporting/3-Dashboard/1-evidence/ControlDashboard', compact(
+
+
+        return view('process/reporting/dashboard/1-evidence/ControlDashboard', compact(
             'controls',
             'controlsCount',
             'subdomainId'
@@ -881,13 +892,13 @@ class OCDController extends Controller
                 DISTINCT r.risk_id, 
                 ra.risk_assessment_id,
                 GROUP_CONCAT(DISTINCT CONCAT(
-                    "<a href=\'/assets/", a.asset_id, "\' >", a.asset_name, "</a>"
+                    "<a href=\'/asset-register-table/", a.asset_id, "\' >", a.asset_name, "</a>"
                 ) SEPARATOR "<br>") AS assets,
                 COALESCE(ra.implementation_status, "Open") AS status,
                 o.owner_id,
                 o.owner_name,
                 GROUP_CONCAT(DISTINCT CONCAT(
-                    "<a href=\'/custodians/", cn.custodian_name_id, "\' >", cn.custodian_name_name, "</a>"
+                    "<a href=\'/custodian-table/", cn.custodian_name_id, "\' >", cn.custodian_name_name, "</a>"
                 ) SEPARATOR "<br>") AS custodians
             ')
             ->join('asset_group_table as g', 'a.asset_group_id', '=', 'g.asset_group_id')
@@ -936,7 +947,7 @@ class OCDController extends Controller
         $openRisks = $assetRisksCount->pluck('open_risks');
         $closedRisks = $assetRisksCount->pluck('closed_risks');
 
-        return view('process/18-Reporting/3-Dashboard/2-assets/AssetGroup', compact(
+        return view('process/reporting/dashboard/2-assets/AssetGroup', compact(
             'assetId',
             'assetName',
             'riskCount',
@@ -1007,14 +1018,14 @@ class OCDController extends Controller
         o.owner_id as asset_owner_id, 
         o.owner_name as asset_owner_name,
         GROUP_CONCAT(DISTINCT CONCAT(
-            "<a href=\'/custodians/", cu.custodian_name_id, "\'>", cu.custodian_name_name, "</a>"
+            "<a href=\'/custodian-table/", cu.custodian_name_id, "\'>", cu.custodian_name_name, "</a>"
         ) SEPARATOR "<br>") as asset_custodians,
         r.risk_id, 
         r.risk_name, 
         ro.owner_id as risk_owner_id, 
         ro.owner_name as risk_owner_name,
         GROUP_CONCAT(DISTINCT CONCAT(
-            "<a href=\'/custodians/", rcu.custodian_name_id, "\'>", rcu.custodian_name_name, "</a>"
+            "<a href=\'/custodian-table/", rcu.custodian_name_id, "\'>", rcu.custodian_name_name, "</a>"
         ) SEPARATOR "<br>") as risk_custodians,
         COALESCE(rad.implementation_status, "Open")  AS latest_status
     ')

@@ -449,6 +449,25 @@ Route::prefix('mis')->controller(MisReportsController::class)->group(function ()
     Route::get('/pending-controls', 'controlPending');
 });
 
+Route::controller(OCDController::class)->group(function () {
+    Route::get('/dashboard', 'index')->name('compliance-dashboard.index');
+    Route::get('/domain-compliance/{bestPractice}', 'domain')->name('domain-compliance.show');
+    Route::get('/subdomain-compliance/{domainId}', 'subdomain')->name('subdomain-compliance.show');
+    Route::get('/owner-compliance/{subdomainId}', 'owner')->name('owner-compliance.show');
+    Route::get('/owner-controls/{ownerId}', 'ownerControls');
+    Route::get('/risk-domain-compliance', 'riskDomain')->name('risk-domain-compliance.show');
+    Route::get('/risk-subdomain-compliance/{domainId}', 'riskSubdomain')->name('risk-subdomain-compliance.show');
+    Route::get('/risk-owners-compliance/{subdomainId}', 'riskOwners')->name('risk-owners-compliance.show');
+    Route::get('/risk-owner-compliance/{ownerId}', 'riskOwner')->name('risk-owner-compliance.show');
+    Route::get('/asset-type-compliance/{groupId}', 'assetType')->name('asset-type-compliance.show');
+    Route::get('/domain-evidence/{bestPracticeId}', 'domainEvidence')->name('domain-evidence.show');
+    Route::get('/subdomain-evidence/{domainId}', 'subdomainEvidence')->name('subdomain-evidence.show');
+    Route::get('/controls-evidence/{subdomainId}', 'controlEvidence')->name('control-evidence.show');
+    Route::get('/asset-group-risks/{assetGroupId}', 'assetGroupRisks');
+    Route::get('/group-asset-risks/{asset:asset_id}', 'groupAssetRisks');
+    Route::get('/sama-maturity-level/{level}', 'samaMaturityLevel');
+    Route::get('/sama-maturity-level-details/{level}', 'samaMaturityLevelDetails');
+});
 Route::view('/frameworks', 'process/framework')->name('frameworks');
 
 
@@ -625,26 +644,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/risk-vs-asset-dashboard', [DashboardController::class, 'riskAssetsReport'])->name('risk-vs-asset-dashboard');
 
 
-
-    Route::controller(OCDController::class)->group(function () {
-        Route::get('/dashboard', 'index')->name('compliance-dashboard.index');
-        Route::get('/domain-compliance/{bestPractice}', 'domain')->name('domain-compliance.show');
-        Route::get('/subdomain-compliance/{domainId}', 'subdomain')->name('subdomain-compliance.show');
-        Route::get('/owner-compliance/{subdomainId}', 'owner')->name('owner-compliance.show');
-        Route::get('/owner-controls/{ownerId}', 'ownerControls');
-        Route::get('/risk-domain-compliance', 'riskDomain')->name('risk-domain-compliance.show');
-        Route::get('/risk-subdomain-compliance/{domainId}', 'riskSubdomain')->name('risk-subdomain-compliance.show');
-        Route::get('/risk-owners-compliance/{subdomainId}', 'riskOwners')->name('risk-owners-compliance.show');
-        Route::get('/risk-owner-compliance/{ownerId}', 'riskOwner')->name('risk-owner-compliance.show');
-        Route::get('/asset-type-compliance/{groupId}', 'assetType')->name('asset-type-compliance.show');
-        Route::get('/domain-evidence/{bestPracticeId}', 'domainEvidence')->name('domain-evidence.show');
-        Route::get('/subdomain-evidence/{domainId}', 'subdomainEvidence')->name('subdomain-evidence.show');
-        Route::get('/controls-evidence/{subdomainId}', 'controlEvidence')->name('control-evidence.show');
-        Route::get('/asset-group-risks/{assetGroupId}', 'assetGroupRisks');
-        Route::get('/group-asset-risks/{asset:asset_id}', 'groupAssetRisks');
-        Route::get('/sama-maturity-level/{level}', 'samaMaturityLevel');
-        Route::get('/sama-maturity-level-details/{level}', 'samaMaturityLevelDetails');
-    });
 
 
     Route::controller(RCDBController::class)->group(function () {

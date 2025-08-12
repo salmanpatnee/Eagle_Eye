@@ -106,18 +106,18 @@ class ReportService
         ];
     }
 
-    // public function getAssetGroupRiskStatus()
-    // {
-    //     $risk_vs_asset_group . index = $this->reportRepository->getAssetGroupRiskStatus();
+    public function getAssetGroupRiskStatus()
+    {
+        $riskVsAssetGroup = $this->reportRepository->getAssetGroupRiskStatus();
 
-    //     return [
-    //         'assetGroupId' => $risk_vs_asset_group . index->pluck('asset_group_id'),
-    //         'assetGroupName' => $risk_vs_asset_group . index->pluck('asset_group_name'),
-    //         'risk_count' => $risk_vs_asset_group . index->pluck('risk_count'),
-    //         'open_risks' => $risk_vs_asset_group . index->pluck('open_risks'),
-    //         'closed_risks' => $risk_vs_asset_group . index->pluck('closed_risks'),
-    //     ];
-    // }
+        return [
+            'assetGroupId' => $riskVsAssetGroup->pluck('asset_group_id'),
+            'assetGroupName' => $riskVsAssetGroup->pluck('asset_group_name'),
+            'risk_count' => $riskVsAssetGroup->pluck('risk_count'),
+            'open_risks' => $riskVsAssetGroup->pluck('open_risks'),
+            'closed_risks' => $riskVsAssetGroup->pluck('closed_risks'),
+        ];
+    }
 
     public function getHeatmapData()
     {
