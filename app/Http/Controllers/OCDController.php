@@ -136,11 +136,13 @@ class OCDController extends Controller
             ->join('control_assessment_details_table as cad', 'cad.control_id', '=', 'c.control_id') // Correct join for maturity level
             ->select(
                 'c.control_id',
+                'o.id as oid',
                 'o.owner_name',
                 'o.owner_id',
+                'cad.id',
                 DB::raw('COALESCE(cad_latest.control_implementation_status, "Not Implemented") as status'),
                 'cad_latest.control_assessment_id',
-                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodian-table/", ct.custodian_name_id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
+                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", ct.id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
                 // DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/storage/files/", af.path, "\' >", "View Attachments", "</a>") SEPARATOR "<br>") as evidences')
             )
             ->where('cad.control_maturity_level', $level)->where('c.control_id', 'LIKE', 'SAMA-CSF-%')
@@ -149,8 +151,10 @@ class OCDController extends Controller
             })
             ->groupBy(
                 'c.control_id',
+                'o.id',
                 'o.owner_name',
                 'o.owner_id',
+                'cad.id',
                 'cad_latest.control_assessment_id',
                 'cad_latest.control_implementation_status'
             )
@@ -680,15 +684,17 @@ class OCDController extends Controller
                 'la.risk_id'
             )
             ->where('r.owner_id', $ownerId)
-            ->groupBy('r.risk_id', 'r.risk_name', 'la.implementation_status', 'la.risk_assessment_id', 'o.owner_id', 'o.owner_name')
+            ->groupBy('r.id', 'r.risk_id', 'r.risk_name', 'la.implementation_status', 'la.risk_assessment_id', 'o.id', 'o.owner_id', 'o.owner_name')
             ->select(
+                'r.id',
                 'r.risk_id',
                 'r.risk_name',
                 'la.implementation_status',
                 'la.risk_assessment_id',
+                'o.id as oid',
                 'o.owner_name',
                 'o.owner_id',
-                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodian-table/", cu.custodian_name_id, "\' >",cu.custodian_name_name, "</a>") SEPARATOR "<br>") AS custodians')
+                DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", cu.id, "\' >",cu.custodian_name_name, "</a>") SEPARATOR "<br>") AS custodians')
 
             )
             ->get();
@@ -699,6 +705,7 @@ class OCDController extends Controller
         $totalRisksOpen = $ownerRisksCount->pluck('open_risks');
         $totalRisksClose = $ownerRisksCount->pluck('closed_risks');
 
+        // return $risks;
 
         return view('process/reporting/dashboard/4-OwnerCustodiansRiskDashboard', compact(
             'risks',

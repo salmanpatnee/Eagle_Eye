@@ -29,7 +29,7 @@
 
         .ListTable {
             max-width: 1200;
-            margin: 60px auto 60px;
+            margin: 30px auto 60px;
         }
 
         td {
@@ -69,7 +69,7 @@
     <body>
         <div class="OCD">
             <div class="OCDVBC">
-                <h3>Owner's Risk Status</h3>
+                <h3>Risk's Controls Status</h3>
                 <canvas id="BRCHRT" class="BRCHRT"></canvas>
             </div>
         </div>
@@ -84,51 +84,47 @@
                 <div class="sk-chase-dot"></div>
             </div>
             <div id="riskAppetiteContentRow">
+                <h2 id="subdomain" class="text-center">Control Status Report</h2>
                 <div class="ListTable">
-                    <table cellspacing="0">
+                    <table>
                         <thead>
 
                             <tr>
-                                <th class="TableHeads">Risk ID</th>
+                                <th class="TableHeads">S.No</th>
+                                <th class="TableHeads">Control ID</th>
                                 <th class="TableHeads">Status</th>
                                 <th class="TableHeads">Owner</th>
                                 <th class="TableHeads">Custodians</th>
-                                <th class="TableHeads">Control Details</th>
-                                <th class="TableHeads">Assessment Details</th>
+                                <th class="TableHeads">Evidences</th>
                             </tr>
                         </thead>
                         <tbody id="table_body">
-                            @foreach ($riskDetails as $risk)
+                            @foreach ($controlDetails as $control)
                                 <tr>
+                                    <td>{{ $loop->index + 1 }}</td>
                                     <td>
-                                        <a href="{{ route('risks.show', $risk->risk_id) }} "
-                                            target="_blank">{{ $risk->risk_id }}
+                                        <a
+                                            href="{{ route('control-assessments.show', $control->control_assessment_id) }}">{{ $control->control_id }}
                                         </a>
                                     </td>
-                                    <td>
-                                        <a href="{{ route('risk-assessments.show', $risk->risk_assessment_id) }}"
-                                            target="_blank">
-                                            {{ $risk->status }}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('owners.show', $risk->owner_id) }}"
-                                            target="_blank">{{ $risk->owner_name }}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        {!! $risk->custodians !!}
-                                    </td>
-                                    <td><a href="{{ route('risk-controls.show', $risk->risk_id) }}"
-                                            target="_blank">View Controls</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('risk-assessments.show', $risk->risk_assessment_id) }}"
-                                            target="_blank">
 
-                                            {{ $risk->risk_assessment_id }}
+                                    <td>
+                                        <a
+                                            href="{{ route('control-assessments.show', $control->control_assessment_id) }}">
+                                            {{ $control->control_implementation_status }}
                                         </a>
                                     </td>
+                                    <td>
+                                        <a href="{{ route('owners.show', $control->owner_id) }}">{{ $control->owner_name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {!! $control->custodians !!}
+                                    </td>
+                                    <td>
+                                        {!! $control->evidence !!}
+                                    </td>
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -140,12 +136,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
         <script>
-            const ownerRisks = {!! json_encode($ownerRisksGraph) !!}
-            const ownerId = {!! json_encode($ownerId) !!};
-            const owners = ownerRisks.map(row => row.owner_name);
-            const totalRisks = ownerRisks.map(row => row.risk_count);
-            const openRisks = ownerRisks.map(row => row.open_count);
-            const closeRisks = ownerRisks.map(row => row.close_count);
+            const controlCounts = {!! json_encode($controlCounts) !!}
+
+            const riskName = {!! json_encode($riskName) !!};
+            const riskId = {!! json_encode($riskId) !!};
+            const totalControls = controlCounts.total_controls
+            const implementedControls = controlCounts.implemented_count;
+            const notImplementedControls = controlCounts.not_implemented_count;
+            const partiallyImplementedControls = controlCounts.partially_implemented_count;
+            const notApplicableControls = controlCounts.not_applicable_count;
+
+
             const colors = {
                 BLUE: "#2196F3",
                 GREEN: "#228B22",
@@ -157,29 +158,48 @@
             const chartBar = new Chart("BRCHRT", {
                 type: "bar",
                 data: {
-                    labels: owners,
+                    labels: [riskName],
                     datasets: [{
-                        label: 'Total Risks',
-                        backgroundColor: colors.BLUE,
-                        data: totalRisks.map((value, index) => ({
-                            y: value,
-                            statusCode: null
-                        }))
-                    }, {
-                        label: 'Open Risks',
-                        backgroundColor: colors.RED,
-                        data: openRisks.map((value, index) => ({
-                            y: value,
-                            statusCode: 1
-                        })),
-                    }, {
-                        label: 'Close Risks',
-                        backgroundColor: colors.GREEN,
-                        data: closeRisks.map((value, index) => ({
-                            y: value,
-                            statusCode: 2
-                        }))
-                    }]
+                            label: 'Total Controls',
+                            backgroundColor: colors.BLUE,
+                            data: [totalControls].map((value, index) => ({
+                                y: value,
+                                statusCode: null
+                            }))
+                        }, {
+                            label: 'Implemented',
+                            backgroundColor: colors.GREEN,
+                            data: [implementedControls].map((value, index) => ({
+                                y: value,
+                                statusCode: 1
+                            }))
+                        },
+                        {
+                            label: 'Partialy Implemented',
+                            backgroundColor: colors.ORANGE,
+                            data: [partiallyImplementedControls].map((value, index) => ({
+                                y: value,
+                                statusCode: 3
+                            }))
+                        },
+                        {
+                            label: 'Not Implemented',
+                            backgroundColor: colors.RED,
+                            data: [notImplementedControls].map((value, index) => ({
+                                y: value,
+                                statusCode: 2
+                            }))
+                        },
+                        {
+                            label: 'Not Applicable',
+                            backgroundColor: colors.GREY,
+                            data: [notApplicableControls].map((value, index) => ({
+                                y: value,
+                                statusCode: 4
+                            }))
+                        },
+
+                    ]
                 },
                 options: {
                     legend: {
@@ -201,35 +221,56 @@
                                 if (dataset && dataset.data[dataIndex]) {
                                     const dataPoint = dataset.data[dataIndex];
 
-
                                     $('#riskAppetiteContentRow').css('visibility', 'hidden');
                                     $('.sk-chase').show();
                                     const tableBody = $('#table_body');
                                     let html = "";
 
                                     $.ajax({
-                                        url: `/risk-owner/${ownerId}?status=${dataPoint.statusCode}`,
+                                        url: `/risk-controls/${riskId}?status=${dataPoint.statusCode}`,
                                         type: 'GET',
                                         dataType: 'json',
                                         success: function(response) {
                                             console.log('Response:', response);
                                             if (response.length) {
-                                                console.log(response);
-
+                                                if (dataPoint.statusCode === null) {
+                                                    $("h2#subdomain").text("Control Status Report");
+                                                } else if (dataPoint.statusCode === 1) {
+                                                    $("h2#subdomain").text(
+                                                        "Implemented Controls Report");
+                                                } else if (dataPoint.statusCode === 2) {
+                                                    $("h2#subdomain").text(
+                                                        "Not Implemented Controls Report");
+                                                } else if (dataPoint.statusCode === 3) {
+                                                    $("h2#subdomain").text(
+                                                        "Partially Implemented Controls Report");
+                                                } else if (dataPoint.statusCode === 4) {
+                                                    $("h2#subdomain").text(
+                                                        "Not Applicable Controls Report");
+                                                }
+                                                let i = 1
                                                 response.forEach(row => {
 
                                                     html += "<tr>";
+                                                    html += `<td>${i}</td>`;
                                                     html +=
-                                                        `<td><a href="/risk-assessment-table/${row.risk_assessment_id}" target="_blank">${row.risk_id}</a></td>`;
+                                                        `<td><a href="/control-assessments/${row.control_assessment_id}" >${row.control_id}</a></td>`;
                                                     html +=
-                                                        `<td> <a href="/risk-assessment-table/${row.risk_assessment_id}" target="_blank">${row.status}</a></td>`;
+                                                        `<td> <a href="/control-assessments/${row.control_assessment_id}" >${row.control_implementation_status}</a></td>`;
                                                     html +=
-                                                        `<td><a href="/owners/${row.owner_id}" target="_blank">${row.owner_id} - ${row.owner_name}</a></td>`;
+                                                        `<td><a href="/owners/${row.owner_id}" >${row.owner_name}</a></td>`;
                                                     html +=
-                                                        `<td><a href="#" target="_blank">${row.custodians}</a></td>`;
-                                                    html +=
-                                                        `<td><a href="#" target="_blank">View Controls</a></td>`;
+                                                        `<td>${row.custodians != null ? row.custodians : ''}</td>`;
+                                                    if (row.evidence !== null) {
+
+                                                        html +=
+                                                            `<td>${row.evidence}</td>`;
+                                                    } else {
+                                                        html +=
+                                                            `<td>-</td>`;
+                                                    }
                                                     html += "</tr>";
+                                                    i++;
                                                 });
                                                 $(tableBody).html(html)
 
@@ -249,6 +290,7 @@
                 }
             });
         </script>
+
         <script>
             function goBack() {
                 window.history.back();

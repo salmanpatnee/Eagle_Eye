@@ -183,15 +183,17 @@ class RCDBController extends Controller
                 'control_master_table.control_id',
                 'cad.control_implementation_status',
                 'cad.control_assessment_id',
+                'o.id',
                 'o.owner_id',
                 'o.owner_name'
             )
             ->get();
 
 
+
         if (request()->wantsJson()) {
             return response()->json($controlDetails);
         }
-        return view('process/18-Reporting/3-Dashboard/5-RiskControlDashboard', compact('riskId', 'riskName', 'controlCounts', 'controlDetails'));
+        return view('process/reporting/dashboard/5-RiskControlDashboard', compact('riskId', 'riskName', 'controlCounts', 'controlDetails'));
     }
 }

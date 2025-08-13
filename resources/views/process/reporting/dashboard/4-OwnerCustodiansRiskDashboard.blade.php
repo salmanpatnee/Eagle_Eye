@@ -1,159 +1,67 @@
-<!DOCTYPE html5>
-<html lang="en">
+@extends('layouts.app-full')
+@section('title', 'Overall Compliance Dashboard')
+@section('title_ar', 'لوحة التحكم بالامتثال الشامل')
+@section('content')
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool" />
-    <meta name="description" content="Zain Cloud GRC Tool" />
-    <!-- Boxicons Icons-->
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/css/11-Dashboard/1-Dashboard.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        .OCDVBC {
-            max-width: 100%;
-        }
-
-        .BRCHRT {
-            width: 100%;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .ListTable {
-            max-width: 1200;
-            margin: 30px auto 60px;
-        }
-
-        td {
-            text-align: left;
-            padding: 8px;
-            line-height: 2em;
-            vertical-align: baseline;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- SIDEBAR -->
-    <section>
-        <header>
-            <div class="Header">
-
-                <div class="flex items-center">
-                    <a href="/compliance">
-                        <i class="bx bx-home"></i>
-                    </a>
-                    <p class="bold-arbtext">العمليات</p>
-                    <p class="bold-text">Processes</p>
-                    <i style="padding-right: 30px" class="bx bx-right-arrow-alt"></i>
-                    <div class="HeadingTxt">
-                        <p class="ArbTxt">لوحة التحكم بالامتثال الشامل</p>
-                        <p class="EngTxt">Overall Compliance Dashboard</p>
-                    </div>
-                </div>
-
-                <div>
-                    <button id="print" class="btn btn-info btn-turqouis btn-sm rounded rounded-5 text-black"
-                        data-filename="Domains Risk Status">
-                        <p class="m-0">تنزيل بصيغة بي دي إف</p>
-                        <p class="m-0">Download as PDF</p>
-                    </button>
-                </div>
-
-                <div class="flex items-center">
-                    @include('partials.roles')
-                    <div class="RightButtonContainer">
-                        <button type="button" class="RightButton" onclick="goBack()">
-                            <p>للخلف</p>
-                            <p>Back</p>
-                        </button>
-                    </div>
-                </div>
+    <div class="grid grid-cols-1 px-4 mb-6">
+        <div class="card mx-auto" style="width: 65%">
+            <h3 class="card-title">{{ $ownerNames[0] }} Risk Status</h3>
+            <canvas id="chart"></canvas>
+            <!-- Loading Text -->
+            <div class="sk-chase text-2xl"
+                style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; color: #1f2937; font-weight: bold;">
+                Loading...
             </div>
-        </header>
-    </section>
 
-
-
-    <div id="print-area">
-        <div class="OCD">
-            <div class="OCDVBC">
-                <h3>{{ $ownerNames[0] }} Risk Status</h3>
-                <canvas id="BRCHRT" class="BRCHRT"></canvas>
-            </div>
-        </div>
-        <div class="ContentTableSection" id="riskAppetiteContent">
-            <div class="sk-chase" style="display: none">
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-            </div>
-            <div id="riskAppetiteContentRow">
-                <h2 id="subdomain" class="text-center">Risk Status Overview</h2>
-                <div class="ListTable">
-                    <table cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th class="TableHeads">S.No</th>
-                                <th class="TableHeads"> Risk ID</th>
-                                <th class="TableHeads">Status</th>
-                                <th class="TableHeads">Owner Name</th>
-                                <th class="TableHeads">Custodians</th>
-                                <th class="TableHeads">Control Details</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table_body">
-                            @foreach ($risks as $risk)
-                                <tr>
-                                    <td> {{ $loop->index + 1 }}
-                                    </td>
-                                    <td> <a
-                                            href="{{ route('riskmaster.show', $risk->risk_id) }}">{{ $risk->risk_id }}</a>
-                                    </td>
-                                    <td>
-                                        @if ($risk->risk_assessment_id)
-                                            <a href="{{ route('risk-assessments.show', $risk->risk_assessment_id) }}">
-                                        @endif
-
-                                        {{ $risk->implementation_status }}
-
-                                        @if ($risk->risk_assessment_id)
-                                            </a>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a
-                                            href="{{ route('owners.show', $risk->owner_id) }}">{{ $risk->owner_name }}</a>
-                                    </td>
-                                    <td>{!! $risk->custodians !!}</td>
-                                    <td><a href="{{ route('risk-controls.show', $risk->risk_id) }}">View
-                                            Controls</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
+    <div class="grid grid-cols-1 px-4 mb-6">
+        <div class="card" id="content">
+            <h3 class="card-title" id="title">Risk Status Overview</h3>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="S.No" label_ar="رقم" />
+                    <x-table.th label="Risk ID" label_ar="رمز مخاطر" />
+                    <x-table.th label="Status" label_ar="حالة" />
+                    <x-table.th label="Owner Name" label_ar="اسم مالك" />
+                    <x-table.th label="Custodians" label_ar="اسم الوصي" />
+                    <x-table.th label="Control Details" label_ar="تفاصيل التحكم" />
+                </x-table.thead>
+                <x-table.tbody id="table_body">
+                    @foreach ($risks as $risk)
+                        <tr>
+                            <x-table.td> {{ $loop->index + 1 }}
+                            </x-table.td>
+                            <x-table.td> <a href="{{ route('risks.show', $risk->id) }}">{{ $risk->risk_id }}</a>
+                            </x-table.td>
+                            <x-table.td>
+                                @if ($risk->risk_assessment_id)
+                                    <a href="{{ route('risk-assessments.show', $risk->risk_assessment_id) }}">
+                                @endif
 
-    <script src="{{ asset('/js/dashboard.js') }}"></script>
+                                {{ $risk->implementation_status }}
+
+                                @if ($risk->risk_assessment_id)
+                                    </a>
+                                @endif
+                            </x-table.td>
+                            <x-table.td>
+                                <a href="{{ route('owners.show', $risk->oid) }}">{{ $risk->owner_name }}</a>
+                            </x-table.td>
+                            <x-table.td>{!! $risk->custodians !!}</x-table.td>
+                            <x-table.td><a href="{{ route('risk-controls.show', $risk->risk_id) }}">View
+                                    Controls</a>
+                            </x-table.td>
+                        </tr>
+                    @endforeach
+                </x-table.tbody>
+            </x-table.table>
+        </div>
+    </div>
+@endsection
+
+@push('scripts')
     <script>
         function initializeCharts() {
 
@@ -168,7 +76,7 @@
                 RED: '#FF0000',
             };
 
-            const chartBar = new Chart("BRCHRT", {
+            const chartBar = new Chart("chart", {
                 type: "bar",
                 data: {
                     labels: owners,
@@ -235,12 +143,4 @@
         }
         initializeCharts();
     </script>
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-</body>
-</body>
-
-</html>
+@endpush
