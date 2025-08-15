@@ -1,4 +1,4 @@
-@extends('process.initial-setup.layout.app')
+@extends('process/initial-setup/layout/app')
 @section('title', 'Sub-Domains Setup')
 @section('title_ar', 'إعداد المكون الفرعي')
 @section('content')

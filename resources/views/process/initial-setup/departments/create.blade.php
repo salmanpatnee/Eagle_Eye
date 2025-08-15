@@ -1,4 +1,4 @@
-@extends('process.initial-setup.layout.app')
+@extends('process/initial-setup/layout/app')
 @section('title', 'Organization Departments')
 @section('title_ar', 'القسم الجهة')
 @section('content')

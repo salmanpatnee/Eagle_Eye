@@ -1,4 +1,4 @@
-@extends('process.initial-setup.layout.app')
+@extends('process/initial-setup/layout/app')
 @section('title', 'Sub-Category Definition')
 @section('title_ar', 'تعريف الفئة الفرعية الفرعية')
 @section('content')

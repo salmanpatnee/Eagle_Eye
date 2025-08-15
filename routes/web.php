@@ -367,6 +367,14 @@ Route::controller(PenTestReportController::class)->group(function () {
     // Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
 });
 
+Route::controller(PenTestDashboardController::class)->group(function () {
+    Route::get('/va-pen-test-dashboard', 'index')->name('va-pen-test-dashboard.index');
+    Route::get('/va-pen-test-dashboard/{penTest}', 'show')->name('va-pen-test-dashboard.show');
+    Route::get('/va-pen-test-status/{penTest:va_pt_test_id}/{status}', 'status')->name('va-pen-test-dashboard.status');
+    Route::get('/va-pen-test-level-records/{penTest:va_pt_test_id}', 'levelRecords')->name('pen-test-level-records');
+    Route::get('/va-pen-test-level/{penTest:va_pt_test_id}/{level}', 'level')->name('pen-test-level');
+    Route::get('/va-pen-test-level-status/{penTest:va_pt_test_id}', 'levelStatus')->name('pen-test-level-status');
+});
 
 // ------------REPORTING--------------
 
@@ -497,14 +505,7 @@ Route::resource('cms/process', CMSController::class);
 Route::get('/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
 Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
 
-Route::controller(PenTestDashboardController::class)->group(function () {
-    Route::get('/va-pen-test-list', 'list')->name('pen-test-dashboard.index');
-    Route::get('/va-pen-test-dashboard/{penTest:va_pt_test_id}', 'index')->name('pen-test-dashboard');
-    Route::get('/va-pen-test-level/{penTest:va_pt_test_id}/{level}', 'level')->name('pen-test-level');
-    Route::get('/va-pen-test-level-status/{penTest:va_pt_test_id}', 'levelStatus')->name('pen-test-level-status');
-    Route::get('/va-pen-test-status/{penTest:va_pt_test_id}/{status}', 'status')->name('pen-test-status');
-    Route::get('/va-pen-test-level-records/{penTest:va_pt_test_id}', 'levelRecords')->name('pen-test-level-records');
-});
+
 
 
 // Route::get('/insert-record', function () {

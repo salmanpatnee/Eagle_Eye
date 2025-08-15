@@ -737,7 +737,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ route('pen-test-dashboard.index') }}" class="boxhyperlink">
+        <a href="{{ route('va-pen-test-dashboard.index') }}" class="boxhyperlink">
             <div class="itemprocesses">
                 <div class="boxicon">
                     <i class='bx bxs-label'></i>
