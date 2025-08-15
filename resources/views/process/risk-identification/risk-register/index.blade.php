@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Risk Register">
-
+            <x-action.excel-button route_name="risk.register.excel" />
         </x-table.action-wrapper>
 
         <form action="{{ route('risk-register.index') }}" method="GET">

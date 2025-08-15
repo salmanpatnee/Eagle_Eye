@@ -39,12 +39,12 @@ class RiskMethodologyController extends Controller
             // ini_set('pcre.backtrack_limit', '1000000');
 
             $mpdf = new Mpdf();
-            $bootstrapCSS = file_get_contents('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
-            $mpdf->WriteHTML($bootstrapCSS, \Mpdf\HTMLParserMode::HEADER_CSS);
+
+            // $bootstrapCSS = file_get_contents('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
+            // $mpdf->WriteHTML($bootstrapCSS, \Mpdf\HTMLParserMode::HEADER_CSS);
 
             // Get the HTML content
-            $html = view("process/risk/risk-methodology/pdf", compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'))->render();
-
+            $html = view("process/risk-identification/risk-methodology/pdf", compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'))->render();
             // Split HTML into smaller chunks (e.g. 500KB each)
             $chunks = str_split($html, 500000);
 
@@ -58,7 +58,7 @@ class RiskMethodologyController extends Controller
                 ->header('Content-Type', 'application/pdf')
                 ->header('Content-Disposition', 'attachment; filename="RiskMethodology.pdf"');
         } else {
-            return view('process\risk-identification\risk-methodology\show', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
+            return view('process/risk-identification/risk-methodology/show', compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'));
         }
     }
 

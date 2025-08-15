@@ -3,6 +3,10 @@
 @section('title_ar', 'منهجية المخاطر')
 @section('content')
 
+    <x-table.action-wrapper title="">
+        <x-action.pdf-button route_name="risk-methodology.show" :route_param="$riskMethodology->id" />
+    </x-table.action-wrapper>
+
     <div class="report">
         <header class="text-center my-12">
             @if ($organization->organization_logo != null)
