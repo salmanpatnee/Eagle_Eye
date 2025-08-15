@@ -220,6 +220,7 @@ Route::resource('vulnerability-sub-types', VaSubTypeController::class);
 
 Route::resource('risks', RiskIdentificationController::class);
 Route::resource('risk-methodology', RiskMethodologyController::class);
+Route::resource('objectives', ObjectivesController::class);
 Route::resource('risk-groups', RiskGroupController::class);
 Route::resource('risk-types', RiskTypeController::class);
 Route::resource('risk-sub-types', RiskSubTypeController::class);
@@ -929,8 +930,7 @@ Route::prefix('products')->group(function () {
 
 
 
-Route::resource('objectives', ObjectivesController::class)->except(['destroy']);
-Route::delete('/objectives/delete', [ObjectivesController::class, 'destroy'])->name('objectives.destroy');
+
 
 Route::get('/generate-ppt', [PresentationController::class, 'generateChart'])->name('generate.ppt');
 Route::get('/pen-test-generate-ppt/{va_pt_test_id}', [PresentationController::class, 'generatePenTestChart'])->name('pen-test.generate.ppt');

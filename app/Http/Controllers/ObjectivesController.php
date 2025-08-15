@@ -7,35 +7,23 @@ use Illuminate\Http\Request;
 
 class ObjectivesController extends Controller
 {
-    private $_routeName = "objectives";
-    private $_primaryKey = "objective_id";
-
-
     public function index()
     {
-        $objectives = Objective::all();
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $objectives = Objective::paginate(20);
 
-        return view('process/objectives/index', compact('objectives', 'routeName',  'primaryKey'));
+        return view('process/risk-identification/objectives/index', compact('objectives'));
     }
 
     public function show(Objective $objective)
     {
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
-        $data = $objective;
-
-        return view('process/objectives/show', compact('objective', 'routeName', 'data', 'primaryKey'));
+        return view('process/risk-identification/objectives/show', compact('objective'));
     }
 
     public function create()
     {
-        $data = $objective = null;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
+        $objective = null;
 
-        return view('process/objectives/create', compact('objective', 'data', 'routeName', 'primaryKey'));
+        return view('process/risk-identification/objectives/create', compact('objective'));
     }
 
     public function store(Request $request)
@@ -53,11 +41,8 @@ class ObjectivesController extends Controller
 
     public function edit(Objective $objective)
     {
-        $data = $objective;
-        $routeName = $this->_routeName;
-        $primaryKey = $this->_primaryKey;
 
-        return view('process/objectives/create', compact('objective', 'data', 'routeName', 'primaryKey'));
+        return view('process/risk-identification/objectives/create', compact('objective'));
     }
 
     public function update(Objective $objective, Request $request)
@@ -73,13 +58,9 @@ class ObjectivesController extends Controller
             ->with('success', 'Objective saved successfully.');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Objective $objective)
     {
-        $attributes =  $request->validate([
-            'record' => ['required'],
-        ]);
-
-        Objective::where('id', $attributes['record'])->delete();
+        $objective->delete();
 
         return redirect(route('objectives.index'))
             ->with('success', 'Objective deleted successfully.');
