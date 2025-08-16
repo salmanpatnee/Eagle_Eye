@@ -100,7 +100,7 @@ class ControlEvidenceController extends Controller
 
             $mpdf = new Mpdf();
 
-            $html = view("process/10-Evidence/pdf", compact('controlEvidence'))->render();
+            $html = view("process/evidence-management/evidence-control/control-vs-evidence-pdf", compact('controlEvidence'))->render();
 
             $mpdf->WriteHTML($html);
 
@@ -198,7 +198,7 @@ class ControlEvidenceController extends Controller
         if (request()->has('pdf')) {
 
             $mpdf = new Mpdf();
-            $html = view("process/10-Evidence/EvidenceControlTablePdf", compact('evidenceControl'))->render();
+            $html = view("process/evidence-management/evidence-control/evidence-vs-control-pdf", compact('evidenceControl'))->render();
 
             $mpdf->WriteHTML($html);
 
@@ -211,7 +211,7 @@ class ControlEvidenceController extends Controller
 
 
             return view(
-                'process\evidence-management\evidence-control\evidence-vs-control',
+                'process/evidence-management/evidence-control/evidence-vs-control',
                 compact('evidenceControl', 'controlIds', 'practices', 'domains', 'subDomains',   'bestPracticeId', 'domainId', 'subDomainId', 'controlId')
 
             );

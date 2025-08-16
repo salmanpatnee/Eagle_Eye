@@ -4,11 +4,15 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Control vs Evidence">
+
+            <x-slot:extra>
+                <x-action.pdf-button route_name="control-vs-evidence.index" />
+            </x-slot:extra>
+
             <x-action.button label="Control vs Evidence" label_ar="الضوابط مقابل الأدلة" route_name="control-vs-evidence.index"
                 disabled class="opacity-75" />
             <x-action.button label="Evidence vs Control" label_ar="المخاطر مقابل الضوابط"
                 route_name="evidence-vs-control.index" />
-
 
         </x-table.action-wrapper>
 

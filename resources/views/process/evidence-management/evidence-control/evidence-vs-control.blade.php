@@ -3,7 +3,12 @@
 @section('title_ar', 'الأدلة مقابل الضوابط')
 @section('content')
     <div>
+
+
         <x-table.action-wrapper title="Evidence vs Controls">
+            <x-slot:extra>
+                <x-action.pdf-button route_name="evidence-vs-control.index" />
+            </x-slot:extra>
             <x-action.button label="Evidence vs Controls" label_ar="الأدلة مقابل الضوابط"
                 route_name="control-vs-evidence.index" />
             <x-action.button label="Evidence vs Control" label_ar="المخاطر مقابل الضوابط"
