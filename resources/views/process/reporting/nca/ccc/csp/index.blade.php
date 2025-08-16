@@ -4,6 +4,13 @@
 
 @section('content')
 
+@section('actions')
+    <x-table.action-wrapper title="">
+        <x-action.pdf-button route_name="ccc-regulatory-report.show" query_params="&cloudControlType=csp" />
+        <x-action.excel-button route_name="ccc-regulatory-report.excel" query_params="?cloudControlType=csp" />
+    </x-table.action-wrapper>
+@endsection
+
 @section('report-info')
 
     <p class="font-bold mb-5 rtl:text-right text-2xl text-gray-900" lang="ar" dir="rtl">

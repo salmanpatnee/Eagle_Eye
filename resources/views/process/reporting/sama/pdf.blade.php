@@ -7,6 +7,6 @@
     <p>Saudi Arabian Monetary Authority (SAMA)</p>
 @endsection
 @section('content')
+    @include('process/reporting/sama/controls')
 
-    @include('process/SAMAReporting/controls')
 @endsection

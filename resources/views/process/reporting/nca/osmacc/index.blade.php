@@ -3,6 +3,13 @@
 @section('title_ar', 'تقرير التقييم والامتثال NCA-OSMACC')
 
 @section('content')
+@section('actions')
+    <x-table.action-wrapper title="">
+        <x-action.pdf-button route_name="osmacc-regulatory-report.show" />
+        <x-action.excel-button route_name="osmacc-regulatory-report.excel" />
+    </x-table.action-wrapper>
+@endsection
+
 
 @section('report-info')
 

@@ -2,7 +2,15 @@
 @section('title', 'NCA ECC 2018 Assessment and Compliance')
 @section('title_ar', 'تقرير التقييم والامتثال NCA-ECC')
 
+
 @section('content')
+
+@section('actions')
+    <x-table.action-wrapper title="">
+        <x-action.pdf-button route_name="ecc-regulatory-report.show" />
+        <x-action.excel-button route_name="ecc-regulatory-report.excel" />
+    </x-table.action-wrapper>
+@endsection
 
 @section('report-info')
 
