@@ -1,3 +1,45 @@
+document.getElementById("print").addEventListener("click", async () => {
+    const button = document.getElementById("print");
+    const fileName = button.getAttribute("data-filename") || "dashboard.pdf";
+    const container = document.getElementById("print-area");
+
+    // Use html2canvas to capture the content as an image
+    const canvas = await html2canvas(container, {
+        scale: 2, // Increase resolution
+        useCORS: true, // Enable cross-origin images
+    });
+
+    const imgData = canvas.toDataURL("image/png"); // Convert canvas to image
+    const pdf = new jspdf.jsPDF("p", "mm", "a4"); // Create a new PDF document
+
+    const pageWidth = pdf.internal.pageSize.getWidth(); // PDF page width
+    const pageHeight = pdf.internal.pageSize.getHeight(); // PDF page height
+    const imgWidth = pageWidth;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    if (imgHeight > pageHeight) {
+        // Handle multi-page case
+        let yPosition = 0;
+        while (yPosition < imgHeight) {
+            pdf.addImage(
+                imgData,
+                "PNG",
+                0,
+                yPosition > 0 ? 0 : yPosition,
+                imgWidth,
+                imgHeight
+            );
+            yPosition += pageHeight;
+            if (yPosition < imgHeight) pdf.addPage();
+        }
+    } else {
+        // Single page
+        pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+    }
+
+    pdf.save(`${fileName}.pdf`); // Download the PDF with the filename from the button's data attribute
+});
+
 // Helper to create a pie chart
 function createPieChart(ctxId, dataObj, url, showZero = false) {
     new Chart(ctxId, {

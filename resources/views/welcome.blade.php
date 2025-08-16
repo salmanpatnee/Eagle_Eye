@@ -15,7 +15,6 @@
         .page-landing {
             background-image: url('https://virtualciso.compliance360grc.com/Images/1-BackgroundImage-3.png');
             background-size: 100% 100%;
-            width: 90%;
             background-repeat: no-repeat;
             height: 100vh;
             width: 100%;
@@ -24,14 +23,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: #0a0028;
+            /* fallback solid color */
         }
+
+
 
         .page-landing .container {
             width: 100%;
             display: flex;
-            align-items: end;
-            justify-content: center;
+            align-items: center;
+            justify-content: end;
             height: 100%;
+            flex-direction: column;
+            gap: 50px;
         }
 
         .title-button {
@@ -49,9 +54,13 @@
             padding: 10px 25px;
             transition: all 0.5s;
             cursor: pointer;
-            width: 25%;
+            min-width: 25%;
+            width: auto;
             animation: float 6s ease-in-out infinite;
         }
+
+
+
 
         a.title-button p {
             margin: 0;
@@ -60,6 +69,12 @@
         .mb-1,
         a.title-button p.mb-1 {
             margin-bottom: 1em;
+        }
+
+        .title-logo {
+            display: none;
+            max-width: 200px;
+            margin-top: 3em;
         }
 
         .mb-2 {
@@ -82,11 +97,54 @@
                 transform: translatey(0px);
             }
         }
+
+        /* Hide background image and use solid color on tablet and mobile */
+        @media (max-width: 1024px) {
+            .page-landing {
+                background-image: url("{{ asset('Images/riyadh.jpg') }}");
+                background-color: #0a0028 !important;
+                background-size: cover;
+                position: relative;
+            }
+
+            .page-landing::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(10, 0, 40, 0.6);
+                /* semi-transparent dark overlay */
+                z-index: 0;
+            }
+
+            .container {
+                position: relative;
+                z-index: 1;
+            }
+
+            .page-landing .container {
+                justify-content: center;
+            }
+
+            .title-button {
+                min-width: 50%;
+            }
+
+            .title-logo {
+                display: block;
+            }
+        }
     </style>
 </head>
 
 <body class="page-landing">
     <div class="container">
+        <div class="title-logo">
+            <img src="/Images/Eagle_Eye_Logo.png" alt="Eagle Eye Logo"
+                style="max-width: 250px; width: 100%; height: auto;">
+        </div>
         <a href="/login" class="title-button mb-2">
             <p class="title-line2">مرحبا</p>
             <p class="title-line2 mb-1">اضغط هنا للدخول</p>

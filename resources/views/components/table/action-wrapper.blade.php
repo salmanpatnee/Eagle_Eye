@@ -8,7 +8,26 @@
             <h1 class="font-medium text-lg text-center sm:text-left"> {{ $title }}</h1>
         @endif
     </div>
+
     <div class="w-full sm:w-auto flex justify-center sm:justify-end gap-2">
         {{ $slot }}
     </div>
+
+    {{-- Named slot for additional content --}}
+    @isset($extra)
+        {{ $extra }}
+    @endisset
+    {{--
+            How to use the named slot in Blade:
+
+            <x-table.action-wrapper title="My Table">
+                <x-slot:extra>
+                    <!-- Your extra content here -->
+                    <button class="btn">Extra Action</button>
+                </x-slot:extra>
+
+                <!-- Default slot content here -->
+                <x-action.button label="Add" />
+            </x-table.action-wrapper>
+        --}}
 </div>

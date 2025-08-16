@@ -365,7 +365,7 @@ Route::resource('tpt-experts', TPTExpertsControl::class);
 
 Route::controller(PenTestReportController::class)->group(function () {
     Route::get('/va-asset-vs-risk', 'assetVsRisk')->name('pen-test-asset-vs-risk.index');
-    // Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
+    Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
 });
 
 Route::controller(PenTestDashboardController::class)->group(function () {

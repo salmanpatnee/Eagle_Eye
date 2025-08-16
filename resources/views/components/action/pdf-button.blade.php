@@ -5,11 +5,13 @@
     'label_ar' => 'تنزيل بصيغة بي دي إف',
     'route_name' => '',
     'route_param' => '',
+    'query_params' => '',
 ])
 
 
 @if ($route_name)
-    <a href="{{ route($route_name, $route_param) }}?pdf=1" {{ $attributes->merge(['class' => 'inline-block']) }}>
+    <a href="{{ route($route_name, $route_param) }}?pdf=1{{ $query_params }}"
+        {{ $attributes->merge(['class' => 'inline-block']) }}>
 @endif
 <button type="{{ $type }}"
     {{ $attributes->merge(['class' => "bg-brand-950 font-medium hover:bg-brand-600 inline-flex items-center p-3 rounded-lg shadow-theme-xs text-sm text-white transition $class"]) }}>
