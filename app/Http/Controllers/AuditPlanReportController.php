@@ -18,14 +18,14 @@ class AuditPlanReportController extends Controller
 
         $teamResponsible = $this->getTeamResponsibleData();
 
-        $path = 'process/AuditPlanReport';
+        $path = 'process/audit-management/audit-plan-report';
         $auditPlans = $this->getAuditPlanData($team, $audit_start_date);
 
 
         if (request()->has('pdf')) {
-            $this->generatePdf($path, $auditPlans, 'Audit-Plan.pdf');
+            $this->generatePdf($path, $auditPlans, 'Audit-Plan-Report.pdf', 'audit-plan-report-pdf');
         } else {
-            return view("process/audit-management/audit-plan-report/index", compact('auditPlans', 'teamResponsible', 'team', 'audit_start_date'));
+            return view("{$path}/index", compact('auditPlans', 'teamResponsible', 'team', 'audit_start_date'));
         }
     }
 
@@ -36,12 +36,12 @@ class AuditPlanReportController extends Controller
 
         $teamResponsible = $this->getTeamResponsibleData();
 
-        $path = 'process/AuditPlanReport';
+        $path = 'process/audit-management/audit-plan-report';
         $auditPlanSummary = $this->getAuditPlanSummary($team, $audit_start_date);
         if (request()->has('pdf')) {
-            $this->generatePdf($path, $auditPlanSummary, 'Audit-Plan-Summary.pdf', 'summaryPdf');
+            $this->generatePdf($path, $auditPlanSummary, 'Audit-Plan-Summary.pdf', 'audit-plan-report-summary-pdf');
         } else {
-            return view("{$path}/summary", compact('auditPlanSummary', 'teamResponsible'));
+            return view("{$path}/summary", compact('auditPlanSummary', 'teamResponsible', 'team', 'audit_start_date'));
         }
     }
 
@@ -243,7 +243,7 @@ class AuditPlanReportController extends Controller
                 'audit_id' => $plan->audit_id,
                 'audit_name' => $plan->audit_name,
                 'auditor_row_id' => optional($plan->auditor)->id,
-                'auditor_id' => optional($plan->auditor)->auditor_id,
+                'auditor_id' => optional($plan->auditor)->id,
                 'auditor_organization' => optional($plan->auditor)->auditor_organization,
                 'auditor' => trim(optional($plan->auditor)->auditor_first_name . ' ' . optional($plan->auditor)->auditor_last_name),
                 'audit_type' => $plan->audit_type,
@@ -278,11 +278,12 @@ class AuditPlanReportController extends Controller
 
         return $query->get()->map(function ($plan) {
             return [
+                'id' => $plan->id,
                 'audit_id' => $plan->audit_id,
                 'audit_name' => $plan->audit_name,
                 'auditee' => trim(optional($plan->auditee)->auditee_first_name . ' ' . optional($plan->auditee)->auditee_last_name),
-                'auditee_id' => optional($plan->auditee)->auditee_id,
-                'auditor_id' => optional($plan->auditor)->auditor_id,
+                'auditee_id' => optional($plan->auditee)->id,
+                'auditor_id' => optional($plan->auditor)->id,
                 'auditor_organization' => optional($plan->auditor)->auditor_organization,
                 'auditor' => trim(optional($plan->auditor)->auditor_first_name . ' ' . optional($plan->auditor)->auditor_last_name),
                 'audit_plan_start_date' => $plan->audit_plan_start_date,

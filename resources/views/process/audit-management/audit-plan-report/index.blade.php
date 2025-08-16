@@ -4,8 +4,13 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Audit Plan">
-            {{-- <x-action.button label="Evidence vs Control" label_ar="المخاطر مقابل الضوابط"
-                route_name="evidence-vs-control.index" /> --}}
+            <x-action.button label="Summary Report" label_ar="تقرير ملخص" route_name="audit.plan.report.summarize" />
+            <x-slot:extra>
+                <div>
+                    <x-action.pdf-button route_name="audit-plan-report.index" />
+                    <x-action.excel-button route_name="audit.plan.excel.report" />
+                </div>
+            </x-slot:extra>
         </x-table.action-wrapper>
 
         <form action="{{ route('audit-plan-report.index') }}">
@@ -14,8 +19,8 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.select label="Team Responsible" label_ar="فريق المسؤول" name="team_responsible"
-                            :value="$team" :data="$teamResponsible" id_key="auditor_organization" value_key="auditor_organization"
-                            hide_keys="true" onchange="this.form.submit()" />
+                            :value="$team" :data="$teamResponsible" id_key="auditor_organization"
+                            value_key="auditor_organization" hide_keys="true" onchange="this.form.submit()" />
                     </div>
                     <div>
                         <x-form.label label="Audit Start Date" label_ar="تاريخ بدء التدقيق" for="audit_start_date" />

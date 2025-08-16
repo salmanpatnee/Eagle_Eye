@@ -96,7 +96,7 @@
         th {
             padding: .5em;
             font-weight: normal;
-            font-size: 8px;
+            font-size: 12px;
         }
 
         th,
@@ -108,12 +108,13 @@
             padding: .5em;
             text-align: center;
             vertical-align: top;
-            font-size: 8px;
+            font-size: 12px;
         }
 
         th.description {
             width: 230px;
         }
+
         a {
             text-decoration: none;
             color: inherit;
@@ -131,7 +132,7 @@
                 <h2 class="arabic-text mt-0">{{ $organizationData->organization_name_arabic }}</h2>
                 <h2 class="arabic-text mt-0">{{ $organizationData->organization_name_english }}</h2>
             @endif
-            <h2>Audit Plan</h2>
+            <h2>Audit Plan Summary Report</h2>
 
             <p class="enghead">Current Date: {{ now()->format('d-m-Y') }}</p>
         </div>
@@ -148,34 +149,13 @@
                         <p>Audit Name</p>
                     </th>
                     <th class="bg-blue text-light">
+                        <p>Auditee</p>
+                    </th>
+                    <th class="bg-blue text-light">
                         <p>Team</p>
                     </th>
                     <th class="bg-blue text-light">
                         <p>Auditor</p>
-                    </th>
-                    <th class="bg-blue text-light">
-                        <p>Type</p>
-                    </th>
-                    <th class="bg-blue text-light">
-                        <p>Scope</p>
-                    </th>
-                    <th class="bg-blue text-light">
-                        <p>Methods</p>
-                    </th>
-                    <th class="bg-blue text-light">
-                        <p>Criteria</p>
-                    </th>
-                    <th class="bg-blue text-light">
-                        <p>Sampling</p>
-                    </th>
-                    <th class="bg-blue text-light">
-                        <p>Evidence Needed</p>
-                    </th>
-                    <th class="bg-blue text-light">
-                        <p>Duration</p>
-                    </th>
-                    <th class="bg-blue text-light">
-                        <p>Schedule</p>
                     </th>
                     <th class="bg-blue text-light">
                         <p>Start Date</p>
@@ -183,46 +163,23 @@
                     <th class="bg-blue text-light">
                         <p>End Date</p>
                     </th>
-                    <th class="bg-blue text-light">
-                        <p>Cost</p>
-                    </th>
-                    <th class="bg-blue text-light">
-                        <p>Comment</p>
-                    </th>
                 </tr>
             </thead>
             <tbody style="background-color: white">
                 @foreach ($report as $auditPlan)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td><a
-                                href="{{ route('audit.plan.show', $auditPlan['audit_id']) }}">{{ $auditPlan['audit_id'] }}</a>
+                        <td><a href="{{ route('audit-plans.show', $auditPlan['id']) }}">{{ $auditPlan['audit_id'] }}</a>
                         </td>
                         <td>{{ $auditPlan['audit_name'] }}</td>
+                        <td>{{ $auditPlan['auditee'] }}</td>
                         <td>{{ $auditPlan['auditor_organization'] }}</td>
                         <td><a
                                 href="{{ route('auditors.show', $auditPlan['auditor_id']) }}">{{ $auditPlan['auditor'] }}</a>
                         </td>
-                        <td>{{ $auditPlan['audit_type'] }}</td>
-                        <td>
-                            <div style="width: 300px; white-space: normal">{{ $auditPlan['audit_scope'] }}</div>
-                        </td>
-                        <td>{{ $auditPlan['audit_methodology'] }}</td>
-                        <td>{{ $auditPlan['audit_criteria'] }}</td>
-                        <td>
-                            <div style="width: 300px; white-space: normal">{{ $auditPlan['sampling'] }}</div>
-                        </td>
-                        <td>
-                            <div style="width: 300px; white-space: normal">{{ $auditPlan['evidence_needed'] }}</div>
-                        </td>
-                        <td>{{ $auditPlan['duration_in_days'] }} days</td>
-                        <td>
-                            <div style="width: 300px; white-space: normal">{{ $auditPlan['schedule'] }}</div>
-                        </td>
+
                         <td>{{ $auditPlan['audit_plan_start_date'] }}</td>
                         <td>{{ $auditPlan['audit_plan_end_date'] }}</td>
-                        <td>{{ $auditPlan['cost'] }}</td>
-                        <td>{{ $auditPlan['comment'] }}</td>
                 @endforeach
             </tbody>
         </table>
