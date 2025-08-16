@@ -4,7 +4,16 @@
 @section('content')
 
 
-    <div class="grid grid-cols-1 px-4 mb-6">
+    <x-table.action-wrapper>
+        <button type="button" data-filename="Subdomains Risk Status" id="print" class="action-btn">
+            <x-icons.pdf />
+
+            <span class="inline mx-2">Download as PDF</span>
+        </button>
+
+    </x-table.action-wrapper>
+
+    <div class="grid grid-cols-1 px-4 mb-6" id="print-area">
         <div class="card mx-auto" style="width: 75%">
             <h3 class="card-title">Subdomains Risk Status</h3>
             <canvas id="chart"></canvas>

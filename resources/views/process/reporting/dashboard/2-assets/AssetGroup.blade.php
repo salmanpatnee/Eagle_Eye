@@ -3,38 +3,48 @@
 @section('title_ar', 'لوحة التحكم بالامتثال الشامل')
 @section('content')
 
+    <x-table.action-wrapper>
+        <button type="button" data-filename="Risks on {{ $assetGroup->asset_group_name }}" id="print" class="action-btn">
+            <x-icons.pdf />
 
-    <div class="grid grid-cols-1 px-4 mb-6">
-        <div class="card mx-auto" style="width: 65%">
-            <h3 class="card-title">Risks on {{ $assetGroup->asset_group_name }}</h3>
-            <div style="position: relative;">
-                <canvas id="chart"></canvas>
-                <!-- Loading Text -->
-                <div class="sk-chase text-2xl"
-                    style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; color: #1f2937; font-weight: bold;">
-                    Loading...
+            <span class="inline mx-2">Download as PDF</span>
+        </button>
+
+    </x-table.action-wrapper>
+
+
+    <div id="print-area">
+        <div class="grid grid-cols-1 px-4 mb-6">
+            <div class="card mx-auto" style="width: 65%">
+                <h3 class="card-title">Risks on {{ $assetGroup->asset_group_name }}</h3>
+                <div style="position: relative;">
+                    <canvas id="chart"></canvas>
+                    <!-- Loading Text -->
+                    <div class="sk-chase text-2xl"
+                        style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; color: #1f2937; font-weight: bold;">
+                        Loading...
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="grid grid-cols-1 px-4 mb-6">
-        <div class="card" id="content">
-            <h3 class="card-title" id="title">Asset Risk Status Overview</h3>
-            <x-table.table>
-                <x-table.thead>
-                    <x-table.th label="S.No" label_ar="رقم" />
-                    <x-table.th label="Asset" label_ar="الأصول" />
-                    <x-table.th label="Asset Owner" label_ar="مالك الأصول" />
-                    <x-table.th label="Asset Custodians" label_ar="الأصول الوصي" />
-                    <x-table.th label="Risk Owner" label_ar="مالك المخاطر" />
-                    <x-table.th label="Risk Custodians" label_ar="الوصي المخاطر" />
-                    <x-table.th label="Risk Status" label_ar="حالة المخاطر" />
-                    <x-table.th label="Control Details" label_ar="تفاصيل التحكم" />
-                </x-table.thead>
-                <x-table.tbody id="table_body">
-
-                </x-table.tbody>
-            </x-table.table>
+        <div class="grid grid-cols-1 px-4 mb-6">
+            <div class="card" id="content">
+                <h3 class="card-title" id="title">Asset Risk Status Overview</h3>
+                <x-table.table>
+                    <x-table.thead>
+                        <x-table.th label="S.No" label_ar="رقم" />
+                        <x-table.th label="Asset" label_ar="الأصول" />
+                        <x-table.th label="Asset Owner" label_ar="مالك الأصول" />
+                        <x-table.th label="Asset Custodians" label_ar="الأصول الوصي" />
+                        <x-table.th label="Risk Owner" label_ar="مالك المخاطر" />
+                        <x-table.th label="Risk Custodians" label_ar="الوصي المخاطر" />
+                        <x-table.th label="Risk Status" label_ar="حالة المخاطر" />
+                        <x-table.th label="Control Details" label_ar="تفاصيل التحكم" />
+                    </x-table.thead>
+                    <x-table.tbody id="table_body">
+                    </x-table.tbody>
+                </x-table.table>
+            </div>
         </div>
     </div>
 @endsection

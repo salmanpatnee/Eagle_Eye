@@ -3,63 +3,74 @@
 @section('title_ar', 'لوحة التحكم بالامتثال الشامل')
 @section('content')
 
+    <x-table.action-wrapper>
+        <button type="button" data-filename="Human Resource Owner" id="print" class="action-btn">
+            <x-icons.pdf />
 
-    <div class="grid grid-cols-1 px-4 mb-6">
-        <div class="card mx-auto" style="width: 65%">
-            <h3 class="card-title">{{ $owner[0]->owner_name }}</h3>
-            <div style="position: relative;">
-                <canvas id="chart"></canvas>
-                <!-- Loading Text -->
-                <div class="sk-chase text-2xl"
-                    style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; color: #1f2937; font-weight: bold;">
-                    Loading...
+            <span class="inline mx-2">Download as PDF</span>
+        </button>
+
+    </x-table.action-wrapper>
+
+
+    <div id="print-area">
+        <div class="grid grid-cols-1 px-4 mb-6">
+            <div class="card mx-auto" style="width: 65%">
+                <h3 class="card-title">{{ $owner[0]->owner_name }}</h3>
+                <div style="position: relative;">
+                    <canvas id="chart"></canvas>
+                    <!-- Loading Text -->
+                    <div class="sk-chase text-2xl"
+                        style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; color: #1f2937; font-weight: bold;">
+                        Loading...
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="grid grid-cols-1 px-4 mb-6">
-        <div class="card" id="content">
-            <h3 class="card-title" id="title">Control Status Report</h3>
-            <x-table.table>
-                <x-table.thead>
-                    <x-table.th label="S.No" label_ar="رقم" />
-                    <x-table.th label="Control ID" label_ar="رمز الضوابط" />
-                    <x-table.th label="Status" label_ar="حالة" />
-                    <x-table.th label="Owner Name" label_ar="اسم مالك" />
-                    <x-table.th label="Custodians" label_ar="اسم الوصي" />
-                </x-table.thead>
-                <x-table.tbody id="table_body">
-                    @foreach ($controls as $control)
-                        <tr>
-                            <x-table.td>{{ $loop->index + 1 }}</x-table.td>
-                            <x-table.td>
-                                @if ($control->control_assessment_id != '#')
-                                    <a href="{{ route('control-assessments.show', $control->control_assessment_id) }}">{{ $control->control_id }}
-                                    </a>
-                                @else
-                                    {{ $control->control_id }}
-                                @endif
-                            </x-table.td>
-                            <x-table.td>
-                                @if ($control->control_assessment_id != '#')
-                                    <a href="{{ route('control-assessments.show', $control->control_assessment_id) }}">
+        <div class="grid grid-cols-1 px-4 mb-6">
+            <div class="card" id="content">
+                <h3 class="card-title" id="title">Control Status Report</h3>
+                <x-table.table>
+                    <x-table.thead>
+                        <x-table.th label="S.No" label_ar="رقم" />
+                        <x-table.th label="Control ID" label_ar="رمز الضوابط" />
+                        <x-table.th label="Status" label_ar="حالة" />
+                        <x-table.th label="Owner Name" label_ar="اسم مالك" />
+                        <x-table.th label="Custodians" label_ar="اسم الوصي" />
+                    </x-table.thead>
+                    <x-table.tbody id="table_body">
+                        @foreach ($controls as $control)
+                            <tr>
+                                <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                                <x-table.td>
+                                    @if ($control->control_assessment_id != '#')
+                                        <a href="{{ route('control-assessments.show', $control->control_assessment_id) }}">{{ $control->control_id }}
+                                        </a>
+                                    @else
+                                        {{ $control->control_id }}
+                                    @endif
+                                </x-table.td>
+                                <x-table.td>
+                                    @if ($control->control_assessment_id != '#')
+                                        <a href="{{ route('control-assessments.show', $control->control_assessment_id) }}">
+                                            {{ $control->status }}
+                                        </a>
+                                    @else
                                         {{ $control->status }}
+                                    @endif
+                                </x-table.td>
+                                <x-table.td>
+                                    <a href="{{ route('owners.show', $owner[0]->id) }}">{{ $owner[0]->owner_name }}
                                     </a>
-                                @else
-                                    {{ $control->status }}
-                                @endif
-                            </x-table.td>
-                            <x-table.td>
-                                <a href="{{ route('owners.show', $owner[0]->id) }}">{{ $owner[0]->owner_name }}
-                                </a>
-                            </x-table.td>
-                            <x-table.td>
-                                <a href="">{!! $control->custodians !!}</a>
-                            </x-table.td>
-                        </tr>
-                    @endforeach
-                </x-table.tbody>
-            </x-table.table>
+                                </x-table.td>
+                                <x-table.td>
+                                    <a href="">{!! $control->custodians !!}</a>
+                                </x-table.td>
+                            </tr>
+                        @endforeach
+                    </x-table.tbody>
+                </x-table.table>
+            </div>
         </div>
     </div>
 @endsection

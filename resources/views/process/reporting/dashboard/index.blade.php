@@ -1,92 +1,104 @@
 @extends('layouts.app-full')
 @section('title', 'Compliance Dashboard')
 @section('title_ar', 'لوحة معلومات الامتثال')
+
 @section('content')
 
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-        <div class="card">
-            <h3 class="card-title">NCA-ECC Compliance Status</h3>
-            <canvas id="eccStatusChart"></canvas>
+    <x-table.action-wrapper>
+
+        <button type="button" data-filename="Overall Compliance Dashboard" id="print" class="action-btn">
+            <x-icons.pdf />
+            <span class="inline mx-2">Download as PDF</span>
+        </button>
+        <x-action.excel-button route_name="generate.ppt" label="Download as PPT"
+            data-filename="Overall Compliance Dashboard" />
+    </x-table.action-wrapper>
+
+    <div id="print-area">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+            <div class="card">
+                <h3 class="card-title">NCA-ECC Compliance Status</h3>
+                <canvas id="eccStatusChart"></canvas>
+            </div>
+            <div class="card">
+                <h3 class="card-title">SAMA Compliance Status</h3>
+                <canvas id="samaStatusChart"></canvas>
+            </div>
         </div>
-        <div class="card">
-            <h3 class="card-title">SAMA Compliance Status</h3>
-            <canvas id="samaStatusChart"></canvas>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+            <div class="card">
+                <h3 class="card-title">Asset Distribution by Group</h3>
+                <canvas id="assetGroupsChart"></canvas>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Implemented Controls of Best Practices</h3>
+                <canvas id="ncaDomainChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 px-4 mb-6">
+            <div class="card">
+                <h3 class="card-title">Owner's Control Status</h3>
+                <canvas id="ownerControlsChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+            <div class="card">
+                <h3 class="card-title">Asset Technology Distribution Overviewp</h3>
+                <canvas id="assetTechChart"></canvas>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Evidence Summary by Best Practices</h3>
+                <canvas id="evidenceSummaryChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+            <div class="card">
+                <h3 class="card-title">Risk Status by Asset Group</h3>
+                <canvas id="assetGroupStatus"></canvas>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Risk Status</h3>
+                <canvas id="riskStatusChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+            <div class="card">
+                <h3 class="card-title">Asset Distribution by Technologies</h3>
+                <canvas id="assetTechsChart"></canvas>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Risk Distribution by Technologies</h3>
+                <canvas id="riskTechChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+            <div class="card">
+                <h3 class="card-title">NCA Control Distribution by Technologies</h3>
+                <canvas id="controlTechChart"></canvas>
+            </div>
+            <div class="card">
+                <h3 class="card-title">SAMA Control Distribution by Technologies</h3>
+                <canvas id="samaControlTechChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+            <div class="card">
+                <h3 class="card-title">SAMA Control Maturity Level Distribution</h3>
+                <canvas id="samaMaturityLevel"></canvas>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Heatmap - Risk Appetite Breakdown</h3>
+                <canvas id="heatmapChart"></canvas>
+            </div>
         </div>
     </div>
-
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-        <div class="card">
-            <h3 class="card-title">Asset Distribution by Group</h3>
-            <canvas id="assetGroupsChart"></canvas>
-        </div>
-        <div class="card">
-            <h3 class="card-title">Implemented Controls of Best Practices</h3>
-            <canvas id="ncaDomainChart"></canvas>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 px-4 mb-6">
-        <div class="card">
-            <h3 class="card-title">Owner's Control Status</h3>
-            <canvas id="ownerControlsChart"></canvas>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-        <div class="card">
-            <h3 class="card-title">Asset Technology Distribution Overviewp</h3>
-            <canvas id="assetTechChart"></canvas>
-        </div>
-        <div class="card">
-            <h3 class="card-title">Evidence Summary by Best Practices</h3>
-            <canvas id="evidenceSummaryChart"></canvas>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-        <div class="card">
-            <h3 class="card-title">Risk Status by Asset Group</h3>
-            <canvas id="assetGroupStatus"></canvas>
-        </div>
-        <div class="card">
-            <h3 class="card-title">Risk Status</h3>
-            <canvas id="riskStatusChart"></canvas>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-        <div class="card">
-            <h3 class="card-title">Asset Distribution by Technologies</h3>
-            <canvas id="assetTechsChart"></canvas>
-        </div>
-        <div class="card">
-            <h3 class="card-title">Risk Distribution by Technologies</h3>
-            <canvas id="riskTechChart"></canvas>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-        <div class="card">
-            <h3 class="card-title">NCA Control Distribution by Technologies</h3>
-            <canvas id="controlTechChart"></canvas>
-        </div>
-        <div class="card">
-            <h3 class="card-title">SAMA Control Distribution by Technologies</h3>
-            <canvas id="samaControlTechChart"></canvas>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-        <div class="card">
-            <h3 class="card-title">SAMA Control Maturity Level Distribution</h3>
-            <canvas id="samaMaturityLevel"></canvas>
-        </div>
-        <div class="card">
-            <h3 class="card-title">Heatmap - Risk Appetite Breakdown</h3>
-            <canvas id="heatmapChart"></canvas>
-        </div>
-    </div>
-
 
 @endsection
 
