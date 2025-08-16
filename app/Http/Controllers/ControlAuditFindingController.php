@@ -41,7 +41,7 @@ class ControlAuditFindingController extends Controller
 
             $mpdf = new Mpdf();
 
-            $html = view("process/9-Audit/7-ControlAuditPdf", compact('controlsWithAuditFindings'))->render();
+            $html = view("process/audit-management/control-vs-audit-finding/control-vs-audit-finding-pdf", compact('controlsWithAuditFindings'))->render();
 
 
             $mpdf->WriteHTML($html);
@@ -85,7 +85,7 @@ class ControlAuditFindingController extends Controller
 
             $mpdf = new Mpdf();
 
-            $html = view("process/9-Audit/7-AuditControlPdf", compact('auditFindingsWithControls'))->render();
+            $html = view("process\audit-management\control-vs-audit-finding\audit-finding-vs-contprocess\audit-management\control-vs-audit-finding\audit-finding-vs-controlrol-pdf", compact('auditFindingsWithControls'))->render();
 
 
             $mpdf->WriteHTML($html);

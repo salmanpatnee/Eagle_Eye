@@ -8,6 +8,13 @@
                 route_name="control-vs-audit.index" />
             <x-action.button label="Audit Findings vs Control" label_ar="بنتائج مراجعة المتعلقة الضوابط"
                 route_name="audit-vs-control.index" disabled class="opacity-75" />
+
+            <x-slot:extra>
+                <div>
+                    <x-action.pdf-button route_name="audit-vs-control.index" />
+                </div>
+            </x-slot:extra>
+
         </x-table.action-wrapper>
 
         <form action="{{ route('audit-vs-control.index') }}" method="GET">

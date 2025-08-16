@@ -116,8 +116,7 @@
                             <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
                                 {{ $loop->index + 1 }}</td>
                             <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
-                                <a href="{{ route('audit-findings.show', $row->audit_finding_id) }}"
-                                    style="text-decoration: none;">
+                                <a href="{{ route('audit-findings.show', $row->id) }}" style="text-decoration: none;">
                                     {{ $row->audit_finding_id }}
                                 </a>
                             </td>
@@ -126,7 +125,7 @@
                             </td>
                             <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
                                 @foreach ($row->Controls as $control)
-                                    <p><a href="{{ route('controls.show', $control->control_id) }}"
+                                    <p><a href="{{ route('controls.show', $control->id) }}"
                                             style="text-decoration: none;">{{ $control->control_id }}
                                             - {{ $control->control_name }}</a> </p>
                                 @endforeach

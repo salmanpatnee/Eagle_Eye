@@ -2,12 +2,20 @@
 @section('title', 'Control vs Audit Findings')
 @section('title_ar', '')
 @section('content')
+
+
+
     <div>
         <x-table.action-wrapper title="Control vs Audit Findings">
             <x-action.button label="Control vs Audit Findings" label_ar="الضوابط المتعلقة بنتائج مراجعة"
                 route_name="control-vs-audit.index" disabled class="opacity-75" />
             <x-action.button label="Audit Findings vs Control" label_ar="بنتائج مراجعة المتعلقة الضوابط"
                 route_name="audit-vs-control.index" />
+            <x-slot:extra>
+                <div>
+                    <x-action.pdf-button route_name="control-vs-audit.index" />
+                </div>
+            </x-slot:extra>
         </x-table.action-wrapper>
 
         <form action="{{ route('control-vs-audit.index') }}" method="GET">
