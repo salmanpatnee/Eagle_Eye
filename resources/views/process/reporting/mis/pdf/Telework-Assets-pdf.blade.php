@@ -1,4 +1,4 @@
-@extends('process/18-Reporting/2-MISReporting/mis-pdf-layout')
+@extends('process/reporting/mis/pdf/mis-pdf-layout')
 @section('content')
     <div class="tablearea">
         <table class="table">
@@ -12,17 +12,27 @@
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd; column-width: 200px;">
                         {{-- <p style="margin: 0;">رمز الضوابط</p> --}}
-                        <p style="margin: 0;">Control ID</p>
+                        <p style="margin: 0;">Asset ID</p>
                     </th>
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
                         {{-- <p style="margin: 0;">اسم الضوابط</p> --}}
-                        <p style="margin: 0;">Control Name</p>
+                        <p style="margin: 0;">Asset Name</p>
                     </th>
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
                         {{-- <p style="margin: 0;">حالة</p> --}}
-                        <p style="margin: 0;">Maturity Level</p>
+                        <p style="margin: 0;">Asset Group Name</p>
+                    </th>
+                    <th
+                        style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
+                        {{-- <p style="margin: 0;">اسم صاحب</p> --}}
+                        <p style="margin: 0;">Asset Type Name</p>
+                    </th>
+                    <th
+                        style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
+                        {{-- <p style="margin: 0;">اسم الوصي</p> --}}
+                        <p style="margin: 0;">Location Name</p>
                     </th>
                 </tr>
             </thead>
@@ -36,16 +46,23 @@
 
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
 
-                            <a href="{{ route('controls.show', $row->control_id) }}" style="color: black">
-                                {{ $row->control_id }}
-                            </a>
+                            {{ $row->asset_id }}
+
 
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->control_name }}
+                            {{ $row->asset_name }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->maturity_level }}
+                            {{ $row->asset_group_name }}
+                        </td>
+                        <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
+                            {{ $row->asset_type_name }}
+
+                        </td>
+
+                        <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
+                            {{ $row->location_name }}
                         </td>
                     </tr>
                 @endforeach

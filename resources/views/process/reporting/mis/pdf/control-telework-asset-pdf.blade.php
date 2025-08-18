@@ -1,4 +1,4 @@
-@extends('process/18-Reporting/2-MISReporting/mis-pdf-layout')
+@extends('process/reporting/mis/pdf/mis-pdf-layout')
 @section('content')
     <div class="tablearea">
         <table class="table">
@@ -12,27 +12,17 @@
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd; column-width: 200px;">
                         {{-- <p style="margin: 0;">رمز الضوابط</p> --}}
-                        <p style="margin: 0;">Risk ID</p>
+                        <p style="margin: 0;">Control ID</p>
                     </th>
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
                         {{-- <p style="margin: 0;">اسم الضوابط</p> --}}
-                        <p style="margin: 0;">Risk Name</p>
+                        <p style="margin: 0;">Control Name</p>
                     </th>
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
                         {{-- <p style="margin: 0;">حالة</p> --}}
-                        <p style="margin: 0;">Risk Group Name</p>
-                    </th>
-                    <th
-                        style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
-                        {{-- <p style="margin: 0;">اسم صاحب</p> --}}
-                        <p style="margin: 0;">Risk Inherent Score</p>
-                    </th>
-                    <th
-                        style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
-                        {{-- <p style="margin: 0;">اسم الوصي</p> --}}
-                        <p style="margin: 0;">Risk Consequences</p>
+                        <p style="margin: 0;">Maturity Level</p>
                     </th>
                 </tr>
             </thead>
@@ -46,24 +36,15 @@
 
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
 
-                            <a href="{{ route('risks.show', $row->risk_id) }}" style="color: black">
-                                {{ $row->risk_id }}
-                            </a>
+                            {{ $row->control_id }}
+
 
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->risk_name }}
+                            {{ $row->control_name }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->risk_group_name }}
-                        </td>
-                        <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->risk_inherent_score }}
-
-                        </td>
-
-                        <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->risk_consequences }}
+                            {{ $row->maturity_level }}
                         </td>
                     </tr>
                 @endforeach

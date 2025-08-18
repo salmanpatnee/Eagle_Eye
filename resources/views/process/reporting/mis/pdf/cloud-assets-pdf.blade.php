@@ -1,4 +1,4 @@
-@extends('process/18-Reporting/2-MISReporting/mis-pdf-layout')
+@extends('process/reporting/mis/pdf/mis-pdf-layout')
 @section('content')
     <div class="tablearea">
         <table class="table">
@@ -46,9 +46,9 @@
 
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
 
-                            <a href="{{ route('assets.show', $row->asset_id) }}" style="color: black">
-                                {{ $row->asset_id }}
-                            </a>
+                            {{-- <a href="{{ route('assets.show', $row->asset_id) }}" style="color: black"> --}}
+                            {{ $row->asset_id }}
+                            {{-- </a> --}}
 
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">

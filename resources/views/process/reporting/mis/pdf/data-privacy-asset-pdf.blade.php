@@ -1,4 +1,4 @@
-@extends('process/18-Reporting/2-MISReporting/mis-pdf-layout')
+@extends('process/reporting/mis/pdf/mis-pdf-layout')
 @section('content')
     <div class="tablearea">
         <table class="table">
@@ -55,15 +55,15 @@
                             {{ $row->asset_name }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->assetGroup->asset_group_name }}
+                            {{ $row->asset_group_name }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->assetType->asset_type_name }}
+                            {{ $row->asset_type_name }}
 
                         </td>
 
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->location->location_name }}
+                            {{ $row->location_name }}
                         </td>
                     </tr>
                 @endforeach

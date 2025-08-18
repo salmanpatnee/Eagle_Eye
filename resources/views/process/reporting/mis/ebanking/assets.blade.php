@@ -3,7 +3,8 @@
 @section('title_ar', 'تقارير نظم المعلومات الإدارية')
 @section('content')
     <div>
-        <x-table.action-wrapper title="Ebanking Assets Report">
+        <x-table.action-wrapper title="E-Banking Assets Report">
+            <x-action.pdf-button route_name="mis-e-banking-assets.index" />
 
         </x-table.action-wrapper>
 

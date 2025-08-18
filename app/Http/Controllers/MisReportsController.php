@@ -32,7 +32,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($criticalAssets, 'critical-asset-report.pdf', 'pdf/1-critical-asset-pdf', 'Critical Asset');
+            $this->_downloadPdf($criticalAssets, 'critical-asset-report.pdf', 'critical-asset-pdf', 'Critical Asset');
         } else {
             return view('process/reporting/mis/critical/assets', compact('criticalAssets'));
         }
@@ -55,7 +55,7 @@ class MisReportsController extends Controller
 
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($riskAssets, 'Risks-Related-to-Critical-Assets.pdf', 'pdf/2-risks-related-to-critical-assets-pdf', 'Risks Related to Critical Assets');
+            $this->_downloadPdf($riskAssets, 'Risks-Related-to-Critical-Assets.pdf', 'risks-related-to-critical-assets-pdf', 'Risks Related to Critical Assets');
         } else {
             return view('process/reporting/mis/critical/risks', compact('riskAssets'));
         }
@@ -68,7 +68,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Controls-Related-to-Critical-Assets.pdf', 'pdf/3-controls-related-to-critical-assets-pdf', 'Controls Related to Critical Assets');
+            $this->_downloadPdf($result, 'Controls-Related-to-Critical-Assets.pdf', 'controls-related-to-critical-assets-pdf', 'Controls Related to Critical Assets');
         } else {
 
             return view('process/reporting/mis/critical/controls', compact('result'));
@@ -86,7 +86,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Cloud-Assets.pdf', 'pdf/cloud-assets-pdf', 'Cloud Assets');
+            $this->_downloadPdf($result, 'Cloud-Assets.pdf', 'cloud-assets-pdf', 'Cloud Assets');
         } else {
             return view('process/reporting/mis/cloud/assets', compact('result'));
         }
@@ -108,7 +108,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Risks-Related-to-Cloud-Assets.pdf', 'pdf/risk-cloud-assets-pdf', 'Risks Related to Cloud Assets');
+            $this->_downloadPdf($result, 'Risks-Related-to-Cloud-Assets.pdf', 'risk-cloud-assets-pdf', 'Risks Related to Cloud Assets');
         } else {
 
             return view('process/reporting/mis/cloud/risks', compact('result'));
@@ -122,7 +122,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Controls-Related-to-Cloud-Assets.pdf', 'pdf/controls-cloud-assets-pdf', 'Controls Related to Cloud Assets');
+            $this->_downloadPdf($result, 'Controls-Related-to-Cloud-Assets.pdf', 'control-telework-asset-pdf', 'Controls Related to Cloud Assets');
         } else {
 
             return view('process/reporting/mis/cloud/controls', compact('result'));
@@ -139,6 +139,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Telework-Assets.pdf', 'Telework-Assets-pdf', 'List of Telework Assets');
         } else {
             return view('process/reporting/mis/telework/assets', compact('result'));
         }
@@ -160,7 +161,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Telework-Risk.pdf', 'pdf/Telework-Risk-pdf', 'Risks Related to Telework Assets');
+            $this->_downloadPdf($result, 'Telework-Risk.pdf', 'Telework-Risk-pdf', 'Risks Related to Telework Assets');
         } else {
 
             return view('process/reporting/mis/telework/risks', compact('result'));
@@ -174,7 +175,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Control-Telework-Asset.pdf', 'pdf/control-telework-asset-pdf', 'Controls Related to Telework Assets');
+            $this->_downloadPdf($result, 'Control-Telework-Asset.pdf', 'control-telework-asset-pdf', 'Controls Related to Telework Assets');
         } else {
 
 
@@ -191,6 +192,7 @@ class MisReportsController extends Controller
             ->where('social_media_asset', 'Yes')
             ->get();
         if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Social-Media-Assets.pdf', 'social-media-asset-pdf', 'Social Media Assets');
         } else {
 
             return view('process/reporting/mis/social-media/assets', compact('result'));
@@ -213,7 +215,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Risk-Social-Media-Asset.pdf', 'pdf/risk-social-media-asset-pdf', 'Risks Related to Social Media Assets');
+            $this->_downloadPdf($result, 'Risk-Social-Media-Asset.pdf', 'risk-social-media-asset-pdf', 'Risks Related to Social Media Assets');
         } else {
 
             return view('process/reporting/mis/social-media/risks', compact('result'));
@@ -227,7 +229,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Controls-Related-to-Social-Media-Assets.pdf', 'pdf/control-social-media-asset-pdf', 'Controls Related to Social Media Assets');
+            $this->_downloadPdf($result, 'Controls-Related-to-Social-Media-Assets.pdf', 'control-social-media-asset-pdf', 'Controls Related to Social Media Assets');
         } else {
 
             return view('process/reporting/mis/social-media/controls', compact('result'));
@@ -243,6 +245,7 @@ class MisReportsController extends Controller
             ->where('data_privacy_asset', 'Yes')
             ->get();
         if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Data-Privacy-Assets.pdf', 'data-privacy-asset-pdf', 'Data Privacy Assets');
         } else {
             return view('process/reporting/mis/data-privacy/assets', compact('result'));
         }
@@ -264,7 +267,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Risk-data-privacy-Asset.pdf', 'pdf/risk-data-privacy-asset-pdf', 'Risks Related to Data Privacy Assets');
+            $this->_downloadPdf($result, 'Risk-data-privacy-Asset.pdf', 'risk-data-privacy-asset-pdf', 'Risks Related to Data Privacy Assets');
         } else {
             return view('process/reporting/mis/data-privacy/risks', compact('result'));
         }
@@ -277,7 +280,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Controls-Related-to-data-privacy-Assets.pdf', 'pdf/control-data-privacy-asset-pdf', 'Controls Related to Data Privacy Assets');
+            $this->_downloadPdf($result, 'Controls-Related-to-data-privacy-Assets.pdf', 'control-data-privacy-asset-pdf', 'Controls Related to Data Privacy Assets');
         } else {
             return view('process/reporting/mis/data-privacy/controls', compact('result'));
         }
@@ -291,7 +294,12 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('data_pii_asset', 'Yes')
             ->get();
-        return view('process/reporting/mis/pii/assets', compact('result'));
+
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'PII-Asset.pdf', 'pii-asset-pdf', 'Personally Identifiable Information Assets');
+        } else {
+            return view('process/reporting/mis/pii/assets', compact('result'));
+        }
     }
 
     public function riskPiiAssets()
@@ -310,7 +318,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Risk-PII-Asset.pdf', 'pdf/risk-pii-asset-pdf', 'Risks Related to Personally Identifiable Information Assets');
+            $this->_downloadPdf($result, 'Risk-PII-Asset.pdf', 'risk-pii-asset-pdf', 'Risks Related to Personally Identifiable Information Assets');
         } else {
 
             return view('process/reporting/mis/pii/risks', compact('result'));
@@ -323,7 +331,7 @@ class MisReportsController extends Controller
             ->where('control_pii', 'Yes')
             ->get();
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Controls-Related-to-PII-Assets.pdf', 'pdf/control-pii-asset-pdf', 'Controls Related to Personally Identifiable Information Assets');
+            $this->_downloadPdf($result, 'Controls-Related-to-PII-Assets.pdf', 'control-pii-asset-pdf', 'Controls Related to Personally Identifiable Information Assets');
         } else {
 
             return view('process/reporting/mis/pii/controls', compact('result'));
@@ -338,7 +346,11 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('payment_asset', 'Yes')
             ->get();
-        return view('process/reporting/mis/payments/assets', compact('result'));
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Payment-Asset.pdf', 'payment-asset-pdf', 'Payments Assets');
+        } else {
+            return view('process/reporting/mis/payments/assets', compact('result'));
+        }
     }
 
     public function riskPaymentAssets()
@@ -357,7 +369,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Risk-Payment-Asset.pdf', 'pdf/risk-payment-asset-pdf', 'Risks Related to Payment Assets');
+            $this->_downloadPdf($result, 'Risk-Payment-Asset.pdf', 'risk-payment-asset-pdf', 'Risks Related to Payment Assets');
         } else {
 
             return view('process/reporting/mis/payments/risks', compact('result'));
@@ -371,7 +383,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Controls-Related-to-Payment-Assets.pdf', 'pdf/control-payment-asset-pdf', 'Controls Related to Payment Assets');
+            $this->_downloadPdf($result, 'Controls-Related-to-Payment-Assets.pdf', 'control-payment-asset-pdf', 'Controls Related to Payment Assets');
         } else {
 
             return view('process/reporting/mis/payments/controls', compact('result'));
@@ -386,7 +398,11 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('pci_dss_asset', 'Yes')
             ->get();
-        return view('process/reporting/mis/pci/assets', compact('result'));
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'PCI-DSS-Asset.pdf', 'pci-dss-asset-pdf', 'PCI DSS Assets');
+        } else {
+            return view('process/reporting/mis/pci/assets', compact('result'));
+        }
     }
 
     public function riskPciAssets()
@@ -405,7 +421,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Risk-PCI-DSS-Asset.pdf', 'pdf/risk-pci-dss-asset-pdf', 'Risks Related to PCI DSS Assets');
+            $this->_downloadPdf($result, 'Risk-PCI-DSS-Asset.pdf', 'risk-pci-dss-asset-pdf', 'Risks Related to PCI DSS Assets');
         } else {
 
             return view('process/reporting/mis/pci/risks', compact('result'));
@@ -418,7 +434,7 @@ class MisReportsController extends Controller
             ->where('control_pci_dss', 'Yes')
             ->get();
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Controls-Related-to-PCI-DSS-Assets.pdf', 'pdf/control-pci-dss-asset-pdf', 'Controls Related to PCI DSS Assets');
+            $this->_downloadPdf($result, 'Controls-Related-to-PCI-DSS-Assets.pdf', 'control-pci-dss-asset-pdf', 'Controls Related to PCI DSS Assets');
         } else {
 
             return view('process/reporting/mis/pci/controls', compact('result'));
@@ -433,7 +449,11 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_commerce_asset', 'Yes')
             ->get();
-        return view('process/reporting/mis/ecommerce/assets', compact('result'));
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'Ecommerce-Asset.pdf', 'ecommerce-asset-pdf', 'Risks Related to Ecommerce Assets');
+        } else {
+            return view('process/reporting/mis/ecommerce/assets', compact('result'));
+        }
     }
 
     public function riskEcomAssets()
@@ -452,7 +472,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Risk-Ecommerce-Asset.pdf', 'pdf/risk-ecommerce-asset-pdf', 'Risks Related to Ecommerce Assets');
+            $this->_downloadPdf($result, 'Risk-Ecommerce-Asset.pdf', 'risk-ecommerce-asset-pdf', 'Risks Related to Ecommerce Assets');
         } else {
 
             return view('process/reporting/mis/ecommerce/risks', compact('result'));
@@ -466,7 +486,7 @@ class MisReportsController extends Controller
             ->get();
 
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Controls-Related-to-Ecommerce-Assets.pdf', 'pdf/control-ecommerce-asset-pdf', 'Controls Related to Ecommerce Assets');
+            $this->_downloadPdf($result, 'Controls-Related-to-Ecommerce-Assets.pdf', 'control-ecommerce-asset-pdf', 'Controls Related to Ecommerce Assets');
         } else {
 
             return view('process/reporting/mis/ecommerce/controls', compact('result'));
@@ -481,8 +501,11 @@ class MisReportsController extends Controller
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_banking_asset', 'Yes')
             ->get();
-
-        return view('process/reporting/mis/ebanking/assets', compact('result'));
+        if (request()->has('pdf')) {
+            $this->_downloadPdf($result, 'E-Banking-Asset.pdf', 'e-banking-asset-pdf', 'E-Banking Assets');
+        } else {
+            return view('process/reporting/mis/ebanking/assets', compact('result'));
+        }
     }
 
     public function riskEbankAssets()
@@ -500,7 +523,7 @@ class MisReportsController extends Controller
             ->where('risk_e_banking', 'Yes')
             ->get();
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Risk-E-Banking-Asset.pdf', 'pdf/risk-e-banking-asset-pdf', 'Risks Related to E-Banking Assets');
+            $this->_downloadPdf($result, 'Risk-E-Banking-Asset.pdf', 'risk-e-banking-asset-pdf', 'Risks Related to E-Banking Assets');
         } else {
 
             return view('process/reporting/mis/ebanking/risks', compact('result'));
@@ -513,7 +536,7 @@ class MisReportsController extends Controller
             ->where('control_e_banking', 'Yes')
             ->get();
         if (request()->has('pdf')) {
-            $this->_downloadPdf($result, 'Controls-Related-to-E-Banking-Assets.pdf', 'pdf/control-e-banking-asset-pdf', 'Controls Related to E-Banking Assets');
+            $this->_downloadPdf($result, 'Controls-Related-to-E-Banking-Assets.pdf', 'control-e-banking-asset-pdf', 'Controls Related to E-Banking Assets');
         } else {
 
             return view('process/reporting/mis/ebanking/controls', compact('result'));
@@ -528,7 +551,7 @@ class MisReportsController extends Controller
 
         ini_set("pcre.backtrack_limit", "5000000");
 
-        $html = view("process/reporting/exception-reports/{$template}", compact('report', 'title'))->render();
+        $html = view("process/reporting/mis/pdf/{$template}", compact('report', 'title'))->render();
 
         $mpdf->WriteHTML($html);
 

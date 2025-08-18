@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Data Privacy Assets Report">
-
+            <x-action.pdf-button route_name="mis-data-assets.index" />
         </x-table.action-wrapper>
 
         <x-table.table>

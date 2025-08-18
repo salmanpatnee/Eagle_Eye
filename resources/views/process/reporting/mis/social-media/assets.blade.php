@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Social Media Assets Report">
-
+            <x-action.pdf-button route_name="mis-social-assets.index" />
         </x-table.action-wrapper>
 
         <x-table.table>

@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Controls Related to Critical Assets">
-
+            <x-action.pdf-button route_name="mis-critical-control-assets.index" />
         </x-table.action-wrapper>
 
         <x-table.table>

@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Risk Related to PII Assets">
-
+            <x-action.pdf-button route_name="mis-risk-pii-assets.index" />
         </x-table.action-wrapper>
 
         <x-table.table>

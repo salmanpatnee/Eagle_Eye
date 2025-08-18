@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Controls Related to Ecommerce Assets">
-
+            <x-action.pdf-button route_name="mis-control-e-commerce-assets.index" />
         </x-table.action-wrapper>
 
         <x-table.table>

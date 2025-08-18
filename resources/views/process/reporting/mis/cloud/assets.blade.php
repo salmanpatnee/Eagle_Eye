@@ -3,8 +3,8 @@
 @section('title_ar', 'تقارير نظم المعلومات الإدارية')
 @section('content')
     <div>
-        <x-table.action-wrapper title="Critical Assets Report">
-
+        <x-table.action-wrapper title="Cloud  Assets Report">
+            <x-action.pdf-button route_name="mis-cloud-assets.index" />
         </x-table.action-wrapper>
 
         <x-table.table>
