@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mpdf\Mpdf;
+use PhpOffice\PhpPresentation\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ExceptionReportsController extends Controller
 {
@@ -109,7 +112,7 @@ class ExceptionReportsController extends Controller
 
         // return $report;
         if (request()->has('pdf')) {
-            $this->_downloadPdf($report, 'mbe-control-report.pdf', 'mbe-pdf', "Control Status");
+            $this->_downloadPdf($report, 'mbe-control-report.pdf', 'management-pdf', "Control Status");
         } else if (request()->has('excel')) {
             return $this->_downloadControlExcel($report);
         } else {
@@ -198,7 +201,7 @@ class ExceptionReportsController extends Controller
 
         if (request()->has('pdf')) {
 
-            $this->_downloadPdf($report, 'mbe-risk-report.pdf', 'mbe-risk-pdf', 'Risk Status');
+            $this->_downloadPdf($report, 'mbe-risk-report.pdf', 'risk-pdf', 'Risk Status');
         } else if (request()->has('excel')) {
             return $this->_downloadRiskExcel($report);
         } else {
@@ -290,6 +293,24 @@ class ExceptionReportsController extends Controller
         }
     }
 
+    private function _downloadPdf($report, $filename, $template, $title = "")
+    {
+        $mpdf = new Mpdf([
+            'orientation' => 'L'
+        ]);
+
+        ini_set("pcre.backtrack_limit", "5000000");
+
+        $html = view("process/reporting/exception-reports/{$template}", compact('report', 'title'))->render();
+
+        $mpdf->WriteHTML($html);
+
+        // Set the headers to prompt the file download
+        return response($mpdf->Output($filename, 'D'))
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    }
+
     private function _getPdfUrl()
     {
         $currentUrl = request()->fullUrl();
@@ -320,5 +341,190 @@ class ExceptionReportsController extends Controller
         }
 
         return $updatedUrl;
+    }
+
+    private function _downloadControlExcel($report)
+    {
+        $filePath = storage_path('app/public/reports/MBE-Controls-Template.xlsx');
+        $outputFilePath = storage_path('app/public/reports/MBE-Controls.xlsx');
+
+        copy($filePath, $outputFilePath);
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $headers = [
+            'A' => 'sno',
+            'B' => 'control_id',
+            'C' => 'control_name',
+            'D' => 'status',
+            'E' => 'owner_name',
+            'F' => 'custodian_links',
+            'G' => 'risks',
+        ];
+
+        $startingRow = 3;
+        $sNo = 1;
+
+
+        foreach ($report as $rowData) {
+
+            foreach ($headers as $column => $key) {
+                $cellCoordinate = "{$column}{$startingRow}";
+                $custodians = str_replace("<br>", ", \n", strip_tags($rowData->custodian_links, "<br>"));
+                $risks = str_replace("<br>", ", \n", strip_tags($rowData->risks, "<br>"));
+
+                $sheet->setCellValue("A{$startingRow}", $sNo);
+                $sheet->setCellValue("B{$startingRow}", $rowData->control_id);
+                $sheet->setCellValue("C{$startingRow}", $rowData->control_name);
+                $sheet->setCellValue("D{$startingRow}", $rowData->status);
+                $sheet->setCellValue("E{$startingRow}", $rowData->owner_name);
+                $sheet->setCellValue("F{$startingRow}", $custodians);
+                $sheet->setCellValue("G{$startingRow}", $risks);
+
+                $horizontalAlign = Alignment::HORIZONTAL_LEFT;
+                $verticalAlign = Alignment::VERTICAL_TOP;
+
+                $sheet->getStyle($cellCoordinate)
+                    ->getAlignment()
+                    ->setHorizontal($horizontalAlign)
+                    ->setVertical($verticalAlign)
+                    ->setWrapText(true);
+            }
+            $sNo++;
+            $startingRow++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($outputFilePath);
+        return response()->download($outputFilePath)->deleteFileAfterSend(true);
+
+        return response()->json(['message' => 'File updated successfully.']);
+    }
+
+    private function _downloadRiskExcel($report)
+    {
+        $filePath = storage_path('app/public/reports/MBE-Risks-Template.xlsx');
+        $outputFilePath = storage_path('app/public/reports/MBE-Risks.xlsx');
+
+        copy($filePath, $outputFilePath);
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $headers = [
+            'A' => 'sno',
+            'B' => 'risk_id',
+            'C' => 'risk_name',
+            'D' => 'status',
+            'E' => 'owner_name',
+            'F' => 'custodian_links',
+            'G' => 'control_links',
+        ];
+
+        $startingRow = 3;
+        $sNo = 1;
+
+        foreach ($report as $rowData) {
+
+            foreach ($headers as $column => $key) {
+                $cellCoordinate = "{$column}{$startingRow}";
+                $custodians = str_replace("<br>", ", \n", strip_tags($rowData->custodian_links, "<br>"));
+                $controls = str_replace("<br>", ", \n", strip_tags($rowData->control_links, "<br>"));
+
+                $sheet->setCellValue("A{$startingRow}", $sNo);
+                $sheet->setCellValue("B{$startingRow}", $rowData->risk_id);
+                $sheet->setCellValue("C{$startingRow}", $rowData->risk_name);
+                $sheet->setCellValue("D{$startingRow}", $rowData->status);
+                $sheet->setCellValue("E{$startingRow}", $rowData->owner_name);
+                $sheet->setCellValue("F{$startingRow}", $custodians);
+                $sheet->setCellValue("G{$startingRow}", $controls);
+
+                $horizontalAlign = Alignment::HORIZONTAL_LEFT;
+                $verticalAlign = Alignment::VERTICAL_TOP;
+
+                $sheet->getStyle($cellCoordinate)
+                    ->getAlignment()
+                    ->setHorizontal($horizontalAlign)
+                    ->setVertical($verticalAlign)
+                    ->setWrapText(true);
+                $sheet->getColumnDimension('F')->setAutoSize(true);
+                $sheet->getColumnDimension('G')->setAutoSize(true);
+            }
+
+            $sNo++;
+            $startingRow++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($outputFilePath);
+        return response()->download($outputFilePath)->deleteFileAfterSend(true);
+
+        return response()->json(['message' => 'File updated successfully.']);
+    }
+
+    private function _downloadAssetExcel($report)
+    {
+        $filePath = storage_path('app/public/reports/MBE-Assets-Template.xlsx');
+        $outputFilePath = storage_path('app/public/reports/MBE-Assets.xlsx');
+
+        copy($filePath, $outputFilePath);
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+
+        $headers = [
+            'A' => 'sno',
+            'B' => 'asset_id',
+            'C' => 'asset_name',
+            'D' => 'asset_group_name',
+            'E' => 'owner_name',
+            'F' => 'custodians',
+            'G' => 'risks',
+            'H' => 'controls',
+        ];
+
+        $startingRow = 3;
+        $sNo = 1;
+
+        foreach ($report as $rowData) {
+
+            foreach ($headers as $column => $key) {
+                $cellCoordinate = "{$column}{$startingRow}";
+                $custodians = str_replace("<br>", ", \n", strip_tags($rowData->custodians, "<br>"));
+                $controls = str_replace("<br>", ", \n", strip_tags($rowData->controls, "<br>"));
+                $risks = str_replace("<br>", ", \n", strip_tags($rowData->risks, "<br>"));
+
+                $sheet->setCellValue("A{$startingRow}", $sNo);
+                $sheet->setCellValue("B{$startingRow}", $rowData->asset_id);
+                $sheet->setCellValue("C{$startingRow}", $rowData->asset_name);
+                $sheet->setCellValue("D{$startingRow}", $rowData->asset_group_name);
+                $sheet->setCellValue("E{$startingRow}", $rowData->owner_name);
+                $sheet->setCellValue("F{$startingRow}", $custodians);
+                $sheet->setCellValue("G{$startingRow}", $risks);
+                $sheet->setCellValue("H{$startingRow}", $controls);
+
+                $horizontalAlign = Alignment::HORIZONTAL_LEFT;
+                $verticalAlign = Alignment::VERTICAL_TOP;
+
+                $sheet->getStyle($cellCoordinate)
+                    ->getAlignment()
+                    ->setHorizontal($horizontalAlign)
+                    ->setVertical($verticalAlign)
+                    ->setWrapText(true);
+                $sheet->getColumnDimension('F')->setAutoSize(true);
+                $sheet->getColumnDimension('G')->setAutoSize(true);
+            }
+
+            $sNo++;
+            $startingRow++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($outputFilePath);
+        return response()->download($outputFilePath)->deleteFileAfterSend(true);
+
+        return response()->json(['message' => 'File updated successfully.']);
     }
 }

@@ -1,36 +1,40 @@
-@extends('process/18-Reporting/2-MISReporting/mbe-layout')
+@extends('process/reporting/exception-reports/pdf-layout')
 @section('content')
     <div class="tablearea">
         <table class="table">
             <thead class="tablehead">
                 <tr>
                     <th>
-                        <p>رقم</p>
+                        {{-- <p>رقم</p> --}}
                         <p>S.No</p>
                     </th>
                     <th style="column-width: 200px;">
-                        <p>رمز الضوابط</p>
-                        <p>Control ID</p>
+                        {{-- <p>رمز الأصول</p> --}}
+                        <p>Asset ID</p>
                     </th>
                     <th>
-                        <p>اسم الضوابط</p>
-                        <p>Control Name</p>
+                        {{-- <p>اسم الأصول</p> --}}
+                        <p>Asset Name</p>
                     </th>
                     <th>
-                        <p>حالة</p>
-                        <p>Status</p>
+                        {{-- <p>اسم مجموعة الأصول</p> --}}
+                        <p>Asset Group</p>
                     </th>
                     <th>
-                        <p>اسم صاحب</p>
+                        {{-- <p>اسم صاحب</p> --}}
                         <p>Owner</p>
                     </th>
                     <th>
-                        <p> اسم الوصي </p>
+                        {{-- <p> اسم الوصي </p> --}}
                         <p>Custodians</p>
                     </th>
                     <th>
-                        <p>المخاطر</p>
+                        {{-- <p>المخاطر</p> --}}
                         <p>Risks</p>
+                    </th>
+                    <th>
+                        {{-- <p>الضوابط</p> --}}
+                        <p>Controls</p>
                     </th>
                 </tr>
             </thead>
@@ -39,28 +43,27 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td>
-                            <a href="{{ route('controls.show', $row->control_id) }}">
-                                {{ $row->control_id }}
-                            </a>
-                        </td>
-                        <td>
-                            {{ $row->control_name }}
-                        </td>
-                        <td>
-                            {{ $row->status }}
-                        </td>
-                        <td>
-                            <a href="owners/{owner}/{{ $row->owner_id }}">
+                            {{ $row->asset_id }}
 
-                                {{ $row->owner_name }}
-                            </a>
+                        </td>
+                        <td>
+                            {{ $row->asset_name }}
+                        </td>
+                        <td>
+                            {{ $row->asset_group_name }}
+                        </td>
+                        <td>
+                            {{ $row->owner_name }}
                         </td>
 
                         <td>
-                            {!! $row->custodian_links !!}
+                            {!! $row->custodians !!}
                         </td>
                         <td>
                             {!! $row->risks !!}
+                        </td>
+                        <td>
+                            {!! $row->controls !!}
                         </td>
                     </tr>
                 @empty

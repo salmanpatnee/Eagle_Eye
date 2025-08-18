@@ -1,4 +1,4 @@
-@extends('process/18-Reporting/2-MISReporting/mbe-pdf-layout')
+@extends('process/reporting/exception-reports/pdf-layout')
 @section('content')
     <div class="tablearea">
         <table class="table">
@@ -6,44 +6,37 @@
                 <tr>
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">رقم</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">رقم</p> --}}
                         <p style="margin: 0; white-space: nowrap;">S.No</p>
                     </th>
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">رمز الأصول</p>
-                        <p style="margin: 0; white-space: nowrap;">Asset ID</p>
-                    </th>
-
-                    <th
-                        style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">اسم الأصول</p>
-                        <p style="margin: 0; white-space: nowrap;">Asset Name</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">رمز الضوابط</p> --}}
+                        <p style="margin: 0; white-space: nowrap;">Risk ID</p>
                     </th>
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">اسم مجموعة الأصول</p>
-                        <p style="margin: 0; white-space: nowrap;">Asset Group</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">اسم الضوابط</p> --}}
+                        <p style="margin: 0; white-space: nowrap;">Risk Name</p>
                     </th>
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">اسم صاحب</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">حالة</p> --}}
+                        <p style="margin: 0; white-space: nowrap;">Status</p>
+                    </th>
+                    <th
+                        style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
+                        {{-- <p style="margin: 0; white-space: nowrap;">اسم صاحب</p> --}}
                         <p style="margin: 0; white-space: nowrap;">Owner</p>
                     </th>
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">اسم الوصي</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">اسم الوصي</p> --}}
                         <p style="margin: 0; white-space: nowrap;">Custodians</p>
                     </th>
-
                     <th
                         style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">المخاطر</p>
-                        <p style="margin: 0; white-space: nowrap;">Risks</p>
-                    </th>
-                    <th
-                        style="background-color: #203864; color: #fff; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0; white-space: nowrap;">الضوابط</p>
+                        {{-- <p style="margin: 0; white-space: nowrap;">الضوابط</p> --}}
                         <p style="margin: 0; white-space: nowrap;">Controls</p>
                     </th>
                 </tr>
@@ -58,39 +51,31 @@
                             {{ $loop->index + 1 }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: center; vertical-align: top;">
-                            <a href="{{ route('assets.show', $row->asset_id) }}"
-                                style="color: #000; font-size: 12px; text-decoration: none;">
-                                {{ $row->asset_id }}
-                            </a>
+                            {{-- <a href="{{ route('riskmaster.show', $row->risk_id) }}" style="color: #000; font-size: 12px; text-decoration: none;"> --}}
+                            {{ $row->risk_id }}
+                            {{-- </a> --}}
                         </td>
-
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {{ $row->asset_name }}
+                            {{ $row->risk_name }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: center; vertical-align: top;">
-                            {{ $row->asset_group_name }}
+                            {{ $row->status }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            <a href="owners/{owner}/{{ $row->owner_id }}"
-                                style="color: #000; font-size: 12px; text-decoration: none;">
-                                {{ $row->owner_name }}
-                            </a>
-                        </td>
-                        <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {!! $row->custodians !!}
-                        </td>
 
+                            {{ $row->owner_name }}
+                        </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            {!! $row->risks !!}
+                            {!! $row->custodian_links !!}
                         </td>
                         <td
-                            style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top; white-space: nowrap;">
+                            style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top; white-space:nowrap">
                             <style>
                                 a {
                                     color: black;
                                 }
                             </style>
-                            {!! $row->controls !!}
+                            {!! $row->control_links !!}
                         </td>
                     </tr>
 
@@ -98,7 +83,7 @@
 
                 @empty
                     <div class="alert alert-error">
-                        <p>No results were found.</p>
+                        <p>No results found</p>
                     </div>
                 @endforelse
             </tbody>

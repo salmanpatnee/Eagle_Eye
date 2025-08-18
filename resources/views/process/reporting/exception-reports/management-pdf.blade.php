@@ -1,4 +1,4 @@
-@extends('process/18-Reporting/2-MISReporting/mbe-pdf-layout')
+@extends('process/reporting/exception-reports/pdf-layout')
 @section('content')
     <div class="tablearea">
         <table class="table">
@@ -49,9 +49,8 @@
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
                             {{ $loop->index + 1 }}</td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            <a href="{{ route('controls.show', $row->control_id) }}" style="color: black">
-                                {{ $row->control_id }}
-                            </a>
+                            {{ $row->control_id }}
+
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
                             {{ $row->control_name }}
@@ -60,10 +59,8 @@
                             {{ $row->status }}
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
-                            <a href="owners/{owner}/{{ $row->owner_id }}" style="color: black">
+                            {{ $row->owner_name }}
 
-                                {{ $row->owner_name }}
-                            </a>
                         </td>
 
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
