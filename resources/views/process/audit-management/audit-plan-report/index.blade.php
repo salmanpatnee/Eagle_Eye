@@ -5,12 +5,9 @@
     <div>
         <x-table.action-wrapper title="Audit Plan">
             <x-action.button label="Summary Report" label_ar="تقرير ملخص" route_name="audit.plan.report.summarize" />
-            <x-slot:extra>
-                <div>
-                    <x-action.pdf-button route_name="audit-plan-report.index" />
-                    <x-action.excel-button route_name="audit.plan.excel.report" />
-                </div>
-            </x-slot:extra>
+            <x-action.pdf-button route_name="audit-plan-report.index" />
+            <x-action.excel-button route_name="audit.plan.excel.report" />
+
         </x-table.action-wrapper>
 
         <form action="{{ route('audit-plan-report.index') }}">

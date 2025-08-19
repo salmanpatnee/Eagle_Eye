@@ -42,8 +42,7 @@
             </button>
             <!-- Hamburger Toggle BTN -->
             <a href="{{ route('compliance') }}" class="lg:hidden">
-                <img class="dark:hidden" src="{{ asset('images/logo/logo.svg') }}" alt="Logo" />
-                <img class="hidden dark:block" src="{{ asset('images/logo/logo-dark.svg') }}" alt="Logo" />
+                <img class="dark:hidden w-12" src="{{ asset('images/logo/EagleEyeLogo.png') }}" alt="Logo" />
             </a>
             <!-- Application nav menu button -->
             <button
