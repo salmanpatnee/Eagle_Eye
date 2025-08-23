@@ -226,13 +226,17 @@ class AssetRegisterController extends Controller
 
     public function destroy(Asset $asset)
     {
-        if ($asset->categories()->exists() || $asset->custodians()->exists()) {
-            return redirect()->route('assets.index')
-                ->with('error', "Asset {$asset->asset_name} cannot be deleted due to existing dependencies.");
-        } else {
-            $asset->delete();
-            return redirect()->route('assets.index')
-                ->with('success', "Asset {$asset->asset_name} deleted successfully.");
+        // Detach relationships if they exist before deleting the asset
+        if ($asset->categories()->exists()) {
+            $asset->categories()->detach();
         }
+        if ($asset->custodians()->exists()) {
+            $asset->custodians()->detach();
+        }
+
+        $asset->delete();
+
+        return redirect()->route('assets.index')
+            ->with('success', "Asset {$asset->asset_name} deleted successfully.");
     }
 }

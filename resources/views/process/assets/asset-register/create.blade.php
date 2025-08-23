@@ -19,12 +19,12 @@
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Asset Status ID" label_ar="رمز  الأصول" name="asset_id" required="true"
-                            :readonly="$asset?->asset_id" placeholder="Enter Asset Status ID" :value="$asset?->asset_id" />
+                        <x-form.field label="Asset ID" label_ar="رمز  الأصول" name="asset_id" required="true" :readonly="$asset?->asset_id"
+                            placeholder="Enter Asset ID" :value="$asset?->asset_id" />
                     </div>
                     <div>
-                        <x-form.field label="Asset Status Name" label_ar="اسم  الأصول" name="asset_name" required="true"
-                            placeholder="Enter Asset Status Name" :value="$asset?->asset_name" />
+                        <x-form.field label="Asset Name" label_ar="اسم  الأصول" name="asset_name" required="true"
+                            placeholder="Enter Asset Name" :value="$asset?->asset_name" />
                     </div>
                 </x-form.grid-col>
 
@@ -59,7 +59,7 @@
                     <div>
                         <x-form.select label="Asset Group Name" label_ar="اسم مجموعة الأصول" name="asset_group_id"
                             placeholder="Select Asset Group" :value="$asset?->asset_group_id" :data="$assetGroups" id_key="asset_group_id"
-                            value_key="asset_group_name" />
+                            value_key="asset_group_name" required="true" />
                     </div>
                     <div>
                         <x-form.select label="Classification Name" label_ar="اسم التصنيف" name="classification_id"
@@ -72,12 +72,12 @@
                     <div>
                         <x-form.select label="Asset Type Name" label_ar="اسم نوع الأصل" name="asset_type_id"
                             placeholder="Select Asset Type" :value="$asset?->asset_type_id" :data="$assetTypes" id_key="asset_type_id"
-                            value_key="asset_type_name" />
+                            value_key="asset_type_name" required="true" />
                     </div>
                     <div>
                         <x-form.select label="Asset Sub-Type Name" label_ar="اسم النوع الفرعي للأصول"
                             name="asset_sub_type_id" placeholder="Select Asset Sub-Type" :value="$asset?->asset_sub_type_id"
-                            :data="$assetSubTypes" id_key="asset_sub_type_id" value_key="asset_sub_type_name" />
+                            :data="$assetSubTypes" id_key="asset_sub_type_id" value_key="asset_sub_type_name" required="true" />
                     </div>
                 </x-form.grid-col>
 
@@ -85,12 +85,12 @@
                     <div>
                         <x-form.select label="Location Name" label_ar="اسم الموقع" name="location_id"
                             placeholder="Select Location" :value="$asset?->location_id" :data="$locations" id_key="location_id"
-                            value_key="location_name" />
+                            value_key="location_name" required="true" />
                     </div>
                     <div>
                         <x-form.select label="Asset Status Name" label_ar="اسم حالة الأصل" name="asset_status_id"
                             placeholder="Select Status" :value="$asset?->asset_status_id" :data="$assetStatus" id_key="asset_status_id"
-                            value_key="asset_current_status" />
+                            value_key="asset_current_status" required="true" />
                     </div>
                 </x-form.grid-col>
             </div>
@@ -227,7 +227,7 @@
                 </x-form.grid-col>
 
                 <div class="flex justify-end">
-                    <x-form.submit label="Asset Status" label_ar="حالة الأصول" :isUpdate="$asset?->asset_status_id" />
+                    <x-form.submit label="Asset " label_ar="الأصول" :isUpdate="$asset?->asset_status_id" />
                 </div>
             </div>
         </form>
