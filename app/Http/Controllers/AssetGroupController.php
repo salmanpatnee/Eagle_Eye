@@ -21,6 +21,7 @@ class AssetGroupController extends Controller
     public function show(AssetGroup $assetGroup)
     {
         $assetGroup->load('owner', 'classification', 'custodians');
+
         return view('process/assets/asset-groups/show', compact('assetGroup'));
     }
 

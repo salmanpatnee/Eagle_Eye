@@ -42,7 +42,7 @@ class VaMasterController extends Controller
 
         Vulnerability::create($attributes);
 
-        return redirect()->route('vulnerabilities.index')->with('success', 'VA Saved Successfully.');
+        return redirect()->route('vulnerabilities.index')->with('success', 'Vulnerability Saved Successfully.');
     }
 
     public function edit(Vulnerability $vulnerability)
@@ -67,12 +67,12 @@ class VaMasterController extends Controller
         $vulnerability->update($attributes);
 
 
-        return redirect()->route('vulnerabilities.index')->with('success', 'VA Saved Successfully.');
+        return redirect()->route('vulnerabilities.index')->with('success', 'Vulnerability Saved Successfully.');
     }
 
     public function destroy(Vulnerability $vulnerability)
     {
         $vulnerability->delete();
-        return redirect()->route('vulnerabilities.index')->with('success', 'VA Deleted Successfully.');
+        return redirect()->route('vulnerabilities.index')->with('success', 'Vulnerability Deleted Successfully.');
     }
 }

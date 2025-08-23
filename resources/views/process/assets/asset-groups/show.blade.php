@@ -36,7 +36,7 @@
 
             <x-info-row>
                 <x-info-col label="Custodians" label_ar="اسم الوصي">
-                    <x-list :data="$assetGroup->custodians" id_key="custodian_name_id" value_key="custodian_name_name" />
+                    <x-list :data="$assetGroup->custodians" id_key="custodian_role_id" value_key="custodian_role_title" />
                 </x-info-col>
 
             </x-info-row>

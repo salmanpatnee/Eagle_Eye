@@ -36,7 +36,8 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.select label="Owner Name" label_ar="اسم صاحب " name="owner_id" placeholder="Select Owner"
-                            :value="$assetGroup?->owner_id" :data="$owners" id_key="owner_role_id" value_key="owner_name" />
+                            :value="$assetGroup?->owner_id" :data="$owners" id_key="owner_role_id" value_key="owner_name"
+                            required="true" />
                     </div>
                     <div>
                         <x-form.select label="Asset Classification Name" label_ar="اسم التصنيف " name="classification_id"
