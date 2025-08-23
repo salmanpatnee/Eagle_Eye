@@ -261,19 +261,16 @@ class RiskIdentificationController extends Controller
 
     public function destroy(Risk $risk)
     {
-        if (
-            $risk->agents()->exists() ||
-            $risk->vulnerabilities()->exists() ||
-            $risk->categories()->exists() ||
-            $risk->assetGroups()->exists() ||
-            $risk->kris()->exists() ||
-            $risk->kpis()->exists() ||
-            $risk->acceptances()->exists() ||
-            $risk->departments()->exists() ||
-            $risk->custodians()->exists()
-        ) {
-            return redirect()->route('risks.index')->with('error', 'Cannot delete risk because it has associated records.');
-        }
+        // Detach all related records if they exist, then delete the risk
+        $risk->agents()->detach();
+        $risk->vulnerabilities()->detach();
+        $risk->categories()->detach();
+        $risk->assetGroups()->detach();
+        $risk->kris()->detach();
+        $risk->kpis()->detach();
+        $risk->acceptances()->detach();
+        $risk->departments()->detach();
+        $risk->custodians()->detach();
 
         $risk->delete();
         return redirect()->route('risks.index')->with('success', 'Risk deleted successfully.');

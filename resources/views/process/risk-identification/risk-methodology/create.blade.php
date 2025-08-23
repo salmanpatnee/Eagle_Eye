@@ -37,7 +37,7 @@
 
                     <div>
                         <x-form.multiselect label="Objectives" label_ar="أهداف" name="objectives[]" :value="$objectiveIds"
-                            :data="$objectives" id_key="objective_id" value_key="objective" />
+                            :data="$objectives" id_key="objective_id" value_key="objective" required="true" />
                     </div>
                 </x-form.grid-col>
 

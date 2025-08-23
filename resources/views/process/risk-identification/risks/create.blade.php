@@ -141,12 +141,12 @@
                     <div>
                         <x-form.select label="Risk Exclusively Related to Critical Assets?"
                             label_ar="المخاطر المرتبطة حصرا بالأصول الحساسة؟" name="risk_critical_asset"
-                            :value="old('risk_critical_asset', $risk?->risk_critical_asset)" :custom_data="$yesNoOptions" required="true" />
+                            :value="old('risk_critical_asset', $risk?->risk_critical_asset)" :custom_data="$yesNoOptions" />
                     </div>
                     <div>
                         <x-form.select label="Risk Exclusively Related to Cloud?"
                             label_ar="المخاطر المرتبطة حصريًا بالسحابة؟" name="risk_cloud" :value="old('risk_cloud', $risk?->risk_cloud)"
-                            :custom_data="$yesNoOptions" required="true" />
+                            :custom_data="$yesNoOptions" />
                     </div>
                 </x-form.grid-col>
 
@@ -154,12 +154,12 @@
                     <div>
                         <x-form.select label="Risk Exclusively Related to Telework?"
                             label_ar="المخاطر مرتبطة حصريًا بالعمل عن بعد؟" name="risk_telework" :value="old('risk_telework', $risk?->risk_telework)"
-                            :custom_data="$yesNoOptions" required="true" />
+                            :custom_data="$yesNoOptions" />
                     </div>
                     <div>
                         <x-form.select label="Risk Exclusively Related to Social Media?"
                             label_ar="المخاطر المرتبطة حصريًا بوسائل التواصل الاجتماعي؟" name="risk_social_media"
-                            :value="old('risk_social_media', $risk?->risk_social_media)" :custom_data="$yesNoOptions" required="true" />
+                            :value="old('risk_social_media', $risk?->risk_social_media)" :custom_data="$yesNoOptions" />
                     </div>
                 </x-form.grid-col>
 
@@ -167,12 +167,12 @@
                     <div>
                         <x-form.select label="Risk Exclusively Related to Data Privacy?"
                             label_ar="المخاطر المرتبطة حصريًا خصوصية البيانات ؟" name="risk_data_privicy"
-                            :value="old('risk_data_privicy', $risk?->risk_data_privicy)" :custom_data="$yesNoOptions" required="true" />
+                            :value="old('risk_data_privicy', $risk?->risk_data_privicy)" :custom_data="$yesNoOptions" />
                     </div>
                     <div>
                         <x-form.select label="Risk Exclusively Related to PII?"
                             label_ar="؟(PII) المخاطر المرتبطة حصريًا بمعلومات تحديد الهوية الشخصية" name="risk_pii"
-                            :value="old('risk_pii', $risk?->risk_pii)" :custom_data="$yesNoOptions" required="true" />
+                            :value="old('risk_pii', $risk?->risk_pii)" :custom_data="$yesNoOptions" />
                     </div>
                 </x-form.grid-col>
 
@@ -180,12 +180,12 @@
                     <div>
                         <x-form.select label="Risk Exclusively Related to PCI/DSS?"
                             label_ar="؟PCI/DSS المخاطر المرتبطة حصريًا" name="risk_pci_dss" :value="old('risk_pci_dss', $risk?->risk_pci_dss)"
-                            :custom_data="$yesNoOptions" required="true" />
+                            :custom_data="$yesNoOptions" />
                     </div>
                     <div>
                         <x-form.select label="Risk Exclusively Related to E-Commerce?"
                             label_ar="المخاطر المتعلقة حصرا بالتجارة الإلكترونية؟" name="risk_e_commerce"
-                            :value="old('risk_e_commerce', $risk?->risk_e_commerce)" :custom_data="$yesNoOptions" required="true" />
+                            :value="old('risk_e_commerce', $risk?->risk_e_commerce)" :custom_data="$yesNoOptions" />
                     </div>
                 </x-form.grid-col>
 
@@ -193,12 +193,12 @@
                     <div>
                         <x-form.select label="Risk Exclusively Related to Infrastructure?"
                             label_ar="المخاطر المتعلقة حصرا بالبنية التحتية؟" name="risk_infrastructure"
-                            :value="old('risk_infrastructure', $risk?->risk_infrastructure)" :custom_data="$yesNoOptions" required="true" />
+                            :value="old('risk_infrastructure', $risk?->risk_infrastructure)" :custom_data="$yesNoOptions" />
                     </div>
                     <div>
                         <x-form.select label="Risk Exclusively Related to Application?"
                             label_ar="المخاطر المرتبطة حصرا بالتطبيق؟" name="risk_application" :value="old('risk_application', $risk?->risk_application)"
-                            :custom_data="$yesNoOptions" required="true" />
+                            :custom_data="$yesNoOptions" />
                     </div>
                 </x-form.grid-col>
 
@@ -206,12 +206,12 @@
                     <div>
                         <x-form.select label="Risk Exclusively Related to HR?"
                             label_ar="المخاطر المتعلقة حصرا بالموارد البشرية؟" name="risk_hr" :value="old('risk_hr', $risk?->risk_hr)"
-                            :custom_data="$yesNoOptions" required="true" />
+                            :custom_data="$yesNoOptions" />
                     </div>
                     <div>
                         <x-form.select label="Risk Exclusively Related to Physical Security?"
                             label_ar="المخاطر المتعلقة حصرا بالأمن المادي؟" name="risk_physical_security"
-                            :value="old('risk_physical_security', $risk?->risk_physical_security)" :custom_data="$yesNoOptions" required="true" />
+                            :value="old('risk_physical_security', $risk?->risk_physical_security)" :custom_data="$yesNoOptions" />
                     </div>
                 </x-form.grid-col>
 
@@ -219,12 +219,12 @@
                     <div>
                         <x-form.select label="Risk Exclusively Related to Third Party?"
                             label_ar="المخاطر المرتبطة حصرا بطرف خارجي؟" name="risk_third_party" :value="old('risk_third_party', $risk?->risk_third_party)"
-                            :custom_data="$yesNoOptions" required="true" />
+                            :custom_data="$yesNoOptions" />
                     </div>
                     <div>
                         <x-form.select label="Risk Exclusively Related to Operational Technology?"
                             label_ar="المخاطر المرتبطة حصريًا بالتكنولوجيا التشغيلية؟" name="risk_operational"
-                            :value="old('risk_operational', $risk?->risk_operational)" :custom_data="$yesNoOptions" required="true" />
+                            :value="old('risk_operational', $risk?->risk_operational)" :custom_data="$yesNoOptions" />
                     </div>
                 </x-form.grid-col>
 
@@ -232,12 +232,12 @@
                     <div>
                         <x-form.select label="Risk Exclusively Related to Payments?"
                             label_ar="المخاطر المرتبطة حصرا بالمدفوعات؟" name="risk_payment" :value="old('risk_payment', $risk?->risk_payment)"
-                            :custom_data="$yesNoOptions" required="true" />
+                            :custom_data="$yesNoOptions" />
                     </div>
                     <div>
                         <x-form.select label="Risk Exclusively Related to E-Banking?"
                             label_ar="المخاطر المرتبطة حصريًا بالخدمات المصرفية الإلكترونية؟" name="risk_e_banking"
-                            :value="old('risk_e_banking', $risk?->risk_e_banking)" :custom_data="$yesNoOptions" required="true" />
+                            :value="old('risk_e_banking', $risk?->risk_e_banking)" :custom_data="$yesNoOptions" />
                     </div>
                 </x-form.grid-col>
 
