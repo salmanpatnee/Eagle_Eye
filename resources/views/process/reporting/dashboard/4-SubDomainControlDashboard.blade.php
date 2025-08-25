@@ -3,7 +3,7 @@
 @section('title_ar', 'لوحة التحكم بالامتثال الشامل')
 @section('content')
 
-    <x-table.action-wrapper title="Risk Register">
+    <x-table.action-wrapper title="">
         <button type="button" data-filename="Sub Domains Compliance Status" id="print" class="action-btn">
             <x-icons.pdf />
 
@@ -188,12 +188,12 @@
                                                         html +=
                                                             `<td class="px-3 py-3 whitespace-nowrap"><span class="block font-medium text-gray-700 text-theme-sm">${i}</span></td>`;
                                                         if (row
-                                                            .control_assessment_id
+                                                            .cid
                                                         ) {
 
                                                             html +=
                                                                 `<td class="px-3 py-3 whitespace-nowrap " style="vertical-align: top;">
-                                                                    <a href="/control-assessments/${row.control_assessment_id}" >
+                                                                    <a href="/controls/${row.cid}" >
                                                                         <span class="block font-medium text-gray-700 text-theme-sm">
                                                                         ${row.control_id}
                                                                         </span>
@@ -205,11 +205,11 @@
                                                         }
 
                                                         if (row
-                                                            .control_assessment_id
+                                                            .casid
                                                         ) {
 
                                                             html +=
-                                                                `<td class="px-3 py-3 whitespace-nowrap " style="vertical-align: top;"> <a href="/control-assessments/${row.control_assessment_id}"> <span class="block font-medium text-gray-700 text-theme-sm">${row.status}</span></a></td>`;
+                                                                `<td class="px-3 py-3 whitespace-nowrap " style="vertical-align: top;"> <a href="/control-assessments/${row.casid}"> <span class="block font-medium text-gray-700 text-theme-sm">${row.status}</span></a></td>`;
                                                         } else {
                                                             html +=
                                                                 `<td class="px-3 py-3 whitespace-nowrap " style="vertical-align: top;"><span class="block font-medium text-gray-700 text-theme-sm">${row.status}</span></td>`;

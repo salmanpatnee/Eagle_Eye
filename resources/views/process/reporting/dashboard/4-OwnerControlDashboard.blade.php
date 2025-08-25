@@ -43,21 +43,16 @@
                             <tr>
                                 <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                                 <x-table.td>
-                                    @if ($control->control_assessment_id != '#')
-                                        <a href="{{ route('control-assessments.show', $control->control_assessment_id) }}">{{ $control->control_id }}
-                                        </a>
-                                    @else
+                                    {{-- @if ($control->control_assessment_id != '#') --}}
+                                    <a href="{{ route('controls.show', $control->cid) }}">{{ $control->control_id }}
+                                    </a>
+                                    {{-- @else
                                         {{ $control->control_id }}
-                                    @endif
+                                    @endif --}}
                                 </x-table.td>
                                 <x-table.td>
-                                    @if ($control->control_assessment_id != '#')
-                                        <a href="{{ route('control-assessments.show', $control->control_assessment_id) }}">
-                                            {{ $control->status }}
-                                        </a>
-                                    @else
-                                        {{ $control->status }}
-                                    @endif
+
+                                    {{ $control->status }}
                                 </x-table.td>
                                 <x-table.td>
                                     <a href="{{ route('owners.show', $owner[0]->id) }}">{{ $owner[0]->owner_name }}
@@ -188,9 +183,9 @@
                                                 html +=
                                                     `<td class="px-3 py-3 whitespace-nowrap" style="vertical-align: top;"><span class="block font-medium text-gray-700 text-theme-sm">${i}</span></td>`;
 
-                                                if (row.control_assessment_id != "#") {
+                                                if (row.cid) {
                                                     html +=
-                                                        `<td class="px-3 py-3 whitespace-nowrap" style="vertical-align: top;"><span class="block font-medium text-gray-700 text-theme-sm"><a href="/control-assessments/${row.control_assessment_id}" >${row.control_id}</a></span></td>`;
+                                                        `<td class="px-3 py-3 whitespace-nowrap" style="vertical-align: top;"><span class="block font-medium text-gray-700 text-theme-sm"><a href="/controls/${row.cid}" >${row.control_id}</a></span></td>`;
                                                 } else {
                                                     html +=
                                                         `<td class="px-3 py-3 whitespace-nowrap" style="vertical-align: top;"><span class="block font-medium text-gray-700 text-theme-sm">${row.control_id}</span></td>`;
@@ -198,7 +193,7 @@
 
                                                 if (row.control_assessment_id != "#") {
                                                     html +=
-                                                        `<td class="px-3 py-3 whitespace-nowrap" style="vertical-align: top;"><span class="block font-medium text-gray-700 text-theme-sm"> <a href="/control-assessments/${row.control_assessment_id}" >${row.status}</a></span></td>`;
+                                                        `<td class="px-3 py-3 whitespace-nowrap" style="vertical-align: top;"><span class="block font-medium text-gray-700 text-theme-sm"> ${row.status}</span></td>`;
                                                 } else {
                                                     html +=
                                                         `<td class="px-3 py-3 whitespace-nowrap" style="vertical-align: top;"><span class="block font-medium text-gray-700 text-theme-sm">${row.status}</span></td>`;

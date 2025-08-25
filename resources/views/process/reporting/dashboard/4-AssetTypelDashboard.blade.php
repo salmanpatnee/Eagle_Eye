@@ -3,7 +3,7 @@
 @section('title_ar', 'لوحة التحكم بالامتثال الشامل')
 @section('content')
 
-    <x-table.action-wrapper title="Risk Register">
+    <x-table.action-wrapper title="">
         <button type="button" data-filename="Asset Types Overview" id="print" class="action-btn">
             <x-icons.pdf />
 

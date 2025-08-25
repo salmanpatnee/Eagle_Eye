@@ -136,7 +136,9 @@ class MisReportsController extends Controller
             ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('telework_asset', 'Yes')
+            ->select('assetregister.*', 'assetgroup.asset_group_name', 'assettype.asset_type_name', 'assetlocation.location_name')
             ->get();
+
 
         if (request()->has('pdf')) {
             $this->_downloadPdf($result, 'Telework-Assets.pdf', 'Telework-Assets-pdf', 'List of Telework Assets');
@@ -190,6 +192,7 @@ class MisReportsController extends Controller
             ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('social_media_asset', 'Yes')
+            ->select('assetregister.*', 'assetgroup.asset_group_name', 'assettype.asset_type_name', 'assetlocation.location_name')
             ->get();
         if (request()->has('pdf')) {
             $this->_downloadPdf($result, 'Social-Media-Assets.pdf', 'social-media-asset-pdf', 'Social Media Assets');
@@ -243,6 +246,7 @@ class MisReportsController extends Controller
             ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('data_privacy_asset', 'Yes')
+            ->select('assetregister.*', 'assetgroup.asset_group_name', 'assettype.asset_type_name', 'assetlocation.location_name')
             ->get();
         if (request()->has('pdf')) {
             $this->_downloadPdf($result, 'Data-Privacy-Assets.pdf', 'data-privacy-asset-pdf', 'Data Privacy Assets');
@@ -293,6 +297,7 @@ class MisReportsController extends Controller
             ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('data_pii_asset', 'Yes')
+            ->select('assetregister.*', 'assetgroup.asset_group_name', 'assettype.asset_type_name', 'assetlocation.location_name')
             ->get();
 
         if (request()->has('pdf')) {
@@ -345,6 +350,7 @@ class MisReportsController extends Controller
             ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('payment_asset', 'Yes')
+            ->select('assetregister.*', 'assetgroup.asset_group_name', 'assettype.asset_type_name', 'assetlocation.location_name')
             ->get();
         if (request()->has('pdf')) {
             $this->_downloadPdf($result, 'Payment-Asset.pdf', 'payment-asset-pdf', 'Payments Assets');
@@ -397,6 +403,7 @@ class MisReportsController extends Controller
             ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('pci_dss_asset', 'Yes')
+            ->select('assetregister.*', 'assetgroup.asset_group_name', 'assettype.asset_type_name', 'assetlocation.location_name')
             ->get();
         if (request()->has('pdf')) {
             $this->_downloadPdf($result, 'PCI-DSS-Asset.pdf', 'pci-dss-asset-pdf', 'PCI DSS Assets');
@@ -448,6 +455,7 @@ class MisReportsController extends Controller
             ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_commerce_asset', 'Yes')
+            ->select('assetregister.*', 'assetgroup.asset_group_name', 'assettype.asset_type_name', 'assetlocation.location_name')
             ->get();
         if (request()->has('pdf')) {
             $this->_downloadPdf($result, 'Ecommerce-Asset.pdf', 'ecommerce-asset-pdf', 'Risks Related to Ecommerce Assets');
@@ -500,6 +508,7 @@ class MisReportsController extends Controller
             ->join('asset_type_table as assettype', 'assettype.asset_type_id', '=', 'assetregister.asset_type_id')
             ->join('location_table as assetlocation', 'assetlocation.location_id', '=', 'assetregister.location_id')
             ->where('e_banking_asset', 'Yes')
+            ->select('assetregister.*', 'assetgroup.asset_group_name', 'assettype.asset_type_name', 'assetlocation.location_name')
             ->get();
         if (request()->has('pdf')) {
             $this->_downloadPdf($result, 'E-Banking-Asset.pdf', 'e-banking-asset-pdf', 'E-Banking Assets');

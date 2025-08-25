@@ -44,7 +44,7 @@ class RiskTreatmentController extends Controller
             ->get();
 
 
-        return view('process\risk-identification\risk-treatment\risk-vs-control', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
+        return view('process/risk-identification/risk-treatment/risk-vs-control', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
     }
 
     public function controlVsRisk(Request $request)
@@ -78,6 +78,6 @@ class RiskTreatmentController extends Controller
 
 
 
-        return view('process\risk-identification\risk-treatment\control-vs-risk', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
+        return view('process/risk-identification/risk-treatment/control-vs-risk', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
     }
 }

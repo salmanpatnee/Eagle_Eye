@@ -1,4 +1,4 @@
-@extends('layouts.risk')
+@extends('layouts.risk-appetite')
 @section('title', 'Risk Inherent')
 @section('title_ar', 'المخاطر الكامنة')
 

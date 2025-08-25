@@ -38,7 +38,7 @@
                 @forelse ($riskassetgroup as $row)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
-                        <x-table.td><a href="{{ route('risks.show', $row->risk_id) }}"
+                        <x-table.td><a href="{{ route('risks.show', $row->id) }}"
                                 target="_blank">{{ $row->risk_id }}</a></x-table.td>
                         <x-table.td>{{ $row->risk_name }}</x-table.td>
                         <x-table.td>

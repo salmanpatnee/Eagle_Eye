@@ -59,7 +59,11 @@
                             {!! html_entity_decode($standard?->remarks) !!}
                         </x-table.td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <x-table.td colspan="8" class="text-center">No result</x-table.td>
+                    </tr>
+                @endforelse
             </x-table.tbody>
         </x-table.table>
 
@@ -102,7 +106,11 @@
                             {!! html_entity_decode($standard?->remarks) !!}
                         </x-table.td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <x-table.td colspan="8" class="text-center">No result</x-table.td>
+                    </tr>
+                @endforelse
             </x-table.tbody>
         </x-table.table>
 

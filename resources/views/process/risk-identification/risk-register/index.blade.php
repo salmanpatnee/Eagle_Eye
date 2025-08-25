@@ -90,10 +90,16 @@
                         <x-table.td class="list">{!! $row->categories !!}</x-table.td>
                         <x-table.td>{{ $row->owner_name }}</x-table.td>
                         <x-table.td>{{ $row->risk_assessment_start_date }}</x-table.td>
-                        <x-table.td>{{ $row->risk_description }}</x-table.td>
-                        <x-table.td>{{ $row->remarks }}</x-table.td>
+                        <x-table.td>
+                            <div style="width: 250px;">{{ $row->risk_description }}</div>
+                        </x-table.td>
+                        <x-table.td>
+                            <div style="width: 250px;">{{ $row->remarks }}</div>
+                        </x-table.td>
                         <x-table.td class="list">{!! $row->agents !!}</x-table.td>
-                        <x-table.td>{{ $row->risk_assessment_description }}</x-table.td>
+                        <x-table.td>
+                            <div style="width: 250px;">{{ $row->risk_assessment_description }}</div>
+                        </x-table.td>
                         <x-table.td>{{ $row->date_of_risk_analysis }}</x-table.td>
                         <x-table.td>{{ $row->risk_inherent_likelihood }}</x-table.td>
                         <x-table.td>{{ $row->risk_inherent_impact }}</x-table.td>
@@ -110,9 +116,13 @@
                         <x-table.td>{{ $row->risk_impact }}</x-table.td>
                         <x-table.td>{{ $row->risk_appetite }}</x-table.td>
                         {{-- <x-table.td style="background-color: {{ $row->risk_appetite_color }};">{{ $row->risk_appetite }}</x-table.td> --}}
-                        <x-table.td>{{ $row->preventive_action }}</x-table.td>
+                        <x-table.td>
+                            <div style="width: 250px;">{{ $row->preventive_action }}</div>
+                        </x-table.td>
                         <x-table.td>{{ $row->last_evaluation_date }}</x-table.td>
-                        <x-table.td>{{ $row->lesson_learned }}</x-table.td>
+                        <x-table.td>
+                            <div style="width: 250px;">{{ $row->lesson_learned }}</div>
+                        </x-table.td>
                     </tr>
                 @endforeach
             </x-table.tbody>

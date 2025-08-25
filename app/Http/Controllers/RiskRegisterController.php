@@ -175,7 +175,7 @@ class RiskRegisterController extends Controller
                 ->header('Content-Disposition', 'attachment; filename="' . "Risk-Register.pdf" . '"');
         } else {
 
-            return view("process/risk-identification/risk-register\index", compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
+            return view("process/risk-identification/risk-register/index", compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
         }
     }
 

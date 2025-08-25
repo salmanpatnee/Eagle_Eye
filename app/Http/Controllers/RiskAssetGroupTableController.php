@@ -35,7 +35,7 @@ class RiskAssetGroupTableController extends Controller
             ->get();
 
 
-        return view('process\risk-identification\risk-asset-group\asset-group-vs-risk', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
+        return view('process/risk-identification/risk-asset-group/asset-group-vs-risk', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
     }
 
     public function riskVsAssetGroup(Request $request)
@@ -63,6 +63,6 @@ class RiskAssetGroupTableController extends Controller
             ->get();
 
 
-        return view('process\risk-identification\risk-asset-group\risk-vs-asset-group', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
+        return view('process/risk-identification/risk-asset-group/risk-vs-asset-group', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
     }
 }

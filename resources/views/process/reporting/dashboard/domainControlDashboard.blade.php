@@ -3,7 +3,7 @@
 @section('title_ar', 'لوحة التحكم بالامتثال الشامل')
 @section('content')
 
-    <x-table.action-wrapper title="Risk Register">
+    <x-table.action-wrapper title="">
         <button type="button" data-filename="Domain Compliance Status" id="print" class="action-btn">
             <x-icons.pdf />
             <span class="inline mx-2">Download as PDF</span>

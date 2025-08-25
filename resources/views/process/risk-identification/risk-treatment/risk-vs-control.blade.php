@@ -4,9 +4,9 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Risk vs Controls">
-            <x-action.button label="Control vs Risk" label_ar="تقرير معالجة المخاطر" route_name="control-vs-risk.index" />
             <x-action.button label="Risk vs Control" label_ar="الضوابط مقابل الأدلة" route_name="risk-vs-control.index"
                 disabled class="opacity-75" />
+            <x-action.button label="Control vs Risk" label_ar="تقرير معالجة المخاطر" route_name="control-vs-risk.index" />
         </x-table.action-wrapper>
 
         <form action="{{ route('risk-vs-control.index') }}" method="GET">
@@ -37,7 +37,7 @@
                 @forelse ($riskTreatments as $riskTreatment)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
-                        <x-table.td><a href="{{ route('risks.show', $riskTreatment->risk_id) }}"
+                        <x-table.td><a href="{{ route('risks.show', $riskTreatment->id) }}"
                                 target="_blank">{{ $riskTreatment->risk_id }}</a></x-table.td>
                         <x-table.td>{{ $riskTreatment->risk_name }}</x-table.td>
                         <x-table.td>

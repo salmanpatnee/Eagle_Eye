@@ -340,10 +340,12 @@ class OCDController extends Controller
             ) AS cad2 ON cad1.control_id = cad2.control_id AND cad1.id = cad2.latest_id
         ) as cad_latest'), 'c.control_id', '=', 'cad_latest.control_id')
             ->select(
+                'c.id as cid',
                 'c.control_id',
                 'o.id',
                 'o.owner_name',
                 'o.owner_id',
+
                 DB::raw('COALESCE(cad_latest.control_implementation_status, "Not Implemented") as status'),
                 'cad_latest.control_assessment_id',
                 DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", ct.id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
@@ -355,6 +357,7 @@ class OCDController extends Controller
             })
 
             ->groupBy(
+                'c.id',
                 'c.control_id',
                 'o.owner_name',
                 'o.id',
@@ -406,6 +409,8 @@ class OCDController extends Controller
                 'owner_table.owner_id',
                 'owner_table.owner_name',
                 'c.control_id',
+                'c.id as cid',
+                'cad.id as cadid',
                 DB::raw('COALESCE(cad.control_implementation_status, "Not Implemented") as status'),
                 DB::raw('GROUP_CONCAT(CONCAT("<a href=\'/custodians/", cn.id, "\' >",cn.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians'),
                 DB::raw('COALESCE(cad.control_assessment_id, "#") as control_assessment_id')
@@ -420,7 +425,9 @@ class OCDController extends Controller
                 'owner_table.owner_id',
                 'owner_table.owner_name',
                 'c.control_id',
-                'cad.control_implementation_status'
+                'c.id',
+                'cad.control_implementation_status',
+                'cad.id'
             )
             ->get();
 

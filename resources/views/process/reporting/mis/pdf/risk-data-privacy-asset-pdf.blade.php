@@ -46,9 +46,9 @@
 
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">
 
-                            <a href="{{ route('risks.show', $row->risk_id) }}" style="color: black">
-                                {{ $row->risk_id }}
-                            </a>
+                            {{ $row->risk_id }}
+                            {{-- <a href="{{ route('risks.show', $row->risk_id) }}" style="color: black">
+                            </a> --}}
 
                         </td>
                         <td style="padding: 12px; color: black; font-size: 12px; text-align: left; vertical-align: top;">

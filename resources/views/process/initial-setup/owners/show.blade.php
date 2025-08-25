@@ -25,7 +25,7 @@
                 </x-info-col>
 
                 <x-info-col label="Owner Department Name" label_ar="اسم قسم صاحب">
-                    {{ $owner->department->department_name }}
+                    {{ $owner->department->department_name ?? '-' }}
                 </x-info-col>
             </x-info-row>
 

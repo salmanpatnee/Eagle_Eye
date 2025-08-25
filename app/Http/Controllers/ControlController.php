@@ -25,7 +25,8 @@ class ControlController extends Controller
 
 
 
-        $controls = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
+        $controls = ControlMaster::select('control_master_table.id', 'control_master_table.control_id', 'control_master_table.control_name', 'control_master_table.owner_id')
+            ->join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
             ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
             ->with('risks')
             ->when($control, function ($query, $control) {
@@ -45,8 +46,9 @@ class ControlController extends Controller
             })
             ->orderControls()
             // ->get();
-            ->paginate(200);
+            ->paginate(100);
 
+        // return $controls;
         return view('process\control-identification\controls\index', compact('controls', 'controlNames', 'risks', 'owners', 'bestPractices', 'control', 'owner', 'risk', 'bestPractice'));
     }
 

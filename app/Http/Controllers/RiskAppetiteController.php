@@ -19,7 +19,7 @@ class RiskAppetiteController extends Controller
         $riskAppetite = null;
         $riskAppetites = RiskAppetite::all();
 
-        return view('process\risk-identification\risk-appetites\index', compact('riskAppetites', 'result', 'impacts', 'riskAppetite'));
+        return view('process/risk-identification/risk-appetites/index', compact('riskAppetites', 'result', 'impacts', 'riskAppetite'));
     }
 
     public function create()

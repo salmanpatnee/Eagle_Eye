@@ -129,384 +129,383 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/vciso', 'vciso')->name('vciso');
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
+
+
+
+    // ------------------- INITIAL SETUP -------------------
+
+    Route::resource('organizations', OrganizationController::class);
+    Route::resource('locations', LocationController::class);
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('sub-departments', SubDepartmentController::class);
+    Route::resource('classifications', ClassificationController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('sub-categories', SubCategoryController::class);
+    Route::resource('best-practices', BestPracticeController::class);
+    Route::resource('domains', MainDomainController::class);
+    Route::resource('sub-domains', SubDomainController::class);
+    Route::resource('owner-roles', OwnerRoleController::class);
+    Route::resource('owners', OwnerController::class);
+
+    // Owner Data Uploader
+    Route::get('/upload-owners', [DataUploaderController::class, 'createOwner'])->name('upload.owner.create');
+    Route::post('/upload-owners', [DataUploaderController::class, 'uploadOwners'])->name('upload.owners.store');
+
+    Route::resource('custodian-roles', CustodianRoleController::class);
+    Route::resource('custodians', CustodianController::class);
+
+    // Custodian Data Uploader
+    Route::get('/upload-custodians', [DataUploaderController::class, 'createCustodian'])->name('upload.custodians.create');
+    Route::post('/upload-custodians', [DataUploaderController::class, 'uploadCustodian'])->name('upload.custodians.store');
+
+
+
+    // ------------------- ASSET REGISTRATION -------------------
+
+    Route::resource('assets', AssetRegisterController::class);
+
+    // Asset Data Uploader
+    Route::get('/upload-assets', [DataUploaderController::class, 'create'])->name('upload.assets.create');
+    Route::post('/upload-assets', [DataUploaderController::class, 'uploadAssets'])->name('upload.assets.store');
+
+    Route::resource('asset-status', AssetStatusController::class);
+    Route::resource('asset-types', AssetTypeController::class);
+    Route::resource('asset-sub-types', AssetSubTypeController::class);
+    Route::resource('asset-groups', AssetGroupController::class);
+
+    // ------------------- EVIDENCE TRACKING -------------------
+
+    Route::resource('artifacts', ArtifactController::class);
+
+    // Artifact Data Uploader
+    Route::get('/upload-artifacts', [DataUploaderController::class, 'createArtifact'])->name('upload.artifact.create');
+    Route::post('/upload-artifacts', [DataUploaderController::class, 'uploadArtifact'])->name('upload.artifact.store');
+
+    Route::controller(TempFileUploadController::class)->group(function () {
+        Route::post('/uploads', 'store')->name('temp.upload.store');
+        Route::delete('/tmp/delete', 'destroy')->name('temp.upload.destroy');
+    });
+
+    Route::controller(ArtifactAttachmentController::class)->group(function () {
+        Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
+        Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
+    });
+
+    // ------------------- USERS -------------------
+
+    Route::middleware('superadmin')->group(function () {
+        Route::resource('users', UserController::class);
+        // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
+        // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
+    });
+
+    // ------------------- THREAT MANAGEMENT -------------------
+
+    Route::resource('threat-agents', ThreatAgentController::class);
+    Route::resource('threat-agent-types', ThreatAgentTypeController::class);
+    Route::resource('threat-agent-sub-types', ThreatAgentSubTypeController::class);
+    Route::resource('threat-agent-ratings', ThreatAgentRatingController::class);
+    Route::resource('threat-agent-vectors', ThreatAgentVectorController::class);
+
+    // ------------------- VULNERABILITY MANAGEMENT -------------------
+
+    Route::resource('vulnerabilities', VaMasterController::class);
+    Route::resource('cves', RiskCveController::class);
+    Route::resource('cvss', CvssController::class);
+    Route::resource('vulnerability-types', VaTypeController::class);
+    Route::resource('vulnerability-sub-types', VaSubTypeController::class);
+
+
+    // ------------------- RISK IDENTIFICATION -------------------
+
+    Route::resource('risks', RiskIdentificationController::class);
+    Route::resource('risk-methodology', RiskMethodologyController::class);
+    Route::resource('objectives', ObjectivesController::class);
+    Route::resource('risk-groups', RiskGroupController::class);
+    Route::resource('risk-types', RiskTypeController::class);
+    Route::resource('risk-sub-types', RiskSubTypeController::class);
+    Route::resource('kris', RiskKriController::class);
+    Route::resource('kpis', RiskKpiController::class);
+    Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class);
+    Route::resource('risk-appetites', RiskAppetiteController::class);
+    Route::resource('risk-inherents', RiskInherentController::class);
+    Route::resource('risk-acceptances', RiskAcceptanceController::class);
+
+
+    // ------------------- RISK TREATMENT -------------------
+
+    Route::prefix('risk-treatment')->controller(RiskTreatmentController::class)->group(function () {
+        Route::get('/risk-vs-control', 'riskVsControl')->name('risk-vs-control.index');
+        Route::get('/control-vs-risk', 'controlVsRisk')->name('control-vs-risk.index');
+    });
+
+    // ------------------- RISK ON ASSET GROUP -------------------
+
+    Route::controller(RiskAssetGroupTableController::class)->group(function () {
+        Route::get('/risk-vs-asset-group', 'riskVsAssetGroup')->name('risk-vs-asset-group.index');
+        Route::get('/asset-group-vs-risk', 'assetGroupVsRisk')->name('asset-group-vs-risk.index');
+    });
+
+    // ------------------- RISK REGISTER -------------------
+
+    Route::controller(RiskRegisterController::class)->group(function () {
+        Route::get('/risk-register', 'index')->name('risk-register.index');
+        Route::get('/risk-register-excel', 'getRiskRegisterExcel')->name('risk.register.excel');
+    });
+
+    // ------------------- RISK STATUS -------------------
+
+    Route::controller(RiskStatusController::class)->group(function () {
+        Route::get('/risk-status', 'index')->name('risk-status.index');
+    });
+
+    // ------------------- VULNERABILITY REGISTER -------------------
+
+    Route::controller(VulnerabilityRegisterController::class)->group(function () {
+        Route::get('/vulnerability-register', 'index')->name('va.register');
+        Route::get('/vulnerability-register-excel', 'generateExcelReport')->name('va.register.excel');
+    });
+
+    // ------------------- CONTROL IDENTIFICATION -------------------
+
+    Route::resource('controls', ControlController::class);
+    Route::resource('control-types', ControlTypeController::class);
+    Route::resource('kpi-standards', KPIStandardController::class);
+
+    // ------------------- EVIDENCE MANAGEMENT -------------------
+
+    Route::resource('evidences', EvidenceController::class);
+
+    Route::controller(EvidenceController::class)->group(function () {
+        Route::get('/evidence-list/view/{evidence:evidence_id}', 'viewevilist')->name('evidence.view');
+        Route::patch('/evidence-list/update_attachment', 'update_attachment')->name('evidence.update.attachment');
+        Route::post('/evidence-list/delete-attachment', 'delete_attachment')->name('evidence.delete.attachment');
+    });
+
+
+    Route::controller(ControlEvidenceController::class)->group(function () {
+        Route::get('/control-vs-evidence', 'controlVsEvidence')->name('control-vs-evidence.index');
+        Route::get('/evidence-vs-control', 'evidenceVsControl')->name('evidence-vs-control.index');
+    });
+
+    // ------------------- CONTROL ASSESSMENT -------------------
+
+    Route::resource('control-assessments', ControlAssessmentController::class);
+    Route::resource('control-assessment-findings', ControlAssessmentFindingController::class)->except(['index', 'create', 'store']);
+    Route::controller(ControlAssessmentFindingController::class)->group(function () {
+        Route::get('/control-assessment-findings/create/{controlAssessment}', 'create')->name('control-assessment-findings.create');
+        Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
+        Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
+    });
+
+    // ------------------- CONTROL SMART SEARCH -------------------
+
+    Route::get('/control-smart-search', ControlSmartSearch::class)->name('control-smart-search.index');
+
+
+
+    // ------------RISK ASSESSMENTS--------------
+
+    Route::resource('risk-assessments', RiskAssessmentController::class);
+    Route::controller(RiskAssessmentController::class)->group(function () {
+        Route::post('/risk-control/', 'get_control_by_risk');
+    });
+
+
+    Route::resource('risk-assessment-findings', RiskAssessmentFindingController::class)->except(['index', 'create', 'store']);
+    Route::controller(RiskAssessmentFindingController::class)->group(function () {
+        Route::get('/risk-assessment-findings/create/{riskAssessment}', 'create')->name('risk-assessment-findings.create');
+        Route::post('/risk-assessment-finding-input/{riskAssessment}', 'store')->name('risk-assessment-findings.store');
+    });
+
+    // ------------AUDIT MANAGEMENT--------------
+
+    Route::resource('audit-plans', AuditPlanController::class);
+    Route::resource('auditors', AuditorFormController::class);
+    Route::resource('auditees', AuditeeController::class);
+
+    Route::controller(AuditPlanReportController::class)->group(function () {
+        Route::get('/audit-plan-report', 'index')->name('audit-plan-report.index');
+        Route::get('/audit-plan-summarize-report', 'summarizeReport')->name('audit.plan.report.summarize');
+        Route::get('/audit-plan-excel-report', 'generateExcelReport')->name('audit.plan.excel.report');
+        Route::get('/audit-plan-summarize-excel-report', 'generateSummarizeExcelReport')->name('audit.plan.summarize.excel.report');
+    });
+
+    // ------------AUDIT ASSESSMENTS--------------
+
+    Route::resource('audit-assessments', AuditMaterController::class);
+    Route::resource('audit-findings', AuditFindingController::class)->except(['index', 'create', 'store']);
+    Route::controller(AuditFindingController::class)->group(function () {
+        Route::get('/audit-findings/create/{auditAssessment}', 'create')->name('audit-findings.create');
+        Route::post('/audit-findings/{auditAssessment}', 'store')->name('audit-findings.store');
+    });
+
+    Route::controller(ControlAuditFindingController::class)->group(function () {
+        Route::get('/control-vs-audit-finding', 'controlVsAuditFinding')->name('control-vs-audit.index');
+        Route::get('/audit-finding-vs-control', 'auditFindingVsControl')->name('audit-vs-control.index');
+    });
+
+
+    // ------------VULNERABILITY ASSESSMENT / PENETRATION TEST TRACKING--------------
+
+    Route::resource('va-pen-tests', PenTestController::class);
+    Route::resource('va-pen-test-findings', PenTestFindingsController::class)->except(['index', 'create', 'store']);
+    Route::controller(PenTestFindingsController::class)->group(function () {
+        Route::get('/va-pen-test-findings/create/{penTest}', 'create')->name('va-pen-test-findings.create');
+        Route::post('/va-pen-test-findings/{penTest}', 'store')->name('va-pen-test-findings.store');
+        Route::post('/upload-poc', 'uploadPoc')->name('va-pen-test-findings.upload');
+        Route::delete('/delete-temp-poc', 'deleteTempPoc')->name('va-pen-test-findings.poc.temp.destroy');
+        Route::delete('/delete-poc/{attachment}', 'deletePoc')->name('va-pen-test-findings.poc.destroy');
+    });
+
+    Route::resource('patches', PatchController::class);
+    Route::resource('third-party', ThirdPartyController::class);
+    Route::resource('tpt-experts', TPTExpertsControl::class);
+
+
+    Route::controller(PenTestReportController::class)->group(function () {
+        Route::get('/va-asset-vs-risk', 'assetVsRisk')->name('pen-test-asset-vs-risk.index');
+        Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
+    });
+
+    Route::controller(PenTestDashboardController::class)->group(function () {
+        Route::get('/va-pen-test-dashboard', 'index')->name('va-pen-test-dashboard.index');
+        Route::get('/va-pen-test-dashboard/{penTest}', 'show')->name('va-pen-test-dashboard.show');
+        Route::get('/va-pen-test-status/{penTest:va_pt_test_id}/{status}', 'status')->name('va-pen-test-dashboard.status');
+        Route::get('/va-pen-test-level-records/{penTest:va_pt_test_id}', 'levelRecords')->name('pen-test-level-records');
+        Route::get('/va-pen-test-level/{penTest:va_pt_test_id}/{level}', 'level')->name('pen-test-level');
+        Route::get('/va-pen-test-level-status/{penTest:va_pt_test_id}', 'levelStatus')->name('pen-test-level-status');
+    });
+
+    // ------------REPORTING--------------
+
+    Route::controller(KPICategoryController::class)->group(function () {
+        Route::get('/kpi-references', 'report')->name('kpi-references.index');
+    });
+    Route::resource('kpi-standards-report', KPIStandardReportController::class);
+    Route::resource('kpi-categories', KPICategoryController::class);
+
+    Route::controller(RegulatoryReportController::class)->group(function () {
+        Route::get('/nca-regulatory-reports', 'index')->name('nca-regulatory-reports.index');
+        Route::get('/regulatory-report', 'create')->name('regulatory-reports.create');
+        Route::get('/regulatory-reports/generate', 'show')->name('regulatory-reports.show');
+        Route::get('/ecc-regulatory-report', 'ecc')->name('ecc-regulatory-report.show');
+        Route::get('/ecc-2024-regulatory-report', 'ecc_2024')->name('ecc-2024-regulatory-report.show');
+        Route::get('/cscc-regulatory-report', 'cscc')->name('cscc-regulatory-report.show');
+        Route::get('/ccc-regulatory-report', 'ccc')->name('ccc-regulatory-report.show');
+        Route::get('/tcc-regulatory-report', 'tcc')->name('tcc-regulatory-report.show');
+        Route::get('/osmacc-regulatory-report', 'osmacc')->name('osmacc-regulatory-report.show');
+        Route::get('/dcc-regulatory-report', 'dcc')->name('dcc-regulatory-report.show');
+        Route::get('/sama-regulatory-report', 'sama')->name('sama-regulatory-report.show');
+    });
+
+    Route::view('/mis-reporting', 'process/reporting/mis-reporting')->name('mis-report.index');
+    Route::get('/asset-smart-search', AssetSmartSearch::class)->name('asset-smart-search.index');
+
+    Route::controller(ExceptionReportsController::class)->group(function () {
+        Route::get('/management-by-exceptions', 'exceptions_report')->name('exceptions-report.index');
+        Route::get('/management-by-exceptions-risk', 'risk_exceptions_report')->name('risk-exceptions-report.index');
+        Route::get('/management-by-exceptions-asset', 'asset_exceptions_report')->name('asset-exceptions-report.index');
+        // Route::get('/mbe-pdf', 'downloadPdf')->name('mbe.pdf');
+    });
+
+    Route::prefix('mis')->controller(MisReportsController::class)->group(function () {
+
+        Route::get('/critical-assets', 'criticalAssets')->name('mis-critical-assets.index');
+        Route::get('/risk-critical-assets', 'riskCriticalAssets')->name('mis-critical-risk-assets.index');
+        Route::get('/control-critical-assets', 'controlCriticalAssets')->name('mis-critical-control-assets.index');
+        // Route::get('/control-critical-assets-download', 'downloadPDF')->name('criticalpdf');
+
+        Route::get('cloud-assets', 'cloudAssets')->name('mis-cloud-assets.index');
+        Route::get('risk-cloud-assets', 'riskCloudAssets')->name('mis-cloud-risk-assets.index');
+        Route::get('/control-cloud-assets', 'controlCloudAssets')->name('mis-cloud-control-assets.index');
+
+        Route::get('/telework-assets', 'teleworkAssets')->name('mis-telework-assets.index');
+        Route::get('/risk-telework-assets', 'riskTeleworkAssets')->name('mis-telework-risk-assets.index');
+        Route::get('/control-telework-assets', 'controlTeleworkAssets')->name('mis-telework-control-assets.index');
+
+        Route::get('/social-media-assets', 'socialMediaAssets')->name('mis-social-assets.index');
+        Route::get('/risk-social-media-assets', 'riskSocialMediaAssets')->name('mis-social-risk-assets.index');
+        Route::get('/control-social-media-assets', 'controlSocialMediaAssets')->name('mis-social-control-assets.index');
+
+        Route::get('/data-privacy-assets', 'dataPrivacyAssets')->name('mis-data-assets.index');
+        Route::get('/risk-data-privacy-assets', 'riskDataPrivacyAssets')->name('mis-data-risk-assets.index');
+        Route::get('/control-data-privacy-assets', 'controlDataPrivacyAssets')->name('mis-data-control-assets.index');
+
+        Route::get('/pii-assets', 'piiAssets')->name('mis-pii-assets.index');
+        Route::get('/risk-pii-assets', 'riskPiiAssets')->name('mis-risk-pii-assets.index');
+        Route::get('/control-pii-assets', 'controlPiiAssets')->name('mis-control-pii-assets.index');
+
+        Route::get('/payment-assets', 'paymentAssets')->name('mis-payment-assets.index');
+        Route::get('/risk-payment-assets', 'riskPaymentAssets')->name('mis-risk-payment-assets.index');
+        Route::get('/control-payment-assets', 'controlPaymentAssets')->name('mis-control-payment-assets.index');
+
+        Route::get('/pci-assets', 'pciAssets')->name('mis-pci-assets.index');
+        Route::get('/risk-pci-assets', 'riskPciAssets')->name('mis-risk-pci-assets.index');
+        Route::get('/control-pci-assets', 'controlPciAssets')->name('mis-control-pci-assets.index');
+
+        Route::get('/e-commerce-assets', 'ecomAssets')->name('mis-e-commerce-assets.index');
+        Route::get('/risk-e-commerce-assets', 'riskEcomAssets')->name('mis-risk-e-commerce-assets.index');
+        Route::get('/control-e-commerce-assets', 'controlEcomAssets')->name('mis-control-e-commerce-assets.index');
+
+        Route::get('/e-banking-assets', 'ebankAssets')->name('mis-e-banking-assets.index');
+        Route::get('/risk-e-banking-assets', 'riskEbankAssets')->name('mis-risk-e-banking-assets.index');
+        Route::get('/control-e-banking-assets', 'controlEbankAssets')->name('mis-control-e-banking-assets.index');
+
+        Route::get('/mis-risk-register', 'riskReg');
+        Route::get('/implemented-controls', 'controlImple');
+        Route::get('/not-implemented-controls', 'controlNotImple');
+        Route::get('/pending-controls', 'controlPending');
+    });
+
+    Route::controller(OCDController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('compliance-dashboard.index');
+        Route::get('/domain-compliance/{bestPractice}', 'domain')->name('domain-compliance.show');
+        Route::get('/subdomain-compliance/{domainId}', 'subdomain')->name('subdomain-compliance.show');
+        Route::get('/owner-compliance/{subdomainId}', 'owner')->name('owner-compliance.show');
+        Route::get('/owner-controls/{ownerId}', 'ownerControls');
+        Route::get('/risk-domain-compliance', 'riskDomain')->name('risk-domain-compliance.show');
+        Route::get('/risk-subdomain-compliance/{domainId}', 'riskSubdomain')->name('risk-subdomain-compliance.show');
+        Route::get('/risk-owners-compliance/{subdomainId}', 'riskOwners')->name('risk-owners-compliance.show');
+        Route::get('/risk-owner-compliance/{ownerId}', 'riskOwner')->name('risk-owner-compliance.show');
+        Route::get('/asset-type-compliance/{groupId}', 'assetType')->name('asset-type-compliance.show');
+        Route::get('/domain-evidence/{bestPracticeId}', 'domainEvidence')->name('domain-evidence.show');
+        Route::get('/subdomain-evidence/{domainId}', 'subdomainEvidence')->name('subdomain-evidence.show');
+        Route::get('/controls-evidence/{subdomainId}', 'controlEvidence')->name('control-evidence.show');
+        Route::get('/asset-group-risks/{assetGroupId}', 'assetGroupRisks');
+        Route::get('/group-asset-risks/{asset:asset_id}', 'groupAssetRisks');
+        Route::get('/sama-maturity-level/{level}', 'samaMaturityLevel');
+        Route::get('/sama-maturity-level-details/{level}', 'samaMaturityLevelDetails');
+    });
+    Route::view('/frameworks', 'process/framework')->name('frameworks');
+
+
+    // ------------ISO-27001--------------
+
+    Route::view('/scope-of-isms', 'process/iso-27001/scope-of-isms');
+    Route::view('/isms', 'process/iso-27001/isms');
+    Route::view('/asset-inventory', 'process/iso-27001/asset-inventory');
+    Route::view('/risk-assessment-methodology', 'process/iso-27001/risk-assessment-methodology');
+    Route::view('/risk-assessment', 'process/iso-27001/risk-assessment');
+    Route::view('/risk-treatment-iso-27001', 'process/iso-27001/risk-treatment');
+    Route::view('/risk-register-iso-27001', 'process/iso-27001/risk-register');
+    Route::view('/statement-of-applicability', 'process/iso-27001/statement-of-applicability');
+    Route::view('/project-management-security-framework', 'process/iso-27001/project-management-security-framework');
+    Route::view('/network-security-framework', 'process/iso-27001/network-security-framework');
+    Route::view('/secure-coding-framework', 'process/iso-27001/secure-coding-framework');
+    Route::view('/hr-framework', 'process/iso-27001/hr-framework');
+    Route::view('/third-party-security-framework', 'process/iso-27001/third-party-security-framework');
+    Route::view('/internal-audit-27001', 'process/iso-27001/internal-audit');
+    Route::view('/management-review-27001', 'process/iso-27001/management-review');
+
+
+    // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
+
+    Route::resource('cms/process', CMSController::class);
+
+    Route::get('/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
+    Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
 });
-
-
-// ------------------- INITIAL SETUP -------------------
-
-Route::resource('organizations', OrganizationController::class);
-Route::resource('locations', LocationController::class);
-Route::resource('departments', DepartmentController::class);
-Route::resource('sub-departments', SubDepartmentController::class);
-Route::resource('classifications', ClassificationController::class);
-Route::resource('categories', CategoryController::class);
-Route::resource('sub-categories', SubCategoryController::class);
-Route::resource('best-practices', BestPracticeController::class);
-Route::resource('domains', MainDomainController::class);
-Route::resource('sub-domains', SubDomainController::class);
-Route::resource('owner-roles', OwnerRoleController::class);
-Route::resource('owners', OwnerController::class);
-
-// Owner Data Uploader
-Route::get('/upload-owners', [DataUploaderController::class, 'createOwner'])->name('upload.owner.create');
-Route::post('/upload-owners', [DataUploaderController::class, 'uploadOwners'])->name('upload.owners.store');
-
-Route::resource('custodian-roles', CustodianRoleController::class);
-Route::resource('custodians', CustodianController::class);
-
-// Custodian Data Uploader
-Route::get('/upload-custodians', [DataUploaderController::class, 'createCustodian'])->name('upload.custodians.create');
-Route::post('/upload-custodians', [DataUploaderController::class, 'uploadCustodian'])->name('upload.custodians.store');
-
-
-
-// ------------------- ASSET REGISTRATION -------------------
-
-Route::resource('assets', AssetRegisterController::class);
-
-// Asset Data Uploader
-Route::get('/upload-assets', [DataUploaderController::class, 'create'])->name('upload.assets.create');
-Route::post('/upload-assets', [DataUploaderController::class, 'uploadAssets'])->name('upload.assets.store');
-
-Route::resource('asset-status', AssetStatusController::class);
-Route::resource('asset-types', AssetTypeController::class);
-Route::resource('asset-sub-types', AssetSubTypeController::class);
-Route::resource('asset-groups', AssetGroupController::class);
-
-// ------------------- EVIDENCE TRACKING -------------------
-
-Route::resource('artifacts', ArtifactController::class);
-
-// Artifact Data Uploader
-Route::get('/upload-artifacts', [DataUploaderController::class, 'createArtifact'])->name('upload.artifact.create');
-Route::post('/upload-artifacts', [DataUploaderController::class, 'uploadArtifact'])->name('upload.artifact.store');
-
-Route::controller(TempFileUploadController::class)->group(function () {
-    Route::post('/uploads', 'store')->name('temp.upload.store');
-    Route::delete('/tmp/delete', 'destroy')->name('temp.upload.destroy');
-});
-
-Route::controller(ArtifactAttachmentController::class)->group(function () {
-    Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
-    Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
-});
-
-// ------------------- USERS -------------------
-
-Route::middleware('superadmin')->group(function () {
-    Route::resource('users', UserController::class);
-    // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
-    // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
-});
-
-// ------------------- THREAT MANAGEMENT -------------------
-
-Route::resource('threat-agents', ThreatAgentController::class);
-Route::resource('threat-agent-types', ThreatAgentTypeController::class);
-Route::resource('threat-agent-sub-types', ThreatAgentSubTypeController::class);
-Route::resource('threat-agent-ratings', ThreatAgentRatingController::class);
-Route::resource('threat-agent-vectors', ThreatAgentVectorController::class);
-
-// ------------------- VULNERABILITY MANAGEMENT -------------------
-
-Route::resource('vulnerabilities', VaMasterController::class);
-Route::resource('cves', RiskCveController::class);
-Route::resource('cvss', CvssController::class);
-Route::resource('vulnerability-types', VaTypeController::class);
-Route::resource('vulnerability-sub-types', VaSubTypeController::class);
-
-
-// ------------------- RISK IDENTIFICATION -------------------
-
-Route::resource('risks', RiskIdentificationController::class);
-Route::resource('risk-methodology', RiskMethodologyController::class);
-Route::resource('objectives', ObjectivesController::class);
-Route::resource('risk-groups', RiskGroupController::class);
-Route::resource('risk-types', RiskTypeController::class);
-Route::resource('risk-sub-types', RiskSubTypeController::class);
-Route::resource('kris', RiskKriController::class);
-Route::resource('kpis', RiskKpiController::class);
-Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class);
-Route::resource('risk-appetites', RiskAppetiteController::class);
-Route::resource('risk-inherents', RiskInherentController::class);
-Route::resource('risk-acceptances', RiskAcceptanceController::class);
-
-
-// ------------------- RISK TREATMENT -------------------
-
-Route::prefix('risk-treatment')->controller(RiskTreatmentController::class)->group(function () {
-    Route::get('/risk-vs-control', 'riskVsControl')->name('risk-vs-control.index');
-    Route::get('/control-vs-risk', 'controlVsRisk')->name('control-vs-risk.index');
-});
-
-// ------------------- RISK ON ASSET GROUP -------------------
-
-Route::controller(RiskAssetGroupTableController::class)->group(function () {
-    Route::get('/risk-vs-asset-group', 'riskVsAssetGroup')->name('risk-vs-asset-group.index');
-    Route::get('/asset-group-vs-risk', 'assetGroupVsRisk')->name('asset-group-vs-risk.index');
-});
-
-// ------------------- RISK REGISTER -------------------
-
-Route::controller(RiskRegisterController::class)->group(function () {
-    Route::get('/risk-register', 'index')->name('risk-register.index');
-    Route::get('/risk-register-excel', 'getRiskRegisterExcel')->name('risk.register.excel');
-});
-
-// ------------------- RISK STATUS -------------------
-
-Route::controller(RiskStatusController::class)->group(function () {
-    Route::get('/risk-status', 'index')->name('risk-status.index');
-});
-
-// ------------------- VULNERABILITY REGISTER -------------------
-
-Route::controller(VulnerabilityRegisterController::class)->group(function () {
-    Route::get('/vulnerability-register', 'index')->name('va.register');
-    Route::get('/vulnerability-register-excel', 'generateExcelReport')->name('va.register.excel');
-});
-
-// ------------------- CONTROL IDENTIFICATION -------------------
-
-Route::resource('controls', ControlController::class);
-Route::resource('control-types', ControlTypeController::class);
-Route::resource('kpi-standards', KPIStandardController::class);
-
-// ------------------- EVIDENCE MANAGEMENT -------------------
-
-Route::resource('evidences', EvidenceController::class);
-
-Route::controller(EvidenceController::class)->group(function () {
-    Route::get('/evidence-list/view/{evidence:evidence_id}', 'viewevilist')->name('evidence.view');
-    Route::patch('/evidence-list/update_attachment', 'update_attachment')->name('evidence.update.attachment');
-    Route::post('/evidence-list/delete-attachment', 'delete_attachment')->name('evidence.delete.attachment');
-});
-
-
-Route::controller(ControlEvidenceController::class)->group(function () {
-    Route::get('/control-vs-evidence', 'controlVsEvidence')->name('control-vs-evidence.index');
-    Route::get('/evidence-vs-control', 'evidenceVsControl')->name('evidence-vs-control.index');
-});
-
-// ------------------- CONTROL ASSESSMENT -------------------
-
-Route::resource('control-assessments', ControlAssessmentController::class);
-Route::resource('control-assessment-findings', ControlAssessmentFindingController::class)->except(['index', 'create', 'store']);
-Route::controller(ControlAssessmentFindingController::class)->group(function () {
-    Route::get('/control-assessment-findings/create/{controlAssessment}', 'create')->name('control-assessment-findings.create');
-    Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
-    Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
-});
-
-// ------------------- CONTROL SMART SEARCH -------------------
-
-Route::get('/control-smart-search', ControlSmartSearch::class)->name('control-smart-search.index');
-
-
-
-// ------------RISK ASSESSMENTS--------------
-
-Route::resource('risk-assessments', RiskAssessmentController::class);
-Route::controller(RiskAssessmentController::class)->group(function () {
-    Route::post('/risk-control/', 'get_control_by_risk');
-});
-
-
-Route::resource('risk-assessment-findings', RiskAssessmentFindingController::class)->except(['index', 'create', 'store']);
-Route::controller(RiskAssessmentFindingController::class)->group(function () {
-    Route::get('/risk-assessment-findings/create/{riskAssessment}', 'create')->name('risk-assessment-findings.create');
-    Route::post('/risk-assessment-finding-input/{riskAssessment}', 'store')->name('risk-assessment-findings.store');
-});
-
-// ------------AUDIT MANAGEMENT--------------
-
-Route::resource('audit-plans', AuditPlanController::class);
-Route::resource('auditors', AuditorFormController::class);
-Route::resource('auditees', AuditeeController::class);
-
-Route::controller(AuditPlanReportController::class)->group(function () {
-    Route::get('/audit-plan-report', 'index')->name('audit-plan-report.index');
-    Route::get('/audit-plan-summarize-report', 'summarizeReport')->name('audit.plan.report.summarize');
-    Route::get('/audit-plan-excel-report', 'generateExcelReport')->name('audit.plan.excel.report');
-    Route::get('/audit-plan-summarize-excel-report', 'generateSummarizeExcelReport')->name('audit.plan.summarize.excel.report');
-});
-
-// ------------AUDIT ASSESSMENTS--------------
-
-Route::resource('audit-assessments', AuditMaterController::class);
-Route::resource('audit-findings', AuditFindingController::class)->except(['index', 'create', 'store']);
-Route::controller(AuditFindingController::class)->group(function () {
-    Route::get('/audit-findings/create/{auditAssessment}', 'create')->name('audit-findings.create');
-    Route::post('/audit-findings/{auditAssessment}', 'store')->name('audit-findings.store');
-});
-
-Route::controller(ControlAuditFindingController::class)->group(function () {
-    Route::get('/control-vs-audit-finding', 'controlVsAuditFinding')->name('control-vs-audit.index');
-    Route::get('/audit-finding-vs-control', 'auditFindingVsControl')->name('audit-vs-control.index');
-});
-
-
-// ------------VULNERABILITY ASSESSMENT / PENETRATION TEST TRACKING--------------
-
-Route::resource('va-pen-tests', PenTestController::class);
-Route::resource('va-pen-test-findings', PenTestFindingsController::class)->except(['index', 'create', 'store']);
-Route::controller(PenTestFindingsController::class)->group(function () {
-    Route::get('/va-pen-test-findings/create/{penTest}', 'create')->name('va-pen-test-findings.create');
-    Route::post('/va-pen-test-findings/{penTest}', 'store')->name('va-pen-test-findings.store');
-    Route::post('/upload-poc', 'uploadPoc')->name('va-pen-test-findings.upload');
-    Route::delete('/delete-temp-poc', 'deleteTempPoc')->name('va-pen-test-findings.poc.temp.destroy');
-    Route::delete('/delete-poc/{attachment}', 'deletePoc')->name('va-pen-test-findings.poc.destroy');
-});
-
-Route::resource('patches', PatchController::class);
-Route::resource('third-party', ThirdPartyController::class);
-Route::resource('tpt-experts', TPTExpertsControl::class);
-
-
-Route::controller(PenTestReportController::class)->group(function () {
-    Route::get('/va-asset-vs-risk', 'assetVsRisk')->name('pen-test-asset-vs-risk.index');
-    Route::get('/va-pen-test-report/{penTest:va_pt_test_id}', 'report')->name('pen-test-report');
-});
-
-Route::controller(PenTestDashboardController::class)->group(function () {
-    Route::get('/va-pen-test-dashboard', 'index')->name('va-pen-test-dashboard.index');
-    Route::get('/va-pen-test-dashboard/{penTest}', 'show')->name('va-pen-test-dashboard.show');
-    Route::get('/va-pen-test-status/{penTest:va_pt_test_id}/{status}', 'status')->name('va-pen-test-dashboard.status');
-    Route::get('/va-pen-test-level-records/{penTest:va_pt_test_id}', 'levelRecords')->name('pen-test-level-records');
-    Route::get('/va-pen-test-level/{penTest:va_pt_test_id}/{level}', 'level')->name('pen-test-level');
-    Route::get('/va-pen-test-level-status/{penTest:va_pt_test_id}', 'levelStatus')->name('pen-test-level-status');
-});
-
-// ------------REPORTING--------------
-
-Route::controller(KPICategoryController::class)->group(function () {
-    Route::get('/kpi-references', 'report')->name('kpi-references.index');
-});
-Route::resource('kpi-standards-report', KPIStandardReportController::class);
-Route::resource('kpi-categories', KPICategoryController::class);
-
-Route::controller(RegulatoryReportController::class)->group(function () {
-    Route::get('/nca-regulatory-reports', 'index')->name('nca-regulatory-reports.index');
-    Route::get('/regulatory-report', 'create')->name('regulatory-reports.create');
-    Route::get('/regulatory-reports/generate', 'show')->name('regulatory-reports.show');
-    Route::get('/ecc-regulatory-report', 'ecc')->name('ecc-regulatory-report.show');
-    Route::get('/ecc-2024-regulatory-report', 'ecc_2024')->name('ecc-2024-regulatory-report.show');
-    Route::get('/cscc-regulatory-report', 'cscc')->name('cscc-regulatory-report.show');
-    Route::get('/ccc-regulatory-report', 'ccc')->name('ccc-regulatory-report.show');
-    Route::get('/tcc-regulatory-report', 'tcc')->name('tcc-regulatory-report.show');
-    Route::get('/osmacc-regulatory-report', 'osmacc')->name('osmacc-regulatory-report.show');
-    Route::get('/dcc-regulatory-report', 'dcc')->name('dcc-regulatory-report.show');
-    Route::get('/sama-regulatory-report', 'sama')->name('sama-regulatory-report.show');
-});
-
-Route::view('/mis-reporting', 'process/reporting/mis-reporting')->name('mis-report.index');
-Route::get('/asset-smart-search', AssetSmartSearch::class)->name('asset-smart-search.index');
-
-Route::controller(ExceptionReportsController::class)->group(function () {
-    Route::get('/management-by-exceptions', 'exceptions_report')->name('exceptions-report.index');
-    Route::get('/management-by-exceptions-risk', 'risk_exceptions_report')->name('risk-exceptions-report.index');
-    Route::get('/management-by-exceptions-asset', 'asset_exceptions_report')->name('asset-exceptions-report.index');
-    // Route::get('/mbe-pdf', 'downloadPdf')->name('mbe.pdf');
-});
-
-Route::prefix('mis')->controller(MisReportsController::class)->group(function () {
-
-    Route::get('/critical-assets', 'criticalAssets')->name('mis-critical-assets.index');
-    Route::get('/risk-critical-assets', 'riskCriticalAssets')->name('mis-critical-risk-assets.index');
-    Route::get('/control-critical-assets', 'controlCriticalAssets')->name('mis-critical-control-assets.index');
-    // Route::get('/control-critical-assets-download', 'downloadPDF')->name('criticalpdf');
-
-    Route::get('cloud-assets', 'cloudAssets')->name('mis-cloud-assets.index');
-    Route::get('risk-cloud-assets', 'riskCloudAssets')->name('mis-cloud-risk-assets.index');
-    Route::get('/control-cloud-assets', 'controlCloudAssets')->name('mis-cloud-control-assets.index');
-
-    Route::get('/telework-assets', 'teleworkAssets')->name('mis-telework-assets.index');
-    Route::get('/risk-telework-assets', 'riskTeleworkAssets')->name('mis-telework-risk-assets.index');
-    Route::get('/control-telework-assets', 'controlTeleworkAssets')->name('mis-telework-control-assets.index');
-
-    Route::get('/social-media-assets', 'socialMediaAssets')->name('mis-social-assets.index');
-    Route::get('/risk-social-media-assets', 'riskSocialMediaAssets')->name('mis-social-risk-assets.index');
-    Route::get('/control-social-media-assets', 'controlSocialMediaAssets')->name('mis-social-control-assets.index');
-
-    Route::get('/data-privacy-assets', 'dataPrivacyAssets')->name('mis-data-assets.index');
-    Route::get('/risk-data-privacy-assets', 'riskDataPrivacyAssets')->name('mis-data-risk-assets.index');
-    Route::get('/control-data-privacy-assets', 'controlDataPrivacyAssets')->name('mis-data-control-assets.index');
-
-    Route::get('/pii-assets', 'piiAssets')->name('mis-pii-assets.index');
-    Route::get('/risk-pii-assets', 'riskPiiAssets')->name('mis-risk-pii-assets.index');
-    Route::get('/control-pii-assets', 'controlPiiAssets')->name('mis-control-pii-assets.index');
-
-    Route::get('/payment-assets', 'paymentAssets')->name('mis-payment-assets.index');
-    Route::get('/risk-payment-assets', 'riskPaymentAssets')->name('mis-risk-payment-assets.index');
-    Route::get('/control-payment-assets', 'controlPaymentAssets')->name('mis-control-payment-assets.index');
-
-    Route::get('/pci-assets', 'pciAssets')->name('mis-pci-assets.index');
-    Route::get('/risk-pci-assets', 'riskPciAssets')->name('mis-risk-pci-assets.index');
-    Route::get('/control-pci-assets', 'controlPciAssets')->name('mis-control-pci-assets.index');
-
-    Route::get('/e-commerce-assets', 'ecomAssets')->name('mis-e-commerce-assets.index');
-    Route::get('/risk-e-commerce-assets', 'riskEcomAssets')->name('mis-risk-e-commerce-assets.index');
-    Route::get('/control-e-commerce-assets', 'controlEcomAssets')->name('mis-control-e-commerce-assets.index');
-
-    Route::get('/e-banking-assets', 'ebankAssets')->name('mis-e-banking-assets.index');
-    Route::get('/risk-e-banking-assets', 'riskEbankAssets')->name('mis-risk-e-banking-assets.index');
-    Route::get('/control-e-banking-assets', 'controlEbankAssets')->name('mis-control-e-banking-assets.index');
-
-    Route::get('/mis-risk-register', 'riskReg');
-    Route::get('/implemented-controls', 'controlImple');
-    Route::get('/not-implemented-controls', 'controlNotImple');
-    Route::get('/pending-controls', 'controlPending');
-});
-
-Route::controller(OCDController::class)->group(function () {
-    Route::get('/dashboard', 'index')->name('compliance-dashboard.index');
-    Route::get('/domain-compliance/{bestPractice}', 'domain')->name('domain-compliance.show');
-    Route::get('/subdomain-compliance/{domainId}', 'subdomain')->name('subdomain-compliance.show');
-    Route::get('/owner-compliance/{subdomainId}', 'owner')->name('owner-compliance.show');
-    Route::get('/owner-controls/{ownerId}', 'ownerControls');
-    Route::get('/risk-domain-compliance', 'riskDomain')->name('risk-domain-compliance.show');
-    Route::get('/risk-subdomain-compliance/{domainId}', 'riskSubdomain')->name('risk-subdomain-compliance.show');
-    Route::get('/risk-owners-compliance/{subdomainId}', 'riskOwners')->name('risk-owners-compliance.show');
-    Route::get('/risk-owner-compliance/{ownerId}', 'riskOwner')->name('risk-owner-compliance.show');
-    Route::get('/asset-type-compliance/{groupId}', 'assetType')->name('asset-type-compliance.show');
-    Route::get('/domain-evidence/{bestPracticeId}', 'domainEvidence')->name('domain-evidence.show');
-    Route::get('/subdomain-evidence/{domainId}', 'subdomainEvidence')->name('subdomain-evidence.show');
-    Route::get('/controls-evidence/{subdomainId}', 'controlEvidence')->name('control-evidence.show');
-    Route::get('/asset-group-risks/{assetGroupId}', 'assetGroupRisks');
-    Route::get('/group-asset-risks/{asset:asset_id}', 'groupAssetRisks');
-    Route::get('/sama-maturity-level/{level}', 'samaMaturityLevel');
-    Route::get('/sama-maturity-level-details/{level}', 'samaMaturityLevelDetails');
-});
-Route::view('/frameworks', 'process/framework')->name('frameworks');
-
-
-// ------------ISO-27001--------------
-
-Route::view('/scope-of-isms', 'process/iso-27001/scope-of-isms');
-Route::view('/isms', 'process/iso-27001/isms');
-Route::view('/asset-inventory', 'process/iso-27001/asset-inventory');
-Route::view('/risk-assessment-methodology', 'process/iso-27001/risk-assessment-methodology');
-Route::view('/risk-assessment', 'process/iso-27001/risk-assessment');
-Route::view('/risk-treatment-iso-27001', 'process/iso-27001/risk-treatment');
-Route::view('/risk-register-iso-27001', 'process/iso-27001/risk-register');
-Route::view('/statement-of-applicability', 'process/iso-27001/statement-of-applicability');
-Route::view('/project-management-security-framework', 'process/iso-27001/project-management-security-framework');
-Route::view('/network-security-framework', 'process/iso-27001/network-security-framework');
-Route::view('/secure-coding-framework', 'process/iso-27001/secure-coding-framework');
-Route::view('/hr-framework', 'process/iso-27001/hr-framework');
-Route::view('/third-party-security-framework', 'process/iso-27001/third-party-security-framework');
-Route::view('/internal-audit-27001', 'process/iso-27001/internal-audit');
-Route::view('/management-review-27001', 'process/iso-27001/management-review');
-
-
-// ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
-
-Route::resource('cms/process', CMSController::class);
-
-Route::get('/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
-Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
-
-
 
 
 // Route::get('/insert-record', function () {
