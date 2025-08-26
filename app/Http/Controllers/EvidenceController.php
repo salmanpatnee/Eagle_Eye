@@ -19,14 +19,14 @@ class EvidenceController extends Controller
     {
         $evidences = Evidence::paginate(20);
 
-        return view('process\evidence-management\evidences\index', compact('evidences'));
+        return view('process/evidence-management/evidences/index', compact('evidences'));
     }
 
     public function show(Evidence $evidence)
     {
         $evidence->load('classification', 'owner', 'controls', 'artifacts', 'categories');
 
-        return view('process\evidence-management\evidences\show', compact('evidence'));
+        return view('process/evidence-management/evidences/show', compact('evidence'));
     }
 
     public function create()
@@ -55,7 +55,7 @@ class EvidenceController extends Controller
         $selectedArtifactIds = $selectedControlIds = $categoryIds = [];
         $evidence = null;
 
-        return view('process\evidence-management\evidences\create', compact(
+        return view('process/evidence-management/evidences/create', compact(
             'classifications',
             'categories',
             'owners',
@@ -119,7 +119,7 @@ class EvidenceController extends Controller
 
 
         return redirect(route('evidences.index'))
-            ->with('success', 'Evidences added.');
+            ->with('success', 'Evidence added.');
     }
 
     public function edit(Evidence $evidence, Request $request)
@@ -168,7 +168,7 @@ class EvidenceController extends Controller
             ->get();
 
 
-        return view('process\evidence-management\evidences\create', compact(
+        return view('process/evidence-management/evidences/create', compact(
             'evidence',
             'artifacts',
             'categories',
@@ -231,7 +231,7 @@ class EvidenceController extends Controller
 
 
         return redirect(route('evidences.index'))
-            ->with('success', 'Evidences updated.');
+            ->with('success', 'Evidence updated.');
     }
 
     public function destroy(Evidence $evidence)
@@ -241,7 +241,7 @@ class EvidenceController extends Controller
         $evidence->artifacts()->detach();
         $evidence->delete();
         return redirect(route('evidences.index'))
-            ->with('success', 'Evidences deleted.');
+            ->with('success', 'Evidence deleted.');
     }
 
     public function delete_attachment(Request $request)

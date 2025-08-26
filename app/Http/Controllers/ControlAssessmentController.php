@@ -128,7 +128,7 @@ class ControlAssessmentController extends Controller
     public function destroy(ControlAssessment $controlAssessment)
     {
 
-        $findings = $controlAssessment->findings();
+        $findings = $controlAssessment->findings;
 
         foreach ($findings as $finding) {
             $finding->categories()->detach();

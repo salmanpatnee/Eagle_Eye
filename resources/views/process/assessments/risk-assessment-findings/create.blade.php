@@ -5,6 +5,7 @@
     @php
         $ratings = ['1', '2', '3', '4', '5'];
     @endphp
+
     <div>
         <x-table.action-wrapper title="{{ isset($riskAssessmentFinding) ? 'Update' : 'New' }} Risk Assessment Finding">
             <x-action.button label="View" label_ar="منظر" route_name="risk-assessments.index" />

@@ -14,12 +14,12 @@ class ControlAssessment extends Model
     protected $guarded = [];
     public $timestamps = false;
     // protected $primaryKey = 'control_assessment_id';
-    public $incrementing = false;
+    // public $incrementing = false;
 
-    public function getRouteKeyName()
-    {
-        return $this->primaryKey;
-    }
+    // public function getRouteKeyName()
+    // {
+    //     return $this->primaryKey;
+    // }
 
 
     public function findings()

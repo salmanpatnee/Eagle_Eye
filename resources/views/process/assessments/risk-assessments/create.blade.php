@@ -106,7 +106,7 @@
             </div>
 
             <div class="flex justify-end">
-                <x-form.submit label="Risk Assessment" label_ar="المرفق" :isUpdate="$riskAssessment?->id" />
+                <x-form.submit label="Risk Assessment" label_ar="تقييم المخاطر" :isUpdate="$riskAssessment?->id" />
             </div>
         </form>
     </div>

@@ -34,7 +34,7 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.field label="Evidence ID" label_ar="رمز الأدلة" name="evidence_id" required="true"
-                            placeholder="Enter Evidence ID" :value="$evidence?->evidence_id ?? old('evidence_id')" />
+                            placeholder="Enter Evidence ID" :value="$evidence?->evidence_id ?? old('evidence_id')" :readonly="$evidence?->evidence_id" />
                     </div>
                     <div>
                         <x-form.field label="Evidence Name" label_ar="اسم الأدلة" name="evidence_name" required="true"

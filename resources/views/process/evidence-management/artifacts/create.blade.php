@@ -22,7 +22,7 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.field label="Artifact ID" label_ar="رمز المرفقات" name="artifact_id" required="true"
-                            placeholder="Enter Artifact ID" :value="$artifact?->artifact_id ?? old('artifact_id')" />
+                            placeholder="Enter Artifact ID" :value="$artifact?->artifact_id ?? old('artifact_id')" :readonly="$artifact?->artifact_id" />
                     </div>
                     <div>
                         <x-form.field label="Artifact Name" label_ar="اسم المرفقات" name="artifact_name" required="true"

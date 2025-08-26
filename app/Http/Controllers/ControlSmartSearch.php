@@ -17,7 +17,7 @@ class ControlSmartSearch extends Controller
     public function __invoke(Request $request)
     {
 
-        $controlId = $request->input('control_id') ?? null;
+        $controlId = $request->input('control_name') ?? null;
         $classification = $request->input('classification') ?? null;
         $category = $request->input('category') ?? null;
         $type = $request->input('type') ?? null;
@@ -25,6 +25,7 @@ class ControlSmartSearch extends Controller
         $domain = $request->input('domain') ?? null;
         $subdomain = $request->input('subdomain') ?? null;
         $relation = $request->input('relation') ?? null;
+
 
         $controlNames       = ControlMaster::select('control_id')->orderBy(DB::raw("CAST(SUBSTRING_INDEX(control_id, '-', 1) AS UNSIGNED)"))
             ->orderBy(DB::raw("CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_id, '-', 3), '-', -1) AS UNSIGNED)"))
@@ -80,8 +81,8 @@ class ControlSmartSearch extends Controller
             ->when($subdomain, function ($query) use ($request) {
                 $query->where('subdomain.sub_domain_id', $request->input('subdomain'));
             })
-            ->when($relation, function ($query) use ($request) {
-                $query->where($request->input('relation'), 'Yes');
+            ->when($relation, function ($query) use ($request, $relation) {
+                $query->where($relation, 'Yes');
             });
 
         $relations = [
