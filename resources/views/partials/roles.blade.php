@@ -50,6 +50,12 @@
     .bg-info {
         background-color: #6ba8b5 !important;
     }
+
+    @media (max-width: 768px) {
+        .user-nav {
+            margin-left: 0;
+        }
+    }
 </style>
 
 <ul class="align-items-center d-flex gap-2 user-nav mt-0">

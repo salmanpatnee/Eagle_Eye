@@ -798,7 +798,7 @@ Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->
 
 
 
-Route::view('/cs-induction', 'process/1-CsInduction');
+Route::view('/cs-induction', 'process/1-CsInduction')->name('cs-induction');
 
 Route::prefix('cs-induction')->group(function () {
     Route::view('/cybersecurity-governance', 'process/17-GrcDomain/1-CybersecurityStrategyCsIndu');
