@@ -505,6 +505,20 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
     Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
+
+
+    // ------------------CISO Education-------------------------
+
+    Route::view('/ciso-education', 'ciso/ciso-education/index')->name('ciso-education.index');
+
+
+    Route::prefix('ciso-education')->group(function () {
+        Route::view('/applying-cissp-knowledge-in-ksa', 'ciso/ciso-education/cissp')->name('cissp');
+        Route::view('/applying-cism-knowledge-in-ksa', 'ciso/ciso-education/cism')->name('cism');
+        Route::view('/applying-cgeit-knowledge-in-ksa', 'ciso/ciso-education/cgeit')->name('cgeit');
+        Route::view('/applying-pmp-knowledge-in-ksa', 'ciso/ciso-education/pmp')->name('pmp');
+        Route::view('/applying-agile-approach', 'ciso/ciso-education/agile')->name('agile');
+    });
 });
 
 
@@ -795,9 +809,6 @@ Route::get('/hr-experts', [HumanResourceController::class, 'show'])->name('hr.ex
 Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
 Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
 
-
-
-
 Route::view('/cs-induction', 'process/1-CsInduction')->name('cs-induction');
 
 Route::prefix('cs-induction')->group(function () {
@@ -849,6 +860,8 @@ Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destr
 
 
 
+
+
 // Hot Topics
 
 Route::get('/hot-topics', function () {
@@ -871,19 +884,6 @@ Route::prefix('hot-topics')->group(function () {
     Route::view('/review-vs-audit', '6-HotTopics/review-vs-audit');
 });
 
-// CISO Education
-
-Route::get('/ciso-education', function () {
-    return view('5-CISOEducation/CisoEducation');
-});
-
-Route::prefix('ciso-education')->group(function () {
-    Route::view('/applying-cissp-knowledge-in-ksa', '5-CISOEducation/cissp');
-    Route::view('/applying-cism-knowledge-in-ksa', '5-CISOEducation/cism');
-    Route::view('/applying-cgeit-knowledge-in-ksa', '5-CISOEducation/cgeit');
-    Route::view('/applying-pmp-knowledge-in-ksa', '5-CISOEducation/pmp');
-    Route::view('/applying-agile-approach', '5-CISOEducation/agile');
-});
 
 
 // Products

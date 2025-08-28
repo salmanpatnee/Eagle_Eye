@@ -112,7 +112,7 @@ class ControlEvidenceController extends Controller
 
 
             return view(
-                'process\evidence-management\evidence-control\control-vs-evidence',
+                'process/evidence-management/evidence-control/control-vs-evidence',
                 compact('controlEvidence', 'controlIds', 'practices', 'domains', 'subDomains', 'bestPracticeId', 'domainId', 'subDomainId', 'controlId')
             );
         }

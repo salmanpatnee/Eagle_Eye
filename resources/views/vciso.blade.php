@@ -235,7 +235,7 @@
             </div>
         </div>
         <div class="RowTwo">
-            <a href="/ciso-education">
+            <a href="{{ route('ciso-education.index') }}">
                 <div class="BoxTwo">
                     <div>
                         <img src="Images/15-GraduationCap.png" alt="Graduation">

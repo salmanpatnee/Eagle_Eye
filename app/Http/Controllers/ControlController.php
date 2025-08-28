@@ -71,7 +71,7 @@ class ControlController extends Controller
         $domains = DB::table('domain_table')->select('id', 'main_domain_id', 'main_domain_name')->distinct()->get();
         $subDomains = DB::table('sub_domain_table')->select('id', 'sub_domain_id', 'sub_domain_name')->distinct()->get();
         $risks = DB::table('risk_master_table')->select('id', 'risk_id', 'risk_name')->distinct()->get();
-        $controls = ControlMaster::select('control_id', 'control_name')->where('control_id', 'LIKE', 'SAMA-CSF-%')->get();
+        $controls = ControlMaster::select('control_id', 'control_name')->get();
         $categoryIds =  $bestPracticeIds =  $custodianRoleIds =  $mainDomainIds = $subDomainIds = $riskIds = [];
 
         return view('process/control-identification/controls/create', compact('control', 'classifications', 'owners', 'controlTypes', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'controls', 'categoryIds', 'bestPracticeIds', 'custodianRoleIds', 'mainDomainIds', 'subDomainIds', 'riskIds'));
@@ -163,7 +163,7 @@ class ControlController extends Controller
         $mainDomainIds = $control->domains()->pluck('domain_table.main_domain_id')->toArray();
         $subDomainIds = $control->subDomains()->pluck('sub_domain_table.sub_domain_id')->toArray();
         $riskIds = $control->risks()->pluck('risk_master_table.risk_id')->toArray();
-        $controls = ControlMaster::select('control_id', 'control_name')->where('control_id', 'LIKE', 'SAMA-CSF-%')->where('control_id', "!=", $control->control_id)->get();
+        $controls = ControlMaster::select('control_id', 'control_name')->where('control_id', "!=", $control->control_id)->get();
 
         $classifications = DB::table('classification_table')->select('classification_id', 'classification_name')->get();
         $owners = DB::table('owner_table')->select('owner_name', 'owner_role_id')->get();
@@ -174,7 +174,7 @@ class ControlController extends Controller
         $domains = DB::table('domain_table')->select('id', 'main_domain_id', 'main_domain_name')->distinct()->get();
         $subDomains = DB::table('sub_domain_table')->select('id', 'sub_domain_id', 'sub_domain_name')->distinct()->get();
         $risks = DB::table('risk_master_table')->select('id', 'risk_id', 'risk_name')->distinct()->get();
-        $controls = ControlMaster::select('control_id', 'control_name')->where('control_id', 'LIKE', 'SAMA-CSF-%')->get();
+        $controls = ControlMaster::select('control_id', 'control_name')->get();
 
 
 
