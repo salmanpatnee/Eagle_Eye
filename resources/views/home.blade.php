@@ -509,6 +509,18 @@
         </span> --}}
 
         <div class="feature-boxes">
+            <a href="{{ route('compliance') }}" class="feature-box fade-in-up" role="button"
+                aria-label="Access Compliance 360 Out-of-the-Box Compliance">
+                <img src="{{ asset('Images/ComplianceICon.jpeg') }}" alt="Compliance 360" loading="lazy">
+                <h3>Compliance 360</h3>
+                <p>100% Out-of-the-Box Compliance</p>
+            </a>
+            <a href="{{ route('vciso') }}" class="feature-box fade-in-up" role="button"
+                aria-label="Access CISO 360 Decision Support System">
+                <img src="{{ asset('Images/ConfidentCISO.png') }}" alt="CISO 360" loading="lazy">
+                <h3>CISO 360</h3>
+                <p>CISO Decision Support System</p>
+            </a>
             <a href="{{ route('cs-induction') }}" class="feature-box fade-in-up" role="button"
                 aria-label="Access PitStop 360 CS Induction Program">
                 <img src="{{ asset('Images/pitstop.jpg') }}" alt="PitStop 360" loading="lazy">
@@ -516,19 +528,7 @@
                 <p>CS Induction Program</p>
             </a>
 
-            <a href="{{ route('vciso') }}" class="feature-box fade-in-up" role="button"
-                aria-label="Access CISO 360 Decision Support System">
-                <img src="{{ asset('Images/ConfidentCISO.png') }}" alt="CISO 360" loading="lazy">
-                <h3>CISO 360</h3>
-                <p>CISO Decision Support System</p>
-            </a>
 
-            <a href="{{ route('compliance') }}" class="feature-box fade-in-up" role="button"
-                aria-label="Access Compliance 360 Out-of-the-Box Compliance">
-                <img src="{{ asset('Images/ComplianceICon.jpeg') }}" alt="Compliance 360" loading="lazy">
-                <h3>Compliance 360</h3>
-                <p>100% Out-of-the-Box Compliance</p>
-            </a>
         </div>
     </div>
 </body>

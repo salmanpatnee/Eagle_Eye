@@ -7,12 +7,12 @@
          <a href="{{ route('compliance') }}">
              <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                  <span class="flex items-center space-x-2">
-                     <img class="dark:hidden w-20" src="{{ asset('images/logo/EagleEyeLogo.png') }}" alt="Logo" />
+                     <img class="dark:hidden w-20" src="{{ asset('Images/logo/EagleEyeLogo.png') }}" alt="Logo" />
                      <span class="dark:hidden text-2xl font-semibold">Eagle Eye</span>
                  </span>
              </span>
              <img class="logo-icon" :class="sidebarToggle ? 'lg:block mt-10 w-20' : 'hidden'"
-                 src="{{ asset('images/logo/EagleEyeLogo.png') }}" alt="Logo" />
+                 src="{{ asset('Images/logo/EagleEyeLogo.png') }}" alt="Logo" />
 
          </a>
      </div>

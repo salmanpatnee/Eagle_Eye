@@ -23,7 +23,7 @@ class RiskMethodologyController extends Controller
     {
         $riskMethodologies = RiskMethodology::all();
 
-        return view('process\risk-identification\risk-methodology\index', compact('riskMethodologies'));
+        return view('process/risk-identification/risk-methodology/index', compact('riskMethodologies'));
     }
 
     public function show(RiskMethodology $riskMethodology)
@@ -41,7 +41,7 @@ class RiskMethodologyController extends Controller
             $mpdf = new Mpdf();
 
             // $bootstrapCSS = file_get_contents('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
-            // $mpdf->WriteHTML($bootstrapCSS, \Mpdf\HTMLParserMode::HEADER_CSS);
+            // $mpdf->WriteHTML($bootstrapCSS, /Mpdf/HTMLParserMode::HEADER_CSS);
 
             // Get the HTML content
             $html = view("process/risk-identification/risk-methodology/pdf", compact('riskMethodology', 'organization', 'riskAppetites', 'impacts'))->render();
@@ -76,7 +76,7 @@ class RiskMethodologyController extends Controller
         $objectives = Objective::select('id', 'objective_id', 'objective')->get();
         $objectiveIds = [];
 
-        return view('process\risk-identification\risk-methodology\create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'owners', 'appetites', 'acceptances', 'objectives', 'objectiveIds', 'riskTreatments'));
+        return view('process/risk-identification/risk-methodology/create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'owners', 'appetites', 'acceptances', 'objectives', 'objectiveIds', 'riskTreatments'));
     }
 
     public function store(RiskMethodologyRequest $request)
@@ -108,7 +108,7 @@ class RiskMethodologyController extends Controller
         $objectives = Objective::select('id', 'objective_id', 'objective')->get();
         $objectiveIds = $riskMethodology->objectives()->pluck('objectives.objective_id')->toArray();
 
-        return view('process\risk-identification\risk-methodology\create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'riskTreatments', 'owners', 'appetites', 'acceptances', 'objectiveIds', 'objectives'));
+        return view('process/risk-identification/risk-methodology/create', compact('riskMethodology', 'assets', 'threats', 'vulnerabilities', 'risks', 'riskTreatments', 'owners', 'appetites', 'acceptances', 'objectiveIds', 'objectives'));
     }
 
     public function update(RiskMethodology $riskMethodology, RiskMethodologyRequest $request)

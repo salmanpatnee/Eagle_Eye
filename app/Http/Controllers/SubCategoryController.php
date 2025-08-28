@@ -14,14 +14,14 @@ class SubCategoryController extends Controller
     {
         $subCategories = SubCategory::select('id', 'sub_category_id', 'sub_category_name', 'category_id')->with('category')->get();
 
-        return view('process.Initial-setup.sub-categories.index', compact('subCategories'));
+        return view('process.initial-setup.sub-categories.index', compact('subCategories'));
     }
 
     public function show(SubCategory $subCategory)
     {
         $subCategory->load('category');
 
-        return view('process.Initial-setup.sub-categories.show', compact('subCategory'));
+        return view('process.initial-setup.sub-categories.show', compact('subCategory'));
     }
 
     public function create()
@@ -29,7 +29,7 @@ class SubCategoryController extends Controller
         $subCategory = null;
         $categories = Category::select('category_id', 'category_name')->get();
 
-        return view('process.Initial-setup.sub-categories.create', compact('subCategory', 'categories'));
+        return view('process.initial-setup.sub-categories.create', compact('subCategory', 'categories'));
     }
 
     public function store(Request $request)
@@ -51,7 +51,7 @@ class SubCategoryController extends Controller
     {
         $categories = DB::table('category_table')->get();
 
-        return view('process.Initial-setup.sub-categories.create', compact('subCategory', 'categories'));
+        return view('process.initial-setup.sub-categories.create', compact('subCategory', 'categories'));
     }
 
 

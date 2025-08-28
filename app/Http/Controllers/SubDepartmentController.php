@@ -15,13 +15,13 @@ class SubDepartmentController extends Controller
         $subDepartments = SubDepartment::select('id', 'sub_department_id', 'sub_department_name', 'department_id')->with('department')->get();
 
 
-        return view('process.Initial-setup.sub-departments.index', compact('subDepartments'));
+        return view('process.initial-setup.sub-departments.index', compact('subDepartments'));
     }
 
     public function show(SubDepartment $subDepartment)
     {
         $subDepartment->load('department');
-        return view('process.Initial-setup.sub-departments.show', compact('subDepartment'));
+        return view('process.initial-setup.sub-departments.show', compact('subDepartment'));
     }
 
     public function create()
@@ -29,7 +29,7 @@ class SubDepartmentController extends Controller
         $subDepartment = null;
         $departments = Department::select('id', 'department_id', 'department_name')->get();
 
-        return view('process.Initial-setup.sub-departments.create', compact('subDepartment', 'departments'));
+        return view('process.initial-setup.sub-departments.create', compact('subDepartment', 'departments'));
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class SubDepartmentController extends Controller
     {
         $departments = Department::select('id', 'department_id', 'department_name')->get();
 
-        return view('process.Initial-setup.sub-departments.create', compact('subDepartment', 'departments'));
+        return view('process.initial-setup.sub-departments.create', compact('subDepartment', 'departments'));
     }
 
 

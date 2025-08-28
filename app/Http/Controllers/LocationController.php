@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
+
 
 
 
@@ -16,7 +15,7 @@ class LocationController extends Controller
     {
         $locations = Location::all();
 
-        return view('process.Initial-setup.locations.index', compact('locations'));
+        return view('process.initial-setup.locations.index', compact('locations'));
     }
 
     public function show(Location $location)
@@ -28,13 +27,13 @@ class LocationController extends Controller
     public function create()
     {
         $location = null;
-        return view('process.Initial-setup.locations.create', compact('location'));
+        return view('process.initial-setup.locations.create', compact('location'));
     }
 
     public function edit(Location $location)
     {
 
-        return view('process.Initial-setup.locations.create', compact('location'));
+        return view('process.initial-setup.locations.create', compact('location'));
     }
 
 

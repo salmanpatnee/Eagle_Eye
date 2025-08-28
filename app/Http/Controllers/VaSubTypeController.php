@@ -13,21 +13,21 @@ class VaSubTypeController extends Controller
     {
         $vulnerabilitySubTypes = VulnerabilitySubType::with('type')->paginate(20);
 
-        return view('process\vulnerability-management\vulnerability-sub-types\index', compact('vulnerabilitySubTypes'));
+        return view('process/vulnerability-management/vulnerability-sub-types/index', compact('vulnerabilitySubTypes'));
     }
 
     public function show(VulnerabilitySubType $vulnerabilitySubType)
     {
         $vulnerabilitySubType->load('type');
 
-        return view('process\vulnerability-management\vulnerability-sub-types\show', compact('vulnerabilitySubType'));
+        return view('process/vulnerability-management/vulnerability-sub-types/show', compact('vulnerabilitySubType'));
     }
 
     public function create()
     {
         $vulnerabilitySubType = null;
         $vulnerabilityTypes = VulnerabilityType::all();
-        return view('process\vulnerability-management\vulnerability-sub-types\create', compact('vulnerabilitySubType', 'vulnerabilityTypes'));
+        return view('process/vulnerability-management/vulnerability-sub-types/create', compact('vulnerabilitySubType', 'vulnerabilityTypes'));
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class VaSubTypeController extends Controller
     {
         $vulnerabilityTypes = VulnerabilityType::all();
 
-        return view('process\vulnerability-management\vulnerability-sub-types\create', compact('vulnerabilitySubType', 'vulnerabilityTypes'));
+        return view('process/vulnerability-management/vulnerability-sub-types/create', compact('vulnerabilitySubType', 'vulnerabilityTypes'));
     }
 
     public function update(VulnerabilitySubType $vulnerabilitySubType, Request $request)

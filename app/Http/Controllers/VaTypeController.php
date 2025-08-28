@@ -11,18 +11,18 @@ class VaTypeController extends Controller
     public function index()
     {
         $vulnerabilityTypes = VulnerabilityType::paginate(20);
-        return view('process\vulnerability-management\vulnerability-types\index', compact('vulnerabilityTypes'));
+        return view('process/vulnerability-management/vulnerability-types/index', compact('vulnerabilityTypes'));
     }
 
     public function show(VulnerabilityType $vulnerabilityType)
     {
-        return view('process\vulnerability-management\vulnerability-types\show', compact('vulnerabilityType'));
+        return view('process/vulnerability-management/vulnerability-types/show', compact('vulnerabilityType'));
     }
 
     public function create()
     {
         $vulnerabilityType = null;
-        return view('process\vulnerability-management\vulnerability-types\create', compact('vulnerabilityType'));
+        return view('process/vulnerability-management/vulnerability-types/create', compact('vulnerabilityType'));
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class VaTypeController extends Controller
 
     public function edit(VulnerabilityType $vulnerabilityType)
     {
-        return view('process\vulnerability-management\vulnerability-types\create', compact('vulnerabilityType'));
+        return view('process/vulnerability-management/vulnerability-types/create', compact('vulnerabilityType'));
     }
 
     public function update(VulnerabilityType $vulnerabilityType, Request $request)

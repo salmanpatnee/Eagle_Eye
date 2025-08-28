@@ -13,12 +13,12 @@ class RiskGroupController extends Controller
     {
         $riskGroups = RiskGroup::paginate(20);
 
-        return view('process\risk-identification\risk-groups\index', compact('riskGroups'));
+        return view('process/risk-identification/risk-groups/index', compact('riskGroups'));
     }
 
     public function show(RiskGroup $riskGroup)
     {
-        return view('process\risk-identification\risk-groups\show', compact('riskGroup'));
+        return view('process/risk-identification/risk-groups/show', compact('riskGroup'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class RiskGroupController extends Controller
         $riskGroup = null;
         $owners = Owner::select('owner_role_id', 'owner_name')->get();
 
-        return view('process\risk-identification\risk-groups\create', compact('riskGroup', 'owners'));
+        return view('process/risk-identification/risk-groups/create', compact('riskGroup', 'owners'));
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class RiskGroupController extends Controller
     {
         $owners = Owner::select('owner_role_id', 'owner_name')->get();
 
-        return view('process\risk-identification\risk-groups\create', compact('riskGroup', 'owners'));
+        return view('process/risk-identification/risk-groups/create', compact('riskGroup', 'owners'));
     }
 
 
