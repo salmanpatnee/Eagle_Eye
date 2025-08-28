@@ -84,7 +84,7 @@ class AssetSmartSearch extends Controller
             'relation' => $relation,
         ]);
 
-        return view('process\assets\asset-smart-search\index', compact(
+        return view('process/assets/asset-smart-search/index', compact(
             'result',
             'assets',
             'assetGroups',

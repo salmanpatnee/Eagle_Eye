@@ -15,18 +15,18 @@ class RiskKriController extends Controller
     {
         $keyRiskIndicators = KeyRiskIndicator::paginate(20);
 
-        return view('process\risk-identification\kri\index', compact('keyRiskIndicators'));
+        return view('process/risk-identification/kri/index', compact('keyRiskIndicators'));
     }
 
     public function show(KeyRiskIndicator $kri)
     {
-        return view('process\risk-identification\kri\show', compact('kri'));
+        return view('process/risk-identification/kri/show', compact('kri'));
     }
 
     public function create()
     {
         $kri = null;
-        return view('process\risk-identification\kri\create', compact('kri'));
+        return view('process/risk-identification/kri/create', compact('kri'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class RiskKriController extends Controller
 
     public function edit(KeyRiskIndicator $kri)
     {
-        return view('process\risk-identification\kri\create', compact('kri'));
+        return view('process/risk-identification/kri/create', compact('kri'));
     }
 
 

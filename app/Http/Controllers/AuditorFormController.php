@@ -12,19 +12,19 @@ class AuditorFormController extends Controller
     {
         $auditors = Auditor::paginate(20);
 
-        return view('process\audit-management\auditors\index', compact('auditors'));
+        return view('process/audit-management/auditors/index', compact('auditors'));
     }
 
     public function show(Auditor $auditor)
     {
-        return view('process\audit-management\auditors\show', compact('auditor'));
+        return view('process/audit-management/auditors/show', compact('auditor'));
     }
 
     public function create()
     {
         $auditor = null;
 
-        return view('process\audit-management\auditors\create', compact('auditor'));
+        return view('process/audit-management/auditors/create', compact('auditor'));
     }
 
     public function store(Request $request)
@@ -45,7 +45,7 @@ class AuditorFormController extends Controller
 
     public function edit(Auditor $auditor)
     {
-        return view('process\audit-management\auditors\create', compact('auditor'));
+        return view('process/audit-management/auditors/create', compact('auditor'));
     }
 
     public function update(Auditor $auditor, Request $request)

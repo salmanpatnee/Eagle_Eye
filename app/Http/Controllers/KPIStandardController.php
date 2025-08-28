@@ -13,14 +13,14 @@ class KPIStandardController extends Controller
     public function index()
     {
         $kpis = KPIStandards::with('category', 'bestPractice')->paginate(20);
-        return view('process\control-identification\control-kpis\index', compact('kpis'));
+        return view('process/control-identification/control-kpis/index', compact('kpis'));
     }
 
     public function show(KPIStandards $kpiStandard)
     {
         $kpiStandard->load('category', 'bestPractice');
 
-        return view('process\control-identification\control-kpis\show', compact('kpiStandard'));
+        return view('process/control-identification/control-kpis/show', compact('kpiStandard'));
     }
 
     public function create()
@@ -29,7 +29,7 @@ class KPIStandardController extends Controller
         $categories =  Category::select('category_id', 'category_name')->get();
         $bestPractices =  BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $frequencyUnits = KPIStandards::FREQUENCY_UNITS;
-        return view('process\control-identification\control-kpis\create', compact('kpiStandard', 'categories', 'bestPractices', 'frequencyUnits'));
+        return view('process/control-identification/control-kpis/create', compact('kpiStandard', 'categories', 'bestPractices', 'frequencyUnits'));
     }
 
     public function store(Request $request)
@@ -61,7 +61,7 @@ class KPIStandardController extends Controller
         $bestPractices =  BestPractice::select('best_practices_id', 'best_practices_name')->get();
         $frequencyUnits = KPIStandards::FREQUENCY_UNITS;
 
-        return view('process\control-identification\control-kpis\create', compact('kpiStandard', 'categories', 'bestPractices', 'frequencyUnits'));
+        return view('process/control-identification/control-kpis/create', compact('kpiStandard', 'categories', 'bestPractices', 'frequencyUnits'));
     }
 
     public function update(KPIStandards $kpiStandard, Request $request)

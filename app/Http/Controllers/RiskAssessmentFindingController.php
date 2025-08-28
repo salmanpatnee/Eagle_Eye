@@ -21,7 +21,7 @@ class RiskAssessmentFindingController extends Controller
 
     public function show(RiskAssessmentDetail $riskAssessmentFinding)
     {
-        return view('process\assessments\risk-assessment-findings\show', compact('riskAssessmentFinding'));
+        return view('process/assessments/risk-assessment-findings/show', compact('riskAssessmentFinding'));
     }
 
     public function create(RiskAssessment $riskAssessment, Request $request)

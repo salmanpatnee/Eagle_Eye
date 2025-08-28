@@ -85,7 +85,7 @@ class ControlAuditFindingController extends Controller
 
             $mpdf = new Mpdf();
 
-            $html = view("process\audit-management\control-vs-audit-finding\audit-finding-vs-control-pdf", compact('auditFindingsWithControls'))->render();
+            $html = view("process/audit-management/control-vs-audit-finding/audit-finding-vs-control-pdf", compact('auditFindingsWithControls'))->render();
 
 
             $mpdf->WriteHTML($html);
@@ -96,7 +96,7 @@ class ControlAuditFindingController extends Controller
                 ->header('Content-Disposition', 'attachment; filename="' . "Audit-vs-Control.pdf" . '"');
         } else {
 
-            return view('process\audit-management\control-vs-audit-finding\audit-finding-vs-control', compact('auditFindingsWithControls', 'controls', 'findings', 'auditFindingId', 'controlId'));
+            return view('process/audit-management/control-vs-audit-finding/audit-finding-vs-control', compact('auditFindingsWithControls', 'controls', 'findings', 'auditFindingId', 'controlId'));
         }
     }
 }

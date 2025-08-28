@@ -15,14 +15,14 @@ class AuditPlanController extends Controller
     {
         $auditPlans = AuditPlan::select('id', 'audit_id', 'audit_name', 'audit_plan_start_date', 'audit_plan_end_date')->paginate(20);
 
-        return view('process\audit-management\audit-plans\index', compact('auditPlans'));
+        return view('process/audit-management/audit-plans/index', compact('auditPlans'));
     }
 
     public function show(AuditPlan $auditPlan)
     {
         $auditPlan->with(['auditee', 'auditor', 'location'])->first();
 
-        return view('process\audit-management\audit-plans\show', compact('auditPlan'));
+        return view('process/audit-management/audit-plans/show', compact('auditPlan'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class AuditPlanController extends Controller
         $locations = Location::select('location_id', 'location_name')->get();
         $auditPlan = null;
 
-        return view('process\audit-management\audit-plans\create', compact('auditors', 'auditees', 'locations', 'auditPlan'));
+        return view('process/audit-management/audit-plans/create', compact('auditors', 'auditees', 'locations', 'auditPlan'));
     }
 
     public function store(AuditPlanRequest $request)
@@ -52,7 +52,7 @@ class AuditPlanController extends Controller
         $locations = Location::select('location_id', 'location_name')->get();
 
 
-        return view('process\audit-management\audit-plans\create', compact('auditors', 'auditees', 'locations', 'auditPlan'));
+        return view('process/audit-management/audit-plans/create', compact('auditors', 'auditees', 'locations', 'auditPlan'));
     }
 
     public function update(AuditPlan $auditPlan, AuditPlanRequest $request)

@@ -8,21 +8,19 @@ use Illuminate\Support\Facades\DB;
 
 class RiskAcceptanceController extends Controller
 {
-    private $_routeName = "risk-acceptance";
-    private $_primaryKey = "risk_acceptance_id";
 
     public function index()
     {
         $riskAcceptances = RiskAcceptance::with('control')->paginate(20);
 
-        return view('process\risk-identification\risk-acceptances\index', compact('riskAcceptances'));
+        return view('process/risk-identification/risk-acceptances/index', compact('riskAcceptances'));
     }
 
     public function show(RiskAcceptance $riskAcceptance)
     {
         $riskAcceptance->load('control');
 
-        return view('process\risk-identification\risk-acceptances\show', compact('riskAcceptance'));
+        return view('process/risk-identification/risk-acceptances/show', compact('riskAcceptance'));
     }
 
     public function create()
@@ -33,7 +31,7 @@ class RiskAcceptanceController extends Controller
             ->distinct()
             ->get();
 
-        return view('process\risk-identification\risk-acceptances\create', compact('riskAcceptance', 'controls'));
+        return view('process/risk-identification/risk-acceptances/create', compact('riskAcceptance', 'controls'));
     }
 
     public function store(Request $request)
@@ -60,7 +58,7 @@ class RiskAcceptanceController extends Controller
             ->distinct()
             ->get();
 
-        return view('process\risk-identification\risk-acceptances\create', compact('riskAcceptance', 'controls'));
+        return view('process/risk-identification/risk-acceptances/create', compact('riskAcceptance', 'controls'));
     }
 
     public function update(RiskAcceptance $riskAcceptance, Request $request)

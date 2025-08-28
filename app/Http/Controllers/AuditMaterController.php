@@ -87,7 +87,7 @@ class AuditMaterController extends Controller
             ->get();
 
 
-        return view('process\assessments\audit-assessments\create', compact(
+        return view('process/assessments/audit-assessments/create', compact(
             'classifications',
             'locations',
             'auditors',
@@ -150,7 +150,7 @@ class AuditMaterController extends Controller
             ->get();
 
 
-        return view('process\assessments\audit-assessments\create', compact(
+        return view('process/assessments/audit-assessments/create', compact(
             'classifications',
             'locations',
             'auditors',

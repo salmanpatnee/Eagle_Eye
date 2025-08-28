@@ -13,12 +13,12 @@ class RiskInherentController extends Controller
     {
         $riskInherents = RiskInherent::paginate(20);
 
-        return view('process\risk-identification\risk-inherents\index', compact('riskInherents'));
+        return view('process/risk-identification/risk-inherents/index', compact('riskInherents'));
     }
 
     public function show(RiskInherent $riskInherent)
     {
-        return view('process\risk-identification\risk-inherents\show', compact('riskInherent'));
+        return view('process/risk-identification/risk-inherents/show', compact('riskInherent'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class RiskInherentController extends Controller
         $riskInherent = null;
         $riskAppetites = RiskAppetite::select('id', 'risk_appetite_id', 'risk_appetite_name')->get();
 
-        return view('process\risk-identification\risk-inherents\create', compact('riskInherent', 'riskAppetites'));
+        return view('process/risk-identification/risk-inherents/create', compact('riskInherent', 'riskAppetites'));
     }
 
     public function store(Request $request)
@@ -51,7 +51,7 @@ class RiskInherentController extends Controller
     {
         $riskAppetites = RiskAppetite::select('id', 'risk_appetite_id', 'risk_appetite_name')->get();
 
-        return view('process\risk-identification\risk-inherents\create', compact('riskInherent', 'riskAppetites'));
+        return view('process/risk-identification/risk-inherents/create', compact('riskInherent', 'riskAppetites'));
     }
 
     public function update(RiskInherent $riskInherent, Request $request)

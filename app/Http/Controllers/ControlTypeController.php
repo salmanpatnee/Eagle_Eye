@@ -11,18 +11,18 @@ class ControlTypeController extends Controller
     public function index()
     {
         $controlTypes = ControlType::paginate(20);
-        return view('process\control-identification\control-types\index', compact('controlTypes'));
+        return view('process/control-identification/control-types/index', compact('controlTypes'));
     }
 
     public function show(ControlType $controlType)
     {
-        return view('process\control-identification\control-types\show', compact('controlType'));
+        return view('process/control-identification/control-types/show', compact('controlType'));
     }
 
     public function create()
     {
         $controlType = null;
-        return view('process\control-identification\control-types\create', compact('controlType'));
+        return view('process/control-identification/control-types/create', compact('controlType'));
     }
 
     public function store(Request $request)
@@ -41,7 +41,7 @@ class ControlTypeController extends Controller
 
     public function edit(ControlType $controlType)
     {
-        return view('process\control-identification\control-types\create', compact('controlType'));
+        return view('process/control-identification/control-types/create', compact('controlType'));
     }
 
     public function update(ControlType $controlType, Request $request)

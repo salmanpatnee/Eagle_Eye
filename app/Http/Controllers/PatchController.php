@@ -13,14 +13,14 @@ class PatchController extends Controller
     {
         $patches = Patch::with('thirdParty')->paginate(20);
 
-        return view('process\vulnerability-management\patches\index', compact('patches'));
+        return view('process/vulnerability-management/patches/index', compact('patches'));
     }
 
     public function show(Patch $patch)
     {
         $patch->load('thirdParty');
 
-        return view('process\vulnerability-management\patches\show', compact('patch'));
+        return view('process/vulnerability-management/patches/show', compact('patch'));
     }
 
     public function create()
@@ -28,7 +28,7 @@ class PatchController extends Controller
         $thirdParties = ThirdParty::select('tpt_id', 'tpt_name')->get();
         $patch = null;
 
-        return view('process\vulnerability-management\patches\create', compact('patch', 'thirdParties'));
+        return view('process/vulnerability-management/patches/create', compact('patch', 'thirdParties'));
     }
 
     public function store(Request $request)
@@ -50,7 +50,7 @@ class PatchController extends Controller
     {
         $thirdParties = ThirdParty::select('tpt_id', 'tpt_name')->get();
 
-        return view('process\vulnerability-management\patches\create', compact('patch', 'thirdParties'));
+        return view('process/vulnerability-management/patches/create', compact('patch', 'thirdParties'));
     }
 
     public function update(Patch $patch, Request $request)

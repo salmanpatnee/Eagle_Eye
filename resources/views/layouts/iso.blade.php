@@ -10,7 +10,7 @@
             <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
                 @include('partials.breadcrumbs')
                 <div class="bg-white border border-gray-200 flex items-center min-h-screen p-4 rounded-lg"
-                    style="background-image: url('/images/riyadh.jpg'); background-size: cover; background-position: center;">
+                    style="background-image: url('/Images/riyadh.jpg'); background-size: cover; background-position: center;">
                     <div class="mx-auto w-full">
 
 

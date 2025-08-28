@@ -60,14 +60,14 @@ class RiskAssessmentController extends Controller
             ->join('risk_vs_control_table as rvc', 'r.risk_id', '=', 'rvc.risk_id')
             ->get();
 
-        return view('process\assessments\risk-assessments\index', compact('riskAssessments', 'riskAssessmentNames', 'riskNames', 'riskAssessmentId', 'riskId', 'startEndDate'));
+        return view('process/assessments/risk-assessments/index', compact('riskAssessments', 'riskAssessmentNames', 'riskNames', 'riskAssessmentId', 'riskId', 'startEndDate'));
     }
 
     public function show(RiskAssessment $riskAssessment)
     {
         $riskAssessment->load('location', 'auditor', 'classification', 'findings');
 
-        return view('process\assessments\risk-assessments\show', compact('riskAssessment'));
+        return view('process/assessments/risk-assessments/show', compact('riskAssessment'));
     }
 
     public function create(Request $request)
@@ -86,7 +86,7 @@ class RiskAssessmentController extends Controller
             ->distinct()
             ->get();
 
-        return view('process\assessments\risk-assessments\create', compact('locations', 'auditors', 'classifications', 'riskAssessment'));
+        return view('process/assessments/risk-assessments/create', compact('locations', 'auditors', 'classifications', 'riskAssessment'));
     }
 
     public function store(Request $request)
@@ -131,7 +131,7 @@ class RiskAssessmentController extends Controller
             ->distinct()
             ->get();
 
-        return view('process\assessments\risk-assessments\create', compact('locations', 'auditors', 'classifications', 'riskAssessment'));
+        return view('process/assessments/risk-assessments/create', compact('locations', 'auditors', 'classifications', 'riskAssessment'));
     }
 
     public function update(RiskAssessment $riskAssessment, Request $request)
