@@ -91,6 +91,7 @@ use App\Http\Controllers\AuditPlanReportController;
 use App\Http\Controllers\CMSController;
 use App\Http\Controllers\DataUploaderController;
 use App\Http\Controllers\ExceptionReportsController;
+use App\Http\Controllers\HotTopicsController;
 use App\Http\Controllers\HumanResourceController;
 use App\Http\Controllers\KPICategoryController;
 use App\Http\Controllers\KPIStandardController;
@@ -511,13 +512,33 @@ Route::middleware(['auth'])->group(function () {
 
     Route::view('/ciso-education', 'ciso/ciso-education/index')->name('ciso-education.index');
 
-
     Route::prefix('ciso-education')->group(function () {
         Route::view('/applying-cissp-knowledge-in-ksa', 'ciso/ciso-education/cissp')->name('cissp');
         Route::view('/applying-cism-knowledge-in-ksa', 'ciso/ciso-education/cism')->name('cism');
         Route::view('/applying-cgeit-knowledge-in-ksa', 'ciso/ciso-education/cgeit')->name('cgeit');
         Route::view('/applying-pmp-knowledge-in-ksa', 'ciso/ciso-education/pmp')->name('pmp');
         Route::view('/applying-agile-approach', 'ciso/ciso-education/agile')->name('agile');
+    });
+
+
+    // ------------------Hot Topics-------------------------
+
+    Route::get('/hot-topics', HotTopicsController::class)->name('hot-topics.index');
+
+    Route::prefix('hot-topics')->group(function () {
+        Route::view('/compliance-challenges', 'ciso/hot-topics/compliance-challenges')->name('compliance-challenges');
+        Route::view('/key-performance-indicator', 'ciso/hot-topics/key-performance-indicator')->name('key-performance-indicator');
+        Route::view('/essential-kpis-kris', 'ciso/hot-topics/essential-kpis-kris')->name('essential-kpis-kris');
+        Route::view('/risk-management-methodologies', 'ciso/hot-topics/risk-management-methodologies')->name('risk-management-methodologies');
+        Route::view('/control-assessment-risk-assessment', 'ciso/hot-topics/control-assessment-risk-assessment')->name('control-assessment-risk-assessment');
+        Route::view('/26-essential-items-checklist-awareness-topics', 'ciso/hot-topics/26-essential-items-checklist-awareness-topics')->name('26-essential-items');
+        Route::view('/enhancing-staff-knowledge-skill', 'ciso/hot-topics/enhancing-staff-knowledge-skill')->name('enhancing-staff-knowledge');
+        Route::view('/asset-inventory-configuration-management-database', 'ciso/hot-topics/asset-inventory-configuration-management-database')->name('asset-inventory');
+        Route::view('/essential-practical-cryptographic-deployment', 'ciso/hot-topics/essential-practical-cryptographic-deployment')->name('essential-practical-cryptographic');
+        Route::view('/data-information', 'ciso/hot-topics/data-information')->name('data-information');
+        Route::view('/selecting-va-pen-tester', 'ciso/hot-topics/selecting-va-pen-tester')->name('selecting-va-pen-tester');
+        Route::view('/incident-management-cybersecurity-incident-management', 'ciso/hot-topics/incident-management-cybersecurity-incident-management')->name('incident-management');
+        Route::view('/review-vs-audit', 'ciso/hot-topics/review-vs-audit')->name('review-vs-audit');
     });
 });
 
@@ -862,27 +883,9 @@ Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destr
 
 
 
-// Hot Topics
 
-Route::get('/hot-topics', function () {
-    return view('6-HotTopics/HotTopics');
-});
 
-Route::prefix('hot-topics')->group(function () {
-    Route::view('/compliance-challenges', '6-HotTopics/compliance-challenges');
-    Route::view('/key-performance-indicator', '6-HotTopics/key-performance-indicator');
-    Route::view('/essential-kpis-kris', '6-HotTopics/essential-kpis-kris');
-    Route::view('/risk-management-methodologies', '6-HotTopics/risk-management-methodologies');
-    Route::view('/control-assessment-risk-assessment', '6-HotTopics/control-assessment-risk-assessment');
-    Route::view('/26-essential-items-checklist-awareness-topics', '6-HotTopics/26-essential-items-checklist-awareness-topics');
-    Route::view('/enhancing-staff-knowledge-skill', '6-HotTopics/enhancing-staff-knowledge-skill');
-    Route::view('/asset-inventory-configuration-management-database', '6-HotTopics/asset-inventory-configuration-management-database');
-    Route::view('/essential-practical-cryptographic-deployment', '6-HotTopics/essential-practical-cryptographic-deployment');
-    Route::view('/data-information', '6-HotTopics/data-information');
-    Route::view('/selecting-va-pen-tester', '6-HotTopics/selecting-va-pen-tester');
-    Route::view('/incident-management-cybersecurity-incident-management', '6-HotTopics/incident-management-cybersecurity-incident-management');
-    Route::view('/review-vs-audit', '6-HotTopics/review-vs-audit');
-});
+
 
 
 
