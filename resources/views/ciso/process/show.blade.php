@@ -1,58 +1,38 @@
-@extends('process/17-GrcDomain/ProcessLayout')
-@section('header')
-    <h3>{{ $process->title }}</h3>
-    <p>{{ $process->description }}</p>
-@endsection
-@section('boxes')
-    <div class="rowsec">
-        <div id="VideoExplanation">
-            <div class="itemsec">
-                <a href="{{ route('process.resource.videos', $process->process_id) }}">
-
-                    <i class='bx bxs-videos'></i>
-                    <p>Video Explanation</p>
-                </a>
-            </div>
-        </div>
-        <div>
-            <a href="{{ route('process.resource.template', $process->process_id) }}">
-                <div class="itemsec">
-                    <div>
-                        <div id="ImplementationDocs">
-
-                            <i class='bx bxs-file-doc'></i>
-                        </div>
-                        <div id="ImplementationPdf">
-                            <i class='bx bxs-file-pdf'></i>
-                        </div>
-                    </div>
-                    <p>Implementation Templates</p>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="rowsec">
-        <div id="Checklist">
-            <div class="itemsec">
-                <a href="{{ route('process.resource.checklist', $process->process_id) }}">
-                    <i class='bx bxs-file'></i>
-                    <p>Checklist for CISO</p>
-                </a>
-            </div>
-        </div>
-        <div id="Glossary">
-            <div class="itemsec">
-                <a href="{{ route('process.resource.glossary', $process->process_id) }}">
-                    <img class="imgicon" src="/Images/8-TransIcon.png">
-                    <p>Arabic English Glossary</p>
-                </a>
-            </div>
-        </div>
-    </div>
-@endsection
+@extends('layouts.process')
+@section('title', $process->title)
 @section('content')
-    <header class="text-center">
-        <h1>{{ $process->title }}</h1>
-    </header>
-    @include("process/process/content/{$process->process_id}")
+    @php
+        $process_id = html_entity_decode($process->process_id);
+    @endphp
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
+        <div class="bg-brand-950 hover:shadow-lg p-6 rounded-lg shadow text-white transition">
+            <x-iso-content-card title="{{ $process->title }}">
+                {{ $process->description }}
+            </x-iso-content-card>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
+            <div class="flex flex-col gap-6">
+                <x-iso-checklist link="{{ route('process.resource.checklist', $process_id) }}" />
+                <x-iso-glossary link="{{ route('process.resource.glossary', $process_id) }}" />
+            </div>
+            <div class="flex flex-col gap-6">
+                <x-iso-video link="{{ route('process.resource.videos', $process_id) }}" />
+                <x-iso-templates link="{{ route('process.resource.template', $process_id) }}" />
+            </div>
+        </div>
+    </div>
+
+
+@endsection
+
+@section('additional_content')
+    <div class="bg-white my-6 p-5 rounded-2xl">
+        <header class="text-center bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">
+            <h1>{{ $process->title }}</h1>
+        </header>
+        <div class="process-content">
+
+            @include("process/process/content/{$process->process_id}")
+        </div>
+    </div>
 @endsection

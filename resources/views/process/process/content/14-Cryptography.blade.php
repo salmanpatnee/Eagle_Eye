@@ -1,118 +1,126 @@
 <article>
     <h3>1. Description of the Application Security Technologies:</h3>
-    <p>Application Security refers to the practice of protecting software applications from threats and vulnerabilities throughout their lifecycle—from development to deployment and maintenance. It encompasses various security measures, including secure coding practices, vulnerability assessments, penetration testing, and security configurations. Given the increasing reliance on web and mobile applications, securing applications is critical to preventing data breaches, unauthorized access, and cyberattacks.</p>
+    <p>Application Security refers to the practice of protecting software applications from threats and vulnerabilities
+        throughout their lifecycle—from development to deployment and maintenance. It encompasses various security
+        measures, including secure coding practices, vulnerability assessments, penetration testing, and security
+        configurations. Given the increasing reliance on web and mobile applications, securing applications is critical
+        to preventing data breaches, unauthorized access, and cyberattacks.</p>
 
 
     <h3>2. Key Performance Indicators (KPIs) in Application Security</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="KPI Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Frequency" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>KPI Name</th>
-                <th>Description</th>
-                <th>Frequency</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Number of Open Vulnerabilities</td>
-                <td>Tracks the total number of unresolved security vulnerabilities in applications.</td>
-                <td>Monthly</td>
-            </tr>
-            <tr>
-                <td>Time to Remediate Vulnerabilities</td>
-                <td>Measures the average time taken to fix security flaws.</td>
-                <td>Quarterly</td>
+                <x-table.td>Number of Open Vulnerabilities</x-table.td>
+                <x-table.td>Tracks the total number of unresolved security vulnerabilities in applications.</x-table.td>
+                <x-table.td>Monthly</x-table.td>
             </tr>
             <tr>
-                <td>Security Testing Coverage</td>
-                <td>Evaluates the percentage of applications covered by security testing.</td>
-                <td>Monthly</td>
+                <x-table.td>Time to Remediate Vulnerabilities</x-table.td>
+                <x-table.td>Measures the average time taken to fix security flaws.</x-table.td>
+                <x-table.td>Quarterly</x-table.td>
             </tr>
             <tr>
-                <td>Successful Penetration Testing Rate</td>
-                <td>Monitors the percentage of security tests that uncover critical vulnerabilities.</td>
-                <td>Annually</td>
+                <x-table.td>Security Testing Coverage</x-table.td>
+                <x-table.td>Evaluates the percentage of applications covered by security testing.</x-table.td>
+                <x-table.td>Monthly</x-table.td>
             </tr>
             <tr>
-                <td>False Positive Rate</td>
-                <td>Measures the percentage of security alerts that turn out to be false alarms.</td>
-                <td>Monthly</td>
+                <x-table.td>Successful Penetration Testing Rate</x-table.td>
+                <x-table.td>Monitors the percentage of security tests that uncover critical
+                    vulnerabilities.</x-table.td>
+                <x-table.td>Annually</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>False Positive Rate</x-table.td>
+                <x-table.td>Measures the percentage of security alerts that turn out to be false alarms.</x-table.td>
+                <x-table.td>Monthly</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>3. Application Security Products</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="Product Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Relevant Standard" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>Product Name</th>
-                <th>Description</th>
-                <th>Relevant Standard</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Burp Suite</td>
-                <td>A popular tool for web application security testing, including vulnerability scanning.</td>
-                <td>NCA Application Security</td>
-            </tr>
-            <tr>
-                <td>OWASP ZAP</td>
-                <td>An open-source security tool for finding vulnerabilities in web applications.</td>
-                <td>NCA Secure Coding Practices</td>
+                <x-table.td>Burp Suite</x-table.td>
+                <x-table.td>A popular tool for web application security testing, including vulnerability scanning.
+                </x-table.td>
+                <x-table.td>NCA Application Security</x-table.td>
             </tr>
             <tr>
-                <td>Veracode</td>
-                <td>Provides automated static and dynamic security testing for applications.</td>
-                <td>NCA Application Security</td>
+                <x-table.td>OWASP ZAP</x-table.td>
+                <x-table.td>An open-source security tool for finding vulnerabilities in web applications.</x-table.td>
+                <x-table.td>NCA Secure Coding Practices</x-table.td>
             </tr>
             <tr>
-                <td>Checkmarx</td>
-                <td>A source code security scanner for identifying vulnerabilities in code.</td>
-                <td>NCA Secure Coding Practices</td>
+                <x-table.td>Veracode</x-table.td>
+                <x-table.td>Provides automated static and dynamic security testing for applications.</x-table.td>
+                <x-table.td>NCA Application Security</x-table.td>
             </tr>
             <tr>
-                <td>Fortify (Micro Focus)</td>
-                <td>Offers static and dynamic analysis tools for application security.</td>
-                <td>NCA Application Security</td>
+                <x-table.td>Checkmarx</x-table.td>
+                <x-table.td>A source code security scanner for identifying vulnerabilities in code.</x-table.td>
+                <x-table.td>NCA Secure Coding Practices</x-table.td>
             </tr>
             <tr>
-                <td>Imperva WAF</td>
-                <td>A web application firewall that protects against cyber threats.</td>
-                <td>NCA Cybersecurity Defense</td>
+                <x-table.td>Fortify (Micro Focus)</x-table.td>
+                <x-table.td>Offers static and dynamic analysis tools for application security.</x-table.td>
+                <x-table.td>NCA Application Security</x-table.td>
             </tr>
             <tr>
-                <td>WhiteSource</td>
-                <td>Identifies and manages open-source vulnerabilities in applications.</td>
-                <td>NCA Secure Coding Practices</td>
+                <x-table.td>Imperva WAF</x-table.td>
+                <x-table.td>A web application firewall that protects against cyber threats.</x-table.td>
+                <x-table.td>NCA Cybersecurity Defense</x-table.td>
             </tr>
             <tr>
-                <td>SonarQube</td>
-                <td>Performs continuous code analysis to detect security flaws.</td>
-                <td>NCA Application Security</td>
+                <x-table.td>WhiteSource</x-table.td>
+                <x-table.td>Identifies and manages open-source vulnerabilities in applications.</x-table.td>
+                <x-table.td>NCA Secure Coding Practices</x-table.td>
             </tr>
             <tr>
-                <td>Runtime Application Self-Protection (RASP) by Contrast Security</td>
-                <td>Protects applications from real-time threats within the runtime environment.</td>
-                <td>NCA Cybersecurity Controls</td>
+                <x-table.td>SonarQube</x-table.td>
+                <x-table.td>Performs continuous code analysis to detect security flaws.</x-table.td>
+                <x-table.td>NCA Application Security</x-table.td>
             </tr>
             <tr>
-                <td>Snyk</td>
-                <td>Automates security for open-source dependencies and containerized applications.</td>
-                <td>NCA Secure Coding Practices</td>
+                <x-table.td>Runtime Application Self-Protection (RASP) by Contrast Security</x-table.td>
+                <x-table.td>Protects applications from real-time threats within the runtime environment.</x-table.td>
+                <x-table.td>NCA Cybersecurity Controls</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Snyk</x-table.td>
+                <x-table.td>Automates security for open-source dependencies and containerized applications.</x-table.td>
+                <x-table.td>NCA Secure Coding Practices</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>4. Summary</h3>
     <p> Application Security is a crucial aspect of cybersecurity, ensuring that applications are protected from
         vulnerabilities
-        throughout their lifecycle. By implementing robust security practices such as SAST, DAST, and WAF, organizations
+        throughout their lifecycle. By implementing robust security practices such as SAST, DAST, and WAF,
+        organizations
         can
         reduce their risk exposure and prevent cyber threats.</p>
     <p>
-        Measuring KPIs like vulnerability remediation time, testing coverage, and penetration testing success rates
+        Measuring KPIs like vulnerability remediation time, testing coverage, and penetration testing success
+        rates
         helps organizations
-        assess the effectiveness of their security efforts. Using industry-leading security products such as Burp Suite,
+        assess the effectiveness of their security efforts. Using industry-leading security products such as
+        Burp Suite,
         OWASP ZAP, and
-        Veracode enables organizations to align with NCA Application Security standards and build secure applications.
+        Veracode enables organizations to align with NCA Application Security standards and build secure
+        applications.
     </p>
 </article>

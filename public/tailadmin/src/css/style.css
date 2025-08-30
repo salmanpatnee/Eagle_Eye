@@ -349,6 +349,13 @@ layer(base);
 .action-btn-secondary {
     @apply bg-brand-600 shadow-theme-xs inline-flex items-center rounded-lg p-3 text-sm font-medium text-white transition;
 }
+.process-content h3 {
+    @apply text-brand-500 mt-3 mb-3 text-lg font-bold;
+}
+
+.process-content p {
+    @apply text-lg;
+}
 
 .tableCheckbox:checked ~ span span {
     @apply opacity-100;

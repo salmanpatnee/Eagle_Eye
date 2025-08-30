@@ -16,111 +16,115 @@
 
 
     <h3>2. Key Performance Indicators (KPIs) in Asset Management</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="KPI Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Frequency" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>KPI Name</th>
-                <th>Description</th>
-                <th>Frequency</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Asset Inventory Accuracy</td>
-                <td>Measures the percentage of correctly documented IT assets.</td>
-                <td>Annually (NCA Asset Mgmt)</td>
-            </tr>
-            <tr>
-                <td>Patch Compliance Rate</td>
-                <td>Tracks the percentage of assets updated with the latest security patches.</td>
-                <td>Monthly (NCA Security Updates)</td>
+                <x-table.td>Asset Inventory Accuracy</x-table.td>
+                <x-table.td>Measures the percentage of correctly documented IT assets.</x-table.td>
+                <x-table.td>Annually (NCA Asset Mgmt)</x-table.td>
             </tr>
             <tr>
-                <td>Unauthorized Asset Detection Rate</td>
-                <td>Monitors the number of unauthorized or unmanaged assets detected.</td>
-                <td>Quarterly (NCA Threat Mgmt)</td>
+                <x-table.td>Patch Compliance Rate</x-table.td>
+                <x-table.td>Tracks the percentage of assets updated with the latest security patches.</x-table.td>
+                <x-table.td>Monthly (NCA Security Updates)</x-table.td>
             </tr>
             <tr>
-                <td>Asset Utilization Efficiency</td>
-                <td>Measures the percentage of IT assets actively in use.</td>
-                <td>Bi-Annually (NCA IT Governance)</td>
+                <x-table.td>Unauthorized Asset Detection Rate</x-table.td>
+                <x-table.td>Monitors the number of unauthorized or unmanaged assets detected.</x-table.td>
+                <x-table.td>Quarterly (NCA Threat Mgmt)</x-table.td>
             </tr>
             <tr>
-                <td>Incident Response Time for Asset Breaches</td>
-                <td>Tracks the time taken to respond to security incidents related to assets.</td>
-                <td>Monthly (NCA Incident Mgmt)</td>
+                <x-table.td>Asset Utilization Efficiency</x-table.td>
+                <x-table.td>Measures the percentage of IT assets actively in use.</x-table.td>
+                <x-table.td>Bi-Annually (NCA IT Governance)</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Incident Response Time for Asset Breaches</x-table.td>
+                <x-table.td>Tracks the time taken to respond to security incidents related to assets.</x-table.td>
+                <x-table.td>Monthly (NCA Incident Mgmt)</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>3. Asset Management Products</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="Product Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Relevant Standard" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>Product Name</th>
-                <th>Description</th>
-                <th>Relevant Standard</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>IT Asset Management (ITAM) Systems</td>
-                <td>Tracks and manages IT hardware and software assets.</td>
-                <td>NCA Asset Management</td>
-            </tr>
-            <tr>
-                <td>Configuration Management Database (CMDB)</td>
-                <td>Maintains an inventory of IT assets and their relationships.</td>
-                <td>NCA Cybersecurity Governance</td>
+                <x-table.td>IT Asset Management (ITAM) Systems</x-table.td>
+                <x-table.td>Tracks and manages IT hardware and software assets.</x-table.td>
+                <x-table.td>NCA Asset Management</x-table.td>
             </tr>
             <tr>
-                <td>Endpoint Detection & Response (EDR)</td>
-                <td>Monitors and protects endpoints from security threats.</td>
-                <td>NCA Cybersecurity Defense</td>
+                <x-table.td>Configuration Management Database (CMDB)</x-table.td>
+                <x-table.td>Maintains an inventory of IT assets and their relationships.</x-table.td>
+                <x-table.td>NCA Cybersecurity Governance</x-table.td>
             </tr>
             <tr>
-                <td>RFID & GPS Asset Tracking Solutions</td>
-                <td>Provides real-time tracking of physical IT assets.</td>
-                <td>NCA Physical Security</td>
+                <x-table.td>Endpoint Detection & Response (EDR)</x-table.td>
+                <x-table.td>Monitors and protects endpoints from security threats.</x-table.td>
+                <x-table.td>NCA Cybersecurity Defense</x-table.td>
             </tr>
             <tr>
-                <td>Software Asset Management (SAM) Tools</td>
-                <td>Ensures software compliance and license management.</td>
-                <td>NCA Compliance Management</td>
+                <x-table.td>RFID & GPS Asset Tracking Solutions</x-table.td>
+                <x-table.td>Provides real-time tracking of physical IT assets.</x-table.td>
+                <x-table.td>NCA Physical Security</x-table.td>
             </tr>
             <tr>
-                <td>Cloud Asset Management Platforms</td>
-                <td>Monitors cloud-based infrastructure and security risks.</td>
-                <td>NCA Cloud Cybersecurity Controls</td>
+                <x-table.td>Software Asset Management (SAM) Tools</x-table.td>
+                <x-table.td>Ensures software compliance and license management.</x-table.td>
+                <x-table.td>NCA Compliance Management</x-table.td>
             </tr>
             <tr>
-                <td>Automated Patch Management Systems</td>
-                <td>Ensures all IT assets are updated with the latest security patches.</td>
-                <td>NCA Vulnerability Management</td>
+                <x-table.td>Cloud Asset Management Platforms</x-table.td>
+                <x-table.td>Monitors cloud-based infrastructure and security risks.</x-table.td>
+                <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
             </tr>
             <tr>
-                <td>Mobile Device Management (MDM)</td>
-                <td>Controls and secures mobile IT assets.</td>
-                <td>NCA Mobile Security</td>
+                <x-table.td>Automated Patch Management Systems</x-table.td>
+                <x-table.td>Ensures all IT assets are updated with the latest security patches.</x-table.td>
+                <x-table.td>NCA Vulnerability Management</x-table.td>
             </tr>
             <tr>
-                <td>Secure Configuration Management Tools</td>
-                <td>Automates asset security configurations and compliance checks.</td>
-                <td>NCA Secure Configuration</td>
+                <x-table.td>Mobile Device Management (MDM)</x-table.td>
+                <x-table.td>Controls and secures mobile IT assets.</x-table.td>
+                <x-table.td>NCA Mobile Security</x-table.td>
             </tr>
             <tr>
-                <td>Data Loss Prevention (DLP) Solutions</td>
-                <td>Protects sensitive data stored on IT assets from unauthorized access.</td>
-                <td>NCA Data Cybersecurity Controls</td>
+                <x-table.td>Secure Configuration Management Tools</x-table.td>
+                <x-table.td>Automates asset security configurations and compliance checks.</x-table.td>
+                <x-table.td>NCA Secure Configuration</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Data Loss Prevention (DLP) Solutions</x-table.td>
+                <x-table.td>Protects sensitive data stored on IT assets from unauthorized access.</x-table.td>
+                <x-table.td>NCA Data Cybersecurity Controls</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>4. Summary</h3>
-    <p>Asset management is a fundamental component of cybersecurity, ensuring that IT and physical assets are tracked,
+    <p>Asset management is a fundamental component of cybersecurity, ensuring that IT and physical assets are
+        tracked,
         secured, and compliant with regulatory frameworks like NCA Essential Cybersecurity Controls and NCA Data
-        Cybersecurity Controls. Organizations must implement IT Asset Management (ITAM) Systems, CMDBs, RFID tracking,
-        EDR, and automated patch management tools to maintain a secure and compliant asset inventory. Key performance
-        indicators (KPIs) such as asset inventory accuracy, patch compliance, and unauthorized asset detection rates
-        help measure the effectiveness of asset management programs. A well-defined asset management strategy enhances
-        visibility, security, and operational efficiency, reducing cyber risks and ensuring long-term cybersecurity
+        Cybersecurity Controls. Organizations must implement IT Asset Management (ITAM) Systems, CMDBs, RFID
+        tracking,
+        EDR, and automated patch management tools to maintain a secure and compliant asset inventory. Key
+        performance
+        indicators (KPIs) such as asset inventory accuracy, patch compliance, and unauthorized asset detection
+        rates
+        help measure the effectiveness of asset management programs. A well-defined asset management strategy
+        enhances
+        visibility, security, and operational efficiency, reducing cyber risks and ensuring long-term
+        cybersecurity
         resilience.</p>
 </article>

@@ -24,111 +24,115 @@
     external partners.</p>
 
     <h3>2. Key Performance Indicators (KPIs) in Outsourcing</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="KPI Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Frequency" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>KPI Name</th>
-                <th>Description</th>
-                <th>Frequency</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Third-Party Compliance Rate</td>
-                <td>Measures the percentage of outsourced vendors meeting regulatory and security requirements.</td>
-                <td>Quarterly</td>
-            </tr>
-            <tr>
-                <td>Incident Response Time</td>
-                <td>Tracks the average time taken to respond to security incidents related to outsourced services.</td>
-                <td>Monthly</td>
+                <x-table.td>Third-Party Compliance Rate</x-table.td>
+                <x-table.td>Measures the percentage of outsourced vendors meeting regulatory and security
+                    requirements.</x-table.td>
+                <x-table.td>Quarterly</x-table.td>
             </tr>
             <tr>
-                <td>Outsourced Service Uptime</td>
-                <td>Evaluates the availability and performance of outsourced IT services.</td>
-                <td>Continuous Monitoring</td>
+                <x-table.td>Incident Response Time</x-table.td>
+                <x-table.td>Tracks the average time taken to respond to security incidents related to outsourced
+                    services.
+                </x-table.td>
+                <x-table.td>Monthly</x-table.td>
             </tr>
             <tr>
-                <td>Vendor Risk Assessment Score</td>
-                <td>Assesses the security posture of third-party service providers.</td>
-                <td>Annually</td>
+                <x-table.td>Outsourced Service Uptime</x-table.td>
+                <x-table.td>Evaluates the availability and performance of outsourced IT services.</x-table.td>
+                <x-table.td>Continuous Monitoring</x-table.td>
             </tr>
             <tr>
-                <td>Contract Renewal and Compliance Rate</td>
-                <td>Measures the percentage of vendor contracts renewed based on performance and compliance.</td>
-                <td>Annually</td>
+                <x-table.td>Vendor Risk Assessment Score</x-table.td>
+                <x-table.td>Assesses the security posture of third-party service providers.</x-table.td>
+                <x-table.td>Annually</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Contract Renewal and Compliance Rate</x-table.td>
+                <x-table.td>Measures the percentage of vendor contracts renewed based on performance and compliance.
+                </x-table.td>
+                <x-table.td>Annually</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>3. Cybersecurity Governance Products</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="Product Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Relevant Standard" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>Product Name</th>
-                <th>Description</th>
-                <th>Relevant Standard</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>OneTrust Vendor Risk Management</td>
-                <td>Helps organizations assess and manage risks associated with outsourced vendors.</td>
-                <td>NCA Vendor Risk Assessment</td>
-            </tr>
-            <tr>
-                <td>BitSight Security Ratings</td>
-                <td>Provides security ratings for outsourced service providers.</td>
-                <td>NCA Cybersecurity Risk Assessment</td>
+                <x-table.td>OneTrust Vendor Risk Management</x-table.td>
+                <x-table.td>Helps organizations assess and manage risks associated with outsourced vendors.</x-table.td>
+                <x-table.td>NCA Vendor Risk Assessment</x-table.td>
             </tr>
             <tr>
-                <td>Aravo for Third-Party Risk</td>
-                <td>Automates vendor risk management for outsourcing partners.</td>
-                <td>NCA Risk Management</td>
+                <x-table.td>BitSight Security Ratings</x-table.td>
+                <x-table.td>Provides security ratings for outsourced service providers.</x-table.td>
+                <x-table.td>NCA Cybersecurity Risk Assessment</x-table.td>
             </tr>
             <tr>
-                <td>RiskRecon</td>
-                <td>Monitors the cybersecurity posture of outsourced vendors.</td>
-                <td>NCA Third-Party Security</td>
+                <x-table.td>Aravo for Third-Party Risk</x-table.td>
+                <x-table.td>Automates vendor risk management for outsourcing partners.</x-table.td>
+                <x-table.td>NCA Risk Management</x-table.td>
             </tr>
             <tr>
-                <td>Venminder</td>
-                <td>Provides vendor management tools for evaluating outsourcing risks.</td>
-                <td>NCA Contract Compliance</td>
+                <x-table.td>RiskRecon</x-table.td>
+                <x-table.td>Monitors the cybersecurity posture of outsourced vendors.</x-table.td>
+                <x-table.td>NCA Third-Party Security</x-table.td>
             </tr>
             <tr>
-                <td>Coupa Risk Aware</td>
-                <td>Tracks and mitigates third-party security risks.</td>
-                <td>NCA Compliance Management</td>
+                <x-table.td>Venminder</x-table.td>
+                <x-table.td>Provides vendor management tools for evaluating outsourcing risks.</x-table.td>
+                <x-table.td>NCA Contract Compliance</x-table.td>
             </tr>
             <tr>
-                <td>Prevalent Third-Party Risk Management</td>
-                <td>Helps organizations manage security and compliance risks in outsourcing.</td>
-                <td>NCA Risk Monitoring</td>
+                <x-table.td>Coupa Risk Aware</x-table.td>
+                <x-table.td>Tracks and mitigates third-party security risks.</x-table.td>
+                <x-table.td>NCA Compliance Management</x-table.td>
             </tr>
             <tr>
-                <td>ServiceNow Vendor Risk Management</td>
-                <td>Enables risk assessments and compliance tracking for outsourced providers.</td>
-                <td>NCA Information Security</td>
+                <x-table.td>Prevalent Third-Party Risk Management</x-table.td>
+                <x-table.td>Helps organizations manage security and compliance risks in outsourcing.</x-table.td>
+                <x-table.td>NCA Risk Monitoring</x-table.td>
             </tr>
             <tr>
-                <td>LogicGate Risk Cloud</td>
-                <td>Provides an automated framework for outsourcing risk governance.</td>
-                <td>NCA Risk Management</td>
+                <x-table.td>ServiceNow Vendor Risk Management</x-table.td>
+                <x-table.td>Enables risk assessments and compliance tracking for outsourced providers.</x-table.td>
+                <x-table.td>NCA Information Security</x-table.td>
             </tr>
             <tr>
-                <td>Whistic</td>
-                <td>Automates security assessments for outsourced vendors.</td>
-                <td>NCA Cybersecurity Standards</td>
+                <x-table.td>LogicGate Risk Cloud</x-table.td>
+                <x-table.td>Provides an automated framework for outsourcing risk governance.</x-table.td>
+                <x-table.td>NCA Risk Management</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Whistic</x-table.td>
+                <x-table.td>Automates security assessments for outsourced vendors.</x-table.td>
+                <x-table.td>NCA Cybersecurity Standards</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>4. Summary</h3>
     <p>
         Outsourcing presents both opportunities and risks for organizations, making it essential to establish a
         structured approach to vendor management.
-        By conducting rigorous due diligence, enforcing security policies, and continuously monitoring outsourced
+        By conducting rigorous due diligence, enforcing security policies, and continuously monitoring
+        outsourced
         service providers, organizations can maintain compliance and protect sensitive data.
-        Leveraging automated tools for vendor risk management ensures that third-party services align with cybersecurity
+        Leveraging automated tools for vendor risk management ensures that third-party services align with
+        cybersecurity
         best practices and regulatory requirements.
     </p>
 </article>

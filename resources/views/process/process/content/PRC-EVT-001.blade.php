@@ -22,113 +22,114 @@
 
 
     <h3>2. Key Performance Indicators (KPIs) in Cyber Security Event Management</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="KPI Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Frequency" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>KPI Name</th>
-                <th>Description</th>
-                <th>Frequency</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Mean Time to Detect (MTTD)</td>
-                <td>Measures the average time taken to identify security incidents.</td>
-                <td>Monthly</td>
-            </tr>
-            <tr>
-                <td>Mean Time to Respond (MTTR)</td>
-                <td>Tracks the time taken to resolve security events after detection.</td>
-                <td>Monthly</td>
+                <x-table.td>Mean Time to Detect (MTTD)</x-table.td>
+                <x-table.td>Measures the average time taken to identify security incidents.</x-table.td>
+                <x-table.td>Monthly</x-table.td>
             </tr>
             <tr>
-                <td>Number of Security Incidents</td>
-                <td>Counts the total number of security events detected within a given period.</td>
-                <td>Weekly</td>
+                <x-table.td>Mean Time to Respond (MTTR)</x-table.td>
+                <x-table.td>Tracks the time taken to resolve security events after detection.</x-table.td>
+                <x-table.td>Monthly</x-table.td>
             </tr>
             <tr>
-                <td>False Positive Rate</td>
-                <td>Evaluates the percentage of security alerts that turn out to be non-threats.</td>
-                <td>Quarterly</td>
+                <x-table.td>Number of Security Incidents</x-table.td>
+                <x-table.td>Counts the total number of security events detected within a given period.</x-table.td>
+                <x-table.td>Weekly</x-table.td>
             </tr>
             <tr>
-                <td>Incident Resolution Rate</td>
-                <td>Measures the percentage of detected security incidents successfully mitigated.</td>
-                <td>Monthly</td>
+                <x-table.td>False Positive Rate</x-table.td>
+                <x-table.td>Evaluates the percentage of security alerts that turn out to be non-threats.</x-table.td>
+                <x-table.td>Quarterly</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Incident Resolution Rate</x-table.td>
+                <x-table.td>Measures the percentage of detected security incidents successfully mitigated.</x-table.td>
+                <x-table.td>Monthly</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>3. Cyber Security Event Management Products</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="Product Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Relevant Standard" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>Product Name</th>
-                <th>Description</th>
-                <th>Relevant Standard</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Security Information and Event Management (SIEM)</td>
-                <td>Provides real-time analysis of security alerts and log data.</td>
-                <td>NCA Threat Management</td>
-            </tr>
-            <tr>
-                <td>Intrusion Detection Systems (IDS)</td>
-                <td>Monitors network traffic for malicious activity or policy violations.</td>
-                <td>NCA Network Security</td>
+                <x-table.td>Security Information and Event Management (SIEM)</x-table.td>
+                <x-table.td>Provides real-time analysis of security alerts and log data.</x-table.td>
+                <x-table.td>NCA Threat Management</x-table.td>
             </tr>
             <tr>
-                <td>Intrusion Prevention Systems (IPS)</td>
-                <td>Detects and prevents identified threats in real-time.</td>
-                <td>NCA Incident Response</td>
+                <x-table.td>Intrusion Detection Systems (IDS)</x-table.td>
+                <x-table.td>Monitors network traffic for malicious activity or policy violations.</x-table.td>
+                <x-table.td>NCA Network Security</x-table.td>
             </tr>
             <tr>
-                <td>Security Orchestration, Automation, and Response (SOAR)</td>
-                <td>Automates security incident response processes to reduce response time.</td>
-                <td>NCA Cybersecurity Monitoring</td>
+                <x-table.td>Intrusion Prevention Systems (IPS)</x-table.td>
+                <x-table.td>Detects and prevents identified threats in real-time.</x-table.td>
+                <x-table.td>NCA Incident Response</x-table.td>
             </tr>
             <tr>
-                <td>Endpoint Detection and Response (EDR)</td>
-                <td>Monitors and detects threats on endpoint devices.</td>
-                <td>NCA Endpoint Security</td>
+                <x-table.td>Security Orchestration, Automation, and Response (SOAR)</x-table.td>
+                <x-table.td>Automates security incident response processes to reduce response time.</x-table.td>
+                <x-table.td>NCA Cybersecurity Monitoring</x-table.td>
             </tr>
             <tr>
-                <td>Threat Intelligence Platforms</td>
-                <td>Provides data-driven insights on emerging cybersecurity threats.</td>
-                <td>NCA Cyber Threat Intelligence</td>
+                <x-table.td>Endpoint Detection and Response (EDR)</x-table.td>
+                <x-table.td>Monitors and detects threats on endpoint devices.</x-table.td>
+                <x-table.td>NCA Endpoint Security</x-table.td>
             </tr>
             <tr>
-                <td>Log Management Solutions</td>
-                <td>Collects and analyzes system logs for security auditing.</td>
-                <td>NCA Compliance Management</td>
+                <x-table.td>Threat Intelligence Platforms</x-table.td>
+                <x-table.td>Provides data-driven insights on emerging cybersecurity threats.</x-table.td>
+                <x-table.td>NCA Cyber Threat Intelligence</x-table.td>
             </tr>
             <tr>
-                <td>Incident Response Platforms</td>
-                <td>Manages security incidents through structured workflows.</td>
-                <td>NCA Incident Response</td>
+                <x-table.td>Log Management Solutions</x-table.td>
+                <x-table.td>Collects and analyzes system logs for security auditing.</x-table.td>
+                <x-table.td>NCA Compliance Management</x-table.td>
             </tr>
             <tr>
-                <td>Vulnerability Management Tools</td>
-                <td>Identifies and remediates vulnerabilities before they are exploited.</td>
-                <td>NCA Risk Management</td>
+                <x-table.td>Incident Response Platforms</x-table.td>
+                <x-table.td>Manages security incidents through structured workflows.</x-table.td>
+                <x-table.td>NCA Incident Response</x-table.td>
             </tr>
             <tr>
-                <td>Cloud Security Monitoring Solutions</td>
-                <td>Provides visibility and protection for cloud-based services.</td>
-                <td>NCA Cloud Cybersecurity Controls</td>
+                <x-table.td>Vulnerability Management Tools</x-table.td>
+                <x-table.td>Identifies and remediates vulnerabilities before they are exploited.</x-table.td>
+                <x-table.td>NCA Risk Management</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Cloud Security Monitoring Solutions</x-table.td>
+                <x-table.td>Provides visibility and protection for cloud-based services.</x-table.td>
+                <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>4. Summary</h3>
     <p>
         Cyber Security Event Management plays a crucial role in protecting organizations from cyber threats by
         detecting, analyzing,
-        and responding to security incidents in real-time. With the increasing complexity of cyberattacks, businesses
+        and responding to security incidents in real-time. With the increasing complexity of cyberattacks,
+        businesses
         must deploy
-        advanced monitoring tools and incident response mechanisms to mitigate risks effectively. Implementing best
+        advanced monitoring tools and incident response mechanisms to mitigate risks effectively. Implementing
+        best
         practices and
-        leveraging cutting-edge technologies help organizations maintain security resilience and ensure compliance with
+        leveraging cutting-edge technologies help organizations maintain security resilience and ensure
+        compliance with
         cybersecurity standards.
     </p>
 </article>

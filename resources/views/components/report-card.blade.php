@@ -1,8 +1,8 @@
-@props(['route_name', 'title', 'title_ar'])
+@props(['route_name', 'route_param' => null, 'title', 'title_ar'])
 
 
 @if ($route_name)
-    <a href="{{ route($route_name) }}">
+    <a href="{{ route($route_name, html_entity_decode($route_param)) }}">
     @else
         <a href="#">
 @endif

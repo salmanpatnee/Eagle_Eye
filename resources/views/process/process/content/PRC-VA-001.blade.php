@@ -23,106 +23,107 @@
 
 
     <h3>2. Key Performance Indicators (KPIs) in Vulnerability Management</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="KPI Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Frequency" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>KPI Name</th>
-                <th>Description</th>
-                <th>Frequency</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Time to Patch Critical Vulnerabilities</td>
-                <td>Measures the time taken to remediate high-risk vulnerabilities.</td>
-                <td>Monthly</td>
-            </tr>
-            <tr>
-                <td>Number of Unpatched Vulnerabilities</td>
-                <td>Tracks the total number of unaddressed security flaws.</td>
-                <td>Weekly</td>
+                <x-table.td>Time to Patch Critical Vulnerabilities</x-table.td>
+                <x-table.td>Measures the time taken to remediate high-risk vulnerabilities.</x-table.td>
+                <x-table.td>Monthly</x-table.td>
             </tr>
             <tr>
-                <td>Vulnerability Reoccurrence Rate</td>
-                <td>Measures how often previously patched vulnerabilities reappear.</td>
-                <td>Quarterly</td>
+                <x-table.td>Number of Unpatched Vulnerabilities</x-table.td>
+                <x-table.td>Tracks the total number of unaddressed security flaws.</x-table.td>
+                <x-table.td>Weekly</x-table.td>
             </tr>
             <tr>
-                <td>Percentage of Assets Scanned</td>
-                <td>Ensures that all critical IT assets are regularly assessed.</td>
-                <td>Monthly</td>
+                <x-table.td>Vulnerability Reoccurrence Rate</x-table.td>
+                <x-table.td>Measures how often previously patched vulnerabilities reappear.</x-table.td>
+                <x-table.td>Quarterly</x-table.td>
             </tr>
             <tr>
-                <td>Mean Time to Detect (MTTD) Vulnerabilities</td>
-                <td>Measures the efficiency of vulnerability identification processes.</td>
-                <td>Quarterly</td>
+                <x-table.td>Percentage of Assets Scanned</x-table.td>
+                <x-table.td>Ensures that all critical IT assets are regularly assessed.</x-table.td>
+                <x-table.td>Monthly</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Mean Time to Detect (MTTD) Vulnerabilities</x-table.td>
+                <x-table.td>Measures the efficiency of vulnerability identification processes.</x-table.td>
+                <x-table.td>Quarterly</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>3. Vulnerability Management Products</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="Product Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Relevant Standard" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>Product Name</th>
-                <th>Description</th>
-                <th>Relevant Standard</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Tenable Nessus</td>
-                <td>Industry-leading vulnerability assessment tool.</td>
-                <td>NCA Vulnerability Assessment</td>
-            </tr>
-            <tr>
-                <td>Rapid7 InsightVM</td>
-                <td>Provides real-time vulnerability risk insights.</td>
-                <td>NCA Threat Management</td>
+                <x-table.td>Tenable Nessus</x-table.td>
+                <x-table.td>Industry-leading vulnerability assessment tool.</x-table.td>
+                <x-table.td>NCA Vulnerability Assessment</x-table.td>
             </tr>
             <tr>
-                <td>Microsoft Defender for Endpoint</td>
-                <td>Detects and remediates endpoint vulnerabilities.</td>
-                <td>NCA Endpoint Security</td>
+                <x-table.td>Rapid7 InsightVM</x-table.td>
+                <x-table.td>Provides real-time vulnerability risk insights.</x-table.td>
+                <x-table.td>NCA Threat Management</x-table.td>
             </tr>
             <tr>
-                <td>OpenVAS</td>
-                <td>Open-source vulnerability scanning solution.</td>
-                <td>NCA Cybersecurity Controls</td>
+                <x-table.td>Microsoft Defender for Endpoint</x-table.td>
+                <x-table.td>Detects and remediates endpoint vulnerabilities.</x-table.td>
+                <x-table.td>NCA Endpoint Security</x-table.td>
             </tr>
             <tr>
-                <td>IBM QRadar Vulnerability Manager</td>
-                <td>Integrates vulnerability scanning with SIEM.</td>
-                <td>NCA Security Monitoring</td>
+                <x-table.td>OpenVAS</x-table.td>
+                <x-table.td>Open-source vulnerability scanning solution.</x-table.td>
+                <x-table.td>NCA Cybersecurity Controls</x-table.td>
             </tr>
             <tr>
-                <td>BeyondTrust Retina</td>
-                <td>Offers network and endpoint vulnerability detection.</td>
-                <td>NCA Risk Management</td>
+                <x-table.td>IBM QRadar Vulnerability Manager</x-table.td>
+                <x-table.td>Integrates vulnerability scanning with SIEM.</x-table.td>
+                <x-table.td>NCA Security Monitoring</x-table.td>
             </tr>
             <tr>
-                <td>Patch Management Systems</td>
-                <td>Automates software patching to reduce vulnerabilities.</td>
-                <td>NCA System Hardening</td>
+                <x-table.td>BeyondTrust Retina</x-table.td>
+                <x-table.td>Offers network and endpoint vulnerability detection.</x-table.td>
+                <x-table.td>NCA Risk Management</x-table.td>
             </tr>
             <tr>
-                <td>OWASP Dependency-Check</td>
-                <td>Identifies vulnerabilities in software dependencies.</td>
-                <td>NCA Application Security</td>
+                <x-table.td>Patch Management Systems</x-table.td>
+                <x-table.td>Automates software patching to reduce vulnerabilities.</x-table.td>
+                <x-table.td>NCA System Hardening</x-table.td>
             </tr>
             <tr>
-                <td>GFI LanGuard</td>
-                <td>Comprehensive vulnerability detection and patching tool.</td>
-                <td>NCA Compliance Management</td>
+                <x-table.td>OWASP Dependency-Check</x-table.td>
+                <x-table.td>Identifies vulnerabilities in software dependencies.</x-table.td>
+                <x-table.td>NCA Application Security</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>GFI LanGuard</x-table.td>
+                <x-table.td>Comprehensive vulnerability detection and patching tool.</x-table.td>
+                <x-table.td>NCA Compliance Management</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>4. Summary</h3>
     <p>
-        A robust vulnerability management strategy is essential for reducing security risks and maintaining compliance
+        A robust vulnerability management strategy is essential for reducing security risks and maintaining
+        compliance
         with industry standards.
-        By continuously identifying, assessing, and mitigating vulnerabilities, organizations can strengthen their
+        By continuously identifying, assessing, and mitigating vulnerabilities, organizations can strengthen
+        their
         security posture and prevent
-        cyberattacks before they occur. Automated scanning tools, timely patching, and proactive risk management help
+        cyberattacks before they occur. Automated scanning tools, timely patching, and proactive risk management
+        help
         businesses stay ahead of
         emerging threats and ensure the safety of their digital assets.
     </p>

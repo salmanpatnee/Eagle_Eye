@@ -15,111 +15,115 @@
 
 
     <h3>2. Key Performance Indicators (KPIs) in Cybersecurity Audits</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="KPI Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Frequency" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>KPI Name</th>
-                <th>Description</th>
-                <th>Frequency</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Audit Completion Rate</td>
-                <td>Measures the percentage of completed cybersecurity audits.</td>
-                <td>Annually (NCA Compliance)</td>
-            </tr>
-            <tr>
-                <td>Compliance Deviation Rate</td>
-                <td>Tracks the number of non-compliant security controls identified.</td>
-                <td>Quarterly (NCA Governance)</td>
+                <x-table.td>Audit Completion Rate</x-table.td>
+                <x-table.td>Measures the percentage of completed cybersecurity audits.</x-table.td>
+                <x-table.td>Annually (NCA Compliance)</x-table.td>
             </tr>
             <tr>
-                <td>Incident Detection Effectiveness</td>
-                <td>Assesses how well security controls detect and respond to threats.</td>
-                <td>Bi-Annually (NCA Incident Mgmt)</td>
+                <x-table.td>Compliance Deviation Rate</x-table.td>
+                <x-table.td>Tracks the number of non-compliant security controls identified.</x-table.td>
+                <x-table.td>Quarterly (NCA Governance)</x-table.td>
             </tr>
             <tr>
-                <td>Remediation Time for Audit Findings</td>
-                <td>Measures the time taken to address non-compliance issues.</td>
-                <td>Monthly (NCA Risk Mgmt)</td>
+                <x-table.td>Incident Detection Effectiveness</x-table.td>
+                <x-table.td>Assesses how well security controls detect and respond to threats.</x-table.td>
+                <x-table.td>Bi-Annually (NCA Incident Mgmt)</x-table.td>
             </tr>
             <tr>
-                <td>Security Policy Adherence Score</td>
-                <td>Evaluates the extent to which security policies are followed.</td>
-                <td>Annually (NCA Cybersecurity)</td>
+                <x-table.td>Remediation Time for Audit Findings</x-table.td>
+                <x-table.td>Measures the time taken to address non-compliance issues.</x-table.td>
+                <x-table.td>Monthly (NCA Risk Mgmt)</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Security Policy Adherence Score</x-table.td>
+                <x-table.td>Evaluates the extent to which security policies are followed.</x-table.td>
+                <x-table.td>Annually (NCA Cybersecurity)</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>3. Cybersecurity Audits Products</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="Product Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Relevant Standard" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>Product Name</th>
-                <th>Description</th>
-                <th>Relevant Standard</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Governance, Risk, and Compliance (GRC) Platforms</td>
-                <td>Automates audit management, policy tracking, and reporting.</td>
-                <td>NCA Cybersecurity Governance</td>
-            </tr>
-            <tr>
-                <td>Security Information & Event Management (SIEM)</td>
-                <td>Monitors security logs and detects anomalies for audit verification.</td>
-                <td>NCA Cybersecurity Defense</td>
+                <x-table.td>Governance, Risk, and Compliance (GRC) Platforms</x-table.td>
+                <x-table.td>Automates audit management, policy tracking, and reporting.</x-table.td>
+                <x-table.td>NCA Cybersecurity Governance</x-table.td>
             </tr>
             <tr>
-                <td>Vulnerability Assessment (VA) Tools</td>
-                <td>Identifies weaknesses in IT systems before they are exploited.</td>
-                <td>NCA Vulnerability Management</td>
+                <x-table.td>Security Information & Event Management (SIEM)</x-table.td>
+                <x-table.td>Monitors security logs and detects anomalies for audit verification.</x-table.td>
+                <x-table.td>NCA Cybersecurity Defense</x-table.td>
             </tr>
             <tr>
-                <td>Penetration Testing (PT) Tools</td>
-                <td>Simulates cyberattacks to evaluate security effectiveness.</td>
-                <td>NCA Penetration Testing</td>
+                <x-table.td>Vulnerability Assessment (VA) Tools</x-table.td>
+                <x-table.td>Identifies weaknesses in IT systems before they are exploited.</x-table.td>
+                <x-table.td>NCA Vulnerability Management</x-table.td>
             </tr>
             <tr>
-                <td>Automated Compliance Auditing Tools</td>
-                <td>Validates security control effectiveness and generates audit reports.</td>
-                <td>NCA Compliance Management</td>
+                <x-table.td>Penetration Testing (PT) Tools</x-table.td>
+                <x-table.td>Simulates cyberattacks to evaluate security effectiveness.</x-table.td>
+                <x-table.td>NCA Penetration Testing</x-table.td>
             </tr>
             <tr>
-                <td>Endpoint Detection & Response (EDR)</td>
-                <td>Ensures endpoint security compliance with regulatory frameworks.</td>
-                <td>NCA Cybersecurity Defense</td>
+                <x-table.td>Automated Compliance Auditing Tools</x-table.td>
+                <x-table.td>Validates security control effectiveness and generates audit reports.</x-table.td>
+                <x-table.td>NCA Compliance Management</x-table.td>
             </tr>
             <tr>
-                <td>Data Loss Prevention (DLP)</td>
-                <td>Prevents unauthorized access and ensures compliance with data security policies.</td>
-                <td>NCA Data Cybersecurity Controls</td>
+                <x-table.td>Endpoint Detection & Response (EDR)</x-table.td>
+                <x-table.td>Ensures endpoint security compliance with regulatory frameworks.</x-table.td>
+                <x-table.td>NCA Cybersecurity Defense</x-table.td>
             </tr>
             <tr>
-                <td>Cloud Security Posture Management (CSPM)</td>
-                <td>Ensures cloud environments adhere to security best practices.</td>
-                <td>NCA Cloud Cybersecurity Controls</td>
+                <x-table.td>Data Loss Prevention (DLP)</x-table.td>
+                <x-table.td>Prevents unauthorized access and ensures compliance with data security
+                    policies.</x-table.td>
+                <x-table.td>NCA Data Cybersecurity Controls</x-table.td>
             </tr>
             <tr>
-                <td>Secure Configuration Management Tools</td>
-                <td>Automates system configuration reviews and compliance checks.</td>
-                <td>NCA Secure Configuration</td>
+                <x-table.td>Cloud Security Posture Management (CSPM)</x-table.td>
+                <x-table.td>Ensures cloud environments adhere to security best practices.</x-table.td>
+                <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
             </tr>
             <tr>
-                <td>Threat Intelligence Platforms (TIPs)</td>
-                <td>Provides real-time threat intelligence for audit and compliance.</td>
-                <td>NCA Threat Intelligence</td>
+                <x-table.td>Secure Configuration Management Tools</x-table.td>
+                <x-table.td>Automates system configuration reviews and compliance checks.</x-table.td>
+                <x-table.td>NCA Secure Configuration</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Threat Intelligence Platforms (TIPs)</x-table.td>
+                <x-table.td>Provides real-time threat intelligence for audit and compliance.</x-table.td>
+                <x-table.td>NCA Threat Intelligence</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>4. Summary</h3>
     <p>Cybersecurity audits play a critical role in ensuring compliance with national cybersecurity standards,
         identifying security gaps, and improving risk management. By implementing GRC platforms, SIEM solutions,
-        vulnerability assessment tools, and compliance auditing technologies, organizations can streamline security
-        reviews and maintain continuous compliance. Key performance indicators (KPIs) such as audit completion rates and
-        compliance deviation scores help organizations measure and enhance their security audit processes. Adhering to
-        NCA cybersecurity frameworks ensures that organizations proactively manage risks, address security weaknesses,
+        vulnerability assessment tools, and compliance auditing technologies, organizations can streamline
+        security
+        reviews and maintain continuous compliance. Key performance indicators (KPIs) such as audit completion
+        rates and
+        compliance deviation scores help organizations measure and enhance their security audit processes.
+        Adhering to
+        NCA cybersecurity frameworks ensures that organizations proactively manage risks, address security
+        weaknesses,
         and uphold a strong security posture. A well-executed cybersecurity audit program enables continuous
-        improvement, risk reduction, and regulatory adherence, ensuring a secure and resilient IT environment.</p>
+        improvement, risk reduction, and regulatory adherence, ensuring a secure and resilient IT environment.
+    </p>
 </article>

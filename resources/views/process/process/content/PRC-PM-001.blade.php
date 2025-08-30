@@ -15,111 +15,116 @@
 
 
     <h3>2. Key Performance Indicators (KPIs) in Cybersecurity in Project Management</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="KPI Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Frequency" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>KPI Name</th>
-                <th>Description</th>
-                <th>Frequency</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Security Risk Assessment Completion</td>
-                <td>Measures how often security risk assessments are conducted in projects.</td>
-                <td>Annually (NCA-ECC-1-5-1)</td>
-            </tr>
-            <tr>
-                <td>Compliance with Secure Development Practices</td>
-                <td>Percentage of projects following secure development lifecycle guidelines.</td>
-                <td>Quarterly (NCA Cybersecurity)</td>
+                <x-table.td>Security Risk Assessment Completion</x-table.td>
+                <x-table.td>Measures how often security risk assessments are conducted in projects.</x-table.td>
+                <x-table.td>Annually (NCA-ECC-1-5-1)</x-table.td>
             </tr>
             <tr>
-                <td>Incident Response Readiness in Projects</td>
-                <td>Assesses the project team's ability to respond to security incidents.</td>
-                <td>Bi-Annually (NCA Incident Mgmt)</td>
+                <x-table.td>Compliance with Secure Development Practices</x-table.td>
+                <x-table.td>Percentage of projects following secure development lifecycle guidelines.</x-table.td>
+                <x-table.td>Quarterly (NCA Cybersecurity)</x-table.td>
             </tr>
             <tr>
-                <td>Secure Code Review Coverage</td>
-                <td>Percentage of project code reviewed for security vulnerabilities.</td>
-                <td>Monthly (NCA SDLC Guidelines)</td>
+                <x-table.td>Incident Response Readiness in Projects</x-table.td>
+                <x-table.td>Assesses the project team's ability to respond to security incidents.</x-table.td>
+                <x-table.td>Bi-Annually (NCA Incident Mgmt)</x-table.td>
             </tr>
             <tr>
-                <td>Access Control Compliance in Projects</td>
-                <td>Measures adherence to IAM policies for project team members.</td>
-                <td>Quarterly (NCA-ECC-2-2-1)</td>
+                <x-table.td>Secure Code Review Coverage</x-table.td>
+                <x-table.td>Percentage of project code reviewed for security vulnerabilities.</x-table.td>
+                <x-table.td>Monthly (NCA SDLC Guidelines)</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Access Control Compliance in Projects</x-table.td>
+                <x-table.td>Measures adherence to IAM policies for project team members.</x-table.td>
+                <x-table.td>Quarterly (NCA-ECC-2-2-1)</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>3. Cybersecurity in Project Management Products</h3>
-    <table>
-        <thead>
+    <x-table.table>
+        <x-table.thead>
+            <x-table.th label="Product Name" />
+            <x-table.th label="Description" />
+            <x-table.th label="Relevant Standard" />
+
+        </x-table.thead>
+        <x-table.tbody>
             <tr>
-                <th>Product Name</th>
-                <th>Description</th>
-                <th>Relevant Standard</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Governance, Risk, and Compliance (GRC)</td>
-                <td>Manages security policies and risk assessments in projects.</td>
-                <td>NCA Cybersecurity Governance</td>
-            </tr>
-            <tr>
-                <td>Threat Modeling Tools</td>
-                <td>Identifies potential cybersecurity risks early in project planning.</td>
-                <td>NCA Risk Management</td>
+                <x-table.td>Governance, Risk, and Compliance (GRC)</x-table.td>
+                <x-table.td>Manages security policies and risk assessments in projects.</x-table.td>
+                <x-table.td>NCA Cybersecurity Governance</x-table.td>
             </tr>
             <tr>
-                <td>Secure SDLC Tools</td>
-                <td>Ensures security is embedded throughout the development lifecycle.</td>
-                <td>NCA Cybersecurity Development</td>
+                <x-table.td>Threat Modeling Tools</x-table.td>
+                <x-table.td>Identifies potential cybersecurity risks early in project planning.</x-table.td>
+                <x-table.td>NCA Risk Management</x-table.td>
             </tr>
             <tr>
-                <td>Static Application Security Testing (SAST)</td>
-                <td>Analyzes source code for security vulnerabilities before deployment.</td>
-                <td>NCA Secure Coding Practices</td>
+                <x-table.td>Secure SDLC Tools</x-table.td>
+                <x-table.td>Ensures security is embedded throughout the development lifecycle.</x-table.td>
+                <x-table.td>NCA Cybersecurity Development</x-table.td>
             </tr>
             <tr>
-                <td>Dynamic Application Security Testing (DAST)</td>
-                <td>Detects security flaws during runtime testing of applications.</td>
-                <td>NCA Application Security</td>
+                <x-table.td>Static Application Security Testing (SAST)</x-table.td>
+                <x-table.td>Analyzes source code for security vulnerabilities before deployment.</x-table.td>
+                <x-table.td>NCA Secure Coding Practices</x-table.td>
             </tr>
             <tr>
-                <td>Cloud Security Posture Management (CSPM)</td>
-                <td>Ensures compliance and security for cloud-based project deployments.</td>
-                <td>NCA Cloud Cybersecurity Controls</td>
+                <x-table.td>Dynamic Application Security Testing (DAST)</x-table.td>
+                <x-table.td>Detects security flaws during runtime testing of applications.</x-table.td>
+                <x-table.td>NCA Application Security</x-table.td>
             </tr>
             <tr>
-                <td>Identity and Access Management (IAM)</td>
-                <td>Manages user access and enforces role-based security policies.</td>
-                <td>NCA Identity & Access Mgmt</td>
+                <x-table.td>Cloud Security Posture Management (CSPM)</x-table.td>
+                <x-table.td>Ensures compliance and security for cloud-based project deployments.</x-table.td>
+                <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
             </tr>
             <tr>
-                <td>Security Incident & Event Management (SIEM)</td>
-                <td>Provides real-time monitoring and response to security incidents.</td>
-                <td>NCA Cybersecurity Defense</td>
+                <x-table.td>Identity and Access Management (IAM)</x-table.td>
+                <x-table.td>Manages user access and enforces role-based security policies.</x-table.td>
+                <x-table.td>NCA Identity & Access Mgmt</x-table.td>
             </tr>
             <tr>
-                <td>Data Loss Prevention (DLP) Tools</td>
-                <td>Prevents unauthorized data sharing and leakage within projects.</td>
-                <td>NCA Data Cybersecurity Controls</td>
+                <x-table.td>Security Incident & Event Management (SIEM)</x-table.td>
+                <x-table.td>Provides real-time monitoring and response to security incidents.</x-table.td>
+                <x-table.td>NCA Cybersecurity Defense</x-table.td>
             </tr>
             <tr>
-                <td>Penetration Testing (PT) Tools</td>
-                <td>Simulates cyberattacks to identify weaknesses in project environments.</td>
-                <td>NCA Penetration Testing</td>
+                <x-table.td>Data Loss Prevention (DLP) Tools</x-table.td>
+                <x-table.td>Prevents unauthorized data sharing and leakage within projects.</x-table.td>
+                <x-table.td>NCA Data Cybersecurity Controls</x-table.td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <x-table.td>Penetration Testing (PT) Tools</x-table.td>
+                <x-table.td>Simulates cyberattacks to identify weaknesses in project environments.</x-table.td>
+                <x-table.td>NCA Penetration Testing</x-table.td>
+            </tr>
+        </x-table.tbody>
+    </x-table.table>
     <h3>4. Summary</h3>
-    <p>Integrating cybersecurity into project management is essential for ensuring secure development, mitigating risks,
-        and complying with national cybersecurity standards like NCA ECC, CSCC, and CCC. Organizations must adopt GRC
-        platforms, threat modeling tools, IAM solutions, and automated security testing tools to embed security from the
-        initiation phase to project closure. Key performance indicators (KPIs) help measure security effectiveness in
-        projects, ensuring compliance with secure coding, risk assessments, and incident response preparedness. By
-        embedding cybersecurity best practices, leveraging advanced security tools, and fostering a security-first
-        mindset, organizations can reduce vulnerabilities, enhance resilience, and achieve successful, secure project
+    <p>Integrating cybersecurity into project management is essential for ensuring secure development,
+        mitigating risks,
+        and complying with national cybersecurity standards like NCA ECC, CSCC, and CCC. Organizations must
+        adopt GRC
+        platforms, threat modeling tools, IAM solutions, and automated security testing tools to embed security
+        from the
+        initiation phase to project closure. Key performance indicators (KPIs) help measure security
+        effectiveness in
+        projects, ensuring compliance with secure coding, risk assessments, and incident response preparedness.
+        By
+        embedding cybersecurity best practices, leveraging advanced security tools, and fostering a
+        security-first
+        mindset, organizations can reduce vulnerabilities, enhance resilience, and achieve successful, secure
+        project
         outcomes while aligning with regulatory requirements.</p>
 </article>
