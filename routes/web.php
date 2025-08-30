@@ -508,42 +508,47 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
 
 
-    // ------------------CISO Education-------------------------
+    Route::prefix('ciso')->group(function () {
 
-    Route::view('/ciso-education', 'ciso/ciso-education/index')->name('ciso-education.index');
+        // ------------------CISO Education-------------------------
+        Route::view('/ciso-education', 'ciso/ciso-education/index')->name('ciso-education.index');
 
-    Route::prefix('ciso-education')->group(function () {
-        Route::view('/applying-cissp-knowledge-in-ksa', 'ciso/ciso-education/cissp')->name('cissp');
-        Route::view('/applying-cism-knowledge-in-ksa', 'ciso/ciso-education/cism')->name('cism');
-        Route::view('/applying-cgeit-knowledge-in-ksa', 'ciso/ciso-education/cgeit')->name('cgeit');
-        Route::view('/applying-pmp-knowledge-in-ksa', 'ciso/ciso-education/pmp')->name('pmp');
-        Route::view('/applying-agile-approach', 'ciso/ciso-education/agile')->name('agile');
+        Route::prefix('ciso-education')->group(function () {
+            Route::view('/applying-cissp-knowledge-in-ksa', 'ciso/ciso-education/cissp')->name('cissp');
+            Route::view('/applying-cism-knowledge-in-ksa', 'ciso/ciso-education/cism')->name('cism');
+            Route::view('/applying-cgeit-knowledge-in-ksa', 'ciso/ciso-education/cgeit')->name('cgeit');
+            Route::view('/applying-pmp-knowledge-in-ksa', 'ciso/ciso-education/pmp')->name('pmp');
+            Route::view('/applying-agile-approach', 'ciso/ciso-education/agile')->name('agile');
+        });
+
+
+        // ------------------Hot Topics-------------------------
+
+        Route::get('/hot-topics', HotTopicsController::class)->name('hot-topics.index');
+
+        Route::prefix('hot-topics')->group(function () {
+            Route::view('/compliance-challenges', 'ciso/hot-topics/compliance-challenges')->name('compliance-challenges');
+            Route::view('/key-performance-indicator', 'ciso/hot-topics/key-performance-indicator')->name('key-performance-indicator');
+            Route::view('/essential-kpis-kris', 'ciso/hot-topics/essential-kpis-kris')->name('essential-kpis-kris');
+            Route::view('/risk-management-methodologies', 'ciso/hot-topics/risk-management-methodologies')->name('risk-management-methodologies');
+            Route::view('/control-assessment-risk-assessment', 'ciso/hot-topics/control-assessment-risk-assessment')->name('control-assessment-risk-assessment');
+            Route::view('/26-essential-items-checklist-awareness-topics', 'ciso/hot-topics/26-essential-items-checklist-awareness-topics')->name('26-essential-items');
+            Route::view('/enhancing-staff-knowledge-skill', 'ciso/hot-topics/enhancing-staff-knowledge-skill')->name('enhancing-staff-knowledge');
+            Route::view('/asset-inventory-configuration-management-database', 'ciso/hot-topics/asset-inventory-configuration-management-database')->name('asset-inventory');
+            Route::view('/essential-practical-cryptographic-deployment', 'ciso/hot-topics/essential-practical-cryptographic-deployment')->name('essential-practical-cryptographic');
+            Route::view('/data-information', 'ciso/hot-topics/data-information')->name('data-information');
+            Route::view('/selecting-va-pen-tester', 'ciso/hot-topics/selecting-va-pen-tester')->name('selecting-va-pen-tester');
+            Route::view('/incident-management-cybersecurity-incident-management', 'ciso/hot-topics/incident-management-cybersecurity-incident-management')->name('incident-management');
+            Route::view('/review-vs-audit', 'ciso/hot-topics/review-vs-audit')->name('review-vs-audit');
+        });
+
+        Route::get('/hr-experts', HumanResourceController::class)->name('hr-expert.index');
+        // Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
+        // Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
+
+        Route::get('/process', [ProcessController::class, 'index'])->name('process.index');
+        Route::get('/process/{process:process_id}', [ProcessController::class, 'show'])->name('process.view.show');
     });
-
-
-    // ------------------Hot Topics-------------------------
-
-    Route::get('/hot-topics', HotTopicsController::class)->name('hot-topics.index');
-
-    Route::prefix('hot-topics')->group(function () {
-        Route::view('/compliance-challenges', 'ciso/hot-topics/compliance-challenges')->name('compliance-challenges');
-        Route::view('/key-performance-indicator', 'ciso/hot-topics/key-performance-indicator')->name('key-performance-indicator');
-        Route::view('/essential-kpis-kris', 'ciso/hot-topics/essential-kpis-kris')->name('essential-kpis-kris');
-        Route::view('/risk-management-methodologies', 'ciso/hot-topics/risk-management-methodologies')->name('risk-management-methodologies');
-        Route::view('/control-assessment-risk-assessment', 'ciso/hot-topics/control-assessment-risk-assessment')->name('control-assessment-risk-assessment');
-        Route::view('/26-essential-items-checklist-awareness-topics', 'ciso/hot-topics/26-essential-items-checklist-awareness-topics')->name('26-essential-items');
-        Route::view('/enhancing-staff-knowledge-skill', 'ciso/hot-topics/enhancing-staff-knowledge-skill')->name('enhancing-staff-knowledge');
-        Route::view('/asset-inventory-configuration-management-database', 'ciso/hot-topics/asset-inventory-configuration-management-database')->name('asset-inventory');
-        Route::view('/essential-practical-cryptographic-deployment', 'ciso/hot-topics/essential-practical-cryptographic-deployment')->name('essential-practical-cryptographic');
-        Route::view('/data-information', 'ciso/hot-topics/data-information')->name('data-information');
-        Route::view('/selecting-va-pen-tester', 'ciso/hot-topics/selecting-va-pen-tester')->name('selecting-va-pen-tester');
-        Route::view('/incident-management-cybersecurity-incident-management', 'ciso/hot-topics/incident-management-cybersecurity-incident-management')->name('incident-management');
-        Route::view('/review-vs-audit', 'ciso/hot-topics/review-vs-audit')->name('review-vs-audit');
-    });
-
-    Route::get('/hr-experts', HumanResourceController::class)->name('hr-expert.index');
-    Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
-    Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
 });
 
 
@@ -870,8 +875,6 @@ Route::prefix('cs-induction')->group(function () {
 });
 
 
-Route::get('/process', [ProcessController::class, 'index']);
-Route::get('/process/{process:process_id}', [ProcessController::class, 'show'])->name('process.view.show');
 Route::get('/resource/{process:process_id}/videos/', [ProcessResourceController::class, 'videos'])->name('process.resource.videos');
 Route::get('/video/stream/{resource}', [ProcessResourceController::class, 'stream'])->name('secure.video.stream');
 

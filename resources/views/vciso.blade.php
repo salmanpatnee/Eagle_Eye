@@ -248,7 +248,7 @@
                 <div class="vertical-line"></div>
                 <div class="horizontal-line-two"></div>
             </div>
-            <a href="/hot-topics">
+            <a href="{{ route('hot-topics.index') }}">
                 <div class="BoxTwo">
                     <div>
                         <img class="FireFlame" src="Images/16-FireFlame.png" alt="Graduation">
@@ -263,7 +263,7 @@
             <div class="short-horizontal-line"></div>
         </div>
         <div class="RowThree">
-            <a href="/hr-experts">
+            <a href="{{ route('hr-expert.index') }}">
                 <div class="BoxFour">
                     <div>
                         <i class='bx bxs-user' style='color:#1106f7'></i>
@@ -272,7 +272,7 @@
                     </div>
                 </div>
             </a>
-            <a href="/process">
+            <a href="{{ route('process.index') }}">
                 <div class="BoxFive">
                     <div>
                         <i class='bx bx-cog' style='color:#f79806'></i>
