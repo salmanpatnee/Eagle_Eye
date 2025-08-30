@@ -8,18 +8,17 @@ use App\Models\HROrganization;
 use App\Models\HumanResource;
 use App\Models\Industry;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HumanResourceController extends Controller
 {
-    public function show(Request $request)
+    public function __invoke(Request $request)
     {
-        $nationality = $request->input('nationality') ?? null;
-        $industry = $request->input('industry_name') ?? null;
-        $organization = $request->input('organization_name') ?? null;
-        $certification = $request->input('certification_title') ?? null;
-        $expertise = $request->input('expertise_title') ?? null;
-        $designation = $request->input('designation') ?? null;
+        $nationality = $request->input('nationality') ?? [];
+        $industry = $request->input('industry_name') ?? [];
+        $organization = $request->input('organization_name') ?? [];
+        $certification = $request->input('certification_title') ?? [];
+        $expertise = $request->input('expertise_title') ?? [];
+        $designation = $request->input('designation') ?? [];
 
 
         $nationalities = HumanResource::select('nationality')
@@ -51,8 +50,6 @@ class HumanResourceController extends Controller
             ->distinct()
             ->orderBy('expertise_title', 'ASC')
             ->get();
-
-
 
 
         $humanResource = HumanResource::select('expert_id', 'organization_id', 'industry_id', 'name', 'nationality', 'linkedin_profile', 'designation', 'experience')
@@ -104,22 +101,19 @@ class HumanResourceController extends Controller
                     }
                 });
             })
-            ->get();
+            ->paginate(20);
+
+        $humanResource->appends([
+            'nationality'    => $nationality,
+            'industry_name' => $industry,
+            'organization_name' => $organization,
+            'certification_title' => $certification,
+            'expertise_title' => $expertise,
+            'designation' => $designation,
+        ]);
 
         $id = null;
 
-        return view('3-People/0-HumanResource', compact('id', 'humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties', 'designations'));
-    }
-
-    private function getFilters()
-    {
-        return [
-            'nationality',
-            'industry_name',
-            'organization_name',
-            'certification_title',
-            'expertise_title',
-            'designation',
-        ];
+        return view('ciso/people/index', compact('id', 'humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation'));
     }
 }

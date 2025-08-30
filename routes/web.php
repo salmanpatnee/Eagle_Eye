@@ -540,6 +540,10 @@ Route::middleware(['auth'])->group(function () {
         Route::view('/incident-management-cybersecurity-incident-management', 'ciso/hot-topics/incident-management-cybersecurity-incident-management')->name('incident-management');
         Route::view('/review-vs-audit', 'ciso/hot-topics/review-vs-audit')->name('review-vs-audit');
     });
+
+    Route::get('/hr-experts', HumanResourceController::class)->name('hr-expert.index');
+    Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
+    Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
 });
 
 
@@ -826,9 +830,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::get('/hr-experts', [HumanResourceController::class, 'show'])->name('hr.expert');
-Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
-Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
+
 
 Route::view('/cs-induction', 'process/1-CsInduction')->name('cs-induction');
 

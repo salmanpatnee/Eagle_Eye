@@ -346,6 +346,10 @@ layer(base);
     @apply bg-brand-950 hover:bg-brand-600 shadow-theme-xs inline-flex items-center rounded-lg p-3 text-sm font-medium text-white transition;
 }
 
+.action-btn-secondary {
+    @apply bg-brand-600 shadow-theme-xs inline-flex items-center rounded-lg p-3 text-sm font-medium text-white transition;
+}
+
 .tableCheckbox:checked ~ span span {
     @apply opacity-100;
 }
