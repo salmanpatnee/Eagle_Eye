@@ -272,7 +272,7 @@
                     </div>
                 </div>
             </a>
-            <a href="{{ route('process.index') }}">
+            <a href="{{ route('ciso-process.index') }}">
                 <div class="BoxFive">
                     <div>
                         <i class='bx bx-cog' style='color:#f79806'></i>
@@ -281,7 +281,7 @@
                     </div>
                 </div>
             </a>
-            <a href="/product">
+            <a href="{{ route('ciso-products.index') }}">
                 <div class="BoxSix">
                     <div>
                         <i class='bx bxs-box' style='color:#cb06f7'></i>

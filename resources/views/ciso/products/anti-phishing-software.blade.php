@@ -1,4 +1,8 @@
-@extends('process/15-ProductSupplier/products/product-layout')
+@extends('layouts.ciso-full')
+@section('title', 'Compliance Challenges! Framework Model')
+@section('title_ar', '')
+@section('content')
+    <x-table.action-wrapper title=""></x-table.action-wrapper>
 @section('heading')
     Anti-Phishing Software
 @endsection

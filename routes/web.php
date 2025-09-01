@@ -107,6 +107,7 @@ use App\Http\Controllers\PenTestReportController;
 use App\Http\Controllers\PresentationController;
 use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegulatoryReportController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\RiskStatusController;
@@ -547,7 +548,7 @@ Route::middleware(['auth'])->group(function () {
 
         // ------------------Process-------------------------
 
-        Route::get('/process', [ProcessController::class, 'index'])->name('process.index');
+        Route::get('/process', [ProcessController::class, 'index'])->name('ciso-process.index');
         Route::get('/process/{process:process_id}', [ProcessController::class, 'show'])->name('process.view.show');
 
         // ------------------Process Resources-------------------------
@@ -560,6 +561,43 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/resource/template/{resource}', [ProcessResourceController::class, 'pdfTemplate'])->name('process.resource.template.pdf');
         Route::get('/resource/{process:process_id}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');
         Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destroy'])->name('process.resource.destroy');
+
+
+        // ------------------Products-------------------------
+        Route::get('/products', ProductsController::class)->name('ciso-products.index');
+
+        Route::prefix('products')->group(function () {
+            Route::view('/anti-phishing-software', 'ciso/products/anti-phishing-software')->name('products.anti-phishing-software');
+            Route::view('/anti-ransomware-software', 'ciso/products/anti-ransomware-software')->name('products.anti-ransomware-software');
+            Route::view('/application-whitelisting', 'ciso/products/application-whitelisting')->name('products.application-whitelisting');
+            Route::view('/backup-recovery', 'ciso/products/backup-recovery')->name('products.backup-recovery');
+            Route::view('/brand-protection', 'ciso/products/brand-protection')->name('products.brand-protection');
+            Route::view('/casb', 'ciso/products/casb')->name('products.casb');
+            Route::view('/container-kubernetes-security', 'ciso/products/container-kubernetes-security')->name('products.container-kubernetes-security');
+            Route::view('/data-classification', 'ciso/products/data-classification')->name('products.data-classification');
+            Route::view('/data-loss-prevention', 'ciso/products/data-loss-prevention')->name('products.data-loss-prevention');
+            Route::view('/database-activity-monitoring', 'ciso/products/database-activity-monitoring')->name('products.database-activity-monitoring');
+            Route::view('/distributed-denial-of-service-of-attack', 'ciso/products/distributed-denial-of-service-of-attack')->name('products.distributed-denial-of-service-of-attack');
+            Route::view('/email-security', 'ciso/products/email-security')->name('products.email-security');
+            Route::view('/encryption', 'ciso/products/encryption')->name('products.encryption');
+            Route::view('/end-point-detection-response', 'ciso/products/end-point-detection-response')->name('products.end-point-detection-response');
+            Route::view('/extended-detection-protection-response', 'ciso/products/extended-detection-protection-response')->name('products.extended-detection-protection-response');
+            Route::view('/identity-access-management', 'ciso/products/identity-access-management')->name('products.identity-access-management');
+            Route::view('/iot-security', 'ciso/products/iot-security')->name('products.iot-security');
+            Route::view('/multi-factor-authentication', 'ciso/products/multi-factor-authentication')->name('products.multi-factor-authentication');
+            Route::view('/network-access-control', 'ciso/products/network-access-control')->name('products.network-access-control');
+            Route::view('/next-generation-firewall', 'ciso/products/next-generation-firewall')->name('products.next-generation-firewall');
+            Route::view('/penetration-testing', 'ciso/products/penetration-testing')->name('products.penetration-testing');
+            Route::view('/privilege-access-management', 'ciso/products/privilege-access-management')->name('products.privilege-access-management');
+            Route::view('/siem-solution', 'ciso/products/siem-solution')->name('products.siem-solution');
+            Route::view('/threat-intelligence', 'ciso/products/threat-intelligence')->name('products.threat-intelligence');
+            Route::view('/unified-threat-management', 'ciso/products/unified-threat-management')->name('products.unified-threat-management');
+            Route::view('/user-entity-behavior-analytics', 'ciso/products/user-entity-behavior-analytics')->name('products.user-entity-behavior-analytics');
+            Route::view('/web-application-firewall', 'ciso/products/web-application-firewall')->name('products.web-application-firewall');
+            Route::view('/wifi-security', 'ciso/products/wifi-security')->name('products.wifi-security');
+            Route::view('/zero-day-attack', 'ciso/products/zero-day-attack')->name('products.zero-day-attack');
+            Route::view('/zero-trust', 'ciso/products/zero-trust')->name('products.zero-trust');
+        });
     });
 });
 
@@ -845,10 +883,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-
-
-
-
 Route::view('/cs-induction', 'process/1-CsInduction')->name('cs-induction');
 
 Route::prefix('cs-induction')->group(function () {
@@ -885,63 +919,6 @@ Route::prefix('cs-induction')->group(function () {
     Route::view('/cybersecurity-risk-management', 'process/17-GrcDomain/29-CybersecurityHRCsIndu');
     Route::view('/cybersecurity-regulatory-compliance', 'process/17-GrcDomain/30-CybersecurityAwarenessTrainingCsIndu');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Products
-
-Route::get('/product', function () {
-    return view('process/15-ProductSupplier/1-ProductMasterForm');
-});
-
-
-Route::prefix('products')->group(function () {
-    Route::view('/anti-phishing-software', 'process/15-ProductSupplier/products/anti-phishing-software');
-    Route::view('/anti-ransomware-software', 'process/15-ProductSupplier/products/anti-ransomware-software');
-    Route::view('/application-whitelisting', 'process/15-ProductSupplier/products/application-whitelisting');
-    Route::view('/backup-recovery', 'process/15-ProductSupplier/products/backup-recovery');
-    Route::view('/brand-protection', 'process/15-ProductSupplier/products/brand-protection');
-    Route::view('/casb', 'process/15-ProductSupplier/products/casb');
-    Route::view('/container-kubernetes-security', 'process/15-ProductSupplier/products/container-kubernetes-security');
-    Route::view('/data-classification', 'process/15-ProductSupplier/products/data-classification');
-    Route::view('/data-loss-prevention', 'process/15-ProductSupplier/products/data-loss-prevention');
-    Route::view('/database-activity-monitoring', 'process/15-ProductSupplier/products/database-activity-monitoring');
-    Route::view('/distributed-denial-of-service-of-attack', 'process/15-ProductSupplier/products/distributed-denial-of-service-of-attack');
-    Route::view('/email-security', 'process/15-ProductSupplier/products/email-security');
-    Route::view('/encryption', 'process/15-ProductSupplier/products/encryption');
-    Route::view('/end-point-detection-response', 'process/15-ProductSupplier/products/end-point-detection-response');
-    Route::view('/extended-detection-protection-response', 'process/15-ProductSupplier/products/extended-detection-protection-response');
-    Route::view('/identity-access-management', 'process/15-ProductSupplier/products/identity-access-management');
-    Route::view('/iot-security', 'process/15-ProductSupplier/products/iot-security');
-    Route::view('/multi-factor-authentication', 'process/15-ProductSupplier/products/multi-factor-authentication');
-    Route::view('/network-access-control', 'process/15-ProductSupplier/products/network-access-control');
-    Route::view('/next-generation-firewall', 'process/15-ProductSupplier/products/next-generation-firewall');
-    Route::view('/penetration-testing', 'process/15-ProductSupplier/products/penetration-testing');
-    Route::view('/privilege-access-management', 'process/15-ProductSupplier/products/privilege-access-management');
-    Route::view('/siem-solution', 'process/15-ProductSupplier/products/siem-solution');
-    Route::view('/threat-intelligence', 'process/15-ProductSupplier/products/threat-intelligence');
-    Route::view('/unified-threat-management', 'process/15-ProductSupplier/products/unified-threat-management');
-    Route::view('/user-entity-behavior-analytics', 'process/15-ProductSupplier/products/user-entity-behavior-analytics');
-    Route::view('/web-application-firewall', 'process/15-ProductSupplier/products/web-application-firewall');
-    Route::view('/wifi-security', 'process/15-ProductSupplier/products/wifi-security');
-    Route::view('/zero-day-attack', 'process/15-ProductSupplier/products/zero-day-attack');
-    Route::view('/zero-trust', 'process/15-ProductSupplier/products/zero-trust');
-});
-
-
-
-
 
 
 Route::get('/generate-ppt', [PresentationController::class, 'generateChart'])->name('generate.ppt');
