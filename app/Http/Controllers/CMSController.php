@@ -15,8 +15,9 @@ class CMSController extends Controller
         return view('process/cms/process/index', compact('process'));
     }
 
-    public function show(Process $process)
+    public function show(Process $cm)
     {
+        $process = $cm;
         $process->load('resources');
 
         return view('process/cms/process/show', compact('process'));
@@ -24,8 +25,8 @@ class CMSController extends Controller
 
     public function create()
     {
-        $process = null;
-        return view('process/cms/process/create', compact('process'));
+        $cm = null;
+        return view('process/cms/process/create', compact('cm'));
     }
 
     public function store(Request $request)
@@ -43,35 +44,35 @@ class CMSController extends Controller
             ->with('success', 'Process saved successfully.');
     }
 
-    public function edit(Request $request, Process $process)
+    public function edit(Request $request, Process $cm)
     {
-        return view('process/cms/process/create', compact('process'));
+        return view('process/cms/process/create', compact('cm'));
     }
 
-    public function update(Request $request, Process $process)
+    public function update(Request $request, Process $cm)
     {
         $attributes = $request->validate([
-            'process_id' => ['required', 'unique:cms_process,process_id,' . $process->id],
+            'process_id' => ['required', 'unique:cms_process,process_id,' . $cm->id],
             'title' => 'required',
             'title_ar' => 'nullable',
             'description' => 'nullable',
         ]);
 
-        $process->update($attributes);
+        $cm->update($attributes);
 
         return redirect(route('process.index'))
             ->with('success', 'Process saved successfully.');
     }
 
 
-    public function destroy(Process $process)
+    public function destroy(Process $cm)
     {
-        $process->load('resources');
-        if ($process->resources()->count() > 0) {
+        $cm->load('resources');
+        if ($cm->resources()->count() > 0) {
             return redirect(route('process.index'))
                 ->with('error', 'Process cannot be deleted as it has resources attached to it.');
         } else {
-            $process->delete();
+            $cm->delete();
         }
         return redirect(route('process.index'))
             ->with('success', 'Process deleted successfully.');

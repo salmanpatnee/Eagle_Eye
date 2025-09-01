@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Process;
 use App\Models\Resource;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProcessResourceController extends Controller
 {
+    public function checklist(Process $process)
+    {
+        $processWithChecklist = $process->load(['resources' => function ($query) {
+            $query->where('resource_type', 'checklist');
+        }]);
+
+        return view('ciso/process/resources/checklist', compact('processWithChecklist'));
+    }
+
     public function videos(Process $process)
     {
         $processWithVideos = $process->load(['resources' => function ($query) {
@@ -17,7 +25,7 @@ class ProcessResourceController extends Controller
 
         // return $processWithVideos;
 
-        return view('process/process/resources/videos', compact('processWithVideos'));
+        return view('ciso/process/resources/videos', compact('processWithVideos'));
     }
 
     public function stream(Resource $resource)
@@ -43,16 +51,6 @@ class ProcessResourceController extends Controller
         ]);
     }
 
-    public function checklist(Process $process)
-    {
-        $processWithChecklist = $process->load(['resources' => function ($query) {
-            $query->where('resource_type', 'checklist');
-        }]);
-
-        // return $processWithChecklist;
-
-        return view('process/process/resources/checklist', compact('processWithChecklist'));
-    }
 
     public function template(Process $process)
     {
@@ -60,16 +58,14 @@ class ProcessResourceController extends Controller
             $query->where('resource_type', 'template');
         }]);
 
-        // return $processWithTemplates;
-
-        return view('process/process/resources/template', compact('processWithTemplates'));
+        return view('ciso/process/resources/template', compact('processWithTemplates'));
     }
 
     public function pdfTemplate(Resource $resource)
     {
 
         $resource->load('resourceable');
-        return view('process/process/resources/template-pdf', compact('resource'));
+        return view('ciso/process/resources/template-pdf', compact('resource'));
     }
 
     public function glossary(Process $process)
@@ -78,7 +74,7 @@ class ProcessResourceController extends Controller
             $query->where('resource_type', 'glossary');
         }]);
 
-        return view('process/process/resources/glossary', compact('processWithGlossary'));
+        return view('ciso/process/resources/glossary', compact('processWithGlossary'));
     }
 
     public function destroy(Resource $resource)

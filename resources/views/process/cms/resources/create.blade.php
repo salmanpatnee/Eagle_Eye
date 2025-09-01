@@ -4,10 +4,10 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $process?->id ? 'Update' : 'New' }} Resource">
-            <x-action.button label="View" label_ar="منظر" route_name="process.index" />
+            <x-action.button label="View" label_ar="منظر" route_name="cms.index" />
         </x-table.action-wrapper>
 
-        <form action="{{ route('process.show', $process->id) }}">
+        <form action="{{ route('cms.show', $process->id) }}">
             @csrf
             <input type="hidden" id="resourceable_id" value="{{ $process->id }}">
             <input type="hidden" id="resourceable_type" value="App\Models\Process">

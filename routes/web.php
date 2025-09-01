@@ -502,8 +502,7 @@ Route::middleware(['auth'])->group(function () {
 
     // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
 
-    Route::resource('cms/process', CMSController::class);
-
+    Route::resource('cms', CMSController::class);
     Route::get('/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
     Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
 
@@ -546,8 +545,21 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
         // Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
 
+        // ------------------Process-------------------------
+
         Route::get('/process', [ProcessController::class, 'index'])->name('process.index');
         Route::get('/process/{process:process_id}', [ProcessController::class, 'show'])->name('process.view.show');
+
+        // ------------------Process Resources-------------------------
+
+        Route::get('/resource/{process:process_id}/checklist/', [ProcessResourceController::class, 'checklist'])->name('process.resource.checklist');
+        Route::get('/resource/{process:process_id}/videos/', [ProcessResourceController::class, 'videos'])->name('process.resource.videos');
+        Route::get('/video/stream/{resource}', [ProcessResourceController::class, 'stream'])->name('secure.video.stream');
+
+        Route::get('/resource/{process:process_id}/template/', [ProcessResourceController::class, 'template'])->name('process.resource.template');
+        Route::get('/resource/template/{resource}', [ProcessResourceController::class, 'pdfTemplate'])->name('process.resource.template.pdf');
+        Route::get('/resource/{process:process_id}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');
+        Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destroy'])->name('process.resource.destroy');
     });
 });
 
@@ -875,14 +887,7 @@ Route::prefix('cs-induction')->group(function () {
 });
 
 
-Route::get('/resource/{process:process_id}/videos/', [ProcessResourceController::class, 'videos'])->name('process.resource.videos');
-Route::get('/video/stream/{resource}', [ProcessResourceController::class, 'stream'])->name('secure.video.stream');
 
-Route::get('/resource/{process:process_id}/checklist/', [ProcessResourceController::class, 'checklist'])->name('process.resource.checklist');
-Route::get('/resource/{process:process_id}/template/', [ProcessResourceController::class, 'template'])->name('process.resource.template');
-Route::get('/resource/template/{resource}', [ProcessResourceController::class, 'pdfTemplate'])->name('process.resource.template.pdf');
-Route::get('/resource/{process:process_id}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');
-Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destroy'])->name('process.resource.destroy');
 
 
 

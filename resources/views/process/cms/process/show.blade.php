@@ -4,8 +4,8 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Process Details">
-            <x-action.button label="View" label_ar="منظر" route_name="process.index" />
-            <x-action.button label="Edit" label_ar="تحرير" route_name="process.edit" route_param="{{ $process->id }}" />
+            <x-action.button label="View" label_ar="منظر" route_name="cms.index" />
+            <x-action.button label="Edit" label_ar="تحرير" route_name="cms.edit" route_param="{{ $process->id }}" />
         </x-table.action-wrapper>
 
         <div class="border-gray-100 border-t p-3">

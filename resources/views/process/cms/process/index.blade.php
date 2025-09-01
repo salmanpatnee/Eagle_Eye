@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="All Process">
-            <x-action.button label="Add Process" label_ar="إضافة العملية" route_name="process.create" />
+            <x-action.button label="Add Process" label_ar="إضافة العملية" route_name="cms.create" />
         </x-table.action-wrapper>
 
         <x-table.table>
@@ -26,9 +26,9 @@
                                 class="inline-flex items-center justify-center p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-blue-600 transition-colors">
                                 <x-icons.media />
                             </a>
-                            <x-action.view route_name="process.show" param="{{ $row->id }}" />
-                            <x-action.edit route_name="process.edit" param="{{ $row->id }}" />
-                            <x-action.delete route_name="process.destroy" param="{{ $row->id }}" />
+                            <x-action.view route_name="cms.show" param="{{ $row->id }}" />
+                            <x-action.edit route_name="cms.edit" param="{{ $row->id }}" />
+                            <x-action.delete route_name="cms.destroy" param="{{ $row->id }}" />
                         </x-table.td>
                     </tr>
                 @endforeach
