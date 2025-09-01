@@ -248,7 +248,7 @@
                         remains a
                         business challenge.</x-table.td>
                 </tr>
-            </x-table.tbody>
+                zero-trust/x-table.tbody>
         </x-table.table>
 
 

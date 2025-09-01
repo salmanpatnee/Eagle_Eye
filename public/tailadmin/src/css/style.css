@@ -354,7 +354,15 @@ layer(base);
 }
 
 .process-content p {
-    @apply text-lg;
+    @apply mb-3 text-lg;
+}
+
+.process-content ul {
+    @apply mb-3 list-disc pl-4 text-lg;
+}
+
+.process-content ol {
+    @apply mb-3 list-decimal pl-5 text-lg;
 }
 
 .tableCheckbox:checked ~ span span {
