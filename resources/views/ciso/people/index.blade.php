@@ -56,14 +56,14 @@
                 <x-table.th label="Expert ID" />
                 <x-table.th label="Expert Name" />
                 <x-table.th label="Nationality" />
-                <x-table.th label="Certification" />
-                <x-table.th label="LinkedIn Profile" />
-                <x-table.th label="Organization" />
-                <x-table.th label="Designation" />
-                <x-table.th label="Expert Roles" />
                 <x-table.th label="Industry" />
-                <x-table.th label="Experience" />
+                <x-table.th label="Organization" />
+                <x-table.th label="Certification" />
                 <x-table.th label="Expertise" />
+                <x-table.th label="Designation" />
+                <x-table.th label="Experience" />
+                <x-table.th label="Expert Roles" />
+                <x-table.th label="LinkedIn Profile" />
             </x-table.thead>
             <x-table.tbody>
                 @forelse ($humanResource as $row)
@@ -72,37 +72,29 @@
                         <x-table.td> {{ $row->expert_id }}</x-table.td>
                         <x-table.td> {{ $row->name }}</x-table.td>
                         <x-table.td> {{ $row->nationality }}</x-table.td>
-
+                        <x-table.td> {{ $row->industry->industry_name }}</x-table.td>
+                        <x-table.td> {{ $row->organization->organization_name }}</x-table.td>
                         <x-table.td>
                             <div style="width: 250px;">
                                 <x-table-list :data="$row->certifications" id_key="certification_id"
                                     value_key="certification_title" />
                             </div>
                         </x-table.td>
-
-                        <x-table.td> <a href="{{ $row->linkedin_profile }}" target="_blank">
-                                {{ $row->linkedin_profile }}
-                            </a></x-table.td>
-
-                        <x-table.td> {{ $row->organization->organization_name }}</x-table.td>
-
-                        <x-table.td>
-                            <div style="width: 250px;">{{ $row->designation }}</div>
-                        </x-table.td>
-
-                        <x-table.td>
-                            <x-table-list :data="$row->roles" id_key="" value_key="role_title" />
-                            {{-- @if ($id != $row->expert_id)
-                                {{ $row->role_title }}
-                            @endif --}}
-                        </x-table.td>
-                        <x-table.td> {{ $row->industry->industry_name }}</x-table.td>
-                        <x-table.td> {{ $row->experience }}</x-table.td>
                         <x-table.td>
                             <div style="width: 250px;">
                                 <x-table-list :data="$row->experties" id_key="" value_key="expertise_title" />
                             </div>
                         </x-table.td>
+                        <x-table.td>
+                            <div style="width: 250px;">{{ $row->designation }}</div>
+                        </x-table.td>
+                        <x-table.td> {{ $row->experience }}</x-table.td>
+                        <x-table.td>
+                            <x-table-list :data="$row->roles" id_key="" value_key="role_title" />
+                        </x-table.td>
+                        <x-table.td> <a href="{{ $row->linkedin_profile }}" target="_blank">
+                                {{ $row->linkedin_profile }}
+                            </a></x-table.td>
                         @php $id = $row->expert_id @endphp
 
                     </tr>
@@ -113,7 +105,5 @@
         <x-pagination>
             {{ $humanResource->links() }}
         </x-pagination>
-
-
     </div>
 @endsection

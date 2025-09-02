@@ -88,6 +88,7 @@ use App\Http\Controllers\ControlAuditFindingController;
 use App\Http\Controllers\OCDController;
 use App\Http\Controllers\AssetSmartSearch;
 use App\Http\Controllers\AuditPlanReportController;
+use App\Http\Controllers\CisoEducationController;
 use App\Http\Controllers\CMSController;
 use App\Http\Controllers\DataUploaderController;
 use App\Http\Controllers\ExceptionReportsController;
@@ -511,7 +512,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('ciso')->group(function () {
 
         // ------------------CISO Education-------------------------
-        Route::view('/ciso-education', 'ciso/ciso-education/index')->name('ciso-education.index');
+
+        Route::get('/ciso-education', CisoEducationController::class)->name('ciso-education.index');
 
         Route::prefix('ciso-education')->group(function () {
             Route::view('/applying-cissp-knowledge-in-ksa', 'ciso/ciso-education/cissp')->name('cissp');
@@ -520,7 +522,6 @@ Route::middleware(['auth'])->group(function () {
             Route::view('/applying-pmp-knowledge-in-ksa', 'ciso/ciso-education/pmp')->name('pmp');
             Route::view('/applying-agile-approach', 'ciso/ciso-education/agile')->name('agile');
         });
-
 
         // ------------------Hot Topics-------------------------
 
@@ -542,6 +543,8 @@ Route::middleware(['auth'])->group(function () {
             Route::view('/review-vs-audit', 'ciso/hot-topics/review-vs-audit')->name('review-vs-audit');
         });
 
+        // ------------------People-------------------------
+
         Route::get('/hr-experts', HumanResourceController::class)->name('hr-expert.index');
         // Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
         // Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
@@ -556,7 +559,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/resource/{process:process_id}/checklist/', [ProcessResourceController::class, 'checklist'])->name('process.resource.checklist');
         Route::get('/resource/{process:process_id}/videos/', [ProcessResourceController::class, 'videos'])->name('process.resource.videos');
         Route::get('/video/stream/{resource}', [ProcessResourceController::class, 'stream'])->name('secure.video.stream');
-
         Route::get('/resource/{process:process_id}/template/', [ProcessResourceController::class, 'template'])->name('process.resource.template');
         Route::get('/resource/template/{resource}', [ProcessResourceController::class, 'pdfTemplate'])->name('process.resource.template.pdf');
         Route::get('/resource/{process:process_id}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');

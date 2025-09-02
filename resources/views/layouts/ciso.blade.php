@@ -4,7 +4,7 @@
     <!-- ===== Content Area Start ===== -->
     <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
         <!-- Small Device Overlay Start -->
-        @include('partials.nav')
+        @include('partials.nav-ciso')
         <!-- ===== Main Content Start ===== -->
         <main>
             <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">

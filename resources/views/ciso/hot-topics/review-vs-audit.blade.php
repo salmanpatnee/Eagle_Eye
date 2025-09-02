@@ -3,9 +3,7 @@
 @section('title_ar', '')
 @section('content')
 
-    <x-table.action-wrapper title="">
 
-    </x-table.action-wrapper>
 
     <div class="px-7">
         <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
@@ -37,7 +35,7 @@
             for cybersecurity professionals, including CISOs, to implement an effective governance and risk management
             strategy.
         </p>
-        <h3 class="bg-black font-bold inline mb-3 p-3 rounded-md text-white">Review vs. Audit in Cybersecurity</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Review vs. Audit in Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="Aspect" />

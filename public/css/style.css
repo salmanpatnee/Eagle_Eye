@@ -1,9 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    letter-spacing: 1px;
-}
-
 :root {
     /* Colors */
     --black: #000000;
@@ -16,17 +10,22 @@
     --dim-blue: #e6f2f2;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+}
+
 .HeadingTxt {
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-left: -18px;CisoEdudomainbox
+    margin-left: -18px;
 }
 .FieldHeadEngTxt {
     color: black;
     font-size: 15px !important;
     font-weight: bold;
-    mb
 }
 .FieldHeadArbTxt {
     color: black;
@@ -446,7 +445,7 @@ header {
     background-size: cover;
     margin: 0em;
 } */
-.profilebody .bodysec{
+.profilebody .bodysec {
     background-image: url("/Images/7-GrcBackgrounImg.jpg");
     background-size: cover;
     margin-bottom: 3em;

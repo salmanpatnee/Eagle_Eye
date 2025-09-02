@@ -3,9 +3,7 @@
 @section('title_ar', '')
 @section('content')
 
-    <x-table.action-wrapper title="">
 
-    </x-table.action-wrapper>
 
     <div class="px-7">
         <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
@@ -35,7 +33,7 @@
             require attention, a control assessment determines whether existing security controls are sufficient to mitigate
             those risks. Together, they form a comprehensive approach to cybersecurity governance, helping organizations
             safeguard sensitive information and maintain regulatory compliance.</p>
-        <h3 class="bg-black font-bold inline mb-3 p-3 rounded-md text-white">Control Assessment vs. Risk Assessment in
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Control Assessment vs. Risk Assessment in
             Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>

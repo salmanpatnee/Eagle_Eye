@@ -11,7 +11,10 @@
 
 <script>
     $(document).ready(function() {
-        $('.multiselect').select2();
+        $('.multiselect').select2({
+            placeholder: "Select an option",
+            allowClear: true // optional, adds "x" to clear selection
+        });
     }).on('select2:open', function() {
         // Apply Tailwind classes to the ul
         $('.select2-results__options').addClass(

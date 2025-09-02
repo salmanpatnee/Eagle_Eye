@@ -3,9 +3,7 @@
 @section('title_ar', '')
 @section('content')
 
-    <x-table.action-wrapper title="">
 
-    </x-table.action-wrapper>
 
     <div class="px-7">
         <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
@@ -27,7 +25,7 @@
             their cybersecurity
             relevance
             and best practices for secure implementation.</p>
-        <h3 class="bg-black font-bold inline mb-3 p-3 rounded-md text-white">Essential and Practical Cryptographic
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Essential and Practical Cryptographic
             Deployment in Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>

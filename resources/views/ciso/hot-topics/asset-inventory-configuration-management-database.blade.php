@@ -3,9 +3,7 @@
 @section('title_ar', '')
 @section('content')
 
-    <x-table.action-wrapper title="">
 
-    </x-table.action-wrapper>
 
     <div class="px-7">
         <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
@@ -38,7 +36,7 @@
             particularly in the context
             of
             cybersecurity.</p>
-        <h3 class="bg-black font-bold inline mb-3 p-3 rounded-md text-white">Asset Inventory vs. (CMDB) in Cybersecurity
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Asset Inventory vs. (CMDB) in Cybersecurity
         </h3>
         <x-table.table>
             <x-table.thead>

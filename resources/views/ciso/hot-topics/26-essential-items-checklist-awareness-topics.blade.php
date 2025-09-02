@@ -3,9 +3,7 @@
 @section('title_ar', '')
 @section('content')
 
-    <x-table.action-wrapper title="">
 
-    </x-table.action-wrapper>
 
     <div class="px-7">
         <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
@@ -33,7 +31,7 @@
             topics
             into an ongoing security awareness training program, organizations can minimize security incidents, enhance
             regulatory compliance, and build a culture of cybersecurity resilience.</p>
-        <h3 class="bg-black font-bold inline mb-3 p-3 rounded-md text-white">Essential Items Checklist of Awareness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Essential Items Checklist of Awareness
             Topics in Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>

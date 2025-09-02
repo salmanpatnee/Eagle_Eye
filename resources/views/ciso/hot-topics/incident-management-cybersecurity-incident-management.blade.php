@@ -3,9 +3,7 @@
 @section('title_ar', '')
 @section('content')
 
-    <x-table.action-wrapper title="">
 
-    </x-table.action-wrapper>
 
     <div class="px-7">
         <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
@@ -37,7 +35,7 @@
             integrate
             both ITSM and cybersecurity strategies to effectively manage incidents and strengthen their security posture.
         </p>
-        <h3 class="bg-black font-bold inline mb-3 p-3 rounded-md text-white">Incident Management vs. Cybersecurity
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Incident Management vs. Cybersecurity
             Incident Management</h3>
         <x-table.table>
             <x-table.thead>
