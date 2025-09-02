@@ -2,7 +2,7 @@
 @section('title', 'Container and Kubernetes Security')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
         <p>Container and Kubernetes security is a critical component of modern cloud-native application security. Containers
@@ -28,7 +28,9 @@
             (XDR) platforms. The future of container and Kubernetes security lies in AI-driven anomaly detection, service
             mesh
             security, and zero-trust networking models to enhance resilience against evolving cyber threats.</p>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -91,7 +93,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Container and Kubernetes Security</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for Container
+            and Kubernetes Security</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -163,7 +167,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial Container and Kubernetes Security Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial Container and
+            Kubernetes Security
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -246,7 +252,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to Container and Kubernetes Security</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to Container and
+            Kubernetes Security</h3>
         <ol>
             <li>Misconfigurations leading to security vulnerabilities.</li>
             <li>Unauthorized access to Kubernetes clusters.</li>
@@ -259,7 +267,9 @@
             <li>Difficulty in integrating with traditional security solutions.</li>
             <li>Increasing complexity with multi-cloud Kubernetes deployments.</li>
         </ol>
-        <h3>6. Key Features of Top 10 Container and Kubernetes Security Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+            Container and
+            Kubernetes Security Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -364,7 +374,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>Kubernetes security must be integrated into DevSecOps.</li>
             <li>Role-based access control (RBAC) is essential for Kubernetes
@@ -380,7 +391,9 @@
             <li>Continuous security assessments help reduce misconfigurations.
             </li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -476,7 +489,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of Container and Kubernetes Security (3-5
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of Container and
+            Kubernetes Security
+            (3-5
             Years)</h3>
         <x-table.table>
             <x-table.thead>
@@ -533,7 +548,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for
@@ -566,7 +582,8 @@
                 transit and at rest in
                 Kubernetes clusters.</li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered threat intelligence and
                 anomaly detection in

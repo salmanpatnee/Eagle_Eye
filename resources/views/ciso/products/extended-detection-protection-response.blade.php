@@ -2,11 +2,28 @@
 @section('title', 'Extended Detection Protection Response (XDR)')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
 
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <p>Extended Detection and Response (XDR) is an advanced cybersecurity technology that integrates multiple security
+            layers into a unified detection, investigation, and response platform. Unlike traditional Endpoint Detection and
+            Response (EDR) solutions that focus solely on endpoint threats, XDR extends visibility across networks, email,
+            cloud environments, and applications. By correlating data from multiple security domains, XDR provides security
+            teams with a holistic view of threats and enables faster detection and response.</p>
+        <p>XDR solutions leverage artificial intelligence (AI) and machine learning (ML) to analyze security telemetry data,
+            detect anomalies, and automate response actions. These platforms aggregate and normalize security alerts from
+            various sources, reducing alert fatigue and providing security analysts with contextualized threat intelligence.
+            Additionally, XDR solutions integrate with Security Information and Event Management (SIEM) and Security
+            Orchestration, Automation, and Response (SOAR) platforms to enhance security operations and threat mitigation
+            strategies.</p>
+        <p>As organizations face increasingly sophisticated cyber threats, XDR plays a critical role in strengthening their
+            security posture. By unifying disparate security tools into a single interface, XDR simplifies threat hunting,
+            incident analysis, and forensic investigations. The future of XDR will focus on further automation, predictive
+            analytics, and zero-trust architecture integration to enhance cyber resilience against emerging threats.</p>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -66,7 +83,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Extended Detection and Response (XDR)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for Extended
+            Detection and Response (XDR)</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -142,7 +161,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial XDR Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial XDR Products
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -228,7 +248,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to XDR</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to XDR</h3>
         <ol>
             <li>Complexity in integrating with legacy security systems.</li>
             <li>Managing large volumes of security telemetry data.</li>
@@ -241,7 +262,8 @@
             <li>Lack of skilled personnel to manage XDR effectively.</li>
             <li>Adapting to evolving attacker techniques and tactics.</li>
         </ol>
-        <h3>6. Key Features of Top 10 XDR Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 XDR
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -352,7 +374,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>XDR provides unified threat detection across multiple security
                 layers.</li>
@@ -372,7 +395,9 @@
             <li>Future advancements in AI will further automate threat
                 mitigation.</li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -467,7 +492,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of XDR (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of XDR (3-5 Years)
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -528,7 +554,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for
@@ -561,7 +588,8 @@
                 data in transit and at
                 rest.</li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered predictive threat
                 intelligence.</li>

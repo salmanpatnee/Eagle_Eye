@@ -2,11 +2,32 @@
 @section('title', 'Zero Trust')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
 
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <p>Zero Trust is a cybersecurity framework that follows the principle of "never trust, always verify," ensuring that
+            all users, devices, and network components are continuously authenticated and authorized before being granted
+            access. Unlike traditional perimeter-based security models, Zero Trust assumes that threats exist both inside
+            and outside the network. It enforces strict identity verification, least-privilege access, and continuous
+            monitoring to mitigate risks. The architecture is built on several key technologies, including multi-factor
+            authentication (MFA), endpoint security, identity and access management (IAM), network segmentation, and
+            behavioral analytics</p>
+        <p>Zero Trust models rely on micro-segmentation to minimize lateral movement in the event of a breach. By segmenting
+            networks into smaller zones, organizations can restrict access to only those resources necessary for specific
+            users or applications. Continuous monitoring and adaptive access controls leverage AI-driven analytics to detect
+            anomalies and enforce security policies dynamically. Additionally, Zero Trust Network Access (ZTNA) replaces
+            traditional VPNs, providing secure access based on user identity, device posture, and contextual factors rather
+            than relying solely on network location.</p>
+        <p>The adoption of cloud computing, remote work, and IoT devices has made Zero Trust an essential cybersecurity
+            strategy. Organizations are increasingly implementing Software-Defined Perimeters (SDP) and Security Service
+            Edge (SSE) solutions to extend Zero Trust principles across hybrid and multi-cloud environments. Future
+            developments in Zero Trust will focus on AI-driven threat detection, automation, and integration with Extended
+            Detection and Response (XDR) platforms to create a more proactive cybersecurity posture. The shift from implicit
+            trust models to Zero Trust ensures a more resilient and adaptive security framework.</p>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -66,7 +87,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Zero Trust</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for Zero Trust
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -139,7 +162,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial Zero Trust Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial Zero Trust
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -221,7 +245,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to Zero Trust</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to Zero Trust</h3>
         <ol>
             <li>Implementing Zero Trust across legacy systems.</li>
             <li>Balancing user experience with security enforcement.</li>
@@ -234,7 +259,9 @@
             <li>Automating security responses without disrupting workflows.</li>
             <li>Aligning Zero Trust with compliance and regulatory requirements.</li>
         </ol>
-        <h3>6. Key Features of Top 10 Zero Trust Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+            Zero Trust Products
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -335,7 +362,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>Zero Trust minimizes the risk of unauthorized access.</li>
             <li>Continuous authentication enhances security posture.</li>
@@ -350,7 +378,9 @@
             <li>Future Zero Trust developments will focus on automation and
                 AI-driven security.</li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -440,7 +470,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of Zero Trust (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of Zero Trust (3-5
+            Years)</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -501,7 +532,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for
@@ -529,7 +561,8 @@
             <li>Compliance-driven enforcement of Zero
                 Trust security policies.</li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered risk scoring for identity
                 verification and

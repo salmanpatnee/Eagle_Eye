@@ -2,7 +2,7 @@
 @section('title', 'Wifi Security')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
         <p>WiFi security is a crucial aspect of cybersecurity, ensuring that wireless networks remain protected from
@@ -30,7 +30,9 @@
             unauthorized
             access and data breaches.
         </p>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -90,12 +92,15 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for WiFi Security</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for WiFi
+            Security</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
                     <x-table.th label="S.No" />
-                    <th>UTM Solution</th>
+                    <x-table.th label="UTM Solution" />
+
                     <x-table.th label="Vendor" />
                     <x-table.th label="Description" />
             </x-table.thead>
@@ -162,7 +167,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial WiFi Security Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial WiFi Security
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -246,7 +252,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to WAF</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to WAF</h3>
         <ol>
             <li>Managing rogue access points and unauthorized devices.</li>
             <li>Securing IoT devices connected to WiFi networks.</li>
@@ -259,7 +266,9 @@
             <li>Integrating WiFi security with Zero Trust Network Access (ZTNA).</li>
             <li>Automating security responses to wireless-based threats.</li>
         </ol>
-        <h3>6. Key Features of Top 10 WiFi Security Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+            WiFi Security
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -357,7 +366,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>AI-driven WiFi security enhances threat detection.</li>
             <li>Zero Trust integration improves access control.</li>
@@ -373,7 +383,9 @@
             <li>IoT WiFi security remains a critical area for cybersecurity
                 teams.</li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -466,7 +478,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of WiFi Security (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of WiFi Security
+            (3-5 Years)</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -526,7 +539,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for WiFi
@@ -560,7 +574,8 @@
                 security policies.
             </li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered anomaly detection in wireless
                 network traffic.

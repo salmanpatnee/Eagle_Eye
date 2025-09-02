@@ -2,11 +2,32 @@
 @section('title', 'Identity and Access Management (IAM)')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
 
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <p>Identity and Access Management (IAM) is a crucial cybersecurity technology that ensures the right individuals and
+            entities have appropriate access to digital resources. IAM solutions control and manage user identities,
+            authentication, and authorization processes, enabling organizations to enforce security policies while
+            maintaining compliance with regulatory frameworks. By implementing IAM, businesses can reduce the risk of
+            unauthorized access, insider threats, and credential-based attacks. IAM encompasses various technologies,
+            including Single Sign-On (SSO), Multi-Factor Authentication (MFA), Role-Based Access Control (RBAC), and
+            Privileged Access Management (PAM), which collectively strengthen enterprise security.</p>
+        <p>Modern IAM solutions leverage artificial intelligence (AI) and machine learning (ML) to analyze user behavior,
+            detect anomalies, and prevent unauthorized access attempts. Adaptive authentication mechanisms use contextual
+            data such as geolocation, device type, and login behavior to dynamically adjust authentication requirements.
+            Additionally, IAM integrates with Zero Trust security frameworks, ensuring continuous verification of user
+            identities and access rights across cloud and on-premises environments. Identity Federation and Identity as a
+            Service (IDaaS) are emerging IAM models that provide seamless authentication across multiple platforms and
+            services.</p>
+        <p>As organizations embrace cloud computing and remote work, IAM technologies continue to evolve to address new
+            security challenges. Cloud-based IAM solutions enable centralized identity governance, while decentralized
+            identity models, such as blockchain-based identity management, offer enhanced security and privacy. The future
+            of IAM lies in biometric authentication, AI-driven risk-based access controls, and self-sovereign identity
+            frameworks, ensuring greater security resilience against evolving cyber threats.</p>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -67,7 +88,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Identity and Access Management (IAM)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for Identity
+            and Access Management (IAM)</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -139,7 +162,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial IAM Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial IAM Products
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -225,7 +249,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to IAM</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to IAM</h3>
         <ol>
             <li>Managing access across multi-cloud and hybrid environments.</li>
             <li>Ensuring compliance with multiple regulatory frameworks.</li>
@@ -238,7 +263,8 @@
             <li>Automating identity lifecycle management.</li>
             <li>Adapting IAM policies for remote work and decentralized access.</li>
         </ol>
-        <h3>6. Key Features of Top 10 IAM Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 IAM
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -350,7 +376,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>IAM is critical for enforcing access control and authentication
                 policies.
@@ -369,7 +396,9 @@
             <li>Future IAM strategies include blockchain-based decentralized
                 identity.</li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -464,7 +493,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of IAM (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of IAM (3-5 Years)
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -521,7 +551,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for user
@@ -554,7 +585,8 @@
                 identity governance
                 policies.</li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered identity analytics and
                 risk-based access control.

@@ -2,7 +2,7 @@
 @section('title', 'Backup Recovery')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
         <p>Backup and recovery technologies are essential components of an organization’s cybersecurity and disaster
@@ -29,7 +29,9 @@
             towards zero-trust backup architectures, AI-driven automation, and compliance-focused data protection strategies
             to
             address regulatory requirements and cybersecurity challenges.</p>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -88,7 +90,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Backup and Recovery</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for Backup and
+            Recovery</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -160,7 +164,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial Backup and Recovery Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial Backup and
+            Recovery Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -245,7 +250,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to Backup and Recovery</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to Backup and
+            Recovery</h3>
         <ol>
             <li>Increasing ransomware threats targeting backup data.</li>
             <li>Ensuring compliance with evolving data protection regulations.</li>
@@ -258,7 +265,9 @@
             <li>Ensuring encryption and security of stored backup data.</li>
             <li>Integrating backup solutions with SIEM, SOAR, and other security tools.</li>
         </ol>
-        <h3>6. Key Features of Top 10 Backup Recovery Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+            Backup Recovery
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -366,7 +375,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>Backup security is essential for mitigating ransomware attacks.
             </li>
@@ -386,7 +396,9 @@
                 recovery planning.
             </li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -471,7 +483,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of Backup and Recovery (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of Backup and
+            Recovery (3-5 Years)
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -536,7 +550,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven anomaly detection for backup
@@ -566,7 +581,8 @@
                 backup system activities.
             </li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered backup anomaly detection.
             </li>

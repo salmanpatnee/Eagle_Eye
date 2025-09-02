@@ -2,11 +2,32 @@
 @section('title', 'Database Activity Monitoring (DAM)')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
 
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <p>Database Activity Monitoring (DAM) is a security technology designed to track, analyze, and report database
+            activities in real time. DAM solutions provide visibility into user behavior, database transactions, and
+            unauthorized access attempts, helping organizations protect sensitive information from insider threats,
+            unauthorized access, and cyberattacks. Unlike traditional security solutions that focus on network perimeter
+            defenses, DAM operates at the database level, detecting suspicious activities such as privilege abuse, SQL
+            injection attacks, and data exfiltration attempts.</p>
+        <p>Modern DAM solutions incorporate artificial intelligence (AI) and machine learning (ML) to enhance anomaly
+            detection and automate security responses. These technologies help identify abnormal data access patterns,
+            unauthorized modifications, and privileged user activities that may indicate a security breach. DAM tools also
+            integrate with Security Information and Event Management (SIEM) systems, Data Loss Prevention (DLP) solutions,
+            and Identity and Access Management (IAM) systems to provide a comprehensive security posture. Additionally, DAM
+            solutions enforce security policies, generate audit reports for compliance, and support real-time alerts to
+            mitigate database-related threats.</p>
+        <p>With stringent regulatory compliance requirements such as GDPR, PCI-DSS, HIPAA, and the Saudi PDPL, organizations
+            are increasingly deploying DAM solutions to safeguard their data. As businesses migrate to cloud and hybrid
+            environments, DAM tools have evolved to support multi-cloud deployments, containerized databases, and serverless
+            architectures. The future of DAM will focus on AI-driven predictive analytics, zero-trust security principles,
+            and tighter integration with cloud-native security frameworks to enhance data protection and threat mitigation.
+        </p>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -73,7 +94,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Database Activity Monitoring (DAM)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for Database
+            Activity Monitoring (DAM)</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -145,7 +168,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial DAM Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial DAM Products
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -200,7 +224,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to DAM</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to DAM</h3>
         <ol>
             <li>Managing high volumes of database activity logs.</li>
             <li>Balancing performance impact with security monitoring.</li>
@@ -213,7 +238,8 @@
             <li>Automating security response without disrupting business processes.</li>
             <li>Reducing false positives in anomaly detection.</li>
         </ol>
-        <h3>6. Key Features of Top 10 DAM Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 DAM
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -328,7 +354,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>DAM enhances database security by providing real-time
                 monitoring.</li>
@@ -349,7 +376,9 @@
                 protection.
             </li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -437,7 +466,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of DAM (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of DAM (3-5 Years)
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -495,7 +525,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for
@@ -524,7 +555,8 @@
             <li>Encryption enforcement for data in
                 transit and at rest.</li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered anomaly detection in database
                 queries.</li>

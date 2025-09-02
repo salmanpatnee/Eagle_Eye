@@ -2,11 +2,31 @@
 @section('title', 'Penetration Testing')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
 
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <p>Penetration testing, also known as ethical hacking, is a cybersecurity practice designed to simulate real-world
+            attacks on an organization’s IT infrastructure, applications, and networks. The objective of penetration testing
+            is to identify vulnerabilities before malicious actors can exploit them. It involves a systematic approach,
+            including reconnaissance, scanning, exploitation, privilege escalation, and post-exploitation activities.
+            Security professionals use penetration testing to assess an organization's security posture and provide
+            recommendations for remediation.</p>
+        <p>Penetration testing technologies have evolved to include both manual and automated testing tools. Manual
+            penetration testing is conducted by ethical hackers using various tools and techniques to mimic an attacker’s
+            behavior. Automated penetration testing solutions use artificial intelligence (AI) and machine learning (ML) to
+            identify vulnerabilities in real time, reducing the time required for assessments. Advanced penetration testing
+            technologies also include Red Teaming, which simulates persistent attack scenarios, and Purple Teaming, where
+            offensive and defensive teams collaborate to improve security defenses.</p>
+        <p>With the rise of cloud computing, IoT devices, and remote work environments, penetration testing technologies
+            have expanded to cover cloud security assessments, mobile application security, and API security testing. Modern
+            penetration testing tools integrate with Security Information and Event Management (SIEM) and Extended Detection
+            and Response (XDR) solutions to provide continuous monitoring and proactive threat mitigation. The future of
+            penetration testing is driven by AI-powered threat simulations, attack surface management (ASM), and automated
+            red teaming to enhance security resilience.</p>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -68,7 +88,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Penetration Testing</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for
+            Penetration Testing</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -148,7 +170,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial Penetration Testing Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial Penetration
+            Testing Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -233,7 +256,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to Penetration Testing</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to Penetration
+            Testing</h3>
         <ol>
             <li>Keeping up with evolving attack techniques.</li>
             <li>Managing penetration testing across hybrid cloud environments.</li>
@@ -246,7 +271,9 @@
             <li>Handling the shortage of skilled penetration testers.</li>
             <li>Integrating penetration testing results with security operations.</li>
         </ol>
-        <h3>6. Key Features of Top 10 Penetration Testing Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+            Penetration Testing
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -351,7 +378,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>Penetration testing enhances proactive security risk management.
             </li>
@@ -370,7 +398,9 @@
                 simulation platforms.
             </li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -466,7 +496,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of NGFW (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of NGFW (3-5 Years)
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -527,7 +558,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for
@@ -562,7 +594,8 @@
                 aligned with Zero
                 Trust security models.</li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered vulnerability scanning and
                 risk prioritization.

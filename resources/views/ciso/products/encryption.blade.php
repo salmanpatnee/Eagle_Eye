@@ -2,11 +2,33 @@
 @section('title', 'Encryption')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
 
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <p>Encryption is a fundamental component of endpoint security that ensures data confidentiality by converting
+            readable information into an unreadable format, which can only be decrypted with an authorized key. As
+            endpoints, such as laptops, desktops, mobile devices, and removable storage, become prime targets for cyber
+            threats, encryption helps prevent unauthorized access to sensitive data. Endpoint encryption technologies
+            safeguard data at rest, in transit, and in use, ensuring protection against cyberattacks, insider threats, and
+            accidental data leaks. Organizations implement endpoint encryption solutions to comply with regulatory
+            frameworks and protect intellectual property, customer data, and financial information.</p>
+        <p>Modern endpoint encryption solutions use various encryption standards, including Advanced Encryption Standard
+            (AES-256), RSA, and elliptic curve cryptography (ECC). These solutions are integrated into endpoint security
+            platforms, offering features such as full disk encryption (FDE), file-level encryption (FLE), email encryption,
+            and encrypted USB drives. Some advanced encryption tools leverage hardware-based security modules (HSM) and
+            Trusted Platform Modules (TPM) to enhance key management and prevent unauthorized decryption attempts.
+            Additionally, encryption is increasingly integrated with Endpoint Detection and Response (EDR) and Data Loss
+            Prevention (DLP) solutions to provide layered protection against cyber threats.</p>
+        <p>With the rise of remote work, cloud computing, and regulatory compliance requirements, encryption technologies
+            have evolved to support seamless key management, cloud-based encryption, and zero-trust security frameworks.
+            AI-driven encryption solutions now dynamically adapt encryption policies based on user behavior and risk levels.
+            The future of endpoint encryption will focus on quantum-resistant encryption, AI-powered automation, and tighter
+            integration with access control mechanisms to enhance data security in a rapidly evolving threat landscape.</p>
+
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -65,7 +87,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Encryption (Endpoint Security)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for Encryption
+            (Endpoint Security)</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -137,7 +161,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial Encryption Products for Endpoint Security</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial Encryption
+            Products for Endpoint
+            Security</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -224,7 +250,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to Encryption (Endpoint Security)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to Encryption
+            (Endpoint Security)</h3>
         <ol>
             <li>Managing encryption keys securely across multiple endpoints.</li>
             <li>Balancing encryption performance with system efficiency.</li>
@@ -237,7 +265,9 @@
             <li>Adapting encryption policies for remote workforces.</li>
             <li>Automating encryption enforcement across diverse endpoint devices.</li>
         </ol>
-        <h3>6. Key Features of Top 10 Encryption Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+            Encryption Products
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -347,7 +377,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>Encryption is critical for endpoint data protection.</li>
             <li>AI-driven encryption enhances adaptive security.</li>
@@ -367,7 +398,9 @@
                 crucial.
             </li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -454,7 +487,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of Encryption (Endpoint Security) (3-5 Years)
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of Encryption
+            (Endpoint Security)
+            (3-5 Years)
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -513,7 +548,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for data
@@ -544,7 +580,8 @@
                 aligned with Zero
                 Trust principles.</li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered anomaly detection in
                 encryption activities.</li>

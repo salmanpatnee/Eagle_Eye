@@ -353,6 +353,10 @@ layer(base);
     @apply text-brand-500 mt-3 mb-3 text-lg font-bold;
 }
 
+.process-content h3.secondary-heading {
+    @apply text-white;
+}
+
 .process-content p {
     @apply mb-3 text-lg;
 }

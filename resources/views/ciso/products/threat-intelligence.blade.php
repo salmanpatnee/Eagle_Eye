@@ -2,11 +2,33 @@
 @section('title', 'Threat Intelligence')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
 
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <p>Threat intelligence is a cybersecurity discipline that involves collecting, analyzing, and sharing information
+            about potential and emerging cyber threats. This technology helps organizations proactively defend against
+            cyberattacks by providing insights into threat actors, attack techniques, indicators of compromise (IOCs), and
+            tactics, techniques, and procedures (TTPs). Threat intelligence sources include open-source intelligence
+            (OSINT), commercial threat feeds, dark web monitoring, and internal security data from an organization’s network
+            and endpoints. By leveraging threat intelligence, organizations can enhance their security posture, prioritize
+            threat mitigation efforts, and respond to cyber threats more effectively.</p>
+        <p>Modern threat intelligence solutions integrate machine learning (ML) and artificial intelligence (AI) to automate
+            threat analysis and provide actionable insights in real-time. These solutions classify and correlate threat
+            data, enabling security teams to identify malicious activities before they impact critical systems. Threat
+            intelligence platforms (TIPs) facilitate collaboration by integrating with security operations tools such as
+            Security Information and Event Management (SIEM), Endpoint Detection and Response (EDR), and Security
+            Orchestration, Automation, and Response (SOAR). This integration helps security teams analyze threats in context
+            and accelerate incident response.</p>
+        <p>As cyber threats evolve, the future of threat intelligence lies in automation, predictive analytics, and deeper
+            integration with cybersecurity frameworks. Organizations are shifting towards intelligence-driven security
+            operations to detect advanced persistent threats (APTs) and zero-day vulnerabilities before exploitation.
+            Additionally, threat intelligence sharing among enterprises, governments, and industry groups enhances
+            collective defense strategies. AI-driven threat intelligence will continue to play a vital role in strengthening
+            cybersecurity resilience against evolving attack vectors and emerging threats.</p>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -68,7 +90,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Threat Intelligence</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for Threat
+            Intelligence</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -142,7 +166,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial Threat Intelligence Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial Threat
+            Intelligence Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -229,7 +254,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to SIEM</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to SIEM</h3>
         <ol>
             <li>Managing high volumes of threat data and reducing false positives.</li>
             <li>Ensuring real-time analysis and automated threat response.</li>
@@ -242,7 +268,9 @@
             <li>Ensuring visibility into threats across cloud and hybrid environments.</li>
             <li>Avoiding vendor lock-in with proprietary threat intelligence feeds.</li>
         </ol>
-        <h3>6. Key Features of Top 10 Threat Intelligence Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+            Threat Intelligence
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -354,7 +382,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>Threat intelligence enhances proactive cybersecurity defense.
             </li>
@@ -374,7 +403,9 @@
             <li>Future threat intelligence will leverage AI for predictive
                 security.</li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -460,7 +491,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of Threat Intelligence (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of Threat
+            Intelligence (3-5 Years)
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -521,7 +554,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for
@@ -557,7 +591,8 @@
                 policies and access control.
             </li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered predictive analytics for
                 emerging cyber threats.

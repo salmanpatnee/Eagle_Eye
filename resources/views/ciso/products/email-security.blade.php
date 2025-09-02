@@ -2,11 +2,30 @@
 @section('title', 'Email Security')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
 
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <p>Email remains one of the primary communication tools for organizations worldwide, but it is also one of the most
+            targeted attack vectors by cybercriminals. Email security technologies protect against a wide range of threats,
+            including phishing, Business Email Compromise (BEC), malware, ransomware, and spam. These solutions use various
+            techniques such as email authentication, advanced threat detection, sandboxing, encryption, and artificial
+            intelligence (AI)-driven anomaly detection to prevent unauthorized access and mitigate risks associated with
+            malicious emails.</p>
+        <p>Modern email security solutions incorporate technologies such as Domain-based Message Authentication, Reporting,
+            and Conformance (DMARC), Sender Policy Framework (SPF), and DomainKeys Identified Mail (DKIM) to verify sender
+            authenticity and prevent email spoofing. Secure Email Gateways (SEGs) act as the first line of defense by
+            filtering inbound and outbound emails, identifying threats, and blocking malicious content before it reaches
+            end-users. Additionally, cloud-based email security solutions leverage AI and machine learning to detect
+            emerging threats, ensuring real-time protection against sophisticated cyberattacks.</p>
+        <p>With the increasing adoption of cloud email services such as Microsoft 365 and Google Workspace, organizations
+            are integrating email security technologies with cloud access security brokers (CASB), data loss prevention
+            (DLP), and security information and event management (SIEM) systems. Future advancements in email security will
+            focus on AI-driven automation, deep behavioral analytics, and zero-trust-based email authentication models to
+            enhance resilience against evolving cyber threats.</p>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -68,7 +87,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for Email Security</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for Email
+            Security</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -143,7 +164,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial Email Security Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial Email Security
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -227,7 +249,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to Email Security</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to Email Security
+        </h3>
         <ol>
             <li>Increasing sophistication of phishing and BEC attacks.</li>
             <li>High false positives affecting legitimate communications.</li>
@@ -240,7 +264,9 @@
             <li>Balancing security with user experience.</li>
             <li>Emerging threats such as deepfake email fraud.</li>
         </ol>
-        <h3>6. Key Features of Top 10 Email Security Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+            Email Security
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -354,7 +380,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>Email remains the primary attack vector for cyber threats.</li>
             <li>AI-driven security improves phishing and malware detection.</li>
@@ -372,7 +399,9 @@
             <li>Behavioral analytics improve email security monitoring.</li>
             <li>SIEM and SOAR integration enhances incident response.</li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -463,7 +492,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of Email Security (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of Email Security
+            (3-5 Years)</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -525,7 +555,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for
@@ -554,7 +585,8 @@
                 threat intelligence
                 platforms.</li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered email threat intelligence.
             </li>

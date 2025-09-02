@@ -2,11 +2,33 @@
 @section('title', 'IoT Security')
 @section('title_ar', '')
 @section('content')
-    <x-table.action-wrapper title=""></x-table.action-wrapper>
+
 
     <div class="px-7 process-content">
         <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
-        <h3>2. Justification of Technology Deployment Based on Regulatory and Cybersecurity Controls</h3>
+        <p>The Internet of Things (IoT) has revolutionized the way organizations and individuals interact with technology,
+            enabling seamless connectivity between devices, sensors, and systems. However, this rapid proliferation of IoT
+            devices introduces significant security challenges. Many IoT devices are designed with limited processing power
+            and memory, making it difficult to implement robust security features such as encryption, secure boot, and
+            regular firmware updates. As a result, these devices often become attractive targets for cybercriminals seeking
+            to exploit vulnerabilities for unauthorized access, data theft, or to launch large-scale distributed
+            denial-of-service (DDoS) attacks.</p>
+        <p>Effective IoT security requires a multi-layered approach that encompasses device authentication, network
+            segmentation, and continuous monitoring. Organizations must ensure that only authorized devices are allowed to
+            connect to their networks by implementing strong authentication mechanisms and unique device identities. Network
+            segmentation helps contain potential breaches by isolating IoT devices from critical systems and sensitive data.
+            Additionally, real-time monitoring and anomaly detection can identify suspicious behavior, enabling rapid
+            response to potential threats before they escalate.</p>
+        <p>Regulatory frameworks and industry standards are increasingly emphasizing the importance of IoT security.
+            Compliance with guidelines such as the National Cybersecurity Authority (NCA) controls, SAMA Cybersecurity
+            Framework, and international standards like ISO/IEC 27001 helps organizations establish baseline security
+            practices for IoT deployments. These include requirements for secure device provisioning, lifecycle management,
+            vulnerability management, and incident response. By adopting a proactive and standards-based approach to IoT
+            security, organizations can mitigate risks, protect sensitive data, and ensure the resilience of their connected
+            environments.</p>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+            Deployment Based
+            on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -65,7 +87,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>3. Gartner Magic Quadrant Leaders for IoT Security</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+            Leaders for IoT
+            Security</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -137,7 +161,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>4. Commercial IoT Security Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial IoT Security
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -223,7 +248,9 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>5. Top 10 Challenges Related to IoT Security</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+            to IoT Security
+        </h3>
         <ol>
             <li>Lack of built-in security controls in IoT devices.</li>
             <li>Managing large-scale IoT deployments across multiple environments.</li>
@@ -236,7 +263,9 @@
             <li>Addressing vulnerabilities in legacy IoT devices.</li>
             <li>Protecting IoT-generated data from breaches and leaks.</li>
         </ol>
-        <h3>6. Key Features of Top 10 IoT Security Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 IoT
+            Security Products
+        </h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -342,7 +371,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>7. Top 10 Takeaways for CISO</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        </h3>
         <ol>
             <li>IoT security is critical for protecting connected devices and
                 sensitive
@@ -368,7 +398,9 @@
                 management.
             </li>
         </ol>
-        <h3>8. Integration with Other Cybersecurity Products</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+            Cybersecurity
+            Products</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -454,7 +486,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>9. Future of IoT Security (3-5 Years)</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of IoT Security
+            (3-5 Years)</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>
@@ -510,7 +543,8 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3>10. Top 10 Points for Zero-Trust Readiness
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+            Zero-Trust Readiness
         </h3>
         <ol>
             <li>AI-driven identity verification for IoT
@@ -539,7 +573,8 @@
             <li>Compliance-driven enforcement of IoT
                 security policies.</li>
         </ol>
-        <h3>11. Top 10 Points for AI-Readiness</h3>
+        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+            AI-Readiness</h3>
         <ol>
             <li>AI-powered anomaly detection for IoT
                 device behavior.</li>
