@@ -105,6 +105,7 @@ use App\Http\Controllers\PenTestController;
 use App\Http\Controllers\PenTestDashboardController;
 use App\Http\Controllers\PenTestFindingsController;
 use App\Http\Controllers\PenTestReportController;
+use App\Http\Controllers\PitstopController;
 use App\Http\Controllers\PresentationController;
 use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
@@ -513,9 +514,9 @@ Route::middleware(['auth'])->group(function () {
 
         // ------------------CISO Education-------------------------
 
-        Route::get('/ciso-education', CisoEducationController::class)->name('ciso-education.index');
+        Route::get('/education', CisoEducationController::class)->name('ciso-education.index');
 
-        Route::prefix('ciso-education')->group(function () {
+        Route::prefix('education')->group(function () {
             Route::view('/applying-cissp-knowledge-in-ksa', 'ciso/ciso-education/cissp')->name('cissp');
             Route::view('/applying-cism-knowledge-in-ksa', 'ciso/ciso-education/cism')->name('cism');
             Route::view('/applying-cgeit-knowledge-in-ksa', 'ciso/ciso-education/cgeit')->name('cgeit');
@@ -566,6 +567,7 @@ Route::middleware(['auth'])->group(function () {
 
 
         // ------------------Products-------------------------
+
         Route::get('/products', ProductsController::class)->name('ciso-products.index');
 
         Route::prefix('products')->group(function () {
@@ -600,6 +602,45 @@ Route::middleware(['auth'])->group(function () {
             Route::view('/zero-day-attack', 'ciso/products/zero-day-attack')->name('products.zero-day-attack');
             Route::view('/zero-trust', 'ciso/products/zero-trust')->name('products.zero-trust');
         });
+    });
+
+    // ------------------Pitstop-------------------------
+
+    Route::get('/pitstop', PitstopController::class)->name('pitstop.index');
+
+    Route::prefix('pitstop')->group(function () {
+        Route::view('/cybersecurity-governance', 'pitstop/cybersecurity-strategy')->name('pitstop.governance');
+        Route::view('/cybersecurity-strategy', 'pitstop/cybersecurity-management')->name('pitstop.strategy');
+        Route::view('/cybersecurity-policies', 'pitstop/cybersecurity-policies-and-procedure')->name('pitstop.policies');
+        Route::view('/cybersecurity-roles-and-responsibilities', 'pitstop/cybersecurity-roles-and-responsibilities')->name('pitstop.roles');
+        Route::view('/cybersecurity-project-management', 'pitstop/cybersecurity-it-project-management')->name('pitstop.project');
+        Route::view('/cybersecurity-awareness', 'pitstop/cybersecurity-awareness')->name('pitstop.awareness');
+        Route::view('/cybersecurity-training', 'pitstop/periodical-cybersecurity-review-2')->name('pitstop.training');
+        Route::view('/cybersecurity-risk-management', 'pitstop/cybersecurity-risk-management')->name('pitstop.risk');
+        Route::view('/cybersecurity-regulatory-compliance', 'pitstop/cybersecurity-regulatory-compliance')->name('pitstop.compliance');
+        Route::view('/cybersecurity-review', 'pitstop/cybersecurity-review')->name('pitstop.review');
+        Route::view('/cybersecurity-audit', 'pitstop/identity-access-management')->name('pitstop.audit');
+        Route::view('/human-resources', 'pitstop/human-resources')->name('pitstop.hr');
+        Route::view('/physical-security', 'pitstop/physical-security')->name('pitstop.physical');
+        Route::view('/asset-management', 'pitstop/asset-management')->name('pitstop.assets');
+        Route::view('/cybersecurity-architecture', 'pitstop/cybersecurity-architecture')->name('pitstop.architecture');
+        Route::view('/identity-and-access-management', 'pitstop/identity-and-access-management')->name('pitstop.identity');
+        Route::view('/change-management', 'pitstop/change-management')->name('pitstop.change');
+        Route::view('/infrastructure-security', 'pitstop/infrastructure-security')->name('pitstop.infrastructure');
+        Route::view('/cryptography', 'pitstop/cryptography')->name('pitstop.cryptography');
+        Route::view('/bring-your-own-device', 'pitstop/bring-your-own-devic')->name('pitstop.byod');
+
+        Route::view('/secure-disposal', 'pitstop/cybersecurity-incident-management')->name('pitstop.disposal');
+        Route::view('/payment-system', 'pitstop/physical-security')->name('pitstop.payment');
+        Route::view('/electronic-banking', 'pitstop/web-application-security')->name('pitstop.banking');
+
+        Route::view('/cybersecurity-event-management', 'pitstop/cybersecurity-resilience')->name('pitstop.event');
+        Route::view('/cybersecurity-incident-management', 'pitstop/third-party-cybersecurity')->name('pitstop.incident');
+        Route::view('/threat-management', 'pitstop/cloud-computing')->name('pitstop.threat');
+        Route::view('/vulnerability-management', 'pitstop/industrial-controls-2')->name('pitstop.vulnerability');
+        Route::view('/contract-and-vendor', 'pitstop/change-management-2')->name('pitstop.contract');
+        Route::view('/outsourcing', 'pitstop/secure-data-disposal-2')->name('pitstop.outsourcing');
+        Route::view('/cloud-computing', 'pitstop/cloud-computing-2')->name('pitstop.cloud');
     });
 });
 
@@ -881,45 +922,6 @@ Route::middleware(['auth'])->group(function () {
 
     // ------------------MIS Reports-------------------------
 
-});
-
-
-
-Route::view('/cs-induction', 'process/1-CsInduction')->name('cs-induction');
-
-Route::prefix('cs-induction')->group(function () {
-    Route::view('/cybersecurity-governance', 'process/17-GrcDomain/1-CybersecurityStrategyCsIndu');
-    Route::view('/cybersecurity-strategy', 'process/17-GrcDomain/2-CybersecurityManagementCsIndu');
-    Route::view('/cybersecurity-policies', 'process/17-GrcDomain/3-CybersecurityPoliciesAndProcedureCsIndu');
-    Route::view('/cybersecurity-roles-and-responsibilities', 'process/17-GrcDomain/4-CybersecurityRiskManagementCsIndu');
-    Route::view('/cybersecurity-project-management', 'process/17-GrcDomain/5-CybersecurityItProjectManagementCsIndu');
-    Route::view('/cybersecurity-awareness', 'process/17-GrcDomain/6-ComplianceCybersecurityStandardCsIndu');
-    Route::view('/cybersecurity-review', 'process/17-GrcDomain/7-CybersecurityAssetManagementCsIndu');
-    Route::view('/cybersecurity-audit', 'process/17-GrcDomain/8-IdentityAccessManagementCsIndu');
-    Route::view('/human-resources', 'process/17-GrcDomain/9-InformationSystemProcessingCsIndu');
-    Route::view('/physical-security', 'process/17-GrcDomain/10-EmailProtectionCsIndu');
-
-    Route::view('/asset-management', 'process/17-GrcDomain/11-NetworkSecurityManagementCsIndu');
-    Route::view('/cybersecurity-architecture', 'process/17-GrcDomain/12-MobileDeviceSecurityCsIndu');
-    Route::view('/identity-and-access-management', 'process/17-GrcDomain/13-DataInformationSecurityCsIndu');
-    Route::view('/change-management', 'process/17-GrcDomain/15-BackupRecoveryManagementCsIndu');
-    Route::view('/infrastructure-security', 'process/17-GrcDomain/16-VulnerabilitManagementCsIndu');
-    Route::view('/cryptography', 'process/17-GrcDomain/17-PenetrationTestingCsIndu');
-    Route::view('/bring-your-own-device', 'process/17-GrcDomain/18-CybersecurityEventLogsCsIndu');
-    Route::view('/secure-disposal', 'process/17-GrcDomain/19-CybersecurityIncidentManagementCsIndu');
-    Route::view('/payment-system', 'process/17-GrcDomain/20-PhysicalSecurityCsIndu');
-    Route::view('/electronic-banking', 'process/17-GrcDomain/21-WebApplicationSecurityCsIndu');
-
-    Route::view('/cybersecurity-event-management', 'process/17-GrcDomain/22-CybersecurityResilienceCsIndu');
-    Route::view('/cybersecurity-incident-management', 'process/17-GrcDomain/23-ThirdPartyCybersecurityCsIndu');
-    Route::view('/threat-management', 'process/17-GrcDomain/24-CloudComputingCsIndu');
-    Route::view('/vulnerability-management', 'process/17-GrcDomain/25-IndustrialControlsCsIndu');
-    Route::view('/contract-and-vendor', 'process/17-GrcDomain/26-ChangeManagementCsIndu');
-    Route::view('/outsourcing', 'process/17-GrcDomain/27-SecureDataDisposalCsIndu');
-    Route::view('/cloud-computing', 'process/17-GrcDomain/31-CloudComputingCsIndu');
-    Route::view('/cybersecurity-training', 'process/17-GrcDomain/28-PeriodicalCybersecurityReviewCsIndu');
-    Route::view('/cybersecurity-risk-management', 'process/17-GrcDomain/29-CybersecurityHRCsIndu');
-    Route::view('/cybersecurity-regulatory-compliance', 'process/17-GrcDomain/30-CybersecurityAwarenessTrainingCsIndu');
 });
 
 

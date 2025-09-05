@@ -59,7 +59,7 @@
                 <h3>CISO 360</h3>
                 <p>CISO Decision Support System</p>
             </a>
-            <a href="{{ route('cs-induction') }}" class="feature-box fade-in-up" role="button"
+            <a href="{{ route('pitstop.index') }}" class="feature-box fade-in-up" role="button"
                 aria-label="Access PitStop 360 CS Induction Program">
                 <img src="{{ asset('Images/pitstop.jpg') }}" alt="PitStop 360" loading="lazy">
                 <h3>PitStop 360</h3>
