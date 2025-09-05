@@ -7,7 +7,7 @@
         <x-table.action-wrapper title="Risk Acceptance Details">
             <x-action.button label="View" label_ar="منظر" route_name="risk-acceptances.index" />
             <x-action.button label="Edit" label_ar="تحرير" route_name="risk-acceptances.edit"
-                route_param="{{ $riskAcceptance->risk_acceptance_id }}" />
+                route_param="{{ $riskAcceptance->id }}" />
         </x-table.action-wrapper>
 
         <div class="border-gray-100 border-t p-3">

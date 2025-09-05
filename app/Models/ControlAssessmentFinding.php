@@ -43,6 +43,6 @@ class ControlAssessmentFinding extends Model
 
     public function controlAssessment()
     {
-        return $this->belongsTo(controlAssessment::class, 'control_assessment_id', 'control_assessment_id');
+        return $this->belongsTo(ControlAssessment::class, 'control_assessment_id', 'control_assessment_id');
     }
 }

@@ -42,6 +42,7 @@ class RiskRegisterController extends Controller
                     )
             ) as latest_status'), 'co.control_id', '=', 'latest_status.control_id')
             ->select(
+                'r.id as riskid',
                 'r.risk_id',
                 'r.risk_description',
                 DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<span>", c.category_name, "</span><br>") SEPARATOR "") as categories'),
@@ -56,7 +57,7 @@ class RiskRegisterController extends Controller
                 'rt.risk_treatment_description',
                 'app.risk_appetite_name',
                 'app.risk_appetite_color as appetite_color',
-                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/control-identification-table/', co.control_id, '\"><span>', co.control_id, ' - ', ow.owner_name, '</span></a><br>') SEPARATOR '') as control_owner"),
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/controls/', co.id, '\"><span>', co.control_id, ' - ', ow.owner_name, '</span></a><br>') SEPARATOR '') as control_owner"),
                 DB::raw('GROUP_CONCAT(
                     DISTINCT CONCAT("<span>", 
                         IF(
@@ -108,6 +109,7 @@ class RiskRegisterController extends Controller
                 return $query->WhereDate('risk_assessment_start_date', '<=', $evalutionDate);
             })
             ->groupBy(
+                'r.id',
                 'r.risk_id',
                 'o.owner_name',
                 'r.risk_description',
@@ -169,12 +171,14 @@ class RiskRegisterController extends Controller
                 $mpdf->WriteHTML($chunk);
             }
 
+
+
             // Set the headers to prompt the file download
             return response($mpdf->Output("Risk-Register.pdf", 'D'))
                 ->header('Content-Type', 'application/pdf')
                 ->header('Content-Disposition', 'attachment; filename="' . "Risk-Register.pdf" . '"');
         } else {
-
+            // return $riskRegister;
             return view("process/risk-identification/risk-register/index", compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
         }
     }

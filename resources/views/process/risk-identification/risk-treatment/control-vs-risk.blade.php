@@ -9,7 +9,7 @@
                 disabled class="opacity-75" />
         </x-table.action-wrapper>
 
-        <form action="{{ route('risk-vs-control.index') }}" method="GET">
+        <form action="{{ route('control-vs-risk.index') }}" method="GET">
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
                 <x-form.grid-col>
                     <div>

@@ -81,7 +81,7 @@
                 <x-table.th label="Remarks/Comments" label_ar="ملاحظات" />
             </x-table.thead>
             <x-table.tbody>
-                @forelse ($kpiStandardsReport->recommededPriorites as $standard)
+                @forelse ($kpiStandardsReport->standardPriorities as $standard)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td>

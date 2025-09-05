@@ -172,19 +172,19 @@ class AuditFindingController extends Controller
             'assetsGroups' => ['nullable'],
         ]);
 
-        $assets = $attributes['assets'];
+        $assets = $attributes['assets'] ?? [];
         unset($attributes['assets']);
 
-        $assetsGroups = $attributes['assetsGroups'];
+        $assetsGroups = $attributes['assetsGroups'] ?? [];
         unset($attributes['assetsGroups']);
 
-        $custodians = $attributes['custodians'];
+        $custodians = $attributes['custodians'] ?? [];
         unset($attributes['custodians']);
 
-        $categories = $attributes['categories'];
+        $categories = $attributes['categories'] ?? [];
         unset($attributes['categories']);
 
-        $controls = $attributes['controls'];
+        $controls = $attributes['controls'] ?? [];
         unset($attributes['controls']);
 
         $auditFinding->update($attributes);

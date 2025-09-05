@@ -40,7 +40,7 @@ class CMSController extends Controller
 
         Process::create($attributes);
 
-        return redirect(route('process.index'))
+        return redirect(route('cms.index'))
             ->with('success', 'Process saved successfully.');
     }
 
@@ -60,7 +60,7 @@ class CMSController extends Controller
 
         $cm->update($attributes);
 
-        return redirect(route('process.index'))
+        return redirect(route('cms.index'))
             ->with('success', 'Process saved successfully.');
     }
 

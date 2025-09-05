@@ -27,6 +27,7 @@ class RiskStatusController extends Controller
         // Main query
         $riskStatus = DB::table('risk_master_table as r')
             ->selectRaw("
+                r.id as rid,
                 r.risk_id,
                         CONCAT(r.risk_id, ' - ', r.risk_name) AS risk,
                 o.owner_name AS risk_owner,
@@ -50,6 +51,7 @@ class RiskStatusController extends Controller
             })
             ->join('owner_table as ow', 'c.owner_id', '=', 'ow.owner_role_id')
             ->groupBy([
+                'r.id',
                 'r.risk_id',
                 'r.risk_name',
                 'o.owner_name',
