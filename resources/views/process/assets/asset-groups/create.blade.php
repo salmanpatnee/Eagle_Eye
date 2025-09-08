@@ -42,7 +42,7 @@
                     <div>
                         <x-form.select label="Asset Classification Name" label_ar="اسم التصنيف " name="classification_id"
                             placeholder="Select Classification" :value="$assetGroup?->classification_id" :data="$classifications"
-                            id_key="classification_id" value_key="classification_name" />
+                            id_key="classification_id" value_key="classification_name" required="true" />
                     </div>
                 </x-form.grid-col>
 

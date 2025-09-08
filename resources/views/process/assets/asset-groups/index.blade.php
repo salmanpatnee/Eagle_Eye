@@ -22,7 +22,9 @@
                 @foreach ($assetGroups as $assetGroup)
                     <tr>
                         <x-table.td> <x-table.serial :loop="$loop" :paginator="$assetGroups" /></x-table.td>
-                        <x-table.td>{{ $assetGroup->asset_group_id }}</x-table.td>
+                        <x-table.td>
+                            <div style="width: 200px;">{{ $assetGroup->asset_group_id }}</div>
+                        </x-table.td>
                         <x-table.td>{{ $assetGroup->asset_group_name }}</x-table.td>
                         <x-table.td>
                             {{ $assetGroup?->owner?->owner_name }}
