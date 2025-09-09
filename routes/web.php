@@ -629,18 +629,17 @@ Route::middleware(['auth'])->group(function () {
         Route::view('/infrastructure-security', 'pitstop/infrastructure-security')->name('pitstop.infrastructure');
         Route::view('/cryptography', 'pitstop/cryptography')->name('pitstop.cryptography');
         Route::view('/bring-your-own-device', 'pitstop/bring-your-own-devic')->name('pitstop.byod');
-
-        Route::view('/secure-disposal', 'pitstop/cybersecurity-incident-management')->name('pitstop.disposal');
-        Route::view('/payment-system', 'pitstop/physical-security')->name('pitstop.payment');
+        Route::view('/secure-disposal', 'pitstop/secure-disposal')->name('pitstop.disposal');
+        Route::view('/payment-system', 'pitstop/payment-system')->name('pitstop.payment');
         Route::view('/electronic-banking', 'pitstop/web-application-security')->name('pitstop.banking');
+        Route::view('/cybersecurity-event-management', 'pitstop/cybersecurity-event-management')->name('pitstop.event');
+        Route::view('/cybersecurity-incident-management', 'pitstop/cybersecurity-incident-management')->name('pitstop.incident');
 
-        Route::view('/cybersecurity-event-management', 'pitstop/cybersecurity-resilience')->name('pitstop.event');
-        Route::view('/cybersecurity-incident-management', 'pitstop/third-party-cybersecurity')->name('pitstop.incident');
-        Route::view('/threat-management', 'pitstop/cloud-computing')->name('pitstop.threat');
-        Route::view('/vulnerability-management', 'pitstop/industrial-controls-2')->name('pitstop.vulnerability');
-        Route::view('/contract-and-vendor', 'pitstop/change-management-2')->name('pitstop.contract');
-        Route::view('/outsourcing', 'pitstop/secure-data-disposal-2')->name('pitstop.outsourcing');
-        Route::view('/cloud-computing', 'pitstop/cloud-computing-2')->name('pitstop.cloud');
+        Route::view('/threat-management', 'pitstop/threat-management')->name('pitstop.threat');
+        Route::view('/vulnerability-management', 'pitstop/vulnerability-management')->name('pitstop.vulnerability');
+        Route::view('/contract-and-vendor', 'pitstop/contract-and-vendor')->name('pitstop.contract');
+        Route::view('/outsourcing', 'pitstop/outsourcing')->name('pitstop.outsourcing');
+        Route::view('/cloud-computing', 'pitstop/cloud-computing')->name('pitstop.cloud');
     });
 });
 
