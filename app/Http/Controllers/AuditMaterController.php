@@ -120,7 +120,7 @@ class AuditMaterController extends Controller
 
         $audit = Audit::create($attributes);
 
-        return redirect(route('audit-findings.create', $audit->audit_id));
+        return redirect(route('audit-findings.create', $audit->id));
     }
 
     public function edit(Audit $auditAssessment)

@@ -69,12 +69,12 @@ class CMSController extends Controller
     {
         $cm->load('resources');
         if ($cm->resources()->count() > 0) {
-            return redirect(route('process.index'))
+            return redirect(route('cms.index'))
                 ->with('error', 'Process cannot be deleted as it has resources attached to it.');
         } else {
             $cm->delete();
         }
-        return redirect(route('process.index'))
+        return redirect(route('cms.index'))
             ->with('success', 'Process deleted successfully.');
     }
 }
