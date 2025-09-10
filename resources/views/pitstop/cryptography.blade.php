@@ -75,104 +75,100 @@
                 techniques, organizations can safeguard sensitive data, prevent cyber threats, and comply with security
                 regulations like GDPR and PCI DSS.</p>
             <h3>3. Key Performance Indicators (KPIs) in Cryptography</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Encryption Strength</td>
-                        <td>Measures the robustness of encryption algorithms used in securing data.</td>
-                        <td>Quarterly</td>
+                        <x-table.td>Encryption Strength</x-table.td>
+                        <x-table.td>Measures the robustness of encryption algorithms used in securing data.</x-table.td>
+                        <x-table.td>Quarterly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Key Rotation Compliance</td>
-                        <td>Tracks adherence to scheduled cryptographic key rotations.</td>
-                        <td>Monthly</td>
+                        <x-table.td>Key Rotation Compliance</x-table.td>
+                        <x-table.td>Tracks adherence to scheduled cryptographic key rotations.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Hashing Integrity Checks</td>
-                        <td>Monitors data integrity by validating cryptographic hash values.</td>
-                        <td>Weekly</td>
+                        <x-table.td>Hashing Integrity Checks</x-table.td>
+                        <x-table.td>Monitors data integrity by validating cryptographic hash values.</x-table.td>
+                        <x-table.td>Weekly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Certificate Expiry Monitoring</td>
-                        <td>Ensures that SSL/TLS certificates are renewed before expiration.</td>
-                        <td>Monthly</td>
+                        <x-table.td>Certificate Expiry Monitoring</x-table.td>
+                        <x-table.td>Ensures that SSL/TLS certificates are renewed before expiration.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Quantum-Safe Readiness</td>
-                        <td>Evaluates cryptographic resilience against emerging quantum threats.</td>
-                        <td>Annually</td>
+                        <x-table.td>Quantum-Safe Readiness</x-table.td>
+                        <x-table.td>Evaluates cryptographic resilience against emerging quantum threats.</x-table.td>
+                        <x-table.td>Annually</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Cryptography Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>AES Encryption</td>
-                        <td>Advanced Encryption Standard (AES) ensures high-level data encryption.</td>
-                        <td>NCA Data Cybersecurity Controls</td>
+                        <x-table.td>AES Encryption</x-table.td>
+                        <x-table.td>Advanced Encryption Standard (AES) ensures high-level data encryption.</x-table.td>
+                        <x-table.td>NCA Data Cybersecurity Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>RSA Cryptosystem</td>
-                        <td>Public-key encryption method for secure data exchange.</td>
-                        <td>NCA Identity & Access Management</td>
+                        <x-table.td>RSA Cryptosystem</x-table.td>
+                        <x-table.td>Public-key encryption method for secure data exchange.</x-table.td>
+                        <x-table.td>NCA Identity & Access Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>SHA-256 Hashing</td>
-                        <td>Secure hash function for data integrity verification.</td>
-                        <td>NCA Cybersecurity Defense</td>
+                        <x-table.td>SHA-256 Hashing</x-table.td>
+                        <x-table.td>Secure hash function for data integrity verification.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Defense</x-table.td>
                     </tr>
                     <tr>
-                        <td>PKI (Public Key Infrastructure)</td>
-                        <td>Manages digital certificates and encryption keys.</td>
-                        <td>NCA Secure Communications</td>
+                        <x-table.td>PKI (Public Key Infrastructure)</x-table.td>
+                        <x-table.td>Manages digital certificates and encryption keys.</x-table.td>
+                        <x-table.td>NCA Secure Communications</x-table.td>
                     </tr>
                     <tr>
-                        <td>HSM (Hardware Security Module)</td>
-                        <td>Dedicated hardware for secure key management.</td>
-                        <td>NCA Critical Cybersecurity Controls</td>
+                        <x-table.td>HSM (Hardware Security Module)</x-table.td>
+                        <x-table.td>Dedicated hardware for secure key management.</x-table.td>
+                        <x-table.td>NCA Critical Cybersecurity Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>Quantum Cryptography</td>
-                        <td>Next-gen encryption resistant to quantum computing threats.</td>
-                        <td>NCA Emerging Technologies Security</td>
+                        <x-table.td>Quantum Cryptography</x-table.td>
+                        <x-table.td>Next-gen encryption resistant to quantum computing threats.</x-table.td>
+                        <x-table.td>NCA Emerging Technologies Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Digital Signatures</td>
-                        <td>Ensures authentication and non-repudiation of electronic documents.</td>
-                        <td>NCA Secure Transactions</td>
+                        <x-table.td>Digital Signatures</x-table.td>
+                        <x-table.td>Ensures authentication and non-repudiation of electronic documents.</x-table.td>
+                        <x-table.td>NCA Secure Transactions</x-table.td>
                     </tr>
                     <tr>
-                        <td>SSL/TLS Encryption</td>
-                        <td>Secures web communications using strong cryptographic protocols.</td>
-                        <td>NCA Network Security</td>
+                        <x-table.td>SSL/TLS Encryption</x-table.td>
+                        <x-table.td>Secures web communications using strong cryptographic protocols.</x-table.td>
+                        <x-table.td>NCA Network Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Zero Trust Encryption</td>
-                        <td>Applies continuous encryption for Zero Trust security frameworks.</td>
-                        <td>NCA Zero Trust Architecture</td>
+                        <x-table.td>Zero Trust Encryption</x-table.td>
+                        <x-table.td>Applies continuous encryption for Zero Trust security frameworks.</x-table.td>
+                        <x-table.td>NCA Zero Trust Architecture</x-table.td>
                     </tr>
                     <tr>
-                        <td>End-to-End Encryption (E2EE)</td>
-                        <td>Protects data from sender to recipient without third-party access.</td>
-                        <td>NCA Secure Messaging</td>
+                        <x-table.td>End-to-End Encryption (E2EE)</x-table.td>
+                        <x-table.td>Protects data from sender to recipient without third-party access.</x-table.td>
+                        <x-table.td>NCA Secure Messaging</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>Cryptography plays a critical role in securing digital communications, ensuring data confidentiality, and
                 safeguarding sensitive information from cyber threats. As technology evolves, organizations must adopt

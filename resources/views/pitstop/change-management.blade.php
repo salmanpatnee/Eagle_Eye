@@ -65,104 +65,104 @@
 
 
             <h3>2. Key Performance Indicators (KPIs) in Change Management</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Change Success Rate</td>
-                        <td>Percentage of changes implemented without causing incidents.</td>
-                        <td>Monthly</td>
+                        <x-table.td>Change Success Rate</x-table.td>
+                        <x-table.td>Percentage of changes implemented without causing incidents.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Unauthorized Change Detection</td>
-                        <td>Number of unauthorized changes detected in the system.</td>
-                        <td>Weekly</td>
+                        <x-table.td>Unauthorized Change Detection</x-table.td>
+                        <x-table.td>Number of unauthorized changes detected in the system.</x-table.td>
+                        <x-table.td>Weekly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Change Request Approval Time</td>
-                        <td>Average time taken to approve change requests.</td>
-                        <td>Monthly</td>
+                        <x-table.td>Change Request Approval Time</x-table.td>
+                        <x-table.td>Average time taken to approve change requests.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Number of Rollback Changes</td>
-                        <td>Number of changes reverted due to failure or security concerns.</td>
-                        <td>Quarterly</td>
+                        <x-table.td>Number of Rollback Changes</x-table.td>
+                        <x-table.td>Number of changes reverted due to failure or security concerns.</x-table.td>
+                        <x-table.td>Quarterly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Compliance Adherence Rate</td>
-                        <td>Percentage of changes aligned with regulatory requirements.</td>
-                        <td>Monthly</td>
+                        <x-table.td>Compliance Adherence Rate</x-table.td>
+                        <x-table.td>Percentage of changes aligned with regulatory requirements.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>3. Change Management Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>ServiceNow Change Management</td>
-                        <td>Automates and tracks IT changes to reduce risk and ensure compliance.</td>
-                        <td>ISO 27001, NCA</td>
+                        <x-table.td>ServiceNow Change Management</x-table.td>
+                        <x-table.td>Automates and tracks IT changes to reduce risk and ensure compliance.</x-table.td>
+                        <x-table.td>ISO 27001, NCA</x-table.td>
                     </tr>
                     <tr>
-                        <td>BMC Helix ITSM</td>
-                        <td>Provides an AI-driven change management system for IT and security teams.</td>
-                        <td>NIST, ISO 27001</td>
+                        <x-table.td>BMC Helix ITSM</x-table.td>
+                        <x-table.td>Provides an AI-driven change management system for IT and security teams.</x-table.td>
+                        <x-table.td>NIST, ISO 27001</x-table.td>
                     </tr>
                     <tr>
-                        <td>SolarWinds Change Management</td>
-                        <td>Tracks system changes and ensures configuration compliance.</td>
-                        <td>ISO 27001, NCA</td>
+                        <x-table.td>SolarWinds Change Management</x-table.td>
+                        <x-table.td>Tracks system changes and ensures configuration compliance.</x-table.td>
+                        <x-table.td>ISO 27001, NCA</x-table.td>
                     </tr>
                     <tr>
-                        <td>ManageEngine ServiceDesk Plus</td>
-                        <td>ITIL-based change management solution for tracking security-related changes.</td>
-                        <td>ISO 27001, NCA</td>
+                        <x-table.td>ManageEngine ServiceDesk Plus</x-table.td>
+                        <x-table.td>ITIL-based change management solution for tracking security-related
+                            changes.</x-table.td>
+                        <x-table.td>ISO 27001, NCA</x-table.td>
                     </tr>
                     <tr>
-                        <td>Microsoft System Center (SCCM)</td>
-                        <td>Helps in deploying and managing software changes across an organization.</td>
-                        <td>NIST, ISO 27001</td>
+                        <x-table.td>Microsoft System Center (SCCM)</x-table.td>
+                        <x-table.td>Helps in deploying and managing software changes across an organization.</x-table.td>
+                        <x-table.td>NIST, ISO 27001</x-table.td>
                     </tr>
                     <tr>
-                        <td>IBM Cloud Pak for Security</td>
-                        <td>Provides security automation and change tracking across hybrid environments.</td>
-                        <td>ISO 27001, NCA</td>
+                        <x-table.td>IBM Cloud Pak for Security</x-table.td>
+                        <x-table.td>Provides security automation and change tracking across hybrid
+                            environments.</x-table.td>
+                        <x-table.td>ISO 27001, NCA</x-table.td>
                     </tr>
                     <tr>
-                        <td>RSA Archer Change Management</td>
-                        <td>A governance tool for managing security and IT changes with compliance tracking.</td>
-                        <td>NIST, ISO 27001</td>
+                        <x-table.td>RSA Archer Change Management</x-table.td>
+                        <x-table.td>A governance tool for managing security and IT changes with compliance
+                            tracking.</x-table.td>
+                        <x-table.td>NIST, ISO 27001</x-table.td>
                     </tr>
                     <tr>
-                        <td>Symantec Control Compliance Suite</td>
-                        <td>Helps in tracking and auditing security changes across IT environments.</td>
-                        <td>NCA, ISO 27001</td>
+                        <x-table.td>Symantec Control Compliance Suite</x-table.td>
+                        <x-table.td>Helps in tracking and auditing security changes across IT environments.</x-table.td>
+                        <x-table.td>NCA, ISO 27001</x-table.td>
                     </tr>
                     <tr>
-                        <td>Tenable.sc</td>
-                        <td>Monitors system changes and identifies vulnerabilities introduced by modifications.</td>
-                        <td>NCA, NIST</td>
+                        <x-table.td>Tenable.sc</x-table.td>
+                        <x-table.td>Monitors system changes and identifies vulnerabilities introduced by
+                            modifications.</x-table.td>
+                        <x-table.td>NCA, NIST</x-table.td>
                     </tr>
                     <tr>
-                        <td>Qualys Cloud Platform</td>
-                        <td>Assesses security risks related to software and configuration changes.</td>
-                        <td>ISO 27001, NCA</td>
+                        <x-table.td>Qualys Cloud Platform</x-table.td>
+                        <x-table.td>Assesses security risks related to software and configuration changes.</x-table.td>
+                        <x-table.td>ISO 27001, NCA</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Summary</h3>
             <p>
                 Effective Change Management is a critical component of cybersecurity that ensures IT and security changes

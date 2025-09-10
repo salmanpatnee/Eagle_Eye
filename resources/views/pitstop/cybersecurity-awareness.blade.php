@@ -72,104 +72,100 @@
                 mitigate risks, protect sensitive data, and build a resilient security framework.</p>
 
             <h3>3. Key Performance Indicators (KPIs) in Cybersecurity Awareness</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cybersecurity Training Completion Rate</td>
-                        <td>Percentage of employees who have completed mandatory security training.</td>
-                        <td>Quarterly (NCA-ECC-1-10-3)</td>
+                        <x-table.td>Cybersecurity Training Completion Rate</x-table.td>
+                        <x-table.td>Percentage of employees who have completed mandatory security training.</x-table.td>
+                        <x-table.td>Quarterly (NCA-ECC-1-10-3)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Phishing Test Success Rate</td>
-                        <td>Percentage of employees who correctly identify and report phishing emails.</td>
-                        <td>Bi-Annually (NCA Awareness)</td>
+                        <x-table.td>Phishing Test Success Rate</x-table.td>
+                        <x-table.td>Percentage of employees who correctly identify and report phishing emails.</x-table.td>
+                        <x-table.td>Bi-Annually (NCA Awareness)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Security Policy Acknowledgment Rate</td>
-                        <td>Percentage of employees who have read and acknowledged security policies.</td>
-                        <td>Annually (NCA Compliance Mgmt)</td>
+                        <x-table.td>Security Policy Acknowledgment Rate</x-table.td>
+                        <x-table.td>Percentage of employees who have read and acknowledged security policies.</x-table.td>
+                        <x-table.td>Annually (NCA Compliance Mgmt)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Incident Reporting Awareness</td>
-                        <td>Number of security incidents reported due to awareness training.</td>
-                        <td>Monthly (NCA Incident Mgmt)</td>
+                        <x-table.td>Incident Reporting Awareness</x-table.td>
+                        <x-table.td>Number of security incidents reported due to awareness training.</x-table.td>
+                        <x-table.td>Monthly (NCA Incident Mgmt)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Social Engineering Resistance Score</td>
-                        <td>Measures employee resilience against social engineering attacks.</td>
-                        <td>Annually (NCA Social Engineering)</td>
+                        <x-table.td>Social Engineering Resistance Score</x-table.td>
+                        <x-table.td>Measures employee resilience against social engineering attacks.</x-table.td>
+                        <x-table.td>Annually (NCA Social Engineering)</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Cybersecurity Awareness Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Learning Management Systems (LMS)</td>
-                        <td>Provides structured cybersecurity training courses for employees.</td>
-                        <td>NCA Cybersecurity Awareness</td>
+                        <x-table.td>Learning Management Systems (LMS)</x-table.td>
+                        <x-table.td>Provides structured cybersecurity training courses for employees.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Awareness</x-table.td>
                     </tr>
                     <tr>
-                        <td>Phishing Simulation Platforms</td>
-                        <td>Tests employees’ ability to detect and report phishing attacks.</td>
-                        <td>NCA Email Security</td>
+                        <x-table.td>Phishing Simulation Platforms</x-table.td>
+                        <x-table.td>Tests employees’ ability to detect and report phishing attacks.</x-table.td>
+                        <x-table.td>NCA Email Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Security Awareness Training Platforms</td>
-                        <td>Offers interactive training modules on cybersecurity best practices.</td>
-                        <td>NCA Cybersecurity Training</td>
+                        <x-table.td>Security Awareness Training Platforms</x-table.td>
+                        <x-table.td>Offers interactive training modules on cybersecurity best practices.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Training</x-table.td>
                     </tr>
                     <tr>
-                        <td>Gamified Cybersecurity Training</td>
-                        <td>Uses interactive challenges and simulations to enhance security awareness.</td>
-                        <td>NCA Employee Engagement</td>
+                        <x-table.td>Gamified Cybersecurity Training</x-table.td>
+                        <x-table.td>Uses interactive challenges and simulations to enhance security awareness.</x-table.td>
+                        <x-table.td>NCA Employee Engagement</x-table.td>
                     </tr>
                     <tr>
-                        <td>AI-Powered Threat Intelligence</td>
-                        <td>Provides real-time updates on evolving cybersecurity threats.</td>
-                        <td>NCA Cyber Threat Intelligence</td>
+                        <x-table.td>AI-Powered Threat Intelligence</x-table.td>
+                        <x-table.td>Provides real-time updates on evolving cybersecurity threats.</x-table.td>
+                        <x-table.td>NCA Cyber Threat Intelligence</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cybersecurity Awareness Portals</td>
-                        <td>Hosts policies, best practices, and guidelines for employees.</td>
-                        <td>NCA Policy Compliance</td>
+                        <x-table.td>Cybersecurity Awareness Portals</x-table.td>
+                        <x-table.td>Hosts policies, best practices, and guidelines for employees.</x-table.td>
+                        <x-table.td>NCA Policy Compliance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Mobile Security Awareness Apps</td>
-                        <td>Delivers cybersecurity training and alerts via mobile devices.</td>
-                        <td>NCA Mobile Security</td>
+                        <x-table.td>Mobile Security Awareness Apps</x-table.td>
+                        <x-table.td>Delivers cybersecurity training and alerts via mobile devices.</x-table.td>
+                        <x-table.td>NCA Mobile Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Employee Security Quiz Tools</td>
-                        <td>Assesses cybersecurity knowledge and provides feedback.</td>
-                        <td>NCA Compliance</td>
+                        <x-table.td>Employee Security Quiz Tools</x-table.td>
+                        <x-table.td>Assesses cybersecurity knowledge and provides feedback.</x-table.td>
+                        <x-table.td>NCA Compliance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Secure Messaging Awareness Tools</td>
-                        <td>Educates employees on secure communication practices.</td>
-                        <td>NCA Secure Communication</td>
+                        <x-table.td>Secure Messaging Awareness Tools</x-table.td>
+                        <x-table.td>Educates employees on secure communication practices.</x-table.td>
+                        <x-table.td>NCA Secure Communication</x-table.td>
                     </tr>
                     <tr>
-                        <td>Social Engineering Training Programs</td>
-                        <td>Trains employees to recognize and counter social engineering attacks.</td>
-                        <td>NCA Social Engineering Defense</td>
+                        <x-table.td>Social Engineering Training Programs</x-table.td>
+                        <x-table.td>Trains employees to recognize and counter social engineering attacks.</x-table.td>
+                        <x-table.td>NCA Social Engineering Defense</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>Cybersecurity awareness is a critical component of an organization's security strategy, ensuring that
                 employees

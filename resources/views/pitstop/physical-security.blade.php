@@ -61,7 +61,8 @@
                 Employees should only be granted access to areas relevant to their roles, following the principle of least
                 privilege. Surveillance cameras and motion sensors should also be installed to monitor and record activity,
                 acting as both a deterrent and an investigative tool in case of security incidents.</p>
-            <p>Another critical element is device security. Laptops, USB drives, and other portable devices can be easily
+            <p>Another critical element is device security. Laptops, USB drives, and other porx-table.table devices can be
+                easily
                 stolen
                 if left unattended. Organizations should implement policies requiring employees to lock their screens when
                 stepping away and use cable locks for office computers. In high-security environments, faraday cages or
@@ -76,104 +77,100 @@
                 protect critical infrastructure, and ensure business continuity in the face of physical threats.</p>
 
             <h3>3. Key Performance Indicators (KPIs) in Physical Security</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Unauthorized Access Attempts</td>
-                        <td>Measures the number of failed access attempts at restricted areas.</td>
-                        <td>Monthly (NCA Physical Security)</td>
+                        <x-table.td>Unauthorized Access Attempts</x-table.td>
+                        <x-table.td>Measures the number of failed access attempts at restricted areas.</x-table.td>
+                        <x-table.td>Monthly (NCA Physical Security)</x-table.td>
                     </tr>
                     <tr>
-                        <td>CCTV Coverage Efficiency</td>
-                        <td>Percentage of security-critical areas monitored by surveillance cameras.</td>
-                        <td>Quarterly (NCA Security)</td>
+                        <x-table.td>CCTV Coverage Efficiency</x-table.td>
+                        <x-table.td>Percentage of security-critical areas monitored by surveillance cameras.</x-table.td>
+                        <x-table.td>Quarterly (NCA Security)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Incident Response Time</td>
-                        <td>Tracks the average response time to physical security breaches.</td>
-                        <td>Bi-Annually (NCA Incident Mgmt)</td>
+                        <x-table.td>Incident Response Time</x-table.td>
+                        <x-table.td>Tracks the average response time to physical security breaches.</x-table.td>
+                        <x-table.td>Bi-Annually (NCA Incident Mgmt)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Environmental Monitoring Compliance</td>
-                        <td>Evaluates adherence to environmental safety standards in IT facilities.</td>
-                        <td>Annually (NCA Data Center Security)</td>
+                        <x-table.td>Environmental Monitoring Compliance</x-table.td>
+                        <x-table.td>Evaluates adherence to environmental safety standards in IT facilities.</x-table.td>
+                        <x-table.td>Annually (NCA Data Center Security)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Physical Asset Security Compliance</td>
-                        <td>Measures compliance with physical security policies for IT equipment.</td>
-                        <td>Quarterly (NCA Asset Protection)</td>
+                        <x-table.td>Physical Asset Security Compliance</x-table.td>
+                        <x-table.td>Measures compliance with physical security policies for IT equipment.</x-table.td>
+                        <x-table.td>Quarterly (NCA Asset Protection)</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Physical Security Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Access Control Systems (ACS)</td>
-                        <td>Restricts entry using biometric authentication, RFID, or keypads.</td>
-                        <td>NCA Physical Security</td>
+                        <x-table.td>Access Control Systems (ACS)</x-table.td>
+                        <x-table.td>Restricts entry using biometric authentication, RFID, or keypads.</x-table.td>
+                        <x-table.td>NCA Physical Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>CCTV Surveillance Systems</td>
-                        <td>Provides continuous monitoring and video recording of secure areas.</td>
-                        <td>NCA Cybersecurity Monitoring</td>
+                        <x-table.td>CCTV Surveillance Systems</x-table.td>
+                        <x-table.td>Provides continuous monitoring and video recording of secure areas.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Monitoring</x-table.td>
                     </tr>
                     <tr>
-                        <td>Intrusion Detection Systems (IDS)</td>
-                        <td>Alerts security teams on unauthorized access attempts.</td>
-                        <td>NCA Threat Management</td>
+                        <x-table.td>Intrusion Detection Systems (IDS)</x-table.td>
+                        <x-table.td>Alerts security teams on unauthorized access attempts.</x-table.td>
+                        <x-table.td>NCA Threat Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Environmental Monitoring Systems</td>
-                        <td>Detects temperature, humidity, and environmental hazards.</td>
-                        <td>NCA Data Center Security</td>
+                        <x-table.td>Environmental Monitoring Systems</x-table.td>
+                        <x-table.td>Detects temperature, humidity, and environmental hazards.</x-table.td>
+                        <x-table.td>NCA Data Center Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Visitor Management Systems (VMS)</td>
-                        <td>Manages guest access to restricted areas.</td>
-                        <td>NCA Facility Access Management</td>
+                        <x-table.td>Visitor Management Systems (VMS)</x-table.td>
+                        <x-table.td>Manages guest access to restricted areas.</x-table.td>
+                        <x-table.td>NCA Facility Access Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Smart Locks & Security Barriers</td>
-                        <td>Reinforces access control through automated locking mechanisms.</td>
-                        <td>NCA Physical Access Control</td>
+                        <x-table.td>Smart Locks & Security Barriers</x-table.td>
+                        <x-table.td>Reinforces access control through automated locking mechanisms.</x-table.td>
+                        <x-table.td>NCA Physical Access Control</x-table.td>
                     </tr>
                     <tr>
-                        <td>Asset Tracking & RFID Solutions</td>
-                        <td>Monitors physical movement of IT assets.</td>
-                        <td>NCA Asset Security</td>
+                        <x-table.td>Asset Tracking & RFID Solutions</x-table.td>
+                        <x-table.td>Monitors physical movement of IT assets.</x-table.td>
+                        <x-table.td>NCA Asset Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Physical Security Information Management Systems (PSIM)</td>
-                        <td>Integrates security technologies for centralized monitoring.</td>
-                        <td>NCA Security Operations</td>
+                        <x-table.td>Physical Security Information Management Systems (PSIM)</x-table.td>
+                        <x-table.td>Integrates security technologies for centralized monitoring.</x-table.td>
+                        <x-table.td>NCA Security Operations</x-table.td>
                     </tr>
                     <tr>
-                        <td>Secure Facility Alarm Systems</td>
-                        <td>Alerts security teams on physical security threats.</td>
-                        <td>NCA Emergency Response</td>
+                        <x-table.td>Secure Facility Alarm Systems</x-table.td>
+                        <x-table.td>Alerts security teams on physical security threats.</x-table.td>
+                        <x-table.td>NCA Emergency Response</x-table.td>
                     </tr>
                     <tr>
-                        <td>Emergency Response & Fire Suppression Systems</td>
-                        <td>Protects IT infrastructure from fire hazards and emergencies.</td>
-                        <td>NCA Safety & Compliance</td>
+                        <x-table.td>Emergency Response & Fire Suppression Systems</x-table.td>
+                        <x-table.td>Protects IT infrastructure from fire hazards and emergencies.</x-table.td>
+                        <x-table.td>NCA Safety & Compliance</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>Physical security is a critical component of an organization’s cybersecurity strategy, ensuring the
                 protection of

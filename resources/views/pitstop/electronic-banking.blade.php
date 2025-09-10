@@ -68,104 +68,102 @@
                 customer
                 education, and regulatory compliance to maintain trust and security in electronic banking services.</p>
             <h3>3. Key Performance Indicators (KPIs) in Electronic Banking Services</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Transaction Success Rate</td>
-                        <td>Measures the percentage of successful electronic transactions.</td>
-                        <td>Daily</td>
+                        <x-table.td>Transaction Success Rate</x-table.td>
+                        <x-table.td>Measures the percentage of successful electronic transactions.</x-table.td>
+                        <x-table.td>Daily</x-table.td>
                     </tr>
                     <tr>
-                        <td>System Uptime Percentage</td>
-                        <td>Tracks the availability of electronic banking services.</td>
-                        <td>Monthly</td>
+                        <x-table.td>System Uptime Percentage</x-table.td>
+                        <x-table.td>Tracks the availability of electronic banking services.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Customer Satisfaction Score</td>
-                        <td>Evaluates customer experience with online and mobile banking.</td>
-                        <td>Quarterly</td>
+                        <x-table.td>Customer Satisfaction Score</x-table.td>
+                        <x-table.td>Evaluates customer experience with online and mobile banking.</x-table.td>
+                        <x-table.td>Quarterly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Fraud Detection Rate</td>
-                        <td>Monitors the effectiveness of fraud prevention mechanisms.</td>
-                        <td>Weekly</td>
+                        <x-table.td>Fraud Detection Rate</x-table.td>
+                        <x-table.td>Monitors the effectiveness of fraud prevention mechanisms.</x-table.td>
+                        <x-table.td>Weekly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Average Transaction Speed</td>
-                        <td>Measures the time taken to complete an online banking transaction.</td>
-                        <td>Daily</td>
+                        <x-table.td>Average Transaction Speed</x-table.td>
+                        <x-table.td>Measures the time taken to complete an online banking transaction.</x-table.td>
+                        <x-table.td>Daily</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Electronic Banking Services Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Online Banking Platforms</td>
-                        <td>Secure web-based portals for account access, fund transfers, and bill payments.</td>
-                        <td>NCA Cybersecurity Governance</td>
-                    </tr>
-                    <tr>
-                        <td>Mobile Banking Apps</td>
-                        <td>Smartphone applications providing banking services on the go.</td>
-                        <td>NCA Mobile Security</td>
+                        <x-table.td>Online Banking Platforms</x-table.td>
+                        <x-table.td>Secure web-based portals for account access, fund transfers, and bill
+                            payments.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Governance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Automated Teller Machines (ATMs)</td>
-                        <td>Self-service machines for cash withdrawals, deposits, and balance inquiries.</td>
-                        <td>NCA Physical Security</td>
+                        <x-table.td>Mobile Banking Apps</x-table.td>
+                        <x-table.td>Smartphone applications providing banking services on the go.</x-table.td>
+                        <x-table.td>NCA Mobile Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Electronic Fund Transfers (EFT)</td>
-                        <td>Digital transfer of funds between bank accounts.</td>
-                        <td>NCA Data Cybersecurity Controls</td>
+                        <x-table.td>Automated Teller Machines (ATMs)</x-table.td>
+                        <x-table.td>Self-service machines for cash withdrawals, deposits, and balance
+                            inquiries.</x-table.td>
+                        <x-table.td>NCA Physical Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Point-of-Sale (POS) Systems</td>
-                        <td>Electronic terminals for card-based transactions in retail locations.</td>
-                        <td>NCA Payment Security</td>
+                        <x-table.td>Electronic Fund Transfers (EFT)</x-table.td>
+                        <x-table.td>Digital transfer of funds between bank accounts.</x-table.td>
+                        <x-table.td>NCA Data Cybersecurity Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>Secure Payment Gateways</td>
-                        <td>Online platforms that process digital payments securely.</td>
-                        <td>NCA Cybersecurity Monitoring</td>
+                        <x-table.td>Point-of-Sale (POS) Systems</x-table.td>
+                        <x-table.td>Electronic terminals for card-based transactions in retail locations.</x-table.td>
+                        <x-table.td>NCA Payment Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Biometric Authentication Solutions</td>
-                        <td>Uses fingerprint, facial recognition, or iris scanning for secure banking.</td>
-                        <td>NCA Identity & Access Management</td>
+                        <x-table.td>Secure Payment Gateways</x-table.td>
+                        <x-table.td>Online platforms that process digital payments securely.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Monitoring</x-table.td>
                     </tr>
                     <tr>
-                        <td>AI-based Fraud Detection</td>
-                        <td>Machine learning systems that identify and prevent fraudulent transactions.</td>
-                        <td>NCA Threat Management</td>
+                        <x-table.td>Biometric Authentication Solutions</x-table.td>
+                        <x-table.td>Uses fingerprint, facial recognition, or iris scanning for secure banking.</x-table.td>
+                        <x-table.td>NCA Identity & Access Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Digital Wallets</td>
-                        <td>Secure virtual wallets for contactless payments and fund storage.</td>
-                        <td>NCA Cloud Cybersecurity Controls</td>
+                        <x-table.td>AI-based Fraud Detection</x-table.td>
+                        <x-table.td>Machine learning systems that identify and prevent fraudulent transactions.</x-table.td>
+                        <x-table.td>NCA Threat Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Blockchain Payment Solutions</td>
-                        <td>Decentralized and secure payment processing using blockchain technology.</td>
-                        <td>NCA Compliance Management</td>
+                        <x-table.td>Digital Wallets</x-table.td>
+                        <x-table.td>Secure virtual wallets for contactless payments and fund storage.</x-table.td>
+                        <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                    <tr>
+                        <x-table.td>Blockchain Payment Solutions</x-table.td>
+                        <x-table.td>Decentralized and secure payment processing using blockchain technology.</x-table.td>
+                        <x-table.td>NCA Compliance Management</x-table.td>
+                    </tr>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Summary</h3>
             <p>
                 Electronic Banking Services have revolutionized the financial industry by providing secure, convenient, and

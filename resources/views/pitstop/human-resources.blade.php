@@ -69,104 +69,102 @@
                 organization’s overall cybersecurity strategy.</p>
 
             <h3>3. Key Performance Indicators (KPIs) in Human Resources and Cybersecurity</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Employee Security Training Completion Rate</td>
-                        <td>Measures the percentage of employees who have completed cybersecurity awareness training.</td>
-                        <td>Quarterly (NCA-ECC-1-10-3)</td>
-                    </tr>
-                    <tr>
-                        <td>HR System Access Control Compliance</td>
-                        <td>Tracks the enforcement of role-based access control in HR systems.</td>
-                        <td>Monthly (NCA IAM Standards)</td>
+                        <x-table.td>Employee Security Training Completion Rate</x-table.td>
+                        <x-table.td>Measures the percentage of employees who have completed cybersecurity awareness
+                            training.</x-table.td>
+                        <x-table.td>Quarterly (NCA-ECC-1-10-3)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Insider Threat Incident Rate</td>
-                        <td>Measures the number of security incidents caused by employees.</td>
-                        <td>Bi-Annually (NCA Threat Mgmt)</td>
+                        <x-table.td>HR System Access Control Compliance</x-table.td>
+                        <x-table.td>Tracks the enforcement of role-based access control in HR systems.</x-table.td>
+                        <x-table.td>Monthly (NCA IAM Standards)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Background Screening Compliance</td>
-                        <td>Percentage of employees who have undergone security background checks..</td>
-                        <td>Annually (NCA Cybersecurity Governance)</td>
+                        <x-table.td>Insider Threat Incident Rate</x-table.td>
+                        <x-table.td>Measures the number of security incidents caused by employees.</x-table.td>
+                        <x-table.td>Bi-Annually (NCA Threat Mgmt)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Data Loss Prevention Policy Compliance</td>
-                        <td>Monitors HR data security policies to prevent unauthorized data access.</td>
-                        <td>Quarterly (NCA Data Security)</td>
+                        <x-table.td>Background Screening Compliance</x-table.td>
+                        <x-table.td>Percentage of employees who have undergone security background checks..</x-table.td>
+                        <x-table.td>Annually (NCA Cybersecurity Governance)</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                    <tr>
+                        <x-table.td>Data Loss Prevention Policy Compliance</x-table.td>
+                        <x-table.td>Monitors HR data security policies to prevent unauthorized data access.</x-table.td>
+                        <x-table.td>Quarterly (NCA Data Security)</x-table.td>
+                    </tr>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Human Resources and Cybersecurity Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Human Resource Management Systems (HRMS)</td>
-                        <td>Manages employee data, recruitment, payroll, and compliance tracking.</td>
-                        <td>NCA HR Security & Compliance</td>
+                        <x-table.td>Human Resource Management Systems (HRMS)</x-table.td>
+                        <x-table.td>Manages employee data, recruitment, payroll, and compliance tracking.</x-table.td>
+                        <x-table.td>NCA HR Security & Compliance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Identity and Access Management (IAM)</td>
-                        <td>Enforces role-based access control for HR systems and sensitive data.</td>
-                        <td>NCA-ECC-2-2-1</td>
+                        <x-table.td>Identity and Access Management (IAM)</x-table.td>
+                        <x-table.td>Enforces role-based access control for HR systems and sensitive data.</x-table.td>
+                        <x-table.td>NCA-ECC-2-2-1</x-table.td>
                     </tr>
                     <tr>
-                        <td>Security Awareness and Training Platforms</td>
-                        <td>Educates employees on cybersecurity best practices.</td>
-                        <td>NCA Cybersecurity Awareness</td>
+                        <x-table.td>Security Awareness and Training Platforms</x-table.td>
+                        <x-table.td>Educates employees on cybersecurity best practices.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Awareness</x-table.td>
                     </tr>
                     <tr>
-                        <td>Privileged Access Management (PAM)</td>
-                        <td>Controls access to sensitive HR records and administrative functions.</td>
-                        <td>NCA Identity & Access Mgmt</td>
+                        <x-table.td>Privileged Access Management (PAM)</x-table.td>
+                        <x-table.td>Controls access to sensitive HR records and administrative functions.</x-table.td>
+                        <x-table.td>NCA Identity & Access Mgmt</x-table.td>
                     </tr>
                     <tr>
-                        <td>Background Screening & Onboarding Systems</td>
-                        <td>Verifies employee credentials and ensures security clearance.</td>
-                        <td>NCA HR Governance</td>
+                        <x-table.td>Background Screening & Onboarding Systems</x-table.td>
+                        <x-table.td>Verifies employee credentials and ensures security clearance.</x-table.td>
+                        <x-table.td>NCA HR Governance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Data Loss Prevention (DLP)</td>
-                        <td>Prevents unauthorized access and sharing of sensitive employee data.</td>
-                        <td>NCA Data Cybersecurity Controls</td>
+                        <x-table.td>Data Loss Prevention (DLP)</x-table.td>
+                        <x-table.td>Prevents unauthorized access and sharing of sensitive employee data.</x-table.td>
+                        <x-table.td>NCA Data Cybersecurity Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>Endpoint Detection & Response (EDR)</td>
-                        <td>Monitors HR systems for security threats and potential breaches.</td>
-                        <td>NCA Cybersecurity Defense</td>
+                        <x-table.td>Endpoint Detection & Response (EDR)</x-table.td>
+                        <x-table.td>Monitors HR systems for security threats and potential breaches.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Defense</x-table.td>
                     </tr>
                     <tr>
-                        <td>Secure Document Management Systems</td>
-                        <td>Ensures HR documents are stored securely and accessed only by authorized personnel.</td>
-                        <td>NCA Data Protection</td>
+                        <x-table.td>Secure Document Management Systems</x-table.td>
+                        <x-table.td>Ensures HR documents are stored securely and accessed only by authorized
+                            personnel.</x-table.td>
+                        <x-table.td>NCA Data Protection</x-table.td>
                     </tr>
                     <tr>
-                        <td>Employee Exit and Access Revocation Tools</td>
-                        <td>Automates access revocation for departing employees.</td>
-                        <td>NCA Identity & Access Mgmt</td>
+                        <x-table.td>Employee Exit and Access Revocation Tools</x-table.td>
+                        <x-table.td>Automates access revocation for departing employees.</x-table.td>
+                        <x-table.td>NCA Identity & Access Mgmt</x-table.td>
                     </tr>
                     <tr>
-                        <td>Compliance Management Systems</td>
-                        <td>Tracks adherence to HR cybersecurity policies and regulatory compliance.</td>
-                        <td>NCA Compliance Management</td>
+                        <x-table.td>Compliance Management Systems</x-table.td>
+                        <x-table.td>Tracks adherence to HR cybersecurity policies and regulatory compliance.</x-table.td>
+                        <x-table.td>NCA Compliance Management</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>Human Resources (HR) plays a critical role in maintaining cybersecurity compliance, enforcing access
                 controls,

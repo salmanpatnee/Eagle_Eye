@@ -615,7 +615,7 @@ Route::middleware(['auth'])->group(function () {
         Route::view('/cybersecurity-roles-and-responsibilities', 'pitstop/cybersecurity-roles-and-responsibilities')->name('pitstop.roles');
         Route::view('/cybersecurity-project-management', 'pitstop/cybersecurity-it-project-management')->name('pitstop.project');
         Route::view('/cybersecurity-awareness', 'pitstop/cybersecurity-awareness')->name('pitstop.awareness');
-        Route::view('/cybersecurity-training', 'pitstop/periodical-cybersecurity-review-2')->name('pitstop.training');
+        Route::view('/cybersecurity-training', 'pitstop/cybersecurity-training')->name('pitstop.training');
         Route::view('/cybersecurity-risk-management', 'pitstop/cybersecurity-risk-management')->name('pitstop.risk');
         Route::view('/cybersecurity-regulatory-compliance', 'pitstop/cybersecurity-regulatory-compliance')->name('pitstop.compliance');
         Route::view('/cybersecurity-review', 'pitstop/cybersecurity-review')->name('pitstop.review');
@@ -631,7 +631,7 @@ Route::middleware(['auth'])->group(function () {
         Route::view('/bring-your-own-device', 'pitstop/bring-your-own-devic')->name('pitstop.byod');
         Route::view('/secure-disposal', 'pitstop/secure-disposal')->name('pitstop.disposal');
         Route::view('/payment-system', 'pitstop/payment-system')->name('pitstop.payment');
-        Route::view('/electronic-banking', 'pitstop/web-application-security')->name('pitstop.banking');
+        Route::view('/electronic-banking', 'pitstop/electronic-banking')->name('pitstop.banking');
         Route::view('/cybersecurity-event-management', 'pitstop/cybersecurity-event-management')->name('pitstop.event');
         Route::view('/cybersecurity-incident-management', 'pitstop/cybersecurity-incident-management')->name('pitstop.incident');
 

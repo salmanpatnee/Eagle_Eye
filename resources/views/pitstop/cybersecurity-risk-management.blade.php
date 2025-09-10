@@ -74,104 +74,100 @@
             </p>
 
             <h3>3. Key Performance Indicators (KPIs) in Cybersecurity Risk Management</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cybersecurity Risk Assessment Completion</td>
-                        <td>Percentage of completed risk assessments as per policy.</td>
-                        <td>Annually (NCA-ECC-1-5-1)</td>
+                        <x-table.td>Cybersecurity Risk Assessment Completion</x-table.td>
+                        <x-table.td>Percentage of completed risk assessments as per policy.</x-table.td>
+                        <x-table.td>Annually (NCA-ECC-1-5-1)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Incident Response Time</td>
-                        <td>Measures the average time taken to detect and respond to cyber threats.</td>
-                        <td>Quarterly (NCA Incident Mgmt)</td>
+                        <x-table.td>Incident Response Time</x-table.td>
+                        <x-table.td>Measures the average time taken to detect and respond to cyber threats.</x-table.td>
+                        <x-table.td>Quarterly (NCA Incident Mgmt)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Compliance with Risk Mitigation Plans</td>
-                        <td>Tracks adherence to recommended security controls and remediation actions.</td>
-                        <td>Annually (NCA Risk Management)</td>
+                        <x-table.td>Compliance with Risk Mitigation Plans</x-table.td>
+                        <x-table.td>Tracks adherence to recommended security controls and remediation actions.</x-table.td>
+                        <x-table.td>Annually (NCA Risk Management)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Number of Open Security Vulnerabilities</td>
-                        <td>Counts unresolved vulnerabilities that pose security risks.</td>
-                        <td>Monthly (NCA Vulnerability Mgmt)</td>
+                        <x-table.td>Number of Open Security Vulnerabilities</x-table.td>
+                        <x-table.td>Counts unresolved vulnerabilities that pose security risks.</x-table.td>
+                        <x-table.td>Monthly (NCA Vulnerability Mgmt)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Threat Intelligence Effectiveness</td>
-                        <td>Assesses how well threat intelligence helps prevent cyber incidents.</td>
-                        <td>Bi-Annually (NCA Cyber Threat)</td>
+                        <x-table.td>Threat Intelligence Effectiveness</x-table.td>
+                        <x-table.td>Assesses how well threat intelligence helps prevent cyber incidents.</x-table.td>
+                        <x-table.td>Bi-Annually (NCA Cyber Threat)</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Cybersecurity Risk Management Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Risk Management Platforms</td>
-                        <td>Helps identify, assess, and mitigate cybersecurity risks.</td>
-                        <td>NCA Risk Management</td>
+                        <x-table.td>Risk Management Platforms</x-table.td>
+                        <x-table.td>Helps identify, assess, and mitigate cybersecurity risks.</x-table.td>
+                        <x-table.td>NCA Risk Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Security Information & Event Management (SIEM)</td>
-                        <td>Monitors security logs and detects cyber threats in real-time.</td>
-                        <td>NCA Cybersecurity Defense</td>
+                        <x-table.td>Security Information & Event Management (SIEM)</x-table.td>
+                        <x-table.td>Monitors security logs and detects cyber threats in real-time.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Defense</x-table.td>
                     </tr>
                     <tr>
-                        <td>Threat Intelligence Platforms (TIPs)</td>
-                        <td>Provides real-time insights on cyber threats and vulnerabilities.</td>
-                        <td>NCA Threat Management</td>
+                        <x-table.td>Threat Intelligence Platforms (TIPs)</x-table.td>
+                        <x-table.td>Provides real-time insights on cyber threats and vulnerabilities.</x-table.td>
+                        <x-table.td>NCA Threat Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Vulnerability Management Systems</td>
-                        <td>Scans IT environments for security weaknesses.</td>
-                        <td>NCA Vulnerability Management</td>
+                        <x-table.td>Vulnerability Management Systems</x-table.td>
+                        <x-table.td>Scans IT environments for security weaknesses.</x-table.td>
+                        <x-table.td>NCA Vulnerability Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Governance, Risk, and Compliance (GRC) Tools</td>
-                        <td>Tracks risk compliance and automates cybersecurity reporting.</td>
-                        <td>NCA Cybersecurity Governance</td>
+                        <x-table.td>Governance, Risk, and Compliance (GRC) Tools</x-table.td>
+                        <x-table.td>Tracks risk compliance and automates cybersecurity reporting.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Governance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Penetration Testing (PT) Tools</td>
-                        <td>Simulates cyberattacks to test an organization’s security defenses.</td>
-                        <td>NCA Penetration Testing</td>
+                        <x-table.td>Penetration Testing (PT) Tools</x-table.td>
+                        <x-table.td>Simulates cyberattacks to test an organization’s security defenses.</x-table.td>
+                        <x-table.td>NCA Penetration Testing</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cloud Security Posture Management (CSPM)</td>
-                        <td>Identifies and mitigates risks in cloud environments.</td>
-                        <td>NCA Cloud Cybersecurity Controls</td>
+                        <x-table.td>Cloud Security Posture Management (CSPM)</x-table.td>
+                        <x-table.td>Identifies and mitigates risks in cloud environments.</x-table.td>
+                        <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>Incident Response Platforms</td>
-                        <td>Manages security breaches and containment strategies.</td>
-                        <td>NCA Incident Management</td>
+                        <x-table.td>Incident Response Platforms</x-table.td>
+                        <x-table.td>Manages security breaches and containment strategies.</x-table.td>
+                        <x-table.td>NCA Incident Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Endpoint Detection & Response (EDR)</td>
-                        <td>Detects and responds to endpoint security threats.</td>
-                        <td>NCA Cybersecurity Defense</td>
+                        <x-table.td>Endpoint Detection & Response (EDR)</x-table.td>
+                        <x-table.td>Detects and responds to endpoint security threats.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Defense</x-table.td>
                     </tr>
                     <tr>
-                        <td>Data Loss Prevention (DLP)</td>
-                        <td>Prevents unauthorized access and data breaches.</td>
-                        <td>NCA Data Cybersecurity Controls</td>
+                        <x-table.td>Data Loss Prevention (DLP)</x-table.td>
+                        <x-table.td>Prevents unauthorized access and data breaches.</x-table.td>
+                        <x-table.td>NCA Data Cybersecurity Controls</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>Cybersecurity risk management is a critical function for organizations to protect their assets, data, and
                 operations from cyber threats. Implementing risk management platforms, SIEM solutions, threat intelligence

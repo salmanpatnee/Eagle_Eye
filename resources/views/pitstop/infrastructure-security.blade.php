@@ -71,104 +71,100 @@
                 incidents impacting their IT infrastructure.</p>
 
             <h3>3. Key Performance Indicators (KPIs) in Infrastructure Security</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Network Uptime</td>
-                        <td>Measures the availability of critical network infrastructure.</td>
-                        <td>Monthly</td>
+                        <x-table.td>Network Uptime</x-table.td>
+                        <x-table.td>Measures the availability of critical network infrastructure.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Patch Compliance Rate</td>
-                        <td>Percentage of systems with up-to-date security patches.</td>
-                        <td>Quarterly</td>
+                        <x-table.td>Patch Compliance Rate</x-table.td>
+                        <x-table.td>Percentage of systems with up-to-date security patches.</x-table.td>
+                        <x-table.td>Quarterly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Incident Detection Time</td>
-                        <td>Average time taken to detect security incidents.</td>
-                        <td>Weekly</td>
+                        <x-table.td>Incident Detection Time</x-table.td>
+                        <x-table.td>Average time taken to detect security incidents.</x-table.td>
+                        <x-table.td>Weekly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Mean Time to Resolve (MTTR)</td>
-                        <td>Average time taken to resolve security incidents.</td>
-                        <td>Monthly</td>
+                        <x-table.td>Mean Time to Resolve (MTTR)</x-table.td>
+                        <x-table.td>Average time taken to resolve security incidents.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Unauthorized Access Attempts</td>
-                        <td>Number of unauthorized access attempts detected.</td>
-                        <td>Daily</td>
+                        <x-table.td>Unauthorized Access Attempts</x-table.td>
+                        <x-table.td>Number of unauthorized access attempts detected.</x-table.td>
+                        <x-table.td>Daily</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Infrastructure Security Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Firewalls</td>
-                        <td>Protects networks by filtering incoming and outgoing traffic.</td>
-                        <td>NCA Essential Cybersecurity Controls</td>
+                        <x-table.td>Firewalls</x-table.td>
+                        <x-table.td>Protects networks by filtering incoming and outgoing traffic.</x-table.td>
+                        <x-table.td>NCA Essential Cybersecurity Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>Intrusion Detection Systems (IDS)</td>
-                        <td>Monitors networks for malicious activities.</td>
-                        <td>NCA Threat Management</td>
+                        <x-table.td>Intrusion Detection Systems (IDS)</x-table.td>
+                        <x-table.td>Monitors networks for malicious activities.</x-table.td>
+                        <x-table.td>NCA Threat Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Security Information and Event Management (SIEM)</td>
-                        <td>Real-time monitoring and threat detection.</td>
-                        <td>NCA Security Operations</td>
+                        <x-table.td>Security Information and Event Management (SIEM)</x-table.td>
+                        <x-table.td>Real-time monitoring and threat detection.</x-table.td>
+                        <x-table.td>NCA Security Operations</x-table.td>
                     </tr>
                     <tr>
-                        <td>Endpoint Detection and Response (EDR)</td>
-                        <td>Protects endpoints from malware and cyber threats.</td>
-                        <td>NCA Cybersecurity Defense</td>
+                        <x-table.td>Endpoint Detection and Response (EDR)</x-table.td>
+                        <x-table.td>Protects endpoints from malware and cyber threats.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Defense</x-table.td>
                     </tr>
                     <tr>
-                        <td>Zero Trust Security Solutions</td>
-                        <td>Ensures continuous identity verification for access.</td>
-                        <td>NCA Identity & Access Management</td>
+                        <x-table.td>Zero Trust Security Solutions</x-table.td>
+                        <x-table.td>Ensures continuous identity verification for access.</x-table.td>
+                        <x-table.td>NCA Identity & Access Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cloud Security Posture Management (CSPM)</td>
-                        <td>Monitors cloud environments for misconfigurations.</td>
-                        <td>NCA Cloud Cybersecurity Controls</td>
+                        <x-table.td>Cloud Security Posture Management (CSPM)</x-table.td>
+                        <x-table.td>Monitors cloud environments for misconfigurations.</x-table.td>
+                        <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>Next-Gen Antivirus (NGAV)</td>
-                        <td>Advanced protection against malware and cyber threats.</td>
-                        <td>NCA Endpoint Security</td>
+                        <x-table.td>Next-Gen Antivirus (NGAV)</x-table.td>
+                        <x-table.td>Advanced protection against malware and cyber threats.</x-table.td>
+                        <x-table.td>NCA Endpoint Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Physical Security Access Controls</td>
-                        <td>Secures data centers and critical infrastructure.</td>
-                        <td>NCA Physical Security</td>
+                        <x-table.td>Physical Security Access Controls</x-table.td>
+                        <x-table.td>Secures data centers and critical infrastructure.</x-table.td>
+                        <x-table.td>NCA Physical Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Automated Patch Management</td>
-                        <td>Ensures all systems are up to date with security patches.</td>
-                        <td>NCA Vulnerability Management</td>
+                        <x-table.td>Automated Patch Management</x-table.td>
+                        <x-table.td>Ensures all systems are up to date with security patches.</x-table.td>
+                        <x-table.td>NCA Vulnerability Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Data Loss Prevention (DLP) Solutions</td>
-                        <td>Protects sensitive data from unauthorized access.</td>
-                        <td>NCA Data Cybersecurity Controls</td>
+                        <x-table.td>Data Loss Prevention (DLP) Solutions</x-table.td>
+                        <x-table.td>Protects sensitive data from unauthorized access.</x-table.td>
+                        <x-table.td>NCA Data Cybersecurity Controls</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>Infrastructure security is fundamental to an organization's cybersecurity strategy, ensuring that its IT
                 assets,

@@ -83,104 +83,100 @@
                 structure improves resilience against cyber threats and ensures that businesses can recover quickly from
                 security incidents.</p>
             <h3>3. Key Performance Indicators (KPIs) in Cybersecurity Strategy</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cybersecurity Strategy Review</td>
-                        <td>Measures how often the cybersecurity strategy is updated and reviewed.</td>
-                        <td>Once in 3 years (NCA-ECC-1-1-3)</td>
+                        <x-table.td>Cybersecurity Strategy Review</x-table.td>
+                        <x-table.td>Measures how often the cybersecurity strategy is updated and reviewed.</x-table.td>
+                        <x-table.td>Once in 3 years (NCA-ECC-1-1-3)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Risk Assessment Completion</td>
-                        <td>Evaluates the percentage of completed risk assessments.</td>
-                        <td>Annually (NCA-CSCC-1-2-1-1)</td>
+                        <x-table.td>Risk Assessment Completion</x-table.td>
+                        <x-table.td>Evaluates the percentage of completed risk assessments.</x-table.td>
+                        <x-table.td>Annually (NCA-CSCC-1-2-1-1)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Compliance with Cybersecurity Policies</td>
-                        <td>Tracks the implementation of cybersecurity frameworks and policies.</td>
-                        <td>Annually (NCA-ECC-1-8-1)</td>
+                        <x-table.td>Compliance with Cybersecurity Policies</x-table.td>
+                        <x-table.td>Tracks the implementation of cybersecurity frameworks and policies.</x-table.td>
+                        <x-table.td>Annually (NCA-ECC-1-8-1)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Incident Response Effectiveness</td>
-                        <td>Measures the response time and resolution of cybersecurity incidents.</td>
-                        <td>Quarterly (NCA Incident Mgmt)</td>
+                        <x-table.td>Incident Response Effectiveness</x-table.td>
+                        <x-table.td>Measures the response time and resolution of cybersecurity incidents.</x-table.td>
+                        <x-table.td>Quarterly (NCA Incident Mgmt)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cybersecurity Awareness Program Reach</td>
-                        <td>Percentage of employees trained in cybersecurity policies and threats.</td>
-                        <td>Quarterly (NCA-ECC-1-10-3)</td>
+                        <x-table.td>Cybersecurity Awareness Program Reach</x-table.td>
+                        <x-table.td>Percentage of employees trained in cybersecurity policies and threats.</x-table.td>
+                        <x-table.td>Quarterly (NCA-ECC-1-10-3)</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Cybersecurity Strategy Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>SIEM (Security Information & Event Management)</td>
-                        <td>Provides real-time security monitoring and event correlation.</td>
-                        <td>NCA Cybersecurity Defense</td>
+                        <x-table.td>SIEM (Security Information & Event Management)</x-table.td>
+                        <x-table.td>Provides real-time security monitoring and event correlation.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Defense</x-table.td>
                     </tr>
                     <tr>
-                        <td>Risk Management Software</td>
-                        <td>Assists in identifying and mitigating cybersecurity risks.</td>
-                        <td>NCA Risk Management</td>
+                        <x-table.td>Risk Management Software</x-table.td>
+                        <x-table.td>Assists in identifying and mitigating cybersecurity risks.</x-table.td>
+                        <x-table.td>NCA Risk Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>IAM (Identity & Access Management)</td>
-                        <td>Manages access to systems and enforces authentication policies.</td>
-                        <td>NCA-ECC-1-2-1</td>
+                        <x-table.td>IAM (Identity & Access Management)</x-table.td>
+                        <x-table.td>Manages access to systems and enforces authentication policies.</x-table.td>
+                        <x-table.td>NCA-ECC-1-2-1</x-table.td>
                     </tr>
                     <tr>
-                        <td>Compliance Management Tools</td>
-                        <td>Automates tracking and reporting for regulatory compliance.</td>
-                        <td>NCA Cybersecurity Governance</td>
+                        <x-table.td>Compliance Management Tools</x-table.td>
+                        <x-table.td>Automates tracking and reporting for regulatory compliance.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Governance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Threat Intelligence Platforms</td>
-                        <td>Provides insights into emerging cybersecurity threats.</td>
-                        <td>NCA Cybersecurity Resilience</td>
+                        <x-table.td>Threat Intelligence Platforms</x-table.td>
+                        <x-table.td>Provides insights into emerging cybersecurity threats.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Resilience</x-table.td>
                     </tr>
                     <tr>
-                        <td>Vulnerability Management Systems</td>
-                        <td>Identifies and mitigates security vulnerabilities.</td>
-                        <td>NCA Vulnerability Management</td>
+                        <x-table.td>Vulnerability Management Systems</x-table.td>
+                        <x-table.td>Identifies and mitigates security vulnerabilities.</x-table.td>
+                        <x-table.td>NCA Vulnerability Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Endpoint Security Solutions</td>
-                        <td>Protects user devices from malware, phishing, and ransomware attacks.</td>
-                        <td>NCA Cybersecurity Defense</td>
+                        <x-table.td>Endpoint Security Solutions</x-table.td>
+                        <x-table.td>Protects user devices from malware, phishing, and ransomware attacks.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Defense</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cloud Security Solutions</td>
-                        <td>Ensures security compliance for cloud-hosted infrastructure.</td>
-                        <td>NCA Cloud Cybersecurity Controls</td>
+                        <x-table.td>Cloud Security Solutions</x-table.td>
+                        <x-table.td>Ensures security compliance for cloud-hosted infrastructure.</x-table.td>
+                        <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>Incident Response Platforms</td>
-                        <td>Helps in managing and responding to security breaches.</td>
-                        <td>NCA Incident Management</td>
+                        <x-table.td>Incident Response Platforms</x-table.td>
+                        <x-table.td>Helps in managing and responding to security breaches.</x-table.td>
+                        <x-table.td>NCA Incident Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Data Loss Prevention (DLP) Tools</td>
-                        <td>Prevents unauthorized access and data exfiltration.</td>
-                        <td>NCA Data Cybersecurity Controls</td>
+                        <x-table.td>Data Loss Prevention (DLP) Tools</x-table.td>
+                        <x-table.td>Prevents unauthorized access and data exfiltration.</x-table.td>
+                        <x-table.td>NCA Data Cybersecurity Controls</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>A robust cybersecurity strategy is essential for protecting an organization’s digital infrastructure from
                 evolving threats while ensuring compliance with regulatory standards like the NCA Essential Cybersecurity

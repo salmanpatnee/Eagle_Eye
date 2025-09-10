@@ -45,7 +45,8 @@
             </p>
 
             <p>
-                Effective cloud security strategies involve selecting reputable cloud service providers (CSPs), implementing
+                Effective cloud security strategies involve selecting repux-table.table cloud service providers (CSPs),
+                implementing
                 access controls, and regularly auditing cloud environments.
                 Compliance with cloud security standards, such as the NCA Cloud Cybersecurity Controls, ensures
                 organizations
@@ -82,104 +83,103 @@
 
 
             <h3>3. Key Performance Indicators (KPIs) in Cloud Computing</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cloud Security Compliance</td>
-                        <td>Measures adherence to cloud security frameworks and regulatory requirements.</td>
-                        <td>Quarterly</td>
-                    </tr>
-                    <tr>
-                        <td>Data Encryption Rate</td>
-                        <td>Tracks the percentage of sensitive data encrypted in the cloud environment.</td>
-                        <td>Monthly</td>
+                        <x-table.td>Cloud Security Compliance</x-table.td>
+                        <x-table.td>Measures adherence to cloud security frameworks and regulatory
+                            requirements.</x-table.td>
+                        <x-table.td>Quarterly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cloud Incident Response Time</td>
-                        <td>Evaluates the average time taken to detect and respond to security incidents.</td>
-                        <td>Continuous Monitoring</td>
+                        <x-table.td>Data Encryption Rate</x-table.td>
+                        <x-table.td>Tracks the percentage of sensitive data encrypted in the cloud environment.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
                     <tr>
-                        <td>Access Control Effectiveness</td>
-                        <td>Assesses the enforcement of identity and access management policies.</td>
-                        <td>Monthly</td>
+                        <x-table.td>Cloud Incident Response Time</x-table.td>
+                        <x-table.td>Evaluates the average time taken to detect and respond to security
+                            incidents.</x-table.td>
+                        <x-table.td>Continuous Monitoring</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cloud System Uptime</td>
-                        <td>Monitors the availability and reliability of cloud services.</td>
-                        <td>Real-time</td>
+                        <x-table.td>Access Control Effectiveness</x-table.td>
+                        <x-table.td>Assesses the enforcement of identity and access management policies.</x-table.td>
+                        <x-table.td>Monthly</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                    <tr>
+                        <x-table.td>Cloud System Uptime</x-table.td>
+                        <x-table.td>Monitors the availability and reliability of cloud services.</x-table.td>
+                        <x-table.td>Real-time</x-table.td>
+                    </tr>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Cloud Security Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Microsoft Azure Security Center</td>
-                        <td>Provides advanced threat protection and compliance monitoring for cloud environments.</td>
-                        <td>NCA Cloud Cybersecurity Controls</td>
-                    </tr>
-                    <tr>
-                        <td>Amazon GuardDuty</td>
-                        <td>AI-powered threat detection service for AWS environments.</td>
-                        <td>NCA Cloud Security Monitoring</td>
+                        <x-table.td>Microsoft Azure Security Center</x-table.td>
+                        <x-table.td>Provides advanced threat protection and compliance monitoring for cloud
+                            environments.</x-table.td>
+                        <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>Google Security Command Center</td>
-                        <td>Cloud-native security management and risk assessment platform.</td>
-                        <td>NCA Cloud Risk Management</td>
+                        <x-table.td>Amazon GuardDuty</x-table.td>
+                        <x-table.td>AI-powered threat detection service for AWS environments.</x-table.td>
+                        <x-table.td>NCA Cloud Security Monitoring</x-table.td>
                     </tr>
                     <tr>
-                        <td>Palo Alto Prisma Cloud</td>
-                        <td>Comprehensive cloud security and compliance platform.</td>
-                        <td>NCA Cloud Compliance</td>
+                        <x-table.td>Google Security Command Center</x-table.td>
+                        <x-table.td>Cloud-native security management and risk assessment platform.</x-table.td>
+                        <x-table.td>NCA Cloud Risk Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>IBM Cloud Security</td>
-                        <td>Provides AI-driven security analytics and compliance monitoring.</td>
-                        <td>NCA Information Security</td>
+                        <x-table.td>Palo Alto Prisma Cloud</x-table.td>
+                        <x-table.td>Comprehensive cloud security and compliance platform.</x-table.td>
+                        <x-table.td>NCA Cloud Compliance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Trend Micro Cloud One</td>
-                        <td>Automates cloud security and provides workload protection.</td>
-                        <td>NCA Secure Cloud Deployment</td>
+                        <x-table.td>IBM Cloud Security</x-table.td>
+                        <x-table.td>Provides AI-driven security analytics and compliance monitoring.</x-table.td>
+                        <x-table.td>NCA Information Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>McAfee MVISION Cloud</td>
-                        <td>Ensures data security and compliance for SaaS, PaaS, and IaaS.</td>
-                        <td>NCA Cloud Security Governance</td>
+                        <x-table.td>Trend Micro Cloud One</x-table.td>
+                        <x-table.td>Automates cloud security and provides workload protection.</x-table.td>
+                        <x-table.td>NCA Secure Cloud Deployment</x-table.td>
                     </tr>
                     <tr>
-                        <td>Fortinet FortiCWP</td>
-                        <td>Provides cloud workload protection and threat detection.</td>
-                        <td>NCA Secure Cloud Architecture</td>
+                        <x-table.td>McAfee MVISION Cloud</x-table.td>
+                        <x-table.td>Ensures data security and compliance for SaaS, PaaS, and IaaS.</x-table.td>
+                        <x-table.td>NCA Cloud Security Governance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Check Point CloudGuard</td>
-                        <td>Secures cloud workloads with advanced threat prevention.</td>
-                        <td>NCA Threat Management</td>
+                        <x-table.td>Fortinet FortiCWP</x-table.td>
+                        <x-table.td>Provides cloud workload protection and threat detection.</x-table.td>
+                        <x-table.td>NCA Secure Cloud Architecture</x-table.td>
                     </tr>
                     <tr>
-                        <td>Symantec Cloud Workload Protection</td>
-                        <td>Automates security management for public and private clouds.</td>
-                        <td>NCA Cloud Access Security</td>
+                        <x-table.td>Check Point CloudGuard</x-table.td>
+                        <x-table.td>Secures cloud workloads with advanced threat prevention.</x-table.td>
+                        <x-table.td>NCA Threat Management</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                    <tr>
+                        <x-table.td>Symantec Cloud Workload Protection</x-table.td>
+                        <x-table.td>Automates security management for public and private clouds.</x-table.td>
+                        <x-table.td>NCA Cloud Access Security</x-table.td>
+                    </tr>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>
                 Cloud computing has transformed modern businesses by offering scalable and cost-effective solutions, but it

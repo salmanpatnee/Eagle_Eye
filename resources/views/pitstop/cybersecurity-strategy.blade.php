@@ -75,104 +75,101 @@
                 security incidents.</p>
 
             <h3>3. Key Performance Indicators (KPIs) in Cybersecurity Governance</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cybersecurity Strategy Review</td>
-                        <td>Measures the frequency of updates and reviews to cybersecurity strategies.</td>
-                        <td>Once in 3 years (NCA-ECC-1-1-3)</td>
+                        <x-table.td>Cybersecurity Strategy Review</x-table.td>
+                        <x-table.td>Measures the frequency of updates and reviews to cybersecurity strategies.</x-table.td>
+                        <x-table.td>Once in 3 years (NCA-ECC-1-1-3)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cybersecurity Management Review</td>
-                        <td>Tracks regular reviews of cybersecurity management effectiveness.</td>
-                        <td>Quarterly (NCA-ECC-1-2-3)</td>
+                        <x-table.td>Cybersecurity Management Review</x-table.td>
+                        <x-table.td>Tracks regular reviews of cybersecurity management effectiveness.</x-table.td>
+                        <x-table.td>Quarterly (NCA-ECC-1-2-3)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Compliance with Cybersecurity Standards</td>
-                        <td>Monitors adherence to internal and external cybersecurity frameworks.</td>
-                        <td>Annually (NCA-ECC-1-8-1)</td>
+                        <x-table.td>Compliance with Cybersecurity Standards</x-table.td>
+                        <x-table.td>Monitors adherence to internal and external cybersecurity frameworks.</x-table.td>
+                        <x-table.td>Annually (NCA-ECC-1-8-1)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Risk Assessment Completion</td>
-                        <td>Evaluates how regularly the cybersecurity risks are assessed.</td>
-                        <td>Annually (NCA-CSCC-1-2-1-1)</td>
+                        <x-table.td>Risk Assessment Completion</x-table.td>
+                        <x-table.td>Evaluates how regularly the cybersecurity risks are assessed.</x-table.td>
+                        <x-table.td>Annually (NCA-CSCC-1-2-1-1)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Training and Awareness Program Coverage</td>
-                        <td>Measures the extent to which personnel are trained in cybersecurity best practices.</td>
-                        <td>Quarterly (NCA-ECC-1-10-3)</td>
+                        <x-table.td>Training and Awareness Program Coverage</x-table.td>
+                        <x-table.td>Measures the extent to which personnel are trained in cybersecurity best
+                            practices.</x-table.td>
+                        <x-table.td>Quarterly (NCA-ECC-1-10-3)</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Cybersecurity Governance Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>SIEM (Security Information and Event Management)</td>
-                        <td>Provides real-time analysis and reporting of security alerts.</td>
-                        <td>NCA Controls</td>
+                        <x-table.td>SIEM (Security Information and Event Management)</x-table.td>
+                        <x-table.td>Provides real-time analysis and reporting of security alerts.</x-table.td>
+                        <x-table.td>NCA Controls</x-table.td>
                     </tr>
                     <tr>
-                        <td>IAM (Identity and Access Management)</td>
-                        <td>Manages user identities and access privileges across systems.</td>
-                        <td>NCA-ECC-1-2-1</td>
+                        <x-table.td>IAM (Identity and Access Management)</x-table.td>
+                        <x-table.td>Manages user identities and access privileges across systems.</x-table.td>
+                        <x-table.td>NCA-ECC-1-2-1</x-table.td>
                     </tr>
                     <tr>
-                        <td>Compliance Management Software</td>
-                        <td>Automates compliance checks and reporting for security frameworks.</td>
-                        <td>NCA Cybersecurity Framework</td>
+                        <x-table.td>Compliance Management Software</x-table.td>
+                        <x-table.td>Automates compliance checks and reporting for security frameworks.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Framework</x-table.td>
                     </tr>
                     <tr>
-                        <td>Risk Management Tools</td>
-                        <td>Assists in identifying, assessing, and mitigating cybersecurity risks.</td>
-                        <td>NCA Risk Management</td>
+                        <x-table.td>Risk Management Tools</x-table.td>
+                        <x-table.td>Assists in identifying, assessing, and mitigating cybersecurity risks.</x-table.td>
+                        <x-table.td>NCA Risk Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Endpoint Security Solutions</td>
-                        <td>Provides protection against threats on individual devices.</td>
-                        <td>NCA Cybersecurity Defense</td>
+                        <x-table.td>Endpoint Security Solutions</x-table.td>
+                        <x-table.td>Provides protection against threats on individual devices.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Defense</x-table.td>
                     </tr>
                     <tr>
-                        <td>Backup and Recovery Tools</td>
-                        <td>Ensures secure data backup and recovery processes.</td>
-                        <td>NCA Cybersecurity Defense</td>
+                        <x-table.td>Backup and Recovery Tools</x-table.td>
+                        <x-table.td>Ensures secure data backup and recovery processes.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Defense</x-table.td>
                     </tr>
                     <tr>
-                        <td>Vulnerability Scanners</td>
-                        <td>Detects weaknesses in systems that could be exploited.</td>
-                        <td>NCA Vulnerability Management</td>
+                        <x-table.td>Vulnerability Scanners</x-table.td>
+                        <x-table.td>Detects weaknesses in systems that could be exploited.</x-table.td>
+                        <x-table.td>NCA Vulnerability Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Threat Intelligence Platforms</td>
-                        <td>Monitors and provides insights into emerging security threats.</td>
-                        <td>NCA Cybersecurity Resilience</td>
+                        <x-table.td>Threat Intelligence Platforms</x-table.td>
+                        <x-table.td>Monitors and provides insights into emerging security threats.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Resilience</x-table.td>
                     </tr>
                     <tr>
-                        <td>Data Loss Prevention (DLP)</td>
-                        <td>Prevents unauthorized access to or sharing of sensitive data.</td>
-                        <td>NCA Data Cybersecurity</td>
+                        <x-table.td>Data Loss Prevention (DLP)</x-table.td>
+                        <x-table.td>Prevents unauthorized access to or sharing of sensitive data.</x-table.td>
+                        <x-table.td>NCA Data Cybersecurity</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cloud Security Solutions</td>
-                        <td>Secures cloud infrastructure and services.</td>
-                        <td>NCA Cloud Cybersecurity Controls</td>
+                        <x-table.td>Cloud Security Solutions</x-table.td>
+                        <x-table.td>Secures cloud infrastructure and services.</x-table.td>
+                        <x-table.td>NCA Cloud Cybersecurity Controls</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>Cybersecurity governance is the cornerstone of any organization's approach to mitigating risks, ensuring
                 compliance, and maintaining a secure operational environment. The combination of strategic planning,

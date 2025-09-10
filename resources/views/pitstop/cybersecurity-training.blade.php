@@ -73,104 +73,101 @@
             </p>
 
             <h3>3. Key Performance Indicators (KPIs) in Cybersecurity Training</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="KPI Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Frequency" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>KPI Name</th>
-                        <th>Description</th>
-                        <th>Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Training Completion Rate</td>
-                        <td>Percentage of employees who completed assigned cybersecurity training.</td>
-                        <td>Quarterly (NCA-ECC-1-10-3)</td>
+                        <x-table.td>Training Completion Rate</x-table.td>
+                        <x-table.td>Percentage of employees who completed assigned cybersecurity training.</x-table.td>
+                        <x-table.td>Quarterly (NCA-ECC-1-10-3)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Phishing Simulation Success Rate</td>
-                        <td>Percentage of employees who correctly identify and report phishing emails.</td>
-                        <td>Bi-Annually (NCA Awareness)</td>
+                        <x-table.td>Phishing Simulation Success Rate</x-table.td>
+                        <x-table.td>Percentage of employees who correctly identify and report phishing emails.</x-table.td>
+                        <x-table.td>Bi-Annually (NCA Awareness)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cybersecurity Knowledge Retention</td>
-                        <td>Measures how well employees retain knowledge through post-training assessments.</td>
-                        <td>Annually (NCA Training)</td>
+                        <x-table.td>Cybersecurity Knowledge Retention</x-table.td>
+                        <x-table.td>Measures how well employees retain knowledge through post-training
+                            assessments.</x-table.td>
+                        <x-table.td>Annually (NCA Training)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Incident Response Readiness Score</td>
-                        <td>Assesses the preparedness of employees in handling cybersecurity incidents.</td>
-                        <td>Bi-Annually (NCA Incident Mgmt)</td>
+                        <x-table.td>Incident Response Readiness Score</x-table.td>
+                        <x-table.td>Assesses the preparedness of employees in handling cybersecurity incidents.</x-table.td>
+                        <x-table.td>Bi-Annually (NCA Incident Mgmt)</x-table.td>
                     </tr>
                     <tr>
-                        <td>Compliance with Security Policies</td>
-                        <td>Percentage of employees adhering to cybersecurity policies after training.</td>
-                        <td>Annually (NCA Compliance Mgmt)</td>
+                        <x-table.td>Compliance with Security Policies</x-table.td>
+                        <x-table.td>Percentage of employees adhering to cybersecurity policies after training.</x-table.td>
+                        <x-table.td>Annually (NCA Compliance Mgmt)</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>4. Cybersecurity Training Products</h3>
-            <table>
-                <thead>
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="Product Name" />
+                    <x-table.th label="Description" />
+                    <x-table.th label="Relevant Standard" />
+                </x-table.thead>
+                <x-table.tbody>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Relevant Standard</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Learning Management Systems (LMS)</td>
-                        <td>Provides structured cybersecurity training programs.</td>
-                        <td>NCA Cybersecurity Awareness</td>
+                        <x-table.td>Learning Management Systems (LMS)</x-table.td>
+                        <x-table.td>Provides structured cybersecurity training programs.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Awareness</x-table.td>
                     </tr>
                     <tr>
-                        <td>Cybersecurity Simulation Platforms</td>
-                        <td>Simulates real-world security threats to train employees.</td>
-                        <td>NCA Threat Management</td>
+                        <x-table.td>Cybersecurity Simulation Platforms</x-table.td>
+                        <x-table.td>Simulates real-world security threats to train employees.</x-table.td>
+                        <x-table.td>NCA Threat Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Phishing Awareness Tools</td>
-                        <td>Conducts phishing attack simulations to test employee response.</td>
-                        <td>NCA Email Security</td>
+                        <x-table.td>Phishing Awareness Tools</x-table.td>
+                        <x-table.td>Conducts phishing attack simulations to test employee response.</x-table.td>
+                        <x-table.td>NCA Email Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>AI-Powered Adaptive Training</td>
-                        <td>Customizes training based on user performance and risk profile.</td>
-                        <td>NCA Cybersecurity Training</td>
+                        <x-table.td>AI-Powered Adaptive Training</x-table.td>
+                        <x-table.td>Customizes training based on user performance and risk profile.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Training</x-table.td>
                     </tr>
                     <tr>
-                        <td>Virtual Cyber Ranges</td>
-                        <td>Provides hands-on exercises for cybersecurity professionals.</td>
-                        <td>NCA Incident Response</td>
+                        <x-table.td>Virtual Cyber Ranges</x-table.td>
+                        <x-table.td>Provides hands-on exercises for cybersecurity professionals.</x-table.td>
+                        <x-table.td>NCA Incident Response</x-table.td>
                     </tr>
                     <tr>
-                        <td>Role-Based Security Training</td>
-                        <td>Tailors security training to specific job roles and responsibilities.</td>
-                        <td>NCA Cybersecurity Governance</td>
+                        <x-table.td>Role-Based Security Training</x-table.td>
+                        <x-table.td>Tailors security training to specific job roles and responsibilities.</x-table.td>
+                        <x-table.td>NCA Cybersecurity Governance</x-table.td>
                     </tr>
                     <tr>
-                        <td>Secure Coding Training Tools</td>
-                        <td>Educates developers on secure software development practices.</td>
-                        <td>NCA Application Security</td>
+                        <x-table.td>Secure Coding Training Tools</x-table.td>
+                        <x-table.td>Educates developers on secure software development practices.</x-table.td>
+                        <x-table.td>NCA Application Security</x-table.td>
                     </tr>
                     <tr>
-                        <td>Incident Response Training Platforms</td>
-                        <td>Trains IT teams on handling security incidents effectively.</td>
-                        <td>NCA Incident Management</td>
+                        <x-table.td>Incident Response Training Platforms</x-table.td>
+                        <x-table.td>Trains IT teams on handling security incidents effectively.</x-table.td>
+                        <x-table.td>NCA Incident Management</x-table.td>
                     </tr>
                     <tr>
-                        <td>Security Awareness Gamification</td>
-                        <td>Uses games and challenges to reinforce cybersecurity concepts.</td>
-                        <td>NCA Employee Engagement</td>
+                        <x-table.td>Security Awareness Gamification</x-table.td>
+                        <x-table.td>Uses games and challenges to reinforce cybersecurity concepts.</x-table.td>
+                        <x-table.td>NCA Employee Engagement</x-table.td>
                     </tr>
                     <tr>
-                        <td>Social Engineering Defense Training</td>
-                        <td>Educates employees on preventing social engineering attacks.</td>
-                        <td>NCA Social Engineering Defense</td>
+                        <x-table.td>Social Engineering Defense Training</x-table.td>
+                        <x-table.td>Educates employees on preventing social engineering attacks.</x-table.td>
+                        <x-table.td>NCA Social Engineering Defense</x-table.td>
                     </tr>
-                </tbody>
-            </table>
+                </x-table.tbody>
+            </x-table.table>
             <h3>5. Summary</h3>
             <p>Cybersecurity training is a crucial component of an organization's defense strategy, ensuring that employees
                 and
