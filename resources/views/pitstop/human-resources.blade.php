@@ -1,4 +1,4 @@
-@extends('layouts.process')
+@extends('layouts.pitstop')
 @section('title', 'Human Resource')
 @section('content')
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">

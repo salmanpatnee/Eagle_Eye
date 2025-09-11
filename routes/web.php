@@ -634,7 +634,6 @@ Route::middleware(['auth'])->group(function () {
         Route::view('/electronic-banking', 'pitstop/electronic-banking')->name('pitstop.banking');
         Route::view('/cybersecurity-event-management', 'pitstop/cybersecurity-event-management')->name('pitstop.event');
         Route::view('/cybersecurity-incident-management', 'pitstop/cybersecurity-incident-management')->name('pitstop.incident');
-
         Route::view('/threat-management', 'pitstop/threat-management')->name('pitstop.threat');
         Route::view('/vulnerability-management', 'pitstop/vulnerability-management')->name('pitstop.vulnerability');
         Route::view('/contract-and-vendor', 'pitstop/contract-and-vendor')->name('pitstop.contract');

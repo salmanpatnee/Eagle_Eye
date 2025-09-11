@@ -1,4 +1,4 @@
-@extends('layouts.process')
+@extends('layouts.pitstop')
 @section('title', 'Cybersecurity Roles and Responsibilities')
 @section('content')
 

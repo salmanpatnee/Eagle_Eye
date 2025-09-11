@@ -1,4 +1,4 @@
-@extends('layouts.ciso-full')
+@extends('layouts.pitstop-full')
 @section('title', 'Cybersecurity Induction Program')
 @section('title_ar', 'البرنامج التعريفي للأمن السيبراني')
 @section('content')
