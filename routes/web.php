@@ -3,29 +3,12 @@
 use App\Http\Controllers\ArtifactAttachmentController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExpertController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ExpertOrganizationController;
-use App\Http\Controllers\IndustryController;
-use App\Http\Controllers\ExpertRoleController;
-use App\Http\Controllers\ExpertiesController;
-use App\Http\Controllers\ExpertEducationController;
-use App\Http\Controllers\ExpertCertificationController;
 use App\Http\Controllers\ArtifactController;
 use App\Http\Controllers\ControlAssessmentController;
 use App\Http\Controllers\ControlAssessmentFindingController;
 use App\Http\Controllers\RiskAssessmentController;
 use App\Http\Controllers\RiskAssessmentFindingController;
-use App\Http\Controllers\MainDashboardController;
-use App\Http\Controllers\NcaEccAssessmentController;
-use App\Http\Controllers\NcsCsccIdentificationController;
-use App\Http\Controllers\NcaCsccAssessmentController;
-use App\Http\Controllers\NcaCccTenantsController;
-use App\Http\Controllers\NcaCccProviderController;
-use App\Http\Controllers\NcaTccAssessmentController;
-use App\Http\Controllers\NcaOsmaccIdentificationController;
-use App\Http\Controllers\NcaOsmaccAssessmentController;
-use App\Http\Controllers\NcaDccAssessmentController;
 use App\Http\Controllers\MisReportsController;
 use App\Http\Controllers\RiskTreatmentController;
 use App\Http\Controllers\RiskAssetGroupTableController;
@@ -78,8 +61,6 @@ use App\Http\Controllers\ThreatAgentRatingController;
 use App\Http\Controllers\ThreatAgentTypeController;
 use App\Http\Controllers\ThreatAgentVectorController;
 use App\Http\Controllers\VaMasterController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RCDBController;
 use App\Http\Controllers\RiskRegisterController;
 use App\Http\Controllers\RegulatoryExcelReportController;
 use App\Http\Controllers\RegulatorySummaryReportController;
@@ -99,7 +80,6 @@ use App\Http\Controllers\KPIStandardController;
 use App\Http\Controllers\KPIStandardReportController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ObjectivesController;
-use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\PatchController;
 use App\Http\Controllers\PenTestController;
 use App\Http\Controllers\PenTestDashboardController;
@@ -116,8 +96,32 @@ use App\Http\Controllers\RiskStatusController;
 use App\Http\Controllers\ThirdPartyController;
 use App\Http\Controllers\TPTExpertsControl;
 use App\Http\Controllers\VulnerabilityRegisterController;
-use App\Models\ControlMaster;
-use Illuminate\Support\Facades\DB;
+// use App\Http\Controllers\OptionsController;
+
+
+/*
+// ------------------THIS NEEDS TO BE DELETED-------------------------
+use App\Http\Controllers\ExpertController;
+use App\Http\Controllers\ExpertOrganizationController;
+use App\Http\Controllers\IndustryController;
+use App\Http\Controllers\ExpertRoleController;
+use App\Http\Controllers\ExpertiesController;
+use App\Http\Controllers\ExpertEducationController;
+use App\Http\Controllers\ExpertCertificationController;
+use App\Http\Controllers\MainDashboardController;
+use App\Http\Controllers\NcaEccAssessmentController;
+use App\Http\Controllers\NcsCsccIdentificationController;
+use App\Http\Controllers\NcaCsccAssessmentController;
+use App\Http\Controllers\NcaCccTenantsController;
+use App\Http\Controllers\NcaCccProviderController;
+use App\Http\Controllers\NcaTccAssessmentController;
+use App\Http\Controllers\NcaOsmaccIdentificationController;
+use App\Http\Controllers\NcaOsmaccAssessmentController;
+use App\Http\Controllers\NcaDccAssessmentController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RCDBController;
+*/
+
 
 Route::middleware(['guest'])->group(function () {
 
@@ -161,8 +165,6 @@ Route::middleware(['auth'])->group(function () {
     // Custodian Data Uploader
     Route::get('/upload-custodians', [DataUploaderController::class, 'createCustodian'])->name('upload.custodians.create');
     Route::post('/upload-custodians', [DataUploaderController::class, 'uploadCustodian'])->name('upload.custodians.store');
-
-
 
     // ------------------- ASSET REGISTRATION -------------------
 
@@ -381,6 +383,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/va-pen-test-level-status/{penTest:va_pt_test_id}', 'levelStatus')->name('pen-test-level-status');
     });
 
+    Route::get('/pen-test-generate-ppt/{va_pt_test_id}', [PresentationController::class, 'generatePenTestChart'])->name('pen-test.generate.ppt');
+
     // ------------REPORTING--------------
 
     Route::controller(KPICategoryController::class)->group(function () {
@@ -401,6 +405,30 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/osmacc-regulatory-report', 'osmacc')->name('osmacc-regulatory-report.show');
         Route::get('/dcc-regulatory-report', 'dcc')->name('dcc-regulatory-report.show');
         Route::get('/sama-regulatory-report', 'sama')->name('sama-regulatory-report.show');
+    });
+
+    // TODO
+    Route::controller(RegulatorySummaryReportController::class)->group(function () {
+        Route::get('/ecc-regulatory-summary', 'eccsummaryreport')->name('ecc-regulatory-summary.show');
+        Route::get('/cscc-regulatory-summary', 'csccsummaryreport')->name('cscc-regulatory-summary.show');
+        Route::get('/ccc-regulatory-summary', 'cccsummaryreport')->name('ccc-regulatory-summary.show');
+        Route::get('/tcc-regulatory-summary', 'tccsummaryreport')->name('tcc-regulatory-summary.show');
+        Route::get('/osmacc-regulatory-summary', 'Osmaccsummaryreport')->name('osmacc-regulatory-summary.show');
+        Route::get('/dcc-regulatory-summary', 'Dccsummaryreport')->name('dcc-regulatory-summary.show');
+    });
+
+    // TODO
+    Route::controller(RegulatoryExcelReportController::class)->group(function () {
+        Route::get('/ecc-regulatory-report-downloads', 'ccc')->name('ecc-regulatory-report.download');
+
+        Route::get('/ecc-regulatory-report-excel', 'ecc')->name('ecc-regulatory-report.excel');
+        Route::get('/ecc-2024-regulatory-report-excel', 'downloadEcc2024ExcelReport')->name('ecc-2024-regulatory-report.excel');
+        Route::get('/cscc-regulatory-report-excel', 'downloadCsccExcelReport')->name('cscc-regulatory-report.excel');
+        Route::get('/ccc-regulatory-report-excel', 'downloadCccExcelReport')->name('ccc-regulatory-report.excel');
+        Route::get('/tcc-regulatory-report-excel', 'downloadTccExcelReport')->name('tcc-regulatory-report.excel');
+        Route::get('/osmacc-regulatory-report-excel', 'downloadOsmaccExcelReport')->name('osmacc-regulatory-report.excel');
+        Route::get('/dcc-regulatory-report-excel', 'downloadDccExcelReport')->name('dcc-regulatory-report.excel');
+        Route::get('/sama-regulatory-report-excel', 'sama')->name('sama-regulatory-report.excel');
     });
 
     Route::view('/mis-reporting', 'process/reporting/mis-reporting')->name('mis-report.index');
@@ -481,6 +509,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/sama-maturity-level/{level}', 'samaMaturityLevel');
         Route::get('/sama-maturity-level-details/{level}', 'samaMaturityLevelDetails');
     });
+
+    Route::get('/generate-ppt', [PresentationController::class, 'generateChart'])->name('generate.ppt');
+
     Route::view('/frameworks', 'process/framework')->name('frameworks');
 
 
@@ -509,6 +540,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
     Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
 
+    // ------------------CISO 360-------------------------
 
     Route::prefix('ciso')->group(function () {
 
@@ -604,7 +636,7 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    // ------------------Pitstop-------------------------
+    // ------------------PITSTOP-------------------------
 
     Route::get('/pitstop', PitstopController::class)->name('pitstop.index');
 
@@ -643,28 +675,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-// Route::get('/insert-record', function () {
-//     $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->where('control_id', 'LIKE', 'NCA-DCC-3-1owner-controls/1-1.STRG-OWNR?status=null%')->get()->pluck('control_id');
-//     // $controlIds = ControlMaster::where('control_reference', 'NCA-DCC')->get()->pluck('control_id');
-//     // return $controlIds;
-
-//     foreach ($controlIds as $controlId) {
-//         // DB::table('control_master_table_vs_custodian_role_table')->insert([
-//         //     'control_id' => $controlId,
-//         //     'custodian_id' => '1-2.MNGT-CSTD'
-//         // ]);
-
-//         DB::table('control_master_table_vs_custodian_role_table')
-//             ->where('control_id', $controlId)
-//             ->update([
-//                 'custodian_id' => '3-1.BCM-CSTD'
-//             ]);
-//     }
-//     return "Done";
-//     return $controlIds;
-// });
-
-
+/* 
+// ------------------THIS NEEDS TO BE DELETED-------------------------
 
 Route::middleware(['auth'])->group(function () {
 
@@ -673,8 +685,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/people', 'index')->name('experts.index');
         Route::get('/expert-input', 'view');
         Route::post('/expert-input/post', 'store');
-        // Route::delete('/risk-identification/delete', 'delete')->name('delete.riskident');
-        // Route::get('/risk-identification-table/{risk_id}', 'show');
     });
 
     // Organization
@@ -691,7 +701,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // ------------Industry---------------
-
     Route::controller(IndustryController::class)->group(function () {
         Route::post('/expert-industry-input/post', 'store');
         Route::get('/expert-industry-list', 'index');
@@ -699,16 +708,11 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/expert-industry/delete', 'delete')->name('delete.industry');
     });
 
-
     Route::get('/expert-industry-input', function () {
         return view('3-People/7-IndustryInput');
     });
 
-
     // ------------Expert Role---------------
-
-
-
     Route::controller(ExpertRoleController::class)->group(function () {
         Route::post('/expert-role-input/post', 'store');
         Route::get('/expert-role-list', 'index');
@@ -716,18 +720,11 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/expert-role/delete', 'delete')->name('delete.role');
     });
 
-
     Route::get('/expert-role-input', function () {
         return view('3-People/3-ExpertRoleInput');
     });
 
-
-
-
     // ------------Expertise---------------
-
-
-
     Route::controller(ExpertiesController::class)->group(function () {
         Route::post('/expert-expertise-input/post', 'store');
         Route::get('/expert-expertise-list', 'index');
@@ -735,16 +732,12 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/expert-expertise/delete', 'delete')->name('delete.expertise');
     });
 
-
     Route::get('/expert-expertise-input', function () {
         return view('3-People/4-ExpertExpertiesInput');
     });
 
 
     // ------------Education---------------
-
-
-
     Route::controller(ExpertEducationController::class)->group(function () {
         Route::post('/expert-education-input/post', 'store');
         Route::get('/expert-education-list', 'index');
@@ -752,23 +745,17 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/expert-education/delete', 'delete')->name('delete.education');
     });
 
-
     Route::get('/expert-education-input', function () {
         return view('3-People/5-ExpertEducationInput');
     });
 
-
     // ------------Education---------------
-
-
-
     Route::controller(ExpertCertificationController::class)->group(function () {
         Route::post('/expert-certification-input/post', 'store');
         Route::get('/expert-certification-list', 'index');
         Route::get('/expert-certification-table/{certification_id}', 'show');
         Route::delete('/expert-certification/delete', 'delete')->name('delete.certification');
     });
-
 
     Route::get('/expert-certification-input', function () {
         return view('3-People/6-ExpertCertificationInput');
@@ -778,9 +765,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/domain-vs-control-dashboard', [DashboardController::class, 'domainControllersReport'])->name('domain-vs-control-dashboard');
     Route::get('/control-vs-risk-dashboard', [DashboardController::class, 'controlRisksReport'])->name('control-vs-risk-dashboard');
     Route::get('/risk-vs-asset-dashboard', [DashboardController::class, 'riskAssetsReport'])->name('risk-vs-asset-dashboard');
-
-
-
 
     Route::controller(RCDBController::class)->group(function () {
         Route::get('/risk-complaince-dashboard', 'index')->name('risk-compliance.index');
@@ -808,55 +792,17 @@ Route::middleware(['auth'])->group(function () {
         return view('process/18-Reporting/3-Dashboard/9-OCDCSICS');
     });
 
-
     // End of Show Dashboard
-
-
     Route::controller(MainDashboardController::class)->group(function () {
         Route::get('/dashboard-one', 'getRecordCount');
         Route::post('/dashboard-one', 'getRecordCount')->name('dashboardCount');
     });
 
-
-
     // Regulatory Reports New
-
     Route::get('/regulatory-reports', function () {
 
         return view('process/18-Reporting/1-RegulatoryReportsNew/1-RegulatoryReport');
     });
-
-    Route::controller(RegulatorySummaryReportController::class)->group(function () {
-        Route::get('/ecc-regulatory-summary', 'eccsummaryreport')->name('ecc-regulatory-summary.show');
-        Route::get('/cscc-regulatory-summary', 'csccsummaryreport')->name('cscc-regulatory-summary.show');
-        Route::get('/ccc-regulatory-summary', 'cccsummaryreport')->name('ccc-regulatory-summary.show');
-        Route::get('/tcc-regulatory-summary', 'tccsummaryreport')->name('tcc-regulatory-summary.show');
-        Route::get('/osmacc-regulatory-summary', 'Osmaccsummaryreport')->name('osmacc-regulatory-summary.show');
-        Route::get('/dcc-regulatory-summary', 'Dccsummaryreport')->name('dcc-regulatory-summary.show');
-    });
-
-
-
-
-    // Regulatory Report Detail
-
-    Route::controller(RegulatoryExcelReportController::class)->group(function () {
-        Route::get('/ecc-regulatory-report-downloads', 'ccc')->name('ecc-regulatory-report.download');
-
-        Route::get('/ecc-regulatory-report-excel', 'ecc')->name('ecc-regulatory-report.excel');
-        Route::get('/ecc-2024-regulatory-report-excel', 'downloadEcc2024ExcelReport')->name('ecc-2024-regulatory-report.excel');
-        Route::get('/cscc-regulatory-report-excel', 'downloadCsccExcelReport')->name('cscc-regulatory-report.excel');
-        Route::get('/ccc-regulatory-report-excel', 'downloadCccExcelReport')->name('ccc-regulatory-report.excel');
-        Route::get('/tcc-regulatory-report-excel', 'downloadTccExcelReport')->name('tcc-regulatory-report.excel');
-        Route::get('/osmacc-regulatory-report-excel', 'downloadOsmaccExcelReport')->name('osmacc-regulatory-report.excel');
-        Route::get('/dcc-regulatory-report-excel', 'downloadDccExcelReport')->name('dcc-regulatory-report.excel');
-        Route::get('/sama-regulatory-report-excel', 'sama')->name('sama-regulatory-report.excel');
-    });
-
-
-
-
-
 
     Route::get('/personal-data-frameworks', function () {
         return view('process/PdplFramework');
@@ -864,8 +810,6 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Reporting
-
-
 
     Route::controller(NcaEccAssessmentController::class)->group(function () {
         Route::get('/nca-ecc-assessment', 'index');
@@ -883,45 +827,31 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/nca-cscc-assessment/{id}', 'show')->name('nca.cscc.show');
     });
 
-
     Route::controller(NcaCccTenantsController::class)->group(function () {
         Route::get('/nca-css-tenants', 'index');
     });
 
-
     Route::controller(NcaCccProviderController::class)->group(function () {
         Route::get('/nca-ccc-providers', 'index');
     });
-
 
     Route::controller(NcaTccAssessmentController::class)->group(function () {
         Route::get('/nca-tcc-assessment', 'index');
         Route::get('/nca-tcc-assessment/{id}', 'show')->name('nca.tcc.show');
     });
 
-
     Route::controller(NcaOsmaccIdentificationController::class)->group(function () {
         Route::get('/nca-osmacc-identification', 'index');
     });
-
-
 
     Route::controller(NcaOsmaccAssessmentController::class)->group(function () {
         Route::get('/nca-osmacc-assessment', 'index');
         Route::get('/nca-osmacc-assessment/{id}', 'show')->name('nca.osmacc.show');
     });
 
-
     Route::controller(NcaDccAssessmentController::class)->group(function () {
         Route::get('/nca-dcc-assessment', 'index');
         Route::get('/nca-dcc-assessment/{id}', 'show')->name('nca.dcc.show');
     });
-
-
-    // ------------------MIS Reports-------------------------
-
 });
-
-
-Route::get('/generate-ppt', [PresentationController::class, 'generateChart'])->name('generate.ppt');
-Route::get('/pen-test-generate-ppt/{va_pt_test_id}', [PresentationController::class, 'generatePenTestChart'])->name('pen-test.generate.ppt');
+*/

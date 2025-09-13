@@ -71,6 +71,7 @@ class RegulatorySummaryReportController extends Controller
 
         return $report;
     }
+
     public function eccsummaryreport(Request $request)
     {
         $controlAssessmentId = $request->input('controlAssessmentId') ?? null;

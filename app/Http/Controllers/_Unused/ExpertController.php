@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Certification;
-use App\Models\Education;
-use App\Models\Expert;
 use App\Models\Experties;
 use App\Models\Industry;
 use App\Models\Organization;
+
+use App\Models\Certification;
+use App\Models\Education;
+use App\Models\Expert;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,7 @@ class ExpertController extends Controller
         $roles          = Role::select('id', 'expert_role_id', 'expert_role_name')->orderBy('expert_role_name')->get();
 
         return Expert::all();
-        
+
         $experts = Expert::orderBy('expert_experties_id')
             ->with(
                 ['educations', 'certifications', 'experties', 'roles']
