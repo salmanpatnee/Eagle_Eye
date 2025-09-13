@@ -57,7 +57,8 @@
                                     <a href="{{ route('owners.show', $risk->oid) }}">{{ $risk->owner_name }}</a>
                                 </x-table.td>
                                 <x-table.td>{!! $risk->custodians !!}</x-table.td>
-                                <x-table.td><a href="{{ route('risk-controls.show', $risk->risk_id) }}">View
+                                <x-table.td>
+                                    <a href="{{ route('risk-controls.show', $risk->risk_id) }}">View
                                         Controls</a>
                                 </x-table.td>
                             </tr>

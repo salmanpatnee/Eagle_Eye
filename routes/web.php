@@ -90,6 +90,7 @@ use App\Http\Controllers\PresentationController;
 use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\RCDBController;
 use App\Http\Controllers\RegulatoryReportController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\RiskStatusController;
@@ -510,6 +511,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/sama-maturity-level-details/{level}', 'samaMaturityLevelDetails');
     });
 
+    Route::controller(RCDBController::class)->group(function () {
+        Route::get('/risk-complaince-dashboard', 'index')->name('risk-compliance.index');
+        Route::get('/risk-owner/{owner:owner_role_id}', 'show')->name('risk-owner.show');
+        Route::get('/risk-controls/{risk:risk_id}', 'riskControls')->name('risk-controls.show');
+    });
+
     Route::get('/generate-ppt', [PresentationController::class, 'generateChart'])->name('generate.ppt');
 
     Route::view('/frameworks', 'process/framework')->name('frameworks');
@@ -766,11 +773,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/control-vs-risk-dashboard', [DashboardController::class, 'controlRisksReport'])->name('control-vs-risk-dashboard');
     Route::get('/risk-vs-asset-dashboard', [DashboardController::class, 'riskAssetsReport'])->name('risk-vs-asset-dashboard');
 
-    Route::controller(RCDBController::class)->group(function () {
-        Route::get('/risk-complaince-dashboard', 'index')->name('risk-compliance.index');
-        Route::get('/risk-owner/{owner:owner_role_id}', 'show')->name('risk-owner.show');
-        Route::get('/risk-controls/{risk:risk_id}', 'riskControls')->name('risk-controls.show');
-    });
+    
 
     Route::get('/cs-strategy-dashboard', function () {
         return view('process/18-Reporting/3-Dashboard/5-OCDCSGOV');

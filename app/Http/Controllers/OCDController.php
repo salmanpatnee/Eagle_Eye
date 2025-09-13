@@ -556,7 +556,7 @@ class OCDController extends Controller
                 DB::raw('COUNT(CASE WHEN la.implementation_status = "Open" OR la.implementation_status IS NULL THEN 1 END) AS open_risks')
             )
             ->where('s.main_domain_id', $domainId)
-            ->groupBy('s.sub_domain_id', 'S.sub_domain_name')
+            ->groupBy('s.sub_domain_id', 's.sub_domain_name')
             ->get();
 
 
