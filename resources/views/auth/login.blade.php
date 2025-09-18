@@ -92,7 +92,7 @@
                     <img src="{{ asset('Images/shape/grid-01.svg') }}" alt="grid" />
                 </div>
                 <div class="flex flex-col items-center max-w-xs">
-                    <a href="{{ route('home') }}" class="block mb-4">
+                    <a href="{{ route('welcome') }}" class="block mb-4">
                         <img src="{{ asset('Images/logo/EagleEyeLogo.png') }}" class="w-40" alt="Logo" />
                     </a>
                     <p

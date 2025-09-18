@@ -14,7 +14,7 @@ class ProcessResourceController extends Controller
             $query->where('resource_type', 'checklist');
         }]);
 
-        return view('ciso/process/resources/checklist', compact('processWithChecklist'));
+        return view('iso/process/resources/checklist', compact('processWithChecklist'));
     }
 
     public function videos(Process $process)
@@ -25,7 +25,7 @@ class ProcessResourceController extends Controller
 
         // return $processWithVideos;
 
-        return view('ciso/process/resources/videos', compact('processWithVideos'));
+        return view('iso/process/resources/videos', compact('processWithVideos'));
     }
 
     public function stream(Resource $resource)
@@ -58,14 +58,14 @@ class ProcessResourceController extends Controller
             $query->where('resource_type', 'template');
         }]);
 
-        return view('ciso/process/resources/template', compact('processWithTemplates'));
+        return view('iso/process/resources/template', compact('processWithTemplates'));
     }
 
     public function pdfTemplate(Resource $resource)
     {
 
         $resource->load('resourceable');
-        return view('ciso/process/resources/template-pdf', compact('resource'));
+        return view('iso/process/resources/template-pdf', compact('resource'));
     }
 
     public function glossary(Process $process)
@@ -74,7 +74,7 @@ class ProcessResourceController extends Controller
             $query->where('resource_type', 'glossary');
         }]);
 
-        return view('ciso/process/resources/glossary', compact('processWithGlossary'));
+        return view('iso/process/resources/glossary', compact('processWithGlossary'));
     }
 
     public function destroy(Resource $resource)

@@ -22,7 +22,7 @@
                         <x-table.td> <x-table.serial :loop="$loop" :paginator="$departments" /></x-table.td>
                         <x-table.td>{{ $department->department_id }}</x-table.td>
                         <x-table.td>{{ $department->department_name }}</x-table.td>
-                        <x-table.td>{{ $department->location->location_name }}</x-table.td>
+                        <x-table.td>{{ $department?->location?->location_name }}</x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="departments.show" param="{{ $department->id }}" />
                             <x-action.edit route_name="departments.edit" param="{{ $department->id }}" />

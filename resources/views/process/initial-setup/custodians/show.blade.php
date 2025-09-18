@@ -31,7 +31,7 @@
 
             <x-info-row>
                 <x-info-col label="Custodian Role Title" label_ar="عنوان دور الوصي">
-                    {{ $custodian->role->custodian_role_title }}
+                    {{ $custodian?->role?->custodian_role_title }}
                 </x-info-col>
 
 
