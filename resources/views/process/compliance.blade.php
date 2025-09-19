@@ -286,7 +286,7 @@
     <header>
         <div class="header-content" id="header">
             <div>
-                <a href="/home" class="text-white">
+                <a href="/" class="text-white">
                     <i class='bx bx-home'></i>
                 </a>
                 <p class="bold-arbtext">العمليات</p>

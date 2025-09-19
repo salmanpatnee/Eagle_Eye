@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Option;
-use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -23,17 +21,6 @@ class LoginController extends Controller
         if (!auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
                 'username' => 'Your provided credentials could not be verified.'
-            ]);
-        }
-
-        $systemExpiryDate = Option::select('value')->where('key', 'system_expired_at')->first();
-        $todaysDate = Carbon::today();
-
-        // Bypass expiration check if the user is a superadmin (id = 1)
-        if (Carbon::parse($systemExpiryDate->value)->lt($todaysDate) && auth()->user()->id !== 1) {
-            auth()->logout();
-            throw ValidationException::withMessages([
-                'username' => 'Your system trial has expired.'
             ]);
         }
 
