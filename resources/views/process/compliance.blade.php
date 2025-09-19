@@ -337,7 +337,7 @@
         </div>
 
         <!-- ISO 20000 -->
-        @include('process/domain-ISO-27001')
+        @include('process/domain-ISO-22301')
         @include('process/resource-management')
     </div>
 
