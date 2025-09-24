@@ -13,6 +13,6 @@
             </svg>
         </div>
         <p class="text-gray-700 font-medium group-hover:text-brand-700 transition-colors duration-300">
-            Checklist for BCM Manager</p>
+            Checklist for Quality Manager</p>
     </div>
 </a>

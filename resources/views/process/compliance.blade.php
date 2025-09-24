@@ -335,10 +335,11 @@
                 </div>
             </a>
         </div>
+     
+    </div>
+    @include('domain-ISO-9001')
 
-        <!-- ISO 20000 -->
-        @include('process/domain-ISO-22301')
-        @include('process/resource-management')
+    @include('process/resource-management')
     </div>
 
 </body>

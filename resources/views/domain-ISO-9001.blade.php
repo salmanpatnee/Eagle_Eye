@@ -1,201 +1,187 @@
 <div>
     <div class="sectionhead">
-        <p>ISO 22301:Business Continuity Management System (BCMS)</p>
-        <p dir="rtl">ISO 22301: نظام إدارة استمرارية الأعمال </p>
+        <p>ISO 9001: Quality Management System</p>
+        <p dir="rtl">ISO 9001: نظام إدارة الجودة</p>
     </div>
 </div>
 <div class="processes">
-    <a href="{{ route('process.view.show', 'PRC-BCMS-001') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-QMS-001')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
             </div>
             <div class="boxname">
-                <p class="boxarbtext">نطاق نظام إدارة استمرارية الأعمال</p>
+                <p class="boxarbtext">نطاق نظام إدارة الجودة  </p>
                 <div class="seperatorline"></div>
-                <p class="boxengtext">Scope of BCMS</p>
+                <p class="boxengtext">Scope of QMS</p>
             </div>
         </div>
     </a>
-    <a href="{{ route('process.view.show', 'PRC-BCMS-002') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-QMS-002')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
             </div>
             <div class="boxname">
-                <p class="boxarbtext">نظام إدارة استمرارية الأعمال </p>
+                <p class="boxarbtext">نظام إدارة الجودة </p>
                 <div class="seperatorline"></div>
-                <p class="boxengtext">Business Continuity Management System (BCMS)</p>
+                <p class="boxengtext">Quality Management System (QMS)</p>
             </div>
         </div>
     </a>
-    <a href="{{ route('process.view.show', 'PRC-BIA-002') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-QPLC-001')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
             </div>
             <div class="boxname">
-                <p class="boxarbtext">تحليل تأثير الأعمال</p>
+                <p class="boxarbtext">سياسة الجودة</p>
                 <div class="seperatorline"></div>
-                <p class="boxengtext">Business Impact Analysis</p>
-            </div>
-        </div>
-    </a>
-</div>
-<div class="processes">
-    <a href="{{ route('process.view.show', 'PRC-RSKA-001') }}" class="boxhyperlink">
-        <div class="itemprocesses">
-            <div class="boxicon">
-                <i class='bx bxs-label'></i>
-            </div>
-            <div class="boxname">
-                <p class="boxarbtext">منهجية تقييم المخاطر</p>
-                <div class="seperatorline"></div>
-                <p class="boxengtext">Risk Assessment Methodology</p>
-            </div>
-        </div>
-    </a>
-    <a href="{{ route('process.view.show', 'PRC-RSKA-002') }}" class="boxhyperlink">
-        <div class="itemprocesses">
-            <div class="boxicon">
-                <i class='bx bxs-label'></i>
-            </div>
-            <div class="boxname">
-                <p class="boxarbtext">تقييم المخاطر</p>
-                <div class="seperatorline"></div>
-                <p class="boxengtext">Risk Assessment</p>
-            </div>
-        </div>
-    </a>
-    <a href="{{ route('process.view.show', 'PRC-RSKTRT-001') }}" class="boxhyperlink">
-        <div class="itemprocesses">
-            <div class="boxicon">
-                <i class='bx bxs-label'></i>
-            </div>
-            <div class="boxname">
-                <p class="boxarbtext">معالجة المخاطر</p>
-                <div class="seperatorline"></div>
-                <p class="boxengtext">Risk Treatment</p>
+                <p class="boxengtext">Quality Policy</p>
             </div>
         </div>
     </a>
 </div>
 <div class="processes">
-    <a href="{{ route('process.view.show', 'PRC-RSKR-001') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-QOBJ-001')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
             </div>
             <div class="boxname">
-                <p class="boxarbtext">سجل المخاطر</p>
+                <p class="boxarbtext">أهداف الجودة</p>
                 <div class="seperatorline"></div>
-                <p class="boxengtexttwo">Risk Register</p>
+                <p class="boxengtext">Quality Objectives</p>
             </div>
         </div>
     </a>
-    <a href="{{ route('process.view.show', 'PRC-BCSTRG-001') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-QKPI')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
             </div>
             <div class="boxname">
-                <p class="boxarbtext">استراتيجية استمرارية الأعمال</p>
+                <p class="boxarbtext">مؤشرات الأداء الرئيسية للجودة </p>
                 <div class="seperatorline"></div>
-                <p class="boxengtext">Business Continuity Strategy</p>
+                <p class="boxengtext">Quality KPIs</p>
             </div>
         </div>
     </a>
-    <a href="{{ route('process.view.show', 'PRC-CMP-001') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-DUP-001')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
             </div>
             <div class="boxname">
-                <p class="boxarbtext">خطة إدارة الأزمات</p>
+                <p class="boxarbtext">إجراءات وحدات الأقسام</p>
                 <div class="seperatorline"></div>
-                <p class="boxengtext"> Crisis Management Plan</p>
-            </div>
-        </div>
-    </a>
-</div>
-<div class="processes">
-    <a href="{{ route('process.view.show', 'PRC-ERP-001') }}" class="boxhyperlink">
-        <div class="itemprocesses">
-            <div class="boxicon">
-                <i class='bx bxs-label'></i>
-            </div>
-            <div class="boxname">
-                <p class="boxarbtext">خطة الاستجابة للطوارئ</p>
-                <div class="seperatorline"></div>
-                <p class="boxengtext">Emergency Response Plan</p>
-            </div>
-        </div>
-    </a>
-    <a href="{{ route('process.view.show', 'PRC-CAT-001') }}" class="boxhyperlink">
-        <div class="itemprocesses">
-            <div class="boxicon">
-                <i class='bx bxs-label'></i>
-            </div>
-            <div class="boxname">
-                <p class="boxarbtext">شجرة الاتصال</p>
-                <div class="seperatorline"></div>
-                <p class="boxengtext">Call Tree</p>
-            </div>
-        </div>
-    </a>
-    <a href="{{ route('process.view.show', 'PRC-ITDRP-001') }}" class="boxhyperlink">
-        <div class="itemprocesses">
-            <div class="boxicon">
-                <i class='bx bxs-label'></i>
-            </div>
-            <div class="boxname">
-                <p class="boxarbtext">خطة استعادة الكوارث لتكنولوجيا المعلومات</p>
-                <div class="seperatorline"></div>
-                <p class="boxengtext">IT Disaster Recovery Plan</p>
+                <p class="boxengtext">Department Unit Procedures</p>
             </div>
         </div>
     </a>
 </div>
 <div class="processes">
-    <a href="{{ route('process.view.show', 'PRC-BURP-001') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-CCMP-001')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
             </div>
             <div class="boxname">
-                <p class="boxarbtext">خطة استعادة وحدات الأعمال</p>
+                <p class="boxarbtext">إطار إدارة الكفاءات والقدرات</p>
                 <div class="seperatorline"></div>
-                <p class="boxengtext">Business Units Recovery Plan</p>
+                <p class="boxengtexttwo">Competencies and Capability Management Framework</p>
             </div>
         </div>
     </a>
-    <a href="{{ route('process.view.show', 'PRC-TSTP-001') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-TNA-001')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
             </div>
             <div class="boxname">
-                <p class="boxarbtext">خطة الاختبار</p>
+                <p class="boxarbtext">تحليل احتياجات التدريب</p>
                 <div class="seperatorline"></div>
-                <p class="boxengtext">Test Plan</p>
+                <p class="boxengtext">Training Need Analysis</p>
             </div>
         </div>
     </a>
-    <a href="{{ route('process.view.show', 'PRC-TSTR-001') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-TRP-001')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
             </div>
             <div class="boxname">
-                <p class="boxarbtext">تقارير الاختبار</p>
+                <p class="boxarbtext">خطط التدريب</p>
                 <div class="seperatorline"></div>
-                <p class="boxengtext">Test Reports</p>
+                <p class="boxengtext">Training Plans</p>
             </div>
         </div>
     </a>
 </div>
 <div class="processes">
-    <a href="{{ route('process.view.show', 'PRC-INA-001') }}" class="boxhyperlink">
+    <a href="{{route('process.view.show', 'PRC-FMF-001')}}" class="boxhyperlink">
+        <div class="itemprocesses">
+            <div class="boxicon">
+                <i class='bx bxs-label'></i>
+            </div>
+            <div class="boxname">
+                <p class="boxarbtext">إطار إدارة المرافق</p>
+                <div class="seperatorline"></div>
+                <p class="boxengtext">Facility Management Framework</p>
+            </div>
+        </div>
+    </a>
+    <a href="{{route('process.view.show', 'PRC-PMF-001')}}" class="boxhyperlink">
+        <div class="itemprocesses">
+            <div class="boxicon">
+                <i class='bx bxs-label'></i>
+            </div>
+            <div class="boxname">
+                <p class="boxarbtext">إطار إدارة المشتريات</p>
+                <div class="seperatorline"></div>
+                <p class="boxengtext">Procurement Management Framework</p>
+            </div>
+        </div>
+    </a>
+    <a href="{{route('process.view.show', 'PRC-DS-001')}}" class="boxhyperlink">
+        <div class="itemprocesses">
+            <div class="boxicon">
+                <i class='bx bxs-label'></i>
+            </div>
+            <div class="boxname">
+                <p class="boxarbtext">تصميم الخدمة</p>
+                <div class="seperatorline"></div>
+                <p class="boxengtext">Design of Service</p>
+            </div>
+        </div>
+    </a>
+</div>
+<div class="processes">
+    <a href="{{route('process.view.show', 'PRC-DYLS-001')}}" class="boxhyperlink">
+        <div class="itemprocesses">
+            <div class="boxicon">
+                <i class='bx bxs-label'></i>
+            </div>
+            <div class="boxname">
+                <p class="boxarbtext">نشر الخدمات</p>
+                <div class="seperatorline"></div>
+                <p class="boxengtext">Deployment of the Services</p>
+            </div>
+        </div>
+    </a>
+    <a href="{{route('process.view.show', 'PRC-RWS-001')}}" class="boxhyperlink">
+        <div class="itemprocesses">
+            <div class="boxicon">
+                <i class='bx bxs-label'></i>
+            </div>
+            <div class="boxname">
+                <p class="boxarbtext">مراجعة الخدمات</p>
+                <div class="seperatorline"></div>
+                <p class="boxengtext">Review of the Services</p>
+            </div>
+        </div>
+    </a>
+    <a href="{{route('process.view.show', 'PRC-INTA-001')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
@@ -207,7 +193,11 @@
             </div>
         </div>
     </a>
-    <a href="{{ route('process.view.show', 'PRC-MGNTR-001') }}" class="boxhyperlink">
+</div>
+
+<div class="processes">
+    <div class="spacebox"></div>
+    <a href="{{route('process.view.show', 'PRC-MGTR-001')}}" class="boxhyperlink">
         <div class="itemprocesses">
             <div class="boxicon">
                 <i class='bx bxs-label'></i>
@@ -219,10 +209,6 @@
             </div>
         </div>
     </a>
-    <a href="/internal-audit" class="" style="visibility: hidden">
-        <div class="itemprocesses">
-
-        </div>
-    </a>
-
+    <div class="spacebox"></div>
 </div>
+
