@@ -335,10 +335,299 @@
                 </div>
             </a>
         </div>
+        <div>
+            <div class="sectionhead">
+                <p>Golden Bulb Database and MIS</p>
+                <p>قاعدة بيانات المصباح الأزرق ونظام إدارة المعلومات</p>
+            </div>
+        </div>
+    </div>
+    <div class="processes">
+        <a href="#" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">قاعدة بيانات الذكاء الاصطناعي</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Artificial Intelligence Database</p>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">مراجعة و تدقيق الذكاء الاصطناعي</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Artificial Intelligence Review and Audit</p>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">لوحة تحكم الذكاء الاصطناعي</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Artificial Intelligence Dashboard</p>
+                </div>
+            </div>
+        </a>
+    </div>
 
-        <!-- ISO 20000 -->
-        @include('process/domain-ISO-22301')
-        @include('process/resource-management')
+    <div>
+        <div class="sectionhead">
+            <p>Artificial Intelligence System</p>
+            <p>نظام الذكاء الاصطناعي</p>
+        </div>
+    </div>
+    <div class="processes">
+        <a href="{{ route('process.view.show', 'PRC-AIF-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">إطار عمل الذكاء الاصطناعي</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Artificial Intelligence Framework</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('process.view.show', 'PRC-AIS-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">نظام الذكاء الاصطناعي</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Artificial Intelligence System</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('process.view.show', 'PRC-R&R-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">أدوار ومسؤوليات </p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Roles and Responsibilities</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div>
+        <div class="sectionhead">
+            <p>Core Processes</p>
+            <p>العمليات الأساسية</p>
+        </div>
+    </div>
+    <div class="processes">
+
+        <a href="{{ route('process.view.show', 'PRC-OPC-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">أهداف الذكاء الاصطناعي</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Core Process: 8.1 Operation Planning and Control</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ route('process.view.show', 'PRC-AIRSK-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">سياسة الذكاء الاصطناعي</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Core Process: 8.2 AI Risk Assessment</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ route('process.view.show', 'PRC-RSKT-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">استراتيجية الذكاء الاصطناعي</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Core Process: 8.3 AI Risk Treatment</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="processes">
+        <a href="{{ route('process.view.show', 'PRC-AISIA-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">تحديد الفرص</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Core Process: 8.4 AI System Impact Assessment</p>
+                </div>
+            </div>
+        </a>
+
+        {{-- <a href="{{route('innovation-create-concepts')}}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">إنشاء المفاهيم</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Core Process:Create Concepts</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{route('innovation-validate-concepts')}}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">تحقق من المفاهيم</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Core Process:Validate Concepts</p>
+                </div>
+            </div>
+        </a> --}}
+    </div>
+    <div>
+        <div class="sectionhead">
+            <p>Supporting Processes</p>
+            <p>العمليات المساندة</p>
+        </div>
+    </div>
+    <div class="processes">
+        <a href="{{ route('process.view.show', 'PRC-LDR-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">عملية الدعم: القيادة</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Support Process: Leadership</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('process.view.show', 'PRC-PLN-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">عملية الدعم: التخطيط</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Support Process: Planning</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('process.view.show', 'PRC-RMGN-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">عملية الدعم: إدارة الموارد</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Support Process: Resource Management</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="processes">
+        <a href="{{ route('process.view.show', 'PRC-KPI-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">عملية الدعم: التقييم الأداء</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Support Process: Performance Evaluation KPIs</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('process.view.show', 'PRC-CTI-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">عملية الدعم: التحسين المستمر</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">Support Process: Continual Improvement</p>
+                </div>
+            </div>
+        </a>
+        <div class="spacebox"></div>
+    </div>
+    <div>
+        <div class="sectionhead">
+            <p>Artificial Intelligence Resource Center</p>
+            <p>مركز موارد الذكاء الاصطناعي</p>
+        </div>
+    </div>
+    <div class="processes">
+        <a href="{{ route('process.view.show', 'ISO-BRF-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">إحاطة حول ISO 42001</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">ISO 42001 Briefing</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('process.view.show', 'ISO-AUD-001') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">تدقيق ISO 42001</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">ISO 42001 Audit</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('process.view.show', 'ISO-CRF') }}" class="boxhyperlink">
+            <div class="itemprocesses">
+                <div class="boxicon">
+                    <i class='bx bxs-label'></i>
+                </div>
+                <div class="boxname">
+                    <p class="boxarbtext">شهادة ISO 42001</p>
+                    <div class="seperatorline"></div>
+                    <p class="boxengtext">ISO 42001 Certification</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    @include('process/resource-management')
     </div>
 
 </body>
