@@ -42,7 +42,7 @@
 
             </div>
             <div class="flex items-center justify-center gap-5 border-t border-gray-100 p-4">
-                <button class="action-btn text-center justify-center w-20">Filter</button>
+                <button class="action-btn text-center justify-center">Filter Resource</button>
                 {{-- <button class="action-btn-secondary text-center justify-center w-20">
                     <a href="{{ route('hr-expert.index') }}">Reset</a>
                 </button> --}}
