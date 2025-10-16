@@ -146,10 +146,10 @@
                 style="max-width: 250px; width: 100%; height: auto;">
         </div>
         <a href="/login" class="title-button mb-2">
-            <p class="title-line2">مرحبا</p>
-            <p class="title-line2 mb-1">اضغط هنا للدخول</p>
-            <p class="title-line3">Welcome</p>
-            <p class="title-line1">Click here to Enter!</p>
+            {{-- <p class="title-line2"></p> --}}
+            <p class="title-line2 mb-1"> مرحبا اضغط هنا للدخول</p>
+            {{-- <p class="title-line3"></p> --}}
+            <p class="title-line1">Welcome Click here to Enter!</p>
         </a>
     </div>
 

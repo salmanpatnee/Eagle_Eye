@@ -53,7 +53,7 @@ body {
     position: relative;
 }
 
-.page-landing::before {
+/* .page-landing::before {
     content: "";
     position: absolute;
     top: 0;
@@ -62,7 +62,7 @@ body {
     height: 100%;
     background: var(--overlay-bg);
     z-index: 0;
-}
+} */
 
 /* ===== CONTAINER STYLES ===== */
 .container {
