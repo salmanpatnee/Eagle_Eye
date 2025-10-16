@@ -14,16 +14,26 @@
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
                 <x-form.grid-col>
                     <div>
-                        <x-form.select label="Asset" label_ar="الأصول" name="asset" placeholder="Select Asset"
+                        <x-form.multiselect label="Asset" label_ar="الأصول" name="asset[]" :value="$asset"
+                            :data="$assetOptions" id_key="asset_id" value_key="asset_name"/>
+
+                        {{-- <x-form.select label="Asset" label_ar="الأصول" name="asset" placeholder="Select Asset"
                             value="" :data="$assetOptions" id_key="asset_id" value_key="asset_name"
-                            onchange="this.form.submit()" :value="$asset" />
+                            onchange="this.form.submit()" :value="$asset" /> --}}
                     </div>
                     <div>
-                        <x-form.select label="Asset Categories" label_ar="الفئة" name="category"
+                        <x-form.multiselect label="Asset Categories" label_ar="الفئة" name="category[]" :value="$category"
+                        :data="$categories" id_key="category_id" value_key="category_name"/>
+
+                        {{-- <x-form.select label="Asset Categories" label_ar="الفئة" name="category[]"
                             placeholder="Select Category" :value="$category" :data="$categories" id_key="category_id"
-                            value_key="category_name" onchange="this.form.submit()" />
+                            value_key="category_name" onchange="this.form.submit()" /> --}}
                     </div>
                 </x-form.grid-col>
+                <div class="text-center">
+                    <button class="action-btn text-center justify-center">Filter Assets</button>
+                   
+                </div>
             </div>
         </form>
 

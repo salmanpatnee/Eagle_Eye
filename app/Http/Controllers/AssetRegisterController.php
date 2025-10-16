@@ -15,15 +15,17 @@ class AssetRegisterController extends Controller
         $categories = Category::select('category_id', 'category_name')->get();
         $assetOptions = Asset::select('asset_id', 'asset_name')->get();
 
-        $asset = $request->input('asset') ?? null;
-        $category = $request->input('category') ?? null;
+        $asset = $request->input('asset') ?? [];
+        $category = $request->input('category') ?? [];
 
         $assets = Asset::with('categories')
             ->when($asset, function ($query, $asset) {
-                $query->where('asset_id', $asset);
+                if (is_array($asset)) {
+                    $query->whereIn('asset_id', $asset);
+                }
             })->when($category, function ($query, $category) {
                 $query->whereHas('categories', function ($query) use ($category) {
-                    $query->where('category_table.category_id', $category);
+                    $query->whereIn('category_table.category_id', $category);
                 });
             })->paginate(20);
 
