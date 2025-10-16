@@ -51,7 +51,7 @@
                 <x-table.th label="Control ID" label_ar="رمز الضوابط" />
                 <x-table.th label="Control Name" label_ar="اسم الضوابط" />
                 <x-table.th label="Evidences" label_ar="الأدلة" />
-                <x-table.th label="Attachments" label_ar="المرفقات" />
+                <x-table.th label="Artifacts" label_ar="المقتنيات" />
             </x-table.thead>
             <x-table.tbody>
                 @forelse ($controlEvidence as $row)

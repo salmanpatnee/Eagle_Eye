@@ -110,7 +110,7 @@
                         <th
                             style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
                             {{-- <p>المرفقات</p> --}}
-                            <p>Attachments</p>
+                            <p>Artifacts</p>
                         </th>
                     </tr>
                 </thead>
