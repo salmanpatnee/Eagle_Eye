@@ -19,7 +19,7 @@
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Asset ID" label_ar="رمز  الأصول" name="asset_id" required="true" :readonly="$asset?->asset_id"
+                        <x-form.field label="Asset ID" label_ar="رمز الأصول" name="asset_id" required="true" :readonly="$asset?->asset_id"
                             placeholder="Enter Asset ID" :value="$asset?->asset_id" />
                     </div>
                     <div>
@@ -33,7 +33,7 @@
 
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Asset IP Address" label_ar="عنوان IP للأصول" name="asset_ip_address"
+                        <x-form.field label="Asset IP Address" label_ar="العنوان الإلكتروني (IP) للأصول" name="asset_ip_address"
                             placeholder="Enter Asset IP Address" :value="$asset?->asset_ip_address" />
                     </div>
                     <div>

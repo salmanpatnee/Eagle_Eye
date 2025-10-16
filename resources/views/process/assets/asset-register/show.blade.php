@@ -25,7 +25,7 @@
             </x-info-col-lg>
 
             <x-info-row>
-                <x-info-col label="Asset IP Address" label_ar="عنوان IP للأصول">
+                <x-info-col label="Asset IP Address" label_ar="العنوان الإلكتروني (IP) للأصول">
                     {{ $asset->asset_ip_address }}
                 </x-info-col>
                 <x-info-col label="Client Server Name" label_ar="اسم خادم الأصول">
