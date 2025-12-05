@@ -2,16 +2,16 @@
 
 <tr class="bg-light-gray">
     <th>
-        <p>
+        <p class="text-right">
             <span>الهدف</span>
             <br>
             <span>Objectives</span>
         </p>
     </th>
     <th colspan="10" class="text-end">
-        <p>
+        <p class="text-right">
             @if ($info_ar)
-                <span>{{$info_ar}}</span>
+                <span dir="rtl">{{$info_ar}}</span>
                 <br>
             @endif
             <span dir="ltr">{{$info}}</span>

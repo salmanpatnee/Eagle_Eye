@@ -1,6 +1,6 @@
 <tr class="bg-aqua">
     <th colspan="3">
-        <p>
+        <p class="mb-0 mt-0 text-center">
             <span>الضوابط</span>
             <br>
             <span>Controls</span>
@@ -37,7 +37,7 @@
         </p>
     </th>
     <th colspan="2">
-        <p>
+        <p class="text-center">
             <span>مستوى الالتزام</span>
             <br>
             <span>Compliance Level</span>
