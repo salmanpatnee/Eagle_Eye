@@ -9,15 +9,15 @@ This feature will provide administrators with a unified mechanism to import many
 
 ## Technical Context
 
-**Language/Version**: PHP 8.x (Laravel 10.x), JavaScript (Vue 3.x)  
-**Primary Dependencies**: Laravel, Vue 3, Inertia.js, probably Maatwebsite/Laravel-Excel for spreadsheet processing.  
+**Language/Version**: PHP 8.x (Laravel 10.x), JavaScript (Vanilla or Alpine.js for interactivity)  
+**Primary Dependencies**: Laravel, probably Maatwebsite/Laravel-Excel for spreadsheet processing.  
 **Storage**: MySQL  
-**Testing**: PHPUnit (backend), likely Vitest or Jest (frontend).  
-**Target Platform**: Web (Laravel backend, Vue.js frontend).
-**Project Type**: Web Application (Frontend + Backend)  
+**Testing**: PHPUnit (backend).  
+**Target Platform**: Web (Laravel backend).
+**Project Type**: Web Application (Laravel Blade Frontend + Laravel Backend)  
 **Performance Goals**: Administrators can successfully import spreadsheet files with up to 100,000 relationship entries within 10 minutes.  
 **Constraints**:
-- Existing Laravel/Vue/Inertia.js stack.
+- Existing Laravel/Blade stack.
 - Configurable mappings defined via a web interface and stored in the database.
 - Limited to 2-3 concurrent import jobs.
 - Adherence to standard platform security, RBAC, data sanitization/masking (if applicable), and comprehensive audit trails.
@@ -67,19 +67,15 @@ backend/
     ├── Feature/
     └── Unit/
 
-frontend/
-├── resources/
-│   └── js/
-│       ├── Pages/
-│       │   └── Admin/
-│       │       └── ImportManager/ # New Vue component for import UI
-│       └── Components/
-│           └── Common/
-│               └── FileUpload.vue # Reusable file upload component
-└── tests/
+resources/
+├── views/
+│   └── admin/
+│       └── import-manager/     # Blade views for import UI and mapping configuration
+└── js/
+    └── import-manager/         # JavaScript for frontend interactivity (if any)
 ```
 
-**Structure Decision**: The project will follow a Web Application structure, leveraging Laravel for the backend (API, processing, database interactions) and Vue.js/Inertia.js for the frontend (user interface for upload, monitoring, and mapping configuration). New components will be placed under `app/Http/Controllers`, `app/Jobs`, `app/Models`, `app/Services`, `database/migrations` for backend, and `resources/js/Pages/Admin/ImportManager` for the frontend.
+**Structure Decision**: The project will follow a Web Application structure, leveraging Laravel for the backend (API, processing, database interactions) and Laravel Blade for the frontend (user interface for upload, monitoring, and mapping configuration). New components will be placed under `app/Http/Controllers`, `app/Jobs`, `app/Models`, `app/Services`, `database/migrations` for backend, and `resources/views/admin/import-manager` for the frontend Blade views. Any necessary frontend interactivity will be handled with vanilla JavaScript or a lightweight library like Alpine.js in `resources/js/import-manager/`.
 
 ## Complexity Tracking
 
