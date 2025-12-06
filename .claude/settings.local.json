@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan --help:*)",
+      "Bash(php artisan list:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
