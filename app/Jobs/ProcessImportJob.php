@@ -21,20 +21,16 @@ class ProcessImportJob implements ShouldQueue
 
     public $timeout = 600;
 
-    protected string $filePath;
-    protected int $mappingId;
-    protected int $userId;
+    protected ImportJob $importJob;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $filePath, int $mappingId, int $userId)
+    public function __construct(ImportJob $importJob)
     {
-        $this->filePath = $filePath;
-        $this->mappingId = $mappingId;
-        $this->userId = $userId;
+        $this->importJob = $importJob;
     }
 
     /**
@@ -47,30 +43,22 @@ class ProcessImportJob implements ShouldQueue
         ImportValidatorService $validator,
         RelationshipImporterService $importer
     ) {
-        $fileName = basename($this->filePath);
-
-        $importJob = ImportJob::create([
-            'import_mapping_id' => $this->mappingId,
-            'user_id' => $this->userId,
-            'file_path' => $this->filePath,
-            'file_name' => $fileName,
-            'status' => 'processing',
-            'started_at' => now(),
-        ]);
+        // Update job status to 'processing' as soon as the job starts executing
+        $this->importJob->update(['status' => 'processing', 'started_at' => now()]);
 
         Log::channel('import')->info('Import job started', [
-            'job_id' => $importJob->id,
-            'file' => $this->filePath,
-            'mapping_id' => $this->mappingId,
-            'user_id' => $this->userId
+            'job_id' => $this->importJob->id,
+            'file' => $this->importJob->file_path,
+            'mapping_id' => $this->importJob->import_mapping_id,
+            'user_id' => $this->importJob->user_id
         ]);
 
         try {
-            $mapping = ImportMapping::findOrFail($this->mappingId);
+            $mapping = ImportMapping::findOrFail($this->importJob->import_mapping_id);
 
             DB::beginTransaction();
 
-            $rows = $parser->parse($this->filePath);
+            $rows = $parser->parse($this->importJob->file_path);
 
             $validRows = $validator->validate(
                 $rows,
@@ -89,7 +77,7 @@ class ProcessImportJob implements ShouldQueue
 
             $allErrors = array_merge($validator->getErrors(), $result['errors']);
 
-            $importJob->update([
+            $this->importJob->update([
                 'status' => 'completed',
                 'total_rows' => count($rows),
                 'valid_rows' => count($validRows),
@@ -111,13 +99,13 @@ class ProcessImportJob implements ShouldQueue
             DB::commit();
 
             Log::channel('import')->info('Import job completed successfully', [
-                'job_id' => $importJob->id,
-                'summary' => $importJob->summary
+                'job_id' => $this->importJob->id,
+                'summary' => $this->importJob->summary
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
 
-            $importJob->update([
+            $this->importJob->update([
                 'status' => 'failed',
                 'errors' => [[
                     'error' => $e->getMessage(),
@@ -127,9 +115,9 @@ class ProcessImportJob implements ShouldQueue
             ]);
 
             Log::channel('import')->error('Import job failed', [
-                'job_id' => $importJob->id,
-                'file' => $this->filePath,
-                'mapping_id' => $this->mappingId,
+                'job_id' => $this->importJob->id,
+                'file' => $this->importJob->file_path,
+                'mapping_id' => $this->importJob->import_mapping_id,
                 'error' => $e->getMessage()
             ]);
 
