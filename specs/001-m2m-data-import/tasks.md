@@ -23,12 +23,12 @@
 
 **Purpose**: Project initialization and basic structure for the import feature.
 
-- [ ] T001 Create `specs/001-m2m-data-import/tasks.md` (this file)
-- [ ] T002 Configure `.env` variables for import feature (e.g., max file size, import queue)
-- [ ] T003 Install `maatwebsite/excel` package for Laravel in `composer.json`
-- [ ] T004 Run `php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config`
-- [ ] T005 [P] Add necessary frontend dependencies for file upload (e.g., Alpine.js in `package.json` if used, otherwise vanilla JS)
-- [ ] T006 [P] Configure initial routing for import management in `routes/web.php` (e.g., `/admin/imports`)
+- [X] T001 Create `specs/001-m2m-data-import/tasks.md` (this file)
+- [X] T002 Configure `.env` variables for import feature (e.g., max file size, import queue)
+- [X] T003 Install `maatwebsite/excel` package for Laravel in `composer.json`
+- [X] T004 Run `php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config`
+- [X] T005 [P] Add necessary frontend dependencies for file upload (e.g., Alpine.js in `package.json` if used, otherwise vanilla JS)
+- [X] T006 [P] Configure initial routing for import management in `routes/web.php` (e.g., `/admin/imports`)
 
 ---
 
@@ -38,12 +38,12 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T007 Create database migration for `import_mappings` table (FR-010) in `database/migrations/*_create_import_mappings_table.php`
-- [ ] T008 Create `ImportMapping` model (FR-010) in `app/Models/ImportMapping.php`
-- [ ] T009 Implement basic web interface for configuring `ImportMapping` (FR-010) in `resources/views/admin/import-manager/mapping-configuration.blade.php`
-- [ ] T010 Create backend controller for `ImportMapping` management (FR-010) in `app/Http/Controllers/Admin/ImportMappingController.php`
-- [ ] T011 Implement basic RBAC for mapping configuration (NFR-SEC-002) in `app/Http/Middleware/VerifyImportAccess.php` and `routes/web.php`
-- [ ] T012 Configure logging for import operations (FR-007, NFR-SEC-004) in `config/logging.php`
+- [X] T007 Create database migration for `import_mappings` table (FR-010) in `database/migrations/*_create_import_mappings_table.php`
+- [X] T008 Create `ImportMapping` model (FR-010) in `app/Models/ImportMapping.php`
+- [X] T009 Implement basic web interface for configuring `ImportMapping` (FR-010) in `resources/views/admin/import-manager/mapping-configuration.blade.php`
+- [X] T010 Create backend controller for `ImportMapping` management (FR-010) in `app/Http/Controllers/Admin/ImportMappingController.php`
+- [X] T011 Implement basic RBAC for mapping configuration (NFR-SEC-002) in `app/Http/Middleware/VerifyImportAccess.php` and `routes/web.php`
+- [X] T012 Configure logging for import operations (FR-007, NFR-SEC-004) in `config/logging.php`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -57,16 +57,16 @@
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Create file upload HTML/Blade partial (FR-001) in `resources/views/components/file-upload.blade.php`
-- [ ] T014 [US1] Integrate `file-upload.blade.php` into `resources/views/admin/import-manager/index.blade.php` and add necessary JavaScript for interactivity in `public/js/import-manager/index.js`
-- [ ] T015 [US1] Create backend controller action for file upload (FR-001) in `app/Http/Controllers/Admin/ImportController.php`
-- [ ] T016 [US1] Create form request for file upload validation (FR-001) in `app/Http/Requests/ImportFileUploadRequest.php`
-- [ ] T017 [US1] Implement basic Excel/CSV file parsing service using `maatwebsite/excel` (FR-002) in `app/Services/SpreadsheetParserService.php`
-- [ ] T018 [US1] Create a Laravel Job for background import processing (FR-011, Edge Case: Large files) in `app/Jobs/ProcessImportJob.php`
-- [ ] T019 [US1] Implement initial validation logic for entity existence (FR-003) in `app/Services/ImportValidatorService.php`
-- [ ] T020 [US1] Implement relationship insertion logic (FR-004) in `app/Services/RelationshipImporterService.php`
-- [ ] T021 [US1] Connect `ProcessImportJob` to use `SpreadsheetParserService`, `ImportValidatorService`, and `RelationshipImporterService`
-- [ ] T022 [US1] Update `ImportController` to dispatch `ProcessImportJob` and return a confirmation (FR-006)
+- [X] T013 [US1] Create file upload HTML/Blade partial (FR-001) in `resources/views/components/file-upload.blade.php`
+- [X] T014 [US1] Integrate `file-upload.blade.php` into `resources/views/admin/import-manager/index.blade.php` and add necessary JavaScript for interactivity in `public/js/import-manager/index.js`
+- [X] T015 [US1] Create backend controller action for file upload (FR-001) in `app/Http/Controllers/Admin/ImportController.php`
+- [X] T016 [US1] Create form request for file upload validation (FR-001) in `app/Http/Requests/ImportFileUploadRequest.php`
+- [X] T017 [US1] Implement basic Excel/CSV file parsing service using `maatwebsite/excel` (FR-002) in `app/Services/SpreadsheetParserService.php`
+- [X] T018 [US1] Create a Laravel Job for background import processing (FR-011, Edge Case: Large files) in `app/Jobs/ProcessImportJob.php`
+- [X] T019 [US1] Implement initial validation logic for entity existence (FR-003) in `app/Services/ImportValidatorService.php`
+- [X] T020 [US1] Implement relationship insertion logic (FR-004) in `app/Services/RelationshipImporterService.php`
+- [X] T021 [US1] Connect `ProcessImportJob` to use `SpreadsheetParserService`, `ImportValidatorService`, and `RelationshipImporterService`
+- [X] T022 [US1] Update `ImportController` to dispatch `ProcessImportJob` and return a confirmation (FR-006)
 
 **Checkpoint**: User Story 1 should be fully functional and testable independently
 
@@ -80,12 +80,12 @@
 
 ### Implementation for User Story 2
 
-- [ ] T023 [US2] Enhance `SpreadsheetParserService` to identify and report malformed relationship data (FR-002, Edge Case: Malformed IDs)
-- [ ] T024 [US2] Enhance `ImportValidatorService` to accumulate and report all invalid entity IDs (FR-003, FR-005)
-- [ ] T025 [US2] Implement transactional integrity within `RelationshipImporterService` for each row/relationship (FR-009)
-- [ ] T026 [US2] Create a mechanism to store import errors/skipped entries (FR-005, FR-007) (e.g., a new `ImportError` model or JSON column in `ImportJob` model)
-- [ ] T027 [US2] Update `ProcessImportJob` to use enhanced services and store detailed errors
-- [ ] T028 [US2] Update `ImportController` and `resources/views/admin/import-manager/index.blade.php` to display summary of import, including errors (FR-006) with necessary JavaScript.
+- [X] T023 [US2] Enhance `SpreadsheetParserService` to identify and report malformed relationship data (FR-002, Edge Case: Malformed IDs)
+- [X] T024 [US2] Enhance `ImportValidatorService` to accumulate and report all invalid entity IDs (FR-003, FR-005)
+- [X] T025 [US2] Implement transactional integrity within `RelationshipImporterService` for each row/relationship (FR-009)
+- [X] T026 [US2] Create a mechanism to store import errors/skipped entries (FR-005, FR-007) (e.g., a new `ImportError` model or JSON column in `ImportJob` model)
+- [X] T027 [US2] Update `ProcessImportJob` to use enhanced services and store detailed errors
+- [X] T028 [US2] Update `ImportController` and `resources/views/admin/import-manager/index.blade.php` to display summary of import, including errors (FR-006) with necessary JavaScript.
 
 **Checkpoint**: User Stories 1 AND 2 should both work independently
 
@@ -99,13 +99,13 @@
 
 ### Implementation for User Story 3
 
-- [ ] T029 [US3] Create database migration for `import_jobs` table to store history (FR-008, FR-007) in `database/migrations/*_create_import_jobs_table.php`
-- [ ] T030 [US3] Create `ImportJob` model (FR-008) in `app/Models/ImportJob.php`
-- [ ] T031 [US3] Update `ProcessImportJob` to create and update `ImportJob` records with status, summary, and error details (FR-007)
-- [ ] T032 [US3] Create backend controller action to retrieve a list of import jobs (FR-008) in `app/Http/Controllers/Admin/ImportHistoryController.php`
-- [ ] T033 [US3] Create backend controller action to retrieve detailed logs for a specific import job (FR-008) in `app/Http/Controllers/Admin/ImportHistoryController.php`
-- [ ] T034 [US3] Develop frontend UI to display import job history (FR-008) in `resources/views/admin/import-manager/import-history.blade.php` and add necessary JavaScript.
-- [ ] T035 [US3] Develop frontend UI to display detailed import job logs (FR-008) in `resources/views/admin/import-manager/import-log-detail.blade.php` and add necessary JavaScript.
+- [X] T029 [US3] Create database migration for `import_jobs` table to store history (FR-008, FR-007) in `database/migrations/*_create_import_jobs_table.php`
+- [X] T030 [US3] Create `ImportJob` model (FR-008) in `app/Models/ImportJob.php`
+- [X] T031 [US3] Update `ProcessImportJob` to create and update `ImportJob` records with status, summary, and error details (FR-007)
+- [X] T032 [US3] Create backend controller action to retrieve a list of import jobs (FR-008) in `app/Http/Controllers/Admin/ImportHistoryController.php`
+- [X] T033 [US3] Create backend controller action to retrieve detailed logs for a specific import job (FR-008) in `app/Http/Controllers/Admin/ImportHistoryController.php`
+- [X] T034 [US3] Develop frontend UI to display import job history (FR-008) in `resources/views/admin/import-manager/import-history.blade.php` and add necessary JavaScript.
+- [X] T035 [US3] Develop frontend UI to display detailed import job logs (FR-008) in `resources/views/admin/import-manager/import-log-detail.blade.php` and add necessary JavaScript.
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -115,11 +115,11 @@
 
 **Purpose**: Improvements that affect multiple user stories, ensuring robust, secure, and performant operation.
 
-- [ ] T036 Code cleanup and refactoring for import-related services and controllers
-- [ ] T037 Implement data sanitization/masking if sensitive data is identified (NFR-SEC-003)
+- [X] T036 Code cleanup and refactoring for import-related services and controllers
+- [X] T037 Implement data sanitization/masking if sensitive data is identified (NFR-SEC-003)
 - [ ] T038 Conduct performance testing for large import files (SC-001)
-- [ ] T039 Implement comprehensive audit trails for all import activities (NFR-SEC-004)
-- [ ] T040 Review and harden security configurations for import endpoints (NFR-SEC-001)
+- [X] T039 Implement comprehensive audit trails for all import activities (NFR-SEC-004)
+- [X] T040 Review and harden security configurations for import endpoints (NFR-SEC-001)
 - [ ] T041 Update user documentation for the import feature, including spreadsheet format and mapping configuration.
 
 ---

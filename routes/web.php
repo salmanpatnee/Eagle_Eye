@@ -97,6 +97,9 @@ use App\Http\Controllers\RiskStatusController;
 use App\Http\Controllers\ThirdPartyController;
 use App\Http\Controllers\TPTExpertsControl;
 use App\Http\Controllers\VulnerabilityRegisterController;
+use App\Http\Controllers\Admin\ImportController;
+use App\Http\Controllers\Admin\ImportMappingController;
+use App\Http\Controllers\Admin\ImportHistoryController;
 // use App\Http\Controllers\OptionsController;
 
 
@@ -205,6 +208,26 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
         // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
     });
+
+    // ------------------- IMPORT MANAGEMENT -------------------
+
+    Route::prefix('admin/imports')->middleware('superadmin')->group(function () {
+        Route::get('/', [ImportController::class, 'index'])->name('imports.index');
+        Route::post('/upload', [ImportController::class, 'upload'])->name('imports.upload');
+        Route::get('/history', [ImportHistoryController::class, 'index'])->name('imports.history');
+        Route::get('/history/{id}', [ImportHistoryController::class, 'show'])->name('imports.history.show');
+    });
+
+    Route::prefix('admin/mappings')->middleware('superadmin')->group(function () {
+
+        Route::get('/', [ImportMappingController::class, 'index'])->name('imports.mappings.index');
+        Route::get('/create', [ImportMappingController::class, 'create'])->name('imports.mappings.create');
+        Route::post('/', [ImportMappingController::class, 'store'])->name('imports.mappings.store');
+        Route::get('/{id}/edit', [ImportMappingController::class, 'edit'])->name('imports.mappings.edit');
+        Route::put('/{id}', [ImportMappingController::class, 'update'])->name('imports.mappings.update');
+        Route::delete('/{id}', [ImportMappingController::class, 'destroy'])->name('imports.mappings.destroy');
+    });
+    
 
     // ------------------- THREAT MANAGEMENT -------------------
 

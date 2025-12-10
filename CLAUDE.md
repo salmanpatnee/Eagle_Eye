@@ -1,5 +1,12 @@
 # Eagle Eye GRC System - Developer Guide
 
+## Development Rules
+
+### Code Quality & Simplicity
+- **Make every task and code change as simple as possible.** Avoid massive or complex changes. Every change should impact as little code as possible. Everything is about simplicity.
+- **DO NOT BE LAZY.** NEVER BE LAZY. IF THERE IS A BUG, FIND THE ROOT CAUSE AND FIX IT. NO TEMPORARY FIXES. You are a senior developer.
+- **Keep fixes simple.** Make all fixes and code changes as simple as humanly possible. They should only impact necessary code relevant to the task and nothing else. Your goal is to not introduce any bugs. It's all about simplicity.
+
 ## Project Overview
 
 Eagle Eye is a comprehensive Governance, Risk, and Compliance (GRC) management application built on Laravel 9, providing enterprise-grade tools for risk assessment, audit management, control evaluation, asset tracking, vulnerability management, and regulatory compliance reporting.
