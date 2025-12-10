@@ -214,12 +214,14 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin/imports')->middleware('superadmin')->group(function () {
         Route::get('/', [ImportController::class, 'index'])->name('imports.index');
         Route::post('/upload', [ImportController::class, 'upload'])->name('imports.upload');
-        Route::get('/history', [ImportHistoryController::class, 'index'])->name('imports.history');
-        Route::get('/history/{id}', [ImportHistoryController::class, 'show'])->name('imports.history.show');
+    });
+
+    Route::prefix('admin/history')->middleware('superadmin')->group(function () {
+        Route::get('/', [ImportHistoryController::class, 'index'])->name('imports.history');
+        Route::get('/{id}', [ImportHistoryController::class, 'show'])->name('imports.history.show');
     });
 
     Route::prefix('admin/mappings')->middleware('superadmin')->group(function () {
-
         Route::get('/', [ImportMappingController::class, 'index'])->name('imports.mappings.index');
         Route::get('/create', [ImportMappingController::class, 'create'])->name('imports.mappings.create');
         Route::post('/', [ImportMappingController::class, 'store'])->name('imports.mappings.store');
