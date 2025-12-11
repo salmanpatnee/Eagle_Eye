@@ -7,7 +7,9 @@
       "Bash(.specify/scripts/powershell/create-new-feature.ps1 -Json \"System should generate the excel file according to the mapping data, there is an already interface where all mappings are listed, i want to add a column that allow user to download the excel import template as define in the mapping.\" -Number 1 -ShortName \"template-download\")",
       "Bash(bash:*)",
       "Bash(git checkout:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(pwsh:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
