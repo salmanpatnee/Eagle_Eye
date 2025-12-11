@@ -9,7 +9,11 @@
       "Bash(git checkout:*)",
       "Bash(mkdir:*)",
       "Bash(pwsh:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(composer show:*)",
+      "Bash(php artisan test:*)",
+      "Bash(php artisan:*)",
+      "Bash(./vendor/bin/pint:*)"
     ],
     "deny": [],
     "ask": []

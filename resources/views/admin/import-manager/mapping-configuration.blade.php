@@ -32,6 +32,11 @@
                     @endif
                 </x-table.td> --}}
                 <x-table.td action_col="true">
+                    <a href="{{ route('imports.mappings.downloadTemplate', $mapping->id) }}"
+                       class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                       title="Download Excel Template">
+                        <i class="fas fa-download mr-2"></i> Download
+                    </a>
                     <x-action.edit route_name="imports.mappings.edit" param="{{ $mapping->id }}" />
                     <x-action.delete route_name="imports.mappings.destroy" param="{{ $mapping->id }}" />
                 </x-table.td>

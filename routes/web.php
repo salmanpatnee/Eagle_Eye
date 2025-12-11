@@ -228,6 +228,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{id}/edit', [ImportMappingController::class, 'edit'])->name('imports.mappings.edit');
         Route::put('/{id}', [ImportMappingController::class, 'update'])->name('imports.mappings.update');
         Route::delete('/{id}', [ImportMappingController::class, 'destroy'])->name('imports.mappings.destroy');
+        Route::get('/{mapping}/download-template', [ImportMappingController::class, 'downloadTemplate'])->name('imports.mappings.downloadTemplate');
     });
     
 
