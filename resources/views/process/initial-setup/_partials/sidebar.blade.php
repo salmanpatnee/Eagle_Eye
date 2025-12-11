@@ -12,3 +12,4 @@
 <x-sidebar-menu-item route_name="owner-roles.index" label_ar="دور المالك" label="Owner Role" />
 <x-sidebar-menu-item route_name="custodians.index" label_ar="تسجيل المسؤول" label="Custodian Registration" />
 <x-sidebar-menu-item route_name="custodian-roles.index" label_ar="دور المسؤول" label="Custodian Role" />
+<x-sidebar-menu-item route_name="imports.mappings.index" label_ar="مدير الاستيراد" label="Import Manager" />
