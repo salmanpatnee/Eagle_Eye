@@ -136,7 +136,6 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::view('/home', 'home')->name('home');
     Route::view('/compliance', 'process/compliance')->name('compliance');
     Route::view('/vciso', 'vciso')->name('vciso');
 
