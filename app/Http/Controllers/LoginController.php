@@ -39,7 +39,7 @@ class LoginController extends Controller
 
         session()->regenerate();
 
-        return redirect('/home')->with('success', 'Welcome Back!');
+        return redirect('/vciso')->with('success', 'Welcome Back!');
     }
 
     public function destroy()
