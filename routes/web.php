@@ -146,7 +146,7 @@ Route::middleware(['auth'])->group(function () {
     // ------------------- INITIAL SETUP -------------------
 
     Route::resource('organizations', OrganizationController::class);
-    Route::resource('locations', LocationController::class);
+
     Route::resource('departments', DepartmentController::class);
     Route::resource('sub-departments', SubDepartmentController::class);
     Route::resource('classifications', ClassificationController::class);

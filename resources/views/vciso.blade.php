@@ -12,7 +12,7 @@
 <body>
     <header class="header">
         <nav class="nav">
-            {{-- <a href="/home" class="home-link">
+            {{-- <a href="/vciso" class="home-link">
                 <i class='bx bx-home'></i>  
             </a> --}}
             <a href="{{ route('vciso') }}">

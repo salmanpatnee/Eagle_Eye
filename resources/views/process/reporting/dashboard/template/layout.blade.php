@@ -18,7 +18,7 @@
     <!-- SIDEBAR -->
     <header>
         <div class="Header">
-            <a href="/home">
+            <a href="/vciso">
                 <i class='bx bx-home'></i>
             </a>
             <p class="bold-arbtext">العمليات</p>

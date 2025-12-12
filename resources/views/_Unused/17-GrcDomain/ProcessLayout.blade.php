@@ -213,7 +213,7 @@
     <div class="headersec">
         <div class="headerleft">
             <div class="headericon">
-                <a href="/home">
+                <a href="/vciso">
                     <i class='bx bx-home'></i>
                 </a>
             </div>
