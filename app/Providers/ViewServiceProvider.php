@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Organization;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -29,7 +28,6 @@ class ViewServiceProvider extends ServiceProvider
 
         // Share with all views
         View::composer('*', function ($view) {
-            $organizationData = Organization::first(); // or whatever you need
 
             $currentUrl = request()->fullUrl();
 
@@ -44,7 +42,6 @@ class ViewServiceProvider extends ServiceProvider
 
 
             $view->with([
-                'organizationData' => $organizationData,
                 'pdfUrl' => $updatedUrl
             ]);
         });

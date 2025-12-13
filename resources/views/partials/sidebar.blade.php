@@ -4,7 +4,7 @@
      <!-- SIDEBAR HEADER -->
      <div :class="sidebarToggle ? 'justify-center' : 'justify-between'"
          class="flex items-center gap-2 pt-8 sidebar-header pb-7">
-         <a href="{{ route('compliance') }}">
+         <a href="{{ route('vciso') }}">
              <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                  <span class="flex items-center space-x-2">
                      <img class="dark:hidden w-20" src="{{ asset('Images/logo/EagleEyeLogo.png') }}" alt="Logo" />

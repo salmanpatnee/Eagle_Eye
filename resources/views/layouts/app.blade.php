@@ -9,7 +9,7 @@
         <!-- ===== Main Content Start ===== -->
         <main>
             <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-                @include('partials.breadcrumbs')
+                @include('partials.breadcrumbs-ciso')
                 <div
                     class="min-h-screen rounded-lg border border-gray-200 bg-white p-4  dark:border-gray-800 dark:bg-white/[0.03]">
                     <div class="mx-auto w-full">
