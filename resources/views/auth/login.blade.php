@@ -97,7 +97,7 @@
                     </a>
                     <p
                         class="mb-2 font-semibold text-white text-title-sm dark:text-white/90 sm:text-title-md flex items-center justify-between">
-                        Eagle Eye
+                        CISO 360
                     </p>
 
                     <p class="text-center text-gray-400 dark:text-white/60">
