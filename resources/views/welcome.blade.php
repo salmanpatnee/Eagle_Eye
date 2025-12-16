@@ -135,6 +135,7 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         // Get the modal element
         var modal = document.getElementById("contactModal");
@@ -143,7 +144,7 @@
         // 1. The <a> tag in the header with href="#"
         // 2. The <p> tag in the budget section with id="budgetContactButton"
         var contactTriggers = document.querySelectorAll("a[href='#'], #budgetContactButton");
-        
+
         // Get the <span> element that closes the modal ('&times;')
         var span = document.getElementsByClassName("close-button")[0];
 
@@ -151,7 +152,7 @@
         function openModal(event) {
             // Check if the event target is an <a> tag and prevent default
             if (event.target.tagName === 'A') {
-                event.preventDefault(); 
+                event.preventDefault();
             }
             modal.style.display = "block";
         }
@@ -172,15 +173,57 @@
                 modal.style.display = "none";
             }
         }
-        
-        // Optional: Handle form submission (e.g., send data to a server)
+
+        // Handle form submission via AJAX
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Stop the form from submitting normally
-            alert('Thank you for your inquiry! We will be in touch soon.');
-            // In a real application, you would use 'fetch' or 'XMLHttpRequest' here 
-            // to send the form data to your server/email service.
-            modal.style.display = "none"; // Close the modal after submission
-            this.reset(); // Clear the form fields
+
+            // Get form data
+            const formData = new FormData(this);
+            const formObject = {};
+            for (let [key, value] of formData.entries()) {
+                // Map form field names to model field names
+                if (key === 'name') formObject.fullname = value;
+                else if (key === 'problem') formObject.message = value;
+                else formObject[key] = value;
+            }
+
+            // Show a loading state or disable submit button
+            const submitButton = this.querySelector('.submit-button');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+
+            // Send the data to the server via an AJAX request
+            axios.post('/contact-inquiry', formObject)
+                .then(function (response) {
+                    // On success, show success message and reset form
+                    alert(response.data.message);
+                    modal.style.display = "none";
+                    document.getElementById('contactForm').reset();
+                })
+                .catch(function (error) {
+                    // On error, show validation errors or generic error message
+                    if (error.response && error.response.status === 422) {
+                        // Validation error
+                        const errors = error.response.data.errors;
+                        let errorMessage = "Please correct the following errors:\n";
+
+                        for (let field in errors) {
+                            errorMessage += "- " + errors[field][0] + "\n";
+                        }
+
+                        alert(errorMessage);
+                    } else {
+                        // General server error
+                        alert('There was an error submitting your inquiry. Please try again.');
+                    }
+                })
+                .finally(function() {
+                    // Reset button state regardless of success or error
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                });
         });
 
     </script>

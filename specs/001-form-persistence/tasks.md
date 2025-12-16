@@ -16,8 +16,8 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T001 [P] Create the database migration for the `leads` table in a new file inside `database/migrations/`.
-- [ ] T002 [P] Create the `Lead` Eloquent model in `app/Models/Lead.php`.
+- [X] T001 [P] Create the database migration for the `leads` table in a new file inside `database/migrations/`.
+- [X] T002 [P] Create the `Lead` Eloquent model in `app/Models/Lead.php`.
 
 **Checkpoint**: Foundation ready - user story implementation can now begin.
 
@@ -31,11 +31,11 @@
 
 ### Implementation for User Story 1
 
-- [ ] T003 [P] [US1] Create the `StoreLeadRequest` form request class in `app/Http/Requests/StoreLeadRequest.php` and define the validation rules.
-- [ ] T004 [P] [US1] Add a new `POST` route to `routes/web.php` for handling the contact form submission.
-- [ ] T005 [P] [US1] Create the `LeadController` in `app/Http/Controllers/LeadController.php`.
-- [ ] T006 [US1] Implement the `store` method in `app/Http/Controllers/LeadController.php` to validate the request and save the new lead. (Depends on T003, T005)
-- [ ] T007 [US1] Modify the JavaScript in `resources/views/welcome.blade.php` to submit the form via an AJAX request and handle the success/error responses. (Depends on T004, T006)
+- [X] T003 [P] [US1] Create the `StoreLeadRequest` form request class in `app/Http/Requests/StoreLeadRequest.php` and define the validation rules.
+- [X] T004 [P] [US1] Add a new `POST` route to `routes/web.php` for handling the contact form submission.
+- [X] T005 [P] [US1] Create the `LeadController` in `app/Http/Controllers/LeadController.php`.
+- [X] T006 [US1] Implement the `store` method in `app/Http/Controllers/LeadController.php` to validate the request and save the new lead. (Depends on T003, T005)
+- [X] T007 [US1] Modify the JavaScript in `resources/views/welcome.blade.php` to submit the form via an AJAX request and handle the success/error responses. (Depends on T004, T006)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently.
 
@@ -45,7 +45,7 @@
 
 **Purpose**: Final validation and documentation checks.
 
-- [ ] T008 Run through the steps in `specs/001-form-persistence/quickstart.md` to ensure the developer setup and implementation flow are correct.
+- [X] T008 Run through the steps in `specs/001-form-persistence/quickstart.md` to ensure the developer setup and implementation flow are correct.
 
 ---
 

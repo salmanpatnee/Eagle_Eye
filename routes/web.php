@@ -11,6 +11,7 @@ use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\LeadController;
 
 
 
@@ -20,8 +21,9 @@ use App\Http\Controllers\ResourceController;
 
 Route::middleware(['guest'])->group(function () {
 
-    Route::view('/', 'welcome')->name('welcome');
+Route::view('/', 'welcome')->name('welcome');
 
+    Route::post('/contact-inquiry', [LeadController::class, 'store'])->name('contact.store');
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 });
