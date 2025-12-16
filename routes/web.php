@@ -19,10 +19,8 @@ use App\Http\Controllers\LeadController;
 
 
 
-Route::middleware(['guest'])->group(function () {
-
 Route::view('/', 'welcome')->name('welcome');
-
+Route::middleware(['guest'])->group(function () {
     Route::post('/contact-inquiry', [LeadController::class, 'store'])->name('contact.store');
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
