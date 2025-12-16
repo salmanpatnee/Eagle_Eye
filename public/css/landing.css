@@ -1,0 +1,412 @@
+/* Custom Fonts and Reset */
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+/* --- Main Container Styling --- */
+.landing-page {
+  width: 100%;
+  background: #fff;
+  color: #000;
+  padding-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Header Section --- */
+.header {
+  text-align: center;
+  padding: 30px 20px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-text {
+  font-size: 2.5em;
+  font-weight: 900;
+  color: #000;
+  margin: 0;
+}
+
+.tagline {
+  font-size: 1.1em;
+  font-weight: 700;
+  margin: 5px 0 10px;
+  color: #000;
+  letter-spacing: 1px;
+}
+
+.sub-tagline {
+  font-size: 1.5em;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.4;
+  color: #000;
+}
+
+.sub-tagline a {
+  font-size: 1em;
+  color: #000;
+  text-decoration: none; /* Added for clarity */
+}
+
+/* Logo and Main Image Sizing */
+.LogoImg {
+  width: 150px; /* Adjusted for better mobile display */
+  height: auto;
+  max-width: 100%;
+}
+
+.ThreePsImg {
+  width: 100%;
+  max-width: 500px; /* Sets a max size for desktop */
+  height: auto;
+  margin: 20px auto;
+  display: block;
+}
+
+/* --- Main Content Card Styling (Unified) --- */
+.main-content {
+  background: #fff;
+  margin: 20px 5%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  position: relative;
+  /* Using flex for simple single-row/column content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Features (3 Pillars) Section */
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start; /* Aligns content to the top */
+  text-align: center;
+  width: 100%; /* Important for flex to work */
+  max-width: 900px; /* Optional: Limit max width on desktop */
+}
+
+.feature-item {
+  flex: 1;
+  padding: 0 10px;
+  min-width: 120px; /* Ensures items don't get too narrow */
+}
+
+.feature-icon-circle {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.iconimage {
+  width: 80%; /* Adjusted for better fit within the circle/context */
+  height: auto;
+  max-width: 60px;
+}
+
+.feature-number {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: #000;
+  margin: 10px 0 5px;
+  text-transform: uppercase;
+}
+
+.feature-number-down {
+  font-size: 0.9em; /* Smaller for list items */
+  font-weight: 700;
+  color: #000;
+  margin: 5px 0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.feature-text {
+  font-size: 1.1em; /* Adjusted for better readability */
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.3;
+  color: #000;
+}
+
+/* --- TwoSec Section (Consultant/Deadline) --- */
+.TwoSec {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 5%;
+}
+
+/* Unify the styles for the two internal sections */
+.TwoSec > div {
+  flex: 1 1 45%; /* Flex-grow, flex-shrink, basis */
+  min-width: 300px; /* Ensures they stack on smaller phones */
+  max-width: 48%; /* Restrict maximum width for large screens */
+}
+
+/* Re-styling the internal main-content for this section */
+.TwoSec .main-content-two {
+  /* No need for this class, use a general container style */
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 100%; /* Important for equal height in flex container */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.TwoSec h2 {
+  font-size: 1.5em;
+  color: #000;
+  text-align: center;
+  margin-top: 0;
+}
+
+.TwoSec img {
+  width: 100%;
+  max-width: 300px; /* Limit image size */
+  height: auto;
+}
+
+/* --- Budget Section --- */
+.BudgetSec {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+.BudgetCanvas {
+  flex: 1 1 40%;
+  min-width: 300px; /* Ensures stacking on mobile */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.BudgetCanvas img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.BudgetHeading {
+  font-size: 2.2em; /* Adjusted for responsiveness */
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.BudgetPara {
+  font-size: 1.1em; /* Adjusted for responsiveness */
+  text-align: justify;
+  line-height: 1.5;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.BudgetButton {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: #000;
+  background-color: #f8b500; /* Added a button-like background */
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* --- Offer Section (Original Code kept for reference, but not used in HTML) --- */
+/* The offer section styles from your original CSS are not used in the provided HTML. */
+
+/* --- Footer Section --- */
+.footer {
+  text-align: center;
+  padding: 20px 5% 10px;
+  font-size: 0.7em;
+  color: #aaa;
+}
+
+/* --- Modal (Pop-up) Styles --- */
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 90%; /* Increased width for better mobile viewing */
+  max-width: 450px; /* Slightly reduced max width */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Montserrat", sans-serif;
+}
+
+.modal-content h2 {
+  color: #007bff;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* The Close Button */
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Form Styling */
+#contactForm label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #333;
+}
+
+#contactForm input[type="text"],
+#contactForm input[type="email"], 
+#contactForm input[type="tel"],
+#contactForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.1em;
+  font-weight: 700;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* Tablet and Smaller Desktop Screens (601px to 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .features-section {
+    padding: 0 10px;
+  }
+}
+
+/* Mobile Screens (up to 600px) */
+@media (max-width: 600px) {
+  .header {
+    padding-top: 20px;
+  }
+  .sub-tagline {
+    font-size: 1.2em;
+  }
+  .main-content {
+    margin: 15px 3%; /* Smaller margins for mobile */
+    padding: 15px;
+  }
+
+  /* Feature Section Stacking */
+  .features-section {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .feature-item {
+    flex: 1 1 45%; /* Two columns on mobile */
+    margin-bottom: 20px;
+  }
+
+  /* TwoSec Stacking */
+  .TwoSec {
+    flex-direction: column;
+    margin: 15px 3%;
+  }
+  .TwoSec > div {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  /* Budget Section Stacking */
+  .BudgetSec {
+    flex-direction: column-reverse; /* Put text on top of image */
+    padding: 15px;
+    margin: 15px auto;
+  }
+  .BudgetCanvas {
+    min-width: 100%;
+    align-items: center; /* Center content when stacked */
+  }
+  .BudgetHeading {
+    font-size: 1.8em;
+    text-align: center;
+  }
+  .BudgetPara {
+    font-size: 1em;
+    text-align: center;
+  }
+  .BudgetButton {
+    /* Center the button */
+    margin: 0 auto;
+  }
+}
