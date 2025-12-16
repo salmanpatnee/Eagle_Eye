@@ -1,8 +1,8 @@
-# Eagle Eye GRC System - Developer Guide
+# CISO 360 GRC System - Developer Guide
 
 ## Project Overview
 
-Eagle Eye is a comprehensive Governance, Risk, and Compliance (GRC) management application built on Laravel 9, providing enterprise-grade tools for risk assessment, audit management, control evaluation, asset tracking, vulnerability management, and regulatory compliance reporting.
+CISO 360 is a comprehensive Governance, Risk, and Compliance (GRC) management application built on Laravel 9, providing enterprise-grade tools for risk assessment, audit management, control evaluation, asset tracking, vulnerability management, and regulatory compliance reporting.
 
 ## Technology Stack
 
@@ -388,4 +388,4 @@ php artisan up
 **Last Updated**: 2025-12-06
 **Laravel Version**: 9.52.16
 **PHP Version**: 8.0.2+
-**Project Name**: Eagle Eye GRC System
+**Project Name**: CISO 360 GRC System
