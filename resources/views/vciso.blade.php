@@ -15,11 +15,11 @@
             {{-- <a href="/vciso" class="home-link">
                 <i class='bx bx-home'></i>  
             </a> --}}
-            <a href="{{ route('vciso') }}">
+            <a href="{{ route('welcome') }}">
                 <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                     <span class="flex items-center space-x-2">
-                        <img class="dark:hidden w-10" src="/Images/logo/EagleEyeLogo.png" alt="Logo" width="60"
-                            height="60">
+                        <img class="dark:hidden w-10" src="/Images/SaudiCISOLogo.png" alt="Logo" width="100"
+                            height="100">
                     </span>
                 </span>
             </a>

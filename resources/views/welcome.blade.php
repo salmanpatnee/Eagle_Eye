@@ -9,18 +9,43 @@
     <style>
         /* Embed the CSS for simplicity, or keep the link above for external file */
         /* See the CSS section below for the styles */
+        .or-text {
+            display: inline;
+        }
+
+        @media (max-width: 768px) {
+            .or-text {
+                display: none;
+            }
+
+            .sub-tagline a.BudgetButton {
+                display: block;
+                margin: 10px 0;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="landing-page">
         <header class="header">
-            <img class="LogoImg" src="Images/SaudiCISO.Net Logo.png" alt="SaudiCISO.Net"> 
+            <img class="LogoImg" src="Images/SaudiCISOLogo.png" alt="SaudiCISO.Net"> 
             <!-- <h1 class="logo-text">SaudiCISO.Net</h1> -->
             <p class="tagline">Instantly Empowering Saudi CISO</p>
-            <h2>What is Your Biggest Problem Today?</h2>
-            <p class="sub-tagline">We have the Solution. Guaranteed!<br><a href="#">Contact Us!</a></p>
+            {{-- <h2>What is Your Biggest Problem Today?</h2>
+            <p class="sub-tagline">We have the Solution. Guaranteed!<br><a href="#" class="action-link">Contact Us!</a></p> --}}
+
+             <h2>What is Your Biggest Problem Today?</h2>
+            <p class="sub-tagline">We have the Solution. Guaranteed!<br><br>
+                <a href="#" class="BudgetButton" id="headerContactButton">Contact Us!</a>
+                <span class="or-text"> or </span>
+                <a href="/vciso" class="BudgetButton" id="getStartedButton" style="background-color: #00053C; color: white;">Get Started Now</a>
+             </p>
+
             <img class="ThreePsImg" src="Images/ThreePs5.png" alt="SaudiCISO.net">
+
+           
+
         </header>
 
         <main class="main-content">
@@ -143,7 +168,8 @@
         // Get the contact elements:
         // 1. The <a> tag in the header with href="#"
         // 2. The <p> tag in the budget section with id="budgetContactButton"
-        var contactTriggers = document.querySelectorAll("a[href='#'], #budgetContactButton");
+        // 3. The new header contact button with class "BudgetButton"
+        var contactTriggers = document.querySelectorAll("a[href='#'], #budgetContactButton, #headerContactButton");
 
         // Get the <span> element that closes the modal ('&times;')
         var span = document.getElementsByClassName("close-button")[0];

@@ -12,13 +12,13 @@
                 <a href="{{ route('home') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
-                            <img class="dark:hidden w-10" src="{{ asset('Images/logo/EagleEyeLogo.png') }}"
+                            <img class="dark:hidden w-10" src="{{ asset('Images/SaudiCISOLogo.png') }}"
                                 alt="Logo" />
                             <span class="dark:hidden text-2xl font-semibold">CISO 360</span>
                         </span>
                     </span>
                     <img class="logo-icon" :class="sidebarToggle ? 'lg:block mt-10 w-20' : 'hidden'"
-                        src="{{ asset('Images/logo/EagleEyeLogo.png') }}" alt="Logo" />
+                        src="{{ asset('Images/SaudiCISOLogo.png') }}" alt="Logo" />
 
                 </a>
             </div>
@@ -42,7 +42,7 @@
             </button>
             <!-- Hamburger Toggle BTN -->
             <a href="{{ route('home') }}" class="lg:hidden">
-                <img class="dark:hidden w-12" src="{{ asset('Images/logo/EagleEyeLogo.png') }}" alt="Logo" />
+                <img class="dark:hidden w-12" src="{{ asset('Images/SaudiCISOLogo.png') }}" alt="Logo" />
             </a>
             <!-- Application nav menu button -->
             <button
