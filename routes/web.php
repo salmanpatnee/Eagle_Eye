@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
     // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
 
     Route::resource('cms', CMSController::class);
-    Route::get('/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
+    Route::get('/cms/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
     Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
 
     // ------------------CISO 360-------------------------

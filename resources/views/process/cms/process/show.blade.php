@@ -1,4 +1,4 @@
-@extends('layouts/cms')
+@extends('layouts/user')
 @section('title', 'Process')
 @section('title_ar', 'العملية')
 @section('content')

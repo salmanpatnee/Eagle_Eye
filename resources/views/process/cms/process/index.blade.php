@@ -1,10 +1,10 @@
-@extends('layouts/cms')
+@extends('layouts.user')
 @section('title', 'Process')
 @section('title_ar', 'العملية')
 @section('content')
     <div>
         <x-table.action-wrapper title="All Process">
-            <x-action.button label="Add Process" label_ar="إضافة العملية" route_name="cms.create" />
+            {{-- <x-action.button label="Add Process" label_ar="إضافة العملية" route_name="cms.create" /> --}}
         </x-table.action-wrapper>
 
         <x-table.table>
