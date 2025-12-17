@@ -15,7 +15,7 @@ class HotTopicsController extends Controller
     public function __invoke(Request $request)
     {
         $topicsData = [
-            'Compliance Challenges! Framework Model' => 'compliance-challenges',
+            'Compliance Challenges Framework Model' => 'compliance-challenges',
             'Key Performance Indicator vs Key Risk Indicator' => 'key-performance-indicator',
             'Essential KPIs & KRIs' => 'essential-kpis-kris',
             'Risk Management Methodologies' => 'risk-management-methodologies',
