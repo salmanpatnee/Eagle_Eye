@@ -4,11 +4,11 @@
     <!-- ===== Content Area Start ===== -->
     <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
         <!-- Small Device Overlay Start -->
-        @include('partials.nav')
+        @include('partials.nav-ciso')
         <!-- ===== Main Content Start ===== -->
         <main>
             <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-                @include('partials.breadcrumbs')
+                @include('partials.breadcrumbs-ciso')
                 <div class="bg-white border border-gray-200 flex items-center p-4 rounded-lg min-h-screen"
                     id="process_banner"
                     style="background-image: url('/Images/riyadh.jpg'); background-size: cover; background-position: center;">

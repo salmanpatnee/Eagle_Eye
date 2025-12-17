@@ -4,7 +4,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-<script src="{{ asset('js/compliance-dashboard.js') }}"></script>
+{{-- <script src="{{ asset('js/compliance-dashboard.js') }}"></script> --}}
 
 {{-- push custom scripts here --}}
 @stack('scripts')

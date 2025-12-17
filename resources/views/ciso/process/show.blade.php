@@ -1,4 +1,5 @@
-@extends('layouts.ciso')
+
+@extends('layouts.process')
 @section('title', $process->title)
 @section('content')
     @php
@@ -21,17 +22,16 @@
             </div>
         </div>
     </div>
-
-
 @endsection
 
 @section('additional_content')
+
     <div class="bg-white my-6 p-5 rounded-2xl">
         <header class="text-center bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">
             <h1>{{ $process->title }}</h1>
         </header>
         <div class="process-content">
-
+            
             @include("process/process/content/{$process->process_id}")
         </div>
     </div>

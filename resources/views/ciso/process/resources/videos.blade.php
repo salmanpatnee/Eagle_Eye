@@ -1,4 +1,4 @@
-@extends('layouts.ciso')
+@extends('layouts.process')
 @push('css')
     <style>
         #process_banner {
