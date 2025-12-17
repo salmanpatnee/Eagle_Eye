@@ -8,7 +8,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
                 @foreach ($topicsData as $title => $route)
                     <a href="{{ route($route) }}">
-                        <div class="bg-brand-950 border border-gray-200 md:p-6 p-5 rounded-2xl">
+                        <div class="bg-brand-950 border border-gray-200 md:p-6 p-5 rounded-2xl h-full flex flex-col">
                             <div class="bg-gray-100 flex h-12 items-center justify-center mx-auto rounded-xl w-12">
                                 <svg class="fill-gray-800 dark:fill-white/90" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +17,7 @@
                                         fill=""></path>
                                 </svg>
                             </div>
-                            <div class="flex items-center justify-center mt-5">
+                            <div class="flex items-center justify-center mt-5 flex-grow">
                                 <div class="text-center text-white">
                                     {{-- <span class="font-bold" lang="ar"
                                         dir="rtl">{{ $data->category_name_ar }}</span> --}}
