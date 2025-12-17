@@ -1,5 +1,5 @@
 @extends('layouts.ciso-full')
-@section('title', 'Compliance Challenges! Framework Model')
+@section('title', 'Compliance Challenges Framework Model')
 @section('title_ar', '')
 @section('content')
 
