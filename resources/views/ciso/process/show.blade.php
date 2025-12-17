@@ -1,4 +1,4 @@
-@extends('layouts.process')
+@extends('layouts.ciso')
 @section('title', $process->title)
 @section('content')
     @php
