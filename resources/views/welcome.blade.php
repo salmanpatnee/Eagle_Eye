@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="css/landing.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
+        a {
+            text-decoration: none;
+        }
         /* Embed the CSS for simplicity, or keep the link above for external file */
         /* See the CSS section below for the styles */
-        .or-text {
-            display: inline;
-        }
 
         @media (max-width: 768px) {
             .or-text {
@@ -23,13 +23,33 @@
                 margin: 10px 0;
             }
         }
+
+        .signin-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .signin-container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .signin-heading {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00053C;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
     <div class="landing-page">
         <header class="header">
-            <img class="LogoImg" src="Images/SaudiCISOLogo.png" alt="SaudiCISO.Net"> 
+            <img class="LogoImg" src="Images/SaudiCISOLogo.png" alt="SaudiCISO.Net">
             <!-- <h1 class="logo-text">SaudiCISO.Net</h1> -->
             <p class="tagline">Instantly Empowering Saudi CISO</p>
             {{-- <h2>What is Your Biggest Problem Today?</h2>
@@ -38,13 +58,11 @@
              <h2>What is Your Biggest Problem Today?</h2>
             <p class="sub-tagline">We have the Solution. Guaranteed!<br><br>
                 <a href="#" class="BudgetButton" id="headerContactButton">Contact Us!</a>
-                <span class="or-text"> or </span>
-                <a href="/vciso" class="BudgetButton" id="getStartedButton" style="background-color: #00053C; color: white;">Get Started Now</a>
              </p>
 
             <img class="ThreePsImg" src="Images/ThreePs5.png" alt="SaudiCISO.net">
 
-           
+
 
         </header>
 
@@ -109,7 +127,7 @@
                         </div>
                     </section>
                 </main>
-            </div>            
+            </div>
         </div>
         <main class="main-content">
             <section class="features-section">
@@ -132,6 +150,16 @@
                 </div>
             </section>
         </main>
+
+        <main class="main-content">
+            <section class="signin-section">
+                <div class="signin-container">
+                    <h2 class="signin-heading">Access Your Account</h2>
+                    <a href="/vciso" class="BudgetButton" style="background-color: #00053C; color: white;">Sign In</a>
+                </div>
+            </section>
+        </main>
+
     </div>
     <div id="contactModal" class="modal">
 
