@@ -154,7 +154,7 @@
         <main class="main-content">
             <section class="signin-section">
                 <div class="signin-container">
-                    <h2 class="signin-heading">Access Your Account</h2>
+                    <h2 class="signin-heading">Portal Access for Paid Members</h2>
                     <a href="/vciso" class="BudgetButton" style="background-color: #00053C; color: white;">Sign In</a>
                 </div>
             </section>
