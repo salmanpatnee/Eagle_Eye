@@ -26,9 +26,14 @@
                 </a>
             </div>
 
-            <!-- Logout Button -->
             @auth
-            <div class="nav-right"> 
+            <div class="nav-right">
+                @if (auth()->user()->role_id == 1)
+                <a href="{{ route('users.index') }}" class="admin-portal-btn" title="Admin Portal">
+                    <i class='bx bx-cog'></i>
+                    <span>Admin Portal</span>
+                </a>
+                @endif
                 <form id="logout-form" action="{{ route('login.destroy') }}" method="POST" style="display: inline;">
                     @csrf
                     <button type="submit" class="logout-btn" title="Logout">
