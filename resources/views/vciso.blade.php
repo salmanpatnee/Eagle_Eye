@@ -12,17 +12,31 @@
 <body>
     <header class="header">
         <nav class="nav">
-            {{-- <a href="/vciso" class="home-link">
-                <i class='bx bx-home'></i>  
-            </a> --}}
-            <a href="{{ route('welcome') }}">
-                <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-                    <span class="flex items-center space-x-2">
-                        <img class="dark:hidden w-10" src="/Images/SaudiCISOLogo.png" alt="Logo" width="100"
-                            height="100">
+            <div class="nav-left">
+                {{-- <a href="/vciso" class="home-link">
+                    <i class='bx bx-home'></i>
+                </a> --}}
+                <a href="{{ route('welcome') }}">
+                    <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
+                        <span class="flex items-center space-x-2">
+                            <img class="dark:hidden w-10" src="/Images/SaudiCISOLogo.png" alt="Logo" width="100"
+                                height="100">
+                        </span>
                     </span>
-                </span>
-            </a>
+                </a>
+            </div>
+
+            <!-- Logout Button -->
+            @auth
+            <div class="nav-right">
+                <form id="logout-form" action="{{ route('login.destroy') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="logout-btn" title="Logout">
+                        <i class='bx bx-log-out'></i>
+                    </button>
+                </form>
+            </div>
+            @endauth
         </nav>
     </header>
 
