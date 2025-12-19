@@ -8,7 +8,7 @@
         <!-- ===== Main Content Start ===== -->
         <main>
             <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-                <div class="sticky top-[90px] z-99995 p-4" style="background-color: #F9FAFB;">
+                <div class="sticky top-16 sm:top-[60px] md:top-[90px] z-99995 p-4 mb-4" style="background-color: #F9FAFB;">
                     @include('partials.breadcrumbs-ciso')
                 </div>
                 <div
