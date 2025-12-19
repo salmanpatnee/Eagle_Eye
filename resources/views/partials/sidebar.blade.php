@@ -1,6 +1,6 @@
  <!-- ===== Sidebar Start ===== -->
  <aside :class="sidebarToggle ? 'translate-x-0 lg:w-[90px]' : '-translate-x-full'"
-     class="-translate-x-full bg-brand-950 border-gray-200 border-r fixed flex flex-col h-screen left-0 lg:static lg:translate-x-0 overflow-y-hidden px-5 sidebar text-white top-0 w-[290px] z-9999">
+     class="-translate-x-full bg-brand-950 border-gray-200  fixed flex flex-col h-screen left-0 lg:static lg:translate-x-0 overflow-y-hidden px-5 sidebar text-white top-0 w-[290px] z-9999">
      <!-- SIDEBAR HEADER -->
      <div :class="sidebarToggle ? 'justify-center' : 'justify-between'"
          class="flex items-center gap-2 pt-8 sidebar-header pb-7">
