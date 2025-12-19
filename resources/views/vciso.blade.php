@@ -28,11 +28,12 @@
 
             <!-- Logout Button -->
             @auth
-            <div class="nav-right">
+            <div class="nav-right"> 
                 <form id="logout-form" action="{{ route('login.destroy') }}" method="POST" style="display: inline;">
                     @csrf
                     <button type="submit" class="logout-btn" title="Logout">
                         <i class='bx bx-log-out'></i>
+                        <span>Sign out</span>
                     </button>
                 </form>
             </div>
