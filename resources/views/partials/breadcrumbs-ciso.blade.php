@@ -1,6 +1,6 @@
 <!-- Breadcrumb Start -->
 <div>
-    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+    <div class="flex flex-wrap items-center justify-between gap-3">
         <div class="flex flex-col">
             <span
                 class="ibm-plex-sans-arabic-semibold text-sm lg:text-xl font-semibold text-gray-800 dark:text-white/90 text-right"
