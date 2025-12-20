@@ -1,4 +1,4 @@
-# CISO 360 GRC System - Qwen Code Rules
+﻿# CISO 360 GRC System - Qwen Code Rules
 
 This file is customized for the CISO 360 GRC System project, based on the general Qwen Code Rules.
 
