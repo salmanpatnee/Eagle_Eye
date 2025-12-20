@@ -86,4 +86,52 @@ class UserController extends Controller
         $user->delete();
         return redirect(route('users.index'))->with('success', 'User deleted successfully.');
     }
+
+    /**
+     * Show the form for editing the authenticated user's profile.
+     * This is specifically for non-admin users who can update their own profile information,
+     * but cannot change sensitive fields like email or role.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function editProfile()
+    {
+        $user = auth()->user();
+
+        // Authorization check: users can only edit their own profile
+        // This is inherently handled by always using auth()->user() instead of route parameters
+
+        // Only pass the user data to the view, not user roles for non-admins
+        return view('profile.edit', compact('user'));
+    }
+
+    /**
+     * Update the authenticated user's profile information.
+     * Non-admin users can update their personal details but are restricted from
+     * changing sensitive fields like email or role.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+
+        // Validation rules for non-admin users (email and role are not allowed to be updated)
+        $attributes = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username'  => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
+            'password'  => ['nullable', 'min:7', 'max:255'],
+        ]);
+
+        // Only update password if it's provided
+        if (empty($attributes['password'])) {
+            unset($attributes['password']);
+        }
+
+        $user->update($attributes);
+
+        return redirect(route('vciso'))->with('success', 'Profile updated successfully.');
+    }
 }

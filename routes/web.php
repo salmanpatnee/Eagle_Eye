@@ -35,6 +35,10 @@ Route::middleware(['auth'])->group(function () {
 
     // ------------------- USERS -------------------
 
+    // Profile update routes for non-admin users
+    Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
+    Route::put('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
+
     Route::middleware('superadmin')->group(function () {
         Route::resource('users', UserController::class);
         // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');

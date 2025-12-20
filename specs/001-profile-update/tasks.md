@@ -27,11 +27,11 @@ Build an MVP that implements the core functionality (User Story 1), then add the
 
 ## Phase 1: Setup
 
-- [ ] T001 Create placeholder for profile update tests at tests/Feature/User/ProfileUpdateTest.php
+- [x] T001 Create placeholder for profile update tests at tests/Feature/User/ProfileUpdateTest.php
 
 ## Phase 2: Foundational
 
-- [ ] T002 Define and verify the profile update routes in routes/web.php
+- [x] T002 Define and verify the profile update routes in routes/web.php
 
 ## Phase 3: User Story 1 - View and Update Profile Information (Priority: P1)
 
@@ -39,13 +39,13 @@ As a non-admin user who is logged in to the system, I want to be able to update 
 
 **Independent Test**: Non-admin users can access their profile page through the dropdown menu and successfully update their profile details (excluding email) without encountering permission errors.
 
-- [ ] T003 [P] [US1] Create profile edit method in app/Http/Controllers/UserController.php that allows users to edit only their own profile
-- [ ] T004 [P] [US1] Create profile update method in app/Http/Controllers/UserController.php that restricts fields for non-admin users
-- [ ] T005 [P] [US1] Add profile update route to routes/web.php (GET /profile/edit and PUT /profile)
-- [ ] T006 [P] [US1] Create profile edit view at resources/views/profile/edit.blade.php that extends the appropriate layout
-- [ ] T007 [P] [US1] Implement authorization checks to ensure users can only update their own profile
-- [ ] T008 [P] [US1] Ensure success message appears after profile update ("Profile updated successfully")
-- [ ] T009 [US1] Test that non-admin users can access their profile page and update allowed fields
+- [x] T003 [P] [US1] Create profile edit method in app/Http/Controllers/UserController.php that allows users to edit only their own profile
+- [x] T004 [P] [US1] Create profile update method in app/Http/Controllers/UserController.php that restricts fields for non-admin users
+- [x] T005 [P] [US1] Add profile update route to routes/web.php (GET /profile/edit and PUT /profile)
+- [x] T006 [P] [US1] Create profile edit view at resources/views/profile/edit.blade.php that extends the appropriate layout
+- [x] T007 [P] [US1] Implement authorization checks to ensure users can only update their own profile
+- [x] T008 [P] [US1] Ensure success message appears after profile update ("Profile updated successfully")
+- [x] T009 [US1] Test that non-admin users can access their profile page and update allowed fields
 
 ## Phase 4: User Story 2 - Access Profile Update from Navigation (Priority: P2)
 
@@ -53,8 +53,8 @@ As a non-admin user, I want to easily access the profile update page from the ap
 
 **Independent Test**: The "Update Profile" option is visible and accessible to non-admin users in the dropdown menu near the logout button.
 
-- [ ] T010 [P] [US2] Add "Update Profile" link to the user dropdown in resources/views/partials/nav-ciso.blade.php
-- [ ] T011 [US2] Test that the "Update Profile" link is visible in the user dropdown for all users
+- [x] T010 [P] [US2] Add "Update Profile" link to the user dropdown in resources/views/partials/nav-ciso.blade.php
+- [x] T011 [US2] Test that the "Update Profile" link is visible in the user dropdown for all users
 
 ## Phase 5: User Story 3 - Restrict Email and Role Changes (Priority: P3)
 
@@ -62,15 +62,15 @@ As a system administrator, I want to ensure that non-admin users cannot change t
 
 **Independent Test**: The email and role fields are either hidden, disabled, or any attempts to modify them are rejected with appropriate validation.
 
-- [ ] T012 [P] [US3] Modify profile update form in resources/views/profile/edit.blade.php to conditionally hide email and role fields for non-admin users
-- [ ] T013 [P] [US3] Update input validation in UserController.php to reject email and role changes from non-admin users
-- [ ] T014 [P] [US3] Ensure validation errors are displayed properly when non-admin users attempt to submit email/role changes
-- [ ] T015 [US3] Test that non-admin users cannot update their email or role through the profile update form
-- [ ] T016 [US3] Test that admin users retain full editing capabilities
+- [x] T012 [P] [US3] Modify profile update form in resources/views/profile/edit.blade.php to conditionally hide email and role fields for non-admin users
+- [x] T013 [P] [US3] Update input validation in UserController.php to reject email and role changes from non-admin users
+- [x] T014 [P] [US3] Ensure validation errors are displayed properly when non-admin users attempt to submit email/role changes
+- [x] T015 [US3] Test that non-admin users cannot update their email or role through the profile update form
+- [x] T016 [US3] Test that admin users retain full editing capabilities
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
-- [ ] T017 Update profile edit view to maintain consistency with existing UI elements
-- [ ] T018 Add validation for non-admin users that matches the existing system requirements
-- [ ] T019 Test that user can only update their own profile (prevent other user profile access via URL manipulation)
-- [ ] T020 Document any changes to the public API or interfaces
+- [x] T017 Update profile edit view to maintain consistency with existing UI elements
+- [x] T018 Add validation for non-admin users that matches the existing system requirements
+- [x] T019 Test that user can only update their own profile (prevent other user profile access via URL manipulation)
+- [x] T020 Document any changes to the public API or interfaces

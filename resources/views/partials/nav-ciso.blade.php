@@ -76,8 +76,20 @@
                                 {{ auth()->user()->email }}
                             </span>
                         </div>
-                        @if (auth()->user()->role_id == 1)
                         <ul class="flex flex-col gap-1 border-b border-gray-200 pt-4 pb-3 dark:border-gray-800">
+                            <li>
+                                <a href="{{ route('profile.edit') }}"
+                                    class="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round fill-gray-500 group-hover:fill-gray-700 dark:fill-gray-400 dark:group-hover:fill-gray-300">
+                                        <circle cx="18" cy="15" r="3"/><circle cx="9" cy="7" r="4"/><path d="M10 15H6a4 4 0 0 0-4 4v2"/><path d="M22 21v-2a4 4 0 0 0-4-4h-5"/></svg>
+                                    <span>Update Profile</span>
+                                    <span class="text-theme-sm text-gray-700 dark:text-gray-400" dir="rtl"
+                                    style="font-family: inherit;">
+                                         تحديث الملف الشخصي
+                                    </span>
+                                </a>
+                            </li>
+                            @if (auth()->user()->role_id == 1)
                             <li>
                                 <a href="{{ route('users.index') }}"
                                     class="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
@@ -89,8 +101,8 @@
                                     </span>
                                 </a>
                             </li>
+                            @endif
                         </ul>
-                        @endif
                      
                         <form id="logout-form" method="POST" action="{{ route('login.destroy') }}">
                             @csrf
