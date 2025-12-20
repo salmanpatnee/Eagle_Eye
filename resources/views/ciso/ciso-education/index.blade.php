@@ -25,3 +25,6 @@
         </div>
     </div>
 @endsection
+@push('css')
+    <script src="https://cdn.tailwindcss.com"></script>
+@endpush

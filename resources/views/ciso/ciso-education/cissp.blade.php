@@ -1,6 +1,7 @@
 @extends('layouts.ciso-full')
 @section('title', 'Applying CISSP Knowledge in KSA')
 @section('title_ar', '')
+
 @section('content')
 
     <div class="px-7">
