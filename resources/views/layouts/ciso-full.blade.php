@@ -44,6 +44,5 @@
         <!-- ===== Main Content End ===== -->
     </div>
     <!-- ===== Content Area End ===== -->
-</div>
-<!-- ===== Page Wrapper End ===== -->
+</div><!-- ===== Page Wrapper End ===== -->
 @include('partials.footer')

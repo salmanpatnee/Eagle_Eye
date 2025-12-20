@@ -112,9 +112,9 @@ a {
     gap: 0.5rem; /* Space between icon and text */
 }
 
-.logout-btn i {
+/* .logout-btn i {
     font-size: 1.2rem;
-}
+} */
 
 .logout-btn:hover {
     background: #000000;
@@ -568,6 +568,9 @@ a {
 
     .area-subtitle {
         font-size: 0.8rem;
+    }
+    .admin-portal-btn, .logout-btn {
+        font-size: 12px;
     }
 }
 

@@ -32,7 +32,7 @@
                     </a>
                     <!-- Dropdown Start -->
                     <div x-show="dropdownOpen"
-                        class="z-1 shadow-theme-lg dark:bg-gray-dark absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800">
+                        class="z-1 shadow-theme-lg dark:bg-gray-dark absolute right-0 mt-[17px] flex w-[280px] flex-col rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800">
                         <div>
                             <span class="text-theme-sm block font-medium text-gray-700 dark:text-gray-400">
                                 {{ auth()->user()->role->role_name }}

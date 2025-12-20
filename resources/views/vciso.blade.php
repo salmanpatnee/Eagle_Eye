@@ -33,7 +33,13 @@
                     <i class='bx bx-cog'></i>
                     <span>Admin Portal</span>
                 </a>
+                @else
+                    <a href="{{ route('profile.edit') }}" class="admin-portal-btn" title="Update Profile">
+                        <i class='bx bx-cog'></i>
+                        <span>Update Profile</span>
+                    </a>
                 @endif
+                
                 <form id="logout-form" action="{{ route('login.destroy') }}" method="POST" style="display: inline;">
                     @csrf
                     <button type="submit" class="logout-btn" title="Logout">
