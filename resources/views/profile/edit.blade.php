@@ -1,4 +1,4 @@
-@extends('layouts.ciso')
+@extends('layouts.profile')
 
 @section('title', 'Update Profile')
 @section('title_ar', 'تحديث الملف الشخصي')
