@@ -132,6 +132,6 @@ class UserController extends Controller
 
         $user->update($attributes);
 
-        return redirect(route('vciso'))->with('success', 'Profile updated successfully.');
+        return redirect(route('profile.edit'))->with('success', 'Profile updated successfully.');
     }
 }
