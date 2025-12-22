@@ -1,0 +1,60 @@
+# API Contracts: Lead Notification Email
+
+## Overview
+The email notification functionality is integrated directly into the existing Lead creation endpoint. When a new lead is successfully stored in the database, an email notification is automatically sent to a hardcoded email address.
+
+## Endpoints
+The email sending functionality doesn't introduce any new endpoints but extends the behavior of the existing Lead store endpoint.
+
+### POST /leads
+**Purpose**: Creates a new lead and sends an email notification
+
+**Request**:
+- Method: `POST`
+- URL: `/leads`
+- Content-Type: `application/json`
+- Body: 
+  ```json
+  {
+    "name": "string (required)",
+    "email": "string (required, valid email format)",
+    "message": "string (required)"
+  }
+  ```
+
+**Response**:
+- Status: `200 OK`
+- Content-Type: `application/json`
+- Body:
+  ```json
+  {
+    "success": true,
+    "message": "Thank you for your inquiry! We will be in touch soon."
+  }
+  ```
+
+## Email Notification Contract
+
+### Trigger Condition
+- A new lead is successfully saved to the database
+
+### Email Recipient
+- Static hardcoded email address: `admin@example.com` (to be configured)
+
+### Email Content
+- Subject: `[New Lead] Inquiry from {lead_name}`
+- Body: Contains all fields from the lead record (name, email, message) formatted in HTML using Laravel's Markdown template
+
+### Delivery Behavior
+- Email is sent immediately after lead is saved to database
+- If email sending fails, the lead is still created successfully
+- Email delivery failures are logged for debugging purposes
+
+## Error Handling
+- If email service is unavailable, the lead is still created successfully
+- Email delivery failures are logged with error details
+- No error is returned to the client if email sending fails
+
+## Dependencies
+- Laravel's Mail service must be properly configured
+- SMTP settings must be available in environment configuration
