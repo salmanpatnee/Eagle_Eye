@@ -43,6 +43,12 @@
             color: #00053C;
             font-weight: bold;
         }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background-color: #cccccc !important;
+        }
     </style>
 </head>
 <body>
