@@ -164,7 +164,7 @@ function togglePasswordVisibility(fieldId) {
                         </x-form.grid-col>
                     </div>
                 @else
-                    <!-- Regular password field (optional) -->
+                    <!-- Regular password field (optional) - now with confirmation when password is entered -->
                     <x-form.grid-col>
                         <div class="relative">
                             <x-form.field type="password" label="Password" label_ar="كلمة المرور" name="password"
@@ -181,6 +181,23 @@ function togglePasswordVisibility(fieldId) {
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="relative">
+                            <x-form.field type="password" label="Confirm Password" label_ar="تأكيد كلمة المرور" name="password_confirmation"
+                                placeholder="Confirm New Password" id="optional_password_confirmation" />
+                            <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                                onclick="togglePasswordVisibility('optional_password_confirmation')">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                            </button>
+                            @error('password_confirmation')
+                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </x-form.grid-col>
+                    <x-form.grid-col>
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="role">
                                 Role
@@ -203,4 +220,50 @@ function togglePasswordVisibility(fieldId) {
             </div>
         </form>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+function togglePasswordVisibility(fieldId) {
+    const field = document.getElementById(fieldId);
+    const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
+    field.setAttribute('type', type);
+
+    // Toggle the eye icon
+    const button = field.parentElement.querySelector('button');
+    const path = button.querySelector('path');
+
+    if (type === 'text') {
+        // Change to eye-slash icon (closed eye)
+        path.setAttribute('d', 'M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M21 12a9 9 0 01-9 9m4.5-1.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0 0c0-.668.295-1.28 1.025-1.875M12 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z');
+    } else {
+        // Change back to eye icon (open eye)
+        path.setAttribute('d', 'M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z M15 12a3 3 0 11-6 0 3 3 0 016 0z');
+    }
+}
+
+// Function to show/hide password confirmation field based on password field input
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordField = document.getElementById('optional_password');
+    const passwordConfirmationField = document.getElementById('optional_password_confirmation');
+    const passwordConfirmationContainer = passwordConfirmationField.parentElement.parentElement;
+
+    if (passwordField && passwordConfirmationField) {
+        // Initially hide the confirmation field if password field is empty
+        if (!passwordField.value) {
+            passwordConfirmationContainer.style.display = 'none';
+        }
+
+        // Add event listener to show/hide confirmation field when password field changes
+        passwordField.addEventListener('input', function() {
+            if (this.value) {
+                passwordConfirmationContainer.style.display = 'grid';
+            } else {
+                passwordConfirmationContainer.style.display = 'none';
+                passwordConfirmationField.value = ''; // Clear confirmation field when password is cleared
+            }
+        });
+    }
+});
+</script>
 @endsection

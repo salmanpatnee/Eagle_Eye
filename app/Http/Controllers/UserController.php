@@ -217,7 +217,36 @@ class UserController extends Controller
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'username'  => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
-                'password'  => ['nullable', 'min:7', 'max:255'],
+                'password'  => [
+                    'nullable',
+                    'min:8',
+                    'confirmed',
+                    function ($attribute, $value, $fail) use ($user) {
+                        // If password is being updated (not null), apply strength requirements
+                        if (!empty($value)) {
+                            $errors = [];
+
+                            // Check for special character
+                            if (!preg_match('/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/', $value)) {
+                                $errors[] = 'at least one special character';
+                            }
+                            // Check for number
+                            if (!preg_match('/[0-9]/', $value)) {
+                                $errors[] = 'at least one number';
+                            }
+                            // Check that password is different from current password
+                            if (Hash::check($value, $user->password)) {
+                                $fail('The new password cannot be the same as your current password.');
+                                return;
+                            }
+
+                            if (!empty($errors)) {
+                                $fail('The password must contain ' . implode(' and ', $errors) . '.');
+                            }
+                        }
+                    }
+                ],
+                'password_confirmation' => 'nullable|required_with:password'
             ]);
 
             // Sanitize input data

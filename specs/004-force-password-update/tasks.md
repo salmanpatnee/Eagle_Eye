@@ -127,3 +127,15 @@ Finalize implementation with security, performance, and documentation considerat
 - [X] T035 Verify password update works with all supported browsers
 - [X] T036 Run tests to ensure all functionality works as expected
 - [X] T037 Update user onboarding documentation to reflect new requirement
+
+---
+
+## Enhancement: Apply Same Password Strength Rules for Ongoing Updates
+
+### Goal
+Ensure that the same password strength rules applied during the initial forced password update are also applied to any subsequent password updates by the user.
+
+### Tasks
+- [X] Update validation in updateProfile method to apply strength rules for all password updates
+- [X] Update profile view to include password confirmation field for regular updates
+- [X] Add JavaScript to conditionally show password confirmation field
