@@ -153,6 +153,9 @@
                             @enderror
                         </div>
                         <div class="relative">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="optional_password_confirmation">
+                                Confirm Password
+                            </label>
                             <input type="password" name="password_confirmation"
                                 placeholder="Confirm New Password" id="optional_password_confirmation"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
@@ -228,7 +231,7 @@ function togglePasswordVisibility(fieldId) {
 document.addEventListener('DOMContentLoaded', function() {
     const passwordField = document.getElementById('optional_password');
     const passwordConfirmationField = document.getElementById('optional_password_confirmation');
-    const passwordConfirmationContainer = passwordConfirmationField.parentElement;
+    const passwordConfirmationContainer = passwordConfirmationField.closest('div.relative'); // Get the parent div
 
     if (passwordField && passwordConfirmationField) {
         // Initially hide the confirmation field if password field is empty
