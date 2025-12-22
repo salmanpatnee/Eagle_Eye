@@ -14,7 +14,7 @@
                     @if ($resource->file_type === 'application/pdf')
                         <a href="{{ route('process.resource.template.pdf', $resource->id) }}">View</a>
                     @else
-                        <a href="{{ asset('storage/' . $resource->file_path) }}" download>Download</a>
+                        <a href="{{ route('process.resource.download', $resource->id) }}" download>Download</a>
                     @endif
                 </x-table.td>
             </tr>

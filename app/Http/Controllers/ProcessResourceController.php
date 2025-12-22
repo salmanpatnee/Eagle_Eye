@@ -77,6 +77,16 @@ class ProcessResourceController extends Controller
         return view('ciso/process/resources/glossary', compact('processWithGlossary'));
     }
 
+    public function download(Resource $resource)
+    {
+        // Ensure file exists
+        if (!Storage::disk('public')->exists($resource->file_path)) {
+            abort(404, 'File not found');
+        }
+
+        return Storage::disk('public')->download($resource->file_path, $resource->file_name);
+    }
+
     public function destroy(Resource $resource)
     {
 

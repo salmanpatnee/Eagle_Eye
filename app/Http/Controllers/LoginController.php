@@ -30,12 +30,12 @@ class LoginController extends Controller
         $todaysDate = Carbon::today();
 
         // Bypass expiration check if the user is a superadmin (id = 1)
-        if (Carbon::parse($systemExpiryDate->value)->lt($todaysDate) && auth()->user()->id !== 1) {
-            auth()->logout();
-            throw ValidationException::withMessages([
-                'username' => 'Your system trial has expired.'
-            ]);
-        }
+        // if (Carbon::parse($systemExpiryDate->value)->lt($todaysDate) && auth()->user()->id !== 1) {
+        //     auth()->logout();
+        //     throw ValidationException::withMessages([
+        //         'username' => 'Your system trial has expired.'
+        //     ]);
+        // }
 
         session()->regenerate();
 

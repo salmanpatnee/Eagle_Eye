@@ -130,6 +130,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/resource/{process:process_id}/template/', [ProcessResourceController::class, 'template'])->name('process.resource.template');
         Route::get('/resource/template/{resource}', [ProcessResourceController::class, 'pdfTemplate'])->name('process.resource.template.pdf');
         Route::get('/resource/{process:process_id}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');
+        Route::get('/resource/download/{resource}', [ProcessResourceController::class, 'download'])->name('process.resource.download');
         Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destroy'])->name('process.resource.destroy');
 
 
