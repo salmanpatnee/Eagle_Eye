@@ -139,3 +139,4 @@ Ensure that the same password strength rules applied during the initial forced p
 - [X] Update validation in updateProfile method to apply strength rules for all password updates
 - [X] Update profile view to include password confirmation field for regular updates
 - [X] Add JavaScript to conditionally show password confirmation field
+- [X] Fix visibility toggle alignment and functionality for all password fields

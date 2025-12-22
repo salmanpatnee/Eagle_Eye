@@ -3,37 +3,6 @@
 @section('title', 'Update Profile')
 @section('title_ar', 'تحديث الملف الشخصي')
 
-@push('scripts')
-<script>
-function togglePasswordVisibility(fieldId) {
-    const field = document.getElementById(fieldId);
-    if (!field) return;
-
-    const isPassword = field.getAttribute('type') === 'password';
-    field.setAttribute('type', isPassword ? 'text' : 'password');
-
-    // Find the button - it should be in the parent's parent (relative div)
-    const wrapper = field.closest('div');
-    const button = wrapper ? wrapper.querySelector('button[type="button"]') : null;
-
-    if (button) {
-        const svg = button.querySelector('svg');
-        const path = svg ? svg.querySelector('path') : null;
-
-        if (path) {
-            if (!isPassword) {
-                // Change to eye-slash icon (closed eye)
-                path.setAttribute('d', 'M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M21 12a9 9 0 01-9 9m4.5-1.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0 0c0-.668.295-1.28 1.025-1.875M12 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z');
-            } else {
-                // Change back to eye icon (open eye)
-                path.setAttribute('d', 'M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z M15 12a3 3 0 11-6 0 3 3 0 016 0z');
-            }
-        }
-    }
-}
-</script>
-@endpush
-
 @section('content')
     <div class="max-w-4xl mx-auto">
         <x-table.action-wrapper title="Update Profile">
@@ -103,9 +72,9 @@ function togglePasswordVisibility(fieldId) {
                                 <x-form.label label="Current Password" label_ar="كلمة المرور الحالية" for="current_password" required="true" />
                                 <div class="relative mb-6">
                                     <input type="password" id="current_password" name="current_password"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
                                         placeholder="Enter Current Password" required>
-                                    <button type="button" class="absolute top-1/2 right-0 -translate-y-1/2 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                                    <button type="button" class="absolute top-1/2 right-3 -translate-y-1/2 pr-1 flex items-center text-gray-500 hover:text-gray-700"
                                         onclick="togglePasswordVisibility('current_password')">
                                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -125,9 +94,9 @@ function togglePasswordVisibility(fieldId) {
                                 <x-form.label label="New Password" label_ar="كلمة المرور الجديدة" for="password" required="true" />
                                 <div class="relative">
                                     <input type="password" id="password" name="password"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
                                         placeholder="Enter New Password" required>
-                                    <button type="button" class="absolute top-1/2 right-0 -translate-y-1/2 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                                    <button type="button" class="absolute top-1/2 right-3 -translate-y-1/2 pr-1 flex items-center text-gray-500 hover:text-gray-700"
                                         onclick="togglePasswordVisibility('password')">
                                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -146,9 +115,9 @@ function togglePasswordVisibility(fieldId) {
                                 <x-form.label label="Confirm New Password" label_ar="تأكيد كلمة المرور الجديدة" for="password_confirmation" required="true" />
                                 <div class="relative">
                                     <input type="password" id="password_confirmation" name="password_confirmation"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
                                         placeholder="Confirm New Password" required>
-                                    <button type="button" class="absolute top-1/2 right-0 -translate-y-1/2 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                                    <button type="button" class="absolute top-1/2 right-3 -translate-y-1/2 pr-1 flex items-center text-gray-500 hover:text-gray-700"
                                         onclick="togglePasswordVisibility('password_confirmation')">
                                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -167,9 +136,11 @@ function togglePasswordVisibility(fieldId) {
                     <!-- Regular password field (optional) - now with confirmation when password is entered -->
                     <x-form.grid-col>
                         <div class="relative">
-                            <x-form.field type="password" label="Password" label_ar="كلمة المرور" name="password"
-                                placeholder="Enter New Password (leave blank to keep current)" id="optional_password" />
-                            <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                            <input type="password" name="password"
+                                placeholder="Enter New Password (leave blank to keep current)" id="optional_password"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
+                                value="{{ old('password') }}">
+                            <button type="button" class="absolute top-1/2 right-3 -translate-y-1/2 pr-1 flex items-center text-gray-500 hover:text-gray-700"
                                 onclick="togglePasswordVisibility('optional_password')">
                                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -182,9 +153,11 @@ function togglePasswordVisibility(fieldId) {
                             @enderror
                         </div>
                         <div class="relative">
-                            <x-form.field type="password" label="Confirm Password" label_ar="تأكيد كلمة المرور" name="password_confirmation"
-                                placeholder="Confirm New Password" id="optional_password_confirmation" />
-                            <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                            <input type="password" name="password_confirmation"
+                                placeholder="Confirm New Password" id="optional_password_confirmation"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
+                                value="{{ old('password_confirmation') }}">
+                            <button type="button" class="absolute top-1/2 right-3 -translate-y-1/2 pr-1 flex items-center text-gray-500 hover:text-gray-700"
                                 onclick="togglePasswordVisibility('optional_password_confirmation')">
                                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -222,23 +195,32 @@ function togglePasswordVisibility(fieldId) {
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
 function togglePasswordVisibility(fieldId) {
     const field = document.getElementById(fieldId);
-    const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
-    field.setAttribute('type', type);
+    if (!field) return;
 
-    // Toggle the eye icon
-    const button = field.parentElement.querySelector('button');
-    const path = button.querySelector('path');
+    const isPassword = field.getAttribute('type') === 'password';
+    field.setAttribute('type', isPassword ? 'text' : 'password');
 
-    if (type === 'text') {
-        // Change to eye-slash icon (closed eye)
-        path.setAttribute('d', 'M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M21 12a9 9 0 01-9 9m4.5-1.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0 0c0-.668.295-1.28 1.025-1.875M12 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z');
-    } else {
-        // Change back to eye icon (open eye)
-        path.setAttribute('d', 'M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z M15 12a3 3 0 11-6 0 3 3 0 016 0z');
+    // Find the button - it should be in the parent div with relative positioning
+    const wrapper = field.parentElement;
+    const button = wrapper ? wrapper.querySelector('button[type="button"]') : null;
+
+    if (button) {
+        const svg = button.querySelector('svg');
+        const path = svg ? svg.querySelector('path') : null;
+
+        if (path) {
+            if (!isPassword) {
+                // Change to eye-slash icon (closed eye)
+                path.setAttribute('d', 'M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M21 12a9 9 0 01-9 9m4.5-1.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0 0c0-.668.295-1.28 1.025-1.875M12 12a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z');
+            } else {
+                // Change back to eye icon (open eye)
+                path.setAttribute('d', 'M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z M15 12a3 3 0 11-6 0 3 3 0 016 0z');
+            }
+        }
     }
 }
 
@@ -246,7 +228,7 @@ function togglePasswordVisibility(fieldId) {
 document.addEventListener('DOMContentLoaded', function() {
     const passwordField = document.getElementById('optional_password');
     const passwordConfirmationField = document.getElementById('optional_password_confirmation');
-    const passwordConfirmationContainer = passwordConfirmationField.parentElement.parentElement;
+    const passwordConfirmationContainer = passwordConfirmationField.parentElement;
 
     if (passwordField && passwordConfirmationField) {
         // Initially hide the confirmation field if password field is empty
@@ -257,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add event listener to show/hide confirmation field when password field changes
         passwordField.addEventListener('input', function() {
             if (this.value) {
-                passwordConfirmationContainer.style.display = 'grid';
+                passwordConfirmationContainer.style.display = 'block';
             } else {
                 passwordConfirmationContainer.style.display = 'none';
                 passwordConfirmationField.value = ''; // Clear confirmation field when password is cleared
@@ -266,4 +248,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-@endsection
+@endpush
