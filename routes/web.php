@@ -27,10 +27,12 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
+});
+
+Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::view('/compliance', 'process/compliance')->name('compliance');
     Route::view('/vciso', 'vciso')->name('vciso');
-
-    Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 
 
     // ------------------- USERS -------------------

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 
 
 class UserController extends Controller
@@ -101,8 +103,14 @@ class UserController extends Controller
         // Authorization check: users can only edit their own profile
         // This is inherently handled by always using auth()->user() instead of route parameters
 
+        // Check if the user is an admin (role_id = 1) - they should not be forced to change password
+        $is_admin = $user->role_id == 1;
+
+        // If the user is not an admin and must change password, show the password update form
+        $show_password_update = !$is_admin && $user->must_change_password;
+
         // Only pass the user data to the view, not user roles for non-admins
-        return view('profile.edit', compact('user'));
+        return view('profile.edit', compact('user', 'show_password_update'));
     }
 
     /**
@@ -117,20 +125,118 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
-        // Validation rules for non-admin users (email and role are not allowed to be updated)
-        $attributes = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'username'  => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
-            'password'  => ['nullable', 'min:7', 'max:255'],
-        ]);
+        // Check if the user is an admin (role_id = 1) - they should not be forced to change password
+        $is_admin = $user->role_id == 1;
 
-        // Only update password if it's provided
-        if (empty($attributes['password'])) {
-            unset($attributes['password']);
+        // Check if user must change password
+        $must_change_password = !$is_admin && $user->must_change_password;
+
+        // Define validation rules based on whether user must change password
+        if ($must_change_password) {
+            // When user must change password, require new password fields
+            $attributes = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'username'  => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
+                'current_password' => 'required',
+                'password' => [
+                    'required',
+                    'min:8',
+                    'confirmed',
+                    function ($attribute, $value, $fail) use ($user) {
+                        $errors = [];
+
+                        // Check for special character
+                        if (!preg_match('/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/', $value)) {
+                            $errors[] = 'at least one special character';
+                        }
+                        // Check for number
+                        if (!preg_match('/[0-9]/', $value)) {
+                            $errors[] = 'at least one number';
+                        }
+                        // Check that password is different from current password
+                        if (Hash::check($value, $user->password)) {
+                            $fail('The new password cannot be the same as your current password.');
+                            return;
+                        }
+
+                        if (!empty($errors)) {
+                            $fail('The password must contain ' . implode(' and ', $errors) . '.');
+                        }
+                    }
+                ],
+                'password_confirmation' => 'required'
+            ]);
+
+            // Sanitize input data
+            $attributes['first_name'] = strip_tags($attributes['first_name']);
+            $attributes['last_name'] = strip_tags($attributes['last_name']);
+            $attributes['username'] = strip_tags($attributes['username']);
+
+            // Verify current password
+            if (!Hash::check($attributes['current_password'], $user->password)) {
+                // Log failed password update attempt
+                Log::warning('Failed password update attempt', [
+                    'user_id' => $user->id,
+                    'username' => $user->username,
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent(),
+                    'attempted_at' => now()
+                ]);
+
+                return redirect()->back()->withErrors(['current_password' => 'The current password is incorrect.']);
+            }
+
+            // Update the password
+            $user->password = $attributes['password'];
+
+            // Set must_change_password to false since user has now updated their password
+            $user->must_change_password = false;
+
+            // Only update other profile attributes if provided
+            $user->first_name = $attributes['first_name'];
+            $user->last_name = $attributes['last_name'];
+            $user->username = $attributes['username'];
+
+            $user->save();
+
+            // Flash success message to confirm password update
+            session()->flash('success', 'Your password has been updated successfully. You no longer need to change your password.');
+
+            // Log password update for security auditing
+            Log::info('Password updated', [
+                'user_id' => $user->id,
+                'username' => $user->username,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'updated_at' => now()
+            ]);
+        } else {
+            // Normal profile update (password is optional)
+            $attributes = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'username'  => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
+                'password'  => ['nullable', 'min:7', 'max:255'],
+            ]);
+
+            // Sanitize input data
+            $attributes['first_name'] = strip_tags($attributes['first_name']);
+            $attributes['last_name'] = strip_tags($attributes['last_name']);
+            $attributes['username'] = strip_tags($attributes['username']);
+
+            // Only update password if it's provided
+            if (!empty($attributes['password'])) {
+                $user->password = $attributes['password'];
+            }
+
+            // Update other profile attributes
+            $user->first_name = $attributes['first_name'];
+            $user->last_name = $attributes['last_name'];
+            $user->username = $attributes['username'];
+
+            $user->save();
         }
-
-        $user->update($attributes);
 
         return redirect(route('profile.edit'))->with('success', 'Profile updated successfully.');
     }

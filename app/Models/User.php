@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'must_change_password',
     ];
 
     /**
@@ -52,5 +53,16 @@ class User extends Authenticatable
 
     public function role() {
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
+    }
+
+    /**
+     * Get the user's must_change_password status.
+     *
+     * @param  string|null  $value
+     * @return bool
+     */
+    public function getMustChangePasswordAttribute($value)
+    {
+        return (bool) $value;
     }
 }

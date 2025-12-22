@@ -55,13 +55,13 @@ When a non-admin user (role_id != 1) with the 'must_change_password' flag set to
 Can be fully tested by logging in as a non-admin user with a default/temporary password and verifying they are redirected to the password update page, and cannot access other application features until they update their password.
 
 ### Tasks
-- [ ] T008 [US1] Update UserController to check must_change_password flag and redirect appropriately
-- [ ] T009 [US1] Implement middleware to redirect users with must_change_password flag to profile page
-- [ ] T010 [US1] Modify profile/edit.blade.php to show password update form when must_change_password is true
-- [ ] T011 [US1] Ensure non-admin users (role_id != 1) with must_change_password flag are redirected to password update
-- [ ] T012 [US1] Ensure admin users (role_id = 1) are not affected by this requirement
-- [ ] T013 [US1] Maintain user session during password update process
-- [ ] T014 [US1] Prevent access to other application features until password is updated
+- [X] T008 [US1] Update UserController to check must_change_password flag and redirect appropriately
+- [X] T009 [US1] Implement middleware to redirect users with must_change_password flag to profile page
+- [X] T010 [US1] Modify profile/edit.blade.php to show password update form when must_change_password is true
+- [X] T011 [US1] Ensure non-admin users (role_id != 1) with must_change_password flag are redirected to password update
+- [X] T012 [US1] Ensure admin users (role_id = 1) are not affected by this requirement
+- [X] T013 [US1] Maintain user session during password update process
+- [X] T014 [US1] Prevent access to other application features until password is updated
 
 ---
 
@@ -74,12 +74,12 @@ The system validates that the new password meets all security requirements: at l
 Can be tested by entering various password combinations on the update form and verifying that the system correctly validates against all requirements.
 
 ### Tasks
-- [ ] T015 [US2] Implement password length validation (at least 8 characters)
-- [ ] T016 [US2] Implement special character validation (!@#$%^&*()_+-=[]{}|;:,.<>?)
-- [ ] T017 [US2] Implement number validation in password
-- [ ] T018 [US2] Implement validation to prevent reusing current password
-- [ ] T019 [US2] Display specific error messages for each validation failure
-- [ ] T020 [US2] Test all validation rules with various password inputs
+- [X] T015 [US2] Implement password length validation (at least 8 characters)
+- [X] T016 [US2] Implement special character validation (!@#$%^&*()_+-=[]{}|;:,.<>?)
+- [X] T017 [US2] Implement number validation in password
+- [X] T018 [US2] Implement validation to prevent reusing current password
+- [X] T019 [US2] Display specific error messages for each validation failure
+- [X] T020 [US2] Test all validation rules with various password inputs
 
 ---
 
@@ -92,11 +92,11 @@ The password update form includes a confirmation field to ensure the user typed 
 Can be tested by using the password visibility toggle and confirming that the password is masked and unmasked appropriately, and that the confirmation field validates against the new password field.
 
 ### Tasks
-- [ ] T021 [US3] Add password confirmation field to profile/edit.blade.php form
-- [ ] T022 [US3] Implement validation to ensure new password matches confirmation
-- [ ] T023 [US3] Add visibility toggle functionality to password fields
-- [ ] T024 [US3] Test password confirmation validation
-- [ ] T025 [US3] Test visibility toggle functionality in different browsers
+- [X] T021 [US3] Add password confirmation field to profile/edit.blade.php form
+- [X] T022 [US3] Implement validation to ensure new password matches confirmation
+- [X] T023 [US3] Add visibility toggle functionality to password fields
+- [X] T024 [US3] Test password confirmation validation
+- [X] T025 [US3] Test visibility toggle functionality in different browsers
 
 ---
 
@@ -106,11 +106,11 @@ Can be tested by using the password visibility toggle and confirming that the pa
 Implement proper handling for edge cases and error conditions.
 
 ### Tasks
-- [ ] T026 Handle case when user refreshes password update page after submitting
-- [ ] T027 Handle password reset requests while on mandatory update page
-- [ ] T028 Handle session expiration during password update process
-- [ ] T029 Handle concurrent login attempts from different devices
-- [ ] T030 Log password update attempts for security auditing
+- [X] T026 Handle case when user refreshes password update page after submitting
+- [X] T027 Handle password reset requests while on mandatory update page
+- [X] T028 Handle session expiration during password update process
+- [X] T029 Handle concurrent login attempts from different devices
+- [X] T030 Log password update attempts for security auditing
 
 ---
 
@@ -120,10 +120,10 @@ Implement proper handling for edge cases and error conditions.
 Finalize implementation with security, performance, and documentation considerations.
 
 ### Tasks
-- [ ] T031 Add input sanitization to prevent injection attacks
-- [ ] T032 Review security implications of password update functionality
-- [ ] T033 Add documentation for administrators on how to set must_change_password flag
-- [ ] T034 Test performance impact of password validation
-- [ ] T035 Verify password update works with all supported browsers
-- [ ] T036 Run tests to ensure all functionality works as expected
-- [ ] T037 Update user onboarding documentation to reflect new requirement
+- [X] T031 Add input sanitization to prevent injection attacks
+- [X] T032 Review security implications of password update functionality
+- [X] T033 Add documentation for administrators on how to set must_change_password flag
+- [X] T034 Test performance impact of password validation
+- [X] T035 Verify password update works with all supported browsers
+- [X] T036 Run tests to ensure all functionality works as expected
+- [X] T037 Update user onboarding documentation to reflect new requirement
