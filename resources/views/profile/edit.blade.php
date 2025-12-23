@@ -133,41 +133,44 @@
                         </x-form.grid-col>
                     </div>
                 @else
-                    <!-- Regular password field (optional) - now with confirmation when password is entered -->
+                    <!-- Regular password field (optional) - now with confirmation always visible -->
                     <x-form.grid-col>
-                        <div class="relative">
-                            <input type="password" name="password"
-                                placeholder="Enter New Password (leave blank to keep current)" id="optional_password"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
-                                value="{{ old('password') }}">
-                            <button type="button" class="absolute top-1/2 right-3 -translate-y-1/2 pr-1 flex items-center text-gray-500 hover:text-gray-700"
-                                onclick="togglePasswordVisibility('optional_password')">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                    </path>
-                                </svg>
-                            </button>
+                        <div>
+                            <x-form.label label="New Password" for="optional_password" />
+                            <div class="relative">
+                                <input type="password" name="password"
+                                    placeholder="Enter New Password (leave blank to keep current)" id="optional_password"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
+                                    value="{{ old('password') }}">
+                                <button type="button" class="absolute top-1/2 right-3 -translate-y-1/2 pr-1 flex items-center text-gray-500 hover:text-gray-700"
+                                    onclick="togglePasswordVisibility('optional_password')">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
                             @error('password')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="relative">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="optional_password_confirmation">
-                                Confirm Password
-                            </label>
-                            <input type="password" name="password_confirmation"
-                                placeholder="Confirm New Password" id="optional_password_confirmation"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
-                                value="{{ old('password_confirmation') }}">
-                            <button type="button" class="absolute top-1/2 right-3 -translate-y-1/2 pr-1 flex items-center text-gray-500 hover:text-gray-700"
-                                onclick="togglePasswordVisibility('optional_password_confirmation')">
-                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                    </path>
-                                </svg>
-                            </button>
+                        <div>
+                            <x-form.label label="Confirm Password" for="optional_password_confirmation" />
+                            <div class="relative">
+                                <input type="password" name="password_confirmation"
+                                    placeholder="Confirm New Password" id="optional_password_confirmation"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
+                                    value="{{ old('password_confirmation') }}">
+                                <button type="button" class="absolute top-1/2 right-3 -translate-y-1/2 pr-1 flex items-center text-gray-500 hover:text-gray-700"
+                                    onclick="togglePasswordVisibility('optional_password_confirmation')">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
                             @error('password_confirmation')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -227,28 +230,6 @@ function togglePasswordVisibility(fieldId) {
     }
 }
 
-// Function to show/hide password confirmation field based on password field input
-document.addEventListener('DOMContentLoaded', function() {
-    const passwordField = document.getElementById('optional_password');
-    const passwordConfirmationField = document.getElementById('optional_password_confirmation');
-    const passwordConfirmationContainer = passwordConfirmationField.closest('div.relative'); // Get the parent div
-
-    if (passwordField && passwordConfirmationField) {
-        // Initially hide the confirmation field if password field is empty
-        if (!passwordField.value) {
-            passwordConfirmationContainer.style.display = 'none';
-        }
-
-        // Add event listener to show/hide confirmation field when password field changes
-        passwordField.addEventListener('input', function() {
-            if (this.value) {
-                passwordConfirmationContainer.style.display = 'block';
-            } else {
-                passwordConfirmationContainer.style.display = 'none';
-                passwordConfirmationField.value = ''; // Clear confirmation field when password is cleared
-            }
-        });
-    }
-});
+// No JavaScript needed for conditional display as confirm password field should always be visible
 </script>
 @endpush

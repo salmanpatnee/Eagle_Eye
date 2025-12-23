@@ -140,3 +140,4 @@ Ensure that the same password strength rules applied during the initial forced p
 - [X] Update profile view to include password confirmation field for regular updates
 - [X] Add JavaScript to conditionally show password confirmation field
 - [X] Fix visibility toggle alignment and functionality for all password fields
+- [X] Ensure password confirmation field is always visible in both forced and regular update scenarios
