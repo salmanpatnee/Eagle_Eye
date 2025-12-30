@@ -26,9 +26,9 @@ class ControlEvidenceController extends Controller
 
         if ($bestPracticeId != '') {
             $domains = Domain::join('best_practice_vs_domain_table as bvd', 'domain_table.main_domain_id', '=', 'bvd.main_domain_id')
-                ->join('best_practice_table as b', 'bvd.best_practices_id', '=', 'b.best_practices_id')
+                ->join('best_practice_table as b', 'bvd.best_practices_id', '=', 'b.best_practice_id')
                 ->when($bestPracticeId, function ($query, $bestPracticeId) {
-                    $query->where('b.best_practices_id', $bestPracticeId);
+                    $query->where('b.best_practice_id', $bestPracticeId);
                 })
                 ->select('domain_table.id', 'domain_table.main_domain_id', 'domain_table.main_domain_name')
                 ->get();
@@ -47,9 +47,9 @@ class ControlEvidenceController extends Controller
 
 
         $controlIds = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
-            ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
+            ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practice_id')
             ->when($bestPracticeId, function ($query, $bestPracticeId) {
-                $query->where('b.best_practices_id', $bestPracticeId);
+                $query->where('b.best_practice_id', $bestPracticeId);
             })->orderControls()
             ->pluck('control_master_table.control_id');
 
@@ -59,7 +59,7 @@ class ControlEvidenceController extends Controller
             ->join('control_master_table AS c', 'evc.control_id', '=', 'c.control_id')
             ->join('evidence_table AS e', 'evc.evidence_id', '=', 'e.evidence_id')
             ->join('control_master_table_vs_best_practice_table AS cvb', 'cvb.control_id', '=', 'c.control_id')
-            ->join('best_practice_table AS b', 'b.best_practices_id', '=', 'cvb.best_practice_id')
+            ->join('best_practice_table AS b', 'b.best_practice_id', '=', 'cvb.best_practice_id')
             ->join('control_master_table_vs_domain_table AS cvd', 'cvd.control_id', '=', 'c.control_id')
             ->join('domain_table AS d', 'd.main_domain_id', '=', 'cvd.main_domain_id')
             ->join('control_master_table_vs_sub_domain_table AS cvsd', 'cvsd.control_id', '=', 'c.control_id')
@@ -78,7 +78,7 @@ class ControlEvidenceController extends Controller
             )
 
             ->when($bestPracticeId, function ($query, $bestPracticeId) {
-                $query->where('b.best_practices_id', $bestPracticeId);
+                $query->where('b.best_practice_id', $bestPracticeId);
             })->when($domainId, function ($query, $domainId) {
                 $query->where('d.main_domain_id', $domainId);
             })->when($subDomainId, function ($query, $subDomainId) {
@@ -130,9 +130,9 @@ class ControlEvidenceController extends Controller
 
         if ($bestPracticeId != '') {
             $domains = Domain::join('best_practice_vs_domain_table as bvd', 'domain_table.main_domain_id', '=', 'bvd.main_domain_id')
-                ->join('best_practice_table as b', 'bvd.best_practices_id', '=', 'b.best_practices_id')
+                ->join('best_practice_table as b', 'bvd.best_practices_id', '=', 'b.best_practice_id')
                 ->when($bestPracticeId, function ($query, $bestPracticeId) {
-                    $query->where('b.best_practices_id', $bestPracticeId);
+                    $query->where('b.best_practice_id', $bestPracticeId);
                 })
                 ->select('domain_table.id', 'domain_table.main_domain_id', 'domain_table.main_domain_name')
                 ->get();
@@ -150,9 +150,9 @@ class ControlEvidenceController extends Controller
         }
 
         $controlIds = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
-            ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
+            ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practice_id')
             ->when($bestPracticeId, function ($query, $bestPracticeId) {
-                $query->where('b.best_practices_id', $bestPracticeId);
+                $query->where('b.best_practice_id', $bestPracticeId);
             })->orderControls()
             ->pluck('control_master_table.control_id');
 
@@ -163,7 +163,7 @@ class ControlEvidenceController extends Controller
             ->join('evidence_table AS e', 'evc.evidence_id', '=', 'e.evidence_id')
             ->join('control_master_table AS c', 'evc.control_id', '=', 'c.control_id')
             ->join('control_master_table_vs_best_practice_table AS cvb', 'cvb.control_id', '=', 'c.control_id')
-            ->join('best_practice_table AS b', 'b.best_practices_id', '=', 'cvb.best_practice_id')
+            ->join('best_practice_table AS b', 'b.best_practice_id', '=', 'cvb.best_practice_id')
             ->join('control_master_table_vs_domain_table AS cvd', 'cvd.control_id', '=', 'c.control_id')
             ->join('domain_table AS d', 'd.main_domain_id', '=', 'cvd.main_domain_id')
             ->join('control_master_table_vs_sub_domain_table AS cvsd', 'cvsd.control_id', '=', 'c.control_id')
@@ -179,7 +179,7 @@ class ControlEvidenceController extends Controller
                 DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"" . $baseUrl . "artifacts/', a.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts")
             )
             ->when($bestPracticeId, function ($query, $bestPracticeId) {
-                $query->where('b.best_practices_id', $bestPracticeId);
+                $query->where('b.best_practice_id', $bestPracticeId);
             })
             ->when($domainId, function ($query, $domainId) {
                 $query->where('d.main_domain_id', $domainId);

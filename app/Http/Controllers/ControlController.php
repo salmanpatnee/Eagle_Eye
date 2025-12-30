@@ -27,7 +27,7 @@ class ControlController extends Controller
 
         $controls = ControlMaster::select('control_master_table.id', 'control_master_table.control_id', 'control_master_table.control_name', 'control_master_table.owner_id')
             ->join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
-            ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
+            ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practice_id')
             ->with('risks')
             ->when($control, function ($query, $control) {
                 $query->where('control_master_table.control_id', $control);

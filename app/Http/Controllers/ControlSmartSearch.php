@@ -34,14 +34,14 @@ class ControlSmartSearch extends Controller
             ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(control_id, '-', 6), '-', -1) AS UNSIGNED), 0)"))->get();
 
         $controlIds = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
-            ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
+            ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practice_id')
             ->orderControls()
             ->pluck('control_master_table.control_id');
 
         $classifications    = Classification::select('id', 'classification_id', 'classification_name')->get();
         $categories         = Category::select('id', 'category_id', 'category_name')->get();
         $types              = ControlType::select('id', 'control_type_id', 'control_type_name')->get();
-        $practices          = BestPractice::select('id', 'best_practices_id', 'best_practices_name')->get();
+        $practices          = BestPractice::select('id', 'best_practice_id', 'best_practice_name')->get();
         $domains            = Domain::select('id', 'main_domain_id', 'main_domain_name')->get();
         $subDomains         = SubDomain::select('id', 'sub_domain_id', 'sub_domain_name')->get();
 
@@ -51,7 +51,7 @@ class ControlSmartSearch extends Controller
             ->join('control_master_table_vs_category_table as controlcategory', 'controlcategory.control_id', '=', 'controlmaster.control_id')
             ->join('category_table as category', 'category.category_id', '=', 'controlcategory.category_id')
             ->join('control_master_table_vs_best_practice_table as controlbestpractice', 'controlbestpractice.control_id', '=', 'controlmaster.control_id')
-            ->join('best_practice_table as bestpractice', 'bestpractice.best_practices_id', '=', 'controlbestpractice.best_practice_id')
+            ->join('best_practice_table as bestpractice', 'bestpractice.best_practice_id', '=', 'controlbestpractice.best_practice_id')
             ->join('control_master_table_vs_domain_table as controldomain', 'controldomain.control_id', '=', 'controlmaster.control_id')
             ->join('domain_table as domain', 'domain.main_domain_id', '=', 'controldomain.main_domain_id')
             ->join('control_master_table_vs_sub_domain_table as controlsubdomain', 'controlsubdomain.control_id', '=', 'controlmaster.control_id')
@@ -73,7 +73,7 @@ class ControlSmartSearch extends Controller
                 $query->where('controltype.control_type_id', $request->input('type'));
             })
             ->when($practice, function ($query) use ($request) {
-                $query->where('bestpractice.best_practices_id', $request->input('practice'));
+                $query->where('bestpractice.best_practice_id', $request->input('practice'));
             })
             ->when($domain, function ($query) use ($request) {
                 $query->where('domain.main_domain_id', $request->input('domain'));
@@ -150,7 +150,7 @@ class ControlSmartSearch extends Controller
         // return $relations;
 
 
-        $controls = $controls->paginate(20);
+        $controls = $controls->paginate(100);
 
         $controls->appends([
             'control_id'    => $controlId,

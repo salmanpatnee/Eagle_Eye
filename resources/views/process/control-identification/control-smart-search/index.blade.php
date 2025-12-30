@@ -2,6 +2,10 @@
 @section('title', 'Control Smart Search')
 @section('title_ar', 'الضوابط في البحث الذكي')
 @section('content')
+@push('css')
+    <script src="https://cdn.tailwindcss.com"></script>
+@endpush
+
     <div>
         <x-table.action-wrapper title="Control Smart Search" />
 
@@ -35,7 +39,7 @@
                     </div>
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="practice" :value="$practice"
-                            :data="$practices" id_key="best_practices_id" value_key="best_practices_name"
+                            :data="$practices" id_key="best_practice_id" value_key="best_practice_name"
                             onchange="this.form.submit()" hide_keys="true" />
                     </div>
                     <div>
@@ -52,32 +56,70 @@
             </div>
         </form>
 
-        <x-table.table>
-            <x-table.thead>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Sub-Domain" label_ar="المكون الفرعي" />
-                <x-table.th label="Domain" label_ar="المكون الأساسي" />
-                <x-table.th label="Best Practice" label_ar="أفضل الممارسات" />
-                <x-table.th label="Control Type" label_ar="نوع الضابط" />
-                <x-table.th label="Category" label_ar="فئة" />
-                <x-table.th label="Classification" label_ar="التصنيف" />
-                <x-table.th label="Control" label_ar=" الضوابط" />
-            </x-table.thead>
-            <x-table.tbody>
-                @forelse ($controls as $control)
-                    <tr>
-                        <x-table.td><x-table.serial :loop="$loop" :paginator="$controls" /></x-table.td>
-                        <x-table.td> {{ $control->sub_domain_name }}</x-table.td>
-                        <x-table.td> {{ $control->main_domain_name }}</x-table.td>
-                        <x-table.td> {{ $control->best_practices_name }}</x-table.td>
-                        <x-table.td> {{ $control->control_type_name }}</x-table.td>
-                        <x-table.td> {{ $control->category_name }}</x-table.td>
-                        <x-table.td> {{ $control->classification_name }}</x-table.td>
-                        <x-table.td> {{ $control->control_id }} - {{ $control->control_name }}</x-table.td>
-                    </tr>
-                @endforeach
-            </x-table.tbody>
-        </x-table.table>
+        <!-- Scrollable table container with fixed height, inner scroll and always visible scrollbar -->
+        <div class="relative">
+            <!-- Left fade effect -->
+            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-24 lg:block">
+                <div class="h-full w-full bg-gradient-to-r from-white dark:from-gray-800 to-transparent"></div>
+            </div>
+
+            <!-- Right fade effect -->
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-24 lg:block">
+                <div class="h-full w-full bg-gradient-to-l from-white dark:from-gray-800 to-transparent"></div>
+            </div>
+
+            <div class="overflow-x-auto overflow-y-auto max-h-[350px] custom-scrollbar">
+                <x-table.table>
+                    <x-table.thead class="sticky top-0 z-20 !bg-brand-950 !border-brand-500 !border-y !text-left">
+                        <x-table.th label="S.No" label_ar="رقم" />
+                        <x-table.th label="Sub-Domain" label_ar="المكون الفرعي" />
+                        <x-table.th label="Domain" label_ar="المكون الأساسي" />
+                        <x-table.th label="Best Practice" label_ar="أفضل الممارسات" />
+                        <x-table.th label="Control Type" label_ar="نوع الضابط" />
+                        <x-table.th label="Category" label_ar="فئة" />
+                        <x-table.th label="Classification" label_ar="التصنيف" />
+                        <x-table.th label="Control" label_ar=" الضوابط" />
+                    </x-table.thead>
+                    <x-table.tbody>
+                        @forelse ($controls as $control)
+                            <tr>
+                                <x-table.td><x-table.serial :loop="$loop" :paginator="$controls" /></x-table.td>
+                                <x-table.td> {{ $control->sub_domain_name }}</x-table.td>
+                                <x-table.td> {{ $control->main_domain_name }}</x-table.td>
+                                <x-table.td> {{ $control->best_practice_name }}</x-table.td>
+                                <x-table.td> {{ $control->control_type_name }}</x-table.td>
+                                <x-table.td> {{ $control->category_name }}</x-table.td>
+                                <x-table.td> {{ $control->classification_name }}</x-table.td>
+                                <x-table.td> {{ $control->control_id }} - {{ $control->control_name }}</x-table.td>
+                            </tr>
+                        @endforeach
+                    </x-table.tbody>
+                </x-table.table>
+            </div>
+        </div>
+
+        @push('css')
+        <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 12px;
+            width: 12px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        </style>
+        @endpush
 
         <x-pagination>
             {{ $controls->links() }}

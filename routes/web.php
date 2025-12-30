@@ -27,6 +27,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\MainDomainController;
 use App\Http\Controllers\SubDomainController;
 use App\Http\Controllers\TempFileUploadController;
+use Illuminate\Support\Facades\DB;
 
 Route::view('/', 'welcome')->name('welcome');
 Route::middleware(['guest'])->group(function () {
@@ -146,9 +147,14 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     
     Route::prefix('ciso')->group(function () {
 
+        // ------------------CISO Toolkit-------------------------
+
+
+        Route::view('/toolkit', 'ciso/ciso-toolkit/index')->name('ciso-toolkit.index');
+
         // ------------------CISO Education-------------------------
 
-        
+
         Route::get('/education', CisoEducationController::class)->name('ciso-education.index');
 
         Route::prefix('education')->group(function () {
@@ -242,6 +248,69 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
     // ------------------PITSTOP-------------------------
 
-    
+    // ------------------- TEMPORARY HR CERTIFICATION IMPORT -------------------
+
+    Route::get('/import-hr-certifications/{filePath}', function ($filePath) {
+        try {
+            // Decode the file path
+            $decodedPath = base64_decode($filePath);
+            $fullPath = base_path($decodedPath);
+
+            // Security check: ensure the file exists and is within the project
+            if (!file_exists($fullPath) || !str_starts_with(realpath($fullPath), realpath(base_path()))) {
+                return response()->json(['error' => 'File not found or invalid path'], 404);
+            }
+
+            if (($handle = fopen($fullPath, 'r')) !== false) {
+                $imported = 0;
+                $errors = [];
+                $rowNum = 0;
+
+                while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+                    $rowNum++;
+
+                    // Skip header row
+                    if ($rowNum === 1) {
+                        continue;
+                    }
+
+                    // Validate and prepare data
+                    $certificationId = trim($data[0] ?? '');
+                    $certificationTitle = trim($data[1] ?? '');
+                    $institute = trim($data[2] ?? null);
+
+                    if (empty($certificationId) || empty($certificationTitle)) {
+                        $errors[] = "Row {$rowNum}: Missing certification_id or certification_title";
+                        continue;
+                    }
+
+                    try {
+                        DB::table('hr_certification_table')->insert([
+                            'certification_id' => $certificationId,
+                            'certification_title' => $certificationTitle,
+                            'institute' => empty($institute) ? null : $institute,
+                        ]);
+                        $imported++;
+                    } catch (\Exception $e) {
+                        $errors[] = "Row {$rowNum}: " . $e->getMessage();
+                    }
+                }
+
+                fclose($handle);
+
+                return response()->json([
+                    'success' => true,
+                    'imported' => $imported,
+                    'errors' => $errors,
+                    'total_errors' => count($errors)
+                ]);
+            } else {
+                return response()->json(['error' => 'Unable to open file'], 500);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    })->name('import.hr-certifications');
+
 });
 
