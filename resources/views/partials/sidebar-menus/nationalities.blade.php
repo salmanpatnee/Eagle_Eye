@@ -1,0 +1,1 @@
+<x-sidebar-menu-item route_name="nationalities.index" label_ar="إدارة الجنسيات" label="Manage Nationalities" />

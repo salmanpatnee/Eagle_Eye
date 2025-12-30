@@ -25,6 +25,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\MainDomainController;
+use App\Http\Controllers\NationalityController;
 use App\Http\Controllers\SubDomainController;
 use App\Http\Controllers\TempFileUploadController;
 use Illuminate\Support\Facades\DB;
@@ -110,6 +111,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
     Route::middleware('superadmin')->group(function () {
         Route::resource('users', UserController::class);
+        Route::resource('nationalities', NationalityController::class);
         // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
         // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
     });

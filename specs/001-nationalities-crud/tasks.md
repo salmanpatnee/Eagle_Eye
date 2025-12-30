@@ -33,15 +33,15 @@ Per user story:
 
 ## Phase 1: Setup
 
-- [ ] T001 Create database migration for nationalities table with id, name, timestamps, and soft deletes
-- [ ] T002 Create Nationality model with fillable fields and soft deletes trait
-- [ ] T003 Create NationalityController with basic CRUD methods
+- [x] T001 Create database migration for nationalities table with id, name, timestamps, and soft deletes
+- [x] T002 Create Nationality model with fillable fields and soft deletes trait
+- [x] T003 Create NationalityController with basic CRUD methods
 
 ## Phase 2: Foundational
 
-- [ ] T004 Add resource routes for nationalities in web.php with superadmin middleware
-- [ ] T005 Create nationalities views directory structure under resources/views/process/hr/nationalities
-- [ ] T006 Create sidebar menu item for nationalities following the same pattern as users
+- [x] T004 Add resource routes for nationalities in web.php with superadmin middleware
+- [x] T005 Create nationalities views directory structure under resources/views/process/hr/nationalities
+- [x] T006 Create sidebar menu item for nationalities following the same pattern as users
 
 ## Phase 3: [US1] Admin Creates Nationality
 
@@ -51,12 +51,12 @@ Per user story:
 
 **Tasks**:
 
-- [ ] T007 [P] [US1] Create nationality migration with proper fields and constraints
-- [ ] T008 [P] [US1] Implement Nationality model with fillable fields and soft deletes
-- [ ] T009 [P] [US1] Add store method to NationalityController with validation
-- [ ] T010 [P] [US1] Create create.blade.php view in resources/views/process/hr/nationalities following User module pattern
-- [ ] T011 [US1] Run migration to create nationalities table
-- [ ] T012 [US1] Test nationality creation functionality
+- [x] T007 [P] [US1] Create nationality migration with proper fields and constraints
+- [x] T008 [P] [US1] Implement Nationality model with fillable fields and soft deletes
+- [x] T009 [P] [US1] Add store method to NationalityController with validation
+- [x] T010 [P] [US1] Create create.blade.php view in resources/views/process/hr/nationalities following User module pattern
+- [x] T011 [US1] Run migration to create nationalities table
+- [x] T012 [US1] Test nationality creation functionality
 
 ## Phase 4: [US2] Admin Views Nationalities
 
@@ -66,10 +66,10 @@ Per user story:
 
 **Tasks**:
 
-- [ ] T013 [P] [US2] Implement index method in NationalityController
-- [ ] T014 [P] [US2] Create index.blade.php view in resources/views/process/hr/nationalities following User module pattern
-- [ ] T015 [US2] Add pagination to nationality listing
-- [ ] T016 [US2] Test nationality listing functionality
+- [x] T013 [P] [US2] Implement index method in NationalityController
+- [x] T014 [P] [US2] Create index.blade.php view in resources/views/process/hr/nationalities following User module pattern
+- [x] T015 [US2] Add pagination to nationality listing
+- [x] T016 [US2] Test nationality listing functionality
 
 ## Phase 5: [US3] Admin Updates Nationality
 
@@ -79,10 +79,10 @@ Per user story:
 
 **Tasks**:
 
-- [ ] T017 [P] [US3] Implement edit method in NationalityController
-- [ ] T018 [P] [US3] Implement update method in NationalityController with validation
-- [ ] T019 [P] [US3] Enhance create.blade.php to handle both create and edit operations
-- [ ] T020 [US3] Test nationality update functionality
+- [x] T017 [P] [US3] Implement edit method in NationalityController
+- [x] T018 [P] [US3] Implement update method in NationalityController with validation
+- [x] T019 [P] [US3] Enhance create.blade.php to handle both create and edit operations
+- [x] T020 [US3] Test nationality update functionality
 
 ## Phase 6: [US4] Admin Deletes Nationality
 
@@ -92,10 +92,10 @@ Per user story:
 
 **Tasks**:
 
-- [ ] T021 [P] [US4] Implement destroy method in NationalityController with soft delete
-- [ ] T022 [P] [US4] Add delete confirmation to index view
-- [ ] T023 [P] [US4] Add validation to prevent deletion of referenced nationalities
-- [ ] T024 [US4] Test nationality deletion functionality with referential integrity check
+- [x] T021 [P] [US4] Implement destroy method in NationalityController with soft delete
+- [x] T022 [P] [US4] Add delete confirmation to index view
+- [x] T023 [P] [US4] Add validation to prevent deletion of referenced nationalities
+- [x] T024 [US4] Test nationality deletion functionality with referential integrity check
 
 ## Phase 7: [US5] HR Expert Master Table Uses Nationality ID
 
@@ -105,18 +105,18 @@ Per user story:
 
 **Tasks**:
 
-- [ ] T025 [P] [US5] Create migration to add nationality_id foreign key to hr_expert_master_table (keep existing nationality column for backward compatibility)
-- [ ] T026 [P] [US5] Update HR Expert model to include nationality relationship
-- [ ] T027 [P] [US5] Update HR Expert forms to include nationality dropdown alongside existing nationality column
-- [ ] T028 [P] [US5] Update HR Expert controller to handle both nationality_id and existing nationality column
-- [ ] T029 [US5] Test HR Expert form with nationality dropdown
-- [ ] T030 [US5] Test that nationality names display correctly in HR Expert records
+- [x] T025 [P] [US5] Create migration to add nationality_id foreign key to hr_expert_master_table (keep existing nationality column for backward compatibility)
+- [x] T026 [P] [US5] Update HR Expert model to include nationality relationship
+- [x] T027 [P] [US5] Update HR Expert forms to include nationality dropdown alongside existing nationality column
+- [x] T028 [P] [US5] Update HR Expert controller to handle both nationality_id and existing nationality column
+- [x] T029 [US5] Test HR Expert form with nationality dropdown
+- [x] T030 [US5] Test that nationality names display correctly in HR Expert records
 
 ## Phase 8: Polish & Cross-Cutting Concerns
 
-- [ ] T031 Add proper validation messages for nationality name uniqueness
-- [ ] T032 Add authorization checks to ensure only super admins can manage nationalities
-- [ ] T033 Add proper error handling for all nationality operations
-- [ ] T034 Update sidebar navigation to include the new "Manage Nationalities" menu item
-- [ ] T035 Test complete workflow from nationality creation to HR Expert association
-- [ ] T036 Update documentation with usage instructions
+- [x] T031 Add proper validation messages for nationality name uniqueness
+- [x] T032 Add authorization checks to ensure only super admins can manage nationalities
+- [x] T033 Add proper error handling for all nationality operations
+- [x] T034 Update sidebar navigation to include the new "Manage Nationalities" menu item
+- [x] T035 Test complete workflow from nationality creation to HR Expert association
+- [x] T036 Update documentation with usage instructions

@@ -21,41 +21,45 @@ class HumanResource extends Model
         return $this->belongsTo(HROrganization::class, 'organization_id', 'organization_id');
     }
 
+    public function nationality() {
+        return $this->belongsTo(Nationality::class, 'nationality_id', 'id');
+    }
+
     public function certifications()
     {
         return $this->belongsToMany(
             HRCertification::class,
-            'hr_expert_master_vs_certification_table',  
-            'expert_id',                
-            'certification_id',                                  
-            'expert_id',                           
-            'certification_id'  
-        );                                 
+            'hr_expert_master_vs_certification_table',
+            'expert_id',
+            'certification_id',
+            'expert_id',
+            'certification_id'
+        );
     }
 
     public function experties()
     {
         return $this->belongsToMany(
             Experties::class,
-            'hr_expert_master_vs_expertise_table',  
-            'expert_id',                
-            'expertise_id',                                  
-            'expert_id',                           
-            'expertise_id'  
-        );                                 
+            'hr_expert_master_vs_expertise_table',
+            'expert_id',
+            'expertise_id',
+            'expert_id',
+            'expertise_id'
+        );
     }
 
     public function roles()
     {
         return $this->belongsToMany(
             HRRole::class,
-            'hr_expert_master_vs_roles_table',  
-            'expert_id',                
-            'role_id',                                  
-            'expert_id',                           
-            'role_id'  
-        );                                 
+            'hr_expert_master_vs_roles_table',
+            'expert_id',
+            'role_id',
+            'expert_id',
+            'role_id'
+        );
     }
 
-    
+
 }

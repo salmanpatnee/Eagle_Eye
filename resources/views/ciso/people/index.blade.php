@@ -86,7 +86,9 @@
                                     <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->name }}</span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->nationality }}</span>
+                                    <span class="block font-medium text-gray-700 text-theme-sm">
+                                        {{ isset($row->nationality) && !is_string($row->nationality) ? $row->nationality->name : $row->nationality }}
+                                    </span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->industry->industry_name }}</span>

@@ -21,10 +21,8 @@ class HumanResourceController extends Controller
         $designation = $request->input('designation') ?? [];
 
 
-        $nationalities = HumanResource::select('nationality')
-            ->distinct()
-            ->orderBy('nationality', 'ASC')
-            ->pluck('nationality');
+        $nationalities = \App\Models\Nationality::orderBy('name', 'ASC')
+            ->pluck('name');
 
         $designations = HumanResource::select('designation')
             ->distinct()
@@ -52,14 +50,27 @@ class HumanResourceController extends Controller
             ->get();
 
 
-        $humanResource = HumanResource::select('expert_id', 'organization_id', 'industry_id', 'name', 'nationality', 'linkedin_profile', 'designation', 'experience')
-            ->with('certifications', 'organization', 'roles', 'industry', 'experties')
+        $humanResource = HumanResource::select('expert_id', 'organization_id', 'industry_id', 'name', 'nationality', 'nationality_id', 'linkedin_profile', 'designation', 'experience')
+            ->with('certifications', 'organization', 'roles', 'industry', 'experties', 'nationality')
             ->when($nationality, function ($query, $nationality) {
-                if (is_array($nationality)) {
-                    $query->whereIn('nationality', $nationality);
-                } else {
-                    $query->where('nationality', $nationality);
-                }
+                $query->where(function($q) use ($nationality) {
+                    $q->where(function($subquery) use ($nationality) {
+                        if (is_array($nationality)) {
+                            $subquery->whereIn('hr_expert_master_table.nationality', $nationality);
+                        } else {
+                            $subquery->where('hr_expert_master_table.nationality', $nationality);
+                        }
+                    })
+                    ->orWhere(function($subquery) use ($nationality) {
+                        $subquery->whereHas('nationality', function($nationalityQuery) use ($nationality) {
+                            if (is_array($nationality)) {
+                                $nationalityQuery->whereIn('name', $nationality);
+                            } else {
+                                $nationalityQuery->where('name', $nationality);
+                            }
+                        });
+                    });
+                });
             })
 
             ->when($designation, function ($query, $designation) {

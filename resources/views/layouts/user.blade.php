@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('sidebar-menu-items')
     @include('partials.sidebar-menus.users')
+    @include('partials.sidebar-menus.nationalities')
 @endsection
 @section('content')
     @yield('content')
