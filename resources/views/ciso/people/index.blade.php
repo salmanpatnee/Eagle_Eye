@@ -105,7 +105,7 @@
                                 <x-table.td>
                                     <x-table-list :data="$row->roles" id_key="" value_key="role_title" />
                                 </x-table.td>
-                                <x-table.td> <a href="{{ $row->linkedin_profile }}" target="_blank">
+                                <x-table.td> <a style="color: blue; text-decoration: underline;" href="{{ $row->linkedin_profile }}" target="_blank">
                                         {{ $row->linkedin_profile }}
                                     </a></x-table.td>
                                 @php $id = $row->expert_id @endphp

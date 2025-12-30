@@ -1,10 +1,22 @@
 <?php
 
+use App\Http\Controllers\ArtifactAttachmentController;
+use App\Http\Controllers\ArtifactController;
+use App\Http\Controllers\BestPracticeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CMSController;
 use App\Http\Controllers\CisoEducationController;
+use App\Http\Controllers\ControlAssessmentController;
+use App\Http\Controllers\ControlAssessmentFindingController;
+use App\Http\Controllers\ControlAuditFindingController;
+use App\Http\Controllers\ControlController;
+use App\Http\Controllers\ControlEvidenceController;
+use App\Http\Controllers\ControlSmartSearch;
+use App\Http\Controllers\ControlTypeController;
+use App\Http\Controllers\DataUploaderController;
+use App\Http\Controllers\EvidenceController;
 use App\Http\Controllers\HotTopicsController;
 use App\Http\Controllers\HumanResourceController;
 use App\Http\Controllers\ProcessController;
@@ -12,12 +24,9 @@ use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\LeadController;
-
-
-
-
-
-
+use App\Http\Controllers\MainDomainController;
+use App\Http\Controllers\SubDomainController;
+use App\Http\Controllers\TempFileUploadController;
 
 Route::view('/', 'welcome')->name('welcome');
 Route::middleware(['guest'])->group(function () {
@@ -28,7 +37,64 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
+    Route::resource('best-practices', BestPracticeController::class);
+    Route::resource('domains', MainDomainController::class);
+    Route::resource('sub-domains', SubDomainController::class);
+    Route::resource('controls', ControlController::class);
+    Route::resource('control-types', ControlTypeController::class);
+    // ------------------- CONTROL SMART SEARCH -------------------
+
+    Route::get('/control-smart-search', ControlSmartSearch::class)->name('control-smart-search.index');
+
+     // ------------------- EVIDENCE TRACKING -------------------
+
+    Route::resource('artifacts', ArtifactController::class);
+
+    // Artifact Data Uploader
+    Route::get('/upload-artifacts', [DataUploaderController::class, 'createArtifact'])->name('upload.artifact.create');
+    Route::post('/upload-artifacts', [DataUploaderController::class, 'uploadArtifact'])->name('upload.artifact.store');
+
+        Route::controller(ArtifactAttachmentController::class)->group(function () {
+        Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
+        Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
+    });
+    
+     // ------------------- EVIDENCE MANAGEMENT -------------------
+
+    Route::resource('evidences', EvidenceController::class);
+    Route::controller(EvidenceController::class)->group(function () {
+        Route::get('/evidence-list/view/{evidence:evidence_id}', 'viewevilist')->name('evidence.view');
+        Route::patch('/evidence-list/update_attachment', 'update_attachment')->name('evidence.update.attachment');
+        Route::post('/evidence-list/delete-attachment', 'delete_attachment')->name('evidence.delete.attachment');
+    });
+
+    Route::controller(ControlEvidenceController::class)->group(function () {
+        Route::get('/control-vs-evidence', 'controlVsEvidence')->name('control-vs-evidence.index');
+        Route::get('/evidence-vs-control', 'evidenceVsControl')->name('evidence-vs-control.index');
+    });
+
+    Route::controller(ControlAuditFindingController::class)->group(function () {
+        Route::get('/control-vs-audit-finding', 'controlVsAuditFinding')->name('control-vs-audit.index');
+        Route::get('/audit-finding-vs-control', 'auditFindingVsControl')->name('audit-vs-control.index');
+    });
+
+     // ------------------- CONTROL ASSESSMENT -------------------
+
+    Route::resource('control-assessments', ControlAssessmentController::class);
+    Route::resource('control-assessment-findings', ControlAssessmentFindingController::class)->except(['index', 'create', 'store']);
+    Route::controller(ControlAssessmentFindingController::class)->group(function () {
+        Route::get('/control-assessment-findings/create/{controlAssessment}', 'create')->name('control-assessment-findings.create');
+        Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
+        Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
+    });
+    
+    
+    
 });
+
+
+
+
 
 Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::view('/compliance', 'process/compliance')->name('compliance');
