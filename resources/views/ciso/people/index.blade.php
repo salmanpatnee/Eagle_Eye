@@ -1,7 +1,10 @@
-@extends('layouts.ciso-full')
+@extends('layouts.app-full')
 @section('title', 'Expert Resources')
 @section('title_ar', 'موارد الخبراء')
 @section('content')
+@push('css')
+    <script src="https://cdn.tailwindcss.com"></script>
+@endpush
     <div>
         <x-table.action-wrapper title="Expert Resources" />
 
@@ -50,70 +53,85 @@
             </div>
         </form>
 
-        <!-- Scrollable table container with fixed height, inner scroll and always visible scrollbar -->
-        <div class="relative">
-            <!-- Left fade effect -->
-            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-24 lg:block">
-                <div class="h-full w-full bg-gradient-to-r from-white dark:from-gray-800 to-transparent"></div>
-            </div>
-
-            <!-- Right fade effect -->
-            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-24 lg:block">
-                <div class="h-full w-full bg-gradient-to-l from-white dark:from-gray-800 to-transparent"></div>
-            </div>
-
-            <div class="overflow-x-auto overflow-y-auto max-h-[350px]">
-                <x-table.table>
-                    <x-table.thead>
-                        <x-table.th label="S.No" label_ar="رقم" />
-                        <x-table.th label="Expert ID" />
-                        <x-table.th label="Expert Name" />
-                        <x-table.th label="Nationality" />
-                        <x-table.th label="Industry" />
-                        <x-table.th label="Organization" />
-                        <x-table.th label="Certification" />
-                        <x-table.th label="Expertise" />
-                        <x-table.th label="Designation" />
-                        <x-table.th label="Experience" />
-                        <x-table.th label="Expert Roles" />
-                        <x-table.th label="LinkedIn Profile" />
-                    </x-table.thead>
-                    <x-table.tbody>
+        <!-- Data Table with Sticky Header -->
+        <div class="mt-6 border border-gray-200" style="max-height: 350px; overflow: auto;">
+            <div>
+                <table class="w-full" style="border-collapse: collapse; vertical-align: top;">
+                    <thead style="position: sticky; top: 0; z-index: 50;">
+                        <tr style="background-color: #00053C;">
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="width: 60px; background-color: #00053C; vertical-align: top;">S.No</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Expert ID</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Expert Name</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Nationality</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Industry</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Organization</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Certification</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Expertise</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Designation</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Experience</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Expert Roles</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">LinkedIn Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
                         @forelse ($humanResource as $row)
-                            <tr>
-                                <x-table.td><x-table.serial :loop="$loop" :paginator="$humanResource" /></x-table.td>
-                                <x-table.td> {{ $row->expert_id }}</x-table.td>
-                                <x-table.td> {{ $row->name }}</x-table.td>
-                                <x-table.td> {{ $row->nationality }}</x-table.td>
-                                <x-table.td> {{ $row->industry->industry_name }}</x-table.td>
-                                <x-table.td> {{ $row->organization->organization_name }}</x-table.td>
-                                <x-table.td>
-                                    <div style="width: 250px;">
-                                        <x-table-list :data="$row->certifications" id_key="certification_id"
-                                            value_key="certification_title" />
-                                    </div>
-                                </x-table.td>
-                                <x-table.td>
-                                    <div style="width: 250px;">
+                            <tr class="hover:bg-gray-50 transition-colors duration-150">
+                                <td class="px-4 py-3 text-center whitespace-nowrap" style="width: 60px; vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ ($humanResource->currentPage() - 1) * $humanResource->perPage() + $loop->index + 1 }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->expert_id }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->name }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->nationality }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->industry->industry_name }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->organization->organization_name }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">
+                                        <x-table-list :data="$row->certifications" id_key="certification_id" value_key="certification_title" />
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">
                                         <x-table-list :data="$row->experties" id_key="" value_key="expertise_title" />
-                                    </div>
-                                </x-table.td>
-                                <x-table.td>
-                                    <div style="width: 250px;">{{ $row->designation }}</div>
-                                </x-table.td>
-                                <x-table.td> {{ $row->experience }}</x-table.td>
-                                <x-table.td>
-                                    <x-table-list :data="$row->roles" id_key="" value_key="role_title" />
-                                </x-table.td>
-                                <x-table.td> <a style="color: blue; text-decoration: underline;" href="{{ $row->linkedin_profile }}" target="_blank">
-                                        {{ $row->linkedin_profile }}
-                                    </a></x-table.td>
-                                @php $id = $row->expert_id @endphp
-
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->designation }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->experience }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">
+                                        <x-table-list :data="$row->roles" id_key="" value_key="role_title" />
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">
+                                        <a style="color: blue; text-decoration: underline;" href="{{ $row->linkedin_profile }}" target="_blank">
+                                            {{ $row->linkedin_profile }}
+                                        </a>
+                                    </span>
+                                </td>
                             </tr>
-                        @endforeach
-                    </x-table.tbody>
-                </x-table.table>
+                        @empty
+                            <tr>
+                                <td colspan="12" class="px-4 py-8 text-center text-gray-500">
+                                    No expert resources found
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
 

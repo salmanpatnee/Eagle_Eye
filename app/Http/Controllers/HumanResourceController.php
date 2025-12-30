@@ -101,7 +101,7 @@ class HumanResourceController extends Controller
                     }
                 });
             })
-            ->paginate(20);
+            ->paginate(100);
 
         $humanResource->appends([
             'nationality'    => $nationality,

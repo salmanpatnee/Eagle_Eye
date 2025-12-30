@@ -56,70 +56,61 @@
             </div>
         </form>
 
-        <!-- Scrollable table container with fixed height, inner scroll and always visible scrollbar -->
-        <div class="relative">
-            <!-- Left fade effect -->
-            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-24 lg:block">
-                <div class="h-full w-full bg-gradient-to-r from-white dark:from-gray-800 to-transparent"></div>
-            </div>
-
-            <!-- Right fade effect -->
-            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-24 lg:block">
-                <div class="h-full w-full bg-gradient-to-l from-white dark:from-gray-800 to-transparent"></div>
-            </div>
-
-            <div class="overflow-x-auto overflow-y-auto max-h-[350px] custom-scrollbar">
-                <x-table.table>
-                    <x-table.thead class="sticky top-0 z-20 !bg-brand-950 !border-brand-500 !border-y !text-left">
-                        <x-table.th label="S.No" label_ar="رقم" />
-                        <x-table.th label="Sub-Domain" label_ar="المكون الفرعي" />
-                        <x-table.th label="Domain" label_ar="المكون الأساسي" />
-                        <x-table.th label="Best Practice" label_ar="أفضل الممارسات" />
-                        <x-table.th label="Control Type" label_ar="نوع الضابط" />
-                        <x-table.th label="Category" label_ar="فئة" />
-                        <x-table.th label="Classification" label_ar="التصنيف" />
-                        <x-table.th label="Control" label_ar=" الضوابط" />
-                    </x-table.thead>
-                    <x-table.tbody>
+        <!-- Data Table with Sticky Header -->
+        <div class="mt-6 border border-gray-200" style="max-height: 350px; overflow: auto;">
+            <div>
+                <table class="w-full" style="border-collapse: collapse; vertical-align: top;">
+                    <thead style="position: sticky; top: 0; z-index: 50;">
+                        <tr style="background-color: #00053C;">
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="width: 60px; background-color: #00053C; vertical-align: top;">S.No</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Sub-Domain</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Domain</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Best Practice</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Control Type</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Category</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Classification</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Control</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
                         @forelse ($controls as $control)
-                            <tr>
-                                <x-table.td><x-table.serial :loop="$loop" :paginator="$controls" /></x-table.td>
-                                <x-table.td> {{ $control->sub_domain_name }}</x-table.td>
-                                <x-table.td> {{ $control->main_domain_name }}</x-table.td>
-                                <x-table.td> {{ $control->best_practice_name }}</x-table.td>
-                                <x-table.td> {{ $control->control_type_name }}</x-table.td>
-                                <x-table.td> {{ $control->category_name }}</x-table.td>
-                                <x-table.td> {{ $control->classification_name }}</x-table.td>
-                                <x-table.td> {{ $control->control_id }} - {{ $control->control_name }}</x-table.td>
+                            <tr class="hover:bg-gray-50 transition-colors duration-150">
+                                <td class="px-4 py-3 text-center whitespace-nowrap" style="width: 60px; vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ ($controls->currentPage() - 1) * $controls->perPage() + $loop->index + 1 }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->sub_domain_name }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->main_domain_name }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->best_practice_name }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->control_type_name }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->category_name }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->classification_name }}</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->control_id }} - {{ $control->control_name }}</span>
+                                </td>
                             </tr>
-                        @endforeach
-                    </x-table.tbody>
-                </x-table.table>
+                        @empty
+                            <tr>
+                                <td colspan="8" class="px-4 py-8 text-center text-gray-500">
+                                    No controls found
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        @push('css')
-        <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            height: 12px;
-            width: 12px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-        </style>
-        @endpush
 
         <x-pagination>
             {{ $controls->links() }}
