@@ -11,7 +11,12 @@ class Industry extends Model
 
     protected $table = 'hr_industry_table';
 
-    protected $guarded = [];
-
+    protected $fillable = [
+        'industry_id',
+        'industry_name',
+        'sector',
+    ];
+    
+    // Disable timestamps
     public $timestamps = false;
 }

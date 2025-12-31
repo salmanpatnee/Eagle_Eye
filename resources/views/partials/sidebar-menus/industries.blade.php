@@ -1,0 +1,1 @@
+<x-sidebar-menu-item route_name="industries.index" label_ar="إدارة الصناعات" label="Manage Industries" />

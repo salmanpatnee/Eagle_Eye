@@ -2,6 +2,7 @@
 @section('sidebar-menu-items')
     @include('partials.sidebar-menus.users')
     @include('partials.sidebar-menus.nationalities')
+    @include('partials.sidebar-menus.industries')
 @endsection
 @section('content')
     @yield('content')

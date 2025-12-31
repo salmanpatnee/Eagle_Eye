@@ -19,6 +19,7 @@ use App\Http\Controllers\DataUploaderController;
 use App\Http\Controllers\EvidenceController;
 use App\Http\Controllers\HotTopicsController;
 use App\Http\Controllers\HumanResourceController;
+use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\ProductsController;
@@ -192,6 +193,9 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
         Route::get('/hr-experts', HumanResourceController::class)->name('hr-expert.index');
         // Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
         // Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
+
+        // Industry Management Routes
+        Route::resource('industries', IndustryController::class);
 
         // ------------------Process-------------------------
 
