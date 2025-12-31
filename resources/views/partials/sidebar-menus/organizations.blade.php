@@ -1,0 +1,1 @@
+<x-sidebar-menu-item route_name="organizations.index" label_ar="إدارة المنظمات" label="Manage Organizations" />
