@@ -1,0 +1,1 @@
+<x-sidebar-menu-item route_name="certifications.index" label_ar="إدارة الشهادات" label="Manage Certifications" />

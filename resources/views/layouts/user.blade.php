@@ -3,6 +3,8 @@
     @include('partials.sidebar-menus.users')
     @include('partials.sidebar-menus.nationalities')
     @include('partials.sidebar-menus.industries')
+    @include('partials.sidebar-menus.organizations')
+    @include('partials.sidebar-menus.certifications')
 @endsection
 @section('content')
     @yield('content')

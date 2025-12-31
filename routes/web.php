@@ -19,6 +19,8 @@ use App\Http\Controllers\DataUploaderController;
 use App\Http\Controllers\EvidenceController;
 use App\Http\Controllers\HotTopicsController;
 use App\Http\Controllers\HumanResourceController;
+use App\Http\Controllers\HROrganizationController;
+use App\Http\Controllers\HRCertificationController;
 use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
@@ -113,6 +115,8 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::middleware('superadmin')->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('nationalities', NationalityController::class);
+        Route::resource('organizations', HROrganizationController::class);
+        Route::resource('certifications', HRCertificationController::class);
         // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
         // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
     });
