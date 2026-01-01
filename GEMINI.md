@@ -1,4 +1,4 @@
-# CISO 360 GRC System - Developer Guide
+﻿# CISO 360 GRC System - Developer Guide
 
 ## Project Overview
 
@@ -385,7 +385,7 @@ php artisan up
 
 ---
 
-**Last Updated**: 2025-12-06
+**Last Updated**: 2026-01-01
 **Laravel Version**: 9.52.16
 **PHP Version**: 8.0.2+
 **Project Name**: CISO 360 GRC System
