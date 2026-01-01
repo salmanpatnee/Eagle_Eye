@@ -121,7 +121,7 @@ class ImportMappingDownloadTest extends TestCase
     {
         $mapping = ImportMapping::create([
             'name' => 'Risk Control',
-            'left_entity_label' => 'معرّف المخاطر',
+            'left_entity_label' => 'رمز  المخاطر',
             'right_entity_label' => 'معرف التحكم',
             'left_entity_table' => 'risk_master_table',
             'left_entity_column' => 'risk_id',

@@ -5,6 +5,8 @@
     @include('partials.sidebar-menus.industries')
     @include('partials.sidebar-menus.organizations')
     @include('partials.sidebar-menus.certifications')
+    @include('partials.sidebar-menus.expertises')
+    @include('partials.sidebar-menus.designations')
 @endsection
 @section('content')
     @yield('content')

@@ -16,7 +16,9 @@ use App\Http\Controllers\ControlEvidenceController;
 use App\Http\Controllers\ControlSmartSearch;
 use App\Http\Controllers\ControlTypeController;
 use App\Http\Controllers\DataUploaderController;
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EvidenceController;
+use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\HotTopicsController;
 use App\Http\Controllers\HumanResourceController;
 use App\Http\Controllers\HROrganizationController;
@@ -200,6 +202,12 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
         // Industry Management Routes
         Route::resource('industries', IndustryController::class);
+
+        // Expertise Management Routes
+        Route::resource('expertises', ExpertiseController::class);
+
+        // Designation Management Routes
+        Route::resource('designations', DesignationController::class);
 
         // ------------------Process-------------------------
 

@@ -61,5 +61,10 @@ class HumanResource extends Model
         );
     }
 
+    public function designation()
+    {
+        return $this->belongsTo(Designation::class, 'designation_id', 'id');
+    }
+
 
 }
