@@ -8,14 +8,14 @@
             <x-action.button label="Add Certification" label_ar="إضافة شهادة" route_name="certifications.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+      <x-table.table-sticky>
+            <x-table.thead-sticky>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Certification ID" label_ar="رمز الشهادة" />
                 <x-table.th label="Certification Title" label_ar="عنوان الشهادة" />
                 <x-table.th label="Institute" label_ar="المعهد" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
+            </x-table.thead-sticky>
             <x-table.tbody>
                 @foreach ($certifications as $certification)
                     <tr>
@@ -32,7 +32,7 @@
                     </tr>
                 @endforeach
             </x-table.tbody>
-        </x-table.table>
+       </x-table.table-sticky>
 
         <x-pagination>
             {{ $certifications->links() }}

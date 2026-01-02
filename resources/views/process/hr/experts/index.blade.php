@@ -49,20 +49,16 @@
         </form> --}}
 
         {{-- <x-table.table> --}}
-            <div class="mt-6 border border-gray-200" style="max-height: 450px; overflow: auto;">
-            <div>
-                <table class="w-full" style="border-collapse: collapse; vertical-align: top;">
+        <x-table.table-sticky>
             {{-- <x-table.thead> --}}
-                <thead style="position: sticky; top: 0; z-index: 50;">
-                <tr style="background-color: #00053C;">
+            <x-table.thead-sticky>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Name" label_ar="الاسم" />
                 <x-table.th label="Organization" label_ar="منظمة" />
                 <x-table.th label="Industry" label_ar="الصناعة" />
                 <x-table.th label="Designation" label_ar="تعيين" />
                 <x-table.th label="Action" label_ar="إجراء " />
-                </tr>    
-            </thead>
+            </x-table.thead-sticky>
             {{-- </x-table.thead> --}}
             <x-table.tbody>
                 @foreach ($humanResource as $expert)
@@ -81,9 +77,7 @@
                     </tr>
                 @endforeach
             </x-table.tbody>
-            </table>
-            </div>
-            </div>
+        </x-table.table-sticky>
         {{-- </x-table.table> --}}
 
         <x-pagination>

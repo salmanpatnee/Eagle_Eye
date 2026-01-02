@@ -7,12 +7,12 @@
         <x-action.button label="Add Expertise" label_ar="إضافة خبرة" route_name="expertises.create" />
     </x-table.action-wrapper>
 
-    <x-table.table>
-        <x-table.thead>
+ <x-table.table-sticky>
+            <x-table.thead-sticky>
             <x-table.th label="S.No" label_ar="رقم" />
             <x-table.th label="Expertise Title" label_ar="عنوان الخبرة" />
             <x-table.th label="Action" label_ar="إجراء" />
-        </x-table.thead>
+            </x-table.thead-sticky>
         <x-table.tbody>
             @foreach ($expertises as $expertise)
                 <tr>
@@ -31,8 +31,9 @@
 
                 </tr>
             @endforeach
+        
         </x-table.tbody>
-    </x-table.table>
+    </x-table.table-sticky>
 
     <x-pagination>
         {{ $expertises->links() }}

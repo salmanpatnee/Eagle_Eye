@@ -8,14 +8,14 @@
             <x-action.button label="Add Organization" label_ar="إضافة منظمة" route_name="organizations.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+      <x-table.table-sticky>
+            <x-table.thead-sticky>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Organization ID" label_ar="رمز المنظمة" />
                 <x-table.th label="Organization Name" label_ar="اسم المنظمة" />
                 <x-table.th label="Contact Number" label_ar="رقم الاتصال" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
+            </x-table.thead-sticky>
             <x-table.tbody>
                 @foreach ($organizations as $organization)
                     <tr>
@@ -32,7 +32,7 @@
                     </tr>
                 @endforeach
             </x-table.tbody>
-        </x-table.table>
+        </x-table.table-sticky>
 
         <x-pagination>
             {{ $organizations->links() }}
