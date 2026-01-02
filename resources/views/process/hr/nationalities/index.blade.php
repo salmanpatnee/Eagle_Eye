@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.hr')
 @section('title', 'Nationalities')
 @section('title_ar', 'الجنسيات')
 

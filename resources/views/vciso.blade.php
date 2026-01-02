@@ -105,7 +105,7 @@
             <!-- Three Core Areas -->
             <section class="core-areas-section">
                 <div class="areas-container">
-                    <a href="{{ route('hr-expert.index') }}" class="area-card people-card">
+                    <a href="{{ route('people.index') }}" class="area-card people-card">
                         <div class="area-icon">👥</div>
                         <h3 class="area-title">People</h3>
                         <p class="area-subtitle">Human Resource</p>

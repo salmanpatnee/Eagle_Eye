@@ -8,7 +8,7 @@
     <div>
         <x-table.action-wrapper title="Expert Resources" />
 
-        <form action="{{ route('hr-expert.index') }}" method="GET">
+        <form action="{{ route('people.index') }}" method="GET">
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
                 <x-form.grid-3-col>
                     <div>
@@ -47,7 +47,7 @@
             <div class="flex items-center justify-center gap-5 border-t border-gray-100 p-4">
                 <button class="action-btn text-center justify-center">Filter Resource</button>
                 {{-- <button class="action-btn-secondary text-center justify-center w-20">
-                    <a href="{{ route('hr-expert.index') }}">Reset</a>
+                    <a href="{{ route('people.index') }}">Reset</a>
                 </button> --}}
 
             </div>

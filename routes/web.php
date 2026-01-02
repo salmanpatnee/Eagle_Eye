@@ -31,6 +31,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\MainDomainController;
 use App\Http\Controllers\NationalityController;
+use App\Http\Controllers\PeoplesController;
 use App\Http\Controllers\SubDomainController;
 use App\Http\Controllers\TempFileUploadController;
 use Illuminate\Support\Facades\DB;
@@ -116,6 +117,16 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
     Route::middleware('superadmin')->group(function () {
         Route::resource('users', UserController::class);
+        Route::resource('hr-experts', HumanResourceController::class);
+        
+        // Industry Management Routes
+        Route::resource('industries', IndustryController::class);
+
+        // Expertise Management Routes
+        Route::resource('expertises', ExpertiseController::class);
+
+        // Designation Management Routes
+        Route::resource('designations', DesignationController::class);
         Route::resource('nationalities', NationalityController::class);
         Route::resource('organizations', HROrganizationController::class);
         Route::resource('certifications', HRCertificationController::class);
@@ -196,18 +207,12 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
         // ------------------People-------------------------
 
-        Route::get('/hr-experts', HumanResourceController::class)->name('hr-expert.index');
+        
+        Route::get('/peoples', PeoplesController::class)->name('people.index');
         // Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
         // Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
 
-        // Industry Management Routes
-        Route::resource('industries', IndustryController::class);
-
-        // Expertise Management Routes
-        Route::resource('expertises', ExpertiseController::class);
-
-        // Designation Management Routes
-        Route::resource('designations', DesignationController::class);
+        
 
         // ------------------Process-------------------------
 

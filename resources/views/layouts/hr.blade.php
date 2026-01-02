@@ -1,0 +1,13 @@
+@extends('layouts.app')
+@section('sidebar-menu-items')
+@include('partials.sidebar-menus.hr-experts')
+    @include('partials.sidebar-menus.nationalities')
+    @include('partials.sidebar-menus.industries')
+    @include('partials.sidebar-menus.organizations')
+    @include('partials.sidebar-menus.certifications')
+    @include('partials.sidebar-menus.expertises')
+    @include('partials.sidebar-menus.designations')
+@endsection
+@section('content')
+    @yield('content')
+@endsection

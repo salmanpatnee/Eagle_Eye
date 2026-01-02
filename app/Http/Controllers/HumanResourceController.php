@@ -11,7 +11,12 @@ use Illuminate\Http\Request;
 
 class HumanResourceController extends Controller
 {
-    public function __invoke(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
     {
         $nationality = $request->input('nationality') ?? [];
         $industry = $request->input('industry_name') ?? [];
@@ -50,7 +55,7 @@ class HumanResourceController extends Controller
             ->get();
 
 
-        $humanResource = HumanResource::select('expert_id', 'organization_id', 'industry_id', 'name', 'nationality', 'nationality_id', 'linkedin_profile', 'designation', 'experience')
+        $humanResource = HumanResource::select('id', 'expert_id', 'organization_id', 'industry_id', 'name', 'nationality', 'nationality_id', 'linkedin_profile', 'designation', 'experience')
             ->with('certifications', 'organization', 'roles', 'industry', 'experties', 'nationality')
             ->when($nationality, function ($query, $nationality) {
                 $query->where(function($q) use ($nationality) {
@@ -125,6 +130,181 @@ class HumanResourceController extends Controller
 
         $id = null;
 
-        return view('ciso/people/index', compact('id', 'humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation'));
+        return view('process.hr.experts.index', compact('id', 'humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $nationalities = \App\Models\Nationality::orderBy('name', 'ASC')->get();
+        $industries = \App\Models\Industry::orderBy('industry_name', 'ASC')->get();
+        $organizations = \App\Models\HROrganization::orderBy('organization_name', 'ASC')->get();
+        $designations = \App\Models\Designation::orderBy('designation_name', 'ASC')->get();
+        $certifications = \App\Models\HRCertification::orderBy('certification_title', 'ASC')->get();
+        $experties = \App\Models\Experties::orderBy('expertise_title', 'ASC')->get();
+        $humanResource = null;
+
+        return view('process.hr.experts.create', compact('nationalities', 'industries', 'organizations', 'designations', 'certifications', 'experties', 'humanResource'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'expert_id' => 'required|string|max:255|unique:hr_expert_master_table,expert_id',
+            'name' => 'required|string|max:255',
+            // 'email' => 'nullable|email|max:255',
+            // 'phone' => 'nullable|string|max:255',
+            'linkedin_profile' => 'nullable|url|max:255',
+            'experience' => 'nullable|string|max:255',
+            'organization_id' => 'required|exists:hr_organization_table,organization_id',
+            'industry_id' => 'required|exists:hr_industry_table,industry_id',
+            'nationality_id' => 'required|exists:nationalities,id',
+            'designation_id' => 'required|exists:hr_designation_table,id',
+            'certifications' => 'nullable|array',
+            'certifications.*' => 'exists:hr_certification_table,certification_id',
+            'experties' => 'nullable|array',
+            'experties.*' => 'exists:hr_expertise_table,expertise_id',
+        ]);
+
+        $humanResource = HumanResource::create([
+            'expert_id' => $validated['expert_id'],
+            'name' => $validated['name'],
+            // 'email' => $validated['email'] ?? null,
+            // 'phone' => $validated['phone'] ?? null,
+            'linkedin_profile' => $validated['linkedin_profile'] ?? null,
+            'experience' => $validated['experience'] ?? null,
+            'organization_id' => $validated['organization_id'],
+            'industry_id' => $validated['industry_id'],
+            'nationality_id' => $validated['nationality_id'],
+            'designation_id' => $validated['designation_id'],
+            // Backward compatibility
+            'nationality' => \App\Models\Nationality::find($validated['nationality_id'])->name,
+            'designation' => \App\Models\Designation::find($validated['designation_id'])->designation_name,
+        ]);
+
+        if (isset($validated['certifications'])) {
+            $humanResource->certifications()->sync($validated['certifications']);
+        }
+
+        if (isset($validated['experties'])) {
+            $humanResource->experties()->sync($validated['experties']);
+        }
+
+        return redirect()->route('hr-experts.index')->with('success', 'HR Expert created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $humanResource = HumanResource::with('certifications', 'experties', 'organization', 'industry', 'nationality', 'designation')->findOrFail($id);
+      
+        return view('process.hr.experts.show', compact('humanResource'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $humanResource = HumanResource::with('certifications', 'experties')->findOrFail($id);
+        $nationalities = \App\Models\Nationality::orderBy('name', 'ASC')->get();
+        $industries = \App\Models\Industry::orderBy('industry_name', 'ASC')->get();
+        $organizations = \App\Models\HROrganization::orderBy('organization_name', 'ASC')->get();
+        $designations = \App\Models\Designation::orderBy('designation_name', 'ASC')->get();
+        $certifications = \App\Models\HRCertification::orderBy('certification_title', 'ASC')->get();
+        $experties = \App\Models\Experties::orderBy('expertise_title', 'ASC')->get();
+
+        return view('process.hr.experts.create', compact('humanResource', 'nationalities', 'industries', 'organizations', 'designations', 'certifications', 'experties'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $humanResource = HumanResource::findOrFail($id);
+
+        $validated = $request->validate([
+            'expert_id' => 'required|string|max:255|unique:hr_expert_master_table,expert_id,' . $humanResource->id,
+            'name' => 'required|string|max:255',
+            // 'email' => 'nullable|email|max:255',
+            // 'phone' => 'nullable|string|max:255',
+            'linkedin_profile' => 'nullable|url|max:255',
+            'experience' => 'nullable|string|max:255',
+            'organization_id' => 'required|exists:hr_organization_table,organization_id',
+            'industry_id' => 'required|exists:hr_industry_table,industry_id',
+            'nationality_id' => 'required|exists:nationalities,id',
+            'designation_id' => 'required|exists:hr_designation_table,id',
+            'certifications' => 'nullable|array',
+            'certifications.*' => 'exists:hr_certification_table,certification_id',
+            'experties' => 'nullable|array',
+            'experties.*' => 'exists:hr_expertise_table,expertise_id',
+        ]);
+
+        $humanResource->update([
+            'expert_id' => $validated['expert_id'],
+            'name' => $validated['name'],
+            // 'email' => $validated['email'] ?? null,
+            // 'phone' => $validated['phone'] ?? null,
+            'linkedin_profile' => $validated['linkedin_profile'] ?? null,
+            'experience' => $validated['experience'] ?? null,
+            'organization_id' => $validated['organization_id'],
+            'industry_id' => $validated['industry_id'],
+            'nationality_id' => $validated['nationality_id'],
+            'designation_id' => $validated['designation_id'],
+            // Backward compatibility
+            'nationality' => \App\Models\Nationality::find($validated['nationality_id'])->name,
+            'designation' => \App\Models\Designation::find($validated['designation_id'])->designation_name,
+        ]);
+
+        if (isset($validated['certifications'])) {
+            $humanResource->certifications()->sync($validated['certifications']);
+        } else {
+            $humanResource->certifications()->detach();
+        }
+
+        if (isset($validated['experties'])) {
+            $humanResource->experties()->sync($validated['experties']);
+        } else {
+            $humanResource->experties()->detach();
+        }
+
+        return redirect()->route('hr-experts.index')->with('success', 'HR Expert updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $humanResource = HumanResource::findOrFail($id);
+        $humanResource->delete();
+
+        return redirect()->route('hr-experts.index')->with('success', 'HR Expert deleted successfully.');
     }
 }
