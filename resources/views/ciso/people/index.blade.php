@@ -41,16 +41,22 @@
                         <x-form.multiselect label="Designation" label_ar="تعيين" name="designation[]" :value="$designation"
                             :custom_data="$designations" />
                     </div>
-                </x-form.grid-3-col>
-
-            </div>
-            <div class="flex items-center justify-center gap-5 border-t border-gray-100 p-4">
+                    <div>
+                        <x-form.multiselect label="Experience" label_ar="خبرة سنوات" name="experience[]" :value="$experience"
+                            :custom_data="$experienceRanges" />
+                    </div>
+                    <div class="flex items-center justify-center gap-5 border-t border-gray-100 p-4">
                 <button class="action-btn text-center justify-center">Filter Resource</button>
                 {{-- <button class="action-btn-secondary text-center justify-center w-20">
                     <a href="{{ route('people.index') }}">Reset</a>
                 </button> --}}
 
             </div>
+        </form>
+                </x-form.grid-3-col>
+
+            </div>
+            
         </form>
 
         <!-- Data Table with Sticky Header -->

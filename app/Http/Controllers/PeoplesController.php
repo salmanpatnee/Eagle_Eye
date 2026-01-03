@@ -8,6 +8,7 @@ use App\Models\HROrganization;
 use App\Models\HumanResource;
 use App\Models\Industry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PeoplesController extends Controller
 {
@@ -19,6 +20,7 @@ class PeoplesController extends Controller
         $certification = $request->input('certification_title') ?? [];
         $expertise = $request->input('expertise_title') ?? [];
         $designation = $request->input('designation') ?? [];
+        $experience = $request->input('experience') ?? [];
 
 
         $nationalities = \App\Models\Nationality::orderBy('name', 'ASC')
@@ -49,6 +51,13 @@ class PeoplesController extends Controller
             ->orderBy('expertise_title', 'ASC')
             ->get();
 
+        $experienceRanges = collect([
+            '0-5 years',
+            '6-10 years',
+            '11-15 years',
+            '16-20 years',
+            '20+ years'
+        ]);
 
         $humanResource = HumanResource::select('expert_id', 'organization_id', 'industry_id', 'name', 'nationality', 'nationality_id', 'linkedin_profile', 'designation', 'experience')
             ->with('certifications', 'organization', 'roles', 'industry', 'experties', 'nationality')
@@ -112,6 +121,29 @@ class PeoplesController extends Controller
                     }
                 });
             })
+            ->when($experience, function ($query, $experience) {
+                $query->where(function($q) use ($experience) {
+                    foreach ((array)$experience as $range) {
+                        switch($range) {
+                            case '0-5 years':
+                                $q->orWhereBetween(DB::raw('CAST(experience AS UNSIGNED)'), [0, 5]);
+                                break;
+                            case '6-10 years':
+                                $q->orWhereBetween(DB::raw('CAST(experience AS UNSIGNED)'), [6, 10]);
+                                break;
+                            case '11-15 years':
+                                $q->orWhereBetween(DB::raw('CAST(experience AS UNSIGNED)'), [11, 15]);
+                                break;
+                            case '16-20 years':
+                                $q->orWhereBetween(DB::raw('CAST(experience AS UNSIGNED)'), [16, 20]);
+                                break;
+                            case '20+ years':
+                                $q->orWhere(DB::raw('CAST(experience AS UNSIGNED)'), '>=', 21);
+                                break;
+                        }
+                    }
+                });
+            })
             ->paginate(10);
 
         $humanResource->appends([
@@ -121,10 +153,11 @@ class PeoplesController extends Controller
             'certification_title' => $certification,
             'expertise_title' => $expertise,
             'designation' => $designation,
+            'experience' => $experience,
         ]);
 
         $id = null;
 
-        return view('ciso/people/index', compact('id', 'humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation'));
+        return view('ciso/people/index', compact('id', 'humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation', 'experienceRanges', 'experience'));
     }
 }
