@@ -143,12 +143,11 @@ class HumanResourceController extends Controller
         $nationalities = \App\Models\Nationality::orderBy('name', 'ASC')->get();
         $industries = \App\Models\Industry::orderBy('industry_name', 'ASC')->get();
         $organizations = \App\Models\HROrganization::orderBy('organization_name', 'ASC')->get();
-        $designations = \App\Models\Designation::orderBy('designation_name', 'ASC')->get();
         $certifications = \App\Models\HRCertification::orderBy('certification_title', 'ASC')->get();
         $experties = \App\Models\Experties::orderBy('expertise_title', 'ASC')->get();
         $humanResource = null;
 
-        return view('process.hr.experts.create', compact('nationalities', 'industries', 'organizations', 'designations', 'certifications', 'experties', 'humanResource'));
+        return view('process.hr.experts.create', compact('nationalities', 'industries', 'organizations', 'certifications', 'experties', 'humanResource'));
     }
 
     /**
@@ -169,7 +168,7 @@ class HumanResourceController extends Controller
             'organization_id' => 'required|exists:hr_organization_table,organization_id',
             'industry_id' => 'required|exists:hr_industry_table,industry_id',
             'nationality_id' => 'required|exists:nationalities,id',
-            'designation_id' => 'required|exists:hr_designation_table,id',
+            'designation' => 'required|string|max:255',
             'certifications' => 'nullable|array',
             'certifications.*' => 'exists:hr_certification_table,certification_id',
             'experties' => 'nullable|array',
@@ -186,10 +185,9 @@ class HumanResourceController extends Controller
             'organization_id' => $validated['organization_id'],
             'industry_id' => $validated['industry_id'],
             'nationality_id' => $validated['nationality_id'],
-            'designation_id' => $validated['designation_id'],
             // Backward compatibility
             'nationality' => \App\Models\Nationality::find($validated['nationality_id'])->name,
-            'designation' => \App\Models\Designation::find($validated['designation_id'])->designation_name,
+            'designation' => $validated['designation'],
         ]);
 
         if (isset($validated['certifications'])) {
@@ -211,7 +209,7 @@ class HumanResourceController extends Controller
      */
     public function show($id)
     {
-        $humanResource = HumanResource::with('certifications', 'experties', 'organization', 'industry', 'nationality', 'designation')->findOrFail($id);
+        $humanResource = HumanResource::with('certifications', 'experties', 'organization', 'industry', 'nationality')->findOrFail($id);
       
         return view('process.hr.experts.show', compact('humanResource'));
     }
@@ -228,11 +226,10 @@ class HumanResourceController extends Controller
         $nationalities = \App\Models\Nationality::orderBy('name', 'ASC')->get();
         $industries = \App\Models\Industry::orderBy('industry_name', 'ASC')->get();
         $organizations = \App\Models\HROrganization::orderBy('organization_name', 'ASC')->get();
-        $designations = \App\Models\Designation::orderBy('designation_name', 'ASC')->get();
         $certifications = \App\Models\HRCertification::orderBy('certification_title', 'ASC')->get();
         $experties = \App\Models\Experties::orderBy('expertise_title', 'ASC')->get();
 
-        return view('process.hr.experts.create', compact('humanResource', 'nationalities', 'industries', 'organizations', 'designations', 'certifications', 'experties'));
+        return view('process.hr.experts.create', compact('humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties'));
     }
 
     /**
@@ -256,7 +253,7 @@ class HumanResourceController extends Controller
             'organization_id' => 'required|exists:hr_organization_table,organization_id',
             'industry_id' => 'required|exists:hr_industry_table,industry_id',
             'nationality_id' => 'required|exists:nationalities,id',
-            'designation_id' => 'required|exists:hr_designation_table,id',
+            'designation' => 'required|string|max:255',
             'certifications' => 'nullable|array',
             'certifications.*' => 'exists:hr_certification_table,certification_id',
             'experties' => 'nullable|array',
@@ -273,10 +270,9 @@ class HumanResourceController extends Controller
             'organization_id' => $validated['organization_id'],
             'industry_id' => $validated['industry_id'],
             'nationality_id' => $validated['nationality_id'],
-            'designation_id' => $validated['designation_id'],
             // Backward compatibility
             'nationality' => \App\Models\Nationality::find($validated['nationality_id'])->name,
-            'designation' => \App\Models\Designation::find($validated['designation_id'])->designation_name,
+            'designation' => $validated['designation'],
         ]);
 
         if (isset($validated['certifications'])) {

@@ -85,9 +85,8 @@
                             :value="$humanResource->nationality_id ?? ''" />
                     </div>
                     <div>
-                        <x-form.select label="Designation" label_ar="تعيين" name="designation_id" required="true"
-                            :data="$designations" id_key="id" value_key="designation_name"  hide_keys="true"
-                            :value="$humanResource->designation_id ?? ''" />
+                        <x-form.field label="Designation" label_ar="تعيين" name="designation" required="true"
+                            placeholder="Enter Designation" :value="$humanResource->designation ?? ''" />
                     </div>
                 </x-form.grid-col>  
 
