@@ -1,0 +1,226 @@
+Warning: TTY mode is not supported on Windows platform.
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\ExampleTest[39m
+  [32;1m✓[39;22m[39m [2mthat true is true[22m[39m
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Feature\ExampleTest[39m
+  [32;1m✓[39;22m[39m [2mthe application returns a successful response[22m[39m
+
+  [37;41;1m FAIL [39;49;22m[39m Tests\Feature\ImportMappingDownloadTest[39m
+  [31;1m⨯[39;22m[39m [2muser can download template[22m[39m
+  [31;1m⨯[39;22m[39m [2mdownload filename follows pattern[22m[39m
+  [31;1m⨯[39;22m[39m [2mspecial characters in filename are sanitized[22m[39m
+  [31;1m⨯[39;22m[39m [2mnonexistent mapping returns 404[22m[39m
+  [31;1m⨯[39;22m[39m [2mmultiple downloads produce identical files[22m[39m
+  [31;1m⨯[39;22m[39m [2minternational characters are preserved in labels[22m[39m
+
+  [37;41;1m FAIL [39;49;22m[39m Tests\Feature\User\ProfileUpdateTest[39m
+  [31;1m⨯[39;22m[39m [2mnon admin user can update own profile[22m[39m
+  [31;1m⨯[39;22m[39m [2mnon admin user cannot update email or role[22m[39m
+  [31;1m⨯[39;22m[39m [2madmin user can still update all fields[22m[39m
+
+  [2m---[22m
+
+  [31;1m• Tests\Feature\ImportMappingDownloadTest [39;22m> [31;1muser can download template[39;22m
+  [41;1m Illuminate\Database\QueryException [49;22m
+
+[39;1m  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.control_master_table' doesn't exist (SQL: ALTER TABLE `control_master_table` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci)[39;22m
+
+  at [32mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39m:[32m760[39m
+    756▕         // If an exception occurs when attempting to run a query, we'll format the error
+    757▕         // message to include the bindings with SQL, which will make this exception a
+    758▕         // lot more helpful to the developer instead of just the database's errors.
+    759▕         catch (Exception $e) {
+  ➜ 760▕             throw new QueryException(
+    761▕                 $query, $this->prepareBindings($bindings), $e
+    762▕             );
+    763▕         }
+    764▕     }
+
+  [33m1   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m545[39;22m
+  [90m    PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.control_master_table' doesn't exist")[39m
+
+  [33m2   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m545[39;22m
+  [90m    PDOStatement::execute()[39m
+
+  [31;1m• Tests\Feature\ImportMappingDownloadTest [39;22m> [31;1mdownload filename follows pattern[39;22m
+  [41;1m Illuminate\Database\QueryException [49;22m
+
+[39;1m  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist (SQL: select * from `user_roles`)[39;22m
+
+  at [32mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39m:[32m760[39m
+    756▕         // If an exception occurs when attempting to run a query, we'll format the error
+    757▕         // message to include the bindings with SQL, which will make this exception a
+    758▕         // lot more helpful to the developer instead of just the database's errors.
+    759▕         catch (Exception $e) {
+  ➜ 760▕             throw new QueryException(
+    761▕                 $query, $this->prepareBindings($bindings), $e
+    762▕             );
+    763▕         }
+    764▕     }
+
+  [33m1   [39m[39;1m[internal][39;22m:[39;1m0[39;22m
+  [90m    Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(App\Providers\AppServiceProvider))[39m
+
+  [33m2   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m414[39;22m
+  [90m    PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist")[39m
+
+  [31;1m• Tests\Feature\ImportMappingDownloadTest [39;22m> [31;1mspecial characters in filename are sanitized[39;22m
+  [41;1m Illuminate\Database\QueryException [49;22m
+
+[39;1m  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist (SQL: select * from `user_roles`)[39;22m
+
+  at [32mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39m:[32m760[39m
+    756▕         // If an exception occurs when attempting to run a query, we'll format the error
+    757▕         // message to include the bindings with SQL, which will make this exception a
+    758▕         // lot more helpful to the developer instead of just the database's errors.
+    759▕         catch (Exception $e) {
+  ➜ 760▕             throw new QueryException(
+    761▕                 $query, $this->prepareBindings($bindings), $e
+    762▕             );
+    763▕         }
+    764▕     }
+
+  [33m1   [39m[39;1m[internal][39;22m:[39;1m0[39;22m
+  [90m    Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(App\Providers\AppServiceProvider))[39m
+
+  [33m2   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m414[39;22m
+  [90m    PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist")[39m
+
+  [31;1m• Tests\Feature\ImportMappingDownloadTest [39;22m> [31;1mnonexistent mapping returns 404[39;22m
+  [41;1m Illuminate\Database\QueryException [49;22m
+
+[39;1m  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist (SQL: select * from `user_roles`)[39;22m
+
+  at [32mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39m:[32m760[39m
+    756▕         // If an exception occurs when attempting to run a query, we'll format the error
+    757▕         // message to include the bindings with SQL, which will make this exception a
+    758▕         // lot more helpful to the developer instead of just the database's errors.
+    759▕         catch (Exception $e) {
+  ➜ 760▕             throw new QueryException(
+    761▕                 $query, $this->prepareBindings($bindings), $e
+    762▕             );
+    763▕         }
+    764▕     }
+
+  [33m1   [39m[39;1m[internal][39;22m:[39;1m0[39;22m
+  [90m    Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(App\Providers\AppServiceProvider))[39m
+
+  [33m2   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m414[39;22m
+  [90m    PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist")[39m
+
+  [31;1m• Tests\Feature\ImportMappingDownloadTest [39;22m> [31;1mmultiple downloads produce identical files[39;22m
+  [41;1m Illuminate\Database\QueryException [49;22m
+
+[39;1m  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist (SQL: select * from `user_roles`)[39;22m
+
+  at [32mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39m:[32m760[39m
+    756▕         // If an exception occurs when attempting to run a query, we'll format the error
+    757▕         // message to include the bindings with SQL, which will make this exception a
+    758▕         // lot more helpful to the developer instead of just the database's errors.
+    759▕         catch (Exception $e) {
+  ➜ 760▕             throw new QueryException(
+    761▕                 $query, $this->prepareBindings($bindings), $e
+    762▕             );
+    763▕         }
+    764▕     }
+
+  [33m1   [39m[39;1m[internal][39;22m:[39;1m0[39;22m
+  [90m    Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(App\Providers\AppServiceProvider))[39m
+
+  [33m2   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m414[39;22m
+  [90m    PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist")[39m
+
+  [31;1m• Tests\Feature\ImportMappingDownloadTest [39;22m> [31;1minternational characters are preserved in labels[39;22m
+  [41;1m Illuminate\Database\QueryException [49;22m
+
+[39;1m  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist (SQL: select * from `user_roles`)[39;22m
+
+  at [32mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39m:[32m760[39m
+    756▕         // If an exception occurs when attempting to run a query, we'll format the error
+    757▕         // message to include the bindings with SQL, which will make this exception a
+    758▕         // lot more helpful to the developer instead of just the database's errors.
+    759▕         catch (Exception $e) {
+  ➜ 760▕             throw new QueryException(
+    761▕                 $query, $this->prepareBindings($bindings), $e
+    762▕             );
+    763▕         }
+    764▕     }
+
+  [33m1   [39m[39;1m[internal][39;22m:[39;1m0[39;22m
+  [90m    Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(App\Providers\AppServiceProvider))[39m
+
+  [33m2   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m414[39;22m
+  [90m    PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist")[39m
+
+  [31;1m• Tests\Feature\User\ProfileUpdateTest [39;22m> [31;1mnon admin user can update own profile[39;22m
+  [41;1m Illuminate\Database\QueryException [49;22m
+
+[39;1m  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist (SQL: select * from `user_roles`)[39;22m
+
+  at [32mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39m:[32m760[39m
+    756▕         // If an exception occurs when attempting to run a query, we'll format the error
+    757▕         // message to include the bindings with SQL, which will make this exception a
+    758▕         // lot more helpful to the developer instead of just the database's errors.
+    759▕         catch (Exception $e) {
+  ➜ 760▕             throw new QueryException(
+    761▕                 $query, $this->prepareBindings($bindings), $e
+    762▕             );
+    763▕         }
+    764▕     }
+
+  [33m1   [39m[39;1m[internal][39;22m:[39;1m0[39;22m
+  [90m    Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(App\Providers\AppServiceProvider))[39m
+
+  [33m2   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m414[39;22m
+  [90m    PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist")[39m
+
+  [31;1m• Tests\Feature\User\ProfileUpdateTest [39;22m> [31;1mnon admin user cannot update email or role[39;22m
+  [41;1m Illuminate\Database\QueryException [49;22m
+
+[39;1m  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist (SQL: select * from `user_roles`)[39;22m
+
+  at [32mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39m:[32m760[39m
+    756▕         // If an exception occurs when attempting to run a query, we'll format the error
+    757▕         // message to include the bindings with SQL, which will make this exception a
+    758▕         // lot more helpful to the developer instead of just the database's errors.
+    759▕         catch (Exception $e) {
+  ➜ 760▕             throw new QueryException(
+    761▕                 $query, $this->prepareBindings($bindings), $e
+    762▕             );
+    763▕         }
+    764▕     }
+
+  [33m1   [39m[39;1m[internal][39;22m:[39;1m0[39;22m
+  [90m    Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(App\Providers\AppServiceProvider))[39m
+
+  [33m2   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m414[39;22m
+  [90m    PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist")[39m
+
+  [31;1m• Tests\Feature\User\ProfileUpdateTest [39;22m> [31;1madmin user can still update all fields[39;22m
+  [41;1m Illuminate\Database\QueryException [49;22m
+
+[39;1m  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist (SQL: select * from `user_roles`)[39;22m
+
+  at [32mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39m:[32m760[39m
+    756▕         // If an exception occurs when attempting to run a query, we'll format the error
+    757▕         // message to include the bindings with SQL, which will make this exception a
+    758▕         // lot more helpful to the developer instead of just the database's errors.
+    759▕         catch (Exception $e) {
+  ➜ 760▕             throw new QueryException(
+    761▕                 $query, $this->prepareBindings($bindings), $e
+    762▕             );
+    763▕         }
+    764▕     }
+
+  [33m1   [39m[39;1m[internal][39;22m:[39;1m0[39;22m
+  [90m    Illuminate\Foundation\Application::Illuminate\Foundation\{closure}(Object(App\Providers\AppServiceProvider))[39m
+
+  [33m2   [39m[39;1mC:\Users\salmanabdul.ghani\Herd\ciso-360\vendor\laravel\framework\src\Illuminate\Database\Connection.php[39;22m:[39;1m414[39;22m
+  [90m    PDOException::("SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ciso-360.user_roles' doesn't exist")[39m
+
+
+  [37;1mTests:  [39;22m[31;1m9 failed[39;22m[39m, [39m[32;1m2 passed[39;22m
+  [37;1mTime:   [39;22m[39m58.08s[39m
+
+

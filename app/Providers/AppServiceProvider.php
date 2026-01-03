@@ -28,7 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // Paginator::useBootstrap();
 
-        $roles = UserRole::all();
-        View::share('roles', $roles);
+        // Prevent database queries during migrations/tests
+        if (!app()->runningInConsole()) {
+            $roles = UserRole::all();
+            View::share('roles', $roles);
+        }
     }
 }

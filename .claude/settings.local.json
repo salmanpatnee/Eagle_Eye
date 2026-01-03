@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Skill(frontend-design)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(php artisan:*)",
+      "Bash(php -v:*)",
+      "Bash(composer show:*)",
+      "Bash(git checkout:*)",
+      "Bash(git tag:*)",
+      "Bash(composer update:*)",
+      "Bash(composer dump-autoload:*)"
     ]
   }
 }
