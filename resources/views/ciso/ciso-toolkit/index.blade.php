@@ -73,7 +73,17 @@
             <section class="branches-section">
                 <div class="branch-container">
                     
+                    {{-- 
+                    <div class="branch-connector"> --}}
                     <a href="{{ route('control-smart-search.index') }}" class="branch-card smart-search-card">
+                        <div class="branch-icon">💻</div>
+                        <h2 class="branch-title">ISO 27001</h2>
+                    </a>
+                    <div class="branch-connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-node"></div>
+                    </div>
+                        <a href="{{ route('control-smart-search.index') }}" class="branch-card smart-search-card">
                         <div class="branch-icon">🔍</div>
                         <h2 class="branch-title">Smart Search Controls</h2>
                     </a>
