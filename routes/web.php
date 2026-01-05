@@ -52,8 +52,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('control-types', ControlTypeController::class);
 
 
-    // ------------------- CONTROL SMART SEARCH -------------------
+    // ------------------- ISO-27001 -------------------
     Route::get('/iso-27001', [ISO27001Controller::class, 'index'])->name('iso27001.index');
+    Route::get('/iso-27001/{section:section_id}', [ISO27001Controller::class, 'show'])->name('iso27001.show');
 
     // ------------------- CONTROL SMART SEARCH -------------------
 

@@ -14,8 +14,8 @@ class ISO27001Controller extends Controller
         return view('ciso/iso27001/index', compact('allSections'));
     }
 
-    public function show(Process $process)
+    public function show(ISO27001 $section)
     {
-        return view('ciso/process/show', compact('process'));
+        return view('ciso/iso27001/show', compact('section'));
     }
 }
