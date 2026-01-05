@@ -3,7 +3,7 @@
 @section('title_ar', 'الخبرات')
 
 @section('content')
-    <x-table.action-wrapper>
+    <x-table.action-wrapper title="All Expertises">
         <x-action.button label="Add Expertise" label_ar="إضافة خبرة" route_name="expertises.create" />
     </x-table.action-wrapper>
 

@@ -4,7 +4,7 @@
 
 @section('content')
     <div>
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="All Certifications">
             <x-action.button label="Add Certification" label_ar="إضافة شهادة" route_name="certifications.create" />
         </x-table.action-wrapper>
 

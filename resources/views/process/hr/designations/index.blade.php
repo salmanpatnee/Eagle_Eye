@@ -3,7 +3,7 @@
 @section('title_ar', 'المناصب')
 
 @section('content')
-    <x-table.action-wrapper>
+    <x-table.action-wrapper title="All Designations">
         <x-action.button label="Add Designation" label_ar="إضافة منصب" route_name="designations.create" />
     </x-table.action-wrapper>
 

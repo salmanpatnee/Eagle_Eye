@@ -19,8 +19,8 @@
                 <a href="{{ route('welcome') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
-                            <img class="dark:hidden w-10" src="/Images/SaudiCISOLogo.png" alt="Logo" width="100"
-                                height="100">
+                            <img class="dark:hidden w-10" src="/Images/SaudiCISOLogo.png" alt="Logo" width="80"
+                                height="80">
                         </span>
                     </span>
                 </a>
@@ -108,19 +108,19 @@
                     <a href="{{ route('people.index') }}" class="area-card people-card">
                         <div class="area-icon">👥</div>
                         <h3 class="area-title">People</h3>
-                        <p class="area-subtitle">Human Resource</p>
+                        {{-- <p class="area-subtitle">Human Resource</p> --}}
                     </a>
 
                     <a href="{{ route('ciso-process.index') }}" class="area-card process-card">
                         <div class="area-icon">⚙️</div>
                         <h3 class="area-title">Processes</h3>
-                        <p class="area-subtitle">Best Practices</p>
+                        {{-- <p class="area-subtitle">Best Practices</p> --}}
                     </a>
 
                     <a href="{{ route('ciso-products.index') }}" class="area-card product-card">
                         <div class="area-icon">💻</div>
                         <h3 class="area-title">Products</h3>
-                        <p class="area-subtitle">Technology</p>
+                        {{-- <p class="area-subtitle">Technology</p> --}}
                     </a>
                 </div>
             </section>

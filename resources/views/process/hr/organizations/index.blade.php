@@ -4,7 +4,7 @@
 
 @section('content')
     <div>
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="All Organizations">
             <x-action.button label="Add Organization" label_ar="إضافة منظمة" route_name="organizations.create" />
         </x-table.action-wrapper>
 

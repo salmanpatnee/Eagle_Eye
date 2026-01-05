@@ -11,7 +11,13 @@
       "Bash(composer update:*)",
       "Bash(composer dump-autoload:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nchore: upgrade Laravel 10.38.0 to 11.47.0\n\n- Update Laravel framework from 10.38.0 to 11.47.0\n- Implement new Laravel 11 application builder in bootstrap/app.php\n- Update Sanctum from 3.3.3 to 4.2.1\n- Update Carbon from 2.73.0 to 3.11.0\n- Upgrade Symfony components from 6.x to 7.x\n- Update Collision from 7.12.0 to 8.5.0\n- Update Termwind from 1.17.0 to 2.3.3\n- Update PHP minimum requirement to 8.2\n- Keep Kernel.php for backward compatibility\n\nBreaking Changes:\n- bootstrap/app.php: New application builder pattern with Application::configure\\(\\)\n- Sanctum 4.0: Token handling changes\n- Carbon 3.x: Major version upgrade\n- Symfony 7.x: All core components upgraded\n- PHP 8.2+: Minimum requirement increased\n\nFeatures:\n- New /up health check endpoint\n- Improved middleware configuration\n- Modern Laravel 11 structure\n\nAll core tests passing. Database test failures are pre-existing environment issues.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nchore: upgrade Laravel 10.38.0 to 11.47.0\n\n- Update Laravel framework from 10.38.0 to 11.47.0\n- Implement new Laravel 11 application builder in bootstrap/app.php\n- Update Sanctum from 3.3.3 to 4.2.1\n- Update Carbon from 2.73.0 to 3.11.0\n- Upgrade Symfony components from 6.x to 7.x\n- Update Collision from 7.12.0 to 8.5.0\n- Update Termwind from 1.17.0 to 2.3.3\n- Update PHP minimum requirement to 8.2\n- Keep Kernel.php for backward compatibility\n\nBreaking Changes:\n- bootstrap/app.php: New application builder pattern with Application::configure\\(\\)\n- Sanctum 4.0: Token handling changes\n- Carbon 3.x: Major version upgrade\n- Symfony 7.x: All core components upgraded\n- PHP 8.2+: Minimum requirement increased\n\nFeatures:\n- New /up health check endpoint\n- Improved middleware configuration\n- Modern Laravel 11 structure\n\nAll core tests passing. Database test failures are pre-existing environment issues.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ],
+  "enableAllProjectMcpServers": true
 }

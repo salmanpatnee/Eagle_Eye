@@ -33,7 +33,6 @@ use App\Http\Controllers\MainDomainController;
 use App\Http\Controllers\NationalityController;
 use App\Http\Controllers\PeoplesController;
 use App\Http\Controllers\SubDomainController;
-use App\Http\Controllers\TempFileUploadController;
 use Illuminate\Support\Facades\DB;
 
 Route::view('/', 'welcome')->name('welcome');
@@ -99,10 +98,6 @@ Route::middleware(['auth'])->group(function () {
     
     
 });
-
-
-
-
 
 Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::view('/compliance', 'process/compliance')->name('compliance');

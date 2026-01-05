@@ -150,7 +150,7 @@ class ControlSmartSearch extends Controller
         // return $relations;
 
 
-        $controls = $controls->paginate(100);
+        $controls = $controls->paginate(20);
 
         $controls->appends([
             'control_id'    => $controlId,

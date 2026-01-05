@@ -4,7 +4,7 @@
 
 @section('content')
     <div>
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="All Nationalities">
             <x-action.button label="Add Nationality" label_ar="إضافة جنسية" route_name="nationalities.create" />
         </x-table.action-wrapper>
 
