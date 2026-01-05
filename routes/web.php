@@ -3,11 +3,8 @@
 use App\Http\Controllers\ArtifactAttachmentController;
 use App\Http\Controllers\ArtifactController;
 use App\Http\Controllers\BestPracticeController;
-use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CMSController;
 use App\Http\Controllers\CisoEducationController;
+use App\Http\Controllers\CMSController;
 use App\Http\Controllers\ControlAssessmentController;
 use App\Http\Controllers\ControlAssessmentFindingController;
 use App\Http\Controllers\ControlAuditFindingController;
@@ -20,20 +17,24 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EvidenceController;
 use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\HotTopicsController;
-use App\Http\Controllers\HumanResourceController;
-use App\Http\Controllers\HROrganizationController;
 use App\Http\Controllers\HRCertificationController;
+use App\Http\Controllers\HROrganizationController;
+use App\Http\Controllers\HumanResourceController;
 use App\Http\Controllers\IndustryController;
+use App\Http\Controllers\ISO27001Controller;
+use App\Http\Controllers\LeadController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MainDomainController;
+use App\Http\Controllers\NationalityController;
+use App\Http\Controllers\PeoplesController;
 use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ResourceController;
-use App\Http\Controllers\LeadController;
-use App\Http\Controllers\MainDomainController;
-use App\Http\Controllers\NationalityController;
-use App\Http\Controllers\PeoplesController;
 use App\Http\Controllers\SubDomainController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
 Route::middleware(['guest'])->group(function () {
@@ -49,11 +50,16 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('sub-domains', SubDomainController::class);
     Route::resource('controls', ControlController::class);
     Route::resource('control-types', ControlTypeController::class);
+
+
+    // ------------------- CONTROL SMART SEARCH -------------------
+    Route::get('/iso-27001', [ISO27001Controller::class, 'index'])->name('iso27001.index');
+
     // ------------------- CONTROL SMART SEARCH -------------------
 
     Route::get('/control-smart-search', ControlSmartSearch::class)->name('control-smart-search.index');
 
-     // ------------------- EVIDENCE TRACKING -------------------
+    // ------------------- EVIDENCE TRACKING -------------------
 
     Route::resource('artifacts', ArtifactController::class);
 
@@ -61,12 +67,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/upload-artifacts', [DataUploaderController::class, 'createArtifact'])->name('upload.artifact.create');
     Route::post('/upload-artifacts', [DataUploaderController::class, 'uploadArtifact'])->name('upload.artifact.store');
 
-        Route::controller(ArtifactAttachmentController::class)->group(function () {
+    Route::controller(ArtifactAttachmentController::class)->group(function () {
         Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
         Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
     });
-    
-     // ------------------- EVIDENCE MANAGEMENT -------------------
+
+    // ------------------- EVIDENCE MANAGEMENT -------------------
 
     Route::resource('evidences', EvidenceController::class);
     Route::controller(EvidenceController::class)->group(function () {
@@ -85,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/audit-finding-vs-control', 'auditFindingVsControl')->name('audit-vs-control.index');
     });
 
-     // ------------------- CONTROL ASSESSMENT -------------------
+    // ------------------- CONTROL ASSESSMENT -------------------
 
     Route::resource('control-assessments', ControlAssessmentController::class);
     Route::resource('control-assessment-findings', ControlAssessmentFindingController::class)->except(['index', 'create', 'store']);
@@ -94,15 +100,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
         Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
     });
-    
-    
-    
+
 });
 
 Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::view('/compliance', 'process/compliance')->name('compliance');
     Route::view('/vciso', 'vciso')->name('vciso');
-
 
     // ------------------- USERS -------------------
 
@@ -113,7 +116,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::middleware('superadmin')->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('hr-experts', HumanResourceController::class);
-        
+
         // Industry Management Routes
         Route::resource('industries', IndustryController::class);
 
@@ -130,7 +133,6 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     });
 
     Route::view('/frameworks', 'process/framework')->name('frameworks');
-
 
     // ------------ISO-27001--------------
 
@@ -150,7 +152,6 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::view('/internal-audit-27001', 'process/iso-27001/internal-audit');
     Route::view('/management-review-27001', 'process/iso-27001/management-review');
 
-
     // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
 
     Route::resource('cms', CMSController::class);
@@ -159,16 +160,13 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
     // ------------------CISO 360-------------------------
 
-    
     Route::prefix('ciso')->group(function () {
 
         // ------------------CISO Toolkit-------------------------
 
-
         Route::view('/toolkit', 'ciso/ciso-toolkit/index')->name('ciso-toolkit.index');
 
         // ------------------CISO Education-------------------------
-
 
         Route::get('/education', CisoEducationController::class)->name('ciso-education.index');
 
@@ -202,16 +200,13 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
         // ------------------People-------------------------
 
-        
         Route::get('/peoples', PeoplesController::class)->name('people.index');
         // Route::get('/hr-experts/upload', [DataUploaderController::class, 'createHr'])->name('hr.upload');
         // Route::post('/hr-experts/upload', [DataUploaderController::class, 'UploadHr'])->name('hr.upload.store');
 
-        
-
         // ------------------Process-------------------------
 
-       Route::get('/process', [ProcessController::class, 'index'])->name('ciso-process.index');
+        Route::get('/process', [ProcessController::class, 'index'])->name('ciso-process.index');
         Route::get('/process/{process:process_id}', [ProcessController::class, 'show'])->name('process.view.show');
 
         // ------------------Process Resources-------------------------
@@ -224,7 +219,6 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
         Route::get('/resource/{process:process_id}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');
         Route::get('/resource/download/{resource}', [ProcessResourceController::class, 'download'])->name('process.resource.download');
         Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destroy'])->name('process.resource.destroy');
-
 
         // ------------------Products-------------------------
 
@@ -275,7 +269,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
             $fullPath = base_path($decodedPath);
 
             // Security check: ensure the file exists and is within the project
-            if (!file_exists($fullPath) || !str_starts_with(realpath($fullPath), realpath(base_path()))) {
+            if (! file_exists($fullPath) || ! str_starts_with(realpath($fullPath), realpath(base_path()))) {
                 return response()->json(['error' => 'File not found or invalid path'], 404);
             }
 
@@ -299,6 +293,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
                     if (empty($certificationId) || empty($certificationTitle)) {
                         $errors[] = "Row {$rowNum}: Missing certification_id or certification_title";
+
                         continue;
                     }
 
@@ -310,7 +305,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
                         ]);
                         $imported++;
                     } catch (\Exception $e) {
-                        $errors[] = "Row {$rowNum}: " . $e->getMessage();
+                        $errors[] = "Row {$rowNum}: ".$e->getMessage();
                     }
                 }
 
@@ -320,7 +315,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
                     'success' => true,
                     'imported' => $imported,
                     'errors' => $errors,
-                    'total_errors' => count($errors)
+                    'total_errors' => count($errors),
                 ]);
             } else {
                 return response()->json(['error' => 'Unable to open file'], 500);
@@ -331,4 +326,3 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     })->name('import.hr-certifications');
 
 });
-

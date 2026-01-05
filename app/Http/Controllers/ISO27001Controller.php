@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\ISO27001;
+use App\Models\Process;
+
+class ISO27001Controller extends Controller
+{
+    public function index()
+    {
+        $allSections = ISO27001::all();
+
+        return view('ciso/iso27001/index', compact('allSections'));
+    }
+
+    public function show(Process $process)
+    {
+        return view('ciso/process/show', compact('process'));
+    }
+}

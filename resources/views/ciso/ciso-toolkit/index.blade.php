@@ -75,7 +75,7 @@
                     
                     {{-- 
                     <div class="branch-connector"> --}}
-                    <a href="{{ route('control-smart-search.index') }}" class="branch-card smart-search-card">
+                    <a href="{{ route('iso27001.index') }}" class="branch-card smart-search-card">
                         <div class="branch-icon">💻</div>
                         <h2 class="branch-title">ISO 27001</h2>
                     </a>
