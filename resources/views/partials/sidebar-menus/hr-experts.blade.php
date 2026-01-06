@@ -1,1 +1,1 @@
-<x-sidebar-menu-item route_name="hr-experts.index" label_ar="خبراء الموارد البشرية" label="HR Experts" />
+<x-sidebar-menu-item route_name="hr-experts.index" label_ar="" label="HR Experts" />

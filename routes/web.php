@@ -4,6 +4,7 @@ use App\Http\Controllers\ArtifactAttachmentController;
 use App\Http\Controllers\ArtifactController;
 use App\Http\Controllers\BestPracticeController;
 use App\Http\Controllers\CisoEducationController;
+use App\Http\Controllers\CMS_ISO_27001Controller;
 use App\Http\Controllers\CMSController;
 use App\Http\Controllers\ControlAssessmentController;
 use App\Http\Controllers\ControlAssessmentFindingController;
@@ -158,6 +159,13 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::resource('cms', CMSController::class);
     Route::get('/cms/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
     Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
+
+
+    // ------------MANAGE ISO-27001 CONTENT--------------
+
+    Route::resource('iso27001', CMS_ISO_27001Controller::class);
+    // Route::get('/iso27001/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
+    // Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
 
     // ------------------CISO 360-------------------------
 

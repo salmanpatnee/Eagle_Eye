@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
         a {
             text-decoration: none;
         }
+
         /* Embed the CSS for simplicity, or keep the link above for external file */
         /* See the CSS section below for the styles */
 
@@ -51,6 +53,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="landing-page">
@@ -61,10 +64,10 @@
             {{-- <h2>What is Your Biggest Problem Today?</h2>
             <p class="sub-tagline">We have the Solution. Guaranteed!<br><a href="#" class="action-link">Contact Us!</a></p> --}}
 
-             <h2>What is Your Biggest Problem Today?</h2>
+            <h2>What is Your Biggest Problem Today?</h2>
             <p class="sub-tagline">We have the Solution. Guaranteed!<br><br>
                 <a href="#" class="BudgetButton" id="headerContactButton">Contact Us!</a>
-             </p>
+            </p>
 
             <img class="ThreePsImg" src="Images/ThreePs5.png" alt="SaudiCISO.net">
 
@@ -102,10 +105,14 @@
         <main class="main-content">
             <section class="features-section">
                 <div>
-                    <p class="feature-number-down">Vendor-Independent | Executive 12-Month Access | Built for the Saudi Market</p>
-                    <p class="feature-number-down">Pre-Developed Editable Templates | Direct Access to hire Saudi Cybersecurity Talent</p>
-                    <p class="feature-number-down">Priority WhatsApp Advisory Support | Optional Monthly In-Person Executive Session</p>
-                    <p class="feature-text">SaudiCISO.Net is a subscription-based professional platform created exclusively for Chief Information Security Officers (CISOs) in the Kingdom of Saudi Arabia.</p>
+                    <p class="feature-number-down">Vendor-Independent | Executive 12-Month Access | Built for the Saudi
+                        Market</p>
+                    <p class="feature-number-down">Pre-Developed Editable Templates | Direct Access to hire Saudi
+                        Cybersecurity Talent</p>
+                    <p class="feature-number-down">Priority WhatsApp Advisory Support | Optional Monthly In-Person
+                        Executive Session</p>
+                    <p class="feature-text">SaudiCISO.Net is a subscription-based professional platform created
+                        exclusively for Chief Information Security Officers (CISOs) in the Kingdom of Saudi Arabia.</p>
                 </div>
             </section>
         </main>
@@ -138,7 +145,9 @@
         <main class="main-content">
             <section class="features-section">
                 <div>
-                    <p class="feature-number-down"><b>Bonus for CISO:</b> Certified Information Security Manager (CISM) Examination Voucher and Quick Review Session for Purchase Orders and Payments Received by December 31, 2025.</p>
+                    <p class="feature-number-down"><b>Bonus for CISO:</b> Certified Information Security Manager (CISM)
+                        Examination Voucher and Quick Review Session for Purchase Orders and Payments Received by
+                        December 31, 2025.</p>
                 </div>
             </section>
         </main>
@@ -147,7 +156,8 @@
                 <div class="BudgetCanvas">
                     <div>
                         <p class="BudgetHeading">Budget Issues Solved!</p>
-                        <p class="BudgetPara">If you have budget constraints, the full-year subscription is a minimal amount that your main supplier can easily include in their existing project costs.</p>
+                        <p class="BudgetPara">If you have budget constraints, the full-year subscription is a minimal
+                            amount that your main supplier can easily include in their existing project costs.</p>
                         <p class="BudgetButton" id="budgetContactButton">Contact Us!</p>
                     </div>
                 </div>
@@ -256,13 +266,13 @@
 
             // Send the data to the server via an AJAX request
             axios.post('/contact-inquiry', formObject)
-                .then(function (response) {
+                .then(function(response) {
                     // On success, show success message and reset form
                     alert(response.data.message);
                     modal.style.display = "none";
                     document.getElementById('contactForm').reset();
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     // On error, show validation errors or generic error message
                     if (error.response && error.response.status === 422) {
                         // Validation error
@@ -285,8 +295,10 @@
                     submitButton.disabled = false;
                 });
         });
-
     </script>
-
+    <!-- Elfsight AI Chatbot | Saudi Ciso -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-50a59065-4154-49f7-a375-961a269cf1c2" data-elfsight-app-lazy></div>
 </body>
+
 </html>
