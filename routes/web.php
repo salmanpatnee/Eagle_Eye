@@ -23,6 +23,7 @@ use App\Http\Controllers\HROrganizationController;
 use App\Http\Controllers\HumanResourceController;
 use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\ISO27001Controller;
+use App\Http\Controllers\ISO27001ResourceController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainDomainController;
@@ -54,8 +55,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     // ------------------- ISO-27001 -------------------
-    Route::get('/iso-27001', [ISO27001Controller::class, 'index'])->name('iso27001.index');
-    Route::get('/iso-27001/{section:section_id}', [ISO27001Controller::class, 'show'])->name('iso27001.show');
+    Route::get('/iso-27001', [ISO27001Controller::class, 'index'])->name('iso-27001.index');
+    Route::get('/iso-27001/{section:section_id}', [ISO27001Controller::class, 'show'])->name('iso-27001.show');
 
     // ------------------- CONTROL SMART SEARCH -------------------
 
@@ -136,23 +137,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
     Route::view('/frameworks', 'process/framework')->name('frameworks');
 
-    // ------------ISO-27001--------------
 
-    Route::view('/scope-of-isms', 'process/iso-27001/scope-of-isms');
-    Route::view('/isms', 'process/iso-27001/isms');
-    Route::view('/asset-inventory', 'process/iso-27001/asset-inventory');
-    Route::view('/risk-assessment-methodology', 'process/iso-27001/risk-assessment-methodology');
-    Route::view('/risk-assessment', 'process/iso-27001/risk-assessment');
-    Route::view('/risk-treatment-iso-27001', 'process/iso-27001/risk-treatment');
-    Route::view('/risk-register-iso-27001', 'process/iso-27001/risk-register');
-    Route::view('/statement-of-applicability', 'process/iso-27001/statement-of-applicability');
-    Route::view('/project-management-security-framework', 'process/iso-27001/project-management-security-framework');
-    Route::view('/network-security-framework', 'process/iso-27001/network-security-framework');
-    Route::view('/secure-coding-framework', 'process/iso-27001/secure-coding-framework');
-    Route::view('/hr-framework', 'process/iso-27001/hr-framework');
-    Route::view('/third-party-security-framework', 'process/iso-27001/third-party-security-framework');
-    Route::view('/internal-audit-27001', 'process/iso-27001/internal-audit');
-    Route::view('/management-review-27001', 'process/iso-27001/management-review');
 
     // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
 
@@ -164,8 +149,8 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     // ------------MANAGE ISO-27001 CONTENT--------------
 
     Route::resource('iso27001', CMS_ISO_27001Controller::class);
-    // Route::get('/iso27001/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
-    // Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
+    Route::get('/iso27001/create-resource/{section}', [ISO27001ResourceController::class, 'create'])->name('iso27001.resource.create');
+    Route::post('/iso27001/upload-resource', [ISO27001ResourceController::class, 'store'])->name('iso27001.resource.store');
 
     // ------------------CISO 360-------------------------
 
@@ -221,6 +206,8 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
         // ------------------Process Resources-------------------------
 
         Route::get('/resource/{process:process_id}/checklist/', [ProcessResourceController::class, 'checklist'])->name('process.resource.checklist');
+       
+        
         Route::get('/resource/{process:process_id}/videos/', [ProcessResourceController::class, 'videos'])->name('process.resource.videos');
         Route::get('/video/stream/{resource}', [ProcessResourceController::class, 'stream'])->name('secure.video.stream');
         Route::get('/resource/{process:process_id}/template/', [ProcessResourceController::class, 'template'])->name('process.resource.template');

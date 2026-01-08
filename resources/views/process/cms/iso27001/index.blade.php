@@ -22,7 +22,7 @@
                         <x-table.td>{{ $row->section_id }}</x-table.td>
                         <x-table.td>{{ $row->title }}</x-table.td>
                         <x-table.td action_col="true">
-                            <a href="{{ route('resource.create', $row->id) }}"
+                            <a href="{{ route('iso27001.resource.create', $row->id) }}"
                                 class="inline-flex items-center justify-center p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-blue-600 transition-colors">
                                 <x-icons.media />
                             </a>

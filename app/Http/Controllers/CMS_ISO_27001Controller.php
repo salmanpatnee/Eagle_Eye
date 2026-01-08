@@ -46,8 +46,8 @@ class CMS_ISO_27001Controller extends Controller
 
     public function edit(Request $request, ISO27001 $iso27001)
     {
-
-        return view('process/cms/iso27001/create', compact('iso27001'));
+        $section = $iso27001;
+        return view('process/cms/iso27001/create', compact('section'));
     }
 
     public function update(Request $request, ISO27001 $iso27001)
@@ -69,6 +69,7 @@ class CMS_ISO_27001Controller extends Controller
     public function destroy(ISO27001 $iso27001)
     {
         $iso27001->load('resources');
+        
         if ($iso27001->resources()->count() > 0) {
             return redirect(route('iso27001.index'))
                 ->with('error', 'Section cannot be deleted as it has resources attached to it.');

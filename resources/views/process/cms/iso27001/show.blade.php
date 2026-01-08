@@ -20,13 +20,13 @@
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Process Name Arabic" label_ar="اسم العملية عربي">
+                <x-info-col label="Section Name Arabic" label_ar="اسم العملية عربي">
                     <span dir="rtl" style="padding-right: .5em">{{ $process->title_ar }}</span>
                 </x-info-col>
 
             </x-info-row>
 
-            <x-info-col-lg label="Process Description" label_ar="وصف العملية">
+            <x-info-col-lg label="Section Description" label_ar="وصف العملية">
                 {{ $process->description ?? '—' }}
             </x-info-col-lg>
         </div>

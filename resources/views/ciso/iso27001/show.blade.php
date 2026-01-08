@@ -2,7 +2,7 @@
 @section('title', $section->title)
 @section('content')
     @php
-        $section_id = html_entity_decode($section->process_id);
+        $section_id = html_entity_decode($section->section_id);
     @endphp
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
         <div class="bg-brand-950 hover:shadow-lg p-6 rounded-lg shadow text-white transition">
@@ -12,7 +12,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
             <div class="flex flex-col gap-6">
-                <x-iso-checklist link="{{ route('process.resource.checklist', $section_id) }}" />
+                <x-iso-checklist link="{{ route('iso.resource.checklist', $section_id) }}" />
                 <x-iso-glossary link="{{ route('process.resource.glossary', $section_id) }}" />
             </div>
             <div class="flex flex-col gap-6">

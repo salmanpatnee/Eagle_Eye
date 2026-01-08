@@ -3,17 +3,14 @@
 @section('title_ar', 'القسم')
 @section('content')
     <div>
-        <x-table.action-wrapper title="{{ $section?->id ? 'Update' : 'New' }} Section">
+        <x-table.action-wrapper title="{{ $section?->id ? 'Update' : 'New' }} Resource">
             <x-action.button label="View" label_ar="منظر" route_name="iso27001.index" />
         </x-table.action-wrapper>
 
-    
-            <form action="{{ isset($section) ? route('iso27001.update', $section->id) : route('iso27001.store') }}" method="POST">
-             @csrf
-            @if (isset($section))
-                @method('PUT')
-            @endif
-           
+        <form action="{{ route('iso27001.show', $section->id) }}">
+            @csrf
+            <input type="hidden" id="resourceable_id" value="{{ $section->id }}">
+            <input type="hidden" id="resourceable_type" value="App\Models\ISO27001">
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
                     <div>
@@ -25,11 +22,8 @@
                             placeholder="Enter Section Name" :value="$section?->title" />
                     </div>
                 </x-form.grid-col>
-                  <x-form.grid-col-full>
-                    <x-form.textarea-field label="Section Description" label_ar="وصف القسم" name="description"
-                        placeholder="Enter Section Description" :value="$section?->description" />
-                </x-form.grid-col-full>
-                {{-- <div>
+
+                <div>
                     <x-form.label label="Upload Videos" label_ar="تحميل مقاطع الفيديو" for="videoUploadEle" />
                     <input type="file" class="filepond" name="videoUploadEle" multiple credits="false"
                         id="videoUploadEle">
@@ -53,12 +47,12 @@
                         label_ar="تحميل قاموس المصطلحات العربية والإنجليزية" for="glossaryUploadEle" />
                     <input type="file" class="filepond" name="glossaryUploadEle" multiple credits="false"
                         id="glossaryUploadEle">
-                </div> --}}
+                </div>
 
 
 
                 <div class="flex justify-end">
-                    <x-form.submit label="Section" label_ar="القسم" :isUpdate="$section?->id" />
+                    <x-form.submit label="Process" label_ar="القسم" :isUpdate="$section?->id" />
                 </div>
             </div>
         </form>
@@ -66,7 +60,7 @@
     </div>
 @endsection
 
-{{-- @push('scripts')
+@push('scripts')
     <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
     <script>
         const resourceId = document.getElementById('resourceable_id').value;
@@ -110,4 +104,4 @@
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         ]);
     </script>
-@endpush --}}
+@endpush
