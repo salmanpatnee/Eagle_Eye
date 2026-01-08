@@ -3,7 +3,7 @@
      class="-translate-x-full bg-brand-950 border-gray-200  fixed flex flex-col h-screen left-0 lg:static lg:translate-x-0 overflow-y-hidden px-5 sidebar text-white top-0 w-[290px] z-9999">
      <!-- SIDEBAR HEADER -->
      <div :class="sidebarToggle ? 'justify-center' : 'justify-between'"
-         class="flex items-center gap-2 pt-8 sidebar-header pb-7">
+         class="flex items-center gap-2 pt-3 sidebar-header pb-7">
          <a href="{{ route('vciso') }}">
              <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                  <span class="flex items-center space-x-2">

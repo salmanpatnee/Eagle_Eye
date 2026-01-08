@@ -12,12 +12,12 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
             <div class="flex flex-col gap-6">
-                <x-iso-checklist link="{{ route('iso.resource.checklist', $section_id) }}" />
-                <x-iso-glossary link="{{ route('process.resource.glossary', $section_id) }}" />
+                <x-iso-checklist link="{{ route('iso27001.resource.checklist', $section_id) }}" />
+                <x-iso-glossary link="{{ route('iso27001.resource.glossary', $section_id) }}" />
             </div>
             <div class="flex flex-col gap-6">
-                <x-iso-video link="{{ route('process.resource.videos', $section_id) }}" />
-                <x-iso-templates link="{{ route('process.resource.template', $section_id) }}" />
+                <x-iso-video link="{{ route('iso27001.resource.videos', $section_id) }}" />
+                <x-iso-templates link="{{ route('iso27001.resource.template', $section_id) }}" />
             </div>
         </div>
     </div>

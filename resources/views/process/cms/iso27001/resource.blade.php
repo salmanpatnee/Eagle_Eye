@@ -52,7 +52,7 @@
 
 
                 <div class="flex justify-end">
-                    <x-form.submit label="Process" label_ar="القسم" :isUpdate="$section?->id" />
+                    <x-form.submit label="Section" label_ar="القسم" :isUpdate="$section?->id" />
                 </div>
             </div>
         </form>

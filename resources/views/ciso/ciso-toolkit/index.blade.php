@@ -17,8 +17,8 @@
                 <a href="{{ route('welcome') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
-                            <img class="dark:hidden w-10" src="/Images/SaudiCISOLogo.png" alt="Logo" width="100"
-                                height="100">
+                            <img class="dark:hidden " src="/Images/SaudiCISOLogo.png" alt="Logo" width="80"
+                                >
                         </span>
                     </span>
                 </a>

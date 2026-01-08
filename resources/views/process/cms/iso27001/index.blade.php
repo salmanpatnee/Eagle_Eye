@@ -1,17 +1,17 @@
 @extends('layouts.user')
 @section('title', 'Sections')
-@section('title_ar', 'العملية')
+@section('title_ar', 'القسم')
 @section('content')
     <div>
         <x-table.action-wrapper title="All Sections">
-            {{-- <x-action.button label="Add Section" label_ar="إضافة العملية" route_name="cms.create" /> --}}
+            {{-- <x-action.button label="Add Section" label_ar="إضافة القسم" route_name="cms.create" /> --}}
         </x-table.action-wrapper>
 
         <x-table.table-sticky>
             <x-table.thead-sticky>
                 <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Section ID" label_ar="رمز العملية" />
-                <x-table.th label="Section Name" label_ar="اسم العملية" />
+                <x-table.th label="Section ID" label_ar="رمز القسم" />
+                <x-table.th label="Section Name" label_ar="اسم القسم" />
                 <x-table.th label="Action" label_ar="إجراء " />
             </x-table.thead-sticky>
 

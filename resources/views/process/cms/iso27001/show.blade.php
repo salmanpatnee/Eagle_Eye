@@ -1,6 +1,6 @@
 @extends('layouts/user')
 @section('title', 'Section')
-@section('title_ar', 'العملية')
+@section('title_ar', 'القسم')
 @section('content')
     <div>
         <x-table.action-wrapper title="Section Details">
@@ -10,23 +10,23 @@
 
         <div class="border-gray-100 border-t p-3">
             <x-info-row>
-                <x-info-col label="Section ID" label_ar="رمز العملية">
+                <x-info-col label="Section ID" label_ar="رمز القسم">
                     {{ $process->section_id }}
                 </x-info-col>
 
-                <x-info-col label="Section Name" label_ar="اسم العملية">
+                <x-info-col label="Section Name" label_ar="اسم القسم">
                     {{ $process->title }}
                 </x-info-col>
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Section Name Arabic" label_ar="اسم العملية عربي">
+                <x-info-col label="Section Name Arabic" label_ar="اسم القسم عربي">
                     <span dir="rtl" style="padding-right: .5em">{{ $process->title_ar }}</span>
                 </x-info-col>
 
             </x-info-row>
 
-            <x-info-col-lg label="Section Description" label_ar="وصف العملية">
+            <x-info-col-lg label="Section Description" label_ar="وصف القسم">
                 {{ $process->description ?? '—' }}
             </x-info-col-lg>
         </div>

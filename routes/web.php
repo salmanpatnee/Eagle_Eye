@@ -53,7 +53,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('controls', ControlController::class);
     Route::resource('control-types', ControlTypeController::class);
 
-
     // ------------------- ISO-27001 -------------------
     Route::get('/iso-27001', [ISO27001Controller::class, 'index'])->name('iso-27001.index');
     Route::get('/iso-27001/{section:section_id}', [ISO27001Controller::class, 'show'])->name('iso-27001.show');
@@ -137,20 +136,24 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
     Route::view('/frameworks', 'process/framework')->name('frameworks');
 
-
-
     // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
 
     Route::resource('cms', CMSController::class);
     Route::get('/cms/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
     Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
 
-
     // ------------MANAGE ISO-27001 CONTENT--------------
 
     Route::resource('iso27001', CMS_ISO_27001Controller::class);
     Route::get('/iso27001/create-resource/{section}', [ISO27001ResourceController::class, 'create'])->name('iso27001.resource.create');
     Route::post('/iso27001/upload-resource', [ISO27001ResourceController::class, 'store'])->name('iso27001.resource.store');
+
+    // ------------ISO-27001 RESOURCES--------------
+
+    Route::get('/iso27001/resource/{section:section_id}/checklist/', [ISO27001ResourceController::class, 'checklist'])->name('iso27001.resource.checklist');
+    Route::get('/iso27001/resource/{section:section_id}/videos/', [ISO27001ResourceController::class, 'videos'])->name('iso27001.resource.videos');
+    Route::get('/iso27001/resource/{section:section_id}/template/', [ISO27001ResourceController::class, 'template'])->name('iso27001.resource.template');
+    Route::get('/iso27001/resource/{section:section_id}/glossary/', [ISO27001ResourceController::class, 'glossary'])->name('iso27001.resource.glossary');
 
     // ------------------CISO 360-------------------------
 
@@ -206,8 +209,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
         // ------------------Process Resources-------------------------
 
         Route::get('/resource/{process:process_id}/checklist/', [ProcessResourceController::class, 'checklist'])->name('process.resource.checklist');
-       
-        
+
         Route::get('/resource/{process:process_id}/videos/', [ProcessResourceController::class, 'videos'])->name('process.resource.videos');
         Route::get('/video/stream/{resource}', [ProcessResourceController::class, 'stream'])->name('secure.video.stream');
         Route::get('/resource/{process:process_id}/template/', [ProcessResourceController::class, 'template'])->name('process.resource.template');
