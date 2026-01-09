@@ -1,10 +1,9 @@
 @extends('layouts/user')
 @section('title', 'Process')
-@section('title_ar', 'العملية')
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $process?->id ? 'Update' : 'New' }} Resource">
-            <x-action.button label="View" label_ar="منظر" route_name="cms.index" />
+            <x-action.button label="View" route_name="cms.index" />
         </x-table.action-wrapper>
 
         <form action="{{ route('cms.show', $process->id) }}">
@@ -14,29 +13,29 @@
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Process ID" label_ar="رمز العملية" name="process_id" required="true"
+                        <x-form.field label="Process ID" name="process_id" required="true"
                             :readonly="$process?->process_id" placeholder="Enter Process ID" :value="$process?->process_id" />
                     </div>
                     <div>
-                        <x-form.field label="Process Name" label_ar="اسم العملية" name="title" required="true"
+                        <x-form.field label="Process Name" name="title" required="true"
                             placeholder="Enter Process Name" :value="$process?->title" />
                     </div>
                 </x-form.grid-col>
 
                 <div>
-                    <x-form.label label="Upload Videos" label_ar="تحميل مقاطع الفيديو" for="videoUploadEle" />
+                    <x-form.label label="Upload Videos" for="videoUploadEle" />
                     <input type="file" class="filepond" name="videoUploadEle" multiple credits="false"
                         id="videoUploadEle">
                 </div>
 
                 <div>
-                    <x-form.label label="Upload Checklist" label_ar="تحميل قائمة التحقق" for="checklistUploadEle" />
+                    <x-form.label label="Upload Checklist" for="checklistUploadEle" />
                     <input type="file" class="filepond" name="checklistUploadEle" multiple credits="false"
                         id="checklistUploadEle">
                 </div>
 
                 <div>
-                    <x-form.label label="Upload Implementation Templates" label_ar="تحميل قوالب التنفيذ"
+                    <x-form.label label="Upload Implementation Templates"
                         for="templateUploadEle" />
                     <input type="file" class="filepond" name="templateUploadEle" multiple credits="false"
                         id="templateUploadEle">
@@ -44,7 +43,7 @@
 
                 <div>
                     <x-form.label label="Upload Arabic English Glossary"
-                        label_ar="تحميل قاموس المصطلحات العربية والإنجليزية" for="glossaryUploadEle" />
+                        for="glossaryUploadEle" />
                     <input type="file" class="filepond" name="glossaryUploadEle" multiple credits="false"
                         id="glossaryUploadEle">
                 </div>
@@ -52,7 +51,7 @@
 
 
                 <div class="flex justify-end">
-                    <x-form.submit label="Process" label_ar="العملية" :isUpdate="$process?->id" />
+                    <x-form.submit label="Process" :isUpdate="$process?->id" />
                 </div>
             </div>
         </form>

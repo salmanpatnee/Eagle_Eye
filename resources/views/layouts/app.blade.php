@@ -32,7 +32,7 @@
                     </a>
                     <!-- Dropdown Start -->
                     <div x-show="dropdownOpen"
-                        class="z-1 shadow-theme-lg dark:bg-gray-dark absolute right-0 mt-[17px] flex w-[280px] flex-col rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800">
+                        class="z-60 shadow-theme-lg dark:bg-gray-dark absolute right-0 mt-[17px] flex w-[280px] flex-col rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800">
                         <div>
                             <span class="text-theme-sm block font-medium text-gray-700 dark:text-gray-400">
                                 {{ auth()->user()->role->role_name }}
@@ -48,10 +48,10 @@
                                     class="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-round fill-gray-500 group-hover:fill-gray-700 dark:fill-gray-400 dark:group-hover:fill-gray-300"><path d="M18 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                                     <span>Admin Portal</span>
-                                    <span class="text-theme-sm text-gray-700 dark:text-gray-400" dir="rtl"
+                                    {{-- <span class="text-theme-sm text-gray-700 dark:text-gray-400" dir="rtl"
                                     style="font-family: inherit;">
                                          بوابة المشرف
-                                    </span>
+                                    </span> --}}
                                 </a>
                             </li>
                         </ul>
@@ -72,10 +72,10 @@
                                     </svg>
                                     <span>Sign out</span>
                                 </span>
-                                <span class="text-theme-sm text-gray-700 dark:text-gray-400" dir="rtl"
+                                {{-- <span class="text-theme-sm text-gray-700 dark:text-gray-400" dir="rtl"
                                     style="font-family: inherit;">
                                     تسجيل الخروج
-                                </span>
+                                </span> --}}
                             </button>
                         </form>
                     </div>

@@ -1,19 +1,18 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Organization Departments')
-@section('title_ar', 'قسم الجهة')
 @section('content')
     <div>
         <x-table.action-wrapper title="All Departments">
-            <x-action.button label="Add Department" label_ar="قسم إضافة" route_name="departments.create" />
+            <x-action.button label="Add Department" route_name="departments.create" />
         </x-table.action-wrapper>
 
         <x-table.table>
             <x-table.thead>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Department ID" label_ar="رمز القسم" />
-                <x-table.th label="Department Name" label_ar="اسم القسم" />
-                <x-table.th label="Location Name" label_ar="اسم الموقع" />
-                <x-table.th label="Action" label_ar="إجراء " />
+                <x-table.th label="S.No" />
+                <x-table.th label="Department ID" />
+                <x-table.th label="Department Name" />
+                <x-table.th label="Location Name" />
+                <x-table.th label="Action" />
             </x-table.thead>
 
             <x-table.tbody>

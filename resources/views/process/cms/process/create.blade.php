@@ -1,10 +1,9 @@
 @extends('layouts/user')
 @section('title', 'Process')
-@section('title_ar', 'العملية')
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $cm?->id ? 'Update' : 'New' }} Process">
-            <x-action.button label="View" label_ar="منظر" route_name="cms.index" />
+            <x-action.button label="View" route_name="cms.index" />
         </x-table.action-wrapper>
 
         <form action="{{ isset($cm) ? route('cms.update', $cm->id) : route('cms.store') }}" method="POST">
@@ -15,18 +14,18 @@
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Process ID" label_ar="رمز العملية" name="process_id" required="true"
+                        <x-form.field label="Process ID" name="process_id" required="true"
                             :readonly="$cm?->process_id" placeholder="Enter Process ID" :value="$cm?->process_id" />
                     </div>
                     <div>
-                        <x-form.field label="Process Name" label_ar="اسم العملية" name="title" required="true"
+                        <x-form.field label="Process Name" name="title" required="true"
                             placeholder="Enter Process Name" :value="$cm?->title" />
                     </div>
                 </x-form.grid-col>
 
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Process Name Arabic" label_ar="اسم العملية عربي" name="title_ar"
+                        <x-form.field label="Process Name Arabic" name="title_ar"
                             placeholder="Enter Process Name Arabic" :value="$cm?->title_ar" />
                     </div>
                     <div>
@@ -35,14 +34,14 @@
                 </x-form.grid-col>
 
                 <x-form.grid-col-full>
-                    <x-form.textarea-field label="Process Description" label_ar="وصف العملية" name="description"
+                    <x-form.textarea-field label="Process Description" name="description"
                         placeholder="Enter Process Description" :value="$cm?->description" />
                 </x-form.grid-col-full>
 
 
 
                 <div class="flex justify-end">
-                    <x-form.submit label="Process" label_ar="العملية" :isUpdate="$cm?->id" />
+                    <x-form.submit label="Process" :isUpdate="$cm?->id" />
                 </div>
             </div>
         </form>

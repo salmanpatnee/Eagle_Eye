@@ -1,21 +1,20 @@
 @extends('layouts.user')
 @section('title', 'Users')
-@section('title_ar', 'المستخدم')
 
 @section('content')
     <div>
         <x-table.action-wrapper title="All Users">
-            <x-action.button label="Add User" label_ar="إضافة المستخدم" route_name="users.create" />
+            <x-action.button label="Add User" route_name="users.create" />
         </x-table.action-wrapper>
 
         <x-table.table>
             <x-table.thead>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Full Name" label_ar="الاسم الكامل" />
-                <x-table.th label="Username" label_ar="اسم المستخدم" />
-                <x-table.th label="Email" label_ar="عنوان البريد الإلكتروني" />
-                <x-table.th label="Role" label_ar="دور" />
-                <x-table.th label="Action" label_ar="إجراء " />
+                <x-table.th label="S.No" />
+                <x-table.th label="Full Name" />
+                <x-table.th label="Username" />
+                <x-table.th label="Email" />
+                <x-table.th label="Role" />
+                <x-table.th label="Action" />
             </x-table.thead>
             <x-table.tbody>
                 @foreach ($users as $user)

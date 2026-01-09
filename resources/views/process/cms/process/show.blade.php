@@ -1,32 +1,31 @@
 @extends('layouts/user')
 @section('title', 'Process')
-@section('title_ar', 'العملية')
 @section('content')
     <div>
         <x-table.action-wrapper title="Process Details">
-            <x-action.button label="View" label_ar="منظر" route_name="cms.index" />
-            <x-action.button label="Edit" label_ar="تحرير" route_name="cms.edit" route_param="{{ $process->id }}" />
+            <x-action.button label="View" route_name="cms.index" />
+            <x-action.button label="Edit" route_name="cms.edit" route_param="{{ $process->id }}" />
         </x-table.action-wrapper>
 
         <div class="border-gray-100 border-t p-3">
             <x-info-row>
-                <x-info-col label="Process ID" label_ar="رمز العملية">
+                <x-info-col label="Process ID">
                     {{ $process->process_id }}
                 </x-info-col>
 
-                <x-info-col label="Process Name" label_ar="اسم العملية">
+                <x-info-col label="Process Name">
                     {{ $process->title }}
                 </x-info-col>
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Process Name Arabic" label_ar="اسم العملية عربي">
+                <x-info-col label="Process Name Arabic">
                     <span dir="rtl" style="padding-right: .5em">{{ $process->title_ar }}</span>
                 </x-info-col>
 
             </x-info-row>
 
-            <x-info-col-lg label="Process Description" label_ar="وصف العملية">
+            <x-info-col-lg label="Process Description">
                 {{ $process->description ?? '—' }}
             </x-info-col-lg>
         </div>
@@ -34,10 +33,10 @@
         <div>
             <x-table.table>
                 <x-table.thead>
-                    <x-table.th label="S.No" label_ar="رقم" />
-                    <x-table.th label="Resource Name" label_ar="اسم المورد" />
-                    <x-table.th label="Resource Type" label_ar="نوع المورد" />
-                    <x-table.th label="Action" label_ar="إجراء " />
+                    <x-table.th label="S.No" />
+                    <x-table.th label="Resource Name" />
+                    <x-table.th label="Resource Type" />
+                    <x-table.th label="Action" />
                 </x-table.thead>
                 <x-table.tbody>
                     @foreach ($process->resources as $resource)

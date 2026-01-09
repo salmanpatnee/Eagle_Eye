@@ -1,7 +1,6 @@
 @extends('layouts.profile')
 
 @section('title', 'Update Profile')
-@section('title_ar', 'تحديث الملف الشخصي')
 
 @section('content')
     <div class="max-w-4xl mx-auto">
@@ -32,14 +31,14 @@
 
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="First Name" label_ar="الاسم الأول" name="first_name" required="true"
+                        <x-form.field label="First Name" name="first_name" required="true"
                             placeholder="Enter First Name" :value="old('first_name', $user->first_name)" />
                         @error('first_name')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
-                        <x-form.field label="Last Name" label_ar="اسم العائلة" name="last_name" required="true"
+                        <x-form.field label="Last Name" name="last_name" required="true"
                             placeholder="Enter Last Name" :value="old('last_name', $user->last_name)" />
                         @error('last_name')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -49,14 +48,14 @@
 
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Username" label_ar="اسم المستخدم" name="username" required="true"
+                        <x-form.field label="Username" name="username" required="true"
                             placeholder="Enter Username" :value="old('username', $user->username)" />
                         @error('username')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
-                        <x-form.field type="email" label="Email" label_ar="عنوان البريد الإلكتروني" name="email"
+                        <x-form.field type="email" label="Email" name="email"
                             required="true" placeholder="Enter Email" :value="$user->email" readonly="true" />
                         <p class="text-red-600 text-sm mt-1">Cannot be changed</p>
                     </div>
@@ -69,7 +68,7 @@
 
                         <x-form.grid-col>
                             <div>
-                                <x-form.label label="Current Password" label_ar="كلمة المرور الحالية" for="current_password" required="true" />
+                                <x-form.label label="Current Password" for="current_password" required="true" />
                                 <div class="relative mb-6">
                                     <input type="password" id="current_password" name="current_password"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
@@ -91,7 +90,7 @@
 
                         <x-form.grid-col>
                             <div>
-                                <x-form.label label="New Password" label_ar="كلمة المرور الجديدة" for="password" required="true" />
+                                <x-form.label label="New Password" for="password" required="true" />
                                 <div class="relative">
                                     <input type="password" id="password" name="password"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"
@@ -112,7 +111,7 @@
                                 @endif
                             </div>
                             <div>
-                                <x-form.label label="Confirm New Password" label_ar="تأكيد كلمة المرور الجديدة" for="password_confirmation" required="true" />
+                                <x-form.label label="Confirm New Password" for="password_confirmation" required="true" />
                                 <div class="relative">
                                     <input type="password" id="password_confirmation" name="password_confirmation"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-500 focus:border-brand-500 pr-10"

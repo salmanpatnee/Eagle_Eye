@@ -1,18 +1,17 @@
 @extends('layouts.user')
 @section('title', 'Process')
-@section('title_ar', 'العملية')
 @section('content')
     <div>
         <x-table.action-wrapper title="All Process">
-            {{-- <x-action.button label="Add Process" label_ar="إضافة العملية" route_name="cms.create" /> --}}
+            {{-- <x-action.button label="Add Process" route_name="cms.create" /> --}}
         </x-table.action-wrapper>
 
         <x-table.table-sticky>
             <x-table.thead-sticky>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Process ID" label_ar="رمز العملية" />
-                <x-table.th label="Process Name" label_ar="اسم العملية" />
-                <x-table.th label="Action" label_ar="إجراء " />
+                <x-table.th label="S.No" />
+                <x-table.th label="Process ID" />
+                <x-table.th label="Process Name" />
+                <x-table.th label="Action" />
             </x-table.thead-sticky>
 
             <x-table.tbody>
