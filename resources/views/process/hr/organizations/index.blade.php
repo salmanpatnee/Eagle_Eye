@@ -1,20 +1,19 @@
 @extends('layouts.hr')
 @section('title', 'Organizations')
-@section('title_ar', 'المنظمات')
 
 @section('content')
     <div>
         <x-table.action-wrapper title="All Organizations">
-            <x-action.button label="Add Organization" label_ar="إضافة منظمة" route_name="organizations.create" />
+            <x-action.button label="Add Organization" route_name="organizations.create" />
         </x-table.action-wrapper>
 
       <x-table.table-sticky>
             <x-table.thead-sticky>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Organization ID" label_ar="رمز المنظمة" />
-                <x-table.th label="Organization Name" label_ar="اسم المنظمة" />
-                <x-table.th label="Contact Number" label_ar="رقم الاتصال" />
-                <x-table.th label="Action" label_ar="إجراء " />
+                <x-table.th label="S.No" />
+                <x-table.th label="Organization ID" />
+                <x-table.th label="Organization Name" />
+                <x-table.th label="Contact Number" />
+                <x-table.th label="Action" />
             </x-table.thead-sticky>
             <x-table.tbody>
                 @foreach ($organizations as $organization)

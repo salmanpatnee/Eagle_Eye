@@ -1,17 +1,16 @@
 @extends('layouts.hr')
 @section('title', 'Expertises')
-@section('title_ar', 'الخبرات')
 
 @section('content')
     <x-table.action-wrapper title="All Expertises">
-        <x-action.button label="Add Expertise" label_ar="إضافة خبرة" route_name="expertises.create" />
+        <x-action.button label="Add Expertise" route_name="expertises.create" />
     </x-table.action-wrapper>
 
  <x-table.table-sticky>
             <x-table.thead-sticky>
-            <x-table.th label="S.No" label_ar="رقم" />
-            <x-table.th label="Expertise Title" label_ar="عنوان الخبرة" />
-            <x-table.th label="Action" label_ar="إجراء" />
+            <x-table.th label="S.No" />
+            <x-table.th label="Expertise Title" />
+            <x-table.th label="Action" />
             </x-table.thead-sticky>
         <x-table.tbody>
             @foreach ($expertises as $expertise)

@@ -1,1 +1,1 @@
-<x-sidebar-menu-item route_name="designations.index" label_ar="إدارة المناصب" label="Manage Designations" />
+<x-sidebar-menu-item route_name="designations.index" label_ar="" label="Manage Designations" />

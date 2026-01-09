@@ -1,20 +1,19 @@
 @extends('layouts.hr')
 @section('title', 'Certifications')
-@section('title_ar', 'الشهادات')
 
 @section('content')
     <div>
         <x-table.action-wrapper title="All Certifications">
-            <x-action.button label="Add Certification" label_ar="إضافة شهادة" route_name="certifications.create" />
+            <x-action.button label="Add Certification" route_name="certifications.create" />
         </x-table.action-wrapper>
 
       <x-table.table-sticky>
             <x-table.thead-sticky>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Certification ID" label_ar="رمز الشهادة" />
-                <x-table.th label="Certification Title" label_ar="عنوان الشهادة" />
-                <x-table.th label="Institute" label_ar="المعهد" />
-                <x-table.th label="Action" label_ar="إجراء " />
+                <x-table.th label="S.No" />
+                <x-table.th label="Certification ID" />
+                <x-table.th label="Certification Title" />
+                <x-table.th label="Institute" />
+                <x-table.th label="Action" />
             </x-table.thead-sticky>
             <x-table.tbody>
                 @foreach ($certifications as $certification)

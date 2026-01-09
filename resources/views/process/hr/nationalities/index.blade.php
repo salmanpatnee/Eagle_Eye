@@ -1,18 +1,17 @@
 @extends('layouts.hr')
 @section('title', 'Nationalities')
-@section('title_ar', 'الجنسيات')
 
 @section('content')
     <div>
         <x-table.action-wrapper title="All Nationalities">
-            <x-action.button label="Add Nationality" label_ar="إضافة جنسية" route_name="nationalities.create" />
+            <x-action.button label="Add Nationality" route_name="nationalities.create" />
         </x-table.action-wrapper>
 
         <x-table.table-sticky>
             <x-table.thead-sticky>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Name" label_ar="الاسم" />
-                <x-table.th label="Action" label_ar="إجراء " />
+                <x-table.th label="S.No" />
+                <x-table.th label="Name" />
+                <x-table.th label="Action" />
             </x-table.thead-sticky>
             <x-table.tbody>
                 @foreach ($nationalities as $nationality)

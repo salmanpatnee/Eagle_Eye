@@ -1,18 +1,17 @@
 @extends('layouts.hr')
 @section('title', 'Designations')
-@section('title_ar', 'المناصب')
 
 @section('content')
     <x-table.action-wrapper title="All Designations">
-        <x-action.button label="Add Designation" label_ar="إضافة منصب" route_name="designations.create" />
+        <x-action.button label="Add Designation" route_name="designations.create" />
     </x-table.action-wrapper>
 
     <x-table.table-sticky>
         <x-table.thead-sticky>
-            <x-table.th label="S.No" label_ar="رقم" />
-            <x-table.th label="Designation ID" label_ar="رمز  المنصب" />
-            <x-table.th label="Designation Name" label_ar="اسم المنصب" />
-            <x-table.th label="Action" label_ar="إجراء" />
+            <x-table.th label="S.No" />
+            <x-table.th label="Designation ID" />
+            <x-table.th label="Designation Name" />
+            <x-table.th label="Action" />
         </x-table.thead-sticky>
         <x-table.tbody>
             @foreach ($designations as $designation)

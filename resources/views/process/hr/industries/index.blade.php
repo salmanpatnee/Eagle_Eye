@@ -1,19 +1,18 @@
 @extends('layouts.hr')
 @section('title', 'Industries')
-@section('title_ar', 'الصناعات')
 
 @section('content')
     <div>
         <x-table.action-wrapper title="All Industries">
-            <x-action.button label="Add Industry" label_ar="إضافة صناعة" route_name="industries.create" />
+            <x-action.button label="Add Industry" route_name="industries.create" />
         </x-table.action-wrapper>
 
         <x-table.table-sticky>
             <x-table.thead-sticky>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Industry Name" label_ar="اسم الصناعة" />
-                <x-table.th label="Sector" label_ar="القطاع" />
-                <x-table.th label="Action" label_ar="إجراء " />
+                <x-table.th label="S.No" />
+                <x-table.th label="Industry Name" />
+                <x-table.th label="Sector" />
+                <x-table.th label="Action" />
             </x-table.thead-sticky>
             <x-table.tbody>
                 @foreach ($industries as $industry)
