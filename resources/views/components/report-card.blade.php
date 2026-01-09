@@ -21,7 +21,9 @@
 
     <div class="flex items-center justify-center mt-5">
         <div class="text-center text-white">
-            <span class="font-bold text-sm" lang="ar" dir="rtl">{{ $title_ar }}</span>
+            @if(isset($title_ar) && !empty($title_ar))
+                <span class="font-bold text-sm" lang="ar" dir="rtl">{{ $title_ar }}</span>
+            @endif
             <h4 class="font-bold text-sm mt-2">
                 {{ $title }}
             </h4>
