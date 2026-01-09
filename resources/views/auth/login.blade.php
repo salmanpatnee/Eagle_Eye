@@ -22,8 +22,6 @@
                         <h1
                             class="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md flex items-center justify-between">
                             <span>Sign In</span>
-                            <span dir="rtl" lang="ar"
-                                class="font-semibold text-gray-800 dark:text-white/90">تسجيل الدخول</span>
                         </h1>
                     </div>
                     <div>
@@ -33,16 +31,14 @@
                             <div class="space-y-5">
                                 <!-- Email -->
                                 <div>
-                                    <x-form.label for="username" label="Username" required="true"
-                                        label_ar="اسم المستخدم" />
+                                    <x-form.label for="username" label="Username" required="true" />
                                     <x-form.input name="username" required="true" />
                                     <x-form.error name="username" />
                                 </div>
                                 <!-- Password -->
                                 <div>
 
-                                    <x-form.label for="password" label="Password" required="true"
-                                        label_ar="أدخل كلمة المرور" />
+                                    <x-form.label for="password" label="Password" required="true" />
 
                                     <div x-data="{ showPassword: false }" class="relative">
 
@@ -73,7 +69,7 @@
 
                                 <!-- Button -->
                                 <div>
-                                    <x-form.button text="Click Here to Enter" text_rtl="اضغط هنا للدخول" />
+                                    <x-form.button text="Click Here to Enter" />
                                 </div>
                             </div>
                         </form>
