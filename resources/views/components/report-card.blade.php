@@ -6,7 +6,7 @@
     @else
         <a href="#" class="block h-full">
 @endif
-<div class="bg-brand-950 border border-gray-200 px-6 py-10 rounded-2xl h-full min-h-[240px] flex flex-col transition-all duration-300 hover:shadow-xl hover:border-gray-300">
+<div class="bg-brand-950 border border-gray-200 px-3 py-10 rounded-2xl h-full min-h-[240px] flex flex-col transition-all duration-300 hover:shadow-xl hover:border-gray-300">
     <div class="bg-gray-100 flex h-16 items-center justify-center mx-auto rounded-xl w-16 flex-shrink-0">
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
@@ -19,8 +19,8 @@
         </svg>
     </div>
 
-    <div class="flex items-center justify-center mt-8 flex-grow">
-        <div class="text-center text-white px-2">
+    <div class="flex items-start   justify-center mt-8 flex-grow">
+        <div class="text-center text-white ">
             @if(isset($title_ar) && !empty($title_ar))
                 <span class="font-bold text-lg leading-relaxed" lang="ar" dir="rtl">{{ $title_ar }}</span>
             @endif

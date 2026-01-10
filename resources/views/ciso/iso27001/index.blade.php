@@ -50,7 +50,7 @@
         <!-- Sections Grid -->
         <div class="px-4 sm:px-6 lg:px-8 pb-12">
             <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-6">
                     @foreach ($allSections as $index => $item)
                         <div class="group" style="animation: fadeInUp 0.6s ease-out {{ $index * 0.05 }}s backwards;">
                             <x-report-card
