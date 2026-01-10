@@ -2,14 +2,14 @@
 
 
 @if ($route_name)
-    <a href="{{ route($route_name, html_entity_decode($route_param)) }}">
+    <a href="{{ route($route_name, html_entity_decode($route_param)) }}" class="block h-full">
     @else
-        <a href="#">
+        <a href="#" class="block h-full">
 @endif
-<div class="bg-brand-950 border border-gray-200 px-3 py-5 rounded-2xl">
-    <div class="bg-gray-100 flex h-12 items-center justify-center mx-auto rounded-xl w-12">
+<div class="bg-brand-950 border border-gray-200 px-6 py-10 rounded-2xl h-full min-h-[240px] flex flex-col transition-all duration-300 hover:shadow-xl hover:border-gray-300">
+    <div class="bg-gray-100 flex h-16 items-center justify-center mx-auto rounded-xl w-16 flex-shrink-0">
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
             <path fill-rule="evenodd"
                 d="M7.502 6h7.128A3.375 3.375 0 0 1 18 9.375v9.375a3 3 0 0 0 3-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 0 0-.673-.05A3 3 0 0 0 15 1.5h-1.5a3 3 0 0 0-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6ZM13.5 3A1.5 1.5 0 0 0 12 4.5h4.5A1.5 1.5 0 0 0 15 3h-1.5Z"
                 clip-rule="evenodd" />
@@ -19,12 +19,12 @@
         </svg>
     </div>
 
-    <div class="flex items-center justify-center mt-5">
-        <div class="text-center text-white">
+    <div class="flex items-center justify-center mt-8 flex-grow">
+        <div class="text-center text-white px-2">
             @if(isset($title_ar) && !empty($title_ar))
-                <span class="font-bold text-sm" lang="ar" dir="rtl">{{ $title_ar }}</span>
+                <span class="font-bold text-lg leading-relaxed" lang="ar" dir="rtl">{{ $title_ar }}</span>
             @endif
-            <h4 class="font-bold text-sm mt-2">
+            <h4 class="font-bold text-lg leading-relaxed {{ isset($title_ar) && !empty($title_ar) ? 'mt-4' : '' }}">
                 {{ $title }}
             </h4>
         </div>
