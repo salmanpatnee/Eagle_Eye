@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
         <p>Endpoint Detection and Response (EDR) technologies are advanced cybersecurity solutions designed to monitor,
             detect, and respond to threats at the endpoint level. EDR solutions provide continuous visibility into endpoint
             activities, enabling security teams to identify and mitigate threats such as malware, ransomware, and fileless
@@ -26,7 +26,7 @@
             EDR technologies will focus on AI-powered automation, zero-trust security frameworks, and proactive threat
             hunting capabilities to strengthen endpoint security against advanced persistent threats (APTs) and zero-day
             exploits.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
             Deployment Based
             on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
@@ -87,7 +87,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
             Leaders for Endpoint
             Detection and Response (EDR)</h3>
         <x-table.table>
@@ -161,7 +161,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial EDR Products
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">4. Commercial EDR Products
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -245,7 +245,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
             to EDR</h3>
         <ol>
             <li>High volume of endpoint data leading to alert fatigue.</li>
@@ -259,7 +259,7 @@
             <li>Need for continuous updates to counter evolving threats.</li>
             <li>Managing EDR across hybrid and remote work environments.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 EDR
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 EDR
             Products</h3>
         <x-table.table>
             <x-table.thead>
@@ -372,7 +372,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
         </h3>
         <ol>
             <li>EDR enhances endpoint visibility and real-time threat detection.
@@ -392,7 +392,7 @@
             <li>The future of EDR includes AI-driven predictive threat
                 intelligence.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
             Cybersecurity
             Products</h3>
         <x-table.table>
@@ -484,7 +484,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of EDR (3-5 Years)
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">9. Future of EDR (3-5 Years)
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -548,7 +548,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
             Zero-Trust Readiness
         </h3>
         <ol>
@@ -582,7 +582,7 @@
                 in transit and at
                 rest.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
             AI-Readiness</h3>
         <ol>
             <li>AI-powered endpoint threat intelligence

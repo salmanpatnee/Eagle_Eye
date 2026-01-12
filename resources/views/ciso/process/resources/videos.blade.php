@@ -12,7 +12,7 @@
         $process_id = html_entity_decode($processWithVideos->process_id);
     @endphp
     <div class="gap-6 grid grid-cols-1 px-4">
-        <div class="bg-brand-950 hover:shadow-lg max-w-[700px] mx-auto p-6 rounded-lg shadow text-white transition">
+        <div class="hover:shadow-lg mx-auto p-6 rounded-lg shadow text-white transition">
             <x-iso-content-card title="{{ $processWithVideos->title }}">
                 {{ $processWithVideos->description }}
             </x-iso-content-card>
@@ -28,7 +28,7 @@
 
 @section('additional_content')
     <div class="bg-white my-6 p-5 rounded-2xl">
-        <header class="text-center bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">
+        <header class="text-center bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">
             <h1>Video Explanations of {{ $processWithVideos->title }}</h1>
         </header>
 

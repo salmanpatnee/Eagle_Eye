@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
         <p>Encryption is a fundamental component of endpoint security that ensures data confidentiality by converting
             readable information into an unreadable format, which can only be decrypted with an authorized key. As
             endpoints, such as laptops, desktops, mobile devices, and removable storage, become prime targets for cyber
@@ -26,7 +26,7 @@
             The future of endpoint encryption will focus on quantum-resistant encryption, AI-powered automation, and tighter
             integration with access control mechanisms to enhance data security in a rapidly evolving threat landscape.</p>
 
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
             Deployment Based
             on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
@@ -87,7 +87,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
             Leaders for Encryption
             (Endpoint Security)</h3>
         <x-table.table>
@@ -161,7 +161,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial Encryption
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">4. Commercial Encryption
             Products for Endpoint
             Security</h3>
         <x-table.table>
@@ -250,7 +250,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
             to Encryption
             (Endpoint Security)</h3>
         <ol>
@@ -265,7 +265,7 @@
             <li>Adapting encryption policies for remote workforces.</li>
             <li>Automating encryption enforcement across diverse endpoint devices.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
             Encryption Products
         </h3>
         <x-table.table>
@@ -377,7 +377,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
         </h3>
         <ol>
             <li>Encryption is critical for endpoint data protection.</li>
@@ -398,7 +398,7 @@
                 crucial.
             </li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
             Cybersecurity
             Products</h3>
         <x-table.table>
@@ -487,7 +487,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of Encryption
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">9. Future of Encryption
             (Endpoint Security)
             (3-5 Years)
         </h3>
@@ -548,7 +548,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
             Zero-Trust Readiness
         </h3>
         <ol>
@@ -580,7 +580,7 @@
                 aligned with Zero
                 Trust principles.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
             AI-Readiness</h3>
         <ol>
             <li>AI-powered anomaly detection in

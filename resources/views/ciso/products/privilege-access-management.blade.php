@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
         <p>Privileged Access Management (PAM) is a cybersecurity technology designed to control, monitor, and secure access
             to critical IT infrastructure, applications, and sensitive data by privileged users. Privileged accounts, such
             as system administrators, database administrators, and network engineers, have elevated access to an
@@ -23,7 +23,7 @@
             environments. The future of PAM is centered on Zero Trust Security, AI-driven threat detection, and Just-in-Time
             (JIT) access management, enabling organizations to implement proactive security controls for their privileged
             accounts while maintaining compliance with regulatory frameworks.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
             Deployment Based
             on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
@@ -84,7 +84,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
             Leaders for Privileged
             Access Management (PAM)</h3>
         <x-table.table>
@@ -158,7 +158,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial PAM Products
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">4. Commercial PAM Products
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -243,7 +243,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
             to PAM</h3>
         <ol>
             <li>Managing privileged access in hybrid and multi-cloud environments.</li>
@@ -257,7 +257,7 @@
             <li>Reducing administrative overhead for PAM deployment.</li>
             <li>Integrating PAM with IAM, SIEM, and endpoint security platforms.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 PAM
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 PAM
             Products</h3>
         <x-table.table>
             <x-table.thead>
@@ -363,7 +363,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
         </h3>
         <ol>
             <li>PAM significantly reduces the attack surface by controlling
@@ -389,7 +389,7 @@
                 access control.
             </li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
             Cybersecurity
             Products</h3>
         <x-table.table>
@@ -491,7 +491,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of PAM (3-5 Years)
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">9. Future of PAM (3-5 Years)
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -552,7 +552,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
             Zero-Trust Readiness
         </h3>
         <ol>
@@ -584,7 +584,7 @@
                 privileged access
                 management policies.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
             AI-Readiness</h3>
         <ol>
             <li>AI-powered risk scoring for privileged

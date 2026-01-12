@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
         <p>Network Access Control (NAC) is a cybersecurity technology that enforces security policies on devices attempting
             to access an organization's network. NAC ensures that only authorized and compliant devices are permitted
             network access, preventing unauthorized or compromised devices from connecting. NAC solutions verify users and
@@ -23,7 +23,7 @@
             anomalous behaviors and automating security responses. The future of NAC lies in its ability to integrate with
             extended detection and response (XDR), security orchestration automation and response (SOAR), and Secure Access
             Service Edge (SASE) frameworks to provide adaptive and intelligent network access control.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
             Deployment Based
             on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
@@ -84,7 +84,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
             Leaders for Network
             Access Control (NAC)</h3>
         <x-table.table>
@@ -160,7 +160,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial NAC Products
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">4. Commercial NAC Products
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -249,7 +249,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
             to NAC</h3>
         <ol>
             <li>Managing network access for remote and hybrid workforces.</li>
@@ -263,7 +263,7 @@
             <li>Automating threat response while maintaining security governance.</li>
             <li>Addressing challenges with legacy systems and NAC interoperability.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 NAC
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 NAC
             Products</h3>
         <x-table.table>
             <x-table.thead>
@@ -355,7 +355,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
         </h3>
         <ol>
             <li>NAC strengthens network security by controlling device access.
@@ -375,7 +375,7 @@
             <li>Future NAC solutions will integrate with AI-driven security
                 frameworks.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
             Cybersecurity
             Products</h3>
         <x-table.table>
@@ -470,7 +470,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of NGFW (3-5 Years)
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">9. Future of NGFW (3-5 Years)
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -532,7 +532,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
             Zero-Trust Readiness
         </h3>
         <ol>
@@ -565,7 +565,7 @@
                 security policies.
             </li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
             AI-Readiness</h3>
         <ol>
             <li>AI-powered anomaly detection in network

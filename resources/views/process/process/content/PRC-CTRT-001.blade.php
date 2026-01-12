@@ -20,7 +20,7 @@
 
 
 
-    <h3>3. Key Performance Indicators (KPIs) in Contract and Vendor Management</h3>
+    <h3>2. Key Performance Indicators (KPIs) in Contract and Vendor Management</h3>
     <x-table.table>
         <x-table.thead>
             <x-table.th label="KPI Name" />
@@ -57,7 +57,7 @@
             </tr>
         </x-table.tbody>
     </x-table.table>
-    <h3>4. Contract and Vendor Management Products</h3>
+    <h3>3. Contract and Vendor Management Products</h3>
     <x-table.table>
         <x-table.thead>
             <x-table.th label="Product Name" />
@@ -66,11 +66,7 @@
 
         </x-table.thead>
         <x-table.tbody>
-            <tr>
-                <x-table.th label="Product Name" />
-                <x-table.th label="Description" />
-                <x-table.th label="Relevant Standard" />
-            </tr>
+          
             <tr>
                 <x-table.td>Aravo for Third-Party Risk Management</x-table.td>
                 <x-table.td>Automates vendor risk assessments and compliance tracking.</x-table.td>
@@ -123,7 +119,7 @@
             </tr>
         </x-table.tbody>
     </x-table.table>
-    <h3>5. Summary</h3>
+    <h3>4. Summary</h3>
     <p>
         Effective contract and vendor management ensures that third-party service providers meet security,
         compliance,

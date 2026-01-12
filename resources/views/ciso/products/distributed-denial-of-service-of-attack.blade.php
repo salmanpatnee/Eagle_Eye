@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
 
         <p>A Distributed Denial-of-Service (DDoS) attack is a cyber threat in which multiple compromised systems are used to
             flood a targeted server, network, or application with excessive traffic, overwhelming its capacity and causing
@@ -28,7 +28,7 @@
             lies in predictive analytics, automated threat intelligence sharing, and hybrid cloud-based protection to
             enhance network resilience and business continuity</p>
 
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
             Deployment Based
             on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
@@ -99,7 +99,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
             Leaders for
             Distributed Denial-of-Service (DDoS) Attack Protection</h3>
         <x-table.table>
@@ -176,7 +176,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial DDoS Protection
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">4. Commercial DDoS Protection
             Products</h3>
         <x-table.table>
             <x-table.thead>
@@ -267,7 +267,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
             to DAM</h3>
         <ol>
             <li>Increasing scale and complexity of DDoS attacks.</li>
@@ -281,7 +281,7 @@
             <li>Lack of skilled professionals to manage and configure DDoS mitigation.</li>
             <li>Automating responses to minimize downtime and service disruption.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 DAM
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10 DAM
             Products</h3>
         <x-table.table>
             <x-table.thead>
@@ -392,7 +392,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
         </h3>
         <ol>
             <li>DDoS attacks are increasing in frequency and sophistication.
@@ -410,7 +410,7 @@
             <li>Zero-trust architecture strengthens overall cybersecurity
                 posture.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
             Cybersecurity
             Products</h3>
         <x-table.table>
@@ -499,7 +499,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of DDoS Protection
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">9. Future of DDoS Protection
             (3-5 Years)</h3>
         <x-table.table>
             <x-table.thead>
@@ -556,7 +556,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
             Zero-Trust Readiness
         </h3>
         <ol>
@@ -591,7 +591,7 @@
                 transit and network
                 connections.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
             AI-Readiness</h3>
         <ol>
             <li>AI-powered anomaly detection in DDoS

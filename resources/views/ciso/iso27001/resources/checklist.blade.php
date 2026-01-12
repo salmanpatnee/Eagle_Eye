@@ -12,7 +12,7 @@
         $section_id = html_entity_decode($sectionWithChecklist->section_id);
     @endphp
     <div class="gap-6 grid grid-cols-1 px-4">
-        <div class="bg-brand-950 hover:shadow-lg max-w-[700px] mx-auto p-6 rounded-lg shadow text-white transition">
+        <div class="hover:shadow-lg mx-auto rounded-lg shadow text-white transition">
             <x-iso-content-card title="{{ $sectionWithChecklist->title }}">
                 {{ $sectionWithChecklist->description }}
             </x-iso-content-card>

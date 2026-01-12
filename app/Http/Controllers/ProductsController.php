@@ -9,12 +9,11 @@ class ProductsController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)
     {
-        $productsData = [
+        $productsData = collect([
             'Anti Phishing Software' => 'products.anti-phishing-software',
             'Anti Ransomware Software' => 'products.anti-ransomware-software',
             'Application Whitelisting' => 'products.application-whitelisting',
@@ -45,7 +44,12 @@ class ProductsController extends Controller
             'WiFi Security' => 'products.wifi-security',
             'Zero Day Attack' => 'products.zero-day-attack',
             'Zero Trust' => 'products.zero-trust',
-        ];
+        ])->map(function ($route, $title) {
+            return (object) [
+                'title' => $title,
+                'route_name' => $route,
+            ];
+        })->values();
 
         return view('ciso/products/index', compact('productsData'));
     }

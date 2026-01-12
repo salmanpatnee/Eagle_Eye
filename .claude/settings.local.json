@@ -19,7 +19,9 @@
       "mcp__laravel-boost__database-query",
       "mcp__laravel-boost__tinker",
       "Bash(cat:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "mcp__laravel-boost__get-absolute-url",
+      "mcp__laravel-boost__list-routes"
     ]
   },
   "enableAllProjectMcpServers": true,

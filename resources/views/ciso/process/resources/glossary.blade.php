@@ -12,7 +12,7 @@
         $process_id = html_entity_decode($processWithGlossary->process_id);
     @endphp
     <div class="gap-6 grid grid-cols-1 px-4">
-        <div class="bg-brand-950 hover:shadow-lg max-w-[700px] mx-auto p-6 rounded-lg shadow text-white transition">
+        <div class="hover:shadow-lg mx-auto p-6 rounded-lg shadow text-white transition">
             <x-iso-content-card title="{{ $processWithGlossary->title }}">
                 {{ $processWithGlossary->description }}
             </x-iso-content-card>

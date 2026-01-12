@@ -2,36 +2,27 @@
 @section('title', 'Compliance Challenges Framework Model')
 @section('title_ar', '')
 @section('content')
+    <div class="min-h-screen">
+        <x-page-header
+            title="Products"
+            subtitle="Compliance Challenges Framework Model">
+            <x-slot:icon>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-white">
+                    <path fill-rule="evenodd" d="M12.378 1.602a.75.75 0 0 0-.756 0L3 6.632l.178.3a4.5 4.5 0 0 0 1.3.794v8.24a4.5 4.5 0 0 0-1.799 1.013l-.002.002-.006.007a3 3 0 0 0-.54 3.642 3 3 0 0 0 3.536 1.702l.006-.002.007-.006a3 3 0 0 0 1.538-1.517l.001-.006.002-.007a3 3 0 0 0-.54-3.642 3 3 0 0 0 3.536-1.702l.006.002.007.006c.135.08.27.157.406.23.416.22.84.422 1.27.606v-8.24a4.5 4.5 0 0 0-1.3-.794l.178-.3 8.622-5.03a.75.75 0 0 0-.756-1.298l-8.622 5.03Zm-4.5 7.5a.75.75 0 0 0-1.06 0l-2.25 2.25a.75.75 0 0 0 0 1.06l2.25 2.25a.75.75 0 0 0 1.06-1.06l-1.72-1.72 1.72-1.72a.75.75 0 0 0 0-1.06Zm9 0a.75.75 0 0 0-1.06 0l-1.72 1.72-1.72-1.72a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.06 0l2.25-2.25a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd" />
+                </svg>
+            </x-slot:icon>
+            Explore our comprehensive product framework for addressing compliance challenges. Navigate through each product to understand how they can help implement effective governance, risk, and compliance solutions.
+        </x-page-header>
 
-    <div>
-
-
-        <div class="col-span-12 space-y-6 xl:col-span-7">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                @foreach ($productsData as $title => $route)
-                    <a href="{{ route($route) }}">
-                        <div class="bg-brand-950 border border-gray-200 md:p-6 p-5 rounded-2xl">
-                            <div class="bg-gray-100 flex h-12 items-center justify-center mx-auto rounded-xl w-12">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
-                                </svg>
-                            </div>
-                            <div class="flex items-center justify-center mt-5">
-                                <div class="text-center text-white">
-                                    {{-- <span class="font-bold" lang="ar"
-                                        dir="rtl">{{ $data->category_name_ar }}</span> --}}
-                                    <h4 class="font-bold mt-2">
-                                        {{ $title }}
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-
+        <x-grid-layout
+            :items="$productsData"
+            itemComponent="report-card"
+            routeNameField="route_name"
+            titleField="title"
+            titleArField=""
+            headerTitle="Browse Products"
+            headerDescription="Select a product to explore detailed information and capabilities"
+            wrapperClass="product-card-wrapper"
+        />
     </div>
 @endsection

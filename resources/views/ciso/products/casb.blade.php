@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
         <p>Cloud Access Security Broker (CASB) technology serves as a security checkpoint between cloud service providers
             and
             enterprise users to ensure the secure use of cloud applications and services. With the increasing adoption of
@@ -32,7 +32,7 @@
             automation, deep behavioral analytics, and enhanced cloud-native security controls to address emerging threats
             in
             cloud ecosystems.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">2. Justification of Technology
             Deployment Based
             on Regulatory and Cybersecurity Controls</h3>
         <x-table.table>
@@ -118,7 +118,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">3. Gartner Magic Quadrant
             Leaders for Cloud
             Access Security Broker (CASB)</h3>
         <x-table.table>
@@ -194,7 +194,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">4. Commercial CASB Products
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">4. Commercial CASB Products
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -280,7 +280,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">5. Top 10 Challenges Related
             to CASB</h3>
         <ol>
             <li>Complexity in deploying CASB across multi-cloud environments.</li>
@@ -295,7 +295,7 @@
             <li>User resistance and policy circumvention through personal cloud accounts.
             </li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
             CASB Products</h3>
         <x-table.table>
             <x-table.thead>
@@ -390,7 +390,7 @@
                 <tr>
                     <x-table.td>9</x-table.td>
                     <x-table.td>Zscaler CASB</x-table.td>
-                    <x-table.td>Inline traffic inspection, API security, adaptive policy
+                    <x-table.td> traffic inspection, API security, adaptive policy
                         control,
                         advanced malware
                         detection, Zero
@@ -408,7 +408,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">7. Top 10 Takeaways for CISO
         </h3>
         <ol>
             <li>CASB solutions provide critical visibility into cloud security
@@ -426,7 +426,7 @@
             <li>Continuous monitoring is required for dynamic cloud
                 environments.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
             Cybersecurity
             Products</h3>
         <x-table.table>
@@ -532,7 +532,7 @@
                     <x-table.td>Zscaler CASB</x-table.td>
                     <x-table.td>Zscaler</x-table.td>
                     <x-table.td>Cloud-based</x-table.td>
-                    <x-table.td>Inline traffic inspection, API security,
+                    <x-table.td> traffic inspection, API security,
                         adaptive
                         policy
                         control, advanced malware
@@ -594,7 +594,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">9. Future of CASB (3-5 Years)
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">9. Future of CASB (3-5 Years)
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -662,7 +662,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">10. Top 10 Points for
             Zero-Trust Readiness
         </h3>
         <ol>
@@ -696,7 +696,7 @@
                 data at rest and in
                 transit.</li>
         </ol>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">11. Top 10 Points for
             AI-Readiness</h3>
         <ol>
             <li>AI-powered anomaly detection for cloud

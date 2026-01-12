@@ -8,7 +8,7 @@
         <!-- ===== Main Content Start ===== -->
         <main>
             <div class="px-4 py-2 mx-auto max-w-(--breakpoint-2xl)">
-                <div class="top-16 sm:sticky sm:top-[60px] md:top-[66px] z-99995 p-4" style="background-color: #F9FAFB;">
+                <div class="top-16 md:sticky sm:top-[60px] md:top-[66px] z-99995 p-4" style="background-color: #F9FAFB;">
                     @include('partials.breadcrumbs-ciso')
                 </div>
 
@@ -32,7 +32,7 @@
                         @endif
 
                         <div
-                            class="relative max-w-full overflow-x-auto   rounded-lg border border-gray-200 bg-white pt-4 dark:border-gray-800 dark:bg-white/[0.03]">
+                            class="relative max-w-full overflow-x-auto   rounded-lg border border-gray-200 bg-white  dark:border-gray-800 dark:bg-white/[0.03]">
                             @yield('content')
                         </div>
 
