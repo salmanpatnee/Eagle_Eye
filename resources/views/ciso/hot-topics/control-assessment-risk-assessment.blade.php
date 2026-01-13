@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">In the field of cybersecurity, control assessment and risk assessment are two critical
             evaluation processes that help
             organizations strengthen their security posture, ensure regulatory compliance, and mitigate threats effectively.
@@ -33,7 +33,7 @@
             require attention, a control assessment determines whether existing security controls are sufficient to mitigate
             those risks. Together, they form a comprehensive approach to cybersecurity governance, helping organizations
             safeguard sensitive information and maintain regulatory compliance.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Control Assessment vs. Risk Assessment in
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Control Assessment vs. Risk Assessment in
             Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>
@@ -139,7 +139,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md mt-3 text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md mt-3 text-white">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">Both control assessment and risk assessment are essential components of a robust
             cybersecurity strategy, but they
             serve different objectives. Control assessments help organizations determine whether security controls are

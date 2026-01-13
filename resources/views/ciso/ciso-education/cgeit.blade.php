@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">1. Governance of Enterprise IT in
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 mt-7 rounded-md text-white">1. Governance of Enterprise IT in
             Cybersecurity</h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
@@ -60,7 +60,7 @@
             <li>Strategic oversight by a Cybersecurity Steering Committee is essential.</li>
         </ul>
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">2. IT Resources in Cybersecurity</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">2. IT Resources in Cybersecurity</h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
         <p class="mb-3 mt-3 text-lg">
@@ -114,7 +114,7 @@
             <li>Cloud security and endpoint protection must be prioritized.</li>
         </ul>
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">3. Benefits Realization in Cybersecurity
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">3. Benefits Realization in Cybersecurity
         </h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
@@ -166,7 +166,7 @@
             <li>Clear reporting improves executive buy-in for security initiatives.</li>
         </ul>
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">4. Risk Optimization in Cybersecurity</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">4. Risk Optimization in Cybersecurity</h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
         <p class="mb-3 mt-3 text-lg">Risk optimization ensures that cybersecurity risks are effectively identified,
@@ -217,4 +217,5 @@
             <li>Continuous monitoring is critical for managing emerging threats.</li>
             <li>Risk quantification improves decision-making and resource allocation.</li>
         </ul>
+        </div>
     @endsection

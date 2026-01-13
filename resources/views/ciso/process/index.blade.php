@@ -1,6 +1,5 @@
 @extends('layouts.ciso-full')
 @section('title', 'GRC Domain Resources (Capacity Building Framework)')
-@section('title_ar', 'موارد الحوكمة والمخاطر والامتثال (إطار بناء القدرات)')
 @section('content')
     <div class="min-h-screen">
         <x-page-header
@@ -20,7 +19,7 @@
             routeName="process.view.show"
             routeParam="process_id"
             titleField="title"
-            titleArField="title_ar"
+            titleArField=""
             headerTitle="Browse Processes"
             headerDescription="Select a process to explore detailed information and requirements"
             wrapperClass="process-card-wrapper"

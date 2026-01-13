@@ -5,7 +5,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">1. Information Security Governance</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 mt-7 rounded-md text-white">1. Information Security Governance</h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
         <p class="mb-3 mt-3 text-lg">Effective Information Security Governance ensures that security aligns with business
@@ -60,7 +60,7 @@
             <li><strong>Drive a security-aware culture across the organization</strong>.</li>
         </ul>
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">2. Information Security Risk Management
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">2. Information Security Risk Management
         </h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
@@ -114,7 +114,7 @@
             <li>Ensure risk reporting is integrated into decision-making processes.</li>
         </ul>
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">3. Information Security Program Development
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">3. Information Security Program Development
             and Management</h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
@@ -172,7 +172,7 @@
             <li><b>Integrate security programs with enterprise IT governance</b>.</li>
         </ul>
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">4. Information Security Incident Management
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">4. Information Security Incident Management
         </h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
@@ -235,4 +235,5 @@
             <li>Conduct regular <strong>incident response simulations</strong> to test readiness.</li>
             <li>Ensure <strong>post-incident learning</strong> to continuously enhance response capabilities.</li>
         </ul>
+    </div>
     @endsection

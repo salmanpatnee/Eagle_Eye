@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Essential Key Performance Indicators</h3>
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Essential Key Performance Indicators</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -77,7 +77,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline mb-3 p-3 rounded-md text-white mt-3">Essential Key Risk Indicators</h3>
+        <h3 class="bg-black font-bold mb-3 p-3 rounded-md text-white mt-3">Essential Key Risk Indicators</h3>
         <x-table.table>
             <x-table.thead>
                 <tr>

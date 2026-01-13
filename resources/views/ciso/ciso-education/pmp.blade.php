@@ -5,7 +5,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">1. People Domain in Cybersecurity</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 mt-7 rounded-md text-white">1. People Domain in Cybersecurity</h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation in Cybersecurity</h4>
         <p class="mb-3 mt-3 text-lg">The <b>People domain</b> in cybersecurity projects focuses on leading and managing
@@ -60,7 +60,7 @@
             <li><strong>Building a security culture</strong> leads to long-term resilience.</li>
         </ul>
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">2. Process Domain in Cybersecurity</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">2. Process Domain in Cybersecurity</h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation in Cybersecurity</h4>
         <p class="mb-3 mt-3 text-lg">The <b>Process domain</b> ensures structured execution of cybersecurity initiatives,
@@ -118,7 +118,7 @@
             <li><strong>Integration of security into IT processes</strong> ensures seamless protection.</li>
         </ul>
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">3. Business Environment Domain in
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">3. Business Environment Domain in
             Cybersecurity</h3>
 
         <h4 class="font-bold text-brand-500 text-lg">Implementation in Cybersecurity</h4>
@@ -177,4 +177,5 @@
             <li><strong>Executive engagement</strong> improves funding and support for security initiatives.</li>
             <li><strong>Third-party risk management</strong> is crucial for supply chain security.</li>
         </ul>
-    @endsection
+    </div>
+@endsection

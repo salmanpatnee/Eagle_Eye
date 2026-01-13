@@ -5,7 +5,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">In the modern digital landscape, organizations operate in an environment governed by
             stringent cybersecurity and IT
             security regulations. Compliance is a critical pillar for businesses to ensure legal adherence, protect
@@ -32,7 +32,7 @@
             and IT security and provides
             insights into overcoming these obstacles.</p>
 
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Compliance Challenges in Cybersecurity</h3>
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Compliance Challenges in Cybersecurity</h3>
 
         <x-table.table>
             <x-table.thead>
@@ -249,7 +249,7 @@
         </x-table.table>
 
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white mt-3">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-3">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">Compliance in cybersecurity and IT security is a continuous process rather than a
             one-time initiative.
             Organizations

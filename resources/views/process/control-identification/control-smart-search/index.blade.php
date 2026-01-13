@@ -1,6 +1,6 @@
 @extends('layouts.app-full')
 @section('title', 'Control Smart Search')
-@section('title_ar', 'الضوابط في البحث الذكي')
+{{-- @section('title_ar', 'الضوابط في البحث الذكي') --}}
 @section('content')
 @push('css')
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,42 +13,42 @@
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
                 <x-form.grid-4-col>
                     <div>
-                        <x-form.select label="Controls" label_ar="الضوابط" name="control_name" :value="$controlId"
+                        <x-form.select label="Controls"  name="control_name" :value="$controlId"
                             :custom_data="$controlIds" onchange="this.form.submit()" />
                     </div>
                     <div>
-                        <x-form.select label="Classification" label_ar="التصنيف" name="classification" :value="$classification"
+                        <x-form.select label="Classification"  name="classification" :value="$classification"
                             :data="$classifications" id_key="classification_id" value_key="classification_name"
                             onchange="this.form.submit()" hide_keys="true" />
                     </div>
                     <div>
-                        <x-form.select label="Relationships" label_ar="علاقة" name="relation" :value="$relation"
+                        <x-form.select label="Relationships"  name="relation" :value="$relation"
                             :data="$relations" id_key="relation_id" value_key="relation_name" onchange="this.form.submit()"
                             hide_keys="true" />
                     </div>
                     <div>
-                        <x-form.select label="Categories" label_ar="فئة" name="category" :value="$category" :data="$categories"
+                        <x-form.select label="Categories"  name="category" :value="$category" :data="$categories"
                             onchange="this.form.submit()" id_key="category_id" value_key="category_name" hide_keys="true" />
                     </div>
                 </x-form.grid-4-col>
                 <x-form.grid-4-col>
                     <div>
-                        <x-form.select label="Control Types" label_ar="نوع الضابط" name="type" :value="$type"
+                        <x-form.select label="Control Types" name="type" :value="$type"
                             :data="$types" id_key="control_type_id" value_key="control_type_name"
                             onchange="this.form.submit()" hide_keys="true" />
                     </div>
                     <div>
-                        <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="practice" :value="$practice"
+                        <x-form.select label="Best Practices"  name="practice" :value="$practice"
                             :data="$practices" id_key="best_practice_id" value_key="best_practice_name"
                             onchange="this.form.submit()" hide_keys="true" />
                     </div>
                     <div>
-                        <x-form.select label="Main Domains" label_ar="المكون الأساسي" name="domain" :value="$domain"
+                        <x-form.select label="Main Domains" name="domain" :value="$domain"
                             :data="$domains" id_key="main_domain_id" value_key="main_domain_name"
                             onchange="this.form.submit()" hide_keys="true" />
                     </div>
                     <div>
-                        <x-form.select label="Sub Domains" label_ar="المكون الفرعي" name="subdomain" :value="$subdomain"
+                        <x-form.select label="Sub Domains"  name="subdomain" :value="$subdomain"
                             :data="$subDomains" onchange="this.form.submit()" id_key="sub_domain_id"
                             value_key="sub_domain_name" hide_keys="true" />
                     </div>

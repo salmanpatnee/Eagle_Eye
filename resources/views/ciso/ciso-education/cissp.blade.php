@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">1. Security and Risk Management</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 mt-7 rounded-md text-white">1. Security and Risk Management</h3>
         <h4 class="font-bold text-brand-500 text-lg">How this domain can be implemented:</h4>
         <p class="mb-3 mt-3 text-lg">
             Security and Risk Management involves defining security governance, risk management, compliance, and security
@@ -61,7 +61,7 @@
             <li><b>Security awareness programs</b> help mitigate human-related risks.</li>
             <li><b>BCP and DRP</b> ensure business continuity during incidents.</li>
         </ul>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">2. Asset Security</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">2. Asset Security</h3>
         <h4 class="font-bold text-brand-500 text-lg">How this domain can be implemented:</h4>
         <p class="mb-3 mt-3 text-lg">
             Asset Security focuses on protecting <strong>physical and digital assets</strong> by implementing
@@ -110,7 +110,7 @@
             <li><b>Secure asset disposal</b> prevents unauthorized access.</li>
             <li><b>Monitoring asset usage</b> improves data security.</li>
         </ul>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">3. Security Architecture and Engineering
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">3. Security Architecture and Engineering
         </h3>
         <h4 class="font-bold text-brand-500 text-lg">How this domain can be implemented:</h4>
         <p class="mb-3 mt-3 text-lg">
@@ -160,7 +160,7 @@
             <li><strong>Cryptography</strong> strengthens data confidentiality and integrity.</li>
             <li><strong>Regular security testing</strong> helps identify weaknesses.</li>
         </ul>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">3. Communication and Network Security</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">3. Communication and Network Security</h3>
         <h4 class="font-bold text-brand-500 text-lg">How this domain can be implemented:</h4>
         <p class="mb-3 mt-3 text-lg">
             Communication and Network Security focus on
@@ -212,7 +212,7 @@
             <li><strong>Firewalls, IDS/IPS, and NAC</strong> prevent intrusions.</li>
             <li><strong>Continuous monitoring</strong> detects anomalies early.</li>
         </ul>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">5. Identity and Access Management (IAM)
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">5. Identity and Access Management (IAM)
         </h3>
         <h4 class="font-bold text-brand-500 text-lg">How this domain can be implemented:</h4>
         <p class="mb-3 mt-3 text-lg">
@@ -264,7 +264,7 @@
             <li><strong>SSO and FIM</strong> enhance usability and security.</li>
             <li><strong>Regular access reviews</strong> prevent security gaps.</li>
         </ul>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">6. Security Assessment and Testing</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">6. Security Assessment and Testing</h3>
         <h4 class="font-bold text-brand-500 text-lg">How this domain can be implemented:</h4>
         <p class="mb-3 mt-3 text-lg">
             Organizations should conduct <strong>regular Vulnerability Assessments (VA) and Penetration Testing
@@ -311,7 +311,7 @@
             <li>Integrating security testing in <strong>DevSecOps</strong> is essential.</li>
             <li>Incident response exercises prepare teams for cyberattacks.</li>
         </ul>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">7. Security Operations</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">7. Security Operations</h3>
         <h4 class="font-bold text-brand-500 text-lg">How this domain can be implemented:</h4>
         <p class="mb-3 mt-3 text-lg">Security Operations focuses on <strong>incident detection, response, and
                 recovery</strong> to ensure the
@@ -367,7 +367,7 @@
             <li><strong>Regular patching and vulnerability scans</strong> prevent attacks.</li>
             <li><strong>Threat intelligence improves proactive defense strategies.</strong></li>
         </ul>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">8. Software Development Security</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">8. Software Development Security</h3>
         <h4 class="font-bold text-brand-500 text-lg">How this domain can be implemented:</h4>
         <p class="mb-3 mt-3 text-lg">Software Development Security focuses on <strong>securing applications throughout the
                 Software Development Life

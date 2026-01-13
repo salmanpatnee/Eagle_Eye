@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">1. Customer Collaboration</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 mt-7 rounded-md text-white">1. Customer Collaboration</h3>
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
         <p class="mb-3 mt-3 text-lg">Customer collaboration in cybersecurity means actively engaging stakeholders, including
             business leaders, IT
@@ -56,7 +56,7 @@
             <li>Communication between cybersecurity and business teams is essential.</li>
         </ul>
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">2. Responding to Change</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">2. Responding to Change</h3>
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
         <p class="mb-3 mt-3 text-lg">In cybersecurity, responding to change involves being adaptive to new threats,
             regulatory requirements, and
@@ -102,7 +102,7 @@
         Continuous training improves security awareness.
         Investing in cybersecurity flexibility ensures resilience.
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">3. Working Software (Secure Systems &
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">3. Working Software (Secure Systems &
             Infrastructure)</h3>
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
         <p class="mb-3 mt-3 text-lg">In cybersecurity, "working software" translates to ensuring that security mechanisms,
@@ -153,7 +153,7 @@
         </ul>
 
 
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">4. Individuals and Interactions</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">4. Individuals and Interactions</h3>
         <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
         <p class="mb-3 mt-3 text-lg">Agile cybersecurity relies on strong team collaboration and cross-functional
             interaction. Security professionals
@@ -202,7 +202,7 @@
 
 
         <div class="section">
-            <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">5. Iterative Development (Incremental
+            <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">5. Iterative Development (Incremental
                 Security Improvements)</h3>
             <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
             <p class="mb-3 mt-3 text-lg">Cybersecurity should be continuously improved through iterative cycles. Agile
@@ -245,7 +245,7 @@
                 <li>Controlled security rollouts prevent disruptions.</li>
                 <li>Continuous adaptation strengthens cybersecurity posture.</li>
             </ul>
-            <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">6. Simplicity</h3>
+            <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">6. Simplicity</h3>
             <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
             <p class="mb-3 mt-3 text-lg">Simplifying security processes reduces complexity and improves efficiency. Agile
                 security teams should focus
@@ -286,7 +286,7 @@
                 <li>Streamlined policies support compliance.</li>
                 <li>User-friendly security solutions encourage adoption.</li>
             </ul>
-            <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">7. Self-Organizing Teams</h3>
+            <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">7. Self-Organizing Teams</h3>
             <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
             <p class="mb-3 mt-3 text-lg">Self-organizing cybersecurity teams take ownership of security initiatives without
                 requiring constant
@@ -329,7 +329,7 @@
                 <li>Establish decentralized security governance.</li>
                 <li>Balance autonomy with compliance and accountability.</li>
             </ul>
-            <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">8. Continuous Improvement</h3>
+            <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">8. Continuous Improvement</h3>
             <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
             <p class="mb-3 mt-3 text-lg">Continuous improvement in cybersecurity ensures that security measures evolve with
                 emerging threats. Agile
@@ -369,7 +369,7 @@
                 <li>Incident response plans must evolve over time.</li>
                 <li>Learning from security incidents strengthens resilience.</li>
             </ul>
-            <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">9. Sustainability</h3>
+            <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">9. Sustainability</h3>
             <h4 class="font-bold text-brand-500 text-lg">Implementation</h4>
             <p class="mb-3 mt-3 text-lg">Sustainable cybersecurity ensures that security measures are long-term, scalable,
                 and cost-effective. Agile
@@ -410,4 +410,6 @@
                 <li>Aligning security with business growth ensures scalability.</li>
                 <li>Cost-effective security investments promote sustainability.</li>
             </ul>
-        @endsection
+        </div>
+    </div>
+@endsection

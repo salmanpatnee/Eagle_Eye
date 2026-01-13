@@ -1,6 +1,6 @@
 @extends('layouts.app-full')
 @section('title', 'Expert Resources')
-@section('title_ar', 'موارد الخبراء')
+{{-- @section('title_ar', 'موارد الخبراء') --}}
 @section('content')
 @push('css')
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,15 +12,15 @@
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
                 <x-form.grid-3-col>
                     <div>
-                        <x-form.multiselect label="Nationality" label_ar="جنسية" name="nationality[]" :value="$nationality"
+                        <x-form.multiselect label="Nationality"  name="nationality[]" :value="$nationality"
                             :custom_data="$nationalities" />
                     </div>
                     <div>
-                        <x-form.multiselect label="Industry" label_ar="الصناعة" name="industry_name[]" :value="$industry"
+                        <x-form.multiselect label="Industry"  name="industry_name[]" :value="$industry"
                             :data="$industries" id_key="industry_id" value_key="industry_name" hide_keys="true" />
                     </div>
                     <div>
-                        <x-form.multiselect label="Organization" label_ar="منظمة" name="organization_name[]"
+                        <x-form.multiselect label="Organization"  name="organization_name[]"
                             :value="$organization" :data="$organizations" id_key="organization_id" value_key="organization_name"
                             hide_keys="true" />
                     </div>
@@ -28,21 +28,21 @@
                 <x-form.grid-3-col>
                     <div>
 
-                        <x-form.multiselect label="Certification" label_ar="شهادة" name="certification_title[]"
+                        <x-form.multiselect label="Certification"  name="certification_title[]"
                             :value="$certification" :data="$certifications" id_key="certification_id" value_key="certification_title"
                             hide_keys="true" />
                     </div>
                     <div>
-                        <x-form.multiselect label="Expertise" label_ar="خبرة" name="expertise_title[]" :value="$expertise"
+                        <x-form.multiselect label="Expertise"  name="expertise_title[]" :value="$expertise"
                             :data="$experties" id_key="expertise_id" value_key="expertise_title" hide_keys="true" />
                     </div>
                     <div>
 
-                        <x-form.multiselect label="Designation" label_ar="تعيين" name="designation[]" :value="$designation"
+                        <x-form.multiselect label="Designation" name="designation[]" :value="$designation"
                             :custom_data="$designations" />
                     </div>
                     <div>
-                        <x-form.multiselect label="Experience" label_ar="خبرة سنوات" name="experience[]" :value="$experience"
+                        <x-form.multiselect label="Experience" name="experience[]" :value="$experience"
                             :custom_data="$experienceRanges" />
                     </div>
                     <div class="flex items-center justify-center gap-5 border-t border-gray-100 p-4">

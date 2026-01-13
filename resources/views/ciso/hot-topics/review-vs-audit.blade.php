@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">In the domain of cybersecurity, ensuring the effectiveness of security controls,
             compliance with regulations, and
             continuous improvement of security postures are essential. Two key processes that help organizations assess
@@ -35,7 +35,7 @@
             for cybersecurity professionals, including CISOs, to implement an effective governance and risk management
             strategy.
         </p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Review vs. Audit in Cybersecurity</h3>
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Review vs. Audit in Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="Aspect" />
@@ -125,7 +125,7 @@
 
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 mt-3 p-3 rounded-md text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 mt-3 p-3 rounded-md text-white">Take Away</h3>
         <P class="mb-3 mt-3 text-lg">Both reviews and audits are essential in cybersecurity governance and risk management,
             but they serve different
             purposes. Reviews are proactive, flexible assessments that help organizations identify security weaknesses and

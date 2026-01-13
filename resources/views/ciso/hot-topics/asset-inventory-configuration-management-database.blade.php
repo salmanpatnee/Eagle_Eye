@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">Effective cybersecurity management requires a comprehensive understanding of all IT
             assets within an
             organization.
@@ -36,7 +36,7 @@
             particularly in the context
             of
             cybersecurity.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Asset Inventory vs. (CMDB) in Cybersecurity
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Asset Inventory vs. (CMDB) in Cybersecurity
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -116,7 +116,7 @@
 
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3  mt-3 rounded-md text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3  mt-3 rounded-md text-white">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">Both Asset Inventory and CMDB are critical for cybersecurity governance, but they serve
             distinct and
             complementary

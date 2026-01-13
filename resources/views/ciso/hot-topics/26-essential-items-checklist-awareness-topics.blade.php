@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">Cybersecurity awareness is a crucial element in an organization’s defense strategy
             against cyber threats. Human
             error
@@ -31,7 +31,7 @@
             topics
             into an ongoing security awareness training program, organizations can minimize security incidents, enhance
             regulatory compliance, and build a culture of cybersecurity resilience.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Essential Items Checklist of Awareness
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Essential Items Checklist of Awareness
             Topics in Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>
@@ -248,7 +248,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">A strong cybersecurity awareness program is vital to ensuring that employees and
             stakeholders understand security
             risks and take appropriate precautions to mitigate cyber threats. Organizations must establish clear security

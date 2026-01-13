@@ -38,19 +38,17 @@ class ProcessResourceController extends Controller
         }
 
         // Path in storage (assuming `storage/app/videos/filename.mp4`)
-        $path = storage_path('app/public/' . $resource->file_path);
+        $path = storage_path('app/public/'.$resource->file_path);
 
-
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             abort(404);
         }
 
         return response()->file($path, [
             'Content-Type' => 'video/mp4',
-            'Content-Disposition' => 'inline; filename="' . $resource->file_name . '"'
+            'Content-Disposition' => 'inline; filename="'.$resource->file_name.'"',
         ]);
     }
-
 
     public function template(Process $process)
     {
@@ -65,6 +63,7 @@ class ProcessResourceController extends Controller
     {
 
         $resource->load('resourceable');
+
         return view('ciso/process/resources/template-pdf', compact('resource'));
     }
 
@@ -80,7 +79,7 @@ class ProcessResourceController extends Controller
     public function download(Resource $resource)
     {
         // Ensure file exists
-        if (!Storage::disk('public')->exists($resource->file_path)) {
+        if (! Storage::disk('public')->exists($resource->file_path)) {
             abort(404, 'File not found');
         }
 

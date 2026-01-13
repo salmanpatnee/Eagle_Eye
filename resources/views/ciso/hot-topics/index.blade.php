@@ -1,6 +1,6 @@
 @extends('layouts.ciso-full')
 @section('title', 'Hot Topics for CISO')
-@section('title_ar', 'موضوعات ساخنة لرئيس أمن المعلومات')
+{{-- @section('title_ar', 'موضوعات ساخنة لرئيس أمن المعلومات') --}}
 @section('content')
     <div>
 

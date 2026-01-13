@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">Data and information are the most valuable assets of any organization, making them prime
             targets for cyber
             threats.
@@ -27,7 +27,7 @@
             and managed effectively to mitigate cybersecurity risks.</p>
         <p class="mb-3 mt-3 text-lg">The following table outlines key aspects of Data & Information security in the context
             of cybersecurity.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Data & Information in Cybersecurity</h3>
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Data & Information in Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -118,7 +118,7 @@
 
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 mt-3 rounded-md text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 mt-3 rounded-md text-white">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">Data and information security are critical components of cybersecurity, requiring
             strategic planning, continuous
             monitoring, and regulatory compliance to mitigate risks. Organizations must enforce strong encryption, access

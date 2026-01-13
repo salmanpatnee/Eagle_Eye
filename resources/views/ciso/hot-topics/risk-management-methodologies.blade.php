@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">Risk management is a critical function in cybersecurity and IT security, ensuring that
             organizations can
             identify,
@@ -32,7 +32,7 @@
             providing a comparative
             overview
             of their key characteristics and applications.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Risk Management Methodologies in
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Risk Management Methodologies in
             Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>
@@ -139,7 +139,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 mt-3 rounded-md text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 mt-3 rounded-md text-white">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">Risk management is an essential component of cybersecurity, ensuring that organizations
             can anticipate, evaluate,
             and

@@ -6,14 +6,14 @@
         }
     </style>
 @endpush
-@section('title', $resource->title)
+@section('title', $resource->resourceable->title)
 
 
 @section('content')
     <div class="gap-6 grid grid-cols-1 px-4">
         <div class="hover:shadow-lg mx-auto p-6 rounded-lg shadow text-white transition">
-            <x-iso-content-card title="{{ $resource->title }}">
-                {{ $resource->description }}
+            <x-iso-content-card title="{{ $resource->resourceable->title }}">
+                {{ $resource->resourceable->description }}
             </x-iso-content-card>
         </div>
     </div>

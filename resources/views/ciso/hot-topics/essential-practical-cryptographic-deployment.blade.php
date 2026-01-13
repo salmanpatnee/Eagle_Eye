@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">Cryptography plays a fundamental role in modern cybersecurity, ensuring the
             confidentiality, integrity, and
             authenticity of sensitive data. As cyber threats evolve, organizations must deploy cryptographic mechanisms to
@@ -25,7 +25,7 @@
             their cybersecurity
             relevance
             and best practices for secure implementation.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Essential and Practical Cryptographic
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Essential and Practical Cryptographic
             Deployment in Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>
@@ -123,7 +123,7 @@
 
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md mt-3 text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md mt-3 text-white">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">Cryptographic deployment is a critical component of modern cybersecurity, ensuring that
             data remains protected
             against unauthorized access, tampering, and cyberattacks. However, cryptographic solutions must be implemented

@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">In today’s cybersecurity landscape, organizations face increasing threats, regulatory
             pressures, and complex IT
             environments. To measure the effectiveness of their cybersecurity programs, organizations must establish Key
@@ -30,7 +30,7 @@
             their
             cybersecurity posture.</p>
 
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Key Performance Indicators in Cybersecurity
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Key Performance Indicators in Cybersecurity
         </h3>
         <x-table.table>
             <x-table.thead>
@@ -104,7 +104,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Key Risk Indicators in Cybersecurity</h3>
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Key Risk Indicators in Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" />
@@ -183,7 +183,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">Key Performance Indicators (KPIs) serve as critical benchmarks for measuring the
             effectiveness of cybersecurity
             programs. They help organizations track security performance, detect vulnerabilities, and enhance their ability

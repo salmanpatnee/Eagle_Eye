@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">Incident management is a critical function
             within IT service management (ITSM) that ensures the timely detection,
             analysis, and resolution of incidents that impact business operations. It is a structured approach used to
@@ -35,7 +35,7 @@
             integrate
             both ITSM and cybersecurity strategies to effectively manage incidents and strengthen their security posture.
         </p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Incident Management vs. Cybersecurity
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Incident Management vs. Cybersecurity
             Incident Management</h3>
         <x-table.table>
             <x-table.thead>
@@ -126,7 +126,7 @@
 
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md mt-3 text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md mt-3 text-white">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">Incident management and cybersecurity
             incident management are two critical yet distinct disciplines within IT and
             cybersecurity operations. While both focus on handling disruptions efficiently, their scope, objectives, and

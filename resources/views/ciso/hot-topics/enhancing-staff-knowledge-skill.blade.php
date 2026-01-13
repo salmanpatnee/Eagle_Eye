@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">Cybersecurity is an ever-evolving field, with new threats, attack vectors, and
             vulnerabilities emerging daily. To
             maintain a strong security posture, organizations must invest in enhancing staff knowledge and skills. Employees
@@ -22,7 +22,7 @@
             and skills that
             organizations should develop in their staff to strengthen overall security resilience and incident response
             capabilities.</p>
-        <h3 class="bg-black font-bold inline my-6 p-3 rounded-md text-white">Essential Items for Enhancing Staff
+        <h3 class="bg-black font-bold my-6 p-3 rounded-md text-white">Essential Items for Enhancing Staff
             Knowledge & Skill in Cybersecurity</h3>
         <x-table.table>
             <x-table.thead>
@@ -182,7 +182,7 @@
 
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-brand-950 font-bold inline mb-3 p-3 rounded-md mt-3 text-white">Take Away</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md mt-3 text-white">Take Away</h3>
         <p class="mb-3 mt-3 text-lg">Enhancing staff knowledge and skills in cybersecurity is a continuous and strategic
             effort that directly impacts
             an organization’s ability to prevent, detect, and mitigate cyber threats. Cybersecurity is not solely the
