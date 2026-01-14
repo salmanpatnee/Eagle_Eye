@@ -57,7 +57,7 @@
             <!-- Main Title Section -->
             <section class="hero-section">
                 <div class="hero-card">
-                    <div class="hero-icon">🆘</div>
+                    <div class="hero-icon">🛡️</div>
                     <h1 class="hero-title">CISO Survival Lifeline</h1>
                 </div>
                 <!-- Connector lines from hero to branches -->
