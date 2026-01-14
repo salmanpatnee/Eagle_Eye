@@ -8,13 +8,7 @@
         <!-- ===== Main Content Start ===== -->
         <main>
             <div class="px-4 py-2 mx-auto max-w-(--breakpoint-2xl)">
-                <div class="top-16 md:sticky sm:top-[60px] md:top-[66px] z-99995 p-4" style="background-color: #F9FAFB;">
-                    @include('partials.breadcrumbs-ciso')
-                </div>
-
-                {{-- <div class="top-16 sm:sticky sm:top-[60px] md:top-[66px] z-99995 p-4 mb-4" style="background-color: #F9FAFB;">
-                    @include('partials.breadcrumbs-ciso')
-                </div> --}}
+                <x-sticky-breadcrumb />
                 <div
                     class="min-h-screen rounded-lg border border-gray-200 bg-white p-4  dark:border-gray-800 dark:bg-white/[0.03]">
                     <div class="mx-auto w-full">

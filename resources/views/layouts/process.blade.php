@@ -7,10 +7,8 @@
         @include('partials.nav-ciso')
         <!-- ===== Main Content Start ===== -->
         <main>
-            <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-                <div class="top-16 md:sticky md:top-[66px] z-99995 p-4 mb-4" style="background-color: #F9FAFB;">
-                    @include('partials.breadcrumbs-ciso')
-                </div>
+            <div class="px-4 py-2 mx-auto max-w-(--breakpoint-2xl)">
+                <x-sticky-breadcrumb />
                 <div class="bg-white border border-gray-200 flex items-center p-4 rounded-lg min-h-screen"
                     id="process_banner"
                     >

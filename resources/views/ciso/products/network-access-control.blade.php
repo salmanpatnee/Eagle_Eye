@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Network Access Control (NAC) is a cybersecurity technology that enforces security policies on devices attempting
             to access an organization's network. NAC ensures that only authorized and compliant devices are permitted
             network access, preventing unauthorized or compromised devices from connecting. NAC solutions verify users and

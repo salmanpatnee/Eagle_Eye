@@ -4,11 +4,11 @@
     <!-- ===== Content Area Start ===== -->
     <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
         <!-- Small Device Overlay Start -->
-        @include('partials.nav-user')
+       @include('partials.nav-ciso')
         <!-- ===== Main Content Start ===== -->
         <main>
-            <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-                @include('partials.breadcrumbs-ciso')
+             <div class="px-4 py-2 mx-auto max-w-(--breakpoint-2xl)">
+                <x-sticky-breadcrumb />
                 <div
                     class="min-h-screen rounded-lg border border-gray-200 bg-white p-4  dark:border-gray-800 dark:bg-white/[0.03]">
                     <div class="mx-auto w-full">
