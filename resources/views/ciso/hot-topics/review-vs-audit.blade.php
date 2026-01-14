@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">In the domain of cybersecurity, ensuring the effectiveness of security controls,
             compliance with regulations, and
             continuous improvement of security postures are essential. Two key processes that help organizations assess
