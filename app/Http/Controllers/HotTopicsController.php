@@ -9,26 +9,25 @@ class HotTopicsController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)
     {
-        $topicsData = [
-            'Compliance Challenges Framework Model' => 'compliance-challenges',
-            'Key Performance Indicator vs Key Risk Indicator' => 'key-performance-indicator',
-            'Essential KPIs & KRIs' => 'essential-kpis-kris',
-            'Risk Management Methodologies' => 'risk-management-methodologies',
-            'Control Assessment vs Risk Assessment' => 'control-assessment-risk-assessment',
-            '26 Essential Items Checklist of Awarness Topics' => '26-essential-items',
-            'Enhancing Staff Knowledge & Skill' => 'enhancing-staff-knowledge',
-            'Asset Inventory vs Configuration Management Database' => 'asset-inventory',
-            'Essential and Practical Cryptographic Deployment' => 'essential-practical-cryptographic',
-            'Data & Information' => 'data-information',
-            'Selecting VA & Pen Tester' => 'selecting-va-pen-tester',
-            'Incident Management vs Cybersecurity Incident Management' => 'incident-management',
-            'Review vs Audit' => 'review-vs-audit',
-        ];
+        $topicsData = collect([
+            ['title' => 'Compliance Challenges Framework Model', 'route' => 'compliance-challenges'],
+            ['title' => 'Key Performance Indicator vs Key Risk Indicator', 'route' => 'key-performance-indicator'],
+            ['title' => 'Essential KPIs & KRIs', 'route' => 'essential-kpis-kris'],
+            ['title' => 'Risk Management Methodologies', 'route' => 'risk-management-methodologies'],
+            ['title' => 'Control Assessment vs Risk Assessment', 'route' => 'control-assessment-risk-assessment'],
+            ['title' => '26 Essential Items Checklist of Awarness Topics', 'route' => '26-essential-items'],
+            ['title' => 'Enhancing Staff Knowledge & Skill', 'route' => 'enhancing-staff-knowledge'],
+            ['title' => 'Asset Inventory vs Configuration Management Database', 'route' => 'asset-inventory'],
+            ['title' => 'Essential and Practical Cryptographic Deployment', 'route' => 'essential-practical-cryptographic'],
+            ['title' => 'Data & Information', 'route' => 'data-information'],
+            ['title' => 'Selecting VA & Pen Tester', 'route' => 'selecting-va-pen-tester'],
+            ['title' => 'Incident Management vs Cybersecurity Incident Management', 'route' => 'incident-management'],
+            ['title' => 'Review vs Audit', 'route' => 'review-vs-audit'],
+        ]);
 
         return view('ciso/hot-topics/index', compact('topicsData'));
     }

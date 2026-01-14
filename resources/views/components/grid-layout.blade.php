@@ -36,15 +36,15 @@
                 <div class="{{ $wrapperClass }}" @if($showAnimation) style="animation: fadeInUp 0.5s ease-out {{ (int)$index * $animationDelay }}s backwards;" @endif>
                     @if($itemComponent)
                         @php
-                            $itemRouteName = $routeNameField ? ($item->$routeNameField ?? '') : ($routeName ?? '');
+                            $itemRouteName = $routeNameField ? (data_get($item, $routeNameField, '')) : ($routeName ?? '');
                         @endphp
                         <x-dynamic-component
                             :component="$itemComponent"
                             :item="$item"
                             :route_name="$itemRouteName"
-                            :route_param="$routeParam ? ($item->$routeParam ?? '') : ''"
-                            :title="$titleField ? ($item->$titleField ?? '') : ''"
-                            :title_ar="$titleArField ? ($item->$titleArField ?? '') : ''" />
+                            :route_param="$routeParam ? (data_get($item, $routeParam, '')) : ''"
+                            :title="$titleField ? (data_get($item, $titleField, '')) : ''"
+                            :title_ar="$titleArField ? (data_get($item, $titleArField, '')) : ''" />
                     @else
                         {{ $slot }}
                     @endif
