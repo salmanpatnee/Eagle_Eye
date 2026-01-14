@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Threat intelligence is a cybersecurity discipline that involves collecting, analyzing, and sharing information
             about potential and emerging cyber threats. This technology helps organizations proactively defend against
             cyberattacks by providing insights into threat actors, attack techniques, indicators of compromise (IOCs), and

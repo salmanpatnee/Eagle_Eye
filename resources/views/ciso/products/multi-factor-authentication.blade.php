@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Multi-Factor Authentication (MFA) is a security technology designed to enhance authentication by requiring users
             to provide two or more verification factors to access an account, system, or application. This technology
             significantly reduces the risk of unauthorized access, as attackers would need to compromise multiple

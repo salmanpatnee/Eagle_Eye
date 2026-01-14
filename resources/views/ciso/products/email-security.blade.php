@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Email remains one of the primary communication tools for organizations worldwide, but it is also one of the most
             targeted attack vectors by cybercriminals. Email security technologies protect against a wide range of threats,
             including phishing, Business Email Compromise (BEC), malware, ransomware, and spam. These solutions use various

@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>WiFi security is a crucial aspect of cybersecurity, ensuring that wireless networks remain protected from
             unauthorized access, eavesdropping, and cyber threats. As organizations rely increasingly on wireless
             connectivity

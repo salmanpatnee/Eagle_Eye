@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Ransomware is one of the most destructive cyber threats that encrypts files and demands a ransom for their
             release.
             Cybercriminals use sophisticated malware variants to exploit vulnerabilities in organizations, causing financial

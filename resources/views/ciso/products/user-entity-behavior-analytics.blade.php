@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>User and Entity Behavior Analytics (UEBA) is an advanced cybersecurity technology that leverages machine learning
             (ML) and artificial intelligence (AI) to detect anomalies in user and entity behaviors. Unlike traditional
             security monitoring solutions that rely on rule-based detection, UEBA focuses on establishing baselines for

@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Next-Generation Firewalls (NGFWs) are advanced security solutions that extend beyond traditional firewalls by
             integrating multiple layers of security capabilities, such as deep packet inspection (DPI), intrusion prevention
             systems (IPS), application awareness, and threat intelligence. Unlike traditional firewalls, which primarily

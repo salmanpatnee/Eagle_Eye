@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Zero-day attacks exploit vulnerabilities in software, hardware, or firmware that are unknown to vendors and
             security researchers. These attacks occur before a fix or patch is available, making them particularly
             dangerous. Cybercriminals leverage zero-day vulnerabilities to gain unauthorized access, execute malicious code,

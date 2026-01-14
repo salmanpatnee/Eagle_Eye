@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Security Information and Event Management (SIEM) solutions are critical cybersecurity technologies that provide
             real-time monitoring, detection, and response to security threats across an organization’s IT infrastructure.
             SIEM systems aggregate and analyze security event data from various sources, including network devices, servers,

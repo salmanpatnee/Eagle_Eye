@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Penetration testing, also known as ethical hacking, is a cybersecurity practice designed to simulate real-world
             attacks on an organization’s IT infrastructure, applications, and networks. The objective of penetration testing
             is to identify vulnerabilities before malicious actors can exploit them. It involves a systematic approach,

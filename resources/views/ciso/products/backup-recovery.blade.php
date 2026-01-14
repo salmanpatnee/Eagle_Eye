@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Backup and recovery technologies are essential components of an organization’s cybersecurity and disaster
             recovery
             strategy. These solutions ensure that data is securely stored, replicated, and recoverable in case of cyber

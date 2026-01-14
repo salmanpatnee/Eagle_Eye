@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Privileged Access Management (PAM) is a cybersecurity technology designed to control, monitor, and secure access
             to critical IT infrastructure, applications, and sensitive data by privileged users. Privileged accounts, such
             as system administrators, database administrators, and network engineers, have elevated access to an

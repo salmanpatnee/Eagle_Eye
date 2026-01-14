@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Endpoint Detection and Response (EDR) technologies are advanced cybersecurity solutions designed to monitor,
             detect, and respond to threats at the endpoint level. EDR solutions provide continuous visibility into endpoint
             activities, enabling security teams to identify and mitigate threats such as malware, ransomware, and fileless

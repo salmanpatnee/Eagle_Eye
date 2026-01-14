@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Extended Detection and Response (XDR) is an advanced cybersecurity technology that integrates multiple security
             layers into a unified detection, investigation, and response platform. Unlike traditional Endpoint Detection and
             Response (EDR) solutions that focus solely on endpoint threats, XDR extends visibility across networks, email,

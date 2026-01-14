@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Identity and Access Management (IAM) is a crucial cybersecurity technology that ensures the right individuals and
             entities have appropriate access to digital resources. IAM solutions control and manage user identities,
             authentication, and authorization processes, enabling organizations to enforce security policies while

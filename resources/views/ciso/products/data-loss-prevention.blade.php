@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Data Loss Prevention (DLP) technologies are designed to prevent unauthorized access, transmission, and leakage of
             sensitive data within an organization. These solutions monitor and control data at rest, in motion, and in use,
             ensuring compliance with regulatory requirements and corporate policies. DLP solutions utilize pattern

@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Unified Threat Management (UTM) is an integrated cybersecurity approach that consolidates multiple security
             functions into a single platform. Traditionally, organizations used standalone security solutions such as
             firewalls, antivirus software, intrusion detection systems (IDS), and virtual private networks (VPNs) to protect

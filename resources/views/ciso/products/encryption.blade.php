@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>Encryption is a fundamental component of endpoint security that ensures data confidentiality by converting
             readable information into an unreadable format, which can only be decrypted with an authorized key. As
             endpoints, such as laptops, desktops, mobile devices, and removable storage, become prime targets for cyber

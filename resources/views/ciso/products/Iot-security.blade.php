@@ -5,7 +5,7 @@
 
 
     <div class="px-7 process-content">
-        <h2 class="bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">Technology Background</h2>
+        <h2 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Technology Background</h2>
         <p>The Internet of Things (IoT) has revolutionized the way organizations and individuals interact with technology,
             enabling seamless connectivity between devices, sensors, and systems. However, this rapid proliferation of IoT
             devices introduces significant security challenges. Many IoT devices are designed with limited processing power
