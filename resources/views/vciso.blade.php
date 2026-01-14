@@ -27,27 +27,27 @@
             </div>
 
             @auth
-            <div class="nav-right">
-                @if (auth()->user()->role_id == 1)
-                <a href="{{ route('users.index') }}" class="admin-portal-btn" title="Admin Portal">
-                    <i class='bx bx-cog'></i>
-                    <span>Admin Portal</span>
-                </a>
-                @else
-                    <a href="{{ route('profile.edit') }}" class="admin-portal-btn" title="Update Profile">
-                        <i class='bx bx-cog'></i>
-                        <span>Update Profile</span>
-                    </a>
-                @endif
+                <div class="nav-right">
+                    @if (auth()->user()->role_id == 1)
+                        <a href="{{ route('users.index') }}" class="admin-portal-btn" title="Admin Portal">
+                            <i class='bx bx-cog'></i>
+                            <span>Admin Portal</span>
+                        </a>
+                    @else
+                        <a href="{{ route('profile.edit') }}" class="admin-portal-btn" title="Update Profile">
+                            <i class='bx bx-cog'></i>
+                            <span>Update Profile</span>
+                        </a>
+                    @endif
 
-                <form id="logout-form" action="{{ route('login.destroy') }}" method="POST" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="logout-btn" title="Logout">
-                        <i class='bx bx-log-out'></i>
-                        <span>Sign out</span>
-                    </button>
-                </form>
-            </div>
+                    <form id="logout-form" action="{{ route('login.destroy') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="logout-btn" title="Logout">
+                            <i class='bx bx-log-out'></i>
+                            <span>Sign out</span>
+                        </button>
+                    </form>
+                </div>
             @endauth
         </nav>
     </header>
@@ -126,7 +126,9 @@
             </section>
         </div>
     </main>
-
+    <!-- Elfsight AI Chatbot | Saudi Ciso -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-50a59065-4154-49f7-a375-961a269cf1c2" data-elfsight-app-lazy></div>
 </body>
 
 </html>

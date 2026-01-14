@@ -297,8 +297,8 @@
         });
     </script>
     <!-- Elfsight AI Chatbot | Saudi Ciso -->
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-    <div class="elfsight-app-50a59065-4154-49f7-a375-961a269cf1c2" data-elfsight-app-lazy></div>
+    {{-- <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-50a59065-4154-49f7-a375-961a269cf1c2" data-elfsight-app-lazy></div> --}}
 </body>
 
 </html>

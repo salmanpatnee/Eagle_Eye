@@ -7,7 +7,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>CISO Toolkit</title>
     <link rel="stylesheet" href="{{ asset('css/ciso-lifeline.css') }}">
-    
+
 </head>
 
 <body>
@@ -17,39 +17,38 @@
                 <a href="{{ route('welcome') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
-                            <img class="dark:hidden " src="/Images/SaudiCISOLogo.png" alt="Logo" width="80"
-                                >
+                            <img class="dark:hidden " src="/Images/SaudiCISOLogo.png" alt="Logo" width="80">
                         </span>
                     </span>
                 </a>
             </div>
 
             @auth
-            <div class="nav-right">
-                <a href="{{ route('vciso') }}" class="admin-portal-btn" title="Back">
-                    <i class='bx bx-arrow-back'></i>
-                    <span>Back</span>
-                </a>
-                @if (auth()->user()->role_id == 1)
-                <a href="{{ route('users.index') }}" class="admin-portal-btn" title="Admin Portal">
-                    <i class='bx bx-cog'></i>
-                    <span>Admin Portal</span>
-                </a>
-                @else
-                    <a href="{{ route('profile.edit') }}" class="admin-portal-btn" title="Update Profile">
-                        <i class='bx bx-cog'></i>
-                        <span>Update Profile</span>
+                <div class="nav-right">
+                    <a href="{{ route('vciso') }}" class="admin-portal-btn" title="Back">
+                        <i class='bx bx-arrow-back'></i>
+                        <span>Back</span>
                     </a>
-                @endif
+                    @if (auth()->user()->role_id == 1)
+                        <a href="{{ route('users.index') }}" class="admin-portal-btn" title="Admin Portal">
+                            <i class='bx bx-cog'></i>
+                            <span>Admin Portal</span>
+                        </a>
+                    @else
+                        <a href="{{ route('profile.edit') }}" class="admin-portal-btn" title="Update Profile">
+                            <i class='bx bx-cog'></i>
+                            <span>Update Profile</span>
+                        </a>
+                    @endif
 
-                <form id="logout-form" action="{{ route('login.destroy') }}" method="POST" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="logout-btn" title="Logout">
-                        <i class='bx bx-log-out'></i>
-                        <span>Sign out</span>
-                    </button>
-                </form>
-            </div>
+                    <form id="logout-form" action="{{ route('login.destroy') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="logout-btn" title="Logout">
+                            <i class='bx bx-log-out'></i>
+                            <span>Sign out</span>
+                        </button>
+                    </form>
+                </div>
             @endauth
         </nav>
     </header>
@@ -72,7 +71,7 @@
             <!-- Two Main Branches -->
             <section class="branches-section">
                 <div class="branch-container">
-                    
+
                     {{-- 
                     <div class="branch-connector"> --}}
                     <a href="{{ route('iso-27001.index') }}" class="branch-card smart-search-card">
@@ -83,7 +82,7 @@
                         <div class="connector-line"></div>
                         <div class="connector-node"></div>
                     </div>
-                        <a href="{{ route('control-smart-search.index') }}" class="branch-card smart-search-card">
+                    <a href="{{ route('control-smart-search.index') }}" class="branch-card smart-search-card">
                         <div class="branch-icon">🔍</div>
                         <h2 class="branch-title">Smart Search Controls</h2>
                     </a>
@@ -95,7 +94,7 @@
                         <div class="branch-icon">📋</div>
                         <h2 class="branch-title">Evidence Management</h2>
                     </a>
-                    
+
                 </div>
 
 
@@ -109,7 +108,9 @@
             </section>
         </div>
     </main>
-
+    <!-- Elfsight AI Chatbot | Saudi Ciso -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-50a59065-4154-49f7-a375-961a269cf1c2" data-elfsight-app-lazy></div>
 </body>
 
 </html>
