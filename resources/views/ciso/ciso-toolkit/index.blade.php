@@ -14,10 +14,13 @@
     <header class="header">
         <nav class="nav">
             <div class="nav-left">
-                <a href="{{ route('welcome') }}">
+                {{-- <a href="/vciso" class="home-link">
+                    <i class='bx bx-home'></i>
+                </a> --}}
+                <a href="{{ route('vciso') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
-                            <img class="dark:hidden " src="/Images/SaudiCISOLogo.png" alt="Logo" width="80">
+                            <img src="/Images/SaudiCISOLogo.png" alt="Logo" style="height: 80px; width: auto;">
                         </span>
                     </span>
                 </a>

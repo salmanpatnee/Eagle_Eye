@@ -13,7 +13,7 @@
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
                             <img class="dark:hidden" src="{{ asset('Images/SaudiCISOLogo.png') }}"
-                                alt="Logo" width="80"/>
+                                alt="Logo" style="height: 80px; width: auto;"/>
                             {{-- <span class="dark:hidden text-2xl font-semibold">CISO 360</span> --}}
                         </span>
                     </span>
