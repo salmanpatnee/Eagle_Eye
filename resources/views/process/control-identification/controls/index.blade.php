@@ -20,7 +20,7 @@
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="bestPractice"
                             placeholder="Select Best Practice" :value="$bestPractice" :data="$bestPractices"
-                            id_key="best_practices_id" value_key="best_practices_name" onchange="this.form.submit()" />
+                            id_key="best_practice_id" value_key="best_practice_name" onchange="this.form.submit()" />
                     </div>
                     <div>
                         <x-form.select label="Risk" label_ar="المخاطر" name="risk" placeholder="Select Risk"

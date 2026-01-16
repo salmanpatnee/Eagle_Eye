@@ -20,7 +20,7 @@
 
             <x-info-row>
                 <x-info-col label="Best Practice Name" label_ar="اسم أفضل الممارسات">
-                    {{ $controlAssessment->bestPractice?->best_practices_name ?? '—' }}
+                    {{ $controlAssessment->bestPractice?->best_practice_name ?? '—' }}
                 </x-info-col>
                 <x-info-col label="Location Name" label_ar="اسم الموقع">
                     {{ $controlAssessment->location?->location_name ?? '—' }}

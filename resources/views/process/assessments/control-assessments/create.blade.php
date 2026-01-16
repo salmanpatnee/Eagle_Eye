@@ -90,8 +90,8 @@
 
                 <x-form.grid-col>
                     <div>
-                        <x-form.select label="Best Practice Name" label_ar="اسم أفضل الممارسات" name="best_practices_id"
-                            :value="$controlAssessment?->best_practices_id ?? old('best_practices_id')" :data="$bestPractices" id_key="best_practices_id" value_key="best_practices_name"
+                        <x-form.select label="Best Practice Name" label_ar="اسم أفضل الممارسات" name="best_practice_id"
+                            :value="$controlAssessment?->best_practice_id ?? old('best_practice_id')" :data="$bestPractices" id_key="best_practice_id" value_key="best_practice_name"
                             required="true" />
                     </div>
                     <div>

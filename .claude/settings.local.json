@@ -22,7 +22,8 @@
       "Bash(npm run build:*)",
       "mcp__laravel-boost__get-absolute-url",
       "mcp__laravel-boost__list-routes",
-      "Bash(php:*)"
+      "Bash(php:*)",
+      "Bash(vendor\\\\bin\\\\pint:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

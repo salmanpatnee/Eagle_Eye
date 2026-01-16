@@ -1,21 +1,21 @@
-@extends('layouts.artifact')
+@extends('layouts.user')
 @section('title', 'Artifact Management')
-@section('title_ar', 'إدارة المقتنيات')
+{{-- @section('title_ar', 'إدارة المقتنيات') --}}
 
 @section('content')
     <div>
 
         <x-table.action-wrapper>
-            <x-action.button label="Add Artifact" label_ar="إضافة المرفقات" route_name="artifacts.create" />
+            <x-action.button label="Add Artifact" route_name="artifacts.create" />
         </x-table.action-wrapper>
 
         <x-table.table>
             <x-table.thead>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Artifact ID" label_ar="رمز المرفقات" />
-                <x-table.th label="Artifact Name" label_ar="الاسم المرفقات" />
-                <x-table.th label="Number of Attachments" label_ar="عدد المرفقات" />
-                <x-table.th label="Action" label_ar="إجراء " />
+                <x-table.th label="S.No"  />
+                <x-table.th label="Artifact ID" />
+                <x-table.th label="Artifact Name" />
+                <x-table.th label="Number of Attachments" />
+                <x-table.th label="Action" />
             </x-table.thead>
             <x-table.tbody>
                 @foreach ($artifacts as $artifact)

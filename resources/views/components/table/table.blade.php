@@ -3,7 +3,7 @@
 ])
 
 <div class="max-w-full overflow-x-auto custom-scrollbar">
-    <table class="w-full min-w-[970px]">
+    <table class="">
         {{ $slot }}
     </table>
 </div>

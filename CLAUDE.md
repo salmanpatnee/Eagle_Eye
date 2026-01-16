@@ -133,6 +133,7 @@ protected function isAccessible(User $user, ?string $path = null): bool
 - Pass `--no-interaction` to all Artisan commands to ensure they work without user input. You should also pass the correct `--options` to ensure correct behavior.
 
 ### Database
+- **NEVER run `php artisan migrate:fresh` without explicit user approval.** This command drops all tables and can cause data loss.
 - Always use proper Eloquent relationship methods with return type hints. Prefer relationship methods over raw queries or manual joins.
 - Use Eloquent models and relationships before suggesting raw database queries
 - Avoid `DB::`; prefer `Model::query()`. Generate code that leverages Laravel's ORM capabilities rather than bypassing them.

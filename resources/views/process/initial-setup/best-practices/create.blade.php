@@ -11,7 +11,7 @@
         </x-table.action-wrapper>
 
         <form
-            action="{{ isset($bestPractice) ? route('best-practices.update', $bestPractice->best_practices_id) : route('best-practices.store') }}"
+            action="{{ isset($bestPractice) ? route('best-practices.update', $bestPractice->best_practice_id) : route('best-practices.store') }}"
             method="POST">
             @csrf
             @if (isset($bestPractice))
@@ -20,12 +20,12 @@
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
                     <div>
-                        <x-form.field label="Best Practice ID" label_ar="رمز أفضل الممارسات" name="best_practices_id"
-                            required="true" :readonly="$bestPractice?->best_practices_id" placeholder="Enter Best Practice ID" :value="$bestPractice?->best_practices_id" />
+                        <x-form.field label="Best Practice ID" label_ar="رمز أفضل الممارسات" name="best_practice_id"
+                            required="true" :readonly="$bestPractice?->best_practice_id" placeholder="Enter Best Practice ID" :value="$bestPractice?->best_practice_id" />
                     </div>
                     <div>
-                        <x-form.field label="Best Practice Name" label_ar="اسم أفضل الممارسات" name="best_practices_name"
-                            required="true" placeholder="Enter Best Practice Name" :value="$bestPractice?->best_practices_name" />
+                        <x-form.field label="Best Practice Name" label_ar="اسم أفضل الممارسات" name="best_practice_name"
+                            required="true" placeholder="Enter Best Practice Name" :value="$bestPractice?->best_practice_name" />
                     </div>
                 </x-form.grid-col>
 

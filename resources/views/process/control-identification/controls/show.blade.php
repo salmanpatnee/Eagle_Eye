@@ -101,7 +101,7 @@
                     <x-list :data="$control->categories" id_key="" value_key="category_name" />
                 </x-info-col>
                 <x-info-col label="Best Practice" label_ar="أفضل الممارسات">
-                    <x-list :data="$control->bestPractices" id_key="" value_key="best_practices_name" />
+                    <x-list :data="$control->bestPractices" id_key="" value_key="best_practice_name" />
                 </x-info-col>
             </x-info-row>
 

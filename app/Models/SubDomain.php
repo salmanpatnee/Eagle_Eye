@@ -24,7 +24,7 @@ class SubDomain extends Model
 
     public function bestPractices()
     {
-        return $this->belongsToMany(BestPractice::class, 'best_practice_table_vs_sub_domain_table', 'sub_domain_id', 'best_practices_id', 'sub_domain_id', 'best_practices_id');
+        return $this->belongsToMany(BestPractice::class, 'best_practice_table_vs_sub_domain_table', 'sub_domain_id', 'best_practice_id', 'sub_domain_id', 'best_practice_id');
     }
 
     public function categories()

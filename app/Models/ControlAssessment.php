@@ -29,7 +29,7 @@ class ControlAssessment extends Model
 
     public function bestpractice()
     {
-        return $this->belongsTo(BestPractice::class, 'best_practices_id', 'best_practices_id')->select('best_practices_id', 'best_practices_name');
+        return $this->belongsTo(BestPractice::class, 'best_practice_id', 'best_practice_id')->select('best_practice_id', 'best_practice_name');
     }
 
     public function location()

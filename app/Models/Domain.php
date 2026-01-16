@@ -26,7 +26,7 @@ class Domain extends Model
 
     public function bestPractices()
     {
-        return $this->belongsToMany(BestPractice::class, 'best_practice_vs_domain_table', 'main_domain_id', 'best_practices_id', 'main_domain_id', 'best_practices_id');
+        return $this->belongsToMany(BestPractice::class, 'best_practice_vs_domain_table', 'main_domain_id', 'best_practice_id', 'main_domain_id', 'best_practice_id');
     }
 
     public function controls()

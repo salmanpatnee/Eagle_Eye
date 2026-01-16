@@ -35,6 +35,8 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SubDomainController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\KPIStandardController;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('sub-domains', SubDomainController::class);
     Route::resource('controls', ControlController::class);
     Route::resource('control-types', ControlTypeController::class);
+    Route::resource('kpi-standards', KPIStandardController::class);
 
     // ------------------- ISO-27001 -------------------
     Route::get('/iso-27001', [ISO27001Controller::class, 'index'])->name('iso-27001.index');

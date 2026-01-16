@@ -1,17 +1,18 @@
 @extends('layouts.app-full')
 @section('title', 'Evidence vs Controls')
-@section('title_ar', 'الأدلة مقابل الضوابط')
+{{-- @section('title_ar', 'الأدلة مقابل الضوابط') --}}
 @section('content')
     <div>
 
 
         <x-table.action-wrapper title="Evidence vs Controls">
             <x-slot:extra>
-                <x-action.pdf-button route_name="evidence-vs-control.index" />
+                <div></div>
+                {{-- <x-action.pdf-button route_name="evidence-vs-control.index" /> --}}
             </x-slot:extra>
-            <x-action.button label="Evidence vs Controls" label_ar="الأدلة مقابل الضوابط"
+            <x-action.button label="Control vs Evidences" 
                 route_name="control-vs-evidence.index" />
-            <x-action.button label="Evidence vs Control" label_ar="المخاطر مقابل الضوابط"
+            <x-action.button label="Evidence vs Controls" 
                 route_name="evidence-vs-control.index" disabled class="opacity-75" />
         </x-table.action-wrapper>
 
@@ -19,27 +20,27 @@
         <form action="{{ route('evidence-vs-control.index') }}" method="GET">
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
 
-                <x-form.grid-4-col>
+                <x-form.grid-3-col>
                     <div>
-                        <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="practice" :value="$bestPracticeId"
-                            :data="$practices" id_key="best_practices_id" value_key="best_practices_name"
+                        <x-form.select label="Best Practices"  name="practice" :value="$bestPracticeId"
+                            :data="$practices" id_key="best_practice_id" value_key="best_practice_name"
                             onchange="this.form.submit()" />
                     </div>
                     <div>
-                        <x-form.select label="Main Domains" label_ar="المكون الأساسي" name="domain" :value="$domainId"
+                        <x-form.select label="Main Domains" name="domain" :value="$domainId"
                             :data="$domains" id_key="main_domain_id" value_key="main_domain_name"
                             onchange="this.form.submit()" />
                     </div>
                     <div>
-                        <x-form.select label="Sub Domains" label_ar="المكون الفرعي" name="subdomain" :value="$subDomainId"
+                        <x-form.select label="Sub Domains" name="subdomain" :value="$subDomainId"
                             :data="$subDomains" id_key="sub_domain_id" value_key="sub_domain_name"
                             onchange="this.form.submit()" />
                     </div>
-                    <div>
-                        <x-form.select label="Controls" label_ar="الضوابط" name="control_id" :value="$controlId"
+                    {{-- <div>
+                        <x-form.select label="Controls" name="control_id" :value="$controlId"
                             :custom_data="$controlIds" onchange="this.form.submit()" />
-                    </div>
-                </x-form.grid-4-col>
+                    </div> --}}
+                </x-form.grid-3-col>
             </div>
         </form>
 
@@ -47,10 +48,10 @@
 
         <x-table.table>
             <x-table.thead>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Evidence ID" label_ar="رمز الأدلة" />
-                <x-table.th label="Evidence Name" label_ar="اسم الأدلة" />
-                <x-table.th label="Controls" label_ar="الضوابط" />
+                <x-table.th label="S.No"  />
+                <x-table.th label="Evidence ID" />
+                <x-table.th label="Evidence Name" />
+                <x-table.th label="Controls" />
             </x-table.thead>
             <x-table.tbody>
                 @forelse ($evidenceControl as $row)

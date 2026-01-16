@@ -34,7 +34,7 @@
                     {{ $kpiStandard?->category?->category_name }}
                 </x-info-col>
                 <x-info-col label="Best Practice" label_ar="أفضل الممارسات">
-                    {{ $kpiStandard?->bestPractice?->best_practices_name }}
+                    {{ $kpiStandard?->bestPractice?->best_practice_name }}
                 </x-info-col>
             </x-info-row>
 

@@ -22,18 +22,18 @@
                 @foreach ($bestPractices as $bestPractice)
                     <tr>
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$bestPractices" /></x-table.td>
-                        <x-table.td>{{ $bestPractice->best_practices_id }}</x-table.td>
-                        <x-table.td>{{ $bestPractice->best_practices_name }}</x-table.td>
+                        <x-table.td>{{ $bestPractice->best_practice_id }}</x-table.td>
+                        <x-table.td>{{ $bestPractice->best_practice_name }}</x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_release_year }}</x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_version }}</x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_country }}</x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="best-practices.show"
-                                param="{{ $bestPractice->best_practices_id }}" />
+                                param="{{ $bestPractice->best_practice_id }}" />
                             <x-action.edit route_name="best-practices.edit"
-                                param="{{ $bestPractice->best_practices_id }}" />
+                                param="{{ $bestPractice->best_practice_id }}" />
                             <x-action.delete route_name="best-practices.destroy"
-                                param="{{ $bestPractice->best_practices_id }}" />
+                                param="{{ $bestPractice->best_practice_id }}" />
                         </x-table.td>
                     </tr>
                 @endforeach

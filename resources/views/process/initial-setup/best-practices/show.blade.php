@@ -6,16 +6,16 @@
         <x-table.action-wrapper title="Best Practices Details">
             <x-action.button label="View" label_ar="منظر" route_name="best-practices.index" />
             <x-action.button label="Edit" label_ar="تحرير" route_name="best-practices.edit"
-                route_param="{{ $bestPractice->best_practices_id }}" />
+                route_param="{{ $bestPractice->best_practice_id }}" />
         </x-table.action-wrapper>
 
         <div class="border-gray-100 border-t p-3">
             <x-info-row>
                 <x-info-col label="Best Practice ID" label_ar="رمز أفضل الممارسات">
-                    {{ $bestPractice->best_practices_id }}
+                    {{ $bestPractice->best_practice_id }}
                 </x-info-col>
                 <x-info-col label="Best Practice Name" label_ar="اسم أفضل الممارسات">
-                    {{ $bestPractice->best_practices_name ?? '—' }}
+                    {{ $bestPractice->best_practice_name ?? '—' }}
                 </x-info-col>
             </x-info-row>
 

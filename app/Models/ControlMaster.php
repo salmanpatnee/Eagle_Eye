@@ -50,7 +50,7 @@ class ControlMaster extends Model
         if ($filters['practice'] ?? false) {
             $practice = $filters['practice'];
             $query->whereHas('bestPractice', function ($query) use ($practice) {
-                $query->where('best_practices_id', $practice);
+                $query->where('best_practice_id', $practice);
             });
         }
 
@@ -108,7 +108,7 @@ class ControlMaster extends Model
 
     public function bestPractice()
     {
-        return $this->belongsTo(BestPractice::class, 'best_practices_id', 'best_practices_id');
+        return $this->belongsTo(BestPractice::class, 'best_practice_id', 'best_practice_id');
     }
 
     public function bestPractices()
@@ -119,7 +119,7 @@ class ControlMaster extends Model
             'control_id',
             'best_practice_id',
             'control_id',
-            'best_practices_id'
+            'best_practice_id'
         );
     }
 

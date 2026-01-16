@@ -39,8 +39,8 @@
 
                     <div>
                         <x-form.multiselect label="Best Practices" label_ar="أفضل الممارسات" name="bestPractices[]"
-                            required="true" :value="$bestPracticeIds" :data="$bestPractices" id_key="best_practices_id"
-                            value_key="best_practices_name" />
+                            required="true" :value="$bestPracticeIds" :data="$bestPractices" id_key="best_practice_id"
+                            value_key="best_practice_name" />
                     </div>
                 </x-form.grid-col>
 

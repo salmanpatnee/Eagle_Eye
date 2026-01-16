@@ -22,7 +22,7 @@
                 <x-form.grid-4-col>
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="practice" :value="$bestPracticeId"
-                            :data="$practices" id_key="best_practices_id" value_key="best_practices_name"
+                            :data="$practices" id_key="best_practice_id" value_key="best_practice_name"
                             onchange="this.form.submit()" />
                     </div>
                     <div>
