@@ -66,7 +66,7 @@ class ControlAssessmentController extends Controller
     public function create()
     {
         $controlAssessment = null;
-        $bestPractices = BestPractice::select('id', 'best_practices_id', 'best_practices_name', 'sort_order')
+        $bestPractices = BestPractice::select('id', 'best_practice_id', 'best_practice_name', 'sort_order')
             ->distinct()
             ->orderBy('sort_order')
             ->get();
@@ -97,7 +97,7 @@ class ControlAssessmentController extends Controller
 
     public function edit(ControlAssessment $controlAssessment)
     {
-        $bestPractices = BestPractice::select('id', 'best_practices_id', 'best_practices_name')
+        $bestPractices = BestPractice::select('id', 'best_practice_id', 'best_practice_name')
             ->distinct()
             ->get();
 

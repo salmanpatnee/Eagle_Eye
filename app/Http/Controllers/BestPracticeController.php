@@ -11,7 +11,7 @@ class BestPracticeController extends Controller
 
     public function index()
     {
-        $bestPractices = BestPractice::select('id', 'best_practices_id', 'best_practices_name', 'best_practices_release_year', 'best_practices_version', 'best_practices_country')
+        $bestPractices = BestPractice::select('id', 'best_practice_id', 'best_practice_name', 'best_practices_release_year', 'best_practices_version', 'best_practices_country')
             ->orderBy('sort_order', 'asc')
             ->paginate(20);
 
@@ -34,8 +34,8 @@ class BestPracticeController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'best_practices_id' => ['required', 'unique:best_practice_table'],
-            'best_practices_name' => 'required',
+            'best_practice_id' => ['required', 'unique:best_practice_table'],
+            'best_practice_name' => 'required',
             'best_practices_source' => 'required',
             'best_practices_version' => 'nullable',
             'best_practices_country' => 'nullable',
@@ -61,8 +61,8 @@ class BestPracticeController extends Controller
     public function update(BestPractice $bestPractice, Request $request)
     {
         $attributes = $request->validate([
-            'best_practices_id' => ['required', 'unique:best_practice_table,best_practices_id,' . $bestPractice->id],
-            'best_practices_name' => 'required',
+            'best_practice_id' => ['required', 'unique:best_practice_table,best_practice_id,' . $bestPractice->id],
+            'best_practice_name' => 'required',
             'best_practices_source' => 'required',
             'best_practices_version' => 'nullable',
             'best_practices_country' => 'nullable',

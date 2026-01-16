@@ -34,12 +34,12 @@ class ControlAssessmentFindingController extends Controller
         // TODO
         $controls = DB::table('control_master_table as c')
             ->join('control_master_table_vs_best_practice_table as cmp', 'c.control_id', '=', 'cmp.control_id')
-            ->join('best_practice_table as bpt', 'cmp.best_practice_id', '=', 'bpt.best_practices_id')
+            ->join('best_practice_table as bpt', 'cmp.best_practice_id', '=', 'bpt.best_practice_id')
             ->leftJoin('control_assessment_details_table as cadt', function ($join) use ($controlAssessment) {
                 $join->on('c.control_id', '=', 'cadt.control_id')
                     ->where('cadt.control_assessment_id', '=', $controlAssessment->control_assessment_id);
             })
-            ->where('bpt.best_practices_id', $controlAssessment->best_practices_id)
+            ->where('bpt.best_practice_id', $controlAssessment->best_practice_id)
             ->where('c.is_parent_control', 'No')
             ->whereNull('cadt.control_assessment_id')
             ->select('c.control_id', 'c.control_name')
@@ -78,12 +78,12 @@ class ControlAssessmentFindingController extends Controller
 
         $controls = DB::table('control_master_table as c')
             ->join('control_master_table_vs_best_practice_table as cmp', 'c.control_id', '=', 'cmp.control_id')
-            ->join('best_practice_table as bpt', 'cmp.best_practice_id', '=', 'bpt.best_practices_id')
+            ->join('best_practice_table as bpt', 'cmp.best_practice_id', '=', 'bpt.best_practice_id')
             ->leftJoin('control_assessment_details_table as cadt', function ($join) use ($controlAssessmentFinding) {
                 $join->on('c.control_id', '=', 'cadt.control_id')
                     ->where('cadt.control_assessment_id', '=', $controlAssessmentFinding->control_assessment_id)->whereNot('control_finding_id', $controlAssessmentFinding->control_finding_id);
             })
-            ->where('bpt.best_practices_id', $controlAssessment->best_practices_id)
+            ->where('bpt.best_practice_id', $controlAssessment->best_practice_id)
             ->whereNull('cadt.control_assessment_id')
             ->select('c.control_id', 'c.control_name')
             ->get();

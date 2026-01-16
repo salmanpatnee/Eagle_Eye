@@ -93,7 +93,7 @@
                         <div class="connector-line"></div>
                         <div class="connector-node"></div>
                     </div>
-                    <a href="#" class="branch-card evidence-card">
+                    <a href="{{ route('control-vs-evidence.index') }}" class="branch-card evidence-card">
                         <div class="branch-icon">📋</div>
                         <h2 class="branch-title">Evidence Management</h2>
                     </a>

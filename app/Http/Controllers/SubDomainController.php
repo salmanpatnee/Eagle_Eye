@@ -34,7 +34,7 @@ class SubDomainController extends Controller
         $subDomain = null;
         $domains = Domain::select('main_domain_id', 'main_domain_name')->get();
         $classifications = Classification::select('classification_id', 'classification_name')->get();
-        $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
+        $bestPractices = BestPractice::select('best_practice_id', 'best_practice_name')->get();
         $categories = Category::select('category_id', 'category_name')->get();
         $categoryIds = [];
         $bestPracticeIds = [];
@@ -75,10 +75,10 @@ class SubDomainController extends Controller
     {
         $classifications = Classification::select('classification_id', 'classification_name')->get();
         $domains = Domain::select('main_domain_id', 'main_domain_name')->get();
-        $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
+        $bestPractices = BestPractice::select('best_practice_id', 'best_practice_name')->get();
         $categories = Category::select('category_id', 'category_name')->get();
 
-        $bestPracticeIds =  $subDomain->bestPractices->pluck('best_practices_id')->toArray();
+        $bestPracticeIds =  $subDomain->bestPractices->pluck('best_practice_id')->toArray();
         $categoryIds =  $subDomain->categories()->pluck('category_table.category_id')->toArray();
 
         return view('process.initial-setup.sub-domains.create', compact('subDomain', 'classifications', 'domains', 'bestPractices', 'categories', 'bestPracticeIds', 'categoryIds'));

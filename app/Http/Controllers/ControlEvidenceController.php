@@ -21,12 +21,12 @@ class ControlEvidenceController extends Controller
         $controlId = $request->input('control_id') ?? null;
 
 
-        $practices  = BestPractice::select('id', 'best_practices_id', 'best_practices_name')
+        $practices  = BestPractice::select('id', 'best_practice_id', 'best_practice_name')
             ->get();
 
         if ($bestPracticeId != '') {
             $domains = Domain::join('best_practice_vs_domain_table as bvd', 'domain_table.main_domain_id', '=', 'bvd.main_domain_id')
-                ->join('best_practice_table as b', 'bvd.best_practices_id', '=', 'b.best_practice_id')
+                ->join('best_practice_table as b', 'bvd.best_practice_id', '=', 'b.best_practice_id')
                 ->when($bestPracticeId, function ($query, $bestPracticeId) {
                     $query->where('b.best_practice_id', $bestPracticeId);
                 })
@@ -126,11 +126,11 @@ class ControlEvidenceController extends Controller
         $subDomainId = $request->input('subdomain') ?? null;
         $controlId = $request->input('control_id') ?? null;
 
-        $practices  = BestPractice::select('id', 'best_practices_id', 'best_practices_name')->get();
+        $practices  = BestPractice::select('id', 'best_practice_id', 'best_practice_name')->get();
 
         if ($bestPracticeId != '') {
             $domains = Domain::join('best_practice_vs_domain_table as bvd', 'domain_table.main_domain_id', '=', 'bvd.main_domain_id')
-                ->join('best_practice_table as b', 'bvd.best_practices_id', '=', 'b.best_practice_id')
+                ->join('best_practice_table as b', 'bvd.best_practice_id', '=', 'b.best_practice_id')
                 ->when($bestPracticeId, function ($query, $bestPracticeId) {
                     $query->where('b.best_practice_id', $bestPracticeId);
                 })

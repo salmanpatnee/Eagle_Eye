@@ -28,7 +28,7 @@ class MainDomainController extends Controller
     {
         $domain = null;
         $classifications = Classification::select('classification_id', 'classification_name')->get();
-        $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
+        $bestPractices = BestPractice::select('best_practice_id', 'best_practice_name')->get();
         $bestPracticeIds = [];
         return view('process.initial-setup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
     }
@@ -60,8 +60,8 @@ class MainDomainController extends Controller
 
 
         $classifications = Classification::select('classification_id', 'classification_name')->get();
-        $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name')->get();
-        $bestPracticeIds =  $domain->bestPractices->pluck('best_practices_id')->toArray();
+        $bestPractices = BestPractice::select('best_practice_id', 'best_practice_name')->get();
+        $bestPracticeIds =  $domain->bestPractices->pluck('best_practice_id')->toArray();
 
         return view('process.initial-setup.domains.create', compact('domain', 'classifications', 'bestPractices', 'bestPracticeIds'));
     }

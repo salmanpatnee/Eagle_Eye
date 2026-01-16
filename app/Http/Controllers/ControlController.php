@@ -21,7 +21,7 @@ class ControlController extends Controller
         $controlNames = ControlMaster::select('control_id', 'control_name')->get();
         $risks = Risk::select('risk_id', 'risk_name')->get();
         $owners = Owner::select('owner_role_id', 'owner_name')->get();
-        $bestPractices = BestPractice::select('best_practices_id', 'best_practices_name', 'sort_order')->orderBy('sort_order')->get();
+        $bestPractices = BestPractice::select('best_practice_id', 'best_practice_name', 'sort_order')->orderBy('sort_order')->get();
 
 
 
@@ -35,7 +35,7 @@ class ControlController extends Controller
                 $bestPractice,
                 function ($query, $bestPractice) {
                     $query->whereHas('bestPractices', function ($query) use ($bestPractice) {
-                        $query->where('best_practice_table.best_practices_id', $bestPractice);
+                        $query->where('best_practice_table.best_practice_id', $bestPractice);
                     });
                     // $query->where('control_master_table.owner_id', $owner);
                 }
@@ -67,7 +67,7 @@ class ControlController extends Controller
         $controlTypes = DB::table('control_type_table')->select('control_type_id', 'control_type_name')->get();
         $categories = DB::table('category_table')->select('id', 'category_id', 'category_name')->distinct()->get();
         $custodians = DB::table('custodian_table')->select('id', 'custodian_role_id', 'custodian_role_title')->distinct()->get();
-        $bestPractices = DB::table('best_practice_table')->select('id', 'best_practices_id', 'best_practices_name')->distinct()->get();
+        $bestPractices = DB::table('best_practice_table')->select('id', 'best_practice_id', 'best_practice_name')->distinct()->get();
         $domains = DB::table('domain_table')->select('id', 'main_domain_id', 'main_domain_name')->distinct()->get();
         $subDomains = DB::table('sub_domain_table')->select('id', 'sub_domain_id', 'sub_domain_name')->distinct()->get();
         $risks = DB::table('risk_master_table')->select('id', 'risk_id', 'risk_name')->distinct()->get();
@@ -158,7 +158,7 @@ class ControlController extends Controller
     {
         $control = $control->load('classification', 'owner', 'type', 'categories', 'bestPractices', 'custodians', 'domains', 'subDomains', 'risks');
         $categoryIds = $control->categories()->pluck('category_table.category_id')->toArray();
-        $bestPracticeIds = $control->bestPractices()->pluck('best_practice_table.best_practices_id')->toArray();
+        $bestPracticeIds = $control->bestPractices()->pluck('best_practice_table.best_practice_id')->toArray();
         $custodianRoleIds = $control->custodians()->pluck('custodian_table.custodian_role_id')->toArray();
         $mainDomainIds = $control->domains()->pluck('domain_table.main_domain_id')->toArray();
         $subDomainIds = $control->subDomains()->pluck('sub_domain_table.sub_domain_id')->toArray();
@@ -170,7 +170,7 @@ class ControlController extends Controller
         $controlTypes = DB::table('control_type_table')->select('control_type_id', 'control_type_name')->get();
         $categories = DB::table('category_table')->select('id', 'category_id', 'category_name')->distinct()->get();
         $custodians = DB::table('custodian_table')->select('id', 'custodian_role_id', 'custodian_role_title')->distinct()->get();
-        $bestPractices = DB::table('best_practice_table')->select('id', 'best_practices_id', 'best_practices_name')->distinct()->get();
+        $bestPractices = DB::table('best_practice_table')->select('id', 'best_practice_id', 'best_practice_name')->distinct()->get();
         $domains = DB::table('domain_table')->select('id', 'main_domain_id', 'main_domain_name')->distinct()->get();
         $subDomains = DB::table('sub_domain_table')->select('id', 'sub_domain_id', 'sub_domain_name')->distinct()->get();
         $risks = DB::table('risk_master_table')->select('id', 'risk_id', 'risk_name')->distinct()->get();
