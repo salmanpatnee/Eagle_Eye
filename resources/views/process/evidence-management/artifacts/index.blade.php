@@ -1,22 +1,20 @@
 @extends('layouts.user')
 @section('title', 'Artifact Management')
-{{-- @section('title_ar', 'إدارة المقتنيات') --}}
 
 @section('content')
     <div>
-
-        <x-table.action-wrapper>
+        <x-table.action-wrapper title="Artifact Management">
             <x-action.button label="Add Artifact" route_name="artifacts.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.table-sticky>
+            <x-table.thead-sticky>
                 <x-table.th label="S.No"  />
                 <x-table.th label="Artifact ID" />
                 <x-table.th label="Artifact Name" />
                 <x-table.th label="Number of Attachments" />
                 <x-table.th label="Action" />
-            </x-table.thead>
+            </x-table.thead-sticky>
             <x-table.tbody>
                 @foreach ($artifacts as $artifact)
                     <tr>
@@ -24,7 +22,7 @@
                         <x-table.td>{{ $artifact->artifact_id }}</x-table.td>
                         <x-table.td>{{ $artifact->artifact_name }}</x-table.td>
                         <x-table.td>
-                            <div class="w-2xl">{{ $artifact->attachments_count }}</div>
+                            {{ $artifact->attachments_count }}
                         </x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="artifacts.show" param="{{ $artifact->id }}" />
@@ -34,7 +32,7 @@
                     </tr>
                 @endforeach
             </x-table.tbody>
-        </x-table.table>
+        </x-table.table-sticky>
 
         <x-pagination>
             {{ $artifacts->links() }}

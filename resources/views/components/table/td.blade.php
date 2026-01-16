@@ -1,10 +1,10 @@
 @props([
-    'action_col' => 'false',
+    'action_col' => false,
     'class' => '',
 ])
 
-<td {{ $attributes->merge(['class' => "px-3 py-3 whitespace-nowrap $class"]) }} style="vertical-align: top;">
-    @if ($action_col === 'true')
+<td {{ $attributes->merge(['class' => "px-3 py-3" . ($action_col ? '' : ' whitespace-nowrap') . " $class"]) }} style="vertical-align: top;">
+    @if ($action_col === true)
         <div class="flex">
             {{ $slot }}
         </div>

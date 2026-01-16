@@ -36,7 +36,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SubDomainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KPIStandardController;
-
+use App\Http\Controllers\TempFileUploadController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -72,6 +72,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/upload-artifacts', [DataUploaderController::class, 'createArtifact'])->name('upload.artifact.create');
     Route::post('/upload-artifacts', [DataUploaderController::class, 'uploadArtifact'])->name('upload.artifact.store');
 
+    Route::controller(TempFileUploadController::class)->group(function () {
+        Route::post('/uploads', 'store')->name('temp.upload.store');
+        Route::delete('/tmp/delete', 'destroy')->name('temp.upload.destroy');
+    });
+    
     Route::controller(ArtifactAttachmentController::class)->group(function () {
         Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
         Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');

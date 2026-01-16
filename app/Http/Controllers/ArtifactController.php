@@ -19,7 +19,7 @@ class ArtifactController extends Controller
             ->withCount('attachments')
             ->paginate(20);
 
-        return view('process/evidence-management/artifacts/index', compact('artifacts'));
+        return view('process.evidence-management.artifacts.index', compact('artifacts'));
     }
 
     public function show(Artifact $artifact)
