@@ -2,7 +2,7 @@
 @section('title', 'Sections')
 @section('content')
     <div>
-        <x-table.action-wrapper title="All Sections">
+        <x-table.action-wrapper title="Section List">
             {{-- <x-action.button label="Add Section" route_name="cms.create" /> --}}
         </x-table.action-wrapper>
 

@@ -29,7 +29,7 @@
 
             <x-info-row>
                 <x-info-col label="Nationality">
-                    {{ $humanResource->nationality ?? '' }}
+                    {{ $humanResource->nationality->name ?? '' }}
                 </x-info-col>
                 <x-info-col label="Designation">
                     {{ $humanResource->designation->designation_name ?? $humanResource->designation }}

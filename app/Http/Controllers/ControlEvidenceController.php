@@ -176,21 +176,21 @@ class ControlEvidenceController extends Controller
     {
         $baseUrl = config('app.url');
 
-        return DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"{$baseUrl}evidences/', e.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', e.evidence_name, '</a>') SEPARATOR '<br>') AS evidences");
+        return DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"{$baseUrl}evidences/', e.id, '\" style=\"text-decoration: none; color: inherit;\">', e.evidence_name, '</a>') SEPARATOR '<br>') AS evidences");
     }
 
     private function buildControlLinksExpression(): \Illuminate\Database\Query\Expression
     {
         $baseUrl = config('app.url');
 
-        return DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"{$baseUrl}controls/', c.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit; line-height:2em;\">', c.control_id, ' - ', c.control_name, '</a>') SEPARATOR '<br><br>') AS controls");
+        return DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"{$baseUrl}controls/', c.id, '\" style=\"text-decoration: none; color: inherit; line-height:2em;\">', c.control_id, ' - ', c.control_name, '</a>') SEPARATOR '<br>') AS controls");
     }
 
     private function buildArtifactLinksExpression(): \Illuminate\Database\Query\Expression
     {
         $baseUrl = config('app.url');
 
-        return DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"{$baseUrl}artifacts/', a.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts");
+        return DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"{$baseUrl}artifacts/', a.id, '\" style=\"text-decoration: none; color: inherit;\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts");
     }
 
     /**
@@ -205,5 +205,32 @@ class ControlEvidenceController extends Controller
         return response($mpdf->Output($filename, 'D'))
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', "attachment; filename=\"{$filename}\"");
+    }
+
+    /**
+     * Get domains by best practice ID via AJAX
+     */
+    public function getDomainsByBestPractice($bestPracticeId)
+    {
+        $domains = Domain::query()
+            ->join('best_practice_vs_domain_table as bvd', 'domain_table.main_domain_id', '=', 'bvd.main_domain_id')
+            ->join('best_practice_table as b', 'bvd.best_practice_id', '=', 'b.best_practice_id')
+            ->where('b.best_practice_id', $bestPracticeId)
+            ->select('domain_table.id', 'domain_table.main_domain_id', 'domain_table.main_domain_name')
+            ->get();
+
+        return response()->json($domains);
+    }
+
+    /**
+     * Get subdomains by domain ID via AJAX
+     */
+    public function getSubDomainsByDomain($domainId)
+    {
+        $subDomains = SubDomain::select('id', 'sub_domain_id', 'sub_domain_name')
+            ->where('main_domain_id', $domainId)
+            ->get();
+
+        return response()->json($subDomains);
     }
 }

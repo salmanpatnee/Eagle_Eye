@@ -6,7 +6,7 @@
 
 
     <div class="px-7">
-        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white"">Introduction</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white mt-7">Introduction</h3>
         <p class="mb-3 mt-3 text-lg">Vulnerability Assessment (VA) and Penetration Testing (Pen Test) are critical
             cybersecurity practices used to
             identify, assess, and mitigate security risks within an organization's infrastructure. A Vulnerability

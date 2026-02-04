@@ -2,7 +2,7 @@
 @section('title', 'Process')
 @section('content')
     <div>
-        <x-table.action-wrapper title="All Process">
+        <x-table.action-wrapper title="Process List">
             {{-- <x-action.button label="Add Process" route_name="cms.create" /> --}}
         </x-table.action-wrapper>
 

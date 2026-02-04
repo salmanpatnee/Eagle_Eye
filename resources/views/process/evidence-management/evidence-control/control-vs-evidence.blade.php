@@ -1,5 +1,5 @@
 @extends('layouts.app-full')
-@section('title', 'Control vs Evidence')
+@section('title', 'Evidence Management')
 {{-- @section('title_ar', 'الضوابط مقابل الأدلة') --}}
 @section('content')
     <div>
@@ -27,12 +27,12 @@
                     <div>
                         <x-form.select label="Main Domains"  name="domain" :value="$domainId"
                             :data="$domains" id_key="main_domain_id" value_key="main_domain_name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" disabled />
                     </div>
                     <div>
                         <x-form.select label="Sub Domains"  name="subdomain" :value="$subDomainId"
                             :data="$subDomains" id_key="sub_domain_id" value_key="sub_domain_name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" disabled />
                     </div>
                     {{-- <div>
                         <x-form.select label="Controls" label_ar="الضوابط" name="control_id" :value="$controlId"
@@ -70,4 +70,32 @@
             </x-table.tbody>
         </x-table.table>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bestPracticeSelect = document.querySelector('select[name="practice"]');
+            const domainSelect = document.querySelector('select[name="domain"]');
+            const subDomainSelect = document.querySelector('select[name="subdomain"]');
+
+            if (bestPracticeSelect && bestPracticeSelect.value) {
+                // Best practice is selected, enable domain
+                domainSelect.disabled = false;
+
+                if (domainSelect.value) {
+                    // Domain is selected, enable subdomain
+                    subDomainSelect.disabled = false;
+                } else {
+                    // No domain selected, show helpful placeholder
+                    subDomainSelect.innerHTML = '<option value="">Select the domain first</option>';
+                    subDomainSelect.disabled = true;
+                }
+            } else {
+                // No best practice selected, show helpful placeholders
+                domainSelect.innerHTML = '<option value="">Select the best practice first</option>';
+                domainSelect.disabled = true;
+                subDomainSelect.innerHTML = '<option value="">Select the domain first</option>';
+                subDomainSelect.disabled = true;
+            }
+        });
+    </script>
 @endsection

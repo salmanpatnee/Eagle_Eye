@@ -1,21 +1,21 @@
-@extends('layouts.evidence')
+@extends('layouts.user')
 @section('title', 'Evidence Management')
 @section('title_ar', 'إدارة الأدلة')
 
 @section('content')
     <div>
 
-        <x-table.action-wrapper>
-            <x-action.button label="Add Evidence" label_ar="إضافة الأدلة" route_name="evidences.create" />
+        <x-table.action-wrapper title="Evidence List">
+            <x-action.button label="Add Evidence" route_name="evidences.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Evidence ID" label_ar="رمز الأدلة" />
-                <x-table.th label="Evidence Name" label_ar="الاسم الأدلة" />
-                <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
+        <x-table.table-sticky>
+            <x-table.thead-sticky>
+                <x-table.th label="S.No" />
+                <x-table.th label="Evidence ID" />
+                <x-table.th label="Evidence Name" />
+                <x-table.th label="Action" />
+            </x-table.thead-sticky>
             <x-table.tbody>
                 @foreach ($evidences as $evidence)
                     <tr>
@@ -30,7 +30,7 @@
                     </tr>
                 @endforeach
             </x-table.tbody>
-        </x-table.table>
+        </x-table.table-sticky>
 
         <x-pagination>
             {{ $evidences->links() }}

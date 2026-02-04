@@ -30,6 +30,11 @@ CISO 360 is a comprehensive Governance, Risk, and Compliance (GRC) management ap
 - **guzzlehttp/guzzle**: `^7.2` (HTTP client)
 - **barryvdh/laravel-debugbar**: `^3.9` (development debugging)
 
+### Global Helper Functions
+- **getLayoutByRole()**: Returns appropriate layout based on user's role ID (in `app/helpers.php`)
+- **hasRole()**: Checks if authenticated user has a specific role (in `app/helpers.php`)
+- **getUserRoleId()**: Gets the role ID of the authenticated user (in `app/helpers.php`)
+
 ### Development Tools
 - **Testing**: PHPUnit `^9.5.10`
 - **Code Style**: Laravel Pint `^1.0`

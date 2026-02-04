@@ -1,11 +1,15 @@
-@extends('layouts.user')
+@extends(getLayoutByRole(null, $superAdminLayout = 'layouts.user'))
 @section('title', 'Artifact Management')
 {{-- @section('title_ar', 'إدارة المقتنيات') --}}
 @section('content')
     <div>
         <x-table.action-wrapper title="Artifact Details">
-            <x-action.button label="View" route_name="artifacts.index" />
-            <x-action.button label="Edit" route_name="artifacts.edit" route_param="{{ $artifact->id }}" />
+            @if (hasRole(1))
+                <x-action.button label="View" route_name="artifacts.index" />
+                <x-action.button label="Edit" route_name="artifacts.edit" route_param="{{ $artifact->id }}" />
+            @else
+                <x-action.button label="Back" onclick="window.history.back()" />
+            @endif
         </x-table.action-wrapper>
 
 
@@ -34,7 +38,7 @@
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Category" >
+                <x-info-col label="Category">
                     {{ $artifact->category?->category_name ?? '—' }}
                 </x-info-col>
                 <x-info-col label="System Name">
@@ -43,82 +47,73 @@
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Asset Exclusively Related to Critical Assets?"
-                    >
+                <x-info-col label="Asset Exclusively Related to Critical Assets?">
                     {{ $artifact->artifact_critical_asset ?? '—' }}
                 </x-info-col>
-                <x-info-col label="Asset Exclusively Related to Cloud?" >
+                <x-info-col label="Asset Exclusively Related to Cloud?">
                     {{ $artifact->artifact_cloud ?? '—' }}
                 </x-info-col>
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Asset Exclusively Related to Telework?" >
+                <x-info-col label="Asset Exclusively Related to Telework?">
                     {{ $artifact->artifact_telework ?? '—' }}
                 </x-info-col>
-                <x-info-col label="Asset Exclusively Related to Social Media?"
-                    >
+                <x-info-col label="Asset Exclusively Related to Social Media?">
                     {{ $artifact->artifact_social_media ?? '—' }}
                 </x-info-col>
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Asset Exclusively Related to Data Privacy?"
-                    >
+                <x-info-col label="Asset Exclusively Related to Data Privacy?">
                     {{ $artifact->artifact_data_privacy ?? '—' }}
                 </x-info-col>
-                <x-info-col label="Asset Exclusively Related to PII?"
-                    >
+                <x-info-col label="Asset Exclusively Related to PII?">
                     {{ $artifact->artifact_pii ?? '—' }}
                 </x-info-col>
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Asset Exclusively Related to PCI/DSS?" >
+                <x-info-col label="Asset Exclusively Related to PCI/DSS?">
                     {{ $artifact->artifact_pci_dss ?? '—' }}
                 </x-info-col>
-                <x-info-col label="Asset Exclusively Related to E-Commerce?"
-                    >
+                <x-info-col label="Asset Exclusively Related to E-Commerce?">
                     {{ $artifact->artifact_e_commerce ?? '—' }}
                 </x-info-col>
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Asset Exclusively Related to Infrastructure?"
-                    >
+                <x-info-col label="Asset Exclusively Related to Infrastructure?">
                     {{ $artifact->artifact_e_commerce ?? '—' }}
                 </x-info-col>
-                <x-info-col label="Asset Exclusively Related to Application?" >
+                <x-info-col label="Asset Exclusively Related to Application?">
                     {{ $artifact->artifact_application ?? '—' }}
                 </x-info-col>
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Asset Exclusively Related to HR?" >
+                <x-info-col label="Asset Exclusively Related to HR?">
                     {{ $artifact->artifact_hr ?? '—' }}
                 </x-info-col>
-                <x-info-col label="Asset Exclusively Related to Physical Security?"
-                    >
+                <x-info-col label="Asset Exclusively Related to Physical Security?">
                     {{ $artifact->artifact_physical_asset ?? '—' }}
                 </x-info-col>
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Asset Exclusively Related to Third Party?" >
+                <x-info-col label="Asset Exclusively Related to Third Party?">
                     {{ $artifact->artifact_third_party ?? '—' }}
                 </x-info-col>
-                <x-info-col label="Asset Exclusively Related to Operational Technology?"
-                    >
+                <x-info-col label="Asset Exclusively Related to Operational Technology?">
                     {{ $artifact->artifact_opertaional_tech ?? '—' }}
                 </x-info-col>
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Asset Exclusively Related to E-Banking?"
-                    >
+                <x-info-col label="Asset Exclusively Related to E-Banking?">
                     {{ $artifact->artifact_payment ?? '—' }}
                 </x-info-col>
-                <x-info-col label="Asset Exclusively Related to Payments?" >
+                <x-info-col label="Asset Exclusively Related to Payments?">
                     {{ $artifact->artifact_e_banking ?? '—' }}
                 </x-info-col>
             </x-info-row>
@@ -126,7 +121,7 @@
         <div>
             <x-table.table>
                 <x-table.thead>
-                    <x-table.th label="S.No"  />
+                    <x-table.th label="S.No" />
                     <x-table.th label="Attachment Name" />
                     <x-table.th label="Action" />
                 </x-table.thead>
@@ -142,8 +137,10 @@
                                     class="inline-flex items-center justify-center p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-blue-600 transition-colors">
                                     <x-icons.view />
                                 </a>
-                                <x-action.delete route_name="artifacts.attachments.destroy"
-                                    param="{{ $attachment->id }}" />
+                                @if (hasRole(1))
+                                    <x-action.delete route_name="artifacts.attachments.destroy"
+                                        param="{{ $attachment->id }}" />
+                                @endif
                             </x-table.td>
                         </tr>
                     @endforeach

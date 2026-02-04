@@ -42,7 +42,6 @@ class ArtifactController extends Controller
             ->orderBy('category_name')
             ->get();
 
-
         return view('process/evidence-management/artifacts/create', compact('classifications', 'categories', 'artifact'));
     }
 
@@ -78,9 +77,10 @@ class ArtifactController extends Controller
 
         if ($validator->fails()) {
             foreach ($tempFiles as $tempFile) {
-                Storage::deleteDirectory('files/tmp/' . $tempFile->folder);
+                Storage::deleteDirectory('files/tmp/'.$tempFile->folder);
                 $tempFile->delete();
             }
+
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
@@ -103,7 +103,6 @@ class ArtifactController extends Controller
             ->orderBy('category_name')
             ->get();
 
-
         return view('process/evidence-management/artifacts/create', compact('artifact', 'classifications', 'categories'));
     }
 
@@ -111,7 +110,7 @@ class ArtifactController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'artifact_id' => ['required', 'unique:artifact_table,artifact_id,' . $artifact->id],
+            'artifact_id' => ['required', 'unique:artifact_table,artifact_id,'.$artifact->id],
             'artifact_name' => 'required|string',
             'artifact_description' => 'nullable',
             'artifact_creation_date' => 'required|string',
@@ -140,9 +139,10 @@ class ArtifactController extends Controller
 
         if ($validator->fails()) {
             foreach ($tempFiles as $tempFile) {
-                Storage::deleteDirectory('files/tmp/' . $tempFile->folder);
+                Storage::deleteDirectory('files/tmp/'.$tempFile->folder);
                 $tempFile->delete();
             }
+
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
@@ -159,6 +159,7 @@ class ArtifactController extends Controller
         $this->_deleteArtifactAttachments($artifact);
 
         $artifact->delete();
+
         return redirect(route('artifacts.index'))
             ->with('success', 'Artifact deleted.');
     }
@@ -180,17 +181,17 @@ class ArtifactController extends Controller
     {
         foreach ($tempFiles as $tempFile) {
             // Copy the file directly to the 'files' directory without creating a subfolder
-            Storage::copy('files/tmp/' . $tempFile->folder . '/' . $tempFile->file, 'files/' . $tempFile->file);
+            Storage::copy('files/tmp/'.$tempFile->folder.'/'.$tempFile->file, 'files/'.$tempFile->file);
 
             // Create the attachment record with the updated path
             Attachment::create([
                 'artifact_id' => $artifactId,
                 'name' => $tempFile->file,
-                'path' => 'files/' . $tempFile->file // Only the file name, no folder
+                'path' => 'files/'.$tempFile->file, // Only the file name, no folder
             ]);
 
             // Delete the temporary directory
-            Storage::deleteDirectory('files/tmp/' . $tempFile->folder);
+            Storage::deleteDirectory('files/tmp/'.$tempFile->folder);
             $tempFile->delete();
         }
     }

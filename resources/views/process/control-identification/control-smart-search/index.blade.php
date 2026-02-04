@@ -75,6 +75,12 @@
                     <tbody class="divide-y divide-gray-200">
                         @forelse ($controls as $control)
                             <tr class="hover:bg-gray-50 transition-colors duration-150">
+                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
+                                    <a href="{{ route('controls.show', $control->id) }}" class="text-blue-600 hover:underline">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->control_id }} - {{ $control->control_name }}</span>
+                                </a>
+                                </td>
+
                                 <td class="px-4 py-3 text-center whitespace-nowrap" style="width: 60px; vertical-align: top;">
                                     <span class="block font-medium text-gray-700 text-theme-sm">{{ ($controls->currentPage() - 1) * $controls->perPage() + $loop->index + 1 }}</span>
                                 </td>
@@ -96,9 +102,7 @@
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->classification_name }}</span>
                                 </td>
-                                <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->control_id }} - {{ $control->control_name }}</span>
-                                </td>
+                               
                             </tr>
                         @empty
                             <tr>

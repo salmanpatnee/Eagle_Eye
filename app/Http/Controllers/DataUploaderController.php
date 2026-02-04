@@ -21,7 +21,7 @@ class DataUploaderController extends Controller
     {
         // Validate the uploaded file
         $request->validate([
-            'excel_file' => 'required|mimes:xlsx,xls'
+            'excel_file' => 'required|mimes:xlsx,xls',
         ]);
 
         // Load the uploaded file
@@ -40,7 +40,7 @@ class DataUploaderController extends Controller
             $data = array_combine($headers, $row);
 
             // Ensure asset_id is present to avoid errors
-            if (!isset($data['asset_id'])) {
+            if (! isset($data['asset_id'])) {
                 continue;
             }
 
@@ -49,7 +49,7 @@ class DataUploaderController extends Controller
                 $data
             );
 
-            if (!empty($categories)) {
+            if (! empty($categories)) {
                 $categoryIds = explode(',', $categories);
                 $asset->categories()->sync($categoryIds);
             }
@@ -67,7 +67,7 @@ class DataUploaderController extends Controller
     {
         // Validate the uploaded file
         $request->validate([
-            'excel_file' => 'required|mimes:xlsx,xls'
+            'excel_file' => 'required|mimes:xlsx,xls',
         ]);
 
         // Load the uploaded file
@@ -79,13 +79,12 @@ class DataUploaderController extends Controller
         // Extract headers
         $headers = array_shift($rows);
 
-
         foreach ($rows as $row) {
 
             $data = array_combine($headers, $row);
 
             // Ensure asset_id is present to avoid errors
-            if (!isset($data['owner_id'])) {
+            if (! isset($data['owner_id'])) {
                 continue;
             }
 
@@ -107,7 +106,7 @@ class DataUploaderController extends Controller
     {
         // Validate the uploaded file
         $request->validate([
-            'excel_file' => 'required|mimes:xlsx,xls'
+            'excel_file' => 'required|mimes:xlsx,xls',
         ]);
 
         // Load the uploaded file
@@ -119,13 +118,12 @@ class DataUploaderController extends Controller
         // Extract headers
         $headers = array_shift($rows);
 
-
         foreach ($rows as $row) {
 
             $data = array_combine($headers, $row);
 
             // Ensure asset_id is present to avoid errors
-            if (!isset($data['custodian_name_id'])) {
+            if (! isset($data['custodian_name_id'])) {
                 continue;
             }
 
@@ -147,7 +145,7 @@ class DataUploaderController extends Controller
     {
         // Validate the uploaded file
         $request->validate([
-            'excel_file' => 'required|mimes:xlsx,xls'
+            'excel_file' => 'required|mimes:xlsx,xls',
         ]);
 
         // Load the uploaded file
@@ -159,13 +157,12 @@ class DataUploaderController extends Controller
         // Extract headers
         $headers = array_shift($rows);
 
-
         foreach ($rows as $row) {
 
             $data = array_combine($headers, $row);
 
             // Ensure asset_id is present to avoid errors
-            if (!isset($data['artifact_id'])) {
+            if (! isset($data['artifact_id'])) {
                 continue;
             }
 
@@ -188,10 +185,8 @@ class DataUploaderController extends Controller
 
         // Validate the uploaded file
         $request->validate([
-            'excel_file' => 'required|mimes:xlsx,xls'
+            'excel_file' => 'required|mimes:xlsx,xls',
         ]);
-
-
 
         // Load the uploaded file
         $file = $request->file('excel_file');
@@ -212,7 +207,7 @@ class DataUploaderController extends Controller
             $data = array_combine($headers, $row);
 
             // Ensure asset_id is present to avoid errors
-            if (!isset($data['expert_id'])) {
+            if (! isset($data['expert_id'])) {
                 continue;
             }
 
@@ -221,15 +216,15 @@ class DataUploaderController extends Controller
                 $data
             );
 
-            if (!empty($experties)) {
+            if (! empty($experties)) {
                 $expertIds = explode(',', $experties);
                 $expert->experties()->sync($expertIds);
             }
-            if (!empty($roles)) {
-                $roleIds = explode(',', $roles);
-                $expert->roles()->sync($roleIds);
-            }
-            if (!empty($certifications)) {
+            // if (!empty($roles)) {
+            //     $roleIds = explode(',', $roles);
+            //     $expert->roles()->sync($roleIds);
+            // }
+            if (! empty($certifications)) {
                 $certificationIds = explode(',', $certifications);
                 $expert->certifications()->sync($certificationIds);
             }

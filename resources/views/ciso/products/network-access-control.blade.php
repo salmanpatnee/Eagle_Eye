@@ -271,6 +271,8 @@
                     <x-table.th label="S.No" />
                     <x-table.th label="Product Name" />
                     <x-table.th label="Key Features" />
+                    <x-table.th label="Deployment Model" />
+                    <x-table.th label="Description" />
             </x-table.thead>
             <x-table.tbody>
                 <tr>

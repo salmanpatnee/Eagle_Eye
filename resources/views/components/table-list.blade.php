@@ -10,10 +10,14 @@
         @forelse ($data as $item)
             <li class="border-b border-gray-200 flex items-center last:border-b-0">
                 <span>
-                    @if ($id_key)
-                        {{ $item[$id_key] ?? ($item->{$id_key} ?? '') }} -
+                    @php
+                        $idValue = $item[$id_key] ?? ($item->{$id_key} ?? '');
+                        $valueValue = $item[$value_key] ?? ($item->{$value_key} ?? '');
+                    @endphp
+                    @if ($id_key && $idValue !== 'No Certification' && $valueValue !== 'No Certification')
+                        {{ $idValue }} -
                     @endif
-                    {{ $item[$value_key] ?? ($item->{$value_key} ?? '') }}
+                    {{ $valueValue }}
                 </span>
             </li>
         @empty

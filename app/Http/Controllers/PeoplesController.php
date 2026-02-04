@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HRCertification;
 use App\Models\Experties;
+use App\Models\HRCertification;
 use App\Models\HROrganization;
 use App\Models\HumanResource;
 use App\Models\Industry;
@@ -21,7 +21,6 @@ class PeoplesController extends Controller
         $expertise = $request->input('expertise_title') ?? [];
         $designation = $request->input('designation') ?? [];
         $experience = $request->input('experience') ?? [];
-
 
         $nationalities = \App\Models\Nationality::orderBy('name', 'ASC')
             ->pluck('name');
@@ -56,29 +55,29 @@ class PeoplesController extends Controller
             '6-10 years',
             '11-15 years',
             '16-20 years',
-            '20+ years'
+            '20+ years',
         ]);
 
-        $humanResource = HumanResource::select('expert_id', 'organization_id', 'industry_id', 'name', 'nationality', 'nationality_id', 'linkedin_profile', 'designation', 'experience')
-            ->with('certifications', 'organization', 'roles', 'industry', 'experties', 'nationality')
+        $humanResource = HumanResource::select('expert_id', 'organization_id', 'industry_id', 'name', 'nationality_id', 'linkedin_profile', 'designation', 'experience')
+            ->with('certifications', 'organization', 'industry', 'experties', 'nationality')
             ->when($nationality, function ($query, $nationality) {
-                $query->where(function($q) use ($nationality) {
-                    $q->where(function($subquery) use ($nationality) {
+                $query->where(function ($q) use ($nationality) {
+                    $q->where(function ($subquery) use ($nationality) {
                         if (is_array($nationality)) {
-                            $subquery->whereIn('hr_expert_master_table.nationality', $nationality);
+                            $subquery->whereIn('hr_expert_master_table.nationality_id', $nationality);
                         } else {
-                            $subquery->where('hr_expert_master_table.nationality', $nationality);
+                            $subquery->where('hr_expert_master_table.nationality_id', $nationality);
                         }
                     })
-                    ->orWhere(function($subquery) use ($nationality) {
-                        $subquery->whereHas('nationality', function($nationalityQuery) use ($nationality) {
-                            if (is_array($nationality)) {
-                                $nationalityQuery->whereIn('name', $nationality);
-                            } else {
-                                $nationalityQuery->where('name', $nationality);
-                            }
+                        ->orWhere(function ($subquery) use ($nationality) {
+                            $subquery->whereHas('nationality', function ($nationalityQuery) use ($nationality) {
+                                if (is_array($nationality)) {
+                                    $nationalityQuery->whereIn('name', $nationality);
+                                } else {
+                                    $nationalityQuery->where('name', $nationality);
+                                }
+                            });
                         });
-                    });
                 });
             })
 
@@ -122,9 +121,9 @@ class PeoplesController extends Controller
                 });
             })
             ->when($experience, function ($query, $experience) {
-                $query->where(function($q) use ($experience) {
-                    foreach ((array)$experience as $range) {
-                        switch($range) {
+                $query->where(function ($q) use ($experience) {
+                    foreach ((array) $experience as $range) {
+                        switch ($range) {
                             case '0-5 years':
                                 $q->orWhereBetween(DB::raw('CAST(experience AS UNSIGNED)'), [0, 5]);
                                 break;
@@ -147,7 +146,7 @@ class PeoplesController extends Controller
             ->paginate(10);
 
         $humanResource->appends([
-            'nationality'    => $nationality,
+            'nationality' => $nationality,
             'industry_name' => $industry,
             'organization_name' => $organization,
             'certification_title' => $certification,
@@ -158,6 +157,6 @@ class PeoplesController extends Controller
 
         $id = null;
 
-        return view('ciso/people/index', compact('id', 'humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation', 'experienceRanges', 'experience'));
+        return view('ciso.people.index', compact('id', 'humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation', 'experienceRanges', 'experience'));
     }
 }

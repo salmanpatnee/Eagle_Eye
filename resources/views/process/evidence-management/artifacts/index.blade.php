@@ -3,7 +3,7 @@
 
 @section('content')
     <div>
-        <x-table.action-wrapper title="Artifact Management">
+        <x-table.action-wrapper title="Artifact List">
             <x-action.button label="Add Artifact" route_name="artifacts.create" />
         </x-table.action-wrapper>
 

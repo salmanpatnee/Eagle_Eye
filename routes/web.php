@@ -24,6 +24,7 @@ use App\Http\Controllers\HumanResourceController;
 use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\ISO27001Controller;
 use App\Http\Controllers\ISO27001ResourceController;
+use App\Http\Controllers\KPIStandardController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainDomainController;
@@ -34,10 +35,8 @@ use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SubDomainController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\KPIStandardController;
 use App\Http\Controllers\TempFileUploadController;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
@@ -76,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/uploads', 'store')->name('temp.upload.store');
         Route::delete('/tmp/delete', 'destroy')->name('temp.upload.destroy');
     });
-    
+
     Route::controller(ArtifactAttachmentController::class)->group(function () {
         Route::get('/attachments/{attachment}', 'show')->name('artifacts.attachments.show');
         Route::delete('/attachments/{attachment}', 'destroy')->name('artifacts.attachments.destroy');
@@ -94,6 +93,8 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ControlEvidenceController::class)->group(function () {
         Route::get('/control-vs-evidence', 'controlVsEvidence')->name('control-vs-evidence.index');
         Route::get('/evidence-vs-control', 'evidenceVsControl')->name('evidence-vs-control.index');
+        Route::get('/ajax/domains-by-best-practice/{bestPracticeId}', 'getDomainsByBestPractice')->name('ajax.domains.by.best.practice');
+        Route::get('/ajax/subdomains-by-domain/{domainId}', 'getSubDomainsByDomain')->name('ajax.subdomains.by.domain');
     });
 
     Route::controller(ControlAuditFindingController::class)->group(function () {
@@ -247,7 +248,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
             Route::view('/end-point-detection-response', 'ciso/products/end-point-detection-response')->name('products.end-point-detection-response');
             Route::view('/extended-detection-protection-response', 'ciso/products/extended-detection-protection-response')->name('products.extended-detection-protection-response');
             Route::view('/identity-access-management', 'ciso/products/identity-access-management')->name('products.identity-access-management');
-            Route::view('/iot-security', 'ciso/products/iot-security')->name('products.iot-security');
+            Route::view('/iot-security', 'ciso/products/Iot-security')->name('products.iot-security');
             Route::view('/multi-factor-authentication', 'ciso/products/multi-factor-authentication')->name('products.multi-factor-authentication');
             Route::view('/network-access-control', 'ciso/products/network-access-control')->name('products.network-access-control');
             Route::view('/next-generation-firewall', 'ciso/products/next-generation-firewall')->name('products.next-generation-firewall');
@@ -268,22 +269,19 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
 
     // ------------------- TEMPORARY HR CERTIFICATION IMPORT -------------------
 
-    Route::get('/import-hr-certifications/{filePath}', function ($filePath) {
+    Route::get('/import-hr-certifications', function () {
         try {
-            // Decode the file path
-            $decodedPath = base64_decode($filePath);
-            $fullPath = base_path($decodedPath);
+            $csvFilePath = base_path('data/Certifications_UNIQUE.csv');
 
-            // Security check: ensure the file exists and is within the project
-            if (! file_exists($fullPath) || ! str_starts_with(realpath($fullPath), realpath(base_path()))) {
-                return response()->json(['error' => 'File not found or invalid path'], 404);
+            if (! file_exists($csvFilePath)) {
+                return response()->json(['error' => 'CSV file not found'], 404);
             }
 
-            if (($handle = fopen($fullPath, 'r')) !== false) {
-                $imported = 0;
-                $errors = [];
-                $rowNum = 0;
+            $imported = 0;
+            $errors = [];
+            $rowNum = 0;
 
+            if (($handle = fopen($csvFilePath, 'r')) !== false) {
                 while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                     $rowNum++;
 
@@ -295,7 +293,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
                     // Validate and prepare data
                     $certificationId = trim($data[0] ?? '');
                     $certificationTitle = trim($data[1] ?? '');
-                    $institute = trim($data[2] ?? null);
+                    $institute = trim($data[2] ?? '');
 
                     if (empty($certificationId) || empty($certificationTitle)) {
                         $errors[] = "Row {$rowNum}: Missing certification_id or certification_title";
@@ -304,7 +302,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
                     }
 
                     try {
-                        DB::table('hr_certification_table')->insert([
+                        \App\Models\HRCertification::create([
                             'certification_id' => $certificationId,
                             'certification_title' => $certificationTitle,
                             'institute' => empty($institute) ? null : $institute,

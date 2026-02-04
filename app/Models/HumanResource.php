@@ -10,18 +10,23 @@ class HumanResource extends Model
     use HasFactory;
 
     protected $table = 'hr_expert_master_table';
+
     protected $guarded = [];
+
     public $timestamps = false;
 
-    public function industry() {
+    public function industry()
+    {
         return $this->belongsTo(Industry::class, 'industry_id', 'industry_id');
     }
 
-    public function organization() {
+    public function organization()
+    {
         return $this->belongsTo(HROrganization::class, 'organization_id', 'organization_id');
     }
 
-    public function nationality() {
+    public function nationality()
+    {
         return $this->belongsTo(Nationality::class, 'nationality_id', 'id');
     }
 
@@ -49,19 +54,16 @@ class HumanResource extends Model
         );
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(
-            HRRole::class,
-            'hr_expert_master_vs_roles_table',
-            'expert_id',
-            'role_id',
-            'expert_id',
-            'role_id'
-        );
-    }
-
-
-
+    // public function roles()
+    // {
+    //     return $this->belongsToMany(
+    //         HRRole::class,
+    //         'hr_expert_master_vs_roles_table',
+    //         'expert_id',
+    //         'role_id',
+    //         'expert_id',
+    //         'role_id'
+    //     );
+    // }
 
 }

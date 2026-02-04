@@ -3,7 +3,7 @@
 
 @section('content')
     <div>
-        <x-table.action-wrapper title="All Users">
+        <x-table.action-wrapper title="User List">
             <x-action.button label="Add User" route_name="users.create" />
         </x-table.action-wrapper>
 

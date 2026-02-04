@@ -46,7 +46,7 @@ class ISO27001ResourceController extends Controller
 
     public function create(ISO27001 $section)
     {
-        return view('process\cms\iso27001\resource', compact('section'));
+        return view('process.cms.iso27001.resource', compact('section'));
     }
 
     public function store(Request $request)

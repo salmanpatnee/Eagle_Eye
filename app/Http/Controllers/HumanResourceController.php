@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HRCertification;
 use App\Models\Experties;
+use App\Models\HRCertification;
 use App\Models\HROrganization;
 use App\Models\HumanResource;
 use App\Models\Industry;
@@ -18,13 +18,13 @@ class HumanResourceController extends Controller
      */
     public function index(Request $request)
     {
+
         $nationality = $request->input('nationality') ?? [];
         $industry = $request->input('industry_name') ?? [];
         $organization = $request->input('organization_name') ?? [];
         $certification = $request->input('certification_title') ?? [];
         $expertise = $request->input('expertise_title') ?? [];
         $designation = $request->input('designation') ?? [];
-
 
         $nationalities = \App\Models\Nationality::orderBy('name', 'ASC')
             ->pluck('name');
@@ -54,27 +54,26 @@ class HumanResourceController extends Controller
             ->orderBy('expertise_title', 'ASC')
             ->get();
 
-
-        $humanResource = HumanResource::select('id', 'expert_id', 'organization_id', 'industry_id', 'name', 'nationality', 'nationality_id', 'linkedin_profile', 'designation', 'experience')
-            ->with('certifications', 'organization', 'roles', 'industry', 'experties', 'nationality')
+        $humanResource = HumanResource::select('id', 'expert_id', 'organization_id', 'industry_id', 'name', 'nationality_id', 'linkedin_profile', 'designation', 'experience')
+            ->with('certifications', 'organization', 'industry', 'experties', 'nationality')
             ->when($nationality, function ($query, $nationality) {
-                $query->where(function($q) use ($nationality) {
-                    $q->where(function($subquery) use ($nationality) {
+                $query->where(function ($q) use ($nationality) {
+                    $q->where(function ($subquery) use ($nationality) {
                         if (is_array($nationality)) {
-                            $subquery->whereIn('hr_expert_master_table.nationality', $nationality);
+                            $subquery->whereIn('hr_expert_master_table.nationality_id', $nationality);
                         } else {
-                            $subquery->where('hr_expert_master_table.nationality', $nationality);
+                            $subquery->where('hr_expert_master_table.nationality_id', $nationality);
                         }
                     })
-                    ->orWhere(function($subquery) use ($nationality) {
-                        $subquery->whereHas('nationality', function($nationalityQuery) use ($nationality) {
-                            if (is_array($nationality)) {
-                                $nationalityQuery->whereIn('name', $nationality);
-                            } else {
-                                $nationalityQuery->where('name', $nationality);
-                            }
+                        ->orWhere(function ($subquery) use ($nationality) {
+                            $subquery->whereHas('nationality', function ($nationalityQuery) use ($nationality) {
+                                if (is_array($nationality)) {
+                                    $nationalityQuery->whereIn('name', $nationality);
+                                } else {
+                                    $nationalityQuery->where('name', $nationality);
+                                }
+                            });
                         });
-                    });
                 });
             })
 
@@ -120,7 +119,7 @@ class HumanResourceController extends Controller
             ->paginate(100);
 
         $humanResource->appends([
-            'nationality'    => $nationality,
+            'nationality' => $nationality,
             'industry_name' => $industry,
             'organization_name' => $organization,
             'certification_title' => $certification,
@@ -153,7 +152,6 @@ class HumanResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -186,7 +184,7 @@ class HumanResourceController extends Controller
             'industry_id' => $validated['industry_id'],
             'nationality_id' => $validated['nationality_id'],
             // Backward compatibility
-            'nationality' => \App\Models\Nationality::find($validated['nationality_id'])->name,
+            // 'nationality' => \App\Models\Nationality::find($validated['nationality_id'])->name,
             'designation' => $validated['designation'],
         ]);
 
@@ -210,7 +208,7 @@ class HumanResourceController extends Controller
     public function show($id)
     {
         $humanResource = HumanResource::with('certifications', 'experties', 'organization', 'industry', 'nationality')->findOrFail($id);
-      
+
         return view('process.hr.experts.show', compact('humanResource'));
     }
 
@@ -235,7 +233,6 @@ class HumanResourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -244,7 +241,7 @@ class HumanResourceController extends Controller
         $humanResource = HumanResource::findOrFail($id);
 
         $validated = $request->validate([
-            'expert_id' => 'required|string|max:255|unique:hr_expert_master_table,expert_id,' . $humanResource->id,
+            'expert_id' => 'required|string|max:255|unique:hr_expert_master_table,expert_id,'.$humanResource->id,
             'name' => 'required|string|max:255',
             // 'email' => 'nullable|email|max:255',
             // 'phone' => 'nullable|string|max:255',
@@ -271,7 +268,7 @@ class HumanResourceController extends Controller
             'industry_id' => $validated['industry_id'],
             'nationality_id' => $validated['nationality_id'],
             // Backward compatibility
-            'nationality' => \App\Models\Nationality::find($validated['nationality_id'])->name,
+            // 'nationality' => \App\Models\Nationality::find($validated['nationality_id'])->name,
             'designation' => $validated['designation'],
         ]);
 

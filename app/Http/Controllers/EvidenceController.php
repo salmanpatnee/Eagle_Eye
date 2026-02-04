@@ -6,27 +6,26 @@ use App\Models\Artifact;
 use App\Models\Category;
 use App\Models\Classification;
 use App\Models\ControlMaster;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Evidence;
 use App\Models\EvidenceControl;
 use App\Models\Owner;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EvidenceController extends Controller
 {
-
     public function index()
     {
         $evidences = Evidence::paginate(20);
 
-        return view('process/evidence-management/evidences/index', compact('evidences'));
+        return view('process.evidence-management.evidences.index', compact('evidences'));
     }
 
     public function show(Evidence $evidence)
     {
         $evidence->load('classification', 'owner', 'controls', 'artifacts', 'categories');
 
-        return view('process/evidence-management/evidences/show', compact('evidence'));
+        return view('process.evidence-management.evidences.show', compact('evidence'));
     }
 
     public function create()
@@ -43,7 +42,6 @@ class EvidenceController extends Controller
             ->distinct()
             ->get();
 
-
         $artifacts = Artifact::select('id', 'artifact_id', 'artifact_name')
             ->distinct()
             ->get();
@@ -55,7 +53,7 @@ class EvidenceController extends Controller
         $selectedArtifactIds = $selectedControlIds = $categoryIds = [];
         $evidence = null;
 
-        return view('process/evidence-management/evidences/create', compact(
+        return view('process.evidence-management.evidences.create', compact(
             'classifications',
             'categories',
             'owners',
@@ -110,13 +108,11 @@ class EvidenceController extends Controller
         unset($attributes['controls']);
         unset($attributes['attachments']);
 
-
         $evidence = Evidence::create($attributes);
 
         $evidence->controls()->attach($controls ?? []);
         $evidence->artifacts()->attach($attachments ?? []);
         $evidence->categories()->attach($categories ?? []);
-
 
         return redirect(route('evidences.index'))
             ->with('success', 'Evidence added.');
@@ -133,7 +129,6 @@ class EvidenceController extends Controller
             ->distinct()
             ->get();
 
-
         $owners = Owner::select('id', 'owner_role_id', 'owner_name')
             ->distinct()
             ->get();
@@ -145,7 +140,6 @@ class EvidenceController extends Controller
             ->where('e.evidence_id', $evidence->evidence_id)
             ->select('e.evidence_id', 'e.evidence_name', 'a.artifact_id', 'a.artifact_name', 'aa.name', 'aa.path')
             ->get();
-
 
         $selectedArtifactIds = $artifacts->pluck('artifact_id')->toArray();
 
@@ -162,13 +156,11 @@ class EvidenceController extends Controller
             ->distinct()
             ->get();
 
-
         $artifacts = Artifact::select('id', 'artifact_id', 'artifact_name')
             ->distinct()
             ->get();
 
-
-        return view('process/evidence-management/evidences/create', compact(
+        return view('process.evidence-management.evidences.create', compact(
             'evidence',
             'artifacts',
             'categories',
@@ -185,7 +177,7 @@ class EvidenceController extends Controller
     {
 
         $attributes = $request->validate([
-            'evidence_id' => ['required', 'unique:evidence_table,evidence_id,' . $evidence->id],
+            'evidence_id' => ['required', 'unique:evidence_table,evidence_id,'.$evidence->id],
             'evidence_name' => 'required',
             'evidence_description' => 'nullable',
             'classification_id' => 'nullable',
@@ -222,13 +214,11 @@ class EvidenceController extends Controller
         unset($attributes['controls']);
         unset($attributes['attachments']);
 
-
         $evidence->update($attributes);
 
         $evidence->controls()->sync($controls ?? []);
         $evidence->artifacts()->sync($attachments ?? []);
         $evidence->categories()->sync($categories ?? []);
-
 
         return redirect(route('evidences.index'))
             ->with('success', 'Evidence updated.');
@@ -240,6 +230,7 @@ class EvidenceController extends Controller
         $evidence->categories()->detach();
         $evidence->artifacts()->detach();
         $evidence->delete();
+
         return redirect(route('evidences.index'))
             ->with('success', 'Evidence deleted.');
     }
@@ -264,11 +255,10 @@ class EvidenceController extends Controller
 
         $rules = [
             'attachment' => 'required',
-            'EviId' => 'required'
+            'EviId' => 'required',
         ];
 
         $validatedData = $request->validate($rules);
-
 
         $EviId = $request->input('EviId');
         $attachmentIds = json_decode($request->attachment);
@@ -279,8 +269,6 @@ class EvidenceController extends Controller
                 'artifact_id' => $attachmentId,
             ]);
         }
-
-
 
         return redirect()->back()->with('success', 'Attachment has been saved.');
     }

@@ -435,6 +435,9 @@
                     <x-table.th label="S.No" />
                     <x-table.th label="Product Name" />
                     <x-table.th label="Related Cybersecurity Products" />
+                    <x-table.th label="Deployment Model" />
+                    <x-table.th label="Description" />
+                </tr>
             </x-table.thead>
             <x-table.tbody>
                 <tr>
