@@ -1,0 +1,7 @@
+<article>
+<ol>
+    <li>This Regulation shall enter into force on the twentieth day following that of its publication in the Official Journal of the European Union.</li>
+    <li>This Regulation shall be binding in its entirety and directly applicable in all Member States.</li>
+    <li>Done at Brussels, 13 March 2024.</li>
+</ol>
+</article>
