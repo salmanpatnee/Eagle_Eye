@@ -1,7 +1,7 @@
 # API Contract: Designation Management
 
 ## Overview
-This document defines the API contracts for the Designation management module, following RESTful patterns consistent with other HR modules in the CISO 360 GRC System.
+This document defines the API contracts for the Designation management module, following RESTful patterns consistent with other HR modules in the Euro CISO GRC System.
 
 ## Base Path
 `/designations` (or as defined in routes)

@@ -5,7 +5,7 @@
 @section('content')
     <div class="max-w-4xl mx-auto">
         <x-table.action-wrapper title="Update Profile">
-            <x-action.button label="Back to CISO 360" route_name="vciso" />
+            <x-action.button label="Back to Euro CISO" route_name="vciso" />
         </x-table.action-wrapper>
 
         <form action="{{ route('profile.update') }}" method="POST">

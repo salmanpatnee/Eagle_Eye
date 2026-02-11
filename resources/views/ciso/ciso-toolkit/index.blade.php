@@ -20,7 +20,7 @@
                 <a href="{{ route('vciso') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
-                            <img src="/Images/SaudiCISOLogo.png" alt="Logo" style="height: 80px; width: auto;">
+                            <img src="/Images/Logo.svg" alt="Logo" style="height: 80px; width: auto;">
                         </span>
                     </span>
                 </a>
@@ -113,7 +113,7 @@
     </main>
     <!-- Elfsight AI Chatbot | Saudi Ciso -->
     <script src="https://elfsightcdn.com/platform.js" async></script>
-    <div class="elfsight-app-50a59065-4154-49f7-a375-961a269cf1c2" data-elfsight-app-lazy></div>
+<div class="elfsight-app-a3e8273f-df3f-447c-ade7-64c1193be15b" data-elfsight-app-lazy></div>
 </body>
 
 </html>

@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>
         @hasSection('title')
-            @yield('title') | {{ env('APP_NAME', 'CISO 360') }}
+            @yield('title') | {{ env('APP_NAME', 'Euro CISO') }}
         @else
-            {{ env('APP_NAME', 'CISO 360') }}
+            {{ env('APP_NAME', 'Euro CISO') }}
         @endif
     </title>
     <link rel="icon" href="{{ asset('Images/favicon.ico') }}">

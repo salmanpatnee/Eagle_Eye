@@ -63,27 +63,29 @@
                     <thead style="position: sticky; top: 0; z-index: 50;">
                         <tr style="background-color: #00053C;">
                             <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="width: 60px; background-color: #00053C; vertical-align: top;">S.No</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Control</th>
                             <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Sub-Domain</th>
                             <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Domain</th>
                             <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Best Practice</th>
                             <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Control Type</th>
                             <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Category</th>
                             <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Classification</th>
-                            <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white" style="background-color: #00053C; vertical-align: top;">Control</th>
+                            
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         @forelse ($controls as $control)
                             <tr class="hover:bg-gray-50 transition-colors duration-150">
+                                 <td class="px-4 py-3 text-center whitespace-nowrap" style="width: 60px; vertical-align: top;">
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ ($controls->currentPage() - 1) * $controls->perPage() + $loop->index + 1 }}</span>
+                                </td>
                                  <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <a href="{{ route('controls.show', $control->id) }}" class="text-blue-600 hover:underline">
                                     <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->control_id }} - {{ $control->control_name }}</span>
                                 </a>
                                 </td>
+                               
 
-                                <td class="px-4 py-3 text-center whitespace-nowrap" style="width: 60px; vertical-align: top;">
-                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ ($controls->currentPage() - 1) * $controls->perPage() + $loop->index + 1 }}</span>
-                                </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span class="block font-medium text-gray-700 text-theme-sm">{{ $control->sub_domain_name }}</span>
                                 </td>

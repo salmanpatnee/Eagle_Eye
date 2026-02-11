@@ -16,7 +16,7 @@
             </div>
         @endif
         <div class="flex-1">
-            <h1 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-900 to-brand-600 dark:from-white dark:to-gray-300 mb-2">
+            <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-900 to-brand-600 dark:from-white dark:to-gray-300 mb-2">
                 {{ $title }}
             </h1>
             @if($subtitle)

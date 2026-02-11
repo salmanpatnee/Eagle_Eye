@@ -38,8 +38,9 @@ use App\Http\Controllers\SubDomainController;
 use App\Http\Controllers\TempFileUploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageContentController;
 
-Route::view('/', 'welcome')->name('welcome');
+Route::get('/', [LandingPageContentController::class, 'welcome'])->name('welcome');
 Route::middleware(['guest'])->group(function () {
     Route::post('/contact-inquiry', [LeadController::class, 'store'])->name('contact.store');
     Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -48,6 +49,13 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
+
+    Route::controller(LandingPageContentController::class)->group(function () {
+        Route::get('/landing-page-content/create', 'create')->name('landing-page-content.create');
+        Route::post('/landing-page-content', 'store')->name('landing-page-content.store');
+    });
+
+
     Route::resource('best-practices', BestPracticeController::class);
     Route::resource('domains', MainDomainController::class);
     Route::resource('sub-domains', SubDomainController::class);
@@ -164,7 +172,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::get('/iso27001/resource/{section:section_id}/template/', [ISO27001ResourceController::class, 'template'])->name('iso27001.resource.template');
     Route::get('/iso27001/resource/{section:section_id}/glossary/', [ISO27001ResourceController::class, 'glossary'])->name('iso27001.resource.glossary');
 
-    // ------------------CISO 360-------------------------
+    // ------------------Euro CISO-------------------------
 
     Route::prefix('ciso')->group(function () {
 

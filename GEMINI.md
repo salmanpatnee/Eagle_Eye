@@ -1,8 +1,8 @@
-﻿# CISO 360 GRC System - Developer Guide
+﻿# Euro CISO GRC System - Developer Guide
 
 ## Project Overview
 
-CISO 360 is a comprehensive Governance, Risk, and Compliance (GRC) management application built on Laravel 9, providing enterprise-grade tools for risk assessment, audit management, control evaluation, asset tracking, vulnerability management, and regulatory compliance reporting.
+Euro CISO is a comprehensive Governance, Risk, and Compliance (GRC) management application built on Laravel 9, providing enterprise-grade tools for risk assessment, audit management, control evaluation, asset tracking, vulnerability management, and regulatory compliance reporting.
 
 ## Technology Stack
 
@@ -388,7 +388,7 @@ php artisan up
 **Last Updated**: 2026-01-01
 **Laravel Version**: 9.52.16
 **PHP Version**: 8.0.2+
-**Project Name**: CISO 360 GRC System
+**Project Name**: Euro CISO GRC System
 
 ===
 

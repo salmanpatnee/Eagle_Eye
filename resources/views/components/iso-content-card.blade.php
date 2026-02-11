@@ -28,14 +28,14 @@
         </div>
 
         <!-- Bottom Accent -->
-        <div class="mt-8 pt-6 border-t border-white/10">
+        {{-- <div class="mt-8 pt-6 border-t border-white/10">
             <div class="flex items-center gap-2 text-white/60 text-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
                 <span>ISO 27001 Standard</span>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <!-- Hover Glow Effect -->

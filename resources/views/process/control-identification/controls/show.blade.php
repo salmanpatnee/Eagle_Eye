@@ -18,23 +18,15 @@
                     {{ $control->control_id }}
                 </x-info-col>
 
-            </x-info-row>
-            <x-info-row>
                 <x-info-col label="Control Name">
                     {{ $control->control_name }}
                 </x-info-col>
-                <x-info-col label="Control Name Arabic">
-                    {{ $control->control_name_ar }}
-                </x-info-col>
-
             </x-info-row>
             <x-info-col-lg label="Control Description">
                 {{ $control->control_description ?? '—' }}
             </x-info-col-lg>
 
-            <x-info-col-lg label="Control Description Arabic">
-                {{ $control->control_description_ar ?? '—' }}
-            </x-info-col-lg>
+           
 
             <x-info-row>
                 <x-info-col label="Classification Name">

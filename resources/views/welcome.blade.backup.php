@@ -142,7 +142,7 @@
 <body class="page-landing">
     <div class="container">
         <div class="title-logo">
-            <img src="/Images/Eagle_Eye_Logo.png" alt="CISO 360 Logo"
+            <img src="/Images/Eagle_Eye_Logo.png" alt="Euro CISO Logo"
                 style="max-width: 250px; width: 100%; height: auto;">
         </div>
         <a href="/login" class="title-button mb-2">

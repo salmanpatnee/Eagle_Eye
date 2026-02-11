@@ -160,7 +160,7 @@
             <li><strong>Cryptography</strong> strengthens data confidentiality and integrity.</li>
             <li><strong>Regular security testing</strong> helps identify weaknesses.</li>
         </ul>
-        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">3. Communication and Network Security</h3>
+        <h3 class="bg-brand-950 font-bold mb-3 p-3 rounded-md text-white">4. Communication and Network Security</h3>
         <h4 class="font-bold text-brand-500 text-lg">How this domain can be implemented:</h4>
         <p class="mb-3 mt-3 text-lg">
             Communication and Network Security focus on

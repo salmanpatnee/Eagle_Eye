@@ -1,7 +1,7 @@
 # User Onboarding: Password Update Requirement
 
 ## Overview
-As part of our security measures, new users are required to update their password upon their first login to the CISO 360 GRC System.
+As part of our security measures, new users are required to update their password upon their first login to the Euro CISO GRC System.
 
 ## What to Expect
 1. After logging in for the first time, you will be redirected to the profile update page

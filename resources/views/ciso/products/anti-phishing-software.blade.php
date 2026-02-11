@@ -251,7 +251,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">6. Key Features of Top 10
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">5. Key Features of Top 10
             Anti-Phishing
             Products</h3>
         <x-table.table>
@@ -344,7 +344,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">8. Integration with Other
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">6. Integration with Other
             Cybersecurity
             Products</h3>
         <x-table.table>
@@ -423,7 +423,7 @@
                 </tr>
             </x-table.tbody>
         </x-table.table>
-        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">9. Future of Anti-Phishing
+        <h3 class="bg-black font-bold  my-6 p-3 rounded-md text-white secondary-heading">7. Future of Anti-Phishing
             Software in 3-5
             Years</h3>
         <x-table.table>

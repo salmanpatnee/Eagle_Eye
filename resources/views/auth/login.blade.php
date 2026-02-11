@@ -89,12 +89,13 @@
                 </div>
                 <div class="flex flex-col items-center max-w-xs">
                     <a href="{{ route('vciso') }}" class="block mb-4">
-                        <img src="{{ asset('Images/SaudiCISOLogo.png') }}" class="w-40" alt="Logo" />
+                        <img src="{{ asset('Images/EuroCISOLogo.png') }}" class="w-40" alt="Logo" />
                     </a>
-                    {{-- <p
+                    <p
                         class="mb-2 font-semibold text-white text-title-sm dark:text-white/90 sm:text-title-md flex items-center justify-between">
-                        CISO 360
+                        Euro CISO
                     </p>
+                    {{-- 
 
                     <p class="text-center text-gray-400 dark:text-white/60">
                         Compliance Solution

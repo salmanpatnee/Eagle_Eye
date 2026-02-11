@@ -1,7 +1,7 @@
 # Administrator Guide: Force Password Update Feature
 
 ## Overview
-This guide explains how to configure the forced password update functionality for users in the CISO 360 GRC System.
+This guide explains how to configure the forced password update functionality for users in the Euro CISO GRC System.
 
 ## Setting the must_change_password Flag
 

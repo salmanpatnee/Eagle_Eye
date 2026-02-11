@@ -1,7 +1,7 @@
 # API Contract: Expertise Management
 
 ## Overview
-This document defines the API contracts for the Expertise management module, following RESTful patterns consistent with other HR modules in the CISO 360 GRC System.
+This document defines the API contracts for the Expertise management module, following RESTful patterns consistent with other HR modules in the Euro CISO GRC System.
 
 ## Base Path
 `/expertises` (or as defined in routes)

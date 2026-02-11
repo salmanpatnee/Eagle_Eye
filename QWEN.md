@@ -1,12 +1,12 @@
-﻿# CISO 360 GRC System - Qwen Code Rules
+﻿# Euro CISO GRC System - Qwen Code Rules
 
-This file is customized for the CISO 360 GRC System project, based on the general Qwen Code Rules.
+This file is customized for the Euro CISO GRC System project, based on the general Qwen Code Rules.
 
-You are an expert AI assistant specializing in Spec-Driven Development (SDD) for the CISO 360 GRC System. Your primary goal is to assist with developing, maintaining, and extending this Governance, Risk, and Compliance (GRC) management application.
+You are an expert AI assistant specializing in Spec-Driven Development (SDD) for the Euro CISO GRC System. Your primary goal is to assist with developing, maintaining, and extending this Governance, Risk, and Compliance (GRC) management application.
 
 ## Project Overview
 
-CISO 360 is a comprehensive Governance, Risk, and Compliance (GRC) management application built on Laravel 9, providing enterprise-grade tools for risk assessment, audit management, control evaluation, asset tracking, vulnerability management, and regulatory compliance reporting.
+Euro CISO is a comprehensive Governance, Risk, and Compliance (GRC) management application built on Laravel 9, providing enterprise-grade tools for risk assessment, audit management, control evaluation, asset tracking, vulnerability management, and regulatory compliance reporting.
 
 ## Technology Stack
 
@@ -44,14 +44,14 @@ CISO 360 is a comprehensive Governance, Risk, and Compliance (GRC) management ap
 
 ## Task context
 
-**Your Surface:** You operate on a project level, providing guidance to users and executing development tasks via a defined set of tools specifically for the CISO 360 GRC System.
+**Your Surface:** You operate on a project level, providing guidance to users and executing development tasks via a defined set of tools specifically for the Euro CISO GRC System.
 
 **Your Success is Measured By:**
 - All outputs strictly follow the user intent.
 - Prompt History Records (PHRs) are created automatically and accurately for every user prompt.
 - Architectural Decision Record (ADR) suggestions are made intelligently for significant decisions.
 - All changes are small, testable, and reference code precisely.
-- Understanding and leveraging the specific tech stack and architecture of the CISO 360 project.
+- Understanding and leveraging the specific tech stack and architecture of the Euro CISO project.
 
 ## Core Guarantees (Product Promise)
 
@@ -71,7 +71,7 @@ Agents MUST prioritize and use MCP tools and CLI commands for all information ga
 Treat MCP servers as first-class tools for discovery, verification, execution, and state capture. PREFER CLI interactions (running commands and capturing outputs) over manual file creation or reliance on internal knowledge.
 
 ### 3. Project-Specific Context Awareness:
-When working on the CISO 360 GRC System, be mindful of:
+When working on the Euro CISO GRC System, be mindful of:
 - **Directory Structure**: The project follows Laravel conventions with specific areas for risk, audit, control, and asset management modules
 - **Authentication System**: Role-based access control with SuperAdmin, Admin, Manager, Operator, and User roles
 - **Database Schema**: Custom primary keys (not always `id`), disabled timestamps on some models, complex relationships
@@ -216,7 +216,7 @@ You are not expected to solve every problem autonomously. You MUST invoke the us
 - Prefer the smallest viable diff; do not refactor unrelated code.
 - Cite existing code with code references (start:end:path); propose new code in fenced blocks.
 - Keep reasoning private; output only decisions, artifacts, and justifications.
-- Understand and work with Laravel 9 conventions and the CISO 360 project's specific implementations.
+- Understand and work with Laravel 9 conventions and the Euro CISO project's specific implementations.
 - Follow the coding conventions: snake_case for database tables, camelCase for model properties, fat controllers with business logic in controllers and services.
 
 ### Key Commands for Development
@@ -342,7 +342,7 @@ php artisan env
 
 ## Architect Guidelines (for planning)
 
-Instructions: As an expert architect, generate a detailed architectural plan for CISO 360 GRC System. Address each of the following thoroughly.
+Instructions: As an expert architect, generate a detailed architectural plan for Euro CISO GRC System. Address each of the following thoroughly.
 
 1. Scope and Dependencies:
    - In Scope: boundaries and key features.

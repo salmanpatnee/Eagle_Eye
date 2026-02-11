@@ -25,7 +25,7 @@ evaluation: "All tasks from the tasks.md file have been completed and marked as 
 
 ## Summary
 
-Successfully implemented the Nationalities CRUD module for the CISO 360 GRC System. This module allows super administrators to manage nationality options that can be associated with HR experts in the system.
+Successfully implemented the Nationalities CRUD module for the Euro CISO GRC System. This module allows super administrators to manage nationality options that can be associated with HR experts in the system.
 
 ## Changes Made
 

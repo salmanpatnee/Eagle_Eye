@@ -2,7 +2,7 @@
 
 ## Overview
 
-This feature implements complete CRUD interfaces for managing HR Expertise and Designation entities in the CISO 360 GRC System. The implementation will follow the same architectural pattern as existing Industries and Nationalities modules, ensuring consistency across the application.
+This feature implements complete CRUD interfaces for managing HR Expertise and Designation entities in the Euro CISO GRC System. The implementation will follow the same architectural pattern as existing Industries and Nationalities modules, ensuring consistency across the application.
 
 ## Feature Description
 
