@@ -1,5 +1,5 @@
 @extends('layouts.process')
-@section('title', $process->title)
+@section('title', $category->name)
 @section('content')
     <style>
         article ol {
@@ -26,12 +26,10 @@
             margin: 0.5rem 0;
         }
     </style>
-    @php
-        $process_id = html_entity_decode($process->process_id);
-    @endphp
+
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <x-section-header :title="$process->title">
+        <x-section-header :title="$category->name">
             <x-slot:icon>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-white">
                     <path fill-rule="evenodd"
@@ -43,17 +41,17 @@
 
         <x-two-column-layout>
             <x-slot:main>
-                <x-iso-content-card title="{{ $process->title }}">
-                    {{ $process->description }}
+                <x-iso-content-card title="{{ $category->name }}">
+                    {{ $category->description }}
                 </x-iso-content-card>
             </x-slot:main>
 
             <x-slot:sidebar>
                 <x-resource-sidebar>
-                    <x-iso-templates link="{{ route('process.resource.template', $process_id) }}" />
-                    <x-iso-checklist link="{{ route('process.resource.checklist', $process_id) }}" />
-                    <x-iso-video link="{{ route('process.resource.videos', $process_id) }}" />
-                    <x-iso-glossary link="{{ route('process.resource.glossary', $process_id) }}" />
+                    <x-iso-templates link="{{ route('process.resource.template', $category->id) }}" />
+                    <x-iso-checklist link="{{ route('process.resource.checklist', $category->id) }}" />
+                    <x-iso-video link="{{ route('process.resource.videos', $category->id) }}" />
+                    <x-iso-glossary link="{{ route('process.resource.glossary', $category->id) }}" />
                 </x-resource-sidebar>
             </x-slot:sidebar>
         </x-two-column-layout>
@@ -61,17 +59,44 @@
 @endsection
 
 @section('additional_content')
-    <div class="bg-white my-6 p-5 rounded-2xl">
-        <header class="text-center bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">
-            <h1>{{ $process->title }}</h1>
-        </header>
-        <div class="process-content">
-            @php
-                use Illuminate\Support\Facades\View;
-            @endphp
-            @if (View::exists("process/process/content/{$process->process_id}"))
-                @include("process/process/content/{$process->process_id}")
-            @endif
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-6">
+            <div class="bg-white rounded-2xl overflow-hidden">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-brand-950 text-white">
+                            <th class="px-6 py-3 text-left font-semibold">S.No</th>
+                            <th class="px-6 py-3 text-left font-semibold">Articles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $articles = array_filter(array_map('trim', explode("\n", $category->article_list)));
+                        @endphp
+                        @foreach ($articles as $index => $article)
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="px-6 py-3 text-sm font-medium text-gray-700">{{ $index + 1 }}</td>
+                                <td class="px-6 py-3 text-sm text-gray-600">{{ $article }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+{{-- @php
+        use Illuminate\Support\Facades\View;
+    @endphp
+    @forelse ($category->processes as $process)
+        <div class="bg-white my-6 p-5 rounded-2xl">
+            <header class="text-center bg-brand-950 font-bold  mb-3 p-3 rounded-md text-white">
+                <h1>{{ $process->title }}</h1>
+            </header>
+            <div class="process-content">
+
+                @if (View::exists("process/process/content/{$process->process_id}"))
+                    @include("process/process/content/{$process->process_id}")
+                @endif
+            </div>
+        </div>
+    @empty
+    @endforelse --}}
 @endsection

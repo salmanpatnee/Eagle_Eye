@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\ArtifactAttachmentController;
 use App\Http\Controllers\ArtifactController;
 use App\Http\Controllers\BestPracticeController;
@@ -147,6 +148,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
         Route::resource('nationalities', NationalityController::class);
         Route::resource('organizations', HROrganizationController::class);
         Route::resource('certifications', HRCertificationController::class);
+        Route::resource('article-categories', ArticleCategoryController::class);
         // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
         // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
     });
@@ -158,6 +160,12 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::resource('cms', CMSController::class);
     Route::get('/cms/create-resource/{process}', [ResourceController::class, 'create'])->name('resource.create');
     Route::post('/upload-resource', [ResourceController::class, 'store'])->name('resource.store');
+
+    Route::controller(ArticleCategoryController::class)->group(function () {
+        Route::get('/article-categories/create-resource/{articleCategory}', 'createResource')->name('article-categories.create-resource');
+        Route::post('/article-categories/upload-resource', 'storeResource')->name('article-categories.store-resource');
+        Route::delete('/article-categories/resource/{resource}', 'destroyResource')->name('article-categories.resource.destroy');
+    });
 
     // ------------MANAGE ISO-27001 CONTENT--------------
 
@@ -221,17 +229,17 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
         // ------------------Process-------------------------
 
         Route::get('/process', [ProcessController::class, 'index'])->name('ciso-process.index');
-        Route::get('/process/{process:process_id}', [ProcessController::class, 'show'])->name('process.view.show');
+        Route::get('/process/{category}', [ProcessController::class, 'show'])->name('process.view.show');
 
         // ------------------Process Resources-------------------------
 
-        Route::get('/resource/{process:process_id}/checklist/', [ProcessResourceController::class, 'checklist'])->name('process.resource.checklist');
+        Route::get('/resource/{category}/checklist/', [ProcessResourceController::class, 'checklist'])->name('process.resource.checklist');
 
-        Route::get('/resource/{process:process_id}/videos/', [ProcessResourceController::class, 'videos'])->name('process.resource.videos');
+        Route::get('/resource/{category}/videos/', [ProcessResourceController::class, 'videos'])->name('process.resource.videos');
         Route::get('/video/stream/{resource}', [ProcessResourceController::class, 'stream'])->name('secure.video.stream');
-        Route::get('/resource/{process:process_id}/template/', [ProcessResourceController::class, 'template'])->name('process.resource.template');
+        Route::get('/resource/{category}/template/', [ProcessResourceController::class, 'template'])->name('process.resource.template');
         Route::get('/resource/template/{resource}', [ProcessResourceController::class, 'pdfTemplate'])->name('process.resource.template.pdf');
-        Route::get('/resource/{process:process_id}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');
+        Route::get('/resource/{category}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');
         Route::get('/resource/download/{resource}', [ProcessResourceController::class, 'download'])->name('process.resource.download');
         Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destroy'])->name('process.resource.destroy');
 

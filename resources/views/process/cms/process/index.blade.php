@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.content')
 @section('title', 'Process')
 @section('content')
     <div>
@@ -11,6 +11,7 @@
                 <x-table.th label="S.No" />
                 <x-table.th label="Process ID" />
                 <x-table.th label="Process Name" />
+                <x-table.th label="Category" />
                 <x-table.th label="Action" />
             </x-table.thead-sticky>
 
@@ -20,11 +21,8 @@
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$process" /></x-table.td>
                         <x-table.td>{{ $row->process_id }}</x-table.td>
                         <x-table.td>{{ $row->title }}</x-table.td>
+                        <x-table.td>{{ $row->articleCategories?->first()?->name ?? 'N/A' }}</x-table.td>
                         <x-table.td action_col="true">
-                            <a href="{{ route('resource.create', $row->id) }}"
-                                class="inline-flex items-center justify-center p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-blue-600 transition-colors">
-                                <x-icons.media />
-                            </a>
                             <x-action.view route_name="cms.show" param="{{ $row->id }}" />
                             <x-action.edit route_name="cms.edit" param="{{ $row->id }}" />
                             <x-action.delete route_name="cms.destroy" param="{{ $row->id }}" />

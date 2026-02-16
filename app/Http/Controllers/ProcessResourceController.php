@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ArticleCategory;
 use App\Models\Process;
 use App\Models\Resource;
 use Illuminate\Support\Facades\Storage;
 
 class ProcessResourceController extends Controller
 {
-    public function checklist(Process $process)
+    public function checklist(ArticleCategory $category)
     {
-        $processWithChecklist = $process->load(['resources' => function ($query) {
+        $processWithChecklist = $category->load(['resources' => function ($query) {
             $query->where('resource_type', 'checklist');
         }]);
 
         return view('ciso/process/resources/checklist', compact('processWithChecklist'));
     }
 
-    public function videos(Process $process)
+    public function videos(ArticleCategory $category)
     {
-        $processWithVideos = $process->load(['resources' => function ($query) {
+        $processWithVideos = $category->load(['resources' => function ($query) {
             $query->where('file_type', 'video/mp4');
         }]);
 
@@ -50,9 +51,9 @@ class ProcessResourceController extends Controller
         ]);
     }
 
-    public function template(Process $process)
+    public function template(ArticleCategory $category)
     {
-        $processWithTemplates = $process->load(['resources' => function ($query) {
+        $processWithTemplates = $category->load(['resources' => function ($query) {
             $query->where('resource_type', 'template');
         }]);
 
@@ -63,13 +64,14 @@ class ProcessResourceController extends Controller
     {
 
         $resource->load('resourceable');
+        
 
         return view('ciso/process/resources/template-pdf', compact('resource'));
     }
 
-    public function glossary(Process $process)
+    public function glossary(ArticleCategory $category)
     {
-        $processWithGlossary = $process->load(['resources' => function ($query) {
+        $processWithGlossary = $category->load(['resources' => function ($query) {
             $query->where('resource_type', 'glossary');
         }]);
 

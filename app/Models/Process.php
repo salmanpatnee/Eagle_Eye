@@ -13,8 +13,8 @@ class Process extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public function resources()
+    public function articleCategories()
     {
-        return $this->morphMany(Resource::class, 'resourceable');
+        return $this->belongsToMany(ArticleCategory::class, 'article_category_process', 'process_id', 'article_category_id');
     }
 }

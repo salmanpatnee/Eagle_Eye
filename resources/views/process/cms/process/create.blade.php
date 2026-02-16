@@ -1,4 +1,4 @@
-@extends('layouts/user')
+@extends('layouts.content')
 @section('title', 'Process')
 @section('content')
     <div>
@@ -23,23 +23,20 @@
                     </div>
                 </x-form.grid-col>
 
-                <x-form.grid-col>
+                <x-form.grid-col-full>
                     <div>
-                        <x-form.field label="Process Name Arabic" name="title_ar"
-                            placeholder="Enter Process Name Arabic" :value="$cm?->title_ar" />
+                        <x-form.select label="Article Category" name="article_category_id"
+                            placeholder="Select Article Category" :value="$cm?->articleCategories?->first()?->id" :data="$articleCategories" id_key="id"
+                            value_key="name" :hide_keys="true"/>
                     </div>
-                    <div>
-
-                    </div>
-                </x-form.grid-col>
+                </x-form.grid-col-full>
 
                 <x-form.grid-col-full>
                     <x-form.textarea-field label="Process Description" name="description"
                         placeholder="Enter Process Description" :value="$cm?->description" />
                 </x-form.grid-col-full>
 
-
-
+                
                 <div class="flex justify-end">
                     <x-form.submit label="Process" :isUpdate="$cm?->id" />
                 </div>

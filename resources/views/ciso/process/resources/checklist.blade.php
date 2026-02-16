@@ -6,14 +6,14 @@
         }
     </style>
 @endpush
-@section('title', $processWithChecklist->title)
+@section('title', $processWithChecklist->name)
 @section('content')
     @php
         $process_id = html_entity_decode($processWithChecklist->process_id);
     @endphp
     <div class="gap-6 grid grid-cols-1 px-4">
-        <div class="hover:shadow-lg mx-auto p-6 rounded-lg shadow text-white transition">
-            <x-iso-content-card title="{{ $processWithChecklist->title }}">
+        <div class="hover:shadow-lg mx-auto p-6 rounded-lg shadow text-white transition w-full">
+            <x-iso-content-card title="{{ $processWithChecklist->name }}">
                 {{ $processWithChecklist->description }}
             </x-iso-content-card>
         </div>

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
-use Illuminate\Http\Request;
+use App\Models\ArticleCategory;
 use App\Models\Process;
+use Illuminate\Http\Request;
 
 class CMSController extends Controller
 {
@@ -18,7 +18,6 @@ class CMSController extends Controller
     public function show(Process $cm)
     {
         $process = $cm;
-        $process->load('resources');
 
         return view('process/cms/process/show', compact('process'));
     }
@@ -26,7 +25,9 @@ class CMSController extends Controller
     public function create()
     {
         $cm = null;
-        return view('process/cms/process/create', compact('cm'));
+        $articleCategories = ArticleCategory::orderBy('name', 'asc')->get();
+
+        return view('process/cms/process/create', compact('cm', 'articleCategories'));
     }
 
     public function store(Request $request)
@@ -36,9 +37,17 @@ class CMSController extends Controller
             'title' => 'required',
             'title_ar' => 'nullable',
             'description' => 'nullable',
+            'article_category_id' => 'nullable|exists:article_categories,id',
         ]);
 
-        Process::create($attributes);
+        $articleCategoryId = $attributes['article_category_id'];
+        unset($attributes['article_category_id']);
+
+        $process = Process::create($attributes);
+
+        if ($articleCategoryId) {
+            $process->articleCategories()->attach($articleCategoryId);
+        }
 
         return redirect(route('cms.index'))
             ->with('success', 'Process saved successfully.');
@@ -46,34 +55,40 @@ class CMSController extends Controller
 
     public function edit(Request $request, Process $cm)
     {
-        return view('process/cms/process/create', compact('cm'));
+        $articleCategories = ArticleCategory::orderBy('name', 'asc')->get();
+
+        return view('process/cms/process/create', compact('cm', 'articleCategories'));
     }
 
     public function update(Request $request, Process $cm)
     {
         $attributes = $request->validate([
-            'process_id' => ['required', 'unique:cms_process,process_id,' . $cm->id],
+            'process_id' => ['required', 'unique:cms_process,process_id,'.$cm->id],
             'title' => 'required',
             'title_ar' => 'nullable',
             'description' => 'nullable',
+            'article_category_id' => 'nullable|exists:article_categories,id',
         ]);
 
+        $articleCategoryId = $attributes['article_category_id'];
+        unset($attributes['article_category_id']);
+
         $cm->update($attributes);
+
+        if ($articleCategoryId) {
+            $cm->articleCategories()->sync($articleCategoryId);
+        } else {
+            $cm->articleCategories()->detach();
+        }
 
         return redirect(route('cms.index'))
             ->with('success', 'Process saved successfully.');
     }
 
-
     public function destroy(Process $cm)
     {
-        $cm->load('resources');
-        if ($cm->resources()->count() > 0) {
-            return redirect(route('cms.index'))
-                ->with('error', 'Process cannot be deleted as it has resources attached to it.');
-        } else {
-            $cm->delete();
-        }
+        $cm->delete();
+
         return redirect(route('cms.index'))
             ->with('success', 'Process deleted successfully.');
     }

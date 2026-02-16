@@ -6,14 +6,14 @@
         }
     </style>
 @endpush
-@section('title', $processWithVideos->title)
+@section('title', $processWithVideos->name)
 @section('content')
     @php
         $process_id = html_entity_decode($processWithVideos->process_id);
     @endphp
     <div class="gap-6 grid grid-cols-1 px-4">
-        <div class="hover:shadow-lg mx-auto p-6 rounded-lg shadow text-white transition">
-            <x-iso-content-card title="{{ $processWithVideos->title }}">
+        <div class="hover:shadow-lg mx-auto p-6 rounded-lg shadow text-white transition w-full">
+            <x-iso-content-card title="{{ $processWithVideos->name }}">
                 {{ $processWithVideos->description }}
             </x-iso-content-card>
         </div>
