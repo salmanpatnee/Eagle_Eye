@@ -26,6 +26,7 @@ use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\ISO27001Controller;
 use App\Http\Controllers\ISO27001ResourceController;
 use App\Http\Controllers\KPIStandardController;
+use App\Http\Controllers\LandingPageContentController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainDomainController;
@@ -38,10 +39,19 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SubDomainController;
 use App\Http\Controllers\TempFileUploadController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LandingPageContentController;
 
 Route::get('/', [LandingPageContentController::class, 'welcome'])->name('welcome');
+
+Route::get('/clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+
+    return response()->json(['message' => 'All caches cleared successfully.']);
+})->name('clear-cache');
 Route::middleware(['guest'])->group(function () {
     Route::post('/contact-inquiry', [LeadController::class, 'store'])->name('contact.store');
     Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -55,7 +65,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/landing-page-content/create', 'create')->name('landing-page-content.create');
         Route::post('/landing-page-content', 'store')->name('landing-page-content.store');
     });
-
 
     Route::resource('best-practices', BestPracticeController::class);
     Route::resource('domains', MainDomainController::class);
