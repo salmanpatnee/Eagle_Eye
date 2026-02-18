@@ -92,48 +92,48 @@
                                         class="block font-medium text-gray-700 text-theme-sm">{{ ($humanResource->currentPage() - 1) * $humanResource->perPage() + $loop->index + 1 }}</span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->expert_id }}</span>
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row?->expert_id }}</span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row->name }}</span>
+                                    <span class="block font-medium text-gray-700 text-theme-sm">{{ $row?->name }}</span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span class="block font-medium text-gray-700 text-theme-sm">
-                                        {{ isset($row->nationality) && !is_string($row->nationality) ? $row->nationality->name : $row->nationality }}
+                                        {{ isset($row?->nationality) && !is_string($row?->nationality) ? $row?->nationality->name : $row?->nationality }}
                                     </span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span
-                                        class="block font-medium text-gray-700 text-theme-sm">{{ $row->industry->industry_name }}</span>
+                                        class="block font-medium text-gray-700 text-theme-sm">{{ $row?->industry?->industry_name }}</span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span
-                                        class="block font-medium text-gray-700 text-theme-sm">{{ $row->organization->organization_name }}</span>
+                                        class="block font-medium text-gray-700 text-theme-sm">{{ $row?->organization?->organization_name }}</span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span class="block font-medium text-gray-700 text-theme-sm">
-                                        <x-table-list :data="$row->certifications" id_key="certification_id"
+                                        <x-table-list :data="$row?->certifications" id_key="certification_id"
                                             value_key="certification_title" />
                                     </span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span class="block font-medium text-gray-700 text-theme-sm">
-                                        <x-table-list :data="$row->experties" id_key="" value_key="expertise_title" />
+                                        <x-table-list :data="$row?->experties" id_key="" value_key="expertise_title" />
                                     </span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span
-                                        class="block font-medium text-gray-700 text-theme-sm">{{ $row->designation }}</span>
+                                        class="block font-medium text-gray-700 text-theme-sm">{{ $row?->designation }}</span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span
-                                        class="block font-medium text-gray-700 text-theme-sm">{{ $row->experience }}</span>
+                                        class="block font-medium text-gray-700 text-theme-sm">{{ $row?->experience }}</span>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
                                     <span class="block font-medium text-gray-700 text-theme-sm">
                                         <a style="color: blue; text-decoration: underline;"
-                                            href="{{ $row->linkedin_profile }}" target="_blank">
-                                            {{ $row->linkedin_profile }}
+                                            href="{{ $row?->linkedin_profile }}" target="_blank">
+                                            {{ $row?->linkedin_profile }}
                                         </a>
                                     </span>
                                 </td>
