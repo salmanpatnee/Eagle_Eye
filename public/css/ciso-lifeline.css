@@ -508,6 +508,19 @@ a {
         font-size: 1.5rem;
     }
 
+    /* Reorder: Core Areas before Branches on mobile */
+    .hero-section {
+        order: 1;
+    }
+
+    .core-areas-section {
+        order: 2;
+    }
+
+    .branches-section {
+        order: 3;
+    }
+
     /* Hide connectors on mobile for cleaner look */
     .hero-connectors,
     .branches-to-areas-connectors {
@@ -537,7 +550,7 @@ a {
 
     .area-card {
         padding: 1rem;
-        min-width: auto;
+        /* min-width: auto; */
     }
 
     .home-link span {

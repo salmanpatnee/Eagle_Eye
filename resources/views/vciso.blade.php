@@ -69,7 +69,7 @@
             <!-- Two Main Branches -->
             <section class="branches-section">
                 <div class="branch-container">
-                    <a href="{{ route('ciso-toolkit.index') }}" class="branch-card toolkit-card">
+                    {{-- <a href="{{ route('ciso-toolkit.index') }}" class="branch-card toolkit-card">
                         <div class="branch-icon">🛠️</div>
                         <h2 class="branch-title">CISO Toolkit</h2>
                     </a>
@@ -77,7 +77,7 @@
                     <div class="branch-connector">
                         <div class="connector-line"></div>
                         <div class="connector-node"></div>
-                    </div>
+                    </div> --}}
 
                     <a href="{{ route('ciso-education.index') }}" class="branch-card education-card">
                         <div class="branch-icon">🎓</div>
