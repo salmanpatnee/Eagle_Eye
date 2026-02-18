@@ -31,7 +31,8 @@
       "Bash(pandoc:*)",
       "Bash(python3:*)",
       "Bash(pip install:*)",
-      "mcp__laravel-boost__last-error"
+      "mcp__laravel-boost__last-error",
+      "mcp__laravel-boost__application-info"
     ]
   },
   "enableAllProjectMcpServers": true,
