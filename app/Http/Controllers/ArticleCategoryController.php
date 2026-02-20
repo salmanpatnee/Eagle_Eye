@@ -15,7 +15,7 @@ class ArticleCategoryController extends Controller
      */
     public function index()
     {
-        $categories = ArticleCategory::orderBy('name', 'asc')->paginate(20);
+        $categories = ArticleCategory::paginate(30);
 
         return view('process.articles.categories.index', compact('categories'));
     }
