@@ -45,6 +45,126 @@
             </div>
         </form>
 
+        @if (!$filtersApplied)
+            <div class="expert-empty-state">
+                <div class="expert-empty-inner">
+                    <div class="expert-empty-orb"></div>
+                    <div class="expert-empty-orb expert-empty-orb--2"></div>
+
+                    <div class="expert-empty-icon-wrap">
+                        <svg class="expert-empty-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="48" height="6" rx="3" fill="currentColor" opacity="1"/>
+                            <rect x="16" y="29" width="32" height="6" rx="3" fill="currentColor" opacity="0.7"/>
+                            <rect x="24" y="44" width="16" height="6" rx="3" fill="currentColor" opacity="0.4"/>
+                            <circle cx="52" cy="52" r="10" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <line x1="59" y1="59" x2="64" y2="64" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+
+                    <div class="expert-empty-text">
+                        <h2 class="expert-empty-heading">Select filters to view expert resources</h2>
+                        <p class="expert-empty-sub">Use nationality, industry, certification, expertise, or other filters above.</p>
+                        <div class="expert-empty-chips">
+                            <span class="expert-empty-chip">Nationality</span>
+                            <span class="expert-empty-chip">Industry</span>
+                            <span class="expert-empty-chip">Certification</span>
+                            <span class="expert-empty-chip">Expertise</span>
+                            <span class="expert-empty-chip">Designation</span>
+                            <span class="expert-empty-chip">Experience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .expert-empty-state {
+                    position: relative;
+                    margin: 1rem 1.5rem;
+                    overflow: hidden;
+                    border-radius: 0.75rem;
+                    border: 1px solid #e5e7eb;
+                    background: linear-gradient(160deg, #f8f9ff 0%, #eef0f8 50%, #f0f4ff 100%);
+                    padding: 2rem;
+                    text-align: center;
+                }
+
+                .expert-empty-inner {
+                    position: relative;
+                    z-index: 2;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 1.25rem;
+                }
+
+                .expert-empty-orb { display: none; }
+                .expert-empty-orb--2 { display: none; }
+
+                .expert-empty-icon-wrap {
+                    flex-shrink: 0;
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 10px;
+                    background: #00053C;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 4px 16px rgba(0, 5, 60, 0.2);
+                }
+
+                .expert-empty-icon {
+                    width: 22px;
+                    height: 22px;
+                    color: #ffffff;
+                }
+
+                @keyframes expert-float {
+                    0%, 100% { transform: translateY(0px); }
+                    50%       { transform: translateY(-4px); }
+                }
+
+                .expert-empty-label { display: none; }
+
+                .expert-empty-text {
+                    text-align: left;
+                }
+
+                .expert-empty-heading {
+                    font-size: 0.95rem;
+                    font-weight: 700;
+                    color: #00053C;
+                    line-height: 1.3;
+                    margin: 0 0 0.2rem;
+                }
+
+                .expert-empty-sub {
+                    font-size: 0.8rem;
+                    color: #6b7280;
+                    line-height: 1.5;
+                    margin: 0 0 0.6rem;
+                }
+
+                .expert-empty-chips {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.35rem;
+                }
+
+                .expert-empty-chip {
+                    display: inline-block;
+                    padding: 0.15rem 0.6rem;
+                    border-radius: 9999px;
+                    font-size: 0.7rem;
+                    font-weight: 600;
+                    letter-spacing: 0.02em;
+                    border: 1px solid rgba(0, 5, 60, 0.18);
+                    color: #00053C;
+                    background: rgba(0, 5, 60, 0.04);
+                }
+            </style>
+        @else
+
         {{-- Mobile Card View (shown below md breakpoint) --}}
         <div class="mt-6 md:hidden space-y-4 px-4 sm:px-6">
             @forelse ($humanResource as $row)
@@ -220,5 +340,7 @@
         <x-pagination>
             {{ $humanResource->links() }}
         </x-pagination>
+
+        @endif
     </div>
 @endsection
