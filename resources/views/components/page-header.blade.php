@@ -6,7 +6,7 @@
     'showDescription' => true
 ])
 
-<div class="relative overflow-hidden bg-gradient-to-br from-brand-50 via-white to-blue-light-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 px-4 sm:px-6 lg:px-8 py-6">
+<div class="bg-gradient-to-br from-brand-50 my-6 overflow-hidden p-4 relative rounded-2xl to-blue-light-50 via-white">
     <!-- Decorative Background Pattern -->
     @if($showDecorative)
         <div class="absolute inset-0 opacity-5">
@@ -28,7 +28,7 @@
                     </div>
                 @endif
                 <div>
-                    <h1 class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-900 to-brand-600 dark:from-white dark:to-gray-300 tracking-tight mb-2">
+                    <h1 class="bg-clip-text bg-gradient-to-r font-extrabold from-brand-900  sm:text-3xl text-4xl text-transparent to-brand-600 tracking-tight">
                         {{ $title }}
                     </h1>
                     @if($subtitle)

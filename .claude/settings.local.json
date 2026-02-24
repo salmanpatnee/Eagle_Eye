@@ -32,7 +32,10 @@
       "Bash(python3:*)",
       "Bash(pip install:*)",
       "mcp__laravel-boost__last-error",
-      "mcp__laravel-boost__application-info"
+      "mcp__laravel-boost__application-info",
+      "WebFetch(domain:www.flaticon.com)",
+      "WebFetch(domain:cdn-icons-png.flaticon.com)",
+      "Bash(curl:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

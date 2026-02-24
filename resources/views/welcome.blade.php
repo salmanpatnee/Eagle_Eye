@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light only">
-    <title>Euro CISO Resources - Strategic Cybersecurity Intelligence</title>
+    <title>UK CISO Resources - Strategic Cybersecurity Intelligence</title>
     <link rel="icon" href="{{ asset('Images/favicon.ico') }}">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="css/landing.css">
@@ -18,7 +18,7 @@
             <div class="flex items-center justify-between md:px-0 px-3 py-3">
                 <div class="flex items-center">
                     <a href="/" class="flex-shrink-0 logo-text text-2xl font-bold text-gray-900">
-                        <img src="/Images/EuroCISOLogo.png" alt="Euro CISO Logo" class="h-16 w-auto"/>
+                        <img src="/Images/EuroCISOLogo.png" alt="UK CISO Logo" class="h-16 w-auto" />
                     </a>
                 </div>
                 <div class="flex items-center gap-4">
@@ -53,7 +53,8 @@
                     <div class="hero-image-wrapper w-full max-w-lg">
                         <div class="hero-image">
                             @if ($landingPageContent?->hero_image_path)
-                                <img src="{{ asset('storage/' . $landingPageContent->hero_image_path) }}" alt="Cybersecurity Dashboard" class="w-full h-auto object-cover" />
+                                <img src="{{ asset('storage/' . $landingPageContent->hero_image_path) }}"
+                                    alt="Cybersecurity Dashboard" class="w-full h-auto object-cover" />
                             @else
                                 <img src="https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                     alt="Cybersecurity Dashboard" class="w-full h-auto object-cover" />
@@ -175,7 +176,7 @@
             @endif
 
             <div class="flex justify-center">
-                <a href="{{ route('vciso') }}"  class="btn-secondary group inline-flex items-center gap-3">
+                <a href="{{ route('vciso') }}" class="btn-secondary group inline-flex items-center gap-3">
                     <span>Access Platform</span>
 
                 </a>
@@ -187,14 +188,12 @@
     <footer class="bg-slate-900 p-6">
         <div class="max-w-7xl mx-auto text-center">
             <p class="text-slate-400 text-sm">
-                &copy; 2026 EURO CISO. All rights reserved.
+                &copy; 2026 UK CISO. All rights reserved.
             </p>
         </div>
     </footer>
 
-        <!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-a3e8273f-df3f-447c-ade7-64c1193be15b" data-elfsight-app-lazy></div>
+    @include('partials.chatbot')
 
 </body>
 

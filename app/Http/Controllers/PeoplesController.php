@@ -35,10 +35,10 @@ class PeoplesController extends Controller
             ->orderBy('industry_name', 'ASC')
             ->get();
 
-        $organizations = HROrganization::select('organization_id', 'organization_name')
-            ->distinct()
-            ->orderBy('organization_name', 'ASC')
-            ->get();
+        // $organizations = HROrganization::select('organization_id', 'organization_name')
+        //     ->distinct()
+        //     ->orderBy('organization_name', 'ASC')
+        //     ->get();
 
         $certifications = HRCertification::select('certification_id', 'certification_title')
             ->distinct()
@@ -58,8 +58,7 @@ class PeoplesController extends Controller
             '20+ years',
         ]);
 
-        $filtersApplied = ! empty($nationality) || ! empty($industry) || ! empty($organization)
-            || ! empty($certification) || ! empty($expertise) || ! empty($designation) || ! empty($experience);
+        $filtersApplied = ! empty($nationality) || ! empty($industry) || ! empty($certification) || ! empty($expertise) || ! empty($designation) || ! empty($experience);
 
         $humanResource = null;
 
@@ -100,13 +99,13 @@ class PeoplesController extends Controller
                         $query->where('industry_id', $industry);
                     }
                 })
-                ->when($organization, function ($query, $organization) {
-                    if (is_array($organization)) {
-                        $query->whereIn('organization_id', $organization);
-                    } else {
-                        $query->where('organization_id', $organization);
-                    }
-                })
+                // ->when($organization, function ($query, $organization) {
+                //     if (is_array($organization)) {
+                //         $query->whereIn('organization_id', $organization);
+                //     } else {
+                //         $query->where('organization_id', $organization);
+                //     }
+                // })
                 ->when($certification, function ($query, $certification) {
                     $query->whereHas('certifications', function ($query) use ($certification) {
                         if (is_array($certification)) {
@@ -147,7 +146,7 @@ class PeoplesController extends Controller
                             }
                         }
                     });
-                })
+                })->orderBy('name', 'ASC')
                 ->paginate(200);
 
             $humanResource->appends([
@@ -163,6 +162,6 @@ class PeoplesController extends Controller
 
         $id = null;
 
-        return view('ciso.people.index', compact('id', 'filtersApplied', 'humanResource', 'nationalities', 'industries', 'organizations', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation', 'experienceRanges', 'experience'));
+        return view('ciso.people.index', compact('id', 'filtersApplied', 'humanResource', 'nationalities', 'industries', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation', 'experienceRanges', 'experience'));
     }
 }

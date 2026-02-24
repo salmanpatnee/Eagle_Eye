@@ -9,9 +9,9 @@
     <meta name="color-scheme" content="light only">
     <title>
         @hasSection('title')
-            @yield('title') | {{ env('APP_NAME', 'Euro CISO') }}
+            @yield('title') | {{ env('APP_NAME', 'UK CISO') }}
         @else
-            {{ env('APP_NAME', 'Euro CISO') }}
+            {{ env('APP_NAME', 'UK CISO') }}
         @endif
     </title>
     <link rel="icon" href="{{ asset('Images/favicon.ico') }}">

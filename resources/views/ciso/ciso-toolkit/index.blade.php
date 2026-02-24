@@ -111,9 +111,7 @@
             </section>
         </div>
     </main>
-    <!-- Elfsight AI Chatbot | Saudi Ciso -->
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-a3e8273f-df3f-447c-ade7-64c1193be15b" data-elfsight-app-lazy></div>
+@include('partials.chatbot')
 </body>
 
 </html>

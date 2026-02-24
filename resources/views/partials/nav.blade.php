@@ -14,7 +14,7 @@
                         <span class="flex items-center space-x-2">
                             <img class="dark:hidden w-10" src="{{ asset('Images/SaudiCISOLogo.png') }}"
                                 alt="Logo" />
-                            <span class="dark:hidden text-2xl font-semibold">Euro CISO</span>
+                            <span class="dark:hidden text-2xl font-semibold">UK CISO</span>
                         </span>
                     </span>
                     <img class="logo-icon" :class="sidebarToggle ? 'lg:block mt-10 w-20' : 'hidden'"

@@ -93,7 +93,7 @@
                     </a>
                     <p
                         class="mb-2 font-semibold text-white text-title-sm dark:text-white/90 sm:text-title-md flex items-center justify-between">
-                        Euro CISO
+                        UK CISO
                     </p>
                     {{-- 
 

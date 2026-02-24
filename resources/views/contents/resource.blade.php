@@ -1,0 +1,106 @@
+@extends('layouts/user')
+@section('title', 'Content Resource')
+@section('content')
+    <div>
+        <x-table.action-wrapper title="{{ $content?->id ? 'Update' : 'New' }} Resource">
+            <x-action.button label="View" route_name="contents.index" />
+        </x-table.action-wrapper>
+
+        <form action="{{ route('contents.index') }}">
+            @csrf
+            <input type="hidden" id="resourceable_id" value="{{ $content->id }}">
+            <input type="hidden" id="resourceable_type" value="App\Models\Content">
+            <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
+                <x-form.grid-col>
+                    <div>
+                        <x-form.field label="Content Title" name="title" required="true"
+                            placeholder="Enter Content Title" :value="$content?->title" readonly />
+                    </div>
+                    <div>
+                        <x-form.field label="Section" name="category" required="true"
+                            :readonly="$content?->category" placeholder="Enter Content ID" :value="$content?->category" />
+                    </div>
+                </x-form.grid-col>
+
+                <div>
+                    <x-form.label label="Upload Videos" for="videoUploadEle" />
+                    <input type="file" class="filepond" name="videoUploadEle" multiple credits="false"
+                        id="videoUploadEle">
+                </div>
+
+                <div>
+                    <x-form.label label="Upload Checklist" for="checklistUploadEle" />
+                    <input type="file" class="filepond" name="checklistUploadEle" multiple credits="false"
+                        id="checklistUploadEle">
+                </div>
+
+                <div>
+                    <x-form.label label="Upload Implementation Templates"
+                        for="templateUploadEle" />
+                    <input type="file" class="filepond" name="templateUploadEle" multiple credits="false"
+                        id="templateUploadEle">
+                </div>
+
+                <div>
+                    <x-form.label label="Upload Arabic English Glossary"
+                        for="glossaryUploadEle" />
+                    <input type="file" class="filepond" name="glossaryUploadEle" multiple credits="false"
+                        id="glossaryUploadEle">
+                </div>
+
+
+
+                <div class="flex justify-end">
+                    <x-form.submit label="Section" :isUpdate="$content?->id" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+@endsection
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+    <script>
+        const resourceId = document.getElementById('resourceable_id').value;
+        const resourceableType = document.getElementById('resourceable_type').value;
+
+        function initFilePondUploader(inputId, resourceType, acceptedFileTypes = null) {
+            const options = {
+                server: {
+                    process: {
+                        url: '{{ route('contents.resource.store') }}',
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        ondata: (formData) => {
+                            formData.append('resource_type', resourceType);
+                            formData.append('resourceable_id', resourceId);
+                            formData.append('resourceable_type', resourceableType);
+                            return formData;
+                        }
+                    }
+                }
+            };
+
+            if (acceptedFileTypes) {
+                options.acceptedFileTypes = acceptedFileTypes;
+            }
+
+            FilePond.create(document.querySelector(inputId), options);
+        }
+
+        initFilePondUploader('#videoUploadEle', 'guide', ['video/*']);
+
+        initFilePondUploader('#checklistUploadEle', 'checklist', ['application/pdf', 'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ]);
+        initFilePondUploader('#templateUploadEle', 'template', ['application/pdf', 'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ]);
+        initFilePondUploader('#glossaryUploadEle', 'glossary', ['application/pdf', 'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ]);
+    </script>
+@endpush

@@ -7,6 +7,9 @@ use App\Http\Controllers\BestPracticeController;
 use App\Http\Controllers\CisoEducationController;
 use App\Http\Controllers\CMS_ISO_27001Controller;
 use App\Http\Controllers\CMSController;
+use App\Http\Controllers\ContentController;
+use App\Http\Controllers\ContentResourceController;
+use App\Http\Controllers\ContentResourcesController;
 use App\Http\Controllers\ControlAssessmentController;
 use App\Http\Controllers\ControlAssessmentFindingController;
 use App\Http\Controllers\ControlAuditFindingController;
@@ -35,6 +38,7 @@ use App\Http\Controllers\PeoplesController;
 use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ResourceContentController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SubDomainController;
 use App\Http\Controllers\TempFileUploadController;
@@ -73,6 +77,21 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('control-types', ControlTypeController::class);
     Route::resource('kpi-standards', KPIStandardController::class);
 
+    Route::resource('contents', ContentController::class);
+    Route::get('/contents/create-resource/{content}', [ContentResourceController::class, 'create'])->name('contents.resource.create');
+    Route::post('/contents/upload-resource', [ContentResourceController::class, 'store'])->name('contents.resource.store');
+
+
+    // ------------------- Resource Content -------------------
+    Route::get('/content/list', [ResourceContentController::class, 'index'])->name('resource-content.index');
+    Route::get('/content/{content}', [ResourceContentController::class, 'show'])->name('resource-content.show');
+
+    Route::get('/content/resource/{content}/checklist/', [ContentResourcesController::class, 'checklist'])->name('content.resource.checklist');
+    Route::get('/content/resource/{content}/videos/', [ContentResourcesController::class, 'videos'])->name('content.resource.videos');
+    Route::get('/content/resource/{content}/template/', [ContentResourcesController::class, 'template'])->name('content.resource.template');
+    Route::get('/content/resource/{content}/glossary/', [ContentResourcesController::class, 'glossary'])->name('content.resource.glossary');
+
+    
     // ------------------- ISO-27001 -------------------
     Route::get('/iso-27001', [ISO27001Controller::class, 'index'])->name('iso-27001.index');
     Route::get('/iso-27001/{section:section_id}', [ISO27001Controller::class, 'show'])->name('iso-27001.show');
@@ -189,7 +208,7 @@ Route::middleware(['auth', 'must.change.password'])->group(function () {
     Route::get('/iso27001/resource/{section:section_id}/template/', [ISO27001ResourceController::class, 'template'])->name('iso27001.resource.template');
     Route::get('/iso27001/resource/{section:section_id}/glossary/', [ISO27001ResourceController::class, 'glossary'])->name('iso27001.resource.glossary');
 
-    // ------------------Euro CISO-------------------------
+    // ------------------UK CISO-------------------------
 
     Route::prefix('ciso')->group(function () {
 
