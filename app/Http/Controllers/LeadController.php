@@ -21,19 +21,19 @@ class LeadController extends Controller
     {
         $lead = Lead::create($request->validated());
 
-        // Send email notification to anas@saudiciso.net
+        // Send email notification to javed_abbasi@yahoo.com
         try {
             Mail::send(new LeadNotificationMail($lead));
 
             Log::info('Lead notification email sent successfully', [
                 'lead_id' => $lead->id,
-                'recipient' => 'anas@saudiciso.net',
+                'recipient' => 'javed_abbasi@yahoo.com',
                 'timestamp' => now()
             ]);
         } catch (\Exception $e) {
             Log::error('Failed to send lead notification email', [
                 'lead_id' => $lead->id,
-                'recipient' => 'anas@saudiciso.net',
+                'recipient' => 'javed_abbasi@yahoo.com',
                 'error' => $e->getMessage(),
                 'timestamp' => now()
             ]);

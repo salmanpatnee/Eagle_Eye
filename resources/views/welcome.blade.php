@@ -25,6 +25,9 @@
                     <a href="{{ route('vciso') }}" class="btn-primary">
                         Access Platform
                     </a>
+                    <a href="#" class="BudgetButton btn-secondary" id="headerContactButton">
+                        Contact Us
+                    </a>
                 </div>
             </div>
         </div>
@@ -175,10 +178,12 @@
                 {{-- </h2> --}}
             @endif
 
-            <div class="flex justify-center">
+            <div class="flex justify-center gap-6">
                 <a href="{{ route('vciso') }}" class="btn-secondary group inline-flex items-center gap-3">
                     <span>Access Platform</span>
-
+                </a>
+                <a href="#" class="BudgetButton btn-primary" id="headerContactButton">
+                    Contact Us
                 </a>
             </div>
         </div>
@@ -192,8 +197,125 @@
             </p>
         </div>
     </footer>
+    <div id="contactModal" class="modal">
 
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Contact Us to Solve Your Biggest Problem!</h2>
+            <form id="contactForm">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Work Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="company">Company/Organization:</label>
+                <input type="text" id="company" name="company" required>
+
+                <label for="problem">Your Biggest Problem/Inquiry:</label>
+                <textarea id="problem" name="problem" rows="4" required></textarea>
+
+                <button type="submit" class="submit-button">Send Inquiry</button>
+            </form>
+        </div>
+
+    </div>
     @include('partials.chatbot')
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Get the modal element
+        var modal = document.getElementById("contactModal");
+
+        // Get the contact elements:
+        // 1. The <a> tag in the header with href="#"
+        // 2. The <p> tag in the budget section with id="budgetContactButton"
+        // 3. The new header contact button with class "BudgetButton"
+        var contactTriggers = document.querySelectorAll("a[href='#'], #budgetContactButton, #headerContactButton");
+
+        // Get the <span> element that closes the modal ('&times;')
+        var span = document.getElementsByClassName("close-button")[0];
+
+        // Function to open the modal
+        function openModal(event) {
+            // Check if the event target is an <a> tag and prevent default
+            if (event.target.tagName === 'A') {
+                event.preventDefault();
+            }
+            modal.style.display = "block";
+        }
+
+        // Attach click events to all contact triggers
+        contactTriggers.forEach(function(element) {
+            element.onclick = openModal;
+        });
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Handle form submission via AJAX
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop the form from submitting normally
+
+            // Get form data
+            const formData = new FormData(this);
+            const formObject = {};
+            for (let [key, value] of formData.entries()) {
+                // Map form field names to model field names
+                if (key === 'name') formObject.fullname = value;
+                else if (key === 'problem') formObject.message = value;
+                else formObject[key] = value;
+            }
+
+            // Show a loading state or disable submit button
+            const submitButton = this.querySelector('.submit-button');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+
+            // Send the data to the server via an AJAX request
+            axios.post('/contact-inquiry', formObject)
+                .then(function(response) {
+                    // On success, show success message and reset form
+                    alert(response.data.message);
+                    modal.style.display = "none";
+                    document.getElementById('contactForm').reset();
+                })
+                .catch(function(error) {
+                    // On error, show validation errors or generic error message
+                    if (error.response && error.response.status === 422) {
+                        // Validation error
+                        const errors = error.response.data.errors;
+                        let errorMessage = "Please correct the following errors:\n";
+
+                        for (let field in errors) {
+                            errorMessage += "- " + errors[field][0] + "\n";
+                        }
+
+                        alert(errorMessage);
+                    } else {
+                        // General server error
+                        alert('There was an error submitting your inquiry. Please try again.');
+                    }
+                })
+                .finally(function() {
+                    // Reset button state regardless of success or error
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                });
+        });
+    </script>
 
 </body>
 

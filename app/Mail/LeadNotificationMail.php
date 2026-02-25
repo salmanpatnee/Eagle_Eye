@@ -29,7 +29,7 @@ class LeadNotificationMail extends Mailable
         // Log that the email is being prepared
         Log::info('Lead notification email being prepared', [
             'lead_id' => $lead->id,
-            'recipient' => 'anas@saudiciso.net',
+            'recipient' => 'javed_abbasi@yahoo.com',
             'timestamp' => now()
         ]);
     }
@@ -75,7 +75,7 @@ class LeadNotificationMail extends Mailable
      */
     public function build()
     {
-        return $this->to('anas@saudiciso.net')
+        return $this->to('javed_abbasi@yahoo.com')
                     ->with('lead', $this->lead);
     }
 }
