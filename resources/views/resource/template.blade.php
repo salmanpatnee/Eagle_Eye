@@ -6,7 +6,7 @@
         }
     </style>
 @endpush
-@section('title', $contentWithTemplates->category . ' Resource: Templates')
+@section('title', $contentWithTemplates->category . ' Implementation Documents')
 @section('content')
 
     <div class="gap-6 grid grid-cols-1 px-4">
