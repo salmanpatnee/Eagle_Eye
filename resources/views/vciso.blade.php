@@ -115,11 +115,10 @@
                         {{-- <p class="area-subtitle">Best Practices</p> --}}
                     </a>
 
-                    <a href="{{ route('ciso-products.index') }}" class="area-card product-card">
+                    {{-- <a href="{{ route('ciso-products.index') }}" class="area-card product-card">
                         <div class="area-icon">💻</div>
                         <h3 class="area-title">Products</h3>
-                        {{-- <p class="area-subtitle">Technology</p> --}}
-                    </a>
+                    </a> --}}
                 </div>
             </section>
         </div>
