@@ -34,25 +34,33 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden" style="background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 25%, #f0f9ff 75%, #faf5ff 100%);">
+    <section class="relative min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        style="background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 25%, #f0f9ff 75%, #faf5ff 100%);">
         <!-- Decorative Background Elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-20 right-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25 animate-pulse"></div>
-            <div class="absolute bottom-20 left-20 w-96 h-96 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25 animate-pulse" style="animation-delay: 2s;"></div>
-            <div class="absolute top-1/2 right-1/4 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 4s;"></div>
+            <div
+                class="absolute top-20 right-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25 animate-pulse">
+            </div>
+            <div class="absolute bottom-20 left-20 w-96 h-96 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25 animate-pulse"
+                style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 right-1/4 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"
+                style="animation-delay: 4s;"></div>
         </div>
 
         <!-- Hero Content -->
         <div class="max-w-4xl mx-auto relative z-10">
-            <div class="flex pt-10 flex-col justify-center items-center text-center space-y-8 min-h-[calc(100vh-120px)]">
-                
+            <div
+                class="flex pt-10 flex-col justify-center items-center text-center space-y-8 min-h-[calc(100vh-120px)]">
+
                 <!-- Headline -->
                 @if ($landingPageContent?->hero_title)
                     <div>
-                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-tight max-w-3xl mx-auto">
+                        <h1
+                            class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-tight max-w-3xl mx-auto">
                             {!! $landingPageContent->hero_title !!}
                         </h1>
-                        <div class="h-1 w-24 bg-gradient-to-r from-blue-600 to-indigo-600 mt-8 rounded-full mx-auto"></div>
+                        <div class="h-1 w-24 bg-gradient-to-r from-blue-600 to-indigo-600 mt-8 rounded-full mx-auto">
+                        </div>
                     </div>
                 @endif
 
@@ -65,16 +73,153 @@
 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 pt-8 justify-center">
-                    <a href="{{ route('vciso') }}" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 active:scale-95">
+                    <a href="{{ route('vciso') }}"
+                        class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 active:scale-95">
                         <span>Access Platform</span>
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
                     </a>
-                    <a href="#" class="BudgetButton inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 active:scale-95" id="heroContactButton">
+                    <a href="#"
+                        class="BudgetButton inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 active:scale-95"
+                        id="heroContactButton">
                         Contact Us
                     </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Offerings Section -->
+    <section class="core-offerings-section py-20 px-6 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title mb-4">
+                    Core <span class="hero-gradient">Offerings</span>
+                </h2>
+
+            </div>
+
+            <div class="max-w-7xl mx-auto">
+            <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
+                @foreach (range(1, 4) as $i)
+
+                    <a href="{{ $i == 3 ? route('resource-content.index') : '#' }}" class="group block bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        {{-- use an <img> so the container height matches the picture and we avoid large blank areas --}}
+                        <img src="{{ asset('Images/landing-page/C'.$i.'.JPG') }}" alt="Core {{ $i }}" class="w-full h-auto object-contain" />
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
+
+            {{-- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- ISO 27001 Card -->
+                <div class="offering-card group rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-200"
+                    style="background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 50%, #f3e8ff 100%);">
+                    <div class="flex justify-center mb-6">
+                        <div
+                            class="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3
+                        class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
+                        ISO 27001 Complement Management System</h3>
+                </div>
+
+                <!-- NIST Card -->
+                <div class="offering-card group rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-200"
+                    style="background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 50%, #f3e8ff 100%);">
+                    <div class="flex justify-center mb-6">
+                        <div
+                            class="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3
+                        class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
+                        Cybersecurity Strategy</h3>
+                </div>
+
+                <!-- DORA Card -->
+                <div class="offering-card group rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-200"
+                    style="background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 50%, #f3e8ff 100%);">
+                    <div class="flex justify-center mb-6">
+                        <div
+                            class="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3
+                        class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
+                        DORA Compliance Management System</h3>
+                </div>
+
+                <!-- Risk Assessment Card -->
+                <div class="offering-card group rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-200"
+                    style="background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 50%, #f3e8ff 100%);">
+                    <div class="flex justify-center mb-6">
+                        <div
+                            class="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3
+                        class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
+                        NIS2 Compliance Management System</h3>
+                </div>
+            </div> --}}
+        </div>
+    </section>
+
+    <!-- Card Gallery Section -->
+    <section class="gallery-section py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto text-center mb-12">
+            @if ($landingPageContent?->gallery_title)
+                <h2 class="section-title mb-4">
+                    {!! $landingPageContent->gallery_title !!}
+                </h2>
+            @else
+                <h2 class="section-title mb-4">
+                    CISO Essential Frameworks: <br><span class="hero-gradient">Are You Missing Any? </span>
+                </h2>
+            @endif
+
+            @if ($landingPageContent?->gallery_subtitle)
+                <p class="mt-2 text-lg text-gray-700 max-w-3xl mx-auto">
+                    {!! $landingPageContent->gallery_subtitle !!}
+                </p>
+            @else
+                <p class="mt-2 text-lg text-gray-700 max-w-3xl mx-auto">
+                    (Each Framework includes Policies, Procedures, Roles and Responsibilities, and KPIs)
+                </p>
+            @endif
+        </div>
+
+        <div class="max-w-7xl mx-auto">
+            <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3">
+                @foreach (range(5, 24) as $i)
+                    <a href="#" class="group block bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        {{-- use an <img> so the container height matches the picture and we avoid large blank areas --}}
+                        <img src="{{ asset('Images/landing-page/Slide'.$i.'.JPG') }}" alt="Slide {{ $i }}" class="w-full h-auto object-contain" />
+                        <span class="sr-only">Slide {{ $i }}</span>
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>

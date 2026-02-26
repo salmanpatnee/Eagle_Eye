@@ -121,6 +121,13 @@ nav a {
     border-color: var(--color-primary);
 }
 
+/* Hide navbar contact button on mobile */
+@media (max-width: 767px) {
+    nav #headerContactButton {
+        display: none !important;
+    }
+}
+
 /* Hero Section */
 .hero-section {
     background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
@@ -588,7 +595,7 @@ footer {
 }
 
 #contactForm input[type="text"],
-#contactForm input[type="email"], 
+#contactForm input[type="email"],
 #contactForm input[type="tel"],
 #contactForm textarea {
   width: 100%;
