@@ -34,46 +34,38 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden" style="background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 25%, #f0f9ff 75%, #faf5ff 100%);">
-        <!-- Decorative Background Elements -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-20 right-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25 animate-pulse"></div>
-            <div class="absolute bottom-20 left-20 w-96 h-96 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25 animate-pulse" style="animation-delay: 2s;"></div>
-            <div class="absolute top-1/2 right-1/4 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 4s;"></div>
-        </div>
-
-        <!-- Hero Content -->
-        <div class="max-w-4xl mx-auto relative z-10">
-            <div class="flex pt-10 flex-col justify-center items-center text-center space-y-8 min-h-[calc(100vh-120px)]">
-                
-                <!-- Headline -->
-                @if ($landingPageContent?->hero_title)
-                    <div>
-                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-tight max-w-3xl mx-auto">
+    <section class="hero-section pt-32 pb-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Hero Content -->
+                <div class="text-center lg:text-left">
+                    @if ($landingPageContent?->hero_title)
+                        <h1 class="hero-title mb-6">
                             {!! $landingPageContent->hero_title !!}
                         </h1>
-                        <div class="h-1 w-24 bg-gradient-to-r from-blue-600 to-indigo-600 mt-8 rounded-full mx-auto"></div>
+                    @endif
+                    <div class="mb-8">
+                        @if ($landingPageContent?->hero_list_items)
+                            {!! $landingPageContent->hero_list_items !!}
+                        @endif
                     </div>
-                @endif
+                </div>
 
-                <!-- Description -->
-                @if ($landingPageContent?->hero_list_items)
-                    <div class="prose prose-sm lg:prose-lg max-w-5xl mx-auto text-gray-700 leading-relaxed text-2xl">
-                        {!! $landingPageContent->hero_list_items !!}
+                <!-- Hero Image -->
+                <div class="flex justify-center lg:justify-end">
+                    <div class="hero-image-wrapper w-full max-w-lg">
+                        <div class="hero-image">
+                            @if ($landingPageContent?->hero_image_path)
+                                <img src="{{ asset('storage/' . $landingPageContent->hero_image_path) }}"
+                                    alt="Cybersecurity Dashboard" class="w-full h-auto object-cover" />
+                            @else
+                                <img src="https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                    alt="Cybersecurity Dashboard" class="w-full h-auto object-cover" />
+                            @endif
+                        </div>
+                        <div class="ripple-ring ripple-1"></div>
+                        <div class="ripple-ring ripple-2"></div>
                     </div>
-                @endif
-
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 pt-8 justify-center">
-                    <a href="{{ route('vciso') }}" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 active:scale-95">
-                        <span>Access Platform</span>
-                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
-                    </a>
-                    <a href="#" class="BudgetButton inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 active:scale-95" id="heroContactButton">
-                        Contact Us
-                    </a>
                 </div>
             </div>
         </div>
