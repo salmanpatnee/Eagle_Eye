@@ -10,7 +10,9 @@ class Content extends Model
     use HasFactory;
 
     protected $table = 'contents';
-    protected $fillable = ['title', 'description', 'category', 'sort_order'];
+
+    protected $fillable = ['title', 'description', 'category', 'sort_order', 'image'];
+
     public $timestamps = false;
 
     public function resources()

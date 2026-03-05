@@ -35,7 +35,8 @@
       "mcp__laravel-boost__application-info",
       "WebFetch(domain:www.flaticon.com)",
       "WebFetch(domain:cdn-icons-png.flaticon.com)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "mcp__laravel-boost__list-artisan-commands"
     ]
   },
   "enableAllProjectMcpServers": true,

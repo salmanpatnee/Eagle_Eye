@@ -7,7 +7,7 @@
         </x-table.action-wrapper>
 
         <form action="{{ isset($content) ? route('contents.update', $content->id) : route('contents.store') }}"
-            method="POST">
+            method="POST" enctype="multipart/form-data">
             @csrf
             @if (isset($content))
                 @method('PUT')
@@ -35,6 +35,14 @@
                             placeholder="Enter Sort Order" :value="$content?->sort_order" />
                     </div>
                     <div>
+                        <x-form.upload-field label="Image" name="image" accept="image/*" />
+                        @if ($content?->image)
+                            <div class="mt-2">
+                                <img src="{{ asset('storage/' . $content->image) }}" alt="Current process image"
+                                    class="h-24 w-auto rounded-lg border border-gray-200 object-cover">
+                                <p class="mt-1 text-xs text-gray-500">Current image — upload a new one to replace it.</p>
+                            </div>
+                        @endif
                     </div>
                 </x-form.grid-col>
 

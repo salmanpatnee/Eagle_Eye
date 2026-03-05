@@ -92,7 +92,7 @@
     </section>
 
     <!-- Core Offerings Section -->
-    <section class="core-offerings-section py-20 px-6 bg-gradient-to-b from-white to-gray-50">
+    <section class="core-offerings-section py-10 px-6 bg-gradient-to-b from-white to-gray-50">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="section-title mb-4">
@@ -188,7 +188,7 @@
     </section>
 
     <!-- Card Gallery Section -->
-    <section class="gallery-section py-20 px-6 bg-white">
+    <section class="gallery-section py-10 px-6 bg-white">
         <div class="max-w-7xl mx-auto text-center mb-12">
             @if ($landingPageContent?->gallery_title)
                 <h2 class="section-title mb-4">
@@ -270,7 +270,7 @@
 
     <!-- Program Benefits Section -->
     <section
-        class="program-benefits-section py-20 px-6 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        class="program-benefits-section py-10 px-6 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
         <div class="max-w-7xl mx-auto relative z-10">
             <!-- Section Header -->
             <div class="text-center mb-16">

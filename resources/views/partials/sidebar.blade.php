@@ -7,7 +7,7 @@
          <a href="{{ route('vciso') }}">
              <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                  <span class="flex items-center space-x-2">
-                     <img class="dark:hidden w-20" src="{{ asset('Images/EuroCISOLogo.png') }}" alt="Logo" />
+                     <img class="dark:hidden w-32" src="{{ asset('Images/EuroCISOLogo.png') }}" alt="Logo" />
                      {{-- <span class="dark:hidden text-2xl font-semibold">UK CISO</span> --}}
                  </span>
              </span>

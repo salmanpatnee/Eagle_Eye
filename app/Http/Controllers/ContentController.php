@@ -33,7 +33,13 @@ class ContentController extends Controller
 
     public function store(ContentRequest $request): RedirectResponse
     {
-        Content::create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('contents/images', 'public');
+        }
+
+        Content::create($data);
 
         return redirect(route('contents.index'))
             ->with('success', 'Content saved successfully.');
@@ -46,7 +52,16 @@ class ContentController extends Controller
 
     public function update(ContentRequest $request, Content $content): RedirectResponse
     {
-        $content->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($content->image) {
+                Storage::disk('public')->delete($content->image);
+            }
+            $data['image'] = $request->file('image')->store('contents/images', 'public');
+        }
+
+        $content->update($data);
 
         return redirect(route('contents.index'))
             ->with('success', 'Content saved successfully.');
@@ -61,6 +76,11 @@ class ContentController extends Controller
         }
 
         $content->resources()->delete();
+
+        if ($content->image) {
+            Storage::disk('public')->delete($content->image);
+        }
+
         $content->delete();
 
         return redirect(route('contents.index'))

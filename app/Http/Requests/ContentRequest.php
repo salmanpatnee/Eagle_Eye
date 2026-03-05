@@ -28,6 +28,7 @@ class ContentRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'category' => ['nullable', 'string', 'max:255'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
         ];
     }
 
@@ -45,6 +46,9 @@ class ContentRequest extends FormRequest
             'category.max' => 'The category may not be greater than 255 characters.',
             'sort_order.integer' => 'The sort order must be a valid number.',
             'sort_order.min' => 'The sort order must be at least 0.',
+            'image.image' => 'The uploaded file must be an image.',
+            'image.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif, webp.',
+            'image.max' => 'The image may not be greater than 2MB.',
         ];
     }
 }
