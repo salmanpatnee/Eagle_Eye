@@ -5,8 +5,10 @@ use App\Http\Controllers\ArtifactAttachmentController;
 use App\Http\Controllers\ArtifactController;
 use App\Http\Controllers\BestPracticeController;
 use App\Http\Controllers\CisoEducationController;
+use App\Http\Controllers\CisoEssentialFrameworkContentController;
 use App\Http\Controllers\CisoEssentialFrameworkController;
 use App\Http\Controllers\CisoEssentialFrameworkResourceController;
+use App\Http\Controllers\CisoEssentialFrameworkResourcesController;
 use App\Http\Controllers\CMS_ISO_27001Controller;
 use App\Http\Controllers\CMSController;
 use App\Http\Controllers\ContentController;
@@ -95,6 +97,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/content/resource/{content}/videos/', [ContentResourcesController::class, 'videos'])->name('content.resource.videos');
     Route::get('/content/resource/{content}/template/', [ContentResourcesController::class, 'template'])->name('content.resource.template');
     Route::get('/content/resource/{content}/glossary/', [ContentResourcesController::class, 'glossary'])->name('content.resource.glossary');
+
+    // ------------------- CISO Essential Framework Resource -------------------
+    Route::get('/ciso-essential-framework/list', [CisoEssentialFrameworkContentController::class, 'index'])->name('ciso-essential-framework-content.index');
+    Route::get('/ciso-essential-framework/{cisoEssentialFramework}', [CisoEssentialFrameworkContentController::class, 'show'])->name('ciso-essential-framework-content.show');
+
+    Route::get('/ciso-essential-framework/resource/{cisoEssentialFramework}/checklist/', [CisoEssentialFrameworkResourcesController::class, 'checklist'])->name('ciso-essential-framework.resource.checklist');
+    Route::get('/ciso-essential-framework/resource/{cisoEssentialFramework}/videos/', [CisoEssentialFrameworkResourcesController::class, 'videos'])->name('ciso-essential-framework.resource.videos');
+    Route::get('/ciso-essential-framework/resource/{cisoEssentialFramework}/template/', [CisoEssentialFrameworkResourcesController::class, 'template'])->name('ciso-essential-framework.resource.template');
+    Route::get('/ciso-essential-framework/resource/{cisoEssentialFramework}/glossary/', [CisoEssentialFrameworkResourcesController::class, 'glossary'])->name('ciso-essential-framework.resource.glossary');
 
     // ------------------- ISO-27001 -------------------
     Route::get('/iso-27001', [ISO27001Controller::class, 'index'])->name('iso-27001.index');
