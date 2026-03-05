@@ -5,6 +5,8 @@ use App\Http\Controllers\ArtifactAttachmentController;
 use App\Http\Controllers\ArtifactController;
 use App\Http\Controllers\BestPracticeController;
 use App\Http\Controllers\CisoEducationController;
+use App\Http\Controllers\CisoEssentialFrameworkController;
+use App\Http\Controllers\CisoEssentialFrameworkResourceController;
 use App\Http\Controllers\CMS_ISO_27001Controller;
 use App\Http\Controllers\CMSController;
 use App\Http\Controllers\ContentController;
@@ -81,6 +83,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/contents/create-resource/{content}', [ContentResourceController::class, 'create'])->name('contents.resource.create');
     Route::post('/contents/upload-resource', [ContentResourceController::class, 'store'])->name('contents.resource.store');
 
+    Route::resource('ciso-essential-frameworks', CisoEssentialFrameworkController::class);
+    Route::get('/ciso-essential-frameworks/create-resource/{cisoEssentialFramework}', [CisoEssentialFrameworkResourceController::class, 'create'])->name('ciso-essential-frameworks.resource.create');
+    Route::post('/ciso-essential-frameworks/upload-resource', [CisoEssentialFrameworkResourceController::class, 'store'])->name('ciso-essential-frameworks.resource.store');
 
     // ------------------- Resource Content -------------------
     Route::get('/content/list', [ResourceContentController::class, 'index'])->name('resource-content.index');
@@ -91,7 +96,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/content/resource/{content}/template/', [ContentResourcesController::class, 'template'])->name('content.resource.template');
     Route::get('/content/resource/{content}/glossary/', [ContentResourcesController::class, 'glossary'])->name('content.resource.glossary');
 
-    
     // ------------------- ISO-27001 -------------------
     Route::get('/iso-27001', [ISO27001Controller::class, 'index'])->name('iso-27001.index');
     Route::get('/iso-27001/{section:section_id}', [ISO27001Controller::class, 'show'])->name('iso-27001.show');
