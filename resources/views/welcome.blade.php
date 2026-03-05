@@ -213,11 +213,10 @@
 
         <div class="max-w-7xl mx-auto">
             <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3">
-                @foreach (range(5, 24) as $i)
-                    <a href="#" class="group block bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {{-- use an <img> so the container height matches the picture and we avoid large blank areas --}}
-                        <img src="{{ asset('Images/landing-page/Slide'.$i.'.JPG') }}" alt="Slide {{ $i }}" class="w-full h-auto object-contain" />
-                        <span class="sr-only">Slide {{ $i }}</span>
+                @foreach ($frameworks as $framework)
+                    <a href="{{ route('ciso-essential-framework-content.show', $framework->id) }}" class="group block bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <img src="{{ asset('storage/' . $framework->image) }}" alt="{{ $framework->title }}" class="w-full h-auto object-contain" />
+                        <span class="sr-only">{{ $framework->title }}</span>
                     </a>
                 @endforeach
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LandingPageContentRequest;
+use App\Models\CisoEssentialFramework;
 use App\Models\LandingPageContent;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -12,8 +13,9 @@ class LandingPageContentController extends Controller
     public function welcome(): View
     {
         $landingPageContent = LandingPageContent::first();
+        $frameworks = CisoEssentialFramework::select('id', 'title', 'image')->get();
 
-        return view('welcome', compact('landingPageContent'));
+        return view('welcome', compact('landingPageContent', 'frameworks'));
     }
 
     public function create(): View
