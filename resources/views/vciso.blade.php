@@ -19,7 +19,7 @@
                 <a href="{{ route('welcome') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
-                            <img src="/Images/Logo.svg" alt="Logo" style="height: 80px; width: auto;">
+                            <img src="/Images/EuroCISOLogo.png" alt="Logo" style="height: 80px; width: auto;">
                         </span>
                     </span>
                 </a>
@@ -96,31 +96,31 @@
                 </div>
 
                 <!-- Connector lines from branches to core areas -->
-                <div class="branches-to-areas-connectors">
+                {{-- <div class="branches-to-areas-connectors">
                     <div class="connector-line-center"></div>
-                </div>
+                </div> --}}
             </section>
 
             <!-- Three Core Areas -->
-            <section class="core-areas-section">
+            {{-- <section class="core-areas-section">
                 <div class="areas-container">
-                    {{-- <a href="{{ route('people.index') }}" class="area-card people-card">
+                    <a href="{{ route('people.index') }}" class="area-card people-card">
                         <div class="area-icon">👥</div>
                         <h3 class="area-title">People</h3>
-                    </a> --}}
+                    </a>
 
                     <a href="{{ route('resource-content.index') }}" class="area-card process-card">
                         <div class="area-icon">⚙️</div>
                         <h3 class="area-title">Processes</h3>
-                        {{-- <p class="area-subtitle">Best Practices</p> --}}
+                        <p class="area-subtitle">Best Practices</p>
                     </a>
 
-                    {{-- <a href="{{ route('ciso-products.index') }}" class="area-card product-card">
+                    <a href="{{ route('ciso-products.index') }}" class="area-card product-card">
                         <div class="area-icon">💻</div>
                         <h3 class="area-title">Products</h3>
-                    </a> --}}
+                    </a>
                 </div>
-            </section>
+            </section> --}}
         </div>
     </main>
    @include('partials.chatbot')
