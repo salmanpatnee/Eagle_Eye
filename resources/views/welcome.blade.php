@@ -105,7 +105,7 @@
             <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
                 @foreach (range(1, 4) as $i)
 
-                    <a href="{{ $i == 3 ? route('resource-content.index') : '#' }}" class="group block bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <a href="{{ $i == 3 ? route('resource-content.index') : 'javascript:void(0)' }}" class="group block bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         {{-- use an <img> so the container height matches the picture and we avoid large blank areas --}}
                         <img src="{{ asset('Images/landing-page/C'.$i.'.JPG') }}" alt="Core {{ $i }}" class="w-full h-auto object-contain" />
                     </a>
