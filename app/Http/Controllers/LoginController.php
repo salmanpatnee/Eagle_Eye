@@ -26,16 +26,16 @@ class LoginController extends Controller
             ]);
         }
 
-        $systemExpiryDate = Option::select('value')->where('key', 'system_expired_at')->first();
-        $todaysDate = Carbon::today();
+        // $systemExpiryDate = Option::select('value')->where('key', 'system_expired_at')->first();
+        // $todaysDate = Carbon::today();
 
-        // Bypass expiration check if the user is a superadmin (id = 1)
-        if (Carbon::parse($systemExpiryDate->value)->lt($todaysDate) && auth()->user()->id !== 1) {
-            auth()->logout();
-            throw ValidationException::withMessages([
-                'username' => 'Your system trial has expired.'
-            ]);
-        }
+        // // Bypass expiration check if the user is a superadmin (id = 1)
+        // if (Carbon::parse($systemExpiryDate->value)->lt($todaysDate) && auth()->user()->id !== 1) {
+        //     auth()->logout();
+        //     throw ValidationException::withMessages([
+        //         'username' => 'Your system trial has expired.'
+        //     ]);
+        // }
 
         session()->regenerate();
 
