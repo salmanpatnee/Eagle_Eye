@@ -13,7 +13,10 @@
       "Bash(composer show:*)",
       "Bash(php artisan test:*)",
       "Bash(php artisan:*)",
-      "Bash(./vendor/bin/pint:*)"
+      "Bash(./vendor/bin/pint:*)",
+      "Bash(dir \"C:\\\\Users\\\\salmanabdul.ghani\\\\Herd\\\\grc\\\\resources\\\\views\" /b)",
+      "Bash(findstr:*)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

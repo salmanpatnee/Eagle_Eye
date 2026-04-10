@@ -163,7 +163,12 @@
 
             .sectionhead {
                 margin: 15px 0 10px 0;
-                padding: 12px;
+                padding: 12px 6px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                text-align: center;
             }
 
             .itemprocesses {
