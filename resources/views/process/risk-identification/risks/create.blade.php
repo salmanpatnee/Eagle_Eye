@@ -71,7 +71,7 @@
                     </div>
                     <div>
                         <x-form.multiselect label="Threat Agents" required="true" label_ar="وكيل التهديد"
-                            name="threatAgents[]" :value="$threatAgentIds" :data="$threatAgents" id_key="threat_agent_id"
+                            name="threatAgents[]" :value="$threatAgentIds" :show_key="true" :data="$threatAgents" id_key="threat_agent_id"
                             value_key="threat_agent_name" />
                     </div>
                 </x-form.grid-col>
@@ -79,7 +79,7 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.multiselect label="Vulnerabilities" required="true" label_ar="نقاط الضعف"
-                            name="vulnerability[]" :value="$vulnerabilityIds" :data="$vulnerabilities" id_key="va_id"
+                            name="vulnerability[]" :value="$vulnerabilityIds" :show_key="true" :data="$vulnerabilities" id_key="va_id"
                             value_key="va_name" />
                     </div>
                     <div>
