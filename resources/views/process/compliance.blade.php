@@ -842,7 +842,7 @@
             <div class="spacebox"></div>
         </div>
         <!-- ISO 27000 Family -->
-        <div>
+        {{-- <div>
             <div class="sectionhead">
                 <p>ISO 27001 Related Evidences</p>
                 <p>الأدلة ذات الصلة بمعيار ISO 27001</p>
@@ -902,7 +902,7 @@
             </a>
             <div class="spacebox"></div>
         </div>
-        @include('process/domain-ISO-27001')
+        @include('process/domain-ISO-27001') --}}
         <!-- Vulnerability Penetration Test -->
         <div>
             <div class="sectionhead">
