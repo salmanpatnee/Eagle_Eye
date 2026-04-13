@@ -2,6 +2,14 @@
 @section('title', 'Management Information System Reports')
 @section('title_ar', 'تقارير نظم المعلومات الإدارية')
 @section('content')
+<style>
+    @media (max-width: 768px) and (min-width: 320px) {
+    .report-head {
+        flex-direction: column;
+    }
+}
+</style>
+
     <div>
         <x-table.action-wrapper title="">
         </x-table.action-wrapper>
