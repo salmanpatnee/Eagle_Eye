@@ -7,15 +7,20 @@
         </x-table.action-wrapper>
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 px-4">
-                <div class="max-w-[380px] w-full mx-auto">
-                    <x-report-card route_name="asset-smart-search.index" title="Asset Smart Search"
-                        title_ar="البحث الذكي عن الأصول" />
-                </div>
-                <div class="max-w-[380px] w-full mx-auto">
-                    <x-report-card route_name="exceptions-report.index" title="Management by Exceptions (MBE)"
-                        title_ar="إدارة بواسطة الاستثناءات" />
-                </div>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4 space-between ">
+
+                <a href="{{ route('asset-smart-search.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide1.JPG') }}" alt="Asset Smart Search"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <div></div>
+
+                <a href="{{ route('exceptions-report.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide2.JPG') }}" alt="Management by Exceptions (MBE)"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+
+
             </div>
         </div>
 
@@ -25,12 +30,18 @@
         </h2>
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-critical-assets.index" title="List of Critical Assets"
-                    title_ar="قائمة الأصول الحرجة" />
-                <x-report-card route_name="mis-critical-risk-assets.index" title="Risk Related to Critical Assets"
-                    title_ar="المخاطر المتعلقة بالأصول الحرجة" />
-                <x-report-card route_name="mis-critical-control-assets.index" title="Controls Related to Critical Assets"
-                    title_ar="الضوابط المتعلقة بالأصول الحرجة" />
+                <a href="{{ route('mis-critical-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide3.JPG') }}" alt="List of Critical Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-critical-risk-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide4.JPG') }}" alt="Risk Related to Critical Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-critical-control-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide5.JPG') }}" alt="Controls Related to Critical Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
             </div>
         </div>
 
@@ -41,14 +52,21 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-cloud-assets.index" title="List of Cloud Assets"
-                    title_ar="قائمة الأصول الحساسة" />
-                <x-report-card route_name="mis-cloud-risk-assets.index" title="Risk Related to Cloud Assets"
-                    title_ar="المخاطر المتعلقة بالأصول الحساسة" />
-                <x-report-card route_name="mis-cloud-control-assets.index" title="Controls Related to Cloud Assets"
-                    title_ar="الضوابط المتعلقة بالأصول الحساسة" />
+                <a href="{{ route('mis-cloud-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide6.JPG') }}" alt="List of Cloud Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-cloud-risk-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide7.JPG') }}" alt="List of Risk Related to Cloud Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-cloud-control-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide8.JPG') }}" alt="List of Controls Related to Cloud Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
             </div>
         </div>
+
 
         <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
             <span class="font-bold" lang="ar" dir="rtl">أصول العمل عن بعد</span>
@@ -57,14 +75,22 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-telework-assets.index" title="List of Telework Assets"
-                    title_ar="قائمة أصول العمل عن بعد" />
-                <x-report-card route_name="mis-telework-risk-assets.index" title="Risk Related to Telework Assets"
-                    title_ar="المخاطر المتعلقة  أصول العمل عن بعد" />
-                <x-report-card route_name="mis-telework-control-assets.index" title="Controls Related to Telework Assets"
-                    title_ar="الضوابط المتعلقة  أصول العمل عن بعد" />
+                <a href="{{ route('mis-telework-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide9.JPG') }}" alt="List of Telework Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-telework-risk-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide10.JPG') }}" alt="List of Risk Related to Telework Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-telework-control-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide11.JPG') }}"
+                        alt="List of Controls Related to Telework Assets" class="w-full h-auto rounded-lg shadow-md">
+                </a>
             </div>
         </div>
+
+
 
         <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
             <span class="font-bold" lang="ar" dir="rtl">أصول التواصل الاجتماعي
@@ -74,14 +100,23 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-social-assets.index" title="List of Social Media Assets"
-                    title_ar="قائمة أصول التواصل الاجتماعي" />
-                <x-report-card route_name="mis-social-risk-assets.index" title="Risk Related to Social Media Assets"
-                    title_ar="المخاطر المتعلقة  أصول التواصل الاجتماعي" />
-                <x-report-card route_name="mis-social-control-assets.index" title="Controls Related to Social Media Assets"
-                    title_ar="الضوابط المتعلقة  أصول التواصل الاجتماعي" />
+                <a href="{{ route('mis-social-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide12.JPG') }}" alt="List of Social Media Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-social-risk-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide13.JPG') }}"
+                        alt="List of Risk Related to Social Media Assets" class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-social-control-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide14.JPG') }}"
+                        alt="List of Controls Related to Social Media Assets" class="w-full h-auto rounded-lg shadow-md">
+                </a>
             </div>
         </div>
+
+
+
 
         <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
             <span class="font-bold" lang="ar" dir="rtl">أصول خصوصية البيانات
@@ -91,14 +126,21 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-data-assets.index" title="List of Data Privacy Assets"
-                    title_ar="قائمة أصول خصوصية البيانات" />
-                <x-report-card route_name="mis-data-risk-assets.index" title="Risk Related to Data Privacy Assets"
-                    title_ar="المخاطر المتعلقة  أصول خصوصية البيانات" />
-                <x-report-card route_name="mis-data-control-assets.index" title="Controls Related to Data Privacy Assets"
-                    title_ar="الضوابط المتعلقة  أصول خصوصية البيانات" />
+                <a href="{{ route('mis-data-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide15.JPG') }}" alt="List of Data Privacy Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-data-risk-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide16.JPG') }}"
+                        alt="List of Risk Related to Data Privacy Assets" class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-data-control-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide17.JPG') }}"
+                        alt="List of Controls Related to Data Privacy Assets" class="w-full h-auto rounded-lg shadow-md">
+                </a>
             </div>
         </div>
+
 
         <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
             <span class="font-bold" lang="ar" dir="rtl">معلومات تحديد الهوية الشخصية الأصول
@@ -108,14 +150,21 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-pii-assets.index" title="List of PII Assets"
-                    title_ar="قائمة معلومات تحديد الهوية الشخصية الأصول" />
-                <x-report-card route_name="mis-risk-pii-assets.index" title="Risk Related to PII Assets"
-                    title_ar="المخاطر المتعلقة  معلومات تحديد الهوية الشخصية الأصول" />
-                <x-report-card route_name="mis-control-pii-assets.index" title="Controls Related to PII Assets"
-                    title_ar="الضوابط المتعلقة  معلومات تحديد الهوية الشخصية الأصول" />
+                <a href="{{ route('mis-pii-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide18.JPG') }}" alt="List of PII Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-risk-pii-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide19.JPG') }}" alt="List of Risk Related to PII Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-control-pii-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide20.JPG') }}" alt="List of Controls Related to PII Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
             </div>
         </div>
+
 
         <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
             <span class="font-bold" lang="ar" dir="rtl">أصول الدفع
@@ -125,14 +174,22 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-payment-assets.index" title="List of Payment Assets"
-                    title_ar="قائمة أصول الدفع" />
-                <x-report-card route_name="mis-risk-payment-assets.index" title="Risk Related to Payment Assets"
-                    title_ar="المخاطر المتعلقة  أصول الدفع" />
-                <x-report-card route_name="mis-control-payment-assets.index" title="Controls Related to Payment Assets"
-                    title_ar="الضوابط المتعلقة  أصول الدفع" />
+                <a href="{{ route('mis-payment-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide21.JPG') }}" alt="List of Payment Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-risk-payment-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide22.JPG') }}" alt="List of Risk Related to Payment Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-control-payment-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide23.JPG') }}"
+                        alt="List of Controls Related to Payment Assets" class="w-full h-auto rounded-lg shadow-md">
+                </a>
             </div>
         </div>
+
+
 
         <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
             <span class="font-bold" lang="ar" dir="rtl">معيار أمان بيانات صناعة بطاقات الدفع أصول
@@ -142,16 +199,24 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-pci-assets.index" title="List of PCI Data Security Standard Assets"
-                    title_ar="قائمة معيار أمان بيانات صناعة بطاقات الدفع أصول" />
-                <x-report-card route_name="mis-risk-pci-assets.index"
-                    title="Risk Related to PCI Data Security Standard Assets"
-                    title_ar="المخاطر المتعلقة  معيار أمان بيانات صناعة بطاقات الدفع أصول" />
-                <x-report-card route_name="mis-control-pci-assets.index"
-                    title="Controls Related to PCI Data Security Standard Assets"
-                    title_ar="الضوابط المتعلقة  معيار أمان بيانات صناعة بطاقات الدفع أصول" />
+                <a href="{{ route('mis-pci-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide24.JPG') }}"
+                        alt="List of PCI Data Security Standard Assets" class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-risk-pci-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide25.JPG') }}"
+                        alt="List of Risk Related to PCI Data Security Standard Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-control-pci-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide26.JPG') }}"
+                        alt="List of Controls Related to PCI Data Security Standard Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
             </div>
         </div>
+
+
 
         <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
             <span class="font-bold" lang="ar" dir="rtl">أصول التجارة الإلكترونية
@@ -161,14 +226,22 @@
 
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-e-commerce-assets.index" title="List of E-Commerce Assets"
-                    title_ar="قائمة أصول التجارة الإلكترونية" />
-                <x-report-card route_name="mis-risk-e-commerce-assets.index" title="Risk Related to E-Commerce Assets"
-                    title_ar="المخاطر المتعلقة  أصول التجارة الإلكترونية" />
-                <x-report-card route_name="mis-control-e-commerce-assets.index"
-                    title="Controls Related to E-Commerce Assets" title_ar="الضوابط المتعلقة  أصول التجارة الإلكترونية" />
+                <a href="{{ route('mis-e-commerce-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide27.JPG') }}" alt="List of E-Commerce Assets"
+                        class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-risk-e-commerce-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide28.JPG') }}"
+                        alt="List of Risk Related to E-Commerce Assets" class="w-full h-auto rounded-lg shadow-md">
+                </a>
+                <a href="{{ route('mis-control-e-commerce-assets.index') }}" target="_blank" class="block">
+                    <img src="{{ asset('Images/mis-report/Slide29.JPG') }}"
+                        alt="List of Controls Related to E-Commerce Assets" class="w-full h-auto rounded-lg shadow-md">
+                </a>
             </div>
         </div>
+
+
 
         <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
             <span class="font-bold" lang="ar" dir="rtl">الأصول المصرفية الإلكترونية
@@ -176,17 +249,19 @@
             E-Banking Assets
         </h2>
 
-        <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
-                <x-report-card route_name="mis-e-banking-assets.index" title="List of E-Banking Assets"
-                    title_ar="قائمة الأصول المصرفية الإلكترونية" />
-                <x-report-card route_name="mis-risk-e-banking-assets.index" title="Risk Related to E-Banking Assets"
-                    title_ar="المخاطر المتعلقة  الأصول المصرفية الإلكترونية" />
-                <x-report-card route_name="mis-control-e-banking-assets.index"
-                    title="Controls Related to E-Banking Assets"
-                    title_ar="الضوابط المتعلقة  الأصول المصرفية الإلكترونية" />
-            </div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 px-4">
+            <a href="{{ route('mis-e-banking-assets.index') }}" target="_blank" class="block">
+                <img src="{{ asset('Images/mis-report/Slide30.JPG') }}" alt="List of E-Banking Assets"
+                    class="w-full h-auto rounded-lg shadow-md">
+            </a>
+            <a href="{{ route('mis-risk-e-banking-assets.index') }}" target="_blank" class="block">
+                <img src="{{ asset('Images/mis-report/Slide31.JPG') }}" alt="List of Risk Related to E-Banking Assets"
+                    class="w-full h-auto rounded-lg shadow-md">
+            </a>
+            <a href="{{ route('mis-control-e-banking-assets.index') }}" target="_blank" class="block">
+                <img src="{{ asset('Images/mis-report/Slide32.JPG') }}"
+                    alt="List of Controls Related to E-Banking Assets" class="w-full h-auto rounded-lg shadow-md">
+            </a>
         </div>
-
     </div>
 @endsection
