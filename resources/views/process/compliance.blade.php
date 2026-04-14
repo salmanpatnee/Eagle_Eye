@@ -953,7 +953,7 @@
                 </div>
             </a>
         </div>
-        @include('process/resource-management')
+        {{-- @include('process/resource-management') --}}
     </div>
 
 </body>
