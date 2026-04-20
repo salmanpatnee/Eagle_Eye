@@ -118,11 +118,11 @@
                 <x-info-col label="Sub Domain" label_ar="">
                     <x-list :data="$control->subDomains" id_key="" value_key="sub_domain_name" />
                 </x-info-col>
-                <x-info-col label="Risk" label_ar="">
+                {{-- <x-info-col label="Risk" label_ar="">
                     <x-list :data="$control->risks" id_key="" value_key="risk_name" />
-                </x-info-col>
+                </x-info-col> --}}
             </x-info-row>
-
+            <hr>
             <x-info-row>
                 <x-info-col label="Control Exclusively Related to Critical Assets?"
                     label_ar="الضوابط المرتبطة حصرا بالأصول الحساسة؟">

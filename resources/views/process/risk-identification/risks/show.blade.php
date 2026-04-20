@@ -32,6 +32,11 @@
                 {{ $risk->risk_profile ?? '—' }}
             </x-info-col-lg>
 
+            <x-info-col-lg label="Risk Consequences" label_ar="آثار المخاطر">
+                {{ $risk->risk_consequences ?? '—' }}
+            </x-info-col-lg>
+
+
             <x-info-row>
                 <x-info-col label="Risk Group Name" label_ar="اسم مجموعة المخاطر">
                     {{ $risk?->group->risk_group_name ?? '—' }}
@@ -53,62 +58,61 @@
             </x-info-row>
 
             <x-info-row>
+                <x-info-col label="Controls" label_ar="الأحكام">
+                    <x-list :data="$risk->controls" id_key="" value_key="control_name" />
+                </x-info-col>
                 <x-info-col label="Classification Name" label_ar="اسم التصنيف">
                     {{ $risk?->classification->classification_name ?? '—' }}
                 </x-info-col>
+            </x-info-row>
+
+            <x-info-row>
 
                 <x-info-col label="Threat Agents" label_ar="وكيل التهديد">
                     <x-list :data="$risk->agents" id_key="" value_key="threat_agent_name" />
                 </x-info-col>
-            </x-info-row>
-
-            <x-info-row>
                 <x-info-col label="Vulnerability" label_ar="نقاط الضعف">
                     <x-list :data="$risk->vulnerabilities" id_key="" value_key="va_name" />
                 </x-info-col>
+            </x-info-row>
+
+            <x-info-row>
 
                 <x-info-col label="Categories" label_ar="فئات">
                     <x-list :data="$risk->categories" id_key="" value_key="category_name" />
                 </x-info-col>
-            </x-info-row>
-
-            <x-info-row>
                 <x-info-col label="Asset Group" label_ar="مجموعة الأصول">
                     <x-list :data="$risk->assetGroups" id_key="" value_key="asset_group_name" />
                 </x-info-col>
+            </x-info-row>
+
+            <x-info-row>
 
                 <x-info-col label="Key Risk Indicators" label_ar="مؤشرات المخاطر الرئيسية">
                     <x-list :data="$risk->kris" id_key="" value_key="key_risk_indicator_name" />
                 </x-info-col>
-            </x-info-row>
-
-            <x-info-row>
                 <x-info-col label="Key Performance Indicator" label_ar="مؤشر الأداء الرئيسي">
                     <x-list :data="$risk->kpis" id_key="" value_key="key_performance_indicatory_name" />
                 </x-info-col>
+            </x-info-row>
+
+            <x-info-row>
 
                 <x-info-col label="Risk Acceptance" label_ar="قبول المخاطر">
                     <x-list :data="$risk->acceptances" id_key="" value_key="risk_acceptance_source" />
                 </x-info-col>
-            </x-info-row>
-
-            <x-info-row>
                 <x-info-col label="Departments" label_ar="قسم">
                     <x-list :data="$risk->departments" id_key="" value_key="department_name" />
                 </x-info-col>
+            </x-info-row>
+
+            <x-info-row>
 
                 <x-info-col label="Custodian Name" label_ar="اسم الوصي">
                     <x-list :data="$risk->custodians" id_key="" value_key="custodian_role_title" />
                 </x-info-col>
-            </x-info-row>
-
-            <x-info-row>
                 <x-info-col label="Risk Inherent Score" label_ar="المخاطر الكامنة">
                     {{ $risk?->inherent->risk_inherent_score ?? '—' }}
-                </x-info-col>
-
-                <x-info-col label="Risk Consequences" label_ar="آثار المخاطر">
-                    {{ $risk?->risk_consequences ?? '—' }}
                 </x-info-col>
             </x-info-row>
 

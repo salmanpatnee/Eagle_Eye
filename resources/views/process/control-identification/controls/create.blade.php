@@ -157,13 +157,13 @@
                             value_key="sub_domain_name" show_key="true" />
                     </div>
                     <div>
-                        <x-form.multiselect label="Risk" required="true" label_ar="المخاطر" name="risks[]"
+                        {{-- <x-form.multiselect label="Risk" required="true" label_ar="المخاطر" name="risks[]"
                             :value="$riskIds" :data="$risks" id_key="risk_id" value_key="risk_name"
-                            show_key="true" />
+                            show_key="true" /> --}}
                     </div>
                 </x-form.grid-col>
 
-
+                <hr>
 
                 <x-form.grid-col>
                     <div>

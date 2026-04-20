@@ -40,7 +40,7 @@ class RiskIdentificationController extends Controller
 
     public function show(Risk $risk)
     {
-        $risk->load('owner', 'group', 'type', 'subType', 'classification', 'inherent', 'agents', 'vulnerabilities', 'categories', 'assetGroups', 'kris', 'kpis', 'acceptances', 'departments', 'custodians');
+        $risk->load('owner', 'group', 'type', 'subType', 'classification', 'inherent', 'agents', 'vulnerabilities', 'categories', 'assetGroups', 'kris', 'kpis', 'acceptances', 'departments', 'custodians', 'controls');
 
         return view('process/risk-identification/risks/show', compact('risk'));
     }
@@ -55,6 +55,7 @@ class RiskIdentificationController extends Controller
         $riskSubTypeNames = DB::table('risk_sub_type_table')->get();
         $riskClassNames = DB::table('classification_table')->get();
         $riskInherent = DB::table('risk_inherent_table')->get();
+        $controls = DB::table('control_master_table')->select('id', 'control_id', 'control_name')->distinct()->get();
         $threatAgents = DB::table('threat_agent_table')->select('id', 'threat_agent_id', 'threat_agent_name')->distinct()->get();
         $vulnerabilities = DB::table('va_table')->select('id', 'va_id', 'va_name')->distinct()->get();
         $categories = DB::table('category_table')->select('id', 'category_id', 'category_name')->distinct()->get();
@@ -64,9 +65,9 @@ class RiskIdentificationController extends Controller
         $riskAcceptances = DB::table('risk_acceptance_table')->select('id', 'risk_acceptance_id', 'risk_acceptance_source')->distinct()->get();
         $departments = DB::table('department_table')->select('id', 'department_id', 'department_name')->distinct()->get();
         $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->distinct()->get();
-        $threatAgentIds = $vulnerabilityIds = $categoryIds = $assetGroupIds = $kriIds = $kpiIds = $riskAcceptanceIds = $departmentIds = $custodianIds = [];
+        $controlIds = $threatAgentIds = $vulnerabilityIds = $categoryIds = $assetGroupIds = $kriIds = $kpiIds = $riskAcceptanceIds = $departmentIds = $custodianIds = [];
 
-        return view('process/risk-identification/risks/create', compact('risk', 'threatAgents', 'vulnerabilities', 'categories', 'assetGroups', 'keyRiskIndicators', 'keyPerformancekIndicators', 'riskAcceptances', 'departments', 'riskGroupNames', 'riskOwnerNames', 'riskTypeNames', 'riskSubTypeNames', 'riskClassNames', 'riskInherent', 'custodians', 'threatAgentIds', 'categoryIds', 'vulnerabilityIds',  'kriIds', 'kpiIds', 'riskAcceptanceIds', 'departmentIds', 'custodianIds', 'assetGroupIds',));
+        return view('process/risk-identification/risks/create', compact('risk', 'threatAgents', 'controls', 'vulnerabilities', 'categories', 'assetGroups', 'keyRiskIndicators', 'keyPerformancekIndicators', 'riskAcceptances', 'departments', 'riskGroupNames', 'riskOwnerNames', 'riskTypeNames', 'riskSubTypeNames', 'riskClassNames', 'riskInherent', 'custodians', 'threatAgentIds', 'categoryIds', 'vulnerabilityIds',  'kriIds', 'kpiIds', 'riskAcceptanceIds', 'departmentIds', 'custodianIds', 'assetGroupIds', 'controlIds'));
     }
 
     public function store(Request $request)
@@ -100,6 +101,7 @@ class RiskIdentificationController extends Controller
             'risk_operational' => 'nullable',
             'risk_payment' => 'nullable',
             'risk_e_banking' => 'nullable',
+            'controls' => 'required',
             'threatAgents' => 'required',
             'vulnerability' => 'required',
             'category' => 'required',
@@ -111,6 +113,7 @@ class RiskIdentificationController extends Controller
             'custodians' => 'required',
         ]);
 
+        $controls = $attributes['controls'];
         $threatAgents = $attributes['threatAgents'];
         $vulnerabilities = $attributes['vulnerability'];
         $categories = $attributes['category'];
@@ -121,6 +124,7 @@ class RiskIdentificationController extends Controller
         $departments = $attributes['department'];
         $custodians = $attributes['custodians'];
 
+        unset($attributes['controls']);
         unset($attributes['threatAgents']);
         unset($attributes['vulnerability']);
         unset($attributes['category']);
@@ -133,6 +137,7 @@ class RiskIdentificationController extends Controller
 
         $risk = Risk::create($attributes);
 
+        $risk->controls()->attach($controls ?? []);
         $risk->agents()->attach($threatAgents ?? []);
         $risk->vulnerabilities()->attach($vulnerabilities ?? []);
         $risk->categories()->attach($categories ?? []);
@@ -150,6 +155,7 @@ class RiskIdentificationController extends Controller
     {
         $risk->load('owner', 'group', 'type', 'subType', 'classification', 'inherent', 'agents', 'vulnerabilities', 'categories', 'assetGroups', 'kris', 'kpis', 'acceptances', 'departments', 'custodians',);
 
+        $controlIds = $risk->controls()->pluck('control_master_table.control_id')->toArray();
         $threatAgentIds = $risk->agents()->pluck('threat_agent_table.threat_agent_id')->toArray();
         $vulnerabilityIds = $risk->vulnerabilities()->pluck('va_table.va_id')->toArray();
         $categoryIds = $risk->categories()->pluck('category_table.category_id')->toArray();
@@ -166,6 +172,7 @@ class RiskIdentificationController extends Controller
         $riskSubTypeNames = DB::table('risk_sub_type_table')->get();
         $riskClassNames = DB::table('classification_table')->get();
         $riskInherent = DB::table('risk_inherent_table')->get();
+        $controls = DB::table('control_master_table')->select('id', 'control_id', 'control_name')->distinct()->get();
         $threatAgents = DB::table('threat_agent_table')->select('id', 'threat_agent_id', 'threat_agent_name')->distinct()->get();
         $vulnerabilities = DB::table('va_table')->select('id', 'va_id', 'va_name')->distinct()->get();
         $categories = DB::table('category_table')->select('id', 'category_id', 'category_name')->distinct()->get();
@@ -177,7 +184,7 @@ class RiskIdentificationController extends Controller
         $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->distinct()->get();
 
 
-        return view('process/risk-identification/risks/create', compact('risk', 'threatAgentIds', 'categoryIds', 'vulnerabilityIds', 'vulnerabilities', 'kriIds', 'kpiIds', 'riskAcceptanceIds', 'departmentIds', 'custodianIds', 'assetGroupIds', 'categories', 'assetGroups', 'keyRiskIndicators', 'keyPerformancekIndicators', 'riskAcceptances', 'departments', 'riskGroupNames', 'riskOwnerNames', 'riskTypeNames', 'riskSubTypeNames', 'riskClassNames', 'riskInherent', 'threatAgents', 'custodians'));
+        return view('process/risk-identification/risks/create', compact('risk', 'controls', 'controlIds', 'threatAgentIds', 'categoryIds', 'vulnerabilityIds', 'vulnerabilities', 'kriIds', 'kpiIds', 'riskAcceptanceIds', 'departmentIds', 'custodianIds', 'assetGroupIds', 'categories', 'assetGroups', 'keyRiskIndicators', 'keyPerformancekIndicators', 'riskAcceptances', 'departments', 'riskGroupNames', 'riskOwnerNames', 'riskTypeNames', 'riskSubTypeNames', 'riskClassNames', 'riskInherent', 'threatAgents', 'custodians'));
     }
 
     public function update(Risk $risk, Request $request)
@@ -213,6 +220,7 @@ class RiskIdentificationController extends Controller
             'risk_payment' => 'nullable',
             'risk_e_banking' => 'nullable',
             'threatAgents' => 'required',
+            'controls' => 'required',
             'vulnerability' => 'required',
             'category' => 'required',
             'assetGroup' => 'required',
@@ -223,6 +231,7 @@ class RiskIdentificationController extends Controller
             'custodians' => 'required',
         ]);
 
+        $controls = $attributes['controls'];
         $threatAgents = $attributes['threatAgents'];
         $vulnerabilities = $attributes['vulnerability'];
         $categories = $attributes['category'];
@@ -233,6 +242,7 @@ class RiskIdentificationController extends Controller
         $departments = $attributes['department'];
         $custodians = $attributes['custodians'];
 
+        unset($attributes['controls']);
         unset($attributes['threatAgents']);
         unset($attributes['vulnerability']);
         unset($attributes['category']);
@@ -246,6 +256,7 @@ class RiskIdentificationController extends Controller
         $risk->update($attributes);
 
         $risk->agents()->sync($threatAgents ?? []);
+        $risk->controls()->sync($controls ?? []);
         $risk->vulnerabilities()->sync($vulnerabilities ?? []);
         $risk->categories()->sync($categories ?? []);
         $risk->assetGroups()->sync($assetGroups ?? []);

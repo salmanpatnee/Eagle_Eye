@@ -70,11 +70,11 @@ class ControlController extends Controller
         $bestPractices = DB::table('best_practice_table')->select('id', 'best_practices_id', 'best_practices_name')->distinct()->get();
         $domains = DB::table('domain_table')->select('id', 'main_domain_id', 'main_domain_name')->distinct()->get();
         $subDomains = DB::table('sub_domain_table')->select('id', 'sub_domain_id', 'sub_domain_name')->distinct()->get();
-        $risks = DB::table('risk_master_table')->select('id', 'risk_id', 'risk_name')->distinct()->get();
+        // $risks = DB::table('risk_master_table')->select('id', 'risk_id', 'risk_name')->distinct()->get();
         $controls = ControlMaster::select('control_id', 'control_name')->get();
         $categoryIds =  $bestPracticeIds =  $custodianRoleIds =  $mainDomainIds = $subDomainIds = $riskIds = [];
 
-        return view('process/control-identification/controls/create', compact('control', 'classifications', 'owners', 'controlTypes', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'controls', 'categoryIds', 'bestPracticeIds', 'custodianRoleIds', 'mainDomainIds', 'subDomainIds', 'riskIds'));
+        return view('process/control-identification/controls/create', compact('control', 'classifications', 'owners', 'controlTypes', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'controls', 'categoryIds', 'bestPracticeIds', 'custodianRoleIds', 'mainDomainIds', 'subDomainIds', 'riskIds'));
     }
 
     public function store(Request $request)
@@ -104,7 +104,7 @@ class ControlController extends Controller
             'custodians' => 'required',
             'domains' => 'required',
             'subDomains' => 'required',
-            'risks' => 'required',
+            // 'risks' => 'required',
             'control_critical_asset' => 'nullable',
             'control_cloud' => 'nullable',
             'control_telework' => 'nullable',
@@ -139,8 +139,8 @@ class ControlController extends Controller
         $subDomains = $attributes['subDomains'];
         unset($attributes['subDomains']);
 
-        $risks = $attributes['risks'];
-        unset($attributes['risks']);
+        // $risks = $attributes['risks'];
+        // unset($attributes['risks']);
 
         $control = ControlMaster::create($attributes);
 
@@ -149,7 +149,7 @@ class ControlController extends Controller
         $control->custodians()->attach($custodians ?? []);
         $control->domains()->attach($domains ?? []);
         $control->subDomains()->attach($subDomains ?? []);
-        $control->risks()->attach($risks ?? []);
+        // $control->risks()->attach($risks ?? []);
 
         return redirect()->route('controls.index')->with('success', 'Control Saved Successfully.');
     }
@@ -162,7 +162,7 @@ class ControlController extends Controller
         $custodianRoleIds = $control->custodians()->pluck('custodian_table.custodian_role_id')->toArray();
         $mainDomainIds = $control->domains()->pluck('domain_table.main_domain_id')->toArray();
         $subDomainIds = $control->subDomains()->pluck('sub_domain_table.sub_domain_id')->toArray();
-        $riskIds = $control->risks()->pluck('risk_master_table.risk_id')->toArray();
+        // $riskIds = $control->risks()->pluck('risk_master_table.risk_id')->toArray();
         $controls = ControlMaster::select('control_id', 'control_name')->where('control_id', "!=", $control->control_id)->get();
 
         $classifications = DB::table('classification_table')->select('classification_id', 'classification_name')->get();
@@ -173,12 +173,12 @@ class ControlController extends Controller
         $bestPractices = DB::table('best_practice_table')->select('id', 'best_practices_id', 'best_practices_name')->distinct()->get();
         $domains = DB::table('domain_table')->select('id', 'main_domain_id', 'main_domain_name')->distinct()->get();
         $subDomains = DB::table('sub_domain_table')->select('id', 'sub_domain_id', 'sub_domain_name')->distinct()->get();
-        $risks = DB::table('risk_master_table')->select('id', 'risk_id', 'risk_name')->distinct()->get();
+        // $risks = DB::table('risk_master_table')->select('id', 'risk_id', 'risk_name')->distinct()->get();
         $controls = ControlMaster::select('control_id', 'control_name')->get();
 
 
 
-        return view('process/control-identification/controls/create', compact('control', 'classifications', 'owners', 'controlTypes', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains', 'risks', 'controls', 'categoryIds', 'bestPracticeIds', 'custodianRoleIds', 'mainDomainIds', 'subDomainIds', 'riskIds'));
+        return view('process/control-identification/controls/create', compact('control', 'classifications', 'owners', 'controlTypes', 'categories', 'custodians', 'bestPractices', 'domains', 'subDomains',  'controls', 'categoryIds', 'bestPracticeIds', 'custodianRoleIds', 'mainDomainIds', 'subDomainIds'));
     }
 
     public function update(ControlMaster $control, Request $request)
@@ -208,7 +208,7 @@ class ControlController extends Controller
             'custodians' => 'required',
             'domains' => 'required',
             'subDomains' => 'required',
-            'risks' => 'required',
+            // 'risks' => 'required',
             'control_critical_asset' => 'nullable',
             'control_cloud' => 'nullable',
             'control_telework' => 'nullable',
@@ -243,8 +243,8 @@ class ControlController extends Controller
         $subDomains = $attributes['subDomains'];
         unset($attributes['subDomains']);
 
-        $risks = $attributes['risks'];
-        unset($attributes['risks']);
+        // $risks = $attributes['risks'];
+        // unset($attributes['risks']);
 
         $control->update($attributes);
 
@@ -253,7 +253,7 @@ class ControlController extends Controller
         $control->custodians()->sync($custodians ?? []);
         $control->domains()->sync($domains ?? []);
         $control->subDomains()->sync($subDomains ?? []);
-        $control->risks()->sync($risks ?? []);
+        // $control->risks()->sync($risks ?? []);
 
         return redirect()->route('controls.index')->with('success', 'Control Saved Successfully.');
     }
