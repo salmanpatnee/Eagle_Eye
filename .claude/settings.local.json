@@ -16,7 +16,13 @@
       "Bash(./vendor/bin/pint:*)",
       "Bash(dir \"C:\\\\Users\\\\salmanabdul.ghani\\\\Herd\\\\grc\\\\resources\\\\views\" /b)",
       "Bash(findstr:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(xargs grep:*)",
+      "Bash(php -r 'require '\\\\''/c/Users/salmanabdul.ghani/Herd/grc/vendor/autoload.php'\\\\''; $config = include\\('\\\\''/c/Users/salmanabdul.ghani/Herd/grc/config/database.php'\\\\''\\); print_r\\($config['\\\\''connections'\\\\'']\\);')",
+      "Bash(grep -r \"auth\\(\\)->user\\(\\)\\\\|role_id\\\\|->role\" /c/Users/salmanabdul.ghani/Herd/grc/app/Http/Controllers/*.php)",
+      "Bash(grep -rn \"Middleware\\\\|middleware\\\\|can\\\\|role\" /c/Users/salmanabdul.ghani/Herd/grc/app/Http/Controllers/*.php)",
+      "Bash(php -r \"require 'C:/Users/Salman/Herd/grc/vendor/autoload.php';\")",
+      "Bash(php artisan *)"
     ],
     "deny": [],
     "ask": []
