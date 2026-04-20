@@ -5,9 +5,11 @@
 @section('content')
     <div>
 
+        @if(auth()->user()->canManageOrganizations())
         <x-table.action-wrapper>
             <x-action.button label="Add Organization" label_ar="إضافة جهة" route_name="organizations.create" />
         </x-table.action-wrapper>
+        @endif
 
         <x-table.table>
             <x-table.thead>
@@ -28,8 +30,10 @@
                         <x-table.td>{{ $organization->initiative_owner_email }}</x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="organizations.show" param="{{ $organization->id }}" />
+                            @if(auth()->user()->canManageOrganizations())
                             <x-action.edit route_name="organizations.edit" param="{{ $organization->id }}" />
                             <x-action.delete route_name="organizations.destroy" param="{{ $organization->id }}" />
+                            @endif
                         </x-table.td>
                     </tr>
                 @endforeach

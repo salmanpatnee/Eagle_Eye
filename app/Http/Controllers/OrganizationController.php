@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class OrganizationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $organizations = Organization::select('id', 'organization_id', 'organization_name_english', 'initiative_owner_contact_number', 'initiative_owner_email')

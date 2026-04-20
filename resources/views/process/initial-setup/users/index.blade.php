@@ -5,7 +5,9 @@
 @section('content')
     <div>
         <x-table.action-wrapper>
-            <x-action.button label="Add User" label_ar="إضافة المستخدم" route_name="users.create" />
+            @if(auth()->user()->role_id === 1)
+                <x-action.button label="Add User" label_ar="إضافة المستخدم" route_name="users.create" />
+            @endif
         </x-table.action-wrapper>
 
         <x-table.table>
@@ -28,8 +30,10 @@
 
                         <x-table.td action_col="true">
                             <x-action.view route_name="users.show" param="{{ $user->id }}" />
-                            <x-action.edit route_name="users.edit" param="{{ $user->id }}" />
-                            <x-action.delete route_name="users.destroy" param="{{ $user->id }}" />
+                            @if(auth()->user()->role_id === 1)
+                                <x-action.edit route_name="users.edit" param="{{ $user->id }}" />
+                                <x-action.delete route_name="users.destroy" param="{{ $user->id }}" />
+                            @endif
                         </x-table.td>
                     </tr>
                 @endforeach

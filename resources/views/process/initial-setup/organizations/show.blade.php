@@ -5,8 +5,10 @@
     <div>
         <x-table.action-wrapper title="Organization Details">
             <x-action.button label="View" label_ar="منظر" route_name="organizations.index" />
+            @if(auth()->user()->canManageOrganizations())
             <x-action.button label="Edit" label_ar="تحرير" route_name="organizations.edit"
                 route_param="{{ $organization->id }}" />
+            @endif
         </x-table.action-wrapper>
 
         <div class="border-gray-100 border-t p-3">

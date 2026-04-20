@@ -5,7 +5,9 @@
     <div>
         <x-table.action-wrapper title="User Details">
             <x-action.button label="View" label_ar="منظر" route_name="users.index" />
-            <x-action.button label="Edit" label_ar="تحرير" route_name="users.edit" route_param="{{ $user->id }}" />
+            @if(auth()->user()->role_id === 1)
+                <x-action.button label="Edit" label_ar="تحرير" route_name="users.edit" route_param="{{ $user->id }}" />
+            @endif
         </x-table.action-wrapper>
 
         <div class="border-gray-100 border-t p-3">

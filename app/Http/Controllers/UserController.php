@@ -10,6 +10,11 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $users = User::whereNotIn('id', [1])

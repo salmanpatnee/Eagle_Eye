@@ -3,6 +3,7 @@
     'param' => '',
 ])
 
+@if(auth()->check() && auth()->user()->canDelete())
 <div x-data="{ open: false }" class="inline-block">
     <!-- Delete Button -->
     <button type="button" title="Delete" @click="open = true"
@@ -41,3 +42,4 @@
         </div>
     </div>
 </div>
+@endif

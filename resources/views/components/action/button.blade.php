@@ -7,7 +7,12 @@
     'route_param' => '',
 ])
 
+@php
+    $isWriteRoute = str_ends_with($route_name, '.create') || str_ends_with($route_name, '.edit');
+    $canRender = !$isWriteRoute || (auth()->check() && auth()->user()->canWrite());
+@endphp
 
+@if($canRender)
 @if ($route_name)
     <a href="{{ route($route_name, $route_param) }}" {{ $attributes->merge(['class' => 'inline-block']) }}>
 @endif
@@ -19,4 +24,5 @@
 </button>
 @if ($route_name)
     </a>
+@endif
 @endif

@@ -135,7 +135,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::view('/home', 'home')->name('home');
     Route::view('/compliance', 'process/compliance')->name('compliance');
     Route::view('/vciso', 'vciso')->name('vciso');
@@ -203,11 +203,9 @@ Route::middleware(['auth'])->group(function () {
 
     // ------------------- USERS -------------------
 
-    Route::middleware('superadmin')->group(function () {
-        Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class);
         // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
         // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
-    });
 
     // ------------------- IMPORT MANAGEMENT -------------------
 
