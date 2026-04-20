@@ -76,7 +76,7 @@
                 {{ $auditFinding->compliance_level ?? '—' }}
             </x-info-col-lg>
 
-            <x-info-col-lg label="NCA Remarks" label_ar="الملاحظات">
+            <x-info-col-lg label="Auditor Observation" label_ar="ملاحظة المدقق">
                 {{ $auditFinding->nca_remarks ?? '—' }}
             </x-info-col-lg>
 

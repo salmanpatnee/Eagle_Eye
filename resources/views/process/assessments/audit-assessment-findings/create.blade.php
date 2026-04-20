@@ -128,8 +128,8 @@
                 <x-form.textarea-field label="Compliance Level" label_ar="مستوى الالتزام" name="compliance_level"
                     placeholder="Enter Compliance Level" :value="$auditFinding?->compliance_level ?? old('compliance_level')" />
 
-                <x-form.textarea-field label="NCA Remarks" label_ar="الملاحظات" name="nca_remarks"
-                    placeholder="Enter NCA Remarks" :value="$auditFinding?->nca_remarks ?? old('nca_remarks')" />
+                <x-form.textarea-field label="Auditor Observation" label_ar="ملاحظة المدقق" name="nca_remarks"
+                    placeholder="Enter Auditor Observation" :value="$auditFinding?->nca_remarks ?? old('nca_remarks')" />
 
                 <x-form.textarea-field label="Root Cause Analysis" label_ar="تحليل السبب الجذري"
                     name="root_cause_analysis" placeholder="Enter Root Cause Analysis" :value="$auditFinding?->root_cause_analysis ?? old('root_cause_analysis')" />
