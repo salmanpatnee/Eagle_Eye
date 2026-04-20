@@ -1,4 +1,5 @@
 {
+  "showClearContextOnPlanAccept": true,
   "permissions": {
     "allow": [
       "Bash(php artisan --help:*)",

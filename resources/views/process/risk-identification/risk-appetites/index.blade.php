@@ -6,6 +6,7 @@
     <div>
 
         <x-table.action-wrapper title="Risk Appetite Heatmap">
+            <x-action.button label="Update Risk Appetite" label_ar="تحديث الرغبة في المخاطرة" route_name="risk-appetites.list" />
         </x-table.action-wrapper>
 
         <section id="heatmap">

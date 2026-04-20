@@ -258,6 +258,7 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::resource('kris', RiskKriController::class);
     Route::resource('kpis', RiskKpiController::class);
     Route::resource('risk-treatment-options', RiskTreatmentOptionsController::class);
+    Route::get('risk-appetites/list', [RiskAppetiteController::class, 'list'])->name('risk-appetites.list');
     Route::resource('risk-appetites', RiskAppetiteController::class);
     Route::resource('risk-inherents', RiskInherentController::class);
     Route::resource('risk-acceptances', RiskAcceptanceController::class);

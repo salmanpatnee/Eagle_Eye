@@ -16,6 +16,12 @@ class RiskAppetiteController extends Controller
         return view('process.risk-identification.risk-appetites.index', compact('riskAppetites', 'result', 'impacts'));
     }
 
+    public function list()
+    {
+        $riskAppetites = RiskAppetite::orderBy('risk_appetite_id')->paginate(20);
+        return view('process.risk-identification.risk-appetites.list', compact('riskAppetites'));
+    }
+
     public function create()
     {
         return view('process.risk-identification.risk-appetites.create');
