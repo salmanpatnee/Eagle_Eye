@@ -17,6 +17,17 @@
     <div id="print-area">
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
             <div class="card">
+                <h3 class="card-title">SAMA Non-Compliance Status</h3>
+                <canvas id="samaNonComplianceGauge"></canvas>
+            </div>
+            <div class="card">
+                <h3 class="card-title">NCA Non-Compliance Status</h3>
+                <canvas id="ncaNonComplianceGauge"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+            <div class="card">
                 <h3 class="card-title">NCA-ECC Compliance Status</h3>
                 <canvas id="eccStatusChart"></canvas>
             </div>
@@ -104,6 +115,7 @@
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-gauge@0.3.0/dist/chartjs-gauge.min.js"></script>
     <script src="{{ asset('js/compliance-dashboard.js') }}"></script>
 
     <script>
@@ -767,5 +779,60 @@
                 // },
             }
         });
+    </script>
+    <script>
+        (function () {
+            function buildGauge(elementId, dataObj) {
+                const implemented   = dataObj['Implemented']           ?? 0;
+                const notImpl       = dataObj['Not Implemented']       ?? 0;
+                const partial       = dataObj['Partially Implemented'] ?? 0;
+                const notApplicable = dataObj['Not Applicable']        ?? 0;
+                const total = implemented + notImpl + partial + notApplicable;
+                const pct = total > 0 ? Math.round((notImpl + partial) / total * 100) : 0;
+
+                new Chart(document.getElementById(elementId), {
+                    type: 'gauge',
+                    data: {
+                        labels: ['High Risk (67–100%)', 'Medium Risk (34–66%)', 'Low Risk (0–33%)'],
+                        datasets: [{
+                            value: 100 - pct,
+                            data: [34, 33, 33],
+                            backgroundColor: ['#FF0000', '#FFC107', '#228B22'],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        layout: { padding: { bottom: 30 } },
+                        needle: { radiusPercentage: 2, widthPercentage: 3.2, lengthPercentage: 80, color: 'rgba(0,0,0,1)' },
+                        valueLabel: { display: true, formatter: () => pct + '%', fontSize: 22, color: '#FF0000', backgroundColor: 'rgba(0,0,0,0)' },
+                        tooltips: {
+                            enabled: true,
+                            callbacks: {
+                                label: function(tooltipItem, data) {
+                                    return data.labels[tooltipItem.index] + ': ' + pct + '% non-compliant';
+                                }
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                generateLabels: function() {
+                                    return [
+                                        { text: 'High (67–100%)',  fillStyle: '#FF0000', strokeStyle: '#FF0000', lineWidth: 1 },
+                                        { text: 'Medium (34–66%)', fillStyle: '#FFC107', strokeStyle: '#FFC107', lineWidth: 1 },
+                                        { text: 'Low (0–33%)',     fillStyle: '#228B22', strokeStyle: '#228B22', lineWidth: 1 }
+                                    ];
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            buildGauge('samaNonComplianceGauge', @json($samaComplianceStatus));
+            buildGauge('ncaNonComplianceGauge',  @json($eccComplianceStatus));
+        })();
     </script>
 @endpush
