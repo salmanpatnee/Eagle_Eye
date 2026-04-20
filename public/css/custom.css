@@ -12,7 +12,150 @@
     font-family: "IBM Plex Sans Arabic", sans-serif;
     font-weight: 200;
     font-style: normal;
+}.select2-container .select2-search--inline .select2-search__field {
+    height: 28px;
+    line-height: 32px;
 }
+.ibm-plex-sans-arabic-thin {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.ibm-plex-sans-arabic-extralight {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.ibm-plex-sans-arabic-light {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.ibm-plex-sans-arabic-regular {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.ibm-plex-sans-arabic-medium {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.ibm-plex-sans-arabic-semibold {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.ibm-plex-sans-arabic-bold {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+/** RTL direction styles */
+[dir="rtl"] {
+    direction: rtl;
+    unicode-bidi: embed;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+[dir="rtl"] .text-left {
+    text-align: right;
+}
+label [dir="rtl"] {
+    font-size: 16px;
+}
+
+[dir="rtl"].font-bold {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+[dir="rtl"] .text-right {
+    text-align: left;
+}
+
+[dir="rtl"] .ml-auto {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+}
+
+[dir="rtl"] .mr-auto {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+[dir="rtl"] .pl-4 {
+    padding-right: 1rem !important;
+    padding-left: 0 !important;
+}
+
+[dir="rtl"] .pr-4 {
+    padding-left: 1rem !important;
+    padding-right: 0 !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+    border-color: #d0d5dd;
+    border-radius: 0.5rem;
+}
+
+.select2-container--default.select2-container--focus
+    .select2-selection--multiple {
+    border-color: #d0d5dd;
+}
+
+.select2-container .select2-selection--multiple {
+    min-height: 44px;
+    max-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.ck.ck-content.ck-editor__editable {
+    height: 200px;
+}
+.very-low {
+    background-color: #00b050;
+}
+.low {
+    background-color: #a8d08d;
+}
+.medium {
+    background-color: #ffff00;
+}
+.high {
+    background-color: #ffc000;
+}
+.critical {
+    background-color: #ff0000;
+    color: white;
+}
+
+/* Select2 checkbox options */
+.select2-checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 0;
+}
+.select2-checkbox {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--color-brand-500, #465fff);
+    flex-shrink: 0;
+}
+
 
 .ibm-plex-sans-arabic-light {
     font-family: "IBM Plex Sans Arabic", sans-serif;

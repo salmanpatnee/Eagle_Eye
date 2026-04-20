@@ -13,13 +13,40 @@
     $(document).ready(function() {
         $('.multiselect').select2({
             placeholder: "Select an option",
-            allowClear: true // optional, adds "x" to clear selection
+            allowClear: true,
+            closeOnSelect: false,
+            templateResult: function(state) {
+                if (!state.id) return state.text;
+                var isSelected = $(state.element).is(':selected');
+                var $option = $(
+                    '<span class="select2-checkbox-option">' +
+                    '<input type="checkbox" class="select2-checkbox" ' + (isSelected ? 'checked' : '') + ' />' +
+                    '<span>' + state.text + '</span>' +
+                    '</span>'
+                );
+                return $option;
+            },
+            templateSelection: function(data, container) {
+                var $select = $(data.element).closest('select');
+                var selectedVals = $select.val() || [];
+                var count = selectedVals.length;
+
+                if (count > 1) {
+                    if (selectedVals[0].toString() !== data.id.toString()) {
+                        $(container).css('display', 'none');
+                        return $('<span>');
+                    }
+                    return $('<span>').text(count + ' items selected');
+                }
+                return data.text;
+            }
         });
-    }).on('select2:open', function() {
-        // Apply Tailwind classes to the ul
-        $('.select2-results__options').addClass(
-            'shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden'
-        );
+
+        $('.multiselect').on('select2:open', function() {
+            $('.select2-results__options').addClass(
+                'text-sm text-gray-800'
+            );
+        });
     });
 </script>
 </body>
