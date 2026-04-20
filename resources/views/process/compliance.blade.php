@@ -12,277 +12,157 @@
     <!-- Boxicons Icons-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     {{-- <link rel="stylesheet" href="{{ asset('/css/6-Header/1-MainPageHeader.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/style.css?v=1.45') }}">
     <style>
-        .text-center {
-            text-align: center !important;
+        /* Utility overrides */
+        .text-center { text-align: center !important; }
+        .gap-3 { gap: 1rem !important; }
+        .d-flex { display: flex !important; }
+        .align-items-center { align-items: center !important; }
+        .gap-2 { gap: .5rem !important; }
+        .navbar-nav { padding-left: 0; margin-bottom: 0; list-style: none; }
+        .rounded-circle { border-radius: 50% !important; }
+        .bg-white { background-color: #fff !important; }
+        .fs-6 { font-size: 1rem !important; }
+        .p-2 { padding: .5rem !important; }
+        .img-fluid { max-width: 100%; height: auto; }
+
+        * { box-sizing: border-box; }
+        body { overflow-x: hidden; max-width: 100vw; margin: 0; padding: 0; }
+
+        /* Page wrapper */
+        #desktop {
+            padding: 16px 24px 32px;
+            max-width: 1280px;
+            margin: 0 auto;
         }
 
-        .gap-3 {
-            gap: 1rem !important;
+        /* Section headers — gradient strip */
+        .sectionhead {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, #203864 0%, #2e74b6 100%);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 20px 0 10px;
+            border: none;
         }
-
-        .d-flex {
-            display: flex !important;
-        }
-
-        .align-items-center {
-            align-items: center !important;
-        }
-
-        .gap-2 {
-            gap: .5rem !important;
-        }
-
-        .navbar-nav {
-            padding-left: 0;
-            margin-bottom: 0;
-            list-style: none;
-        }
-
-        .rounded-circle {
-            border-radius: 50% !important;
-        }
-
-        .bg-white {
-            background-color: #fff !important;
-        }
-
-        .fs-6 {
-            font-size: 1rem !important;
-        }
-
-        .p-2 {
-            padding: .5rem !important;
-        }
-
-        .img-fluid {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .bg-info {
-            background-color: #6ba8b5 !important;
-        }
-
-        /* ===== COMPREHENSIVE MOBILE RESPONSIVE FIXES ===== */
-        /* Prevent horizontal scrolling and ensure proper viewport */
-        body {
-            overflow-x: hidden;
-            max-width: 100vw;
+        .sectionhead p {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
             margin: 0;
-            padding: 0;
+            letter-spacing: 0.3px;
         }
 
-        /* Ensure proper box sizing */
-        * {
-            box-sizing: border-box;
+        /* Process grid */
+        .processes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 0 0 4px;
+        }
+        .singleitemprocess {
+            display: flex;
+            justify-content: center;
+            margin: 0 0 4px;
         }
 
-        /* Make header fully responsive */
-        @media (max-width: 768px) {
+        /* Cards */
+        .boxhyperlink {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+        }
+        .itemprocesses {
+            background-color: #fff;
+            width: 100%;
+            height: 62px;
+            border: 1px solid rgba(32, 56, 100, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: stretch;
+            box-shadow: 0 1px 4px rgba(32, 56, 100, 0.08);
+            transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+            overflow: hidden;
+        }
+        .itemprocesses:hover {
+            background-color: #eef4fb;
+            border-color: #2e74b6;
+            box-shadow: 0 4px 14px rgba(32, 56, 100, 0.18);
+            transform: translateY(-2px);
+        }
+
+        /* Icon column */
+        .boxicon {
+            flex: 0 0 auto;
+            width: 52px;
+            background-color: #203864;
+            color: #fff;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+        }
+
+        /* Text area */
+        .boxname {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 12px;
+        }
+        .boxarbtext {
+            text-align: right;
+            margin: 0;
+            padding: 0 0 3px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0;
+            line-height: 1.3;
+        }
+        .boxengtext, .boxengtexttwo {
+            text-align: left;
+            margin: 0;
+            padding: 3px 0 0;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 1.3;
+        }
+        .boxengtexttwo { font-size: 11px; }
+        .seperatorline {
+            border-bottom: 1px solid rgba(0,0,0,0.15);
+            margin: 2px 0;
+        }
+
+        /* Spacebox — invisible placeholder for grid alignment */
+        .spacebox {
+            background: transparent;
+            width: 100%;
+            height: 62px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .processes { grid-template-columns: repeat(2, 1fr); }
+            .spacebox { display: none; }
+            .boxhyperlink { width: 100%; }
+        }
+        @media (max-width: 600px) {
+            #desktop { padding: 12px 14px 24px; }
+            .processes { grid-template-columns: 1fr; }
+            .sectionhead { flex-direction: column; gap: 4px; text-align: center; }
             .header-content {
                 flex-direction: column;
-                gap: 15px;
-                padding: 15px;
-                align-items: center;
-            }
-
-            .header-content>div:first-child {
-                order: 1;
-                /* text-align: center; */
-            }
-
-            .header-content>div:last-child {
-                order: 2;
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .text-center.d-flex.gap-3 {
-                gap: 10px !important;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
-
-        /* Make processes fully responsive */
-        @media (max-width: 1024px) {
-            .processes {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 20px !important;
-                align-items: center;
-            }
-
-            .singleitemprocess {
-                display: flex !important;
-                justify-content: center;
-                /* width: 100%; */
-            }
-
-            .itemprocesses {
-                width: 100%;
-                max-width: 400px;
-                min-height: auto;
-            }
-        }
-
-        /* Tablet specific adjustments */
-        @media (max-width: 768px) and (min-width: 481px) {
-            #desktop {
-                padding: 20px;
-            }
-
-            .sectionhead {
-                margin: 20px 0 15px 0;
-                padding: 15px;
-            }
-
-            .itemprocesses {
-                padding: 20px;
-                min-height: 120px;
-                margin: auto;
-            }
-
-            .boxicon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.3rem;
-                display: flex;
-                align-items: center;
-            }
-        }
-
-        /* Mobile specific adjustments */
-        @media (max-width: 480px) {
-            #desktop {
-                padding: 15px;
-            }
-
-            .sectionhead {
-                margin: 15px 0 10px 0;
-                padding: 12px 6px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-                text-align: center;
-            }
-
-            .itemprocesses {
-                min-height: auto;
-                padding: 15px;
-                margin: 0;
-            }
-
-            .boxicon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .boxarbtext {
-                font-size: 0.9rem;
-            }
-
-            .boxengtext,
-            .boxengtexttwo {
-                font-size: 0.8rem;
-            }
-
-            .seperatorline {
-                width: 100%;
-                height: 1px;
-            }
-
-            .header-content>div:first-child a {
-                font-size: 1.3rem;
-            }
-
-            .RightButton {
-                padding: 8px 12px;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Very small mobile adjustments */
-        @media (max-width: 360px) {
-
-
-
-            #desktop {
-                padding: 10px;
-            }
-
-            .sectionhead {
-                padding: 10px;
-            }
-
-            .itemprocesses {
+                gap: 12px;
                 padding: 12px;
-            }
-
-            .boxicon {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
-            }
-
-            .boxarbtext {
-                font-size: 0.8rem;
-            }
-
-            .boxengtext,
-            .boxengtexttwo {
-                font-size: 0.7rem;
-            }
-
-            .header-content>div:first-child a {
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Ensure spacebox doesn't break layout on mobile */
-        @media (max-width: 1024px) {
-            .boxhyperlink {
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .spacebox {
-                display: none !important;
-            }
-        }
-
-        /* Fix any potential flex issues */
-        .processes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        /* Ensure proper touch targets on mobile */
-        @media (max-width: 768px) {
-            .boxhyperlink {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-                width: 100%;
-            }
-
-            .roles-wrap {
-                flex-direction: column;
                 align-items: center;
             }
+            .header-content > div:last-child { width: 100%; justify-content: center; flex-wrap: wrap; }
+            .roles-wrap { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
