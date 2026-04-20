@@ -266,7 +266,7 @@
         .processes {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 10px;
             justify-content: center;
         }
 
@@ -537,22 +537,7 @@
                 </div>
             </a>
         </div>
-        <div class="processes">
-            <div class="spacebox"></div>
-            <a href="{{ route('va.register') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">سجل الثغرات الأمنية</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Vulnerability Regsiter</p>
-                    </div>
-                </div>
-            </a>
-            <div class="spacebox"></div>
-        </div>
+        
         <!-- Reporting -->
         <div>
             <div class="sectionhead">
@@ -654,7 +639,7 @@
         </div>
         <div class="processes">
             <div class="spacebox"></div>
-            <a href="{{ route('frameworks') }}" class="boxhyperlink">
+            <a href="{{ route('compliance') }}" class="boxhyperlink">
                 <div class="itemprocesses">
                     <div class="boxicon">
                         <i class='bx bxs-label'></i>
@@ -952,6 +937,22 @@
                     </div>
                 </div>
             </a>
+        </div>
+        <div class="processes">
+            <div class="spacebox"></div>
+            <a href="{{ route('va.register') }}" class="boxhyperlink">
+                <div class="itemprocesses">
+                    <div class="boxicon">
+                        <i class='bx bxs-label'></i>
+                    </div>
+                    <div class="boxname">
+                        <p class="boxarbtext">سجل الثغرات الأمنية</p>
+                        <div class="seperatorline"></div>
+                        <p class="boxengtext">Vulnerability Regsiter</p>
+                    </div>
+                </div>
+            </a>
+            <div class="spacebox"></div>
         </div>
         {{-- @include('process/resource-management') --}}
     </div>
