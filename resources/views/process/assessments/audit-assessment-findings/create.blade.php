@@ -115,7 +115,7 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.multiselect label="Controls" label_ar="اسم الضوابط" name="controls[]" :value="$controlIds"
-                            :data="$controls" id_key="control_id" value_key="control_name" required="true" />
+                            :data="$controls" id_key="control_id" value_key="control_name" required="true" :show_key="true" />
                     </div>
 
                     <div>
