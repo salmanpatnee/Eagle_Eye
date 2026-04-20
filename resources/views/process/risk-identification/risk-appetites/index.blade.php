@@ -6,7 +6,6 @@
     <div>
 
         <x-table.action-wrapper title="Risk Appetite Heatmap">
-            {{-- <x-action.button label="Add Organization" label_ar="إضافة جهة" route_name="organizations.create" /> --}}
         </x-table.action-wrapper>
 
         <section id="heatmap">
@@ -39,14 +38,14 @@
                             @foreach ($chunk as $data)
                                 <td
                                     class="px-2 py-2 border-b border-r border-gray-200 align-top {{ $data->risk_appetite_color }}">
-                                    <div class="space-y-1">
+                                    <a href="{{ route('risk-appetites.edit', $data->id) }}" class="block space-y-1 hover:opacity-80">
                                         <p class="text-xs"><span class="font-semibold">Risk
                                                 ID:</span> {{ $data->risk_appetite_id }}</p>
                                         <p class="text-xs"><span class="font-semibold">Risk
                                                 Name:</span> {{ $data->risk_appetite_name }}</p>
                                         <p class="text-xs"><span class="font-semibold">Risk
                                                 Score:</span> {{ $data->risk_score }}</p>
-                                    </div>
+                                    </a>
                                 </td>
                             @endforeach
                         </tr>
