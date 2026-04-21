@@ -12,7 +12,7 @@
     <!-- Boxicons Icons-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     {{-- <link rel="stylesheet" href="{{ asset('/css/6-Header/1-MainPageHeader.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('/css/style.css?v=1.45') }}">
+    <link rel="stylesheet" href="{{ asset('/css/style.css?v=1.40') }}">
     <style>
         /* Utility overrides */
         .text-center { text-align: center !important; }
@@ -28,7 +28,7 @@
         .img-fluid { max-width: 100%; height: auto; }
 
         * { box-sizing: border-box; }
-        body { overflow-x: hidden; max-width: 100vw; margin: 0; padding: 0; }
+        body { overflow-x: hidden; max-width: 100vw; margin: 0; padding: 0; background: #f0f4f8; }
 
         /* Page wrapper */
         #desktop {
@@ -37,7 +37,7 @@
             margin: 0 auto;
         }
 
-        /* Section headers — gradient strip */
+        /* Section headers */
         .sectionhead {
             display: flex;
             justify-content: space-between;
@@ -46,20 +46,20 @@
             padding: 10px 20px;
             border-radius: 8px;
             margin: 20px 0 10px;
-            border: none;
         }
         .sectionhead p {
             color: #fff;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             margin: 0;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
         }
 
-        /* Process grid */
+        /* Process rows — flex, centered, wrapping */
         .processes {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 10px;
             margin: 0 0 4px;
         }
@@ -69,42 +69,55 @@
             margin: 0 0 4px;
         }
 
-        /* Cards */
+        /* Each card link — fixed 1/3 width so 3 fill a row, orphans center */
         .boxhyperlink {
             text-decoration: none;
             color: #000;
             display: flex;
+            flex: 0 0 calc(33.333% - 7px);
+            min-width: 0;
         }
-        .itemprocesses {
-            background-color: #fff;
-            width: 100%;
+        .singleitemprocess .boxhyperlink {
+            flex: 0 0 calc(33.333% - 7px);
+        }
+
+        /* Spacebox holds grid slot on desktop, hidden on small */
+        .spacebox {
+            flex: 0 0 calc(33.333% - 7px);
             height: 62px;
-            border: 1px solid rgba(32, 56, 100, 0.2);
+            background: transparent;
+        }
+
+        /* Card shell */
+        .itemprocesses {
+            background: #fff;
+            width: 100%;
+            height: 64px;
+            border: 1px solid rgba(32, 56, 100, 0.15);
+            /* border-left: 3px solid #203864; */
             border-radius: 8px;
             display: flex;
             align-items: stretch;
-            box-shadow: 0 1px 4px rgba(32, 56, 100, 0.08);
-            transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 1px 3px rgba(32, 56, 100, 0.07);
+            transition: box-shadow 0.2s ease, transform 0.18s ease, border-left-color 0.2s ease, background 0.2s ease;
             overflow: hidden;
         }
         .itemprocesses:hover {
-            background-color: #eef4fb;
-            border-color: #2e74b6;
-            box-shadow: 0 4px 14px rgba(32, 56, 100, 0.18);
+            background: #eef4fb;
+            /* border-left-color: #2e74b6; */
+            /* box-shadow: 0 4px 16px rgba(32, 56, 100, 0.14); */
             transform: translateY(-2px);
         }
 
         /* Icon column */
         .boxicon {
-            flex: 0 0 auto;
-            width: 52px;
-            background-color: #203864;
+            flex: 0 0 48px;
+            background: #203864;
             color: #fff;
-            font-size: 17px;
+            font-size: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 0;
         }
 
         /* Text area */
@@ -114,46 +127,51 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 12px;
+            min-width: 0;
         }
         .boxarbtext {
             text-align: right;
             margin: 0;
-            padding: 0 0 3px;
+            padding: 0;
             font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 0;
+            font-size: 12px;
             line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .boxengtext, .boxengtexttwo {
             text-align: left;
             margin: 0;
-            padding: 3px 0 0;
+            padding: 0;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.3;
+            color: #1a2a40;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .boxengtexttwo { font-size: 11px; }
         .seperatorline {
-            border-bottom: 1px solid rgba(0,0,0,0.15);
-            margin: 2px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            margin: 3px 0;
         }
 
-        /* Spacebox — invisible placeholder for grid alignment */
-        .spacebox {
-            background: transparent;
-            width: 100%;
-            height: 62px;
-        }
-
-        /* Responsive */
+        /* Responsive — tablet: 2-col */
         @media (max-width: 900px) {
-            .processes { grid-template-columns: repeat(2, 1fr); }
+            .boxhyperlink,
+            .singleitemprocess .boxhyperlink {
+                flex: 0 0 calc(50% - 5px);
+            }
             .spacebox { display: none; }
-            .boxhyperlink { width: 100%; }
         }
-        @media (max-width: 600px) {
-            #desktop { padding: 12px 14px 24px; }
-            .processes { grid-template-columns: 1fr; }
+
+        /* Responsive — mobile: 1-col */
+        @media (max-width: 560px) {
+            #desktop { padding: 10px 12px 20px; }
+            .boxhyperlink,
+            .singleitemprocess .boxhyperlink { flex: 0 0 100%; }
             .sectionhead { flex-direction: column; gap: 4px; text-align: center; }
             .header-content {
                 flex-direction: column;

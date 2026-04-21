@@ -225,8 +225,7 @@ class RiskRegisterController extends Controller
             'T' => 'risk_finding_description',
             'U' => 'risk_likelihood',
             'V' => 'risk_impact',
-            'W' => 'risk_appetite
-            ',
+            'W' => 'risk_appetite',
             'X' => 'preventive_action',
             'Y' => 'last_evaluation_date',
             'Z' => 'lesson_learned',

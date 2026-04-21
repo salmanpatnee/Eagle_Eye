@@ -64,7 +64,7 @@
             </x-info-col-lg>
 
             <x-info-col-lg label="Risk Assessment Remarks" label_ar="ملاحظات">
-                {{ $riskAssessmentFinding->maturity_justification ?? '—' }}
+                {{ $riskAssessmentFinding->Remarks ?? '—' }}
             </x-info-col-lg>
 
             <x-info-row>

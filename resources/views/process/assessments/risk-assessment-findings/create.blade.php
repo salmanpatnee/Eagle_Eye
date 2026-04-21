@@ -115,8 +115,7 @@
 
 
                 <x-form.textarea-field label="Risk Maturity Justification" label_ar="مبرر نضج التحكم"
-                    name="risk_maturity_justification" placeholder="Enter Risk Maturity Justification" :value="$riskAssessmentFinding?->risk_maturity_justification ??
-                        old('risk_maturity_justification')" />
+                    name="maturity_justification" placeholder="Enter Risk Maturity Justification" :value="$riskAssessmentFinding?->maturity_justification ?? old('maturity_justification')" />
 
 
 

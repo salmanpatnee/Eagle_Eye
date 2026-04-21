@@ -44,10 +44,10 @@ class RiskAssessmentController extends Controller
                 });
             })
             ->when($startEndDate, function ($query) use ($startEndDate) {
-                return $query->where('risk_assessment_start_date', $startEndDate);
-            })
-            ->when($startEndDate, function ($query) use ($startEndDate) {
-                return $query->orWhere('risk_assessment_end_date', $startEndDate);
+                $query->where(function ($q) use ($startEndDate) {
+                    $q->where('risk_assessment_start_date', $startEndDate)
+                      ->orWhere('risk_assessment_end_date', $startEndDate);
+                });
             })
             ->paginate(20);
 

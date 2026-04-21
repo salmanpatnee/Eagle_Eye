@@ -38,10 +38,10 @@ class ControlAssessmentController extends Controller
                 });
             })
             ->when($startEndDate, function ($query) use ($startEndDate) {
-                return $query->where('control_assessment_start_date', $startEndDate);
-            })
-            ->when($startEndDate, function ($query) use ($startEndDate) {
-                return $query->orWhere('control_assessment_end_date', $startEndDate);
+                $query->where(function ($q) use ($startEndDate) {
+                    $q->where('control_assessment_start_date', $startEndDate)
+                      ->orWhere('control_assessment_end_date', $startEndDate);
+                });
             })
             ->paginate(20);
 

@@ -13,8 +13,6 @@ class ControlAssessmentFinding extends Model
     protected $guarded = [];
     public $timestamps = false;
     // protected $primaryKey = 'control_finding_id';
-    public $incrementing = false;
-
     protected $with = ['control'];
 
     public function getRouteKeyName()

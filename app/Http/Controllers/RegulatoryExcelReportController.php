@@ -47,42 +47,28 @@ class RegulatoryExcelReportController extends Controller
     {
         $controlAssessmentId = request('controlAssessmentId');
         $cloudControlType = request('cloudControlType');
-        $eccreport =  $this->getReport("NCA-CCC-2020", $controlAssessmentId, $cloudControlType);
+        $report = $this->getReport("NCA-CCC-2020", $controlAssessmentId, $cloudControlType);
 
-        // View report
-        // $htmlContent = view('process/19-NCAReporting/1-NcaCccReportPdf', compact('eccreport', 'controlAssessmentId', 'cloudControlType'))->render();
-
-        // PDF Template
-        $report =  $this->getReport("NCA-TCC-2021", "CA006");
-        // return $report;
-
-
-        $htmlContent = view('pdf.tcc.index', compact('report'))->render();
-        // return $htmlContent;
+        $template = $cloudControlType === 'csp' ? 'pdf.ccc.csp' : 'pdf.ccc.cst';
 
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'autoScriptToLang' => true,
             'autoLangToFont' => true,
-            'orientation' => 'L', // Landscape orientation
-            'format' => 'A4',     // Page size (A4, A3, etc.)
-            'margin_left' => 2,  // Left margin
-            'margin_right' => 2, // Right margin
-            'margin_top' => 2,   // Top margin
-            'margin_bottom' => 2, // Bottom margin
+            'orientation' => 'L',
+            'format' => 'A4',
+            'margin_left' => 2,
+            'margin_right' => 2,
+            'margin_top' => 2,
+            'margin_bottom' => 2,
         ]);
 
-        $mpdf->WriteHTML($htmlContent);
+        $mpdf->WriteHTML(view($template, compact('report'))->render());
 
-        $outputFilePath = storage_path('app/NCA-CCC-Reportv2.pdf');
+        $outputFilePath = storage_path('app/NCA-CCC-Report.pdf');
         $mpdf->Output($outputFilePath, \Mpdf\Output\Destination::FILE);
 
         return response()->download($outputFilePath)->deleteFileAfterSend(true);
-
-
-
-        // return view('process/19-NCAReporting/1-NcaCccReportUpdated', compact('eccreport', 'controlAssessmentId', 'cloudControlType'));
-        return view('pdf.nca-ccc-cst-pdf', compact('report', 'controlAssessmentId', 'cloudControlType'));
     }
 
     public function downloadCccExcelReport()
