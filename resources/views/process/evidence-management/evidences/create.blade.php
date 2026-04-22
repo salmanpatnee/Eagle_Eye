@@ -47,37 +47,53 @@
 
                 <x-form.grid-col>
                     <div>
+                        <x-form.label label="Creation Date" label_ar="تاريخ الإنشاء" for="creation_date" />
+                        <div class="relative">
+                            <input type="date" id="creation_date" name="creation_date"
+                                value="{{ old('creation_date', $evidence?->creation_date?->format('Y-m-d')) }}"
+                                class="input-field" onclick="this.showPicker()" />
+                            <x-icons.calendar />
+                        </div>
+                    </div>
+                  <div>
                         <x-form.select label="Classification" label_ar="التصنيف" name="classification_id"
                             placeholder="Select Option" :value="$evidence?->classification_id ?? old('classification_id')" :data="$classifications" id_key="classification_id"
                             value_key="classification_name" />
                     </div>
+                </x-form.grid-col>
+
+
+
+                <x-form.grid-col>
+                    
                     <div>
                         <x-form.multiselect label="Categories" label_ar="اسم الفئة" name="categories[]" :value="$categoryIds"
                             :data="$categories" id_key="category_id" value_key="category_name" required="true" />
 
                     </div>
-                </x-form.grid-col>
-
-                <x-form.grid-col>
                     <div>
                         <x-form.select label="Evidence Nature" label_ar="طبيعة الأدلة" name="evidence_nature"
                             :custom_data="['Document', 'Record']" :value="$evidence?->evidence_nature ?? old('evidence_nature', 'Document')" />
                     </div>
+                </x-form.grid-col>
+
+                <x-form.grid-col>
+                    
                     <div>
                         <x-form.select label="Evidence Type" label_ar="نوع الأدلة" name="evidence_type" :custom_data="['Document', 'Screenshot']"
                             :value="$evidence?->evidence_type ?? old('evidence_type', 'Document')" />
                     </div>
-                </x-form.grid-col>
-
-                <x-form.textarea-field label="Evidence Source" label_ar="مصدر الأدلة" name="evidence_source"
-                    placeholder="Enter Evidence Source" :value="$evidence?->evidence_source ?? old('evidence_source')" />
-
-                <x-form.grid-col>
-                    <div>
+                     <div>
                         <x-form.select label="Owner Name" label_ar="اسم مالك" name="owner_id" placeholder="Select Option"
                             :value="$evidence?->owner_id ?? old('owner_id')" :data="$owners" id_key="owner_role_id" value_key="owner_name"
                             required="true" />
                     </div>
+                    
+                </x-form.grid-col>
+
+
+                <x-form.grid-col>
+                   
                     <div>
                         <x-form.multiselect label="Artifact
                             Name" label_ar="اسم المرفقات"
@@ -85,19 +101,18 @@
                             value_key="artifact_name" show_key="true" required="true" />
 
                     </div>
-                </x-form.grid-col>
-
-                <x-form.grid-col>
-                    <div>
+                      <div>
                         <x-form.multiselect label="Mapping Controls" label_ar="ضوابط رسم الخرائط" name="controls[]"
                             :value="$selectedControlIds" :data="$controls" id_key="control_id" value_key="control_name"
                             show_key="true" required="true" />
 
                     </div>
-                    <div>
-
-                    </div>
                 </x-form.grid-col>
+
+           
+                
+                <x-form.textarea-field label="Evidence Source" label_ar="مصدر الأدلة" name="evidence_source"
+                    placeholder="Enter Evidence Source" :value="$evidence?->evidence_source ?? old('evidence_source')" />
 
 
             </div>

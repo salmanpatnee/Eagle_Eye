@@ -20,49 +20,62 @@
                 </x-info-col>
             </x-info-row>
 
+
             <x-info-col-lg label="Evidence Description" label_ar="وصف الأدلة">
                 {{ $evidence->evidence_description ?? '—' }}
             </x-info-col-lg>
 
             <x-info-row>
+                <x-info-col label="Creation Date" label_ar="تاريخ الإنشاء">
+                    {{ $evidence->creation_date?->format('d M Y') ?? '—' }}
+                </x-info-col>
                 <x-info-col label="Classification Name" label_ar="اسم التصنيف">
                     {{ $evidence->classification?->classification_name ?? '—' }}
                 </x-info-col>
+            </x-info-row>
+
+
+            <x-info-row>
+
                 <x-info-col label="Evidence Nature" label_ar="طبيعة الدليل">
                     {{ $evidence->evidence_nature ?? '—' }}
                 </x-info-col>
-            </x-info-row>
-
-            <x-info-row>
                 <x-info-col label="Evidence Type" label_ar="نوع الأدلة">
                     {{ $evidence->evidence_type ?? '—' }}
                 </x-info-col>
+            </x-info-row>
+
+
+
+            <x-info-row>
+
                 <x-info-col label="Owner Name" label_ar="اسم مالك">
                     {{ $evidence->owner->owner_name ?? '—' }}
                 </x-info-col>
+                <x-info-col label="Controls" label_ar="الضوابط">
+                    <x-list :data="$evidence->controls" id_key="control_id" value_key="control_name" route_name="controls.show"
+                        route_param_key="id" />
+                </x-info-col>
             </x-info-row>
+
+
+
+            <x-info-row>
+
+                <x-info-col label="Artifacts" label_ar=" المرفقات">
+                    <x-list :data="$evidence->artifacts" id_key="artifact_id" value_key="artifact_name" route_name="artifacts.show"
+                        route_param_key="id" />
+                </x-info-col>
+                <x-info-col label="Categories" label_ar="الفئة">
+                    <x-list :data="$evidence->categories" id_key="category_id" value_key="category_name" />
+                </x-info-col>
+            </x-info-row>
+
 
             <x-info-col-lg label="Evidence Source" label_ar="مصدر الأدلة">
                 {{ $evidence->evidence_source ?? '—' }}
             </x-info-col-lg>
 
-            <x-info-row>
-                <x-info-col label="Controls" label_ar="الضوابط">
-                    <x-list :data="$evidence->controls" id_key="control_id" value_key="control_name"
-                        route_name="controls.show" route_param_key="id" />
-                </x-info-col>
-                <x-info-col label="Artifacts" label_ar=" المرفقات">
-                    <x-list :data="$evidence->artifacts" id_key="artifact_id" value_key="artifact_name"
-                        route_name="artifacts.show" route_param_key="id" />
-                </x-info-col>
-            </x-info-row>
-
-            <x-info-row>
-                <x-info-col label="Categories" label_ar="الفئة">
-                    <x-list :data="$evidence->categories" id_key="category_id" value_key="category_name" />
-                </x-info-col>
-
-            </x-info-row>
 
 
             <x-info-row>

@@ -12,7 +12,11 @@ class Evidence extends Model
     protected $table = 'evidence_table';
 
     protected $guarded = [];
-    
+
+    protected $casts = [
+        'creation_date' => 'date',
+    ];
+
     public $timestamps = false;
     
     public function classification(){

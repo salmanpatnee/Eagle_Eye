@@ -74,6 +74,7 @@ class EvidenceController extends Controller
         $attributes = $request->validate([
             'evidence_id' => ['required', 'unique:evidence_table'],
             'evidence_name' => 'required',
+            'creation_date' => 'nullable|date',
             'evidence_description' => 'nullable',
             'classification_id' => 'nullable',
             'categories' => 'nullable',
@@ -187,6 +188,7 @@ class EvidenceController extends Controller
         $attributes = $request->validate([
             'evidence_id' => ['required', 'unique:evidence_table,evidence_id,' . $evidence->id],
             'evidence_name' => 'required',
+            'creation_date' => 'nullable|date',
             'evidence_description' => 'nullable',
             'classification_id' => 'nullable',
             'categories' => 'nullable',
