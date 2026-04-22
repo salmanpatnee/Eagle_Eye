@@ -327,7 +327,7 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::controller(ControlAssessmentFindingController::class)->group(function () {
         Route::get('/control-assessment-findings/create/{controlAssessment}', 'create')->name('control-assessment-findings.create');
         Route::post('/control-assessment-findings/{controlAssessment}', 'store')->name('control-assessment-findings.store');
-        Route::post('/evidence-conroller/', 'get_evidence_by_conroller');
+        Route::post('/evidence-controller/', 'get_evidence_by_control');
     });
 
     // ------------------- CONTROL SMART SEARCH -------------------

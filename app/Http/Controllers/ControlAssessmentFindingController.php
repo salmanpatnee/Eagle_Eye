@@ -22,7 +22,7 @@ class ControlAssessmentFindingController extends Controller
 
     public function show(ControlAssessmentFinding $controlAssessmentFinding)
     {
-        $controlAssessmentFinding->load('categories');
+        $controlAssessmentFinding->load(['categories', 'controlAssessment']);
         return view('process/assessments/control-assessment-findings/show', compact('controlAssessmentFinding'));
     }
 
@@ -55,6 +55,7 @@ class ControlAssessmentFindingController extends Controller
 
     public function store(ControlAssessment $controlAssessment, ControlAssessmentFindingRequest $request)
     {
+        abort_unless(auth()->user()->canWrite(), 403);
         $attributes = $request->validated();
 
         $categories = $attributes['categories'];
@@ -100,6 +101,7 @@ class ControlAssessmentFindingController extends Controller
 
     public function update(ControlAssessmentFinding $controlAssessmentFinding, ControlAssessmentFindingRequest $request)
     {
+        abort_unless(auth()->user()->canWrite(), 403);
         $attributes =  $request->validated();
 
         $categories = $attributes['categories'] ?? null;
@@ -114,6 +116,7 @@ class ControlAssessmentFindingController extends Controller
 
     public function destroy(ControlAssessmentFinding $controlAssessmentFinding)
     {
+        abort_unless(auth()->user()->canDelete(), 403);
         $controlAssessmentFinding->categories()->detach();
         $controlAssessmentFinding->delete();
 
@@ -135,15 +138,17 @@ class ControlAssessmentFindingController extends Controller
         return response()->json(['control_id' => $control->control_id]);
     }
 
-    public function get_evidence_by_conroller(Request $request)
+    public function get_evidence_by_control(Request $request)
     {
+        $request->validate(['selectedValue' => 'required|exists:control_master_table,control_id']);
+
         $results = DB::table('evidence_vs_artifact_table AS eva')
             ->join('evidence_table AS ev', 'eva.evidence_id', '=', 'ev.evidence_id')
             ->join('evidence_vs_control_table AS evc', 'ev.evidence_id', '=', 'evc.evidence_id')
             ->join('artifact_table AS at', 'eva.artifact_id', '=', 'at.artifact_id')
             ->where('evc.control_id', '=', $request->selectedValue)
             ->orderBy('ev.evidence_id')
-            ->select('ev.evidence_id', 'ev.evidence_name', 'at.id')
+            ->select('ev.evidence_id', 'ev.evidence_name', 'at.id', 'ev.id as ev_db_id')
             ->get();
 
         if (count($results)) {
@@ -162,14 +167,14 @@ class ControlAssessmentFindingController extends Controller
 
             foreach ($results as $row) {
 
-                $row_id = $id != $row->evidence_id ? $row->id : '';
+                $ev_db_id = $id != $row->evidence_id ? $row->ev_db_id : '';
                 $evidence_id = $id != $row->evidence_id ? $row->evidence_id : '';
                 $evidence_name = $id != $row->evidence_id ? $row->evidence_name : '';
 
                 $html .= "<tr>";
-                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/evidences/{$row_id}'>{$evidence_id}</a></span></td>";
-                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'>{$evidence_name}</span></td>";
-                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/artifacts/{$row->id}'>View</a></span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/evidences/" . e($ev_db_id) . "'>" . e($evidence_id) . "</a></span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'>" . e($evidence_name) . "</span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/artifacts/" . e($row->id) . "'>View</a></span></td>";
                 $html .= "</tr>";
                 $id = $row->evidence_id;
             }

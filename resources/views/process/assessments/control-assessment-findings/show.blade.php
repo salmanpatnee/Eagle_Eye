@@ -5,9 +5,11 @@
     <div>
         <x-table.action-wrapper title="Control Assessment Findings">
             <x-action.button label="View" label_ar="منظر" route_name="control-assessments.index" />
+            <x-action.button label="Back to Assessment" label_ar="العودة"
+                route_name="control-assessments.show"
+                route_param="{{ $controlAssessmentFinding->controlAssessment->id }}" />
             <x-action.button label="Edit" label_ar="تحرير" route_name="control-assessment-findings.edit"
                 route_param="{{ $controlAssessmentFinding->id }}" />
-
         </x-table.action-wrapper>
 
 

@@ -58,9 +58,21 @@ class ControlAssessmentController extends Controller
 
     public function show(ControlAssessment $controlAssessment)
     {
-        $controlAssessment->load(['bestPractice', 'location', 'auditor', 'classification',  'findings']);
+        $controlAssessment->load(['bestPractice', 'location', 'auditor', 'classification', 'findings']);
 
-        return view('process/assessments/control-assessments/show', compact('controlAssessment'));
+        $remainingControlsCount = DB::table('control_master_table as c')
+            ->join('control_master_table_vs_best_practice_table as cmp', 'c.control_id', '=', 'cmp.control_id')
+            ->join('best_practice_table as bpt', 'cmp.best_practice_id', '=', 'bpt.best_practices_id')
+            ->leftJoin('control_assessment_details_table as cadt', function ($join) use ($controlAssessment) {
+                $join->on('c.control_id', '=', 'cadt.control_id')
+                    ->where('cadt.control_assessment_id', '=', $controlAssessment->control_assessment_id);
+            })
+            ->where('bpt.best_practices_id', $controlAssessment->best_practices_id)
+            ->where('c.is_parent_control', 'No')
+            ->whereNull('cadt.control_assessment_id')
+            ->count();
+
+        return view('process/assessments/control-assessments/show', compact('controlAssessment', 'remainingControlsCount'));
     }
 
     public function create()
@@ -88,6 +100,7 @@ class ControlAssessmentController extends Controller
 
     public function store(ControlAssessmentRequest $request)
     {
+        abort_unless(auth()->user()->canWrite(), 403);
         $attributes = $request->all();
 
         $controlAssessment = ControlAssessment::create($attributes);
@@ -116,9 +129,10 @@ class ControlAssessmentController extends Controller
         return view('process/assessments/control-assessments/create', compact('controlAssessment', 'bestPractices', 'locations', 'auditors', 'classifications'));
     }
 
-    public function update(ControlAssessment $controlAssessment, Request $request)
+    public function update(ControlAssessment $controlAssessment, ControlAssessmentRequest $request)
     {
-        $attributes = $request->all();
+        abort_unless(auth()->user()->canWrite(), 403);
+        $attributes = $request->validated();
 
         $controlAssessment->update($attributes);
 
@@ -127,6 +141,7 @@ class ControlAssessmentController extends Controller
 
     public function destroy(ControlAssessment $controlAssessment)
     {
+        abort_unless(auth()->user()->canDelete(), 403);
 
         $findings = $controlAssessment->findings;
 

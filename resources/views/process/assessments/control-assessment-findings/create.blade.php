@@ -71,8 +71,14 @@
                     </div>
                 </x-form.grid-col>
 
+                <div id="evidence_loading" class="hidden text-sm text-gray-500 py-2">Loading evidence...</div>
                 <div id="evidenve_vs_control_content">
-
+                    <div class="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-500">
+                        <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Select a control above to load its associated evidence.
+                    </div>
                 </div>
 
                 <x-form.textarea-field label="Control Assessment Finding Description" label_ar="وصف تقييم الضوابط"
@@ -127,6 +133,7 @@
                                 class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
                         </div>
+                        <x-form.error name="corrective_action_due_date" />
                     </div>
                 </x-form.grid-col>
 
@@ -144,6 +151,7 @@
                                 class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
                         </div>
+                        <x-form.error name="preventive_action_due_date" />
                     </div>
                 </x-form.grid-col>
 
@@ -197,9 +205,22 @@
         $(document).ready(function() {
             $("#control_id").change(function() {
                 var selectedValue = $(this).val();
+
+                if (!selectedValue) {
+                    $('#evidenve_vs_control_content').html(
+                        '<div class="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-500">' +
+                        '<svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">' +
+                        '<path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />' +
+                        '</svg>' +
+                        'Select a control above to load its associated evidence.' +
+                        '</div>'
+                    );
+                    return;
+                }
+
                 console.log("Selected value:", selectedValue);
                 $.ajax({
-                    url: '/evidence-conroller',
+                    url: '/evidence-controller',
                     type: 'POST',
                     dataType: 'json',
                     headers: {
@@ -208,11 +229,18 @@
                     data: {
                         selectedValue: selectedValue
                     },
+                    beforeSend: function() {
+                        $('#evidence_loading').removeClass('hidden');
+                        $('#evidenve_vs_control_content').html('');
+                    },
                     success: function(response) {
                         $("#evidenve_vs_control_content").html(response);
                     },
+                    complete: function() {
+                        $('#evidence_loading').addClass('hidden');
+                    },
                     error: function(xhr, status, error) {
-                        console.error(error); // Handle any errors
+                        console.error(error);
                     }
                 });
             });

@@ -24,7 +24,7 @@ class ControlAssessmentFindingRequest extends FormRequest
      */
     public function rules()
     {
-        $controlAssessmentFindingId = $this->route('controlAssessmentFindings');
+        $controlAssessmentFindingId = $this->route('control_assessment_finding')?->id;
 
         return [
             'control_finding_id' => [
@@ -43,9 +43,9 @@ class ControlAssessmentFindingRequest extends FormRequest
             'control_maturity_justification' => 'nullable',
             'remarks' => 'nullable',
             'corrective_action' => 'nullable',
-            'corrective_action_due_date' => 'nullable',
+            'corrective_action_due_date' => array_filter(['nullable', 'date', $this->isMethod('POST') ? 'after_or_equal:today' : null]),
             'preventive_action' => 'nullable',
-            'preventive_action_due_date' => 'nullable',
+            'preventive_action_due_date' => array_filter(['nullable', 'date', $this->isMethod('POST') ? 'after_or_equal:today' : null]),
             'control_auditee_name' => 'nullable',
             'control_auditee_department' => 'nullable',
             'control_auditee_system' => 'nullable',
