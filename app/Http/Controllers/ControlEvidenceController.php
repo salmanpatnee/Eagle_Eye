@@ -64,8 +64,8 @@ class ControlEvidenceController extends Controller
             ->join('domain_table AS d', 'd.main_domain_id', '=', 'cvd.main_domain_id')
             ->join('control_master_table_vs_sub_domain_table AS cvsd', 'cvsd.control_id', '=', 'c.control_id')
             ->join('sub_domain_table AS s', 's.sub_domain_id', '=', 'cvsd.sub_domain_id')
-            ->join('evidence_vs_artifact_table AS eva', 'e.evidence_id', '=', 'eva.evidence_id')
-            ->join('artifact_table AS a', 'eva.artifact_id', '=', 'a.artifact_id')
+            ->leftJoin('evidence_vs_artifact_table AS eva', 'e.evidence_id', '=', 'eva.evidence_id')
+            ->leftJoin('artifact_table AS a', 'eva.artifact_id', '=', 'a.artifact_id')
             ->select(
                 'c.id',
                 'c.control_id',
@@ -98,7 +98,13 @@ class ControlEvidenceController extends Controller
 
         if (request()->has('pdf')) {
 
-            $mpdf = new Mpdf();
+            $mpdf = new Mpdf([
+                'orientation' => 'L',
+                'margin_left' => 12,
+                'margin_right' => 12,
+                'margin_top' => 10,
+                'margin_bottom' => 10,
+            ]);
 
             $html = view("process/evidence-management/evidence-control/control-vs-evidence-pdf", compact('controlEvidence'))->render();
 
@@ -168,8 +174,8 @@ class ControlEvidenceController extends Controller
             ->join('domain_table AS d', 'd.main_domain_id', '=', 'cvd.main_domain_id')
             ->join('control_master_table_vs_sub_domain_table AS cvsd', 'cvsd.control_id', '=', 'c.control_id')
             ->join('sub_domain_table AS s', 's.sub_domain_id', '=', 'cvsd.sub_domain_id')
-            ->join('evidence_vs_artifact_table AS eva', 'e.evidence_id', '=', 'eva.evidence_id')
-            ->join('artifact_table AS a', 'eva.artifact_id', '=', 'a.artifact_id')
+            ->leftJoin('evidence_vs_artifact_table AS eva', 'e.evidence_id', '=', 'eva.evidence_id')
+            ->leftJoin('artifact_table AS a', 'eva.artifact_id', '=', 'a.artifact_id')
             ->select(
                 'e.id',
                 'e.evidence_id',
@@ -197,7 +203,13 @@ class ControlEvidenceController extends Controller
 
         if (request()->has('pdf')) {
 
-            $mpdf = new Mpdf();
+            $mpdf = new Mpdf([
+                'orientation' => 'L',
+                'margin_left' => 12,
+                'margin_right' => 12,
+                'margin_top' => 10,
+                'margin_bottom' => 10,
+            ]);
             $html = view("process/evidence-management/evidence-control/evidence-vs-control-pdf", compact('evidenceControl'))->render();
 
             $mpdf->WriteHTML($html);

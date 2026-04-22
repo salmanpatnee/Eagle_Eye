@@ -6,11 +6,15 @@
     'route_name' => '',
     'route_param' => '',
     'query_params' => '',
+    'url' => '',
 ])
 
+@php
+    $href = $url ?: ($route_name ? route($route_name, $route_param) . '?pdf=1' . $query_params : '');
+@endphp
 
-@if ($route_name)
-    <a href="{{ route($route_name, $route_param) }}?pdf=1{{ $query_params }}"
+@if ($href)
+    <a href="{{ $href }}"
         {{ $attributes->merge(['class' => 'inline-block']) }}>
 @endif
 <button type="{{ $type }}"
@@ -26,6 +30,6 @@
     <span class="inline mx-2">{{ $label }}</span>
     {{-- <span class="inline text-xs font-semibold leading-tight " dir="rtl" lang="ar">{{ $label_ar }}</span> --}}
 </button>
-@if ($route_name)
+@if ($href)
     </a>
 @endif

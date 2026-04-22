@@ -57,7 +57,7 @@
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
             <div class="card">
-                <h3 class="card-title">Asset Technology Distribution Overviewp</h3>
+                <h3 class="card-title">Asset Technology Distribution Overview</h3>
                 <canvas id="assetTechChart"></canvas>
             </div>
             <div class="card">
@@ -393,7 +393,7 @@
                             x: assetGroups[index],
                             y: value,
                             id: assetGroupId[index],
-                            statusCode: 1
+                            statusCode: 'Open'
                         })),
                     },
                     {
@@ -403,7 +403,7 @@
                             x: assetGroups[index],
                             y: value,
                             id: assetGroupId[index],
-                            statusCode: 3
+                            statusCode: 'Close'
                         })),
                     },
 
@@ -441,8 +441,8 @@
                             if (dataset && dataset.data[dataIndex]) {
                                 const dataPoint = dataset.data[dataIndex];
 
-                                window.location.href = `/asset-group-risks/${dataPoint.id}`
-                                // window.open(`/asset-group-risks/${dataPoint.id}`);
+                                const url = `/asset-group-risks/${dataPoint.id}` + (dataPoint.statusCode ? `?status=${dataPoint.statusCode}` : '');
+                                window.location.href = url;
                             }
                         }
                     }
@@ -504,12 +504,10 @@
                     }
                 },
                 onClick: function(event, elements) {
-                    window.location.href = `/risk-domain-compliance`;
-
-                    // window.open(`/risk-domain-compliance`,
-                    //     '_blank');
-
-
+                    const statusMap = ['Open', 'Close'];
+                    const status = elements.length > 0 ? statusMap[elements[0]._index] : null;
+                    const url = '/risk-domain-compliance' + (status ? `?status=${status}` : '');
+                    window.location.href = url;
                 },
             }
         });
@@ -542,6 +540,12 @@
                             fontColor: '#000',
                             lineHeight: 1.5,
                             padding: 4
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: '#000',
                         }
                     }]
                 },
@@ -582,6 +586,12 @@
                             fontColor: '#000',
                             lineHeight: 1.5,
                             padding: 4
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: '#000',
                         }
                     }]
                 },
@@ -625,6 +635,12 @@
                             lineHeight: 1.5,
                             padding: 4
                         }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: '#000',
+                        }
                     }]
                 },
 
@@ -666,6 +682,12 @@
                             fontColor: '#000',
                             lineHeight: 1.5,
                             padding: 4
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: '#000',
                         }
                     }]
                 },

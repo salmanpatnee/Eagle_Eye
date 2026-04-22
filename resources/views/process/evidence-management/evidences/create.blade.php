@@ -130,8 +130,8 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.select label="Evidence Exclusively Related to Telework?"
-                            label_ar="الأدلة مرتبطة حصريًا بالعمل عن بعد؟" name="evidence_telework   " :custom_data="$yesNoOptions"
-                            :value="$evidence?->evidence_telework ?? old('evidence_telework ', 'No')" />
+                            label_ar="الأدلة مرتبطة حصريًا بالعمل عن بعد؟" name="evidence_telework" :custom_data="$yesNoOptions"
+                            :value="$evidence?->evidence_telework ?? old('evidence_telework', 'No')" />
                     </div>
                     <div>
                         <x-form.select label="Evidence Exclusively Related to Social Media?"

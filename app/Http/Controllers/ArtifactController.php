@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Classification;
 use App\Models\TempFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -157,7 +158,7 @@ class ArtifactController extends Controller
     public function destroy(Artifact $artifact)
     {
         $this->_deleteArtifactAttachments($artifact);
-
+        DB::table('evidence_vs_artifact_table')->where('artifact_id', $artifact->artifact_id)->delete();
         $artifact->delete();
         return redirect(route('artifacts.index'))
             ->with('success', 'Artifact deleted.');

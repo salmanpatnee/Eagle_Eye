@@ -26,7 +26,7 @@
 
             <x-info-row>
                 <x-info-col label="Classification Name" label_ar="اسم التصنيف">
-                    {{ $evidence->classification->classification_name ?? '—' }}
+                    {{ $evidence->classification?->classification_name ?? '—' }}
                 </x-info-col>
                 <x-info-col label="Evidence Nature" label_ar="طبيعة الدليل">
                     {{ $evidence->evidence_nature ?? '—' }}
@@ -48,10 +48,12 @@
 
             <x-info-row>
                 <x-info-col label="Controls" label_ar="الضوابط">
-                    <x-list :data="$evidence->controls" id_key="control_id" value_key="control_name" />
+                    <x-list :data="$evidence->controls" id_key="control_id" value_key="control_name"
+                        route_name="controls.show" route_param_key="id" />
                 </x-info-col>
                 <x-info-col label="Artifacts" label_ar=" المرفقات">
-                    <x-list :data="$evidence->artifacts" id_key="artifact_id" value_key="artifact_name" />
+                    <x-list :data="$evidence->artifacts" id_key="artifact_id" value_key="artifact_name"
+                        route_name="artifacts.show" route_param_key="id" />
                 </x-info-col>
             </x-info-row>
 
@@ -139,10 +141,10 @@
             <x-info-row>
                 <x-info-col label="Evidence Exclusively Related to E-Banking?"
                     label_ar="الأدلة المرتبطة حصريًا بالخدمات المصرفية الإلكترونية؟">
-                    {{ $evidence->payment ?? '—' }}
+                    {{ $evidence->e_banking ?? '—' }}
                 </x-info-col>
                 <x-info-col label="Evidence Exclusively Related to Payments?" label_ar="الأدلة المرتبطة حصرا بالمدفوعات؟">
-                    {{ $evidence->e_banking ?? '—' }}
+                    {{ $evidence->payment ?? '—' }}
                 </x-info-col>
             </x-info-row>
         </div>

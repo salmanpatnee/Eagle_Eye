@@ -62,8 +62,8 @@
                             value_key="classification_name" />
                     </div>
                     <div>
-                        <x-form.select label="Categories" label_ar="الفئة" name="category_id" placeholder="Select Option"
-                            :value="$artifact?->category_id ?? old('category_id')" :data="$categories" id_key="category_id" value_key="category_name" />
+                        <x-form.select label="Categories" label_ar="الفئة" name="artifact_category_id" placeholder="Select Option"
+                            :value="$artifact?->artifact_category_id ?? old('artifact_category_id')" :data="$categories" id_key="category_id" value_key="category_name" />
                     </div>
                 </x-form.grid-col>
             </div>

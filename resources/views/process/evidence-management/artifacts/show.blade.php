@@ -86,7 +86,7 @@
             <x-info-row>
                 <x-info-col label="Asset Exclusively Related to Infrastructure?"
                     label_ar="الأصول المتعلقة حصرا بالبنية التحتية؟">
-                    {{ $artifact->artifact_e_commerce ?? '—' }}
+                    {{ $artifact->artifact_infrastructure ?? '—' }}
                 </x-info-col>
                 <x-info-col label="Asset Exclusively Related to Application?" label_ar="الأصول المرتبطة حصرا بالتطبيق؟">
                     {{ $artifact->artifact_application ?? '—' }}

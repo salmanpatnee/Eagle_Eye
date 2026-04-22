@@ -24,7 +24,7 @@
 
             <x-info-row>
                 <x-info-col label="Controls" label_ar="اسم الضوابط">
-                    {{ $controlAssessmentFinding->control->control_name }}
+                    {{ $controlAssessmentFinding->control->control_id }} - {{ $controlAssessmentFinding->control->control_name }}
                 </x-info-col>
                 <x-info-col label="Categories" label_ar="اسم الفئة">
                     <x-list :data="$controlAssessmentFinding->categories" id_key="" value_key="category_name" />
@@ -53,7 +53,7 @@
             </x-info-col-lg>
 
             <x-info-col-lg label="Control Assessment Remarks" label_ar="ملاحظات">
-                {{ $controlAssessmentFinding->control_maturity_justification ?? '—' }}
+                {{ $controlAssessmentFinding->remarks ?? '—' }}
             </x-info-col-lg>
 
 

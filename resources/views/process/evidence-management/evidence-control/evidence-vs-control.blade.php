@@ -7,9 +7,9 @@
 
         <x-table.action-wrapper title="Evidence vs Controls">
             <x-slot:extra>
-                <x-action.pdf-button route_name="evidence-vs-control.index" />
+                <x-action.pdf-button :url="$pdfUrl" />
             </x-slot:extra>
-            <x-action.button label="Evidence vs Controls" label_ar="الأدلة مقابل الضوابط"
+            <x-action.button label="Control vs Evidence" label_ar="الضوابط مقابل الأدلة"
                 route_name="control-vs-evidence.index" />
             <x-action.button label="Evidence vs Control" label_ar="المخاطر مقابل الضوابط"
                 route_name="evidence-vs-control.index" disabled class="opacity-75" />
@@ -51,6 +51,7 @@
                 <x-table.th label="Evidence ID" label_ar="رمز الأدلة" />
                 <x-table.th label="Evidence Name" label_ar="اسم الأدلة" />
                 <x-table.th label="Controls" label_ar="الضوابط" />
+                <x-table.th label="Artifacts" label_ar="المقتنيات" />
             </x-table.thead>
             <x-table.tbody>
                 @forelse ($evidenceControl as $row)
@@ -67,8 +68,13 @@
                             </a>
                         </x-table.td>
                         <x-table.td> {!! $row->controls !!}</x-table.td>
+                        <x-table.td> {!! $row->artifacts ?? '' !!}</x-table.td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="5" class="px-4 py-6 text-center text-gray-500">No evidence with linked controls found.</td>
+                    </tr>
+                @endforelse
             </x-table.tbody>
         </x-table.table>
     </div>

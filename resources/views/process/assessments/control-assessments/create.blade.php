@@ -55,6 +55,7 @@
                                 class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
                         </div>
+                        <x-form.error name="control_assessment_end_date" />
                     </div>
                 </x-form.grid-col>
 

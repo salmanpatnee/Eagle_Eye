@@ -33,7 +33,7 @@ class ControlAssessmentRequest extends FormRequest
             'control_assessment_name' => 'required',
             'control_assessment_description' => 'nullable',
             'control_assessment_start_date' => 'required',
-            'control_assessment_end_date' => 'required',
+            'control_assessment_end_date' => 'required|after_or_equal:control_assessment_start_date',
             'control_assessment_type' => 'nullable',
             'control_assessment_internal_external' => 'nullable',
             'control_assessment_approach' => 'nullable',

@@ -29,8 +29,8 @@ class ControlAssessmentFindingRequest extends FormRequest
         return [
             'control_finding_id' => [
                 'required',
-                Rule::unique('control_assessment_details_table', 'id')
-                    ->ignore($controlAssessmentFindingId, 'id'),
+                Rule::unique('control_assessment_details_table', 'control_finding_id')
+                    ->ignore($controlAssessmentFindingId),
             ],
 
             'control_finding_name' => 'required',

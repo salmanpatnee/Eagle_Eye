@@ -6,7 +6,7 @@
         <x-table.action-wrapper title="Control vs Evidence">
 
             <x-slot:extra>
-                <x-action.pdf-button route_name="control-vs-evidence.index" />
+                <x-action.pdf-button :url="$pdfUrl" />
             </x-slot:extra>
 
             <x-action.button label="Control vs Evidence" label_ar="الضوابط مقابل الأدلة" route_name="control-vs-evidence.index"
@@ -67,7 +67,11 @@
                         <x-table.td> {!! $row->artifacts !!}</x-table.td>
 
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="5" class="px-4 py-6 text-center text-gray-500">No controls with linked evidence found.</td>
+                    </tr>
+                @endforelse
             </x-table.tbody>
         </x-table.table>
     </div>

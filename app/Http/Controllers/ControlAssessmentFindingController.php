@@ -129,6 +129,9 @@ class ControlAssessmentFindingController extends Controller
             ->where('control_name', $selectedControlName)
             ->first();
 
+        if (!$control) {
+            return response()->json(['control_id' => null], 404);
+        }
         return response()->json(['control_id' => $control->control_id]);
     }
 

@@ -479,6 +479,7 @@ class OCDController extends Controller
 
     function riskDomain()
     {
+        $status = request('status');
 
         $latestAssessments = DB::table('risk_assessment_details_table as rad')
             ->select('rad.risk_id', 'rad.implementation_status')
@@ -507,6 +508,16 @@ class OCDController extends Controller
                 DB::raw('COUNT(CASE WHEN la.implementation_status = "Open" OR la.implementation_status IS NULL THEN 1 END) AS open_risks')
             )
             ->groupBy('d.main_domain_id', 'd.main_domain_name')
+            ->when($status, function ($q) use ($status) {
+                if ($status === 'Open') {
+                    $q->where(function ($q2) {
+                        $q2->where('la.implementation_status', 'Open')
+                           ->orWhereNull('la.implementation_status');
+                    });
+                } else {
+                    $q->where('la.implementation_status', $status);
+                }
+            })
             ->get();
 
 
@@ -871,6 +882,7 @@ class OCDController extends Controller
 
     function assetGroupRisks($assetGroupId)
     {
+        $status = request('status');
 
         $assetRisksCount = DB::table('asset_group_table as g')
             ->join('asset_register_table as a', 'g.asset_group_id', '=', 'a.asset_group_id')
@@ -930,6 +942,16 @@ class OCDController extends Controller
             ->join('risk_master_table_vs_custodian_role_table as rvc', 'r.risk_id', '=', 'rvc.risk_id')
             ->join('custodian_name_table as cn', 'rvc.custodian_id', '=', 'cn.custodian_role_id')
             ->where('g.asset_group_id', '=', $assetGroupId)
+            ->when($status, function ($q) use ($status) {
+                if ($status === 'Open') {
+                    $q->where(function ($q2) {
+                        $q2->where('ra.implementation_status', 'Open')
+                           ->orWhereNull('ra.implementation_status');
+                    });
+                } else {
+                    $q->where('ra.implementation_status', $status);
+                }
+            })
             ->groupBy('r.risk_id', 'ra.implementation_status', 'o.owner_id', 'o.owner_name', 'ra.risk_assessment_id')
             ->get();
 
