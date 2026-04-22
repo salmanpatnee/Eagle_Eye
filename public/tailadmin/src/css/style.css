@@ -5,6 +5,8 @@ layer(base);
 
 @custom-variant dark (&:is(.dark *));
 
+@source "../../../../resources/views/**/*.blade.php";
+
 @theme {
     --font-*: initial;
     --font-outfit: Outfit, sans-serif;
