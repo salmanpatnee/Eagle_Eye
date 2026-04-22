@@ -72,7 +72,17 @@ class ControlAssessmentController extends Controller
             ->whereNull('cadt.control_assessment_id')
             ->count();
 
-        return view('process/assessments/control-assessments/show', compact('controlAssessment', 'remainingControlsCount'));
+        $findings = $controlAssessment->findings;
+        $findingStats = [
+            'implemented'          => $findings->where('control_implementation_status', 'Implemented')->count(),
+            'partially_implemented' => $findings->where('control_implementation_status', 'Partially Implemented')->count(),
+            'not_implemented'      => $findings->where('control_implementation_status', 'Not Implemented')->count(),
+            'not_applicable'       => $findings->where('control_implementation_status', 'Not Applicable')->count(),
+        ];
+        $totalControls = $remainingControlsCount + $findings->count();
+        $completionPercent = $totalControls > 0 ? round(($findings->count() / $totalControls) * 100) : 0;
+
+        return view('process/assessments/control-assessments/show', compact('controlAssessment', 'remainingControlsCount', 'findingStats', 'totalControls', 'completionPercent'));
     }
 
     public function create()
