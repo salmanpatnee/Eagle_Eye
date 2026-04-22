@@ -35,6 +35,8 @@ php artisan tinker             # REPL
 
 ## AI Sub-Agents
 
+**GRC advisory**: When exploring the codebase for context, planning new features, or adding functionality related to risk, audit, controls, assets, or compliance — **always use `grc-expert-advisor` sub-agent** via Agent tool with `subagent_type: "grc-expert-advisor"` to get standards-aligned guidance before designing or implementing.
+
 **Report design**: When asked to design/create/generate any GRC report (risk, audit, control effectiveness, compliance summaries, executive dashboards, PDF templates) — **always use `grc-report-designer` sub-agent** via Agent tool with `subagent_type: "grc-report-designer"`.
 
 > Full reference (directory structure, conventions, all commands): see `AGENTS.md`
