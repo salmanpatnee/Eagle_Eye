@@ -1,5 +1,5 @@
 @push('css')
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --ee-bg:       #FAFAF8;
@@ -12,11 +12,42 @@
   --ee-input-bd: #E2DFD8;
 }
 
-/* Override left panel bg */
-.login-left-panel {
-  background: var(--ee-bg) !important;
+/* ── LEFT PANEL ── */
+.ee-left {
+  background: var(--ee-bg);
   font-family: 'DM Sans', sans-serif;
   position: relative;
+  overflow: hidden;
+}
+
+/* Grid texture */
+.ee-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='%23B8851F' stroke-width='0.6' stroke-opacity='0.18'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M 10 0 L 0 0 0 10' fill='none' stroke='%23B8851F' stroke-width='0.4' stroke-opacity='0.09'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* EE watermark */
+.ee-left::after {
+  content: 'EE';
+  position: absolute;
+  bottom: -40px;
+  right: -20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(220px, 30vw, 420px);
+  line-height: 1;
+  color: var(--ee-gold);
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
 }
 
 /* Back link */
@@ -34,6 +65,35 @@
 .ee-back:hover { color: var(--ee-gold) !important; }
 .ee-back svg { stroke: currentColor; }
 
+/* Form card */
+.ee-card {
+  position: relative;
+  z-index: 10;
+  background: #FFFFFF;
+  border-radius: 2px;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem;
+  box-shadow:
+    0 2px 8px rgba(26,26,24,0.06),
+    0 8px 32px rgba(26,26,24,0.10),
+    0 0 0 1px rgba(184,133,31,0.08),
+    0 16px 64px rgba(184,133,31,0.04);
+}
+
+/* Corner accents */
+.ee-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+.ee-corner--tl { top: -1px; left: -1px; border-top: 1.5px solid var(--ee-gold); border-left: 1.5px solid var(--ee-gold); }
+.ee-corner--tr { top: -1px; right: -1px; border-top: 1.5px solid var(--ee-gold); border-right: 1.5px solid var(--ee-gold); }
+.ee-corner--bl { bottom: -1px; left: -1px; border-bottom: 1.5px solid var(--ee-gold); border-left: 1.5px solid var(--ee-gold); }
+.ee-corner--br { bottom: -1px; right: -1px; border-bottom: 1.5px solid var(--ee-gold); border-right: 1.5px solid var(--ee-gold); }
+
 /* Heading */
 .ee-heading {
   display: flex;
@@ -43,7 +103,6 @@
   border-bottom: 1px solid var(--ee-border);
   margin-bottom: 2rem;
 }
-
 .ee-title-en {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2.5rem;
@@ -52,7 +111,6 @@
   line-height: 1;
   letter-spacing: -0.01em;
 }
-
 .ee-title-ar {
   font-size: 1rem;
   font-weight: 500;
@@ -61,57 +119,65 @@
   font-family: 'IBM Plex Sans Arabic', sans-serif;
 }
 
-/* Override x-form.label */
-.login-left-panel label span:first-child {
+/* Stagger animations */
+@keyframes ee-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.ee-anim-1 { animation: ee-fade-up 0.5s ease 0.05s both; }
+.ee-anim-2 { animation: ee-fade-up 0.5s ease 0.15s both; }
+.ee-anim-3 { animation: ee-fade-up 0.5s ease 0.25s both; }
+.ee-anim-4 { animation: ee-fade-up 0.5s ease 0.35s both; }
+
+/* Labels */
+.ee-card label span:first-child {
   font-size: 0.68rem !important;
   letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
   font-weight: 500 !important;
   color: var(--ee-muted) !important;
 }
-
-.login-left-panel label span[dir="rtl"] {
+.ee-card label span[dir="rtl"] {
   font-size: 0.7rem !important;
   color: #3D3B36 !important;
 }
 
-/* Override x-form.input */
-.login-left-panel input[type="text"],
-.login-left-panel input[type="password"],
-.login-left-panel input[type="email"] {
+/* Inputs */
+.ee-card input[type="text"],
+.ee-card input[type="password"],
+.ee-card input[type="email"] {
   background: var(--ee-input-bg) !important;
   border-color: var(--ee-input-bd) !important;
   color: var(--ee-text) !important;
-  border-radius: 4px !important;
-  height: 46px !important;
+  border-radius: 3px !important;
+  height: 48px !important;
   font-family: 'DM Sans', sans-serif !important;
   box-shadow: none !important;
   transition: border-color 0.18s, box-shadow 0.18s !important;
 }
-
-.login-left-panel input[type="text"]::placeholder,
-.login-left-panel input[type="password"]::placeholder {
-  color: #8C8A85 !important;
-}
-
-.login-left-panel input[type="text"]:focus,
-.login-left-panel input[type="password"]:focus {
+.ee-card input[type="text"]::placeholder,
+.ee-card input[type="password"]::placeholder { color: #8C8A85 !important; }
+.ee-card input[type="text"]:focus,
+.ee-card input[type="password"]:focus {
   border-color: var(--ee-gold) !important;
   box-shadow: 0 0 0 3px rgba(184,133,31,0.1) !important;
   outline: none !important;
 }
-
-/* Eye toggle icon */
-.login-left-panel .text-gray-500 {
-  color: #6B6860 !important;
-  transition: color 0.18s;
+.ee-card input:-webkit-autofill,
+.ee-card input:-webkit-autofill:hover,
+.ee-card input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: var(--ee-text) !important;
+  caret-color: var(--ee-text) !important;
+  transition: background-color 5000s ease-in-out 0s !important;
 }
-.login-left-panel span[class*="cursor-pointer"]:hover path {
-  fill: var(--ee-gold) !important;
-}
 
-/* Override x-form.button */
-.login-left-panel button[type="submit"] {
+/* Eye toggle */
+.ee-card .text-gray-500 { color: #6B6860 !important; transition: color 0.18s; }
+.ee-card span[class*="cursor-pointer"]:hover path { fill: var(--ee-gold) !important; }
+
+/* Button — x-form.button renders <button> with NO type attr */
+.ee-card button {
   background: var(--ee-gold) !important;
   color: #FFFFFF !important;
   font-family: 'DM Sans', sans-serif !important;
@@ -120,19 +186,17 @@
   letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
   border: none !important;
-  border-radius: 4px !important;
+  border-radius: 3px !important;
   height: 48px !important;
   transition: background 0.18s, box-shadow 0.18s !important;
   flex-direction: column !important;
   gap: 2px !important;
 }
-
-.login-left-panel button[type="submit"]:hover {
+.ee-card button:hover {
   background: var(--ee-gold-lt) !important;
-  box-shadow: 0 4px 16px rgba(184,133,31,0.2) !important;
+  box-shadow: 0 4px 16px rgba(184,133,31,0.25) !important;
 }
-
-.login-left-panel button[type="submit"] span[dir="rtl"] {
+.ee-card button span[dir="rtl"] {
   font-size: 0.7rem !important;
   font-family: 'IBM Plex Sans Arabic', sans-serif !important;
   letter-spacing: 0 !important;
@@ -140,18 +204,112 @@
   opacity: 0.7 !important;
   line-height: 1 !important;
 }
+
+/* ── RIGHT PANEL ── */
+.ee-right {
+  position: relative;
+  overflow: hidden;
+  background: #0F1117;
+}
+
+/* Geometric pattern layers */
+.ee-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='1.2' fill='%23B8851F' fill-opacity='0.15'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cline x1='0' y1='60' x2='60' y2='0' stroke='%23B8851F' stroke-width='0.4' stroke-opacity='0.08'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpolygon points='40,4 76,40 40,76 4,40' fill='none' stroke='%23B8851F' stroke-width='0.6' stroke-opacity='0.12'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Rotating rings */
+.ee-ring-outer,
+.ee-ring-inner {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+}
+.ee-ring-outer {
+  width: 460px;
+  height: 460px;
+  margin-top: -230px;
+  margin-left: -230px;
+  border: 1px solid transparent;
+  border-top-color: rgba(184,133,31,0.35);
+  border-right-color: rgba(184,133,31,0.15);
+  border-bottom-color: transparent;
+  border-left-color: rgba(184,133,31,0.08);
+  animation: ee-spin-cw 30s linear infinite;
+  z-index: 1;
+}
+.ee-ring-inner {
+  width: 300px;
+  height: 300px;
+  margin-top: -150px;
+  margin-left: -150px;
+  border: 1px solid transparent;
+  border-top-color: rgba(184,133,31,0.25);
+  border-bottom-color: rgba(184,133,31,0.25);
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: ee-spin-ccw 22s linear infinite;
+  z-index: 1;
+}
+
+@keyframes ee-spin-cw  { to { transform: rotate(360deg); } }
+@keyframes ee-spin-ccw { to { transform: rotate(-360deg); } }
+
+/* Brand content */
+.ee-right-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Art Deco divider */
+.ee-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 180px;
+  margin: 1.25rem 0 1rem;
+}
+.ee-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(184,133,31,0.5));
+}
+.ee-divider-line:last-child {
+  background: linear-gradient(to left, transparent, rgba(184,133,31,0.5));
+}
+.ee-divider-diamond {
+  width: 7px;
+  height: 7px;
+  background: var(--ee-gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  opacity: 0.8;
+}
 </style>
 @endpush
 
 @include('partials.header')
 
 <!-- ===== Page Wrapper Start ===== -->
-<div class="relative p-6 bg-white z-1 dark:bg-gray-900 sm:p-0">
-    <div class="relative flex flex-col justify-center w-full h-screen dark:bg-gray-900 sm:p-0 lg:flex-row">
+<div class="relative bg-white z-1">
+    <div class="relative flex flex-col w-full h-screen lg:flex-row">
 
         <!-- ===== LEFT: Form ===== -->
-        <div class="login-left-panel flex flex-col flex-1 w-full lg:w-1/2">
-            <div class="w-full max-w-md pt-10 mx-auto relative z-10">
+        <div class="ee-left flex flex-col flex-1 w-full lg:w-1/2 h-full">
+            <div class="w-full max-w-md pt-10 mx-auto relative z-10 px-4">
                 <a href="{{ route('welcome') }}" class="ee-back">
                     <svg class="stroke-current" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         viewBox="0 0 20 20" fill="none">
@@ -162,12 +320,19 @@
                 </a>
             </div>
 
-            <div class="flex flex-col justify-center flex-1 w-full max-w-md mx-auto relative z-10 px-4">
-                <div>
+            <div class="flex flex-col justify-center flex-1 w-full mx-auto relative z-10 px-4 py-8">
+                <div class="ee-card">
+                    <span class="ee-corner ee-corner--tl"></span>
+                    <span class="ee-corner ee-corner--tr"></span>
+                    <span class="ee-corner ee-corner--bl"></span>
+                    <span class="ee-corner ee-corner--br"></span>
+
                     <!-- Heading -->
-                    <div class="ee-heading mb-5 sm:mb-8">
-                        <span class="ee-title-en">Sign In</span>
-                        <span class="ee-title-ar" dir="rtl" lang="ar">تسجيل الدخول</span>
+                    <div class="ee-anim-1">
+                        <div class="ee-heading mb-5 sm:mb-8">
+                            <span class="ee-title-en">Sign In</span>
+                            <span class="ee-title-ar" dir="rtl" lang="ar">تسجيل الدخول</span>
+                        </div>
                     </div>
 
                     <!-- Form -->
@@ -175,7 +340,7 @@
                         @csrf
                         <div class="space-y-5">
                             <!-- Username -->
-                            <div>
+                            <div class="ee-anim-2">
                                 <x-form.label for="username" label="Username" required="true"
                                     label_ar="اسم المستخدم" />
                                 <x-form.input name="username" required="true" />
@@ -183,7 +348,7 @@
                             </div>
 
                             <!-- Password -->
-                            <div>
+                            <div class="ee-anim-3">
                                 <x-form.label for="password" label="Password" required="true"
                                     label_ar="أدخل كلمة المرور" />
                                 <div x-data="{ showPassword: false }" class="relative">
@@ -211,7 +376,7 @@
                             </div>
 
                             <!-- Button -->
-                            <div>
+                            <div class="ee-anim-4">
                                 <x-form.button text="Click Here to Enter" text_rtl="اضغط هنا للدخول" />
                             </div>
                         </div>
@@ -220,26 +385,33 @@
             </div>
         </div>
 
-        <!-- ===== RIGHT: Branding (unchanged) ===== -->
-        <div class="relative items-center hidden w-full h-full bg-brand-950 dark:bg-white/5 lg:grid lg:w-1/2">
-            <div class="flex items-center justify-center z-1">
-                <div class="absolute right-0 top-0 -z-1 w-full max-w-[250px] xl:max-w-[450px]">
-                    <img src="{{ asset('Images/shape/grid-01.svg') }}" alt="grid" />
+        <!-- ===== RIGHT: Branding ===== -->
+        <div class="ee-right hidden w-full h-full lg:flex lg:w-1/2 items-center justify-center">
+            <div class="ee-ring-outer"></div>
+            <div class="ee-ring-inner"></div>
+
+            <div class="ee-right-content">
+                <a href="{{ route('home') }}" class="block mb-2">
+                    <img src="{{ asset('Images/logo/EagleEyeLogo.png') }}"
+                         class="w-36"
+                         alt="Eagle Eye Logo"
+                         style="filter: drop-shadow(0 0 18px rgba(184,133,31,0.45));" />
+                </a>
+
+                <div class="ee-divider">
+                    <div class="ee-divider-line"></div>
+                    <div class="ee-divider-diamond"></div>
+                    <div class="ee-divider-line"></div>
                 </div>
-                <div class="absolute bottom-0 left-0 -z-1 w-full max-w-[250px] rotate-180 xl:max-w-[450px]">
-                    <img src="{{ asset('Images/shape/grid-01.svg') }}" alt="grid" />
-                </div>
-                <div class="flex flex-col items-center max-w-xs">
-                    <a href="{{ route('home') }}" class="block mb-4">
-                        <img src="{{ asset('Images/logo/EagleEyeLogo.png') }}" class="w-40" alt="Logo" />
-                    </a>
-                    <p class="mb-2 font-semibold text-white text-title-sm dark:text-white/90 sm:text-title-md flex items-center justify-between">
-                        Eagle Eye
-                    </p>
-                    <p class="text-center text-gray-400 dark:text-white/60">
-                        Compliance Solution
-                    </p>
-                </div>
+
+                <p style="font-family:'Cinzel',serif; font-size:2.2rem; font-weight:600; letter-spacing:0.22em; color:#FFFFFF; line-height:1; margin-bottom:0.5rem;">
+                    Eagle Eye
+                </p>
+                <p style="font-family:'DM Sans',sans-serif; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:1.25rem;">
+                    Compliance Intelligence Platform
+                </p>
+
+                <div style="width:40px; height:1px; background:var(--ee-gold); opacity:0.7;"></div>
             </div>
         </div>
 
