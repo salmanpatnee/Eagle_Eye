@@ -1,0 +1,151 @@
+# Eagle Eye GRC — Reference Guide
+
+Full reference for agents and developers. See `CLAUDE.md` for critical rules.
+
+## Technology Stack
+
+### Backend
+- PHP ^8.0.2, Laravel ^9.19, MySQL, Sanctum auth, Eloquent ORM
+
+### Frontend
+- Vite 4.0, Tailwind CSS (TailAdmin), Axios 1.1.2, ApexCharts 5.3.2
+
+### Key Packages
+- `maatwebsite/excel` ^3.1 — Excel import/export
+- `mpdf/mpdf` ^8.2 — PDF generation
+- `phpoffice/phppresentation` ^1.1 — PowerPoint generation
+- `guzzlehttp/guzzle` ^7.2 — HTTP client
+- `barryvdh/laravel-debugbar` ^3.9 — dev debugging
+
+## Directory Structure
+
+```
+app/Http/Controllers/     # 118 controllers; _Unused/ has deprecated ones
+app/Http/Requests/        # Form validation
+app/Models/               # 84 Eloquent models; _Unused/ for deprecated
+app/Services/             # PresentationService.php, ReportService.php
+app/Repositories/         # ReportRepository.php
+app/Exports/              # Excel export classes
+routes/web.php            # Primary routing (51KB)
+resources/views/
+  process/                # Main feature views
+  pdf/                    # PDF report templates
+  layouts/                # Master layouts
+  ciso/                   # CISO dashboard views
+public/tailadmin/         # TailAdmin UI theme assets
+```
+
+## Coding Conventions
+
+### PHP/Laravel
+- Namespace: PSR-4 (`App\` → `app/`)
+- Models: `$guarded = []` for mass assignment
+- Timestamps: some models disable with `public $timestamps = false`
+- DB tables: snake_case; pivots use `table1_vs_table2_table` format
+- Custom table names via `protected $table`
+- Fat controllers pattern; some logic in Services
+
+### Database
+- Primary keys: custom names (`risk_id`, `asset_id`, etc.)
+- Foreign keys: `_id` suffix
+- Table naming: `risk_master_table`, `control_master_table`, etc.
+
+### Frontend
+- Blade templates with component-based structure
+- Tailwind CSS utility classes
+- AJAX via Axios
+
+## All Commands
+
+### Development
+```bash
+composer install
+npm install
+npm run dev           # Vite HMR
+npm run build         # Production build
+php artisan storage:link
+php artisan cache:clear && php artisan config:clear && php artisan route:clear && php artisan view:clear
+```
+
+### Database
+```bash
+php artisan migrate
+php artisan migrate --seed
+php artisan migrate:rollback
+php artisan migrate:fresh --seed
+php artisan migrate:status
+php artisan db
+```
+
+### Testing
+```bash
+php artisan test
+php artisan test --testsuite=Unit
+php artisan test --testsuite=Feature
+./vendor/bin/phpunit
+```
+
+### Code Quality
+```bash
+./vendor/bin/pint          # Format
+./vendor/bin/pint --test   # Check only
+```
+
+### Artisan
+```bash
+php artisan make:controller ControllerName
+php artisan make:model ModelName -m
+php artisan make:migration create_table_name
+php artisan make:seeder SeederName
+php artisan tinker
+php artisan about
+```
+
+### Deployment
+```bash
+php artisan optimize
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan down / php artisan up
+```
+
+## Environment
+
+- **DB**: `eagle_eye_may` (MySQL) — credentials in `.env`
+- **App URL**: `http://grc.test/`
+- **Mail**: Mailpit on port 1025
+- **Debug**: `APP_DEBUG=true` in dev
+
+## Authentication
+
+- Roles: SuperAdmin, Admin, Manager, Operator, User
+- Web: session-based | API: Sanctum tokens
+- No public registration — accounts managed internally
+
+## Security Notes
+
+- `$guarded = []` on models — always validate request input
+- CSRF enabled on POST/PUT/DELETE
+- Never commit `.env`
+- Use query builder/Eloquent, not raw SQL strings
+
+## Reporting & Exports
+
+- **PDF**: mPDF (`mpdf/mpdf`) — templates in `resources/views/pdf/`
+- **Excel**: Maatwebsite/Excel — classes in `app/Exports/`
+- **PowerPoint**: PHPOffice/PHPPresentation
+- **Charts**: ApexCharts (client-side)
+
+## Project-Specific Features
+
+- PitStop Module, CISO Dashboard, KPI/KRI Tracking
+- Third-Party Risk, Penetration Testing tracking
+- RTL/Arabic support, Multi-format regulatory reports
+
+## Common Issues
+
+1. Vite broken → run `npm run dev`
+2. Permission errors → check `storage/` and `bootstrap/cache/` write perms
+3. DB connection → verify MySQL running + `.env` credentials
+4. Assets not loading → run `npm run build`

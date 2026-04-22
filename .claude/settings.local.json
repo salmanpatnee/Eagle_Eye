@@ -1,5 +1,4 @@
 {
-  "showClearContextOnPlanAccept": true,
   "permissions": {
     "allow": [
       "Bash(php artisan --help:*)",
@@ -23,9 +22,17 @@
       "Bash(grep -r \"auth\\(\\)->user\\(\\)\\\\|role_id\\\\|->role\" /c/Users/salmanabdul.ghani/Herd/grc/app/Http/Controllers/*.php)",
       "Bash(grep -rn \"Middleware\\\\|middleware\\\\|can\\\\|role\" /c/Users/salmanabdul.ghani/Herd/grc/app/Http/Controllers/*.php)",
       "Bash(php -r \"require 'C:/Users/Salman/Herd/grc/vendor/autoload.php';\")",
-      "Bash(php artisan *)"
+      "Bash(php artisan *)",
+      "Bash(php /c/Users/salmanabdul.ghani/Herd/grc/artisan tinker --execute=\"echo DB::select\\('DESCRIBE control_assessment_master_table'\\) ? 'ok' : 'fail';\")",
+      "Bash(php /c/Users/salmanabdul.ghani/Herd/grc/artisan tinker --execute=\"print_r\\(DB::select\\('DESCRIBE control_assessment_master_table'\\)\\);\")",
+      "Bash(php *)",
+      "Bash(grep *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git commit *)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "showClearContextOnPlanAccept": true
 }
