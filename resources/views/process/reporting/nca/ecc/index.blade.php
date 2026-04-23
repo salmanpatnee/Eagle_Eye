@@ -14,7 +14,7 @@
 
 @section('report-info')
 
-    <p class="font-bold mb-5 rtl:text-right text-2xl text-gray-900" lang="ar" dir="rtl">
+    <p class="font-bold mb-5 text-2xl text-gray-900" lang="ar" dir="rtl">
         الهيئة الوطنية للأمن السيبراني - الضوابط الأساسية للأمن السيبراني</p>
     <p class="text-lg text-gray-900 mb-0">Control Assessment Regulator Reports</p>
     <p class="text-lg text-gray-900 mb-0">National Cybersecurity Authority - Essential Cybersecurity

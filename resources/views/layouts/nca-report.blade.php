@@ -158,15 +158,15 @@
                                     <img src="{{ asset('storage/' . $organizationData?->organization_logo) }}"
                                         alt="Organization Logo" width="250" class="mb-6 mx-auto">
 
-                                    <p class="font-bold rtl:text-right text-2xl text-gray-900 mb-2" lang="ar"
+                                    <p class="font-bold text-2xl text-gray-900 mb-2" lang="ar"
                                         dir="rtl">
                                         {{ $organizationData->organization_name_arabic }}</p>
 
-                                    <p class="font-bold rtl:text-right text-2xl text-gray-900 mb-2">
+                                    <p class="font-bold text-2xl text-gray-900 mb-2">
                                         {{ $organizationData->organization_name_english }}
                                     </p>
 
-                                    <p class="font-bold rtl:text-right text-2xl text-gray-900 mb-2" lang="ar"
+                                    <p class="font-bold text-2xl text-gray-900 mb-2" lang="ar"
                                         dir="rtl">
                                         تقييم الضوابط</p>
                                     @yield('report-info')
