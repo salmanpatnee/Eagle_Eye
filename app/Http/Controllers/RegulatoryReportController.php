@@ -77,7 +77,7 @@ class RegulatoryReportController extends Controller
         $path = "process/reporting/nca/ecc";
 
         if (request()->has('pdf')) {
-            $this->generatePdf($path, $report, 'NCA-ECC-Report.pdf');
+            return $this->generatePdf($path, $report, 'NCA-ECC-Report.pdf');
         } else {
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
         }
@@ -92,7 +92,7 @@ class RegulatoryReportController extends Controller
         $path = "process/reporting/nca/ecc2";
 
         if (request()->has('pdf')) {
-            $this->generatePdf($path, $report, 'NCA-ECC-Report.pdf');
+            return $this->generatePdf($path, $report, 'NCA-ECC-Report.pdf');
         } else {
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
         }
@@ -105,7 +105,7 @@ class RegulatoryReportController extends Controller
         $path = "process/reporting/nca/cscc";
 
         if (request()->has('pdf')) {
-            $this->generatePdf($path, $report, 'NCA-CSCC-Report.pdf');
+            return $this->generatePdf($path, $report, 'NCA-CSCC-Report.pdf');
         } else {
 
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
@@ -132,7 +132,7 @@ class RegulatoryReportController extends Controller
 
         if (request()->has('pdf')) {
 
-            $this->generatePdf($pdfTemplate, $report, 'NCA-CCC-Report.pdf');
+            return $this->generatePdf($pdfTemplate, $report, 'NCA-CCC-Report.pdf');
         } else {
 
             return view($template, compact('report', 'controlAssessmentId', 'cloudControlType'));
@@ -147,7 +147,7 @@ class RegulatoryReportController extends Controller
 
         if (request()->has('pdf')) {
 
-            $this->generatePdf($path, $report, 'NCA-TCC-Report.pdf');
+            return $this->generatePdf($path, $report, 'NCA-TCC-Report.pdf');
         } else {
 
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
@@ -163,7 +163,7 @@ class RegulatoryReportController extends Controller
 
         if (request()->has('pdf')) {
 
-            $this->generatePdf($path, $report, 'NCA-OSMACC-Report.pdf');
+            return $this->generatePdf($path, $report, 'NCA-OSMACC-Report.pdf');
         } else {
 
             if ($isDownloadRequest) {
@@ -182,7 +182,7 @@ class RegulatoryReportController extends Controller
         $path = "process/reporting/nca/dcc";
 
         if (request()->has('pdf')) {
-            $this->generatePdf($path, $report, 'NCA-DCC-Report.pdf');
+            return $this->generatePdf($path, $report, 'NCA-DCC-Report.pdf');
         } else {
 
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
@@ -196,7 +196,7 @@ class RegulatoryReportController extends Controller
         $path = "process/reporting/sama";
 
         if (request()->has('pdf')) {
-            $this->generatePdf($path, $report, 'SAMA-Report.pdf');
+            return $this->generatePdf($path, $report, 'SAMA-Report.pdf');
         } else {
             return view("{$path}/index", compact('report', 'controlAssessmentId'));
         }
