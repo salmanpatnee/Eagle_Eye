@@ -100,8 +100,6 @@ class RegulatorySummaryReportController extends Controller
         // Get controls from the best practice
         $controls = $bestPractice->controls;
 
-        $controls->load('owner');
-
         $owners = $controls->pluck('owner')->unique('owner_role_id');
 
         $report = $this->_getReport($bestPracticeId, $controlAssessmentId, $domainId, $subDomainId, $controlId, $ownerId, $statusId);
@@ -136,8 +134,6 @@ class RegulatorySummaryReportController extends Controller
 
         // Get controls from the best practice
         $controls = $bestPractice->controls;
-
-        $controls->load('owner');
 
         $owners = $controls->pluck('owner')->unique('owner_role_id');
 
@@ -175,8 +171,6 @@ class RegulatorySummaryReportController extends Controller
         // Get controls from the best practice
         $controls = $bestPractice->controls;
 
-        $controls->load('owner');
-
         $owners = $controls->pluck('owner')->unique('owner_role_id');
         $report = $this->_getReport($bestPracticeId, $controlAssessmentId, $domainId, $subDomainId, $controlId, $ownerId, $statusId, $controlType);
 
@@ -210,8 +204,6 @@ class RegulatorySummaryReportController extends Controller
 
         // Get controls from the best practice
         $controls = $bestPractice->controls;
-
-        $controls->load('owner');
 
         $owners = $controls->pluck('owner')->unique('owner_role_id');
 
@@ -248,8 +240,6 @@ class RegulatorySummaryReportController extends Controller
         // Get controls from the best practice
         $controls = $bestPractice->controls;
 
-        $controls->load('owner');
-
         $owners = $controls->pluck('owner')->unique('owner_role_id');
 
         $report = $this->_getReport($bestPracticeId, $controlAssessmentId, $domainId, $subDomainId, $controlId, $ownerId, $statusId);
@@ -284,8 +274,6 @@ class RegulatorySummaryReportController extends Controller
 
         // Get controls from the best practice
         $controls = $bestPractice->controls;
-
-        $controls->load('owner');
 
         $owners = $controls->pluck('owner')->unique('owner_role_id');
 

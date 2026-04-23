@@ -1280,8 +1280,6 @@ class RegulatoryExcelReportController extends Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save($outputFilePath);
         return response()->download($outputFilePath)->deleteFileAfterSend(true);
-
-        return response()->json(['message' => 'File updated successfully.']);
     }
 
     private function getReport($bestPracticeId, $controlAssessmentId, string $cloudControlType = null)
