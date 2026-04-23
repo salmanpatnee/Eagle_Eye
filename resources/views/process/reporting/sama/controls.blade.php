@@ -285,7 +285,7 @@
                         $report,
                         'SAMA-CSF-3.1.4.1.',
                         true,
-                        '3.1.4.1.C,3.1.4.2,3.1.4.2.C,3.1.4.3,3.1.4.4,3.1.4.4.A,3.1.4.4.E,3.1.4.4.G,3.1.4.4.I,3.1.4.6',
+                        'SAMA-CSF-3.1.4.1.C,SAMA-CSF-3.1.4.2,SAMA-CSF-3.1.4.2.C,SAMA-CSF-3.1.4.3,SAMA-CSF-3.1.4.4,SAMA-CSF-3.1.4.4.A,SAMA-CSF-3.1.4.4.E,SAMA-CSF-3.1.4.4.G,SAMA-CSF-3.1.4.4.I,SAMA-CSF-3.1.4.6',
                     );
                 @endphp
                 <x-main-control id="3.1.4.1" details="{{ $control->control_description }}" details_ar=""
@@ -327,7 +327,7 @@
 
             @if ($control->control_id == 'SAMA-CSF-3.1.4.2')
                 @php
-                    $status = getParentStatus($report, 'SAMA-CSF-3.1.4.2.', true, '3.1.4.2.C');
+                    $status = getParentStatus($report, 'SAMA-CSF-3.1.4.2.', true, 'SAMA-CSF-3.1.4.2.C');
                 @endphp
                 <x-main-control id="3.1.4.2" details="{{ $control->control_description }}" details_ar=""
                     :status="$status" />
