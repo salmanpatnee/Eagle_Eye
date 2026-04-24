@@ -1,53 +1,50 @@
 @push('css')
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..60,400;12..60,700;12..60,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ee-bg:       #FAFAF8;
-  --ee-gold:     #B8851F;
-  --ee-gold-lt:  #C9962E;
-  --ee-text:     #1A1A18;
-  --ee-muted:    #3D3B36;
-  --ee-border:   rgba(184,133,31,0.2);
-  --ee-input-bg: #FFFFFF;
-  --ee-input-bd: #E2DFD8;
+  --lp-navy:      #0B2447;
+  --lp-navy-d:    #091C3E;
+  --lp-blue:      #2563EB;
+  --lp-blue-h:    #1D4ED8;
+  --lp-blue-d:    #1E40AF;
+  --lp-teal:      #0EA5E9;
+  --lp-text:      #0F172A;
+  --lp-muted:     #475569;
+  --lp-border:    #E2E8F0;
 }
 
 /* ── LEFT PANEL ── */
 .ee-left {
-  background: var(--ee-bg);
+  background: var(--lp-navy);
   font-family: 'DM Sans', sans-serif;
   position: relative;
   overflow: hidden;
 }
 
-/* Grid texture */
+/* subtle blue dot-grid texture */
 .ee-left::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='%23B8851F' stroke-width='0.6' stroke-opacity='0.18'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M 10 0 L 0 0 0 10' fill='none' stroke='%23B8851F' stroke-width='0.4' stroke-opacity='0.09'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='1' fill='%232563EB' fill-opacity='0.10'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
 }
 
-/* EE watermark */
+/* radial blue blob bottom-right */
 .ee-left::after {
-  content: 'EE';
+  content: '';
   position: absolute;
-  bottom: -40px;
-  right: -20px;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: clamp(220px, 30vw, 420px);
-  line-height: 1;
-  color: var(--ee-gold);
-  opacity: 0.04;
+  width: 480px;
+  height: 480px;
+  bottom: -120px;
+  right: -80px;
+  background: radial-gradient(circle, rgba(14,165,233,0.07) 0%, transparent 65%);
   pointer-events: none;
-  z-index: 1;
-  user-select: none;
+  z-index: 0;
 }
 
 /* Back link */
@@ -58,11 +55,11 @@
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ee-muted) !important;
+  color: rgba(255,255,255,0.45) !important;
   text-decoration: none !important;
   transition: color 0.18s;
 }
-.ee-back:hover { color: var(--ee-gold) !important; }
+.ee-back:hover { color: rgba(255,255,255,0.85) !important; }
 .ee-back svg { stroke: currentColor; }
 
 /* Form card */
@@ -70,29 +67,27 @@
   position: relative;
   z-index: 10;
   background: #FFFFFF;
-  border-radius: 2px;
+  border-radius: 12px;
   max-width: 420px;
   width: 100%;
   margin: 0 auto;
   padding: 2.5rem;
   box-shadow:
-    0 2px 8px rgba(26,26,24,0.06),
-    0 8px 32px rgba(26,26,24,0.10),
-    0 0 0 1px rgba(184,133,31,0.08),
-    0 16px 64px rgba(184,133,31,0.04);
+    0 2px 8px rgba(9,28,62,0.20),
+    0 16px 48px rgba(9,28,62,0.32);
 }
 
-/* Corner accents */
+/* Corner accents — blue */
 .ee-corner {
   position: absolute;
   width: 18px;
   height: 18px;
   pointer-events: none;
 }
-.ee-corner--tl { top: -1px; left: -1px; border-top: 1.5px solid var(--ee-gold); border-left: 1.5px solid var(--ee-gold); }
-.ee-corner--tr { top: -1px; right: -1px; border-top: 1.5px solid var(--ee-gold); border-right: 1.5px solid var(--ee-gold); }
-.ee-corner--bl { bottom: -1px; left: -1px; border-bottom: 1.5px solid var(--ee-gold); border-left: 1.5px solid var(--ee-gold); }
-.ee-corner--br { bottom: -1px; right: -1px; border-bottom: 1.5px solid var(--ee-gold); border-right: 1.5px solid var(--ee-gold); }
+.ee-corner--tl { top:-1px; left:-1px;   border-top:1.5px solid rgba(37,99,235,0.45); border-left:1.5px solid rgba(37,99,235,0.45); }
+.ee-corner--tr { top:-1px; right:-1px;  border-top:1.5px solid rgba(37,99,235,0.45); border-right:1.5px solid rgba(37,99,235,0.45); }
+.ee-corner--bl { bottom:-1px; left:-1px;  border-bottom:1.5px solid rgba(37,99,235,0.45); border-left:1.5px solid rgba(37,99,235,0.45); }
+.ee-corner--br { bottom:-1px; right:-1px; border-bottom:1.5px solid rgba(37,99,235,0.45); border-right:1.5px solid rgba(37,99,235,0.45); }
 
 /* Heading */
 .ee-heading {
@@ -100,21 +95,21 @@
   align-items: baseline;
   justify-content: space-between;
   padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--ee-border);
+  border-bottom: 1px solid #E2E8F0;
   margin-bottom: 2rem;
 }
 .ee-title-en {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--ee-text);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #0F172A;
   line-height: 1;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 .ee-title-ar {
   font-size: 1rem;
   font-weight: 500;
-  color: #3D3B36;
+  color: #475569;
   direction: rtl;
   font-family: 'IBM Plex Sans Arabic', sans-serif;
 }
@@ -135,50 +130,49 @@
   letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
   font-weight: 500 !important;
-  color: var(--ee-muted) !important;
+  color: var(--lp-muted) !important;
 }
 .ee-card label span[dir="rtl"] {
   font-size: 0.7rem !important;
-  color: #3D3B36 !important;
+  color: #64748B !important;
 }
 
 /* Inputs */
 .ee-card input[type="text"],
 .ee-card input[type="password"],
 .ee-card input[type="email"] {
-  background: var(--ee-input-bg) !important;
-  border-color: var(--ee-input-bd) !important;
-  color: var(--ee-text) !important;
-  border-radius: 3px !important;
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: var(--lp-text) !important;
+  border-radius: 8px !important;
   height: 48px !important;
   font-family: 'DM Sans', sans-serif !important;
   box-shadow: none !important;
   transition: border-color 0.18s, box-shadow 0.18s !important;
 }
 .ee-card input[type="text"]::placeholder,
-.ee-card input[type="password"]::placeholder { color: #8C8A85 !important; }
+.ee-card input[type="password"]::placeholder { color: #94A3B8 !important; }
 .ee-card input[type="text"]:focus,
 .ee-card input[type="password"]:focus {
-  border-color: var(--ee-gold) !important;
-  box-shadow: 0 0 0 3px rgba(184,133,31,0.1) !important;
+  border-color: var(--lp-blue) !important;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.12) !important;
   outline: none !important;
 }
 .ee-card input:-webkit-autofill,
 .ee-card input:-webkit-autofill:hover,
 .ee-card input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important;
-  -webkit-text-fill-color: var(--ee-text) !important;
-  caret-color: var(--ee-text) !important;
+  -webkit-text-fill-color: var(--lp-text) !important;
+  caret-color: var(--lp-text) !important;
   transition: background-color 5000s ease-in-out 0s !important;
 }
 
 /* Eye toggle */
-.ee-card .text-gray-500 { color: #6B6860 !important; transition: color 0.18s; }
-.ee-card span[class*="cursor-pointer"]:hover path { fill: var(--ee-gold) !important; }
+.ee-card .text-gray-500 { color: #94A3B8 !important; transition: color 0.18s; }
 
-/* Button — x-form.button renders <button> with NO type attr */
+/* Button */
 .ee-card button {
-  background: var(--ee-gold) !important;
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
   color: #FFFFFF !important;
   font-family: 'DM Sans', sans-serif !important;
   font-weight: 600 !important;
@@ -186,15 +180,15 @@
   letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
   border: none !important;
-  border-radius: 3px !important;
+  border-radius: 8px !important;
   height: 48px !important;
   transition: background 0.18s, box-shadow 0.18s !important;
   flex-direction: column !important;
   gap: 2px !important;
 }
 .ee-card button:hover {
-  background: var(--ee-gold-lt) !important;
-  box-shadow: 0 4px 16px rgba(184,133,31,0.25) !important;
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important;
+  box-shadow: 0 4px 20px rgba(37,99,235,0.35) !important;
 }
 .ee-card button span[dir="rtl"] {
   font-size: 0.7rem !important;
@@ -209,23 +203,22 @@
 .ee-right {
   position: relative;
   overflow: hidden;
-  background: #0F1117;
+  background: var(--lp-navy-d);
 }
 
-/* Geometric pattern layers */
+/* Layered dot + diagonal pattern */
 .ee-right::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='1.2' fill='%23B8851F' fill-opacity='0.15'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cline x1='0' y1='60' x2='60' y2='0' stroke='%23B8851F' stroke-width='0.4' stroke-opacity='0.08'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpolygon points='40,4 76,40 40,76 4,40' fill='none' stroke='%23B8851F' stroke-width='0.6' stroke-opacity='0.12'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='1' fill='%232563EB' fill-opacity='0.10'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cline x1='0' y1='60' x2='60' y2='0' stroke='%232563EB' stroke-width='0.4' stroke-opacity='0.06'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
 }
 
-/* Rotating rings */
+/* Rotating rings — blue */
 .ee-ring-outer,
 .ee-ring-inner {
   position: absolute;
@@ -240,10 +233,10 @@
   margin-top: -230px;
   margin-left: -230px;
   border: 1px solid transparent;
-  border-top-color: rgba(184,133,31,0.35);
-  border-right-color: rgba(184,133,31,0.15);
+  border-top-color: rgba(37,99,235,0.50);
+  border-right-color: rgba(37,99,235,0.22);
   border-bottom-color: transparent;
-  border-left-color: rgba(184,133,31,0.08);
+  border-left-color: rgba(37,99,235,0.10);
   animation: ee-spin-cw 30s linear infinite;
   z-index: 1;
 }
@@ -253,8 +246,8 @@
   margin-top: -150px;
   margin-left: -150px;
   border: 1px solid transparent;
-  border-top-color: rgba(184,133,31,0.25);
-  border-bottom-color: rgba(184,133,31,0.25);
+  border-top-color: rgba(14,165,233,0.40);
+  border-bottom-color: rgba(14,165,233,0.40);
   border-left-color: transparent;
   border-right-color: transparent;
   animation: ee-spin-ccw 22s linear infinite;
@@ -274,7 +267,7 @@
   gap: 0;
 }
 
-/* Art Deco divider */
+/* Divider — blue */
 .ee-divider {
   display: flex;
   align-items: center;
@@ -285,18 +278,18 @@
 .ee-divider-line {
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(184,133,31,0.5));
+  background: linear-gradient(to right, transparent, rgba(37,99,235,0.55));
 }
 .ee-divider-line:last-child {
-  background: linear-gradient(to left, transparent, rgba(184,133,31,0.5));
+  background: linear-gradient(to left, transparent, rgba(37,99,235,0.55));
 }
 .ee-divider-diamond {
   width: 7px;
   height: 7px;
-  background: var(--ee-gold);
+  background: var(--lp-blue);
   transform: rotate(45deg);
   flex-shrink: 0;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 </style>
 @endpush
@@ -320,12 +313,19 @@
                 </a>
             </div>
 
+            <!-- Mobile logo — hidden on lg screens -->
+            <div class="lg:hidden flex flex-col items-center pb-2 pt-0 relative z-10">
+                <img src="{{ asset('Images/EagleEyeLogoLight.png') }}"
+                     alt="Eagle Eye Logo"
+                     style="width:160px; filter:drop-shadow(0 0 12px rgba(37,99,235,0.40));" />
+                <p style="font-family:'DM Sans',sans-serif; font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.40); margin-top:0.6rem;">
+                    Compliance Intelligence Platform
+                </p>
+            </div>
+
             <div class="flex flex-col justify-center flex-1 w-full mx-auto relative z-10 px-4 py-8">
                 <div class="ee-card">
-                    <span class="ee-corner ee-corner--tl"></span>
-                    <span class="ee-corner ee-corner--tr"></span>
-                    <span class="ee-corner ee-corner--bl"></span>
-                    <span class="ee-corner ee-corner--br"></span>
+                
 
                     <!-- Heading -->
                     <div class="ee-anim-1">
@@ -392,10 +392,10 @@
 
             <div class="ee-right-content">
                 <a href="{{ route('home') }}" class="block mb-2">
-                    <img src="{{ asset('Images/logo/EagleEyeLogo.png') }}"
-                         class="w-36"
+                    <img src="{{ asset('Images/EagleEyeLogoLight.png') }}"
+                         class="w-100 h-auto"
                          alt="Eagle Eye Logo"
-                         style="filter: drop-shadow(0 0 18px rgba(184,133,31,0.45));" />
+                         style="width: 260px; filter: drop-shadow(0 0 18px rgba(37,99,235,0.50));" />
                 </a>
 
                 <div class="ee-divider">
@@ -404,14 +404,12 @@
                     <div class="ee-divider-line"></div>
                 </div>
 
-                <p style="font-family:'Cinzel',serif; font-size:2.2rem; font-weight:600; letter-spacing:0.22em; color:#FFFFFF; line-height:1; margin-bottom:0.5rem;">
-                    Eagle Eye
-                </p>
+               
                 <p style="font-family:'DM Sans',sans-serif; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:1.25rem;">
                     Compliance Intelligence Platform
                 </p>
 
-                <div style="width:40px; height:1px; background:var(--ee-gold); opacity:0.7;"></div>
+                <div style="width:40px; height:1px; background:var(--lp-blue); opacity:0.7;"></div>
             </div>
         </div>
 
