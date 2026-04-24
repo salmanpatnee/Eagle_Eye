@@ -2,114 +2,282 @@
 @section('title', 'Compliance Dashboard')
 @section('title_ar', 'لوحة معلومات الامتثال')
 
+@push('css')
+<style>
+:root {
+    --dn: #0B2447;
+    --db: #2563EB;
+    --dt: #0EA5E9;
+    --dg: #059669;
+    --da: #D97706;
+    --dr: #DC2626;
+    --dm: #64748B;
+}
+
+#print-area .card {
+    padding: 20px 22px;
+    border-color: #E2E8F0;
+    box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+#print-area .card:hover {
+    box-shadow: 0 4px 16px rgba(15,23,42,0.1);
+    transform: translateY(-2px);
+}
+#print-area .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--db) 0%, var(--dt) 100%);
+    border-radius: 12px 12px 0 0;
+}
+#print-area .card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--dn);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.dash-pg-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 4px 16px 20px;
+    border-bottom: 1px solid #F1F5F9;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.dash-pg-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dn);
+    line-height: 1.2;
+}
+.dash-pg-sub {
+    font-size: 13px;
+    color: var(--dm);
+    margin-top: 4px;
+}
+
+.dash-kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    padding: 0 16px;
+    margin-bottom: 28px;
+}
+.dash-kpi-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #E2E8F0;
+    padding: 18px 20px;
+    box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+    border-left: 3px solid transparent;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.dash-kpi-card:hover {
+    box-shadow: 0 4px 16px rgba(15,23,42,0.1);
+    transform: translateY(-2px);
+}
+.k-blue  { border-left-color: var(--db); }
+.k-teal  { border-left-color: var(--dt); }
+.k-amber { border-left-color: var(--da); }
+.k-green { border-left-color: var(--dg); }
+
+.dash-kpi-lbl {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #94A3B8;
+    margin-bottom: 8px;
+}
+.dash-kpi-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+.k-blue  .dash-kpi-val { color: var(--db); }
+.k-teal  .dash-kpi-val { color: var(--dt); }
+.k-amber .dash-kpi-val { color: var(--da); }
+.k-green .dash-kpi-val { color: var(--dg); }
+.dash-kpi-desc { font-size: 12px; color: var(--dm); line-height: 1.4; }
+
+.dash-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px;
+    margin: 28px 0 14px;
+}
+.dash-section::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #E2E8F0;
+}
+.dash-section-badge {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--db);
+    background: #EFF6FF;
+    border: 1px solid rgba(37,99,235,0.18);
+    padding: 2px 8px;
+    border-radius: 100px;
+}
+.dash-section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dn);
+    white-space: nowrap;
+}
+
+@media (max-width: 1024px) { .dash-kpi-strip { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .dash-kpi-strip { grid-template-columns: 1fr; }
+    .dash-pg-header { flex-direction: column; } }
+</style>
+@endpush
+
 @section('content')
 
-    <x-table.action-wrapper>
+@php
+    $samaImpl  = (int) ($samaComplianceStatus->Implemented ?? 0);
+    $samaTotal = max(1, collect((array) $samaComplianceStatus)->sum());
+    $samaScore = round($samaImpl / $samaTotal * 100);
 
+    $eccImpl  = (int) ($eccComplianceStatus->Implemented ?? 0);
+    $eccTotal = max(1, collect((array) $eccComplianceStatus)->sum());
+    $eccScore = round($eccImpl / $eccTotal * 100);
+
+    $openRisks   = (int) ($riskStatus->Open   ?? 0);
+    $closedRisks = (int) ($riskStatus->Closed ?? 0);
+
+    $totalCtrl = collect($ownerControlsStatus['total_controls'] ?? [])->sum();
+    $implCtrl  = collect($ownerControlsStatus['implemented']    ?? [])->sum();
+    $ctrlScore = $totalCtrl > 0 ? round($implCtrl / $totalCtrl * 100) : 0;
+@endphp
+
+{{-- Page header + actions --}}
+<div class="dash-pg-header">
+    <div>
+        <div class="dash-pg-title">Compliance Dashboard</div>
+        <div class="dash-pg-sub">Overall GRC posture — compliance, risks, controls &amp; assets at a glance</div>
+    </div>
+    <div class="flex gap-2 items-center">
         <button type="button" data-filename="Overall Compliance Dashboard" id="print" class="action-btn">
-            <x-icons.pdf />
-            <span class="inline mx-2">Download as PDF</span>
+            <x-icons.pdf /><span class="inline mx-2">Download as PDF</span>
         </button>
         <x-action.excel-button route_name="generate.ppt" label="Download as PPT"
             data-filename="Overall Compliance Dashboard" />
-    </x-table.action-wrapper>
-
-    <div id="print-area">
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-            <div class="card">
-                <h3 class="card-title">SAMA Non-Compliance Status</h3>
-                <canvas id="samaNonComplianceGauge"></canvas>
-            </div>
-            <div class="card">
-                <h3 class="card-title">NCA Non-Compliance Status</h3>
-                <canvas id="ncaNonComplianceGauge"></canvas>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-            <div class="card">
-                <h3 class="card-title">NCA-ECC Compliance Status</h3>
-                <canvas id="eccStatusChart"></canvas>
-            </div>
-            <div class="card">
-                <h3 class="card-title">SAMA Compliance Status</h3>
-                <canvas id="samaStatusChart"></canvas>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-            <div class="card">
-                <h3 class="card-title">Asset Distribution by Group</h3>
-                <canvas id="assetGroupsChart"></canvas>
-            </div>
-            <div class="card">
-                <h3 class="card-title">Implemented Controls of Best Practices</h3>
-                <canvas id="ncaDomainChart"></canvas>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 px-4 mb-6">
-            <div class="card">
-                <h3 class="card-title">Owner's Control Status</h3>
-                <canvas id="ownerControlsChart"></canvas>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-            <div class="card">
-                <h3 class="card-title">Asset Technology Distribution Overview</h3>
-                <canvas id="assetTechChart"></canvas>
-            </div>
-            <div class="card">
-                <h3 class="card-title">Evidence Summary by Best Practices</h3>
-                <canvas id="evidenceSummaryChart"></canvas>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-            <div class="card">
-                <h3 class="card-title">Risk Status by Asset Group</h3>
-                <canvas id="assetGroupStatus"></canvas>
-            </div>
-            <div class="card">
-                <h3 class="card-title">Risk Status</h3>
-                <canvas id="riskStatusChart"></canvas>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-            <div class="card">
-                <h3 class="card-title">Asset Distribution by Technologies</h3>
-                <canvas id="assetTechsChart"></canvas>
-            </div>
-            <div class="card">
-                <h3 class="card-title">Risk Distribution by Technologies</h3>
-                <canvas id="riskTechChart"></canvas>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-            <div class="card">
-                <h3 class="card-title">NCA Control Distribution by Technologies</h3>
-                <canvas id="controlTechChart"></canvas>
-            </div>
-            <div class="card">
-                <h3 class="card-title">SAMA Control Distribution by Technologies</h3>
-                <canvas id="samaControlTechChart"></canvas>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
-            <div class="card">
-                <h3 class="card-title">SAMA Control Maturity Level Distribution</h3>
-                <canvas id="samaMaturityLevel"></canvas>
-            </div>
-            <div class="card">
-                <h3 class="card-title">Heatmap - Risk Appetite Breakdown</h3>
-                <canvas id="heatmapChart"></canvas>
-            </div>
-        </div>
     </div>
+</div>
+
+{{-- KPI Strip --}}
+{{-- <div class="dash-kpi-strip">
+    <div class="dash-kpi-card k-blue">
+        <div class="dash-kpi-lbl">SAMA Compliance</div>
+        <div class="dash-kpi-val">{{ $samaScore }}%</div>
+        <div class="dash-kpi-desc">{{ $samaImpl }} of {{ $samaTotal }} controls</div>
+    </div>
+    <div class="dash-kpi-card k-teal">
+        <div class="dash-kpi-lbl">NCA Compliance</div>
+        <div class="dash-kpi-val">{{ $eccScore }}%</div>
+        <div class="dash-kpi-desc">{{ $eccImpl }} of {{ $eccTotal }} controls</div>
+    </div>
+    <div class="dash-kpi-card k-amber">
+        <div class="dash-kpi-lbl">Open Risks</div>
+        <div class="dash-kpi-val">{{ $openRisks }}</div>
+        <div class="dash-kpi-desc">{{ $closedRisks }} risks closed</div>
+    </div>
+    <div class="dash-kpi-card k-green">
+        <div class="dash-kpi-lbl">Controls Passed</div>
+        <div class="dash-kpi-val">{{ $ctrlScore }}%</div>
+        <div class="dash-kpi-desc">{{ $implCtrl }} of {{ $totalCtrl }} implemented</div>
+    </div>
+</div> --}}
+
+<div id="print-area">
+    {{-- Section 1: Framework Compliance --}}
+    <div class="dash-section">
+        <span class="dash-section-badge">01</span>
+        <span class="dash-section-title">Framework Compliance</span>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-4">
+        <div class="card"><h3 class="card-title">SAMA Non-Compliance Status</h3><canvas id="samaNonComplianceGauge"></canvas></div>
+        <div class="card"><h3 class="card-title">NCA Non-Compliance Status</h3><canvas id="ncaNonComplianceGauge"></canvas></div>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+        <div class="card"><h3 class="card-title">NCA-ECC Compliance Status</h3><canvas id="eccStatusChart"></canvas></div>
+        <div class="card"><h3 class="card-title">SAMA Compliance Status</h3><canvas id="samaStatusChart"></canvas></div>
+    </div>
+
+    {{-- Section 2: Assets & Controls --}}
+    <div class="dash-section">
+        <span class="dash-section-badge">02</span>
+        <span class="dash-section-title">Assets &amp; Controls</span>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-4">
+        <div class="card"><h3 class="card-title">Asset Distribution by Group</h3><canvas id="assetGroupsChart"></canvas></div>
+        <div class="card"><h3 class="card-title">Implemented Controls of Best Practices</h3><canvas id="ncaDomainChart"></canvas></div>
+    </div>
+    <div class="grid grid-cols-1 px-4 mb-4">
+        <div class="card"><h3 class="card-title">Owner's Control Status</h3><canvas id="ownerControlsChart"></canvas></div>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+        <div class="card"><h3 class="card-title">Asset Technology Distribution Overview</h3><canvas id="assetTechChart"></canvas></div>
+        <div class="card"><h3 class="card-title">Evidence Summary by Best Practices</h3><canvas id="evidenceSummaryChart"></canvas></div>
+    </div>
+
+    {{-- Section 3: Risk Analysis --}}
+    <div class="dash-section">
+        <span class="dash-section-badge">03</span>
+        <span class="dash-section-title">Risk Analysis</span>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+        <div class="card"><h3 class="card-title">Risk Status by Asset Group</h3><canvas id="assetGroupStatus"></canvas></div>
+        <div class="card"><h3 class="card-title">Risk Status</h3><canvas id="riskStatusChart"></canvas></div>
+    </div>
+
+    {{-- Section 4: Technology Distribution --}}
+    <div class="dash-section">
+        <span class="dash-section-badge">04</span>
+        <span class="dash-section-title">Technology Distribution</span>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-4">
+        <div class="card"><h3 class="card-title">Asset Distribution by Technologies</h3><canvas id="assetTechsChart"></canvas></div>
+        <div class="card"><h3 class="card-title">Risk Distribution by Technologies</h3><canvas id="riskTechChart"></canvas></div>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+        <div class="card"><h3 class="card-title">NCA Control Distribution by Technologies</h3><canvas id="controlTechChart"></canvas></div>
+        <div class="card"><h3 class="card-title">SAMA Control Distribution by Technologies</h3><canvas id="samaControlTechChart"></canvas></div>
+    </div>
+
+    {{-- Section 5: Maturity & Risk Appetite --}}
+    <div class="dash-section">
+        <span class="dash-section-badge">05</span>
+        <span class="dash-section-title">Maturity &amp; Risk Appetite</span>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+        <div class="card"><h3 class="card-title">SAMA Control Maturity Level Distribution</h3><canvas id="samaMaturityLevel"></canvas></div>
+        <div class="card"><h3 class="card-title">Heatmap - Risk Appetite Breakdown</h3><canvas id="heatmapChart"></canvas></div>
+    </div>
+</div>
 
 @endsection
 
@@ -142,7 +310,7 @@
             labels: assetGroupLabels,
             data: assetCounts,
             customData: assetGroupIds,
-            backgroundColor: "#2196F3",
+            backgroundColor: "#2563EB",
             xAxisFontSize: 10,
             onClickUrlPrefix: "/asset-type-compliance"
         });
@@ -156,7 +324,7 @@
             labels,
             data: values,
             customData: labels,
-            backgroundColor: "#2196F3",
+            backgroundColor: "#2563EB",
             xAxisFontSize: 8,
             onClickUrlPrefix: "/domain-compliance"
         });
@@ -165,11 +333,11 @@
     <!------------- Owner Controls ---------------->
     <script>
         const colors = {
-            BLUE: "#2196F3",
-            GREEN: "#228B22",
-            ORANGE: "#FFC107",
-            RED: "#FF0000",
-            GREY: "#9E9E9E"
+            BLUE:   "#2563EB",
+            GREEN:  "#059669",
+            ORANGE: "#F59E0B",
+            RED:    "#DC2626",
+            GREY:   "#94A3B8"
         };
         const s = @json($ownerControlsStatus);
 
@@ -228,7 +396,7 @@
                     xAxes: [{
                         ticks: {
                             fontSize: 9,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                             lineHeight: 1.5,
                             padding: 4
                         }
@@ -265,7 +433,7 @@
             data: {
                 labels: assetTechnologies,
                 datasets: [{
-                    backgroundColor: "#2196F3",
+                    backgroundColor: "#2563EB",
                     data: assetGroupCounts,
                 }]
             },
@@ -277,15 +445,15 @@
                     xAxes: [{
                         ticks: {
                             fontSize: 10,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                             lineHeight: 1.5,
                             padding: 4
                         }
                     }],
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true, // Ensure the chart starts at 0
-                            fontColor: '#000',
+                            beginAtZero: true,
+                            fontColor: '#64748B',
                         }
                     }]
                 },
@@ -327,15 +495,15 @@
                     xAxes: [{
                         ticks: {
                             fontSize: 10,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                             lineHeight: 1.5,
                             padding: 4
                         }
                     }],
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true, // Ensure the chart starts at 0
-                            fontColor: '#000',
+                            beginAtZero: true,
+                            fontColor: '#64748B',
                         }
                     }]
                 },
@@ -348,7 +516,6 @@
                         var bestPracticeId = dataset.customData[dataIndex];
 
                         window.location.href = `/domain-evidence/${bestPracticeId}`
-                        // window.open("/domain-evidence/" + bestPracticeId);
                     }
                 },
                 plugins: {
@@ -417,15 +584,15 @@
                     xAxes: [{
                         ticks: {
                             fontSize: 9,
-                            fontColor: '#000000',
+                            fontColor: '#64748B',
                             lineHeight: 1.5,
                             padding: 4
                         }
                     }],
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true, // Ensure the chart starts at 0
-                            fontColor: '#000',
+                            beginAtZero: true,
+                            fontColor: '#64748B',
                         }
                     }]
                 },
@@ -468,14 +635,14 @@
         const riskStatusCount = @json($riskStatus);
 
         const barColors = [
-            "#FF0000",
-            "#069806",
+            "#DC2626",
+            "#059669",
         ];
 
         new Chart("riskStatusChart", {
             type: "pie",
             data: {
-                labels: riskStatusLabel, // Adding labels for each data point
+                labels: riskStatusLabel,
                 datasets: [{
                     backgroundColor: barColors,
                     data: [riskStatusCount.Open, riskStatusCount.Closed]
@@ -494,7 +661,6 @@
                 },
                 plugins: {
                     labels: {
-                        // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
                         render: 'percentage',
                         showZero: true,
                         fontSize: 16,
@@ -524,9 +690,8 @@
             data: {
                 labels: assetTypesKeys,
                 datasets: [{
-                    backgroundColor: "#2196F3",
+                    backgroundColor: "#2563EB",
                     data: assetTypesValues,
-                    // customData: assetGroupIds,
                 }]
             },
             options: {
@@ -537,7 +702,7 @@
                     xAxes: [{
                         ticks: {
                             fontSize: 10,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                             lineHeight: 1.5,
                             padding: 4
                         }
@@ -545,7 +710,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                         }
                     }]
                 },
@@ -571,7 +736,7 @@
             data: {
                 labels: riskTypesLabels,
                 datasets: [{
-                    backgroundColor: "#2196F3",
+                    backgroundColor: "#2563EB",
                     data: riskTypesCount,
                 }]
             },
@@ -583,7 +748,7 @@
                     xAxes: [{
                         ticks: {
                             fontSize: 10,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                             lineHeight: 1.5,
                             padding: 4
                         }
@@ -591,7 +756,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                         }
                     }]
                 },
@@ -618,9 +783,8 @@
             data: {
                 labels: controlTypesKeys,
                 datasets: [{
-                    backgroundColor: "#2196F3",
+                    backgroundColor: "#2563EB",
                     data: controlTypesValues,
-                    // customData: assetGroupIds,
                 }]
             },
             options: {
@@ -631,7 +795,7 @@
                     xAxes: [{
                         ticks: {
                             fontSize: 10,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                             lineHeight: 1.5,
                             padding: 4
                         }
@@ -639,7 +803,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                         }
                     }]
                 },
@@ -666,9 +830,8 @@
             data: {
                 labels: samaControlTypesKeys,
                 datasets: [{
-                    backgroundColor: "#2196F3",
+                    backgroundColor: "#2563EB",
                     data: samaControlTypesValues,
-                    // customData: assetGroupIds,
                 }]
             },
             options: {
@@ -679,7 +842,7 @@
                     xAxes: [{
                         ticks: {
                             fontSize: 10,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                             lineHeight: 1.5,
                             padding: 4
                         }
@@ -687,7 +850,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                         }
                     }]
                 },
@@ -712,7 +875,7 @@
             data: {
                 labels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5'],
                 datasets: [{
-                    backgroundColor: "#2196F3",
+                    backgroundColor: "#2563EB",
                     data: scc,
                     customData: [1, 2, 3, 4, 5],
                 }]
@@ -725,7 +888,7 @@
                     xAxes: [{
                         ticks: {
                             fontSize: 10,
-                            fontColor: '#000',
+                            fontColor: '#64748B',
                             lineHeight: 1.5,
                             padding: 4
                         }
@@ -768,9 +931,9 @@
         new Chart("heatmapChart", {
             type: "pie",
             data: {
-                labels: ["Very Low", "Low", "Medium", "High", "Critical"], // Corrected property name
+                labels: ["Very Low", "Low", "Medium", "High", "Critical"],
                 datasets: [{
-                    backgroundColor: heatmapBackgroundColor, // Corrected property name
+                    backgroundColor: heatmapBackgroundColor,
                     data: heatmapData
                 }]
             },
@@ -787,7 +950,6 @@
                 },
                 plugins: {
                     labels: {
-                        // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
                         render: 'percentage',
                         showZero: false,
                         fontSize: 20,
@@ -796,9 +958,6 @@
                         position: 'border',
                     }
                 },
-                // onClick: function(event, elements) {
-                //     window.location.href = "/domain-compliance/NCA-ECC";
-                // },
             }
         });
     </script>
@@ -819,7 +978,7 @@
                         datasets: [{
                             value: 100 - pct,
                             data: [34, 33, 33],
-                            backgroundColor: ['#FF0000', '#FFC107', '#228B22'],
+                            backgroundColor: ['#DC2626', '#F59E0B', '#059669'],
                             borderWidth: 2
                         }]
                     },
@@ -827,7 +986,7 @@
                         responsive: true,
                         layout: { padding: { bottom: 30 } },
                         needle: { radiusPercentage: 2, widthPercentage: 3.2, lengthPercentage: 80, color: 'rgba(0,0,0,1)' },
-                        valueLabel: { display: true, formatter: () => pct + '%', fontSize: 22, color: '#FF0000', backgroundColor: 'rgba(0,0,0,0)' },
+                        valueLabel: { display: true, formatter: () => pct + '%', fontSize: 22, color: '#DC2626', backgroundColor: 'rgba(0,0,0,0)' },
                         tooltips: {
                             enabled: true,
                             callbacks: {
@@ -842,9 +1001,9 @@
                             labels: {
                                 generateLabels: function() {
                                     return [
-                                        { text: 'High (67–100%)',  fillStyle: '#FF0000', strokeStyle: '#FF0000', lineWidth: 1 },
-                                        { text: 'Medium (34–66%)', fillStyle: '#FFC107', strokeStyle: '#FFC107', lineWidth: 1 },
-                                        { text: 'Low (0–33%)',     fillStyle: '#228B22', strokeStyle: '#228B22', lineWidth: 1 }
+                                        { text: 'High (67–100%)',  fillStyle: '#DC2626', strokeStyle: '#DC2626', lineWidth: 1 },
+                                        { text: 'Medium (34–66%)', fillStyle: '#F59E0B', strokeStyle: '#F59E0B', lineWidth: 1 },
+                                        { text: 'Low (0–33%)',     fillStyle: '#059669', strokeStyle: '#059669', lineWidth: 1 }
                                     ];
                                 }
                             }
