@@ -581,11 +581,88 @@
             transform: translateY(-2px);
         }
 
+        /* ─── Hero Badge ──────────────────────────────── */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(37, 99, 235, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.18);
+            border-radius: 100px;
+            padding: 6px 16px 6px 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--navy-mid);
+            margin-bottom: 22px;
+            width: fit-content;
+        }
+
+        .hero-badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: hero-dot-pulse 2.4s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes hero-dot-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.5); }
+            50%       { box-shadow: 0 0 0 5px rgba(5, 150, 105, 0); }
+        }
+
+        /* ─── Hero Stats Trio ─────────────────────────── */
+        .hero-stats-trio {
+            display: flex;
+            align-items: center;
+            margin-top: 28px;
+            padding: 14px 4px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: var(--shadow-sm);
+            width: fit-content;
+        }
+
+        .hst-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 22px;
+        }
+
+        .hst-sep {
+            width: 1px;
+            height: 32px;
+            background: var(--border);
+            flex-shrink: 0;
+        }
+
+        .hst-val {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1;
+        }
+
+        .hst-lbl {
+            font-size: 10.5px;
+            font-weight: 500;
+            color: var(--text-3);
+            margin-top: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         /* ─── Mockup ──────────────────────────────────── */
         .hero-visual {
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
+            min-width: 0;
             animation: fadeInRight 0.8s ease 0.4s both;
         }
 
@@ -2079,43 +2156,13 @@
             animation: aurora-drift-alt 18s ease-in-out infinite;
             animation-delay: -12s;
         }
-        /* Dark hero overrides */
-        .hero { background: #050E1F; }
-        .hero::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='1' cy='1' r='0.8' fill='rgba(255%2C255%2C255%2C0.04)'/%3E%3C/svg%3E");
-        }
-        .hero-h1 { color: #fff; }
-        .blue-text {
-            background: linear-gradient(135deg, #60A5FA 0%, #34D399 55%, #A78BFA 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero-body { color: rgba(255,255,255,0.58); }
-        .hero-overline { color: #60A5FA; border-left-color: #60A5FA; }
-        .btn-ghost {
-            background: rgba(255,255,255,0.07);
-            border-color: rgba(255,255,255,0.18);
-            color: rgba(255,255,255,0.82);
-        }
-        .btn-ghost:hover {
-            border-color: rgba(255,255,255,0.38);
-            color: #fff;
-            background: rgba(255,255,255,0.12);
-            transform: translateY(-2px);
-        }
-        /* Glassmorphism mockup on dark hero */
-        .mockup-card {
-            background: rgba(11,36,71,0.65) !important;
-            backdrop-filter: blur(24px) !important;
-            -webkit-backdrop-filter: blur(24px) !important;
-            border: 1px solid rgba(96,165,250,0.35) !important;
-            box-shadow:
-                0 40px 100px rgba(0,0,0,0.6),
-                0 0 0 1px rgba(37,99,235,0.1),
-                0 8px 32px rgba(37,99,235,0.28),
-                inset 0 1px 0 rgba(255,255,255,0.08) !important;
-        }
+        /* ─── Light Hero ──────────────────────────────── */
+        .hero { background: linear-gradient(150deg, #EFF6FF 0%, #F8FAFC 45%, #FFFFFF 100%); }
+        /* Subtle aurora blobs for light background */
+        .aurora-1 { background: radial-gradient(circle, rgba(37,99,235,0.14) 0%, rgba(37,99,235,0.05) 48%, transparent 70%); }
+        .aurora-2 { background: radial-gradient(circle, rgba(14,165,233,0.11) 0%, rgba(14,165,233,0.03) 48%, transparent 70%); }
+        .aurora-3 { background: radial-gradient(circle, rgba(124,58,237,0.09) 0%, transparent 65%); }
+        .aurora-4 { background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 65%); }
 
         /* ─── Infographics Section ─────────────────────── */
         .section-infographics {
@@ -2534,6 +2581,15 @@
 
         @media (max-width: 768px) {
 
+            .hero-stats-trio {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .hst-item {
+                padding: 0 12px;
+            }
+
             .nav-links,
             .nav-cta {
                 display: none;
@@ -2596,16 +2652,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 0;
             width: 100%;
-            max-width: 340px;
+            max-width: 380px;
+            min-width: 0;
             margin: 0 auto;
         }
 
         .cv-ring-wrap {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 100%;
+            max-width: 360px;
+            aspect-ratio: 1 / 1;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2613,7 +2671,8 @@
 
         .cv-ring-svg {
             filter: drop-shadow(0 0 30px rgba(52, 211, 153, 0.28));
-            flex-shrink: 0;
+            width: 100%;
+            height: auto;
         }
 
         /* r=96, circumference ≈ 603.19 */
@@ -2633,18 +2692,18 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            background: rgba(5, 14, 31, 0.86);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(52, 211, 153, 0.45);
+            border: 1px solid rgba(52, 211, 153, 0.5);
             border-radius: 20px;
             padding: 6px 11px 6px 7px;
             font-size: 11px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.88);
+            color: var(--navy);
             white-space: nowrap;
             z-index: 4;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.10), 0 1px 4px rgba(15, 23, 42, 0.08);
             opacity: 0;
         }
 
@@ -2687,15 +2746,13 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: rgba(5, 14, 31, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(96, 165, 250, 0.22);
+            background: #fff;
+            border: 1px solid rgba(37, 99, 235, 0.18);
             border-radius: 14px;
             padding: 12px 16px;
             width: 100%;
             max-width: 300px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.10), 0 2px 8px rgba(15, 23, 42, 0.06);
             opacity: 0;
             animation: cv-badge-in 0.6s ease 3.0s forwards;
         }
@@ -2718,13 +2775,13 @@
             font-family: 'Bricolage Grotesque', sans-serif;
             font-size: 13px;
             font-weight: 700;
-            color: #fff;
+            color: var(--navy);
             line-height: 1.2;
         }
 
         .cv-cert-sub {
             font-size: 10.5px;
-            color: rgba(255, 255, 255, 0.45);
+            color: var(--text-3);
             margin-top: 2px;
         }
 
@@ -2739,12 +2796,13 @@
         .cv-stats-row {
             display: flex;
             align-items: stretch;
-            background: rgba(5, 14, 31, 0.65);
-            border: 1px solid rgba(96, 165, 250, 0.15);
+            background: #fff;
+            border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
             width: 100%;
             max-width: 300px;
+            box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
             opacity: 0;
             animation: cv-badge-in 0.6s ease 3.3s forwards;
         }
@@ -2757,23 +2815,23 @@
             padding: 10px 8px;
         }
 
-        .cv-stat + .cv-stat { border-left: 1px solid rgba(96, 165, 250, 0.12); }
+        .cv-stat + .cv-stat { border-left: 1px solid var(--border); }
 
         .cv-stat-val {
             font-family: 'JetBrains Mono', monospace;
             font-size: 20px;
             font-weight: 700;
-            color: #60A5FA;
+            color: var(--blue);
             line-height: 1;
         }
 
-        .cv-val-emerald { color: #34D399; }
-        .cv-val-violet  { color: #A78BFA; }
+        .cv-val-emerald { color: var(--green); }
+        .cv-val-violet  { color: #7C3AED; }
 
         .cv-stat-lbl {
             font-size: 9.5px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.4);
+            color: var(--text-3);
             margin-top: 3px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -2785,7 +2843,7 @@
             gap: 7px;
             font-size: 11px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.45);
+            color: var(--text-3);
             opacity: 0;
             animation: cv-badge-in 0.5s ease 3.6s forwards;
         }
@@ -2861,29 +2919,60 @@
         <div class="container">
             <div class="hero-inner">
                 <div class="hero-content">
-                    {{-- <div class="hero-overline anim-1">[ GRC Platform — KSA ]</div> --}}
-                    <h1 class="hero-h1 anim-2">Out-of-the-Box<br>Regulatory Compliance, <span class="blue-text">Beyond
-                            GRC.</span></h1>
-                    {{-- <p class="hero-arabic anim-3">منصة الحوكمة والمخاطر والامتثال</p> --}}
+                    {{-- <div class="hero-badge anim-1">
+                        <span class="hero-badge-dot"></span>
+                        ISO 27001 &middot; NCA ECC &middot; CITC &middot; PDPL
+                    </div> --}}
+                    <h1 class="hero-h1 anim-2">Out-of-the-Box<br>Regulatory Compliance, <span class="blue-text">Beyond GRC.</span></h1>
                     <p class="hero-body anim-4">Eagle Eye is a Saudi product focused on Saudi Arabia, providing complete
-                        regulatory compliance in the shortest possible time. The product is designed, developed, and
-                        rolled out under the strict supervision of experienced GRC consultants.</p>
+                        regulatory compliance in the shortest possible time. Designed, developed, and rolled out under
+                        the strict supervision of experienced GRC consultants.</p>
                     <div class="hero-actions anim-5">
                         <a href="/login" class="btn-primary">Enter Platform &rarr;</a>
                         <a href="#features" class="btn-ghost">Explore Features &darr;</a>
                     </div>
+                    {{-- <div class="hero-stats-trio anim-5" style="animation-delay:0.62s">
+                        <div class="hst-item">
+                            <div class="hst-val">150+</div>
+                            <div class="hst-lbl">Controls</div>
+                        </div>
+                        <div class="hst-sep"></div>
+                        <div class="hst-item">
+                            <div class="hst-val">6+</div>
+                            <div class="hst-lbl">Frameworks</div>
+                        </div>
+                        <div class="hst-sep"></div>
+                        <div class="hst-item">
+                            <div class="hst-val">100%</div>
+                            <div class="hst-lbl">Saudi-Built</div>
+                        </div>
+                    </div> --}}
                 </div>
                 <div class="hero-visual">
                     <div class="compliance-viz">
 
-                        <!-- Central ring with floating framework badges -->
+                        <!-- Compliance seal ring -->
                         <div class="cv-ring-wrap">
-                            <div class="cv-fw-badge cv-fw-tl"><span class="cv-check">✓</span>SAMA-CSF</div>
-                            <div class="cv-fw-badge cv-fw-tr"><span class="cv-check">✓</span>NCA ECC</div>
-                            <div class="cv-fw-badge cv-fw-bl"><span class="cv-check">✓</span>BCMS</div>
-                            <div class="cv-fw-badge cv-fw-br"><span class="cv-check">✓</span>PDPL</div>
 
-                            <svg class="cv-ring-svg" viewBox="0 0 240 240" width="240" height="240"
+                            <!-- Floating framework badges -->
+                            {{-- <div class="cv-fw-badge cv-fw-tl">
+                                <div class="cv-check">&#10003;</div>
+                                ISO 27001 Ready
+                            </div>
+                            <div class="cv-fw-badge cv-fw-tr">
+                                <div class="cv-check">&#10003;</div>
+                                NCA ECC Aligned
+                            </div>
+                            <div class="cv-fw-badge cv-fw-bl">
+                                <div class="cv-check">&#10003;</div>
+                                PDPL Compliant
+                            </div>
+                            <div class="cv-fw-badge cv-fw-br">
+                                <div class="cv-check">&#10003;</div>
+                                CITC Framework
+                            </div> --}}
+
+                            <svg class="cv-ring-svg" viewBox="0 0 240 240"
                                 role="img" aria-label="100% GRC Compliance Score">
                                 <defs>
                                     <linearGradient id="cvRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -2895,105 +2984,82 @@
                                         <feGaussianBlur stdDeviation="5" result="blur"/>
                                         <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                                     </filter>
-                                    <!-- Text arc paths at r=107 (M x=120±107=13 and 227) -->
                                     <path id="cvTopArc" d="M 13 120 A 107 107 0 0 1 227 120"/>
                                     <path id="cvBotArc" d="M 13 120 A 107 107 0 0 0 227 120"/>
                                 </defs>
 
-                                <!-- Outermost atmospheric dashed ring -->
                                 <circle cx="120" cy="120" r="117" fill="none"
                                     stroke="rgba(52,211,153,0.12)" stroke-width="1" stroke-dasharray="2 7"/>
-
-                                <!-- Outer solid seal border -->
                                 <circle cx="120" cy="120" r="111" fill="none"
                                     stroke="rgba(52,211,153,0.5)" stroke-width="1.5"/>
 
-                                <!-- Cardinal stars on seal border (r=111: N/S=(120,9)/(120,231) E/W=(231,120)/(9,120)) -->
                                 <text x="120" y="14" text-anchor="middle" font-size="10" fill="rgba(52,211,153,0.7)">✦</text>
                                 <text x="120" y="236" text-anchor="middle" font-size="10" fill="rgba(52,211,153,0.7)">✦</text>
                                 <text x="232" y="125" text-anchor="middle" font-size="9" fill="rgba(52,211,153,0.7)">✦</text>
                                 <text x="8" y="125" text-anchor="middle" font-size="9" fill="rgba(52,211,153,0.7)">✦</text>
 
-                                <!-- Top curved seal text: CW over top, reads L→R -->
                                 <text font-family="'Bricolage Grotesque', sans-serif" font-size="9"
                                     font-weight="700" fill="rgba(52,211,153,0.72)" letter-spacing="2.5">
-                                    <textPath href="#cvTopArc" startOffset="50%" text-anchor="middle">EAGLE EYE · GRC PLATFORM · KSA</textPath>
                                 </text>
-
-                                <!-- Bottom curved seal text: CCW through bottom, side=right → outside-readable -->
                                 <text font-family="'Bricolage Grotesque', sans-serif" font-size="9"
                                     font-weight="700" fill="rgba(52,211,153,0.72)" letter-spacing="2.5">
                                     <textPath href="#cvBotArc" startOffset="50%" text-anchor="middle" side="right">CERTIFIED · 100% COMPLIANT ·</textPath>
                                 </text>
 
-                                <!-- Ring track (background) -->
                                 <circle cx="120" cy="120" r="90" fill="none"
                                     stroke="rgba(52,211,153,0.1)" stroke-width="12"/>
-
-                                <!-- Animated 100% fill arc (r=90, circumference=565.49) -->
                                 <circle cx="120" cy="120" r="90" fill="none"
                                     stroke="url(#cvRingGrad)" stroke-width="12" stroke-linecap="round"
                                     class="cv-main-arc" transform="rotate(-90 120 120)"
                                     filter="url(#cvGlowFilter)"/>
-
-                                <!-- Inner decorative rings -->
                                 <circle cx="120" cy="120" r="72" fill="none"
                                     stroke="rgba(52,211,153,0.12)" stroke-width="1" stroke-dasharray="4 8"/>
                                 <circle cx="120" cy="120" r="58" fill="none"
                                     stroke="rgba(52,211,153,0.06)" stroke-width="1"/>
 
-                                <!-- Center score text -->
                                 <text x="120" y="108" text-anchor="middle"
                                     font-family="'Bricolage Grotesque', sans-serif"
                                     font-size="48" font-weight="800" fill="#34D399">100%</text>
                                 <text x="120" y="131" text-anchor="middle"
                                     font-family="'DM Sans', sans-serif"
                                     font-size="10" font-weight="600"
-                                    fill="rgba(255,255,255,0.52)" letter-spacing="2.8">FULLY COMPLIANT</text>
+                                    fill="rgba(11,36,71,0.52)" letter-spacing="2.8">FULLY COMPLIANT</text>
                                 <text x="120" y="150" text-anchor="middle"
                                     font-family="'JetBrains Mono', monospace"
-                                    font-size="8.5" fill="rgba(52,211,153,0.55)" letter-spacing="1.5">GRC VERIFIED ✓</text>
+                                    font-size="8.5" fill="rgba(5,150,105,0.72)" letter-spacing="1.5">GRC VERIFIED ✓</text>
                             </svg>
                         </div>
 
-                        <!-- Certified stamp card -->
-                        <div class="cv-cert-card">
+                        <!-- Certification card -->
+                        {{-- <div class="cv-cert-card">
                             <div class="cv-cert-icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-                                    <path d="M11 2l2.09 4.23 4.67.68-3.38 3.29.8 4.65L11 12.52l-4.18 2.33.8-4.65L4.24 6.91l4.67-.68L11 2z"
-                                        fill="#34D399" stroke="#10B981" stroke-width="0.4" stroke-linejoin="round"/>
-                                    <path d="M8.5 11.5l1.8 1.8L14 8.5"
-                                        stroke="#050E1F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                                        stroke="#059669" stroke-width="2" stroke-linejoin="round"/>
                                 </svg>
                             </div>
                             <div class="cv-cert-text">
-                                <div class="cv-cert-title">Eagle Eye Certified</div>
-                                <div class="cv-cert-sub">Saudi GRC Platform · 4 Frameworks</div>
+                                <div class="cv-cert-title">Saudi GRC Platform</div>
+                                <div class="cv-cert-sub">NCA &middot; PDPL &middot; ISO 27001 &middot; CITC</div>
                             </div>
                             <div class="cv-cert-score">100%</div>
-                        </div>
+                        </div> --}}
 
-                        <!-- Stats strip -->
-                        <div class="cv-stats-row">
+                        <!-- Live metrics row -->
+                        {{-- <div class="cv-stats-row">
                             <div class="cv-stat">
-                                <span class="cv-stat-val">124</span>
-                                <span class="cv-stat-lbl">Controls</span>
+                                <div class="cv-stat-val">84%</div>
+                                <div class="cv-stat-lbl">Compliance</div>
                             </div>
                             <div class="cv-stat">
-                                <span class="cv-stat-val cv-val-emerald">0</span>
-                                <span class="cv-stat-lbl">Critical Gaps</span>
+                                <div class="cv-stat-val cv-val-emerald">89</div>
+                                <div class="cv-stat-lbl">Controls</div>
                             </div>
                             <div class="cv-stat">
-                                <span class="cv-stat-val cv-val-violet">4</span>
-                                <span class="cv-stat-lbl">Frameworks</span>
+                                <div class="cv-stat-val cv-val-violet">14</div>
+                                <div class="cv-stat-lbl">Risks</div>
                             </div>
-                        </div>
-
-                        <!-- Live monitoring indicator -->
-                        <div class="cv-live-pill">
-                            <span class="cv-live-orb"></span>
-                            Real-time Compliance Monitoring
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
@@ -4115,6 +4181,11 @@
             });
         });
     </script>
+    <!-- Elfsight AI Chatbot | Eagle Eye GRC -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div style="position:fixed;bottom:0;right:0;z-index:9999;line-height:0;height:0;overflow:visible;">
+    <div class="elfsight-app-81a06091-998d-4479-82a3-0d48cf35c660" data-elfsight-app-lazy></div>
+</div>
 </body>
 
 </html>
