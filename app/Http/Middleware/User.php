@@ -17,7 +17,7 @@ class User
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()?->role_id !== 4) {
+        if (auth()->user()?->role_id !== 3) {
             abort(Response::HTTP_FORBIDDEN);
         }
 

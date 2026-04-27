@@ -54,7 +54,7 @@ class User extends Authenticatable
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
     }
 
-    public function canWrite(): bool   { return in_array($this->role_id, [1, 2, 4]); }
+    public function canWrite(): bool   { return in_array($this->role_id, [1, 2, 3]); }
     public function canDelete(): bool  { return in_array($this->role_id, [1, 2]); }
     public function canManageOrganizations(): bool { return $this->role_id === 1; }
 }

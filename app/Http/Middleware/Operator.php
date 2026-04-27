@@ -17,7 +17,7 @@ class Operator
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()?->role_id !== 3) {
+        if (auth()->user()?->role_id !== 4) {
             abort(Response::HTTP_FORBIDDEN);
         }
 

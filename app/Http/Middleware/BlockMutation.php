@@ -16,11 +16,11 @@ class BlockMutation
         $roleId = auth()->user()?->role_id;
         $method = $request->method();
 
-        if ($roleId === 3 && in_array($method, ['POST', 'PUT', 'PATCH', 'DELETE'])) {
+        if ($roleId === 4 && in_array($method, ['POST', 'PUT', 'PATCH', 'DELETE'])) {
             return redirect()->back()->with('error', 'Viewers cannot modify data.');
         }
 
-        if ($roleId === 4 && $method === 'DELETE') {
+        if ($roleId === 3 && $method === 'DELETE') {
             return redirect()->back()->with('error', 'You do not have permission to delete records.');
         }
 
