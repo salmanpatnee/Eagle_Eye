@@ -1,860 +1,902 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary Meta Tag  -->
-    <title>Compliance 360</title>
-    <meta name="title" content="Saturn-V GRC Tool">
-    <meta name="description" content="Zain Cloud GRC Tool">
-    <!-- Boxicons Icons-->
+    <title>Compliance 360 — Eagle Eye GRC</title>
+    <meta name="title" content="Eagle Eye GRC">
+    <meta name="description" content="Eagle Eye GRC Compliance Processes">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    {{-- <link rel="stylesheet" href="{{ asset('/css/6-Header/1-MainPageHeader.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('/css/style.css?v=1.40') }}">
     <style>
-        /* Utility overrides */
-        .text-center { text-align: center !important; }
-        .gap-3 { gap: 1rem !important; }
-        .d-flex { display: flex !important; }
-        .align-items-center { align-items: center !important; }
-        .gap-2 { gap: .5rem !important; }
-        .navbar-nav { padding-left: 0; margin-bottom: 0; list-style: none; }
-        .rounded-circle { border-radius: 50% !important; }
-        .bg-white { background-color: #fff !important; }
-        .fs-6 { font-size: 1rem !important; }
-        .p-2 { padding: .5rem !important; }
-        .img-fluid { max-width: 100%; height: auto; }
+        :root { --hh: 64px; }
 
-        * { box-sizing: border-box; }
-        body { overflow-x: hidden; max-width: 100vw; margin: 0; padding: 0; background: #f0f4f8; }
+        *, *::before, *::after { box-sizing: border-box; }
 
-        /* Page wrapper */
-        #desktop {
-            padding: 16px 24px 32px;
-            max-width: 1280px;
-            margin: 0 auto;
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f0f4f8;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Section headers */
-        .sectionhead {
+        /* ── TOP HEADER ── */
+        .top-header {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            background: #203864;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 4px;
+            line-height: 1;
+        }
+        .hamburger-btn:hover { background: rgba(255,255,255,0.12); }
+
+        .header-home-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .header-home-link i { font-size: 20px; }
+
+        .header-title {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        .header-title-en {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.3px;
+        }
+        .header-title-ar {
+            font-size: 11px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.75);
+            text-align: right;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Logout button override for this page */
+        .header-logout-btn {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            border-radius: 6px;
+            padding: 5px 14px;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1.4;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .header-logout-btn:hover { background: rgba(255,255,255,0.22); }
+        .header-logout-btn p { margin: 0; padding: 0; }
+
+        /* ── PAGE SHELL: sidebar + content ── */
+        .page-shell {
+            display: flex;
+            min-height: calc(100vh - var(--hh));
+        }
+
+        /* ── LEFT SIDEBAR ── */
+        .sidebar {
+            width: 220px;
+            flex-shrink: 0;
+            background: #fff;
+            border-right: 1px solid #e2e8f0;
+            position: sticky;
+            top: var(--hh);
+            height: calc(100vh - var(--hh));
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-inner {
+            padding: 12px 0 24px;
+        }
+
+        .sidebar-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 0 16px 8px;
+            margin-top: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 16px;
+            color: #475569;
+            text-decoration: none;
+            font-size: 12.5px;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sidebar-link i {
+            font-size: 16px;
+            flex-shrink: 0;
+            color: #94a3b8;
+            transition: color 0.15s;
+        }
+        .sidebar-link:hover {
+            background: #f8fafc;
+            color: #203864;
+        }
+        .sidebar-link:hover i { color: #203864; }
+        .sidebar-link.active {
+            background: #f0f4f8;
+            color: #203864;
+            font-weight: 700;
+            border-left-color: #203864;
+        }
+        .sidebar-link.active i { color: #203864; }
+
+        /* ── MAIN CONTENT ── */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            padding: 20px 24px 40px;
+        }
+
+        /* ── SECTION HEADER ── */
+        .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(90deg, #203864 0%, #2e74b6 100%);
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin: 20px 0 10px;
-        }
-        .sectionhead p {
-            color: #fff;
-            font-size: 14px;
-            font-weight: 700;
-            margin: 0;
-            letter-spacing: 0.2px;
-        }
-
-        /* Process rows — flex, centered, wrapping */
-        .processes {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 0 0 4px;
-        }
-        .singleitemprocess {
-            display: flex;
-            justify-content: center;
-            margin: 0 0 4px;
-        }
-
-        /* Each card link — fixed 1/3 width so 3 fill a row, orphans center */
-        .boxhyperlink {
-            text-decoration: none;
-            color: #000;
-            display: flex;
-            flex: 0 0 calc(33.333% - 7px);
-            min-width: 0;
-        }
-        .singleitemprocess .boxhyperlink {
-            flex: 0 0 calc(33.333% - 7px);
-        }
-
-        /* Spacebox holds grid slot on desktop, hidden on small */
-        .spacebox {
-            flex: 0 0 calc(33.333% - 7px);
-            height: 62px;
-            background: transparent;
-        }
-
-        /* Card shell */
-        .itemprocesses {
             background: #fff;
-            width: 100%;
-            height: 64px;
-            border: 1px solid rgba(32, 56, 100, 0.15);
-            /* border-left: 3px solid #203864; */
-            border-radius: 8px;
-            display: flex;
-            align-items: stretch;
-            box-shadow: 0 1px 3px rgba(32, 56, 100, 0.07);
-            transition: box-shadow 0.2s ease, transform 0.18s ease, border-left-color 0.2s ease, background 0.2s ease;
-            overflow: hidden;
+            border-left: 4px solid #203864;
+            padding: 12px 16px;
+            margin: 28px 0 14px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 1px 4px rgba(32,56,100,0.07);
         }
-        .itemprocesses:hover {
-            background: #eef4fb;
-            /* border-left-color: #2e74b6; */
-            /* box-shadow: 0 4px 16px rgba(32, 56, 100, 0.14); */
-            transform: translateY(-2px);
+        .section-header:first-child { margin-top: 0; }
+
+        .section-title-en {
+            font-size: 13px;
+            font-weight: 700;
+            color: #203864;
+            margin: 0;
+        }
+        .section-title-ar {
+            font-size: 12px;
+            font-weight: 400;
+            color: #64748b;
+            margin: 0;
+            text-align: right;
         }
 
-        /* Icon column */
-        .boxicon {
-            flex: 0 0 48px;
-            background: #203864;
-            color: #fff;
-            font-size: 16px;
+        /* ── CARD GRID ── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        /* ── CARD ── */
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #203864;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            min-height: 72px;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease, transform 0.18s ease, border-left-color 0.2s ease;
+        }
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(32,56,100,0.12);
+            transform: translateY(-2px);
+            border-left-color: #2e74b6;
+        }
+
+        .card-icon {
+            flex-shrink: 0;
+            width: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
+            align-self: stretch;
+        }
+        .card-icon-inner {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #eef4fb;
+            color: #203864;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
         }
 
-        /* Text area */
-        .boxname {
+        .card-body {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             padding: 0 12px;
             min-width: 0;
         }
-        .boxarbtext {
+        .card-ar {
+            font-size: 12px;
+            font-weight: 700;
+            color: #203864;
             text-align: right;
             margin: 0;
-            padding: 0;
-            font-weight: 700;
-            font-size: 12px;
-            line-height: 1.3;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .boxengtext, .boxengtexttwo {
-            text-align: left;
-            margin: 0;
-            padding: 0;
+        .card-sep {
+            border: none;
+            border-bottom: 1px solid #e2e8f0;
+            margin: 4px 0;
+        }
+        .card-en {
+            font-size: 12px;
             font-weight: 600;
-            font-size: 12px;
-            line-height: 1.3;
             color: #1a2a40;
+            margin: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .boxengtexttwo { font-size: 11px; }
-        .seperatorline {
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            margin: 3px 0;
+        .card-en-sm { font-size: 11px; }
+
+        /* ── MOBILE OVERLAY BACKDROP ── */
+        .sidebar-backdrop {
+            display: none;
+            position: fixed;
+            inset: var(--hh) 0 0 0;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(2px);
+            z-index: 99;
         }
 
-        /* Responsive — tablet: 2-col */
+        /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
-            .boxhyperlink,
-            .singleitemprocess .boxhyperlink {
-                flex: 0 0 calc(50% - 5px);
-            }
-            .spacebox { display: none; }
+            .card-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Responsive — mobile: 1-col */
-        @media (max-width: 560px) {
-            #desktop { padding: 10px 12px 20px; }
-            .boxhyperlink,
-            .singleitemprocess .boxhyperlink { flex: 0 0 100%; }
-            .sectionhead { flex-direction: column; gap: 4px; text-align: center; }
-            .header-content {
-                flex-direction: column;
-                gap: 12px;
-                padding: 12px;
-                align-items: center;
+        @media (max-width: 640px) {
+            .hamburger-btn { display: flex; align-items: center; justify-content: center; }
+
+            .sidebar {
+                position: fixed;
+                top: var(--hh);
+                left: -220px;
+                height: calc(100vh - var(--hh));
+                transition: left 0.25s ease;
+                z-index: 101;
             }
-            .header-content > div:last-child { width: 100%; justify-content: center; flex-wrap: wrap; }
-            .roles-wrap { flex-direction: column; align-items: center; }
+
+            body.sidebar-open .sidebar { left: 0; }
+            body.sidebar-open .sidebar-backdrop { display: block; }
+
+            .main-content { padding: 14px 14px 32px; }
+
+            .card-grid { grid-template-columns: 1fr; }
+
+            .section-header { flex-direction: column; align-items: flex-start; gap: 2px; }
         }
+
+        /* Roles partial overrides — scoped to this header */
+        .top-header .navbar-nav,
+        .top-header .roles-wrap { gap: 8px; }
+        .top-header .img-fluid { width: 20px !important; height: 20px !important; }
+        .top-header .nav-item { padding: 5px !important; }
     </style>
 </head>
-
 <body class="processpage">
-    <header>
-        <div class="header-content" id="header">
-            <div>
-                <a href="/compliance" class="text-white">
-                    <i class='bx bx-home'></i>
-                </a>
-                <p class="bold-arbtext">العمليات</p>
-                <p class="bold-text">Processes</p>
-            </div>
 
-            <div class="text-center d-flex gap-3 roles-wrap">
-                @include('partials.roles')
-
-                <div>
-                    <a href="" onclick="document.querySelector('#logout-form').submit(); return false;">
-                        <button class="RightButton">
-                            <p class="RightButtonArbTxt">تسجيل الخروج</p>
-                            <p class="RightButtonTxt">Logout</p>
-                        </button>
-                    </a>
-                    <form id="logout-form" method="POST" action="{{ route('login.destroy') }}" style="display: none;">
-                        @csrf
-                        <button type="submit"> Log Out</button>
-                    </form>
+    <!-- TOP HEADER -->
+    <header class="top-header">
+        <div class="header-left">
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation">
+                <i class='bx bx-menu'></i>
+            </button>
+            <a href="/compliance" class="header-home-link">
+                <i class='bx bx-home'></i>
+                <div class="header-title">
+                    <span class="header-title-en">Processes</span>
+                    <span class="header-title-ar">العمليات</span>
                 </div>
+            </a>
+        </div>
+        <div class="header-right">
+            @include('partials.roles')
+            <div>
+                <a href="" onclick="document.querySelector('#logout-form').submit(); return false;">
+                    <button class="header-logout-btn">
+                        <p>تسجيل الخروج</p>
+                        <p>Logout</p>
+                    </button>
+                </a>
+                <form id="logout-form" method="POST" action="{{ route('login.destroy') }}" style="display:none;">
+                    @csrf
+                    <button type="submit">Log Out</button>
+                </form>
             </div>
-
-
         </div>
     </header>
-    <div id="desktop">
-        <!-- Initial Setup -->
-        <div>
-            <div class="sectionhead">
-                <p>Initial Setup</p>
-                <p>الإعداد الأولي</p>
+
+    <!-- SIDEBAR BACKDROP (mobile) -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <div class="page-shell">
+        <!-- LEFT SIDEBAR -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-inner">
+                <div class="sidebar-label">Navigation</div>
+                <a href="#section-initial" class="sidebar-link active" data-section="section-initial">
+                    <i class='bx bxs-cog'></i> Initial Setup
+                </a>
+                <a href="#section-grc" class="sidebar-link" data-section="section-grc">
+                    <i class='bx bxs-shield'></i> GRC Processes
+                </a>
+                <a href="#section-reporting" class="sidebar-link" data-section="section-reporting">
+                    <i class='bx bxs-bar-chart-alt-2'></i> Reporting
+                </a>
+                <a href="#section-evidence" class="sidebar-link" data-section="section-evidence">
+                    <i class='bx bxs-file-find'></i> Evidence Management
+                </a>
+                <a href="#section-control-risk" class="sidebar-link" data-section="section-control-risk">
+                    <i class='bx bxs-check-shield'></i> Control & Risk
+                </a>
+                <a href="#section-audit" class="sidebar-link" data-section="section-audit">
+                    <i class='bx bxs-calendar-check'></i> Audit Management
+                </a>
+                <a href="#section-vapt" class="sidebar-link" data-section="section-vapt">
+                    <i class='bx bxs-bug-alt'></i> VA / Pen Testing
+                </a>
             </div>
-        </div>
-        <div class="singleitemprocess">
-            <a href="{{ route('organizations.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">الإعداد الأولي</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Initial Setup</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <a href="/assets" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">سجل الأصول</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Asset Register</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('artifacts.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">تتبع الأدلة</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Evidence Tracking</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('users.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">المستخدمين</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Users</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- GRC Processes -->
-        <div>
-            <div class="sectionhead">
-                <p>Complete Coverage of GRC Processes</p>
-                <p>تغطية كاملة لعمليات الحوكمة والمخاطر والامتثال</p>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- ── INITIAL SETUP ── -->
+            <div id="section-initial" class="section-header">
+                <p class="section-title-en">Initial Setup</p>
+                <p class="section-title-ar">الإعداد الأولي</p>
             </div>
-        </div>
-        <div class="processes">
-            <a href="/asset-groups" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+            <div class="card-grid">
+                <a href="{{ route('organizations.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-cog'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">الإعداد الأولي</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Initial Setup</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">مجموعة الأصول</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Asset Group</p>
+                </a>
+                <a href="/assets" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-server'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">سجل الأصول</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Asset Register</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="{{ route('threat-agents.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+                </a>
+                <a href="{{ route('artifacts.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-file-find'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">تتبع الأدلة</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Evidence Tracking</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">إدارة التهديدات</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Threat Management</p>
+                </a>
+                <a href="{{ route('users.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-user-circle'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">المستخدمين</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Users</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="{{ route('vulnerabilities.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">إدارة نقاط الضعف</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Vulnerability Management</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <a href="{{ route('risk-methodology.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">منهجية المخاطر</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk Methodology</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('risks.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">تحديد المخاطر</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk Identification</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('risk-appetites.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">الرغبة في المخاطرة</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk Appetite</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <a href="{{ route('controls.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">تحديد الضوابط</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Control Identification</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('risk-vs-control.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">علاج المخاطر</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk Treatment</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('risk-vs-asset-group.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">المخاطر على مجموعة الأصول</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk on Asset Group</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <a href="{{ route('risk-acceptances.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">قبول المخاطر</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk Acceptance</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('risk-register.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">سجل المخاطر</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk Register</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('risk-status.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">حالة المخاطر</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk Status</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        
-        <!-- Reporting -->
-        <div>
-            <div class="sectionhead">
-                <p>Reporting</p>
-                <p>التقارير</p>
+                </a>
             </div>
-        </div>
-        <div class="processes">
-            <div class="spacebox"></div>
-            <a href="{{ route('kpi-references.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">المراجع مؤشرات الأداء الرئيسية </p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">KPI References</p>
-                    </div>
-                </div>
-            </a>
-            <div class="spacebox"></div>
-        </div>
-        <div class="processes">
-            <a href="/nca-regulatory-reports" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">التقارير التنظيمية NCA</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">NCA Regulatory Reporting</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('sama-regulatory-report.show') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">التقارير التنظيمية SAMA</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">SAMA Regulatory Reporting</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('mis-report.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">تقارير نظم المعلومات الإدارية</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">MIS Reporting</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <a href="/dashboard" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">لوحة القيادة</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Dashboard</p>
-                    </div>
-                </div>
-            </a>
-            <a href="/" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">استراتيجية الأمن السيبراني</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Cybersecurity Strategy</p>
-                    </div>
-                </div>
-            </a>
-            <a href="/" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">ميثاق الأمن السيبراني</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Cybersecurity Charter</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <div class="spacebox"></div>
-            <a href="{{ route('compliance') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">ثلاثون زائد إطار العمل</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">30+ Frameworks</p>
-                    </div>
-                </div>
-            </a>
-            <div class="spacebox"></div>
-        </div>
-        <!-- Evidence Management -->
-        <div>
-            <div class="sectionhead">
-                <p>Evidence Management</p>
-                <p>إدارة الدليل</p>
+
+            <!-- ── GRC PROCESSES ── -->
+            <div id="section-grc" class="section-header">
+                <p class="section-title-en">Complete Coverage of GRC Processes</p>
+                <p class="section-title-ar">تغطية كاملة لعمليات الحوكمة والمخاطر والامتثال</p>
             </div>
-        </div>
-        <div class="processes">
-            <a href="{{ route('artifacts.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+            <div class="card-grid">
+                <a href="/asset-groups" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-layer'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">مجموعة الأصول</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Asset Group</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">تسجيل سجل</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Artifact Registration</p>
+                </a>
+                <a href="{{ route('threat-agents.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-shield-x'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">إدارة التهديدات</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Threat Management</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="{{ route('evidences.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+                </a>
+                <a href="{{ route('vulnerabilities.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bug'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">إدارة نقاط الضعف</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Vulnerability Management</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">تسجيل الدليل</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Register an Evidence</p>
+                </a>
+                <a href="{{ route('risk-methodology.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-book-open'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">منهجية المخاطر</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk Methodology</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="{{ route('control-vs-evidence.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+                </a>
+                <a href="{{ route('risks.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-search-alt-2'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">تحديد المخاطر</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk Identification</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">الدليل المتعلق بالضوابط</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Evidence vs Control</p>
+                </a>
+                <a href="{{ route('risk-appetites.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bar-chart-square'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">الرغبة في المخاطرة</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk Appetite</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <!-- Control Assessment and Risk Assessment -->
-        <div>
-            <div class="sectionhead">
-                <p>Control Assessment & Risk Assessment</p>
-                <p>تقييم الضوابط وتقييم المخاطر</p>
+                </a>
+                <a href="{{ route('controls.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-check-shield'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">تحديد الضوابط</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Control Identification</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('risk-vs-control.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-first-aid'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">علاج المخاطر</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk Treatment</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('risk-vs-asset-group.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-link-alt'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">المخاطر على مجموعة الأصول</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk on Asset Group</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('risk-acceptances.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-check-circle'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">قبول المخاطر</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk Acceptance</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('risk-register.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-spreadsheet'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">سجل المخاطر</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk Register</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('risk-status.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-chart'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">حالة المخاطر</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk Status</p>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-        <div class="processes">
-            <a href="{{ route('control-assessments.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">تقييم الضوابط</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Control Assessment</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('controls.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">قائمة الضوابط</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Control Listing</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('control-smart-search.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">الضوابط في البحث الذكي</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Control Smart Search</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <a href="{{ route('risk-assessments.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">تقييم المخاطر</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk Assessment</p>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('risks.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">قائمة المخاطر</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Risk Listing</p>
-                    </div>
-                </div>
-            </a>
-            <div class="spacebox"></div>
-        </div>
-        <!-- Audit Management -->
-        <div>
-            <div class="sectionhead">
-                <p>Audit Management</p>
-                <p>إدارة مراجعة</p>
+
+            <!-- ── REPORTING ── -->
+            <div id="section-reporting" class="section-header">
+                <p class="section-title-en">Reporting</p>
+                <p class="section-title-ar">التقارير</p>
             </div>
-        </div>
-        <div class="processes">
-            <a href="{{ route('audit-plans.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+            <div class="card-grid">
+                <a href="{{ route('kpi-references.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bar-chart-alt-2'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">المراجع مؤشرات الأداء الرئيسية</p>
+                            <hr class="card-sep">
+                            <p class="card-en">KPI References</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">تخطيط مراجعة والتسجيل</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Audit Planning</p>
+                </a>
+                <a href="/nca-regulatory-reports" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-institution'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">التقارير التنظيمية NCA</p>
+                            <hr class="card-sep">
+                            <p class="card-en">NCA Regulatory Reporting</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="{{ route('audit-plan-report.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+                </a>
+                <a href="{{ route('sama-regulatory-report.show') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bank'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">التقارير التنظيمية SAMA</p>
+                            <hr class="card-sep">
+                            <p class="card-en">SAMA Regulatory Reporting</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">خطة التدقيق</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Audit Plan</p>
+                </a>
+                <a href="{{ route('mis-report.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-pie-chart-alt-2'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">تقارير نظم المعلومات الإدارية</p>
+                            <hr class="card-sep">
+                            <p class="card-en">MIS Reporting</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="{{ route('audit-assessments.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+                </a>
+                <a href="/dashboard" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-dashboard'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">لوحة القيادة</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Dashboard</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">نتائج مراجعة</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Audit Findings</p>
+                </a>
+                <a href="/" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-shield'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">استراتيجية الأمن السيبراني</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Cybersecurity Strategy</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <div class="spacebox"></div>
-            <a href="{{ route('control-vs-audit.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+                </a>
+                <a href="/" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-file'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">ميثاق الأمن السيبراني</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Cybersecurity Charter</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">الضوابط المتعلقة بنتائج مراجعة</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Control vs Audit Findings</p>
+                </a>
+                <a href="{{ route('compliance') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-category'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">ثلاثون زائد إطار العمل</p>
+                            <hr class="card-sep">
+                            <p class="card-en">30+ Frameworks</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <div class="spacebox"></div>
-        </div>
-        <!-- ISO 27000 Family -->
-        {{-- <div>
-            <div class="sectionhead">
-                <p>ISO 27001 Related Evidences</p>
-                <p>الأدلة ذات الصلة بمعيار ISO 27001</p>
+                </a>
             </div>
-        </div>
-        <div class="processes">
-            <a href="" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">نظام إدارة متكامل</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtexttwo">Integrated Management System</p>
-                    </div>
-                </div>
-            </a>
-            <a href="" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">بيان قابلية التطبيق</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Statement of Applicability</p>
-                    </div>
-                </div>
-            </a>
-            <a href="" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">التدقيق الداخلي</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Internal Audit</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <div class="spacebox"></div>
-            <a href="" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
-                    </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">مراجعة الإدارة</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Management Review</p>
-                    </div>
-                </div>
-            </a>
-            <div class="spacebox"></div>
-        </div>
-        @include('process/domain-ISO-27001') --}}
-        <!-- Vulnerability Penetration Test -->
-        <div>
-            <div class="sectionhead">
-                <p>Vulnerability Assessment / Penetration Test Tracking</p>
-                <p>تتبع تقييم الثغرات الأمنية / اختبار الاختراق</p>
+
+            <!-- ── EVIDENCE MANAGEMENT ── -->
+            <div id="section-evidence" class="section-header">
+                <p class="section-title-en">Evidence Management</p>
+                <p class="section-title-ar">إدارة الدليل</p>
             </div>
-        </div>
-        <div class="processes">
-            <a href="{{ route('patches.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+            <div class="card-grid">
+                <a href="{{ route('artifacts.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-archive'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">تسجيل سجل</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Artifact Registration</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">القضايا المفتوحة لاختبار الثغرات</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">VA-Pen Test Open Issues</p>
+                </a>
+                <a href="{{ route('evidences.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-file-plus'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">تسجيل الدليل</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Register an Evidence</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="{{ route('pen-test-asset-vs-risk.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+                </a>
+                <a href="{{ route('control-vs-evidence.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-link'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">الدليل المتعلق بالضوابط</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Evidence vs Control</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">الأصول المعرضة للثغرات الأمنية</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Assets at Risks WRT VA</p>
+                </a>
+            </div>
+
+            <!-- ── CONTROL & RISK ASSESSMENT ── -->
+            <div id="section-control-risk" class="section-header">
+                <p class="section-title-en">Control Assessment &amp; Risk Assessment</p>
+                <p class="section-title-ar">تقييم الضوابط وتقييم المخاطر</p>
+            </div>
+            <div class="card-grid">
+                <a href="{{ route('control-assessments.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-check-square'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">تقييم الضوابط</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Control Assessment</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="{{ route('va-pen-test-dashboard.index') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+                </a>
+                <a href="{{ route('controls.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bx-list-ul'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">قائمة الضوابط</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Control Listing</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">لوحة تحكم اختبار الثغرات الأمنية</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">VA Pen Test Dashboard</p>
+                </a>
+                <a href="{{ route('control-smart-search.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bx-search-alt'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">الضوابط في البحث الذكي</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Control Smart Search</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="processes">
-            <div class="spacebox"></div>
-            <a href="{{ route('va.register') }}" class="boxhyperlink">
-                <div class="itemprocesses">
-                    <div class="boxicon">
-                        <i class='bx bxs-label'></i>
+                </a>
+                <a href="{{ route('risk-assessments.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-target-lock'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">تقييم المخاطر</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk Assessment</p>
+                        </div>
                     </div>
-                    <div class="boxname">
-                        <p class="boxarbtext">سجل الثغرات الأمنية</p>
-                        <div class="seperatorline"></div>
-                        <p class="boxengtext">Vulnerability Regsiter</p>
+                </a>
+                <a href="{{ route('risks.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-list-check'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">قائمة المخاطر</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Risk Listing</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <div class="spacebox"></div>
-        </div>
-        {{-- @include('process/resource-management') --}}
+                </a>
+            </div>
+
+            <!-- ── AUDIT MANAGEMENT ── -->
+            <div id="section-audit" class="section-header">
+                <p class="section-title-en">Audit Management</p>
+                <p class="section-title-ar">إدارة مراجعة</p>
+            </div>
+            <div class="card-grid">
+                <a href="{{ route('audit-plans.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-calendar'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">تخطيط مراجعة والتسجيل</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Audit Planning</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('audit-plan-report.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-calendar-check'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">خطة التدقيق</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Audit Plan</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('audit-assessments.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-report'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">نتائج مراجعة</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Audit Findings</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('control-vs-audit.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-analyse'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">الضوابط المتعلقة بنتائج مراجعة</p>
+                            <hr class="card-sep">
+                            <p class="card-en card-en-sm">Control vs Audit Findings</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- ── VA / PEN TESTING ── -->
+            <div id="section-vapt" class="section-header">
+                <p class="section-title-en">Vulnerability Assessment / Penetration Test Tracking</p>
+                <p class="section-title-ar">تتبع تقييم الثغرات الأمنية / اختبار الاختراق</p>
+            </div>
+            <div class="card-grid">
+                <a href="{{ route('patches.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bug-alt'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">القضايا المفتوحة لاختبار الثغرات</p>
+                            <hr class="card-sep">
+                            <p class="card-en">VA-Pen Test Open Issues</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('pen-test-asset-vs-risk.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-shield-minus'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">الأصول المعرضة للثغرات الأمنية</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Assets at Risks WRT VA</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('va-pen-test-dashboard.index') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-tachometer'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">لوحة تحكم اختبار الثغرات الأمنية</p>
+                            <hr class="card-sep">
+                            <p class="card-en">VA Pen Test Dashboard</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('va.register') }}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-data'></i></div></div>
+                        <div class="card-body">
+                            <p class="card-ar">سجل الثغرات الأمنية</p>
+                            <hr class="card-sep">
+                            <p class="card-en">Vulnerability Register</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </main>
     </div>
 
-</body>
+    <script>
+        // Hamburger toggle
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const backdrop = document.getElementById('sidebarBackdrop');
 
+        function closeSidebar() { document.body.classList.remove('sidebar-open'); }
+
+        hamburgerBtn.addEventListener('click', () => {
+            document.body.classList.toggle('sidebar-open');
+        });
+        backdrop.addEventListener('click', closeSidebar);
+
+        // Close sidebar on nav link click (mobile)
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 640) closeSidebar();
+            });
+        });
+
+        // IntersectionObserver — highlight active sidebar link on scroll
+        const sectionIds = ['section-initial','section-grc','section-reporting','section-evidence','section-control-risk','section-audit','section-vapt'];
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    document.querySelectorAll('.sidebar-link').forEach(link => {
+                        link.classList.toggle('active', link.dataset.section === id);
+                    });
+                }
+            });
+        }, { rootMargin: '-56px 0px -60% 0px', threshold: 0 });
+
+        sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+    </script>
+</body>
 </html>
