@@ -62,7 +62,7 @@
                                 {{ $row->control_id }}
                             </a>
                         </x-table.td>
-                        <x-table.td> {{ $row->control_name }}</x-table.td>
+                        <x-table.td wrap="true"> {{ $row->control_name }}</x-table.td>
                         <x-table.td> {!! $row->evidences !!}</x-table.td>
                         <x-table.td> {!! $row->artifacts !!}</x-table.td>
 

@@ -23,7 +23,7 @@
                     <tr>
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$threatAgents" /></x-table.td>
                         <x-table.td>{{ $threatAgent->threat_agent_id }}</x-table.td>
-                        <x-table.td>{{ $threatAgent->threat_agent_name }}</x-table.td>
+                        <x-table.td wrap="true">{{ $threatAgent->threat_agent_name }}</x-table.td>
                         <x-table.td>{{ $threatAgent?->rating?->threat_agent_rating_title }}</x-table.td>
                         <x-table.td><x-table-list :data="$threatAgent?->vectors" id_key=""
                                 value_key="threat_agent_vector_name" /></x-table.td>

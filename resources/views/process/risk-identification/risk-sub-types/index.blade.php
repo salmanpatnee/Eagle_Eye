@@ -29,7 +29,7 @@
                             {{ $riskSubType->risk_sub_type_id }}
                         </x-table.td>
                         <x-table.td>{{ $riskSubType->risk_sub_type_name }}</x-table.td>
-                        <x-table.td>{{ $riskSubType->risk_sub_type_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $riskSubType->risk_sub_type_description }}">{{ $riskSubType->risk_sub_type_description }}</span></x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="risk-sub-types.show" param="{{ $riskSubType->id }}" />
                             <x-action.edit route_name="risk-sub-types.edit" param="{{ $riskSubType->id }}" />

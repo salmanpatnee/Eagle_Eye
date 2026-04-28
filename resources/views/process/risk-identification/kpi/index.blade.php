@@ -27,7 +27,9 @@
                         <x-table.td>
                             {{ $keyPerformanceIndicator->key_performance_indicatory_id }}
                         </x-table.td>
-                        <x-table.td>{{ $keyPerformanceIndicator->key_performance_indicatory_name }}</x-table.td>
+                        <x-table.td wrap="true">
+                            {{ $keyPerformanceIndicator->key_performance_indicatory_name }}
+                        </x-table.td>
                         <x-table.td>{{ $keyPerformanceIndicator->key_performance_indicatory_value }}</x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="kpis.show" param="{{ $keyPerformanceIndicator->id }}" />

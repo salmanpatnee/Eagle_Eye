@@ -39,8 +39,8 @@
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td><a href="{{ route('risks.show', $riskTreatment->id) }}"
                                 target="_blank">{{ $riskTreatment->risk_id }}</a></x-table.td>
-                        <x-table.td>{{ $riskTreatment->risk_name }}</x-table.td>
-                        <x-table.td>
+                        <x-table.td wrap="true">{{ $riskTreatment->risk_name }}</x-table.td>
+                        <x-table.td >
                             <x-table-list :data="$riskTreatment->controls" id_key="control_id" value_key="control_name" />
                         </x-table.td>
                     </tr>

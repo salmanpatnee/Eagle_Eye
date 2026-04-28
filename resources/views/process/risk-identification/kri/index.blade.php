@@ -27,7 +27,9 @@
                         <x-table.td>
                             {{ $keyRiskIndicator->key_risk_indicator_id }}
                         </x-table.td>
-                        <x-table.td>{{ $keyRiskIndicator->key_risk_indicator_name }}</x-table.td>
+                        <x-table.td wrap="true">
+                            {{ $keyRiskIndicator->key_risk_indicator_name }}
+                        </x-table.td>
                         <x-table.td>{{ $keyRiskIndicator->key_risk_indicator_value }}</x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="kris.show" param="{{ $keyRiskIndicator->id }}" />

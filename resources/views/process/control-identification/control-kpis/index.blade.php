@@ -29,9 +29,9 @@
                         <x-table.td>
                             {{ $kpi->kpi_id }}
                         </x-table.td>
-                        <x-table.td>{{ $kpi->kpi_name }}</x-table.td>
+                        <x-table.td wrap="true">{{ $kpi->kpi_name }}</x-table.td>
                         <x-table.td>{{ $kpi?->category?->category_name }}</x-table.td>
-                        <x-table.td>{{ $kpi?->bestPractice?->best_practices_name }}</x-table.td>
+                        <x-table.td wrap="true">{{ $kpi?->bestPractice?->best_practices_name }}</x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="kpi-standards.show" param="{{ $kpi->kpi_id }}" />
                             <x-action.edit route_name="kpi-standards.edit" param="{{ $kpi->kpi_id }}" />

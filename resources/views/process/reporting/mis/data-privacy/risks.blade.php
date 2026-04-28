@@ -29,10 +29,10 @@
                                 {{ $row->risk_id }}
                             </a>
                         </x-table.td>
-                        <x-table.td>{{ $row->risk_name }}</x-table.td>
+                        <x-table.td wrap="true">{{ $row->risk_name }}</x-table.td>
                         <x-table.td>{{ $row->risk_group_name }}</x-table.td>
                         <x-table.td>{{ $row->risk_inherent_score }}</x-table.td>
-                        <x-table.td>{{ $row->risk_consequences }}</x-table.td>
+                        <x-table.td wrap="true">{{ $row->risk_consequences }}</x-table.td>
                     </tr>
                 @endforeach
             </x-table.tbody>

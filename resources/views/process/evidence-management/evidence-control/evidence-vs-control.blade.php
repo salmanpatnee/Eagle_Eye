@@ -62,12 +62,12 @@
                                 {{ $row->evidence_id }}
                             </a>
                         </x-table.td>
-                        <x-table.td>
+                        <x-table.td wrap="true">
                             <a href="{{ route('evidences.show', $row->id) }}">
                                 {{ $row->evidence_name }}
                             </a>
                         </x-table.td>
-                        <x-table.td> {!! $row->controls !!}</x-table.td>
+                        <x-table.td wrap="true"> {!! $row->controls !!}</x-table.td>
                         <x-table.td> {!! $row->artifacts ?? '' !!}</x-table.td>
                     </tr>
                 @empty

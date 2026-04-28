@@ -37,10 +37,10 @@
                 @forelse ($riskTreatments as $riskTreatment)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
-                        <x-table.td><a href="{{ route('controls.show', $riskTreatment->id) }}"
+                        <x-table.td  ><a href="{{ route('controls.show', $riskTreatment->id) }}"
                                 target="_blank">{{ $riskTreatment->control_id }}</a></x-table.td>
-                        <x-table.td>{{ $riskTreatment->control_name }}</x-table.td>
-                        <x-table.td>
+                        <x-table.td wrap="true">{{ $riskTreatment->control_name }}</x-table.td>
+                        <x-table.td wrap="true">
                             <x-table-list :data="$riskTreatment->risks" id_key="risk_id" value_key="risk_name" />
                         </x-table.td>
                     </tr>

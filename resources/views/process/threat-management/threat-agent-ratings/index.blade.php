@@ -24,7 +24,7 @@
                         <x-table.td> {{ $loop->index + 1 }}</x-table.td>
                         <x-table.td>{{ $threatAgentRating->threat_agent_rating_id }}</x-table.td>
                         <x-table.td>{{ $threatAgentRating->threat_agent_rating_title }}</x-table.td>
-                        <x-table.td>{{ $threatAgentRating->threat_agent_rating_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $threatAgentRating->threat_agent_rating_description }}">{{ $threatAgentRating->threat_agent_rating_description }}</span></x-table.td>
 
                         <x-table.td action_col="true">
                             <x-action.view route_name="threat-agent-ratings.show" param="{{ $threatAgentRating->id }}" />

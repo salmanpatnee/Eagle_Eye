@@ -82,23 +82,23 @@
                         <x-table.td class="text-center">
                             {{ $loop->index + 1 }}
                         </x-table.td>
-                        <x-table.td>
+                        <x-table.td >
                             <a href="{{ route('risks.show', $row->riskid) }}" target="_blank">
                                 {{ $row->risk_id }}
                             </a>
                         </x-table.td>
-                        <x-table.td class="list">{!! $row->categories !!}</x-table.td>
-                        <x-table.td>{{ $row->owner_name }}</x-table.td>
+                        <x-table.td wrap="true" class="list">{!! $row->categories !!}</x-table.td>
+                        <x-table.td wrap="true">{{ $row->owner_name }}</x-table.td>
                         <x-table.td>{{ $row->risk_assessment_start_date }}</x-table.td>
-                        <x-table.td>
-                            <div style="width: 250px;">{{ $row->risk_description }}</div>
+                        <x-table.td wrap="true">
+                            <span class="line-clamp-3" title="{{ $row->risk_description }}">{{ $row->risk_description }}</span>
                         </x-table.td>
-                        <x-table.td>
-                            <div style="width: 250px;">{{ $row->remarks }}</div>
+                        <x-table.td wrap="true">
+                            <span class="line-clamp-3" title="{{ $row->remarks }}">{{ $row->remarks }}</span>
                         </x-table.td>
-                        <x-table.td class="list">{!! $row->agents !!}</x-table.td>
-                        <x-table.td>
-                            <div style="width: 250px;">{{ $row->risk_assessment_description }}</div>
+                        <x-table.td wrap="true" class="list">{!! $row->agents !!}</x-table.td>
+                        <x-table.td wrap="true">
+                            <span class="line-clamp-3" title="{{ $row->risk_assessment_description }}">{{ $row->risk_assessment_description }}</span>
                         </x-table.td>
                         <x-table.td>{{ $row->date_of_risk_analysis }}</x-table.td>
                         <x-table.td>{{ $row->risk_inherent_likelihood }}</x-table.td>
@@ -107,21 +107,21 @@
                         <x-table.td>{{ $row->risk_appetite_name }}</x-table.td>
                         <x-table.td>&nbsp;</x-table.td>
                         <x-table.td>{{ $row->risk_treatment_name }}</x-table.td>
-                        <x-table.td>{{ $row->risk_treatment_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $row->risk_treatment_description }}">{{ $row->risk_treatment_description }}</span></x-table.td>
                         <x-table.td class="list">{!! $row->control_owner !!}</x-table.td>
                         <x-table.td class="list">{!! $row->status !!}</x-table.td>
                         <x-table.td>{{ $row->corrective_action_due_date }}</x-table.td>
-                        <x-table.td>{{ $row->risk_finding_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $row->risk_finding_description }}">{{ $row->risk_finding_description }}</span></x-table.td>
                         <x-table.td>{{ $row->risk_likelihood }}</x-table.td>
                         <x-table.td>{{ $row->risk_impact }}</x-table.td>
                         <x-table.td>{{ $row->risk_appetite }}</x-table.td>
                         {{-- <x-table.td style="background-color: {{ $row->risk_appetite_color }};">{{ $row->risk_appetite }}</x-table.td> --}}
-                        <x-table.td>
-                            <div style="width: 250px;">{{ $row->preventive_action }}</div>
+                        <x-table.td wrap="true">
+                            <span class="line-clamp-3" title="{{ $row->preventive_action }}">{{ $row->preventive_action }}</span>
                         </x-table.td>
                         <x-table.td>{{ $row->last_evaluation_date }}</x-table.td>
-                        <x-table.td>
-                            <div style="width: 250px;">{{ $row->lesson_learned }}</div>
+                        <x-table.td wrap="true">
+                            <span class="line-clamp-3" title="{{ $row->lesson_learned }}">{{ $row->lesson_learned }}</span>
                         </x-table.td>
                     </tr>
                 @endforeach

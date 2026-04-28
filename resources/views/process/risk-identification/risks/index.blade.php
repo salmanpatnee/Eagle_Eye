@@ -49,7 +49,9 @@
                         <x-table.td>
                             {{ $risk->risk_id }}
                         </x-table.td>
-                        <x-table.td>{{ $risk->risk_name }}</x-table.td>
+                        <x-table.td wrap="true">
+                            {{ $risk->risk_name }}
+                        </x-table.td>
                         <x-table.td>{{ $risk?->group?->risk_group_name }}</x-table.td>
                         <x-table.td>{{ $risk?->owner?->owner_name }}</x-table.td>
                         <x-table.td action_col="true">

@@ -51,9 +51,9 @@
                     <tr>
                         <x-table.td> <x-table.serial :loop="$loop" :paginator="$assets" /></x-table.td>
                         <x-table.td>{{ $asset->asset_id }}</x-table.td>
-                        <x-table.td>{{ $asset->asset_name }}</x-table.td>
-                        <x-table.td>
-                            <div class="w-2xl">{{ $asset->asset_description }}</div>
+                        <x-table.td wrap="true">{{ $asset->asset_name }}</x-table.td>
+                        <x-table.td wrap="true">
+                            <span class="line-clamp-3" title="{{ $asset->asset_description }}">{{ $asset->asset_description }}</span>
                         </x-table.td>
                         <x-table.td>
                             <x-table-list :data="$asset->categories" id_key="" value_key="category_name" />

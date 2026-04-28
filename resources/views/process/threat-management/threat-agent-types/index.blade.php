@@ -24,7 +24,7 @@
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$threatAgentTypes" /></x-table.td>
                         <x-table.td>{{ $threatAgentType->threat_agent_type_id }}</x-table.td>
                         <x-table.td>{{ $threatAgentType->threat_agent_type_name }}</x-table.td>
-                        <x-table.td>{{ $threatAgentType?->type?->threat_agent_type_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $threatAgentType?->type?->threat_agent_type_description }}">{{ $threatAgentType?->type?->threat_agent_type_description }}</span></x-table.td>
 
                         <x-table.td action_col="true">
                             <x-action.view route_name="threat-agent-types.show" param="{{ $threatAgentType->id }}" />

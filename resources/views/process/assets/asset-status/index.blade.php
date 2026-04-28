@@ -28,7 +28,7 @@
                             {{ $status->asset_status_id }}
                         </x-table.td>
                         <x-table.td>{{ $status->asset_current_status }}</x-table.td>
-                        <x-table.td>{{ $status->asset_status_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $status->asset_status_description }}">{{ $status->asset_status_description }}</span></x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="asset-status.show" param="{{ $status->id }}" />
                             <x-action.edit route_name="asset-status.edit" param="{{ $status->id }}" />

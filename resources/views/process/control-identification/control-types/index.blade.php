@@ -28,7 +28,7 @@
                             {{ $controlType->control_type_id }}
                         </x-table.td>
                         <x-table.td>{{ $controlType->control_type_name }}</x-table.td>
-                        <x-table.td>{{ $controlType->control_type_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $controlType->control_type_description }}">{{ $controlType->control_type_description }}</span></x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="control-types.show" param="{{ $controlType->id }}" />
                             <x-action.edit route_name="control-types.edit" param="{{ $controlType->id }}" />

@@ -98,17 +98,17 @@
                         <x-table.td class="text-center">
                             {{ $loop->index + 1 }}
                         </x-table.td>
-                        <x-table.td>
+                        <x-table.td wrap="true">
                             <a href="{{ route('risks.show', $row->rid) }}" target="_blank" class="text-dark">
                                 {{ $row->risk }}
                             </a>
                         </x-table.td>
-                        <x-table.td>{{ $row->risk_owner }}</x-table.td>
+                        <x-table.td wrap="true">{{ $row->risk_owner }}</x-table.td>
                         <x-table.td>{{ $row->risk_assessment }}</x-table.td>
                         <x-table.td>{{ $row->risk_assessment_start_date }}</x-table.td>
                         <x-table.td>{{ $row->findings }}</x-table.td>
                         <x-table.td>{{ $row->implementation_status }}</x-table.td>
-                        <x-table.td>{!! $row->controls !!}</x-table.td>
+                        <x-table.td >{!! $row->controls !!}</x-table.td>
                         <x-table.td>{!! $row->control_status !!}</x-table.td>
                         <x-table.td>{!! $row->control_owner !!}</x-table.td>
                     </tr>

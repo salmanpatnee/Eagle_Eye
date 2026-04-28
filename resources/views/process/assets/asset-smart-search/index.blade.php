@@ -58,7 +58,7 @@
                     <tr>
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$result" /></x-table.td>
                         <x-table.td> {{ $asset->asset_id }}</x-table.td>
-                        <x-table.td> {{ $asset->asset_name }}</x-table.td>
+                        <x-table.td wrap="true"> {{ $asset->asset_name }}</x-table.td>
                         <x-table.td> {{ $asset->asset_group_name }}</x-table.td>
                         <x-table.td> {{ $asset->asset_type_name }}</x-table.td>
                         <x-table.td> {{ $asset->asset_sub_type_name }}</x-table.td>

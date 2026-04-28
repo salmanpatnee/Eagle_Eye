@@ -25,7 +25,7 @@
                         <x-table.td>
                             <div style="width: 200px;">{{ $assetGroup->asset_group_id }}</div>
                         </x-table.td>
-                        <x-table.td>{{ $assetGroup->asset_group_name }}</x-table.td>
+                        <x-table.td wrap="true">{{ $assetGroup->asset_group_name }}</x-table.td>
                         <x-table.td>
                             {{ $assetGroup?->owner?->owner_name }}
                         </x-table.td>

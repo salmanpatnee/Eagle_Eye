@@ -24,7 +24,7 @@
                         <x-table.td> <x-table.serial :loop="$loop" :paginator="$threatAgents" /></x-table.td>
                         <x-table.td>{{ $threatAgent->threat_agent_vector_id }}</x-table.td>
                         <x-table.td>{{ $threatAgent->threat_agent_vector_name }}</x-table.td>
-                        <x-table.td>{{ $threatAgent->threat_agent_vector_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $threatAgent->threat_agent_vector_description }}">{{ $threatAgent->threat_agent_vector_description }}</span></x-table.td>
 
                         <x-table.td action_col="true">
                             <x-action.view route_name="threat-agent-vectors.show" param="{{ $threatAgent->id }}" />

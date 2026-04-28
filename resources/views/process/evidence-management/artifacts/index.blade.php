@@ -24,7 +24,7 @@
                         <x-table.td>{{ $artifact->artifact_id }}</x-table.td>
                         <x-table.td>{{ $artifact->artifact_name }}</x-table.td>
                         <x-table.td>
-                            <div class="w-2xl">{{ $artifact->attachments_count }}</div>
+                            <div >{{ $artifact->attachments_count }}</div>
                         </x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="artifacts.show" param="{{ $artifact->id }}" />

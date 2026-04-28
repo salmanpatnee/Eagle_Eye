@@ -23,7 +23,7 @@
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$ownerRoles" /></x-table.td>
                         <x-table.td>{{ $ownerRole->owner_role_id }}</x-table.td>
                         <x-table.td>{{ $ownerRole->owner_role_name }}</x-table.td>
-                        <x-table.td>{{ $ownerRole->owner_role_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $ownerRole->owner_role_description }}">{{ $ownerRole->owner_role_description }}</span></x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="owner-roles.show" param="{{ $ownerRole->id }}" />
                             <x-action.edit route_name="owner-roles.edit" param="{{ $ownerRole->id }}" />

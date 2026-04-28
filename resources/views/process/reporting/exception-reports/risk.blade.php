@@ -32,9 +32,9 @@
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td> <a href="{{ route('risks.show', $row->rid) }}">{{ $row->risk_id }}</a></x-table.td>
-                        <x-table.td> {{ $row->risk_name }}</x-table.td>
+                        <x-table.td wrap="true"> {{ $row->risk_name }}</x-table.td>
                         <x-table.td> {{ $row->status }}</x-table.td>
-                        <x-table.td> <a href="{{ route('owners.show', $row->oid) }}">{{ $row->owner_name }}</a></x-table.td>
+                        <x-table.td wrap="true"> <a href="{{ route('owners.show', $row->oid) }}">{{ $row->owner_name }}</a></x-table.td>
                         <x-table.td> {!! $row->custodian_links !!}</x-table.td>
                         <x-table.td> {!! $row->control_links !!}</x-table.td>
                     </tr>

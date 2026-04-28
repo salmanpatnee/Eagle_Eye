@@ -28,7 +28,7 @@
                             {{ $riskInherent->risk_inherent_id }}
                         </x-table.td>
                         <x-table.td>{{ $riskInherent->risk_inherent_score }}</x-table.td>
-                        <x-table.td>{{ $riskInherent->risk_inherent_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $riskInherent->risk_inherent_description }}">{{ $riskInherent->risk_inherent_description }}</span></x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="risk-inherents.show" param="{{ $riskInherent->id }}" />
                             <x-action.edit route_name="risk-inherents.edit" param="{{ $riskInherent->id }}" />

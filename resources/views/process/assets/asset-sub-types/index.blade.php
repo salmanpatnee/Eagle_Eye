@@ -31,7 +31,7 @@
                         </x-table.td>
                         <x-table.td>{{ $assetSubType->asset_sub_type_name }}</x-table.td>
                         <x-table.td>{{ $assetSubType->type?->asset_type_name }}</x-table.td>
-                        <x-table.td>{{ $assetSubType->asset_sub_type_description }}</x-table.td>
+                        <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $assetSubType->asset_sub_type_description }}">{{ $assetSubType->asset_sub_type_description }}</span></x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="asset-sub-types.show" param="{{ $assetSubType->id }}" />
                             <x-action.edit route_name="asset-sub-types.edit" param="{{ $assetSubType->id }}" />

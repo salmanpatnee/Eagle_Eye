@@ -47,9 +47,11 @@
                             <x-table.serial :loop="$loop" :paginator="$controls" />
                         </x-table.td>
                         <x-table.td>{{ $control->control_id }}</x-table.td>
-                        <x-table.td>{{ $control->control_name }}</x-table.td>
+                        <x-table.td wrap="true">{{ $control->control_name }}</x-table.td>
                         <x-table.td>{{ $control?->owner?->owner_name }}</x-table.td>
-                        <x-table.td><x-table-list :data="$control->risks" id_key="" value_key="risk_name" /></x-table.td>
+                        <x-table.td wrap="true">
+                            <x-table-list :data="$control->risks" id_key="" value_key="risk_name" />
+                        </x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="controls.show" param="{{ $control->id }}" />
                             <x-action.edit route_name="controls.edit" param="{{ $control->id }}" />
