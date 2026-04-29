@@ -31,7 +31,20 @@
       "Bash(git commit -m ' *)",
       "Bash(git commit *)",
       "Bash(npm run *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(perl -ne 'print \"$.: $_\" if /^\\\\s*@if \\\\\\(\\\\$control->control_id == / ... /^\\\\s*@endif/' resources/views/process/reporting/sama/controls.blade.php)",
+      "Bash(awk '/@if \\\\\\(\\\\$control->control_id ==.*[0-9]+/ {p=1; line=$0; parent_line=NR} p {print NR\": \"$0; if \\(/\\\\.A.*x-sub-control/ && parent_line && NR-parent_line<10\\) print \"^^^ ANTI-PATTERN FOUND\"} /@endif/ {if \\(p\\) {print \"---\"} p=0}' resources/views/process/reporting/sama/controls.blade.php)",
+      "Bash(awk *)",
+      "Bash(python3 *)",
+      "Bash(ls -la \"C:\\\\\\\\Users\\\\\\\\salmanabdul.ghani\\\\\\\\Herd\\\\\\\\grc\\\\\\\\resources\\\\\\\\views\\\\\\\\process\\\\\\\\reporting\\\\\\\\sama\\\\\\\\controls.blade.php\")",
+      "WebFetch(domain:grc-platform.replit.app)",
+      "Bash(curl -s \"https://grc-platform.replit.app/\")",
+      "Bash(curl *)",
+      "WebSearch",
+      "Bash(composer update *)",
+      "Bash(./vendor/bin/phpunit *)",
+      "mcp__laravel-boost__database-schema",
+      "mcp__laravel-boost__application-info"
     ],
     "deny": [],
     "ask": []
