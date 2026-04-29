@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtifactAttachmentController;
+use App\Http\Controllers\OrgStatusController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -136,6 +137,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth', 'block.mutation'])->group(function () {
+    Route::get('/org-status', OrgStatusController::class)->name('org-status.index');
     Route::view('/home', 'home')->name('home');
     Route::view('/compliance', 'process/compliance')->name('compliance');
     Route::view('/vciso', 'vciso')->name('vciso');

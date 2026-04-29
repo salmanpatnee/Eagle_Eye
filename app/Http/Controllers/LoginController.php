@@ -39,7 +39,7 @@ class LoginController extends Controller
 
         session()->regenerate();
 
-        return redirect(route('compliance'))->with('success', 'Welcome Back!');
+        return redirect(route('org-status.index'))->with('success', 'Welcome Back!');
     }
 
     public function destroy()
