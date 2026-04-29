@@ -1,0 +1,1 @@
+- [Phase 5 Risk Assessment QA Findings](project_phase5_risk_assessment.md) — confirmed bugs, model issues, status inconsistencies, missing guards from 2026-04-28 audit
