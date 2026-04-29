@@ -11,13 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class RiskAssessmentFindingController extends Controller
 {
-
     // public function index()
     // {
     //     $columns = DB::table('risk_assessment_details_table')->get();
     //     return view('process/12-RiskAssessment/2-RiskAssessmentFindingList', compact('columns'));
     // }
-
 
     public function show(RiskAssessmentDetail $riskAssessmentFinding)
     {
@@ -62,10 +60,7 @@ class RiskAssessmentFindingController extends Controller
             'risk_appetite' => 'required',
         ]);
 
-
-
         $riskAssessment->findings()->create($attributes);
-
 
         if ($request->input('submit') === 'exit') {
             return redirect(route('risk-assessments.index'))->with('success', 'Risk Assessment Finding has been created successfully.');
@@ -74,19 +69,17 @@ class RiskAssessmentFindingController extends Controller
         return redirect()->back();
     }
 
-
     public function edit(RiskAssessmentDetail $riskAssessmentFinding)
     {
 
         $riskAssessment = $riskAssessmentFinding->riskAssessment;
-        $risks = DB::table('risk_master_table as r')
-            ->leftJoin('risk_assessment_details_table as rad', function ($join) use ($riskAssessmentFinding) {
-                $join->on('r.risk_id', '=', 'rad.risk_id')
-                    ->where('rad.risk_finding_id', '=', $riskAssessmentFinding->risk_finding_id)
-                    ->whereNot('risk_finding_id', $riskAssessmentFinding->risk_finding_id);
-            })
-            ->whereNull('rad.risk_finding_id')
-            ->select('r.risk_id', 'r.risk_name')
+
+        $takenRiskIds = RiskAssessmentDetail::where('risk_assessment_id', $riskAssessmentFinding->risk_assessment_id)
+            ->where('id', '!=', $riskAssessmentFinding->id)
+            ->pluck('risk_id');
+
+        $risks = Risk::select('id', 'risk_id', 'risk_name')
+            ->whereNotIn('risk_id', $takenRiskIds)
             ->get();
 
         $treatments = RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')->get();
@@ -98,7 +91,7 @@ class RiskAssessmentFindingController extends Controller
     {
 
         $attributes = $request->validate([
-            'risk_finding_id' => ['required', 'unique:risk_assessment_details_table,risk_finding_id,' . $riskAssessmentFinding->id],
+            'risk_finding_id' => ['required', 'unique:risk_assessment_details_table,risk_finding_id,'.$riskAssessmentFinding->id],
             'risk_treatment_id' => ['required'],
             'risk_finding_name' => 'required',
             'risk_finding_description' => 'nullable',
@@ -122,7 +115,6 @@ class RiskAssessmentFindingController extends Controller
             'risk_appetite_color' => 'required',
             'risk_appetite' => 'required',
         ]);
-
 
         $riskAssessmentFinding->update($attributes);
 

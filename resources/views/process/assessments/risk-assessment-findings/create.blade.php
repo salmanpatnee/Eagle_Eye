@@ -156,7 +156,6 @@
                             for="corrective_action_due_date" />
                         <div class="relative">
                             <input type="date" id="corrective_action_due_date" name="corrective_action_due_date"
-                                required
                                 value="{{ old('corrective_action_due_date', $riskAssessmentFinding?->corrective_action_due_date) }}"
                                 class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
@@ -174,7 +173,6 @@
                             for="preventive_action_due_date" />
                         <div class="relative">
                             <input type="date" id="preventive_action_due_date" name="preventive_action_due_date"
-                                required
                                 value="{{ old('preventive_action_due_date', $riskAssessmentFinding?->preventive_action_due_date) }}"
                                 class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
@@ -222,6 +220,10 @@
                     },
                     success: function(response) {
                         $("#risk_conrol_status").html(response);
+                        var autoStatus = $('input[name="auto_status"]', $("#risk_conrol_status")).val();
+                        if (autoStatus) {
+                            $("#implementation_status").val(autoStatus);
+                        }
                     },
                     error: function(xhr, status, error) {
                         console.error(error); // Handle any errors

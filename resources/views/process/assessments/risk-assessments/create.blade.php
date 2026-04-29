@@ -45,7 +45,7 @@
                         <x-form.label label="Risk Assessment End Date" label_ar="تاريخ انتهاء تقييم المخاطر"
                             for="risk_assessment_end_date" />
                         <div class="relative">
-                            <input type="date" id="risk_assessment_end_date" name="risk_assessment_end_date" required
+                            <input type="date" id="risk_assessment_end_date" name="risk_assessment_end_date"
                                 value="{{ old('risk_assessment_end_date', $riskAssessment?->risk_assessment_end_date) }}"
                                 class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
