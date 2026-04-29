@@ -99,7 +99,7 @@
                                 {{ $finding->risk_finding_name }}
                             </x-table.td>
                             <x-table.td>
-                                {{ $finding->risk_implementation_status }}
+                                {{ $finding->implementation_status }}
                             </x-table.td>
                             <x-table.td action_col="true">
 

@@ -253,7 +253,7 @@ class RiskAssessmentController extends Controller
 
             // $html .= '<div class="column"><div class="FieldHead" style="width: 480px;"><p class="FieldHeadEngTxt">Risk Status</p><p class="FieldHeadArbTxt">حالة المخاطر</p></div>';
             // $html .= '<p class="status-para"><span class="status ' . $status . '">' . $status . '</span> <span class="status ' . $status . '">' . $statusAr . '</span></p></div>';
-            // $html .= "<input type='hidden' name='status' value='" . $status . "'>";
+            $html .= "<input type='hidden' name='auto_status' value='" . $status . "'>";
         } else {
             $html = "No result";
         }

@@ -12,15 +12,8 @@ class RiskAssessmentFinding extends Model
     protected $table = 'risk_assessment_details_table';
     protected $guarded = [];
     public $timestamps = false;
-    protected $primaryKey = 'risk_assessment_id';
-    public $incrementing = false;
 
     protected $with = ['risk'];
-
-    public function getRouteKeyName()
-    {
-        return $this->primaryKey; 
-    }
 
     public function risk(){
         return $this->belongsTo(Risk::class, 'risk_id', 'risk_id')

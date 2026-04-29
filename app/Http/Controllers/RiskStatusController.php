@@ -82,14 +82,14 @@ class RiskStatusController extends Controller
         COUNT(DISTINCT r.risk_id) as total_risks,
         SUM(
             CASE 
-                WHEN rad.latest_status = "closed" THEN 1
+                WHEN rad.latest_status = "Close" THEN 1
                 WHEN rad.latest_status IS NULL THEN 0
                 ELSE 0
             END
         ) as closed_risks,
         SUM(
-            CASE 
-                WHEN rad.latest_status = "open" OR rad.latest_status IS NULL THEN 1
+            CASE
+                WHEN rad.latest_status = "Open" OR rad.latest_status IS NULL THEN 1
                 ELSE 0
             END
         ) as open_risks
