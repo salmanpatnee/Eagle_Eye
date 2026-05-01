@@ -184,27 +184,63 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #fff;
-            border-left: 4px solid #203864;
-            padding: 12px 16px;
+            background: linear-gradient(100deg, #203864 0%, #1c3259 100%);
+            padding: 14px 20px;
             margin: 28px 0 14px;
-            border-radius: 0 6px 6px 0;
-            box-shadow: 0 1px 4px rgba(32,56,100,0.07);
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(32,56,100,0.25);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            scroll-margin-top: 80px;
         }
         .section-header:first-child { margin-top: 0; }
+
+        /* Diagonal stripe texture */
+        .section-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                -55deg,
+                transparent,
+                transparent 20px,
+                rgba(255,255,255,0.03) 20px,
+                rgba(255,255,255,0.03) 21px
+            );
+            pointer-events: none;
+        }
+
+        /* Left accent strip */
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #5ba3d9 0%, #2e74b6 100%);
+            border-radius: 8px 0 0 8px;
+        }
 
         .section-title-en {
             font-size: 13px;
             font-weight: 700;
-            color: #203864;
+            color: #ffffff;
             margin: 0;
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 1;
         }
         .section-title-ar {
             font-size: 12px;
             font-weight: 400;
-            color: #64748b;
+            color: #ffffff;
+            font-weight: 700;
             margin: 0;
             text-align: right;
+            position: relative;
+            z-index: 1;
         }
 
         /* ── CARD GRID ── */
@@ -332,6 +368,24 @@
         .top-header .roles-wrap { gap: 8px; }
         .top-header .img-fluid { width: 20px !important; height: 20px !important; }
         .top-header .nav-item { padding: 5px !important; }
+
+        /* Image card — no crop, full image shown */
+        .card--img {
+            display: block;
+            min-height: auto;
+            overflow: visible;
+        }
+        .card--img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+
+        /* Center a lone orphan in last row of 3-col grid */
+        .card-grid > .card-link:last-child:nth-child(3n + 1) {
+            grid-column: 2;
+        }
     </style>
 </head>
 <body class="processpage">
@@ -409,43 +463,23 @@
             </div>
             <div class="card-grid">
                 <a href="{{ route('organizations.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-cog'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">الإعداد الأولي</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Initial Setup</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide1.JPG') }}" alt="Initial Setup">
                     </div>
                 </a>
                 <a href="/assets" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-server'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">سجل الأصول</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Asset Register</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide2.JPG') }}" alt="Asset Register">
                     </div>
                 </a>
                 <a href="{{ route('artifacts.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-file-find'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">تتبع الأدلة</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Evidence Tracking</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide3.JPG') }}" alt="Evidence Tracking">
                     </div>
                 </a>
                 <a href="{{ route('users.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-user-circle'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">المستخدمين</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Users</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide4.JPG') }}" alt="Users">
                     </div>
                 </a>
             </div>
@@ -457,123 +491,63 @@
             </div>
             <div class="card-grid">
                 <a href="/asset-groups" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-layer'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">مجموعة الأصول</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Asset Group</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide5.JPG') }}" alt="Asset Group">
                     </div>
                 </a>
                 <a href="{{ route('threat-agents.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-shield-x'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">إدارة التهديدات</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Threat Management</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide6.JPG') }}" alt="Threat Management">
                     </div>
                 </a>
                 <a href="{{ route('vulnerabilities.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bug'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">إدارة نقاط الضعف</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Vulnerability Management</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide7.JPG') }}" alt="Vulnerability Management">
                     </div>
                 </a>
                 <a href="{{ route('risk-methodology.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-book-open'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">منهجية المخاطر</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk Methodology</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide8.JPG') }}" alt="Risk Methodology">
                     </div>
                 </a>
                 <a href="{{ route('risks.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-search-alt-2'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">تحديد المخاطر</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk Identification</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide9.JPG') }}" alt="Risk Identification">
                     </div>
                 </a>
                 <a href="{{ route('risk-appetites.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bar-chart-square'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">الرغبة في المخاطرة</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk Appetite</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide10.JPG') }}" alt="Risk Appetite">
                     </div>
                 </a>
                 <a href="{{ route('controls.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-check-shield'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">تحديد الضوابط</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Control Identification</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide11.JPG') }}" alt="Control Identification">
                     </div>
                 </a>
                 <a href="{{ route('risk-vs-control.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-first-aid'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">علاج المخاطر</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk Treatment</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide12.JPG') }}" alt="Risk Treatment">
                     </div>
                 </a>
                 <a href="{{ route('risk-vs-asset-group.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-link-alt'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">المخاطر على مجموعة الأصول</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk on Asset Group</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide13.JPG') }}" alt="Risk on Asset Group">
                     </div>
                 </a>
                 <a href="{{ route('risk-acceptances.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-check-circle'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">قبول المخاطر</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk Acceptance</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide14.JPG') }}" alt="Risk Acceptance">
                     </div>
                 </a>
                 <a href="{{ route('risk-register.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-spreadsheet'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">سجل المخاطر</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk Register</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide15.JPG') }}" alt="Risk Register">
                     </div>
                 </a>
                 <a href="{{ route('risk-status.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-chart'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">حالة المخاطر</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk Status</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide16.JPG') }}" alt="Risk Status">
                     </div>
                 </a>
             </div>
@@ -585,83 +559,43 @@
             </div>
             <div class="card-grid">
                 <a href="{{ route('kpi-references.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bar-chart-alt-2'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">المراجع مؤشرات الأداء الرئيسية</p>
-                            <hr class="card-sep">
-                            <p class="card-en">KPI References</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide17.JPG') }}" alt="KPI References">
                     </div>
                 </a>
                 <a href="/nca-regulatory-reports" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-institution'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">التقارير التنظيمية NCA</p>
-                            <hr class="card-sep">
-                            <p class="card-en">NCA Regulatory Reporting</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide18.JPG') }}" alt="NCA Regulatory Reporting">
                     </div>
                 </a>
                 <a href="{{ route('sama-regulatory-report.show') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bank'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">التقارير التنظيمية SAMA</p>
-                            <hr class="card-sep">
-                            <p class="card-en">SAMA Regulatory Reporting</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide19.JPG') }}" alt="SAMA Regulatory Reporting">
                     </div>
                 </a>
                 <a href="{{ route('mis-report.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-pie-chart-alt-2'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">تقارير نظم المعلومات الإدارية</p>
-                            <hr class="card-sep">
-                            <p class="card-en">MIS Reporting</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide23.JPG') }}" alt="MIS Reporting">
                     </div>
                 </a>
                 <a href="/dashboard" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-dashboard'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">لوحة القيادة</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Dashboard</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide20.JPG') }}" alt="Dashboard">
                     </div>
                 </a>
                 <a href="/" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-shield'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">استراتيجية الأمن السيبراني</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Cybersecurity Strategy</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide21.JPG') }}" alt="Cybersecurity Strategy">
                     </div>
                 </a>
                 <a href="/" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-file'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">ميثاق الأمن السيبراني</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Cybersecurity Charter</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide24.JPG') }}" alt="Cybersecurity Charter">
                     </div>
                 </a>
                 <a href="{{ route('compliance') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-category'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">ثلاثون زائد إطار العمل</p>
-                            <hr class="card-sep">
-                            <p class="card-en">30+ Frameworks</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide22.JPG') }}" alt="30+ Frameworks">
                     </div>
                 </a>
             </div>
@@ -673,33 +607,18 @@
             </div>
             <div class="card-grid">
                 <a href="{{ route('artifacts.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-archive'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">تسجيل سجل</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Artifact Registration</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide25.JPG') }}" alt="Artifact Registration">
                     </div>
                 </a>
                 <a href="{{ route('evidences.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-file-plus'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">تسجيل الدليل</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Register an Evidence</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide26.JPG') }}" alt="Register an Evidence">
                     </div>
                 </a>
                 <a href="{{ route('control-vs-evidence.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-link'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">الدليل المتعلق بالضوابط</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Evidence vs Control</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide27.JPG') }}" alt="Evidence vs Control">
                     </div>
                 </a>
             </div>
@@ -711,53 +630,28 @@
             </div>
             <div class="card-grid">
                 <a href="{{ route('control-assessments.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-check-square'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">تقييم الضوابط</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Control Assessment</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide28.JPG') }}" alt="Control Assessment">
                     </div>
                 </a>
                 <a href="{{ route('controls.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bx-list-ul'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">قائمة الضوابط</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Control Listing</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide29.JPG') }}" alt="Control Listing">
                     </div>
                 </a>
                 <a href="{{ route('control-smart-search.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bx-search-alt'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">الضوابط في البحث الذكي</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Control Smart Search</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide30.JPG') }}" alt="Control Smart Search">
                     </div>
                 </a>
                 <a href="{{ route('risk-assessments.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-target-lock'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">تقييم المخاطر</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk Assessment</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide31.JPG') }}" alt="Risk Assessment">
                     </div>
                 </a>
                 <a href="{{ route('risks.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-list-check'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">قائمة المخاطر</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Risk Listing</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide32.JPG') }}" alt="Risk Listing">
                     </div>
                 </a>
             </div>
@@ -769,43 +663,23 @@
             </div>
             <div class="card-grid">
                 <a href="{{ route('audit-plans.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-calendar'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">تخطيط مراجعة والتسجيل</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Audit Planning</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide33.JPG') }}" alt="Audit Planning">
                     </div>
                 </a>
                 <a href="{{ route('audit-plan-report.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-calendar-check'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">خطة التدقيق</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Audit Plan</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide34.JPG') }}" alt="Audit Plan">
                     </div>
                 </a>
                 <a href="{{ route('audit-assessments.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-report'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">نتائج مراجعة</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Audit Findings</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide35.JPG') }}" alt="Audit Findings">
                     </div>
                 </a>
                 <a href="{{ route('control-vs-audit.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-analyse'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">الضوابط المتعلقة بنتائج مراجعة</p>
-                            <hr class="card-sep">
-                            <p class="card-en card-en-sm">Control vs Audit Findings</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide36.JPG') }}" alt="Control vs Audit Findings">
                     </div>
                 </a>
             </div>
@@ -817,43 +691,23 @@
             </div>
             <div class="card-grid">
                 <a href="{{ route('patches.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-bug-alt'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">القضايا المفتوحة لاختبار الثغرات</p>
-                            <hr class="card-sep">
-                            <p class="card-en">VA-Pen Test Open Issues</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide37.JPG') }}" alt="VA-Pen Test Open Issues">
                     </div>
                 </a>
                 <a href="{{ route('pen-test-asset-vs-risk.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-shield-minus'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">الأصول المعرضة للثغرات الأمنية</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Assets at Risks WRT VA</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide38.JPG') }}" alt="Assets at Risks WRT VA">
                     </div>
                 </a>
                 <a href="{{ route('va-pen-test-dashboard.index') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-tachometer'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">لوحة تحكم اختبار الثغرات الأمنية</p>
-                            <hr class="card-sep">
-                            <p class="card-en">VA Pen Test Dashboard</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide39.JPG') }}" alt="VA Pen Test Dashboard">
                     </div>
                 </a>
                 <a href="{{ route('va.register') }}" class="card-link">
-                    <div class="card">
-                        <div class="card-icon"><div class="card-icon-inner"><i class='bx bxs-data'></i></div></div>
-                        <div class="card-body">
-                            <p class="card-ar">سجل الثغرات الأمنية</p>
-                            <hr class="card-sep">
-                            <p class="card-en">Vulnerability Register</p>
-                        </div>
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide40.JPG') }}" alt="Vulnerability Register">
                     </div>
                 </a>
             </div>
