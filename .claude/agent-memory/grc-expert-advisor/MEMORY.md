@@ -1,1 +1,2 @@
 - [Phase 5 Risk Assessment QA Findings](project_phase5_risk_assessment.md) — confirmed bugs, model issues, status inconsistencies, missing guards from 2026-04-28 audit
+- [Risk Reports QA Findings (2026-05-01)](project_risk_reports_qa.md) — critical broken PDF/dashboard routes, hardcoded RSK-001, mislabelled controls, silent data exclusions

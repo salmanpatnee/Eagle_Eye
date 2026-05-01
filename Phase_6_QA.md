@@ -1,226 +1,317 @@
-# Phase 5 — Risk Assessment QA Audit Report
-**Eagle Eye GRC System | Laravel 9 | Date: 2026-04-28**
+# Phase 6 QA — Risk Reports
+**Eagle Eye GRC System | Laravel 9 | Date: 2026-05-01**
+**Scope:** Risk Register, Risk Status Report, Risk Dashboard
+**Method:** Static code analysis — routes, controllers, views, PDF templates
+**Branch:** qa/phase-5
 
 ---
 
 ## Executive Summary
 
-The Risk Assessment module (Phase 5) has a functional skeleton — master creation, finding entry, and a control-status display all exist — but contains a cluster of confirmed bugs, a dead business-rule implementation, three data integrity gaps, and zero standards alignment for the verification/validation distinction. None of the three core business rules stated by the product owner are fully enforced. The module is not production-safe in its current state without targeted fixes.
+| Severity | Count |
+|---|---|
+| CRITICAL | 7 |
+| HIGH | 7 |
+| MEDIUM | 5 |
+| LOW | 3 |
+| **Total** | **22** |
+
+Three entire features are completely non-functional in production: Risk Register PDF export, Risk Compliance Dashboard, Risk Owner Dashboard. One hardcoded bug (`RSK-001`) silently serves wrong control data to users with no visible indication. The Risk Register silently excludes incomplete risks, violating ISO 27005 §8.3 completeness requirements.
 
 ---
 
-## Flow Walkthrough
+## Section 1: Risk Register (`/risk-register`)
 
-| Step | Route | Controller Method | Status |
+**Route:** `GET /risk-register` → `RiskRegisterController@index`
+**View:** `resources/views/process/risk-identification/risk-register/index.blade.php`
+**Controller:** `app/Http/Controllers/RiskRegisterController.php`
+
+---
+
+### [CRITICAL] PDF Export Throws ViewNotFoundException
+
+**File:** `RiskRegisterController.php:155,164`
+
+Controller constructs `$path = "process/18-Reporting/2-MISReporting"` then calls `view("{$path}/11-RiskRegisterPDF", ...)`. That view path does not exist under `resources/views/process/`. File `11-RiskRegisterPDF.blade.php` only exists inside `resources/views/_Unused/18-Reporting/2-MISReporting/`. Any user clicking PDF download receives `ViewNotFoundException` — 500 error.
+
+---
+
+### [CRITICAL] PDF Template Body Entirely Commented Out
+
+**File:** `_Unused/18-Reporting/2-MISReporting/11-RiskRegisterPDF.blade.php:408,411`
+
+Even if the view path were corrected, the PDF template is a broken skeleton. The entire `<thead>` rows and the loop over `$riskRegister` are inside a Blade comment (`{{-- ... --}}`). Rendered PDF would contain only a title header and an empty `<table>` — no risk data whatsoever.
+
+---
+
+### [CRITICAL] Silent Exclusion of Risks Without Complete Relationships
+
+**File:** `RiskRegisterController.php:18-30`
+
+Main query uses `->join()` (INNER JOIN) on five pivot/lookup tables:
+- `risk_master_table_vs_category_table` — requires a category
+- `risk_master_table_vs_threat_agent_table` — requires a threat agent
+- `risk_inherent_table` — requires an inherent record
+- `risk_vs_control_table` — requires at least one mapped control
+- `control_master_table` and `owner_table` for that control
+
+Any risk missing any one of these relationships is silently omitted from the register. ISO 27005:2022 §8.3 requires all identified risks to be documented. A register that hides incomplete risks creates a false picture of the risk landscape — an audit finding in itself.
+
+---
+
+### [HIGH] `@forelse` Opened but `@endforeach` Used — Empty State Never Renders
+
+**File:** `risk-register/index.blade.php:80,127`
+
+Line 80 opens `@forelse ($riskRegister as $row)`. Line 127 closes with `@endforeach`. Blade's `@forelse` must close with `@endforelse` and an `@empty` block between them. When register returns zero rows after filtering, table body is silently blank — no "no results" message shown.
+
+---
+
+### [HIGH] Inherent and Residual Risk Scores Selected but Never Rendered
+
+**File:** `RiskRegisterController.php:55,74` / `index.blade.php` (entire file)
+
+Query selects `ri.risk_inherent_score` and `rad.risk_score`. Neither is rendered in the web view. Column "Inherent Risk Rating" renders `$row->risk_appetite_name` (qualitative label only). Column "Residual Risk Rating" renders `$row->risk_appetite` (appetite label only). Calculated scores (`likelihood × impact`) exist in the data payload but are invisible.
+
+ISO 27005 §8.4 gap: risk evaluation requires risk levels determined and compared against risk criteria using defined scoring. Displaying only the appetite label without the underlying score obscures how the rating was derived.
+
+---
+
+### [HIGH] Risk Score Blank in Excel Export
+
+**File:** `RiskRegisterController.php:219`
+
+Column `N` in Excel export mapped to `''` with comment `// Empty column Risk Score from finding`. The `rad.risk_score` field is available in `$data` collection but intentionally left blank. Excel template has a "Risk Score" column that is always empty on export.
+
+---
+
+### [HIGH] Risk Appetite Color Highlighting Commented Out
+
+**File:** `index.blade.php:106,118`
+
+Two cells that should render with color-coded backgrounds (`appetite_color` for inherent risk, `risk_appetite_color` for residual risk) are commented out. Data is fetched correctly. The visual heat-map — primary UX mechanism for conveying risk severity at a glance — is suppressed in both web view and PDF template (line 407).
+
+---
+
+### [MEDIUM] No PDF Export Button in Web View
+
+**File:** `index.blade.php:7`
+
+View exposes only Excel export button (`x-action.excel-button`). Controller has PDF branch triggered by `?pdf` query parameter but no button appends this parameter. PDF path is entirely inaccessible from the browser (and broken when reached anyway — see CRITICAL above).
+
+---
+
+### [MEDIUM] `risk_name` Not Selected in Register Query
+
+**File:** `RiskRegisterController.php:44-91`
+
+Register query does not select `r.risk_name`. "Risk Identifier" column renders only `$row->risk_id` (e.g., "RSK-005"). Filter dropdown shows risk names correctly via a separate query, but the register table itself does not display human-readable names. Auditors rely on names, not identifier codes alone.
+
+---
+
+### [MEDIUM] Date Filter Column Ambiguity
+
+**File:** `RiskRegisterController.php:108-110`
+
+`evalutionDate` filter calls `->WhereDate('risk_assessment_start_date', '<=', $evalutionDate)` without a table alias. Query joins both `risk_assessment_master_table as ra` (which has `risk_assessment_start_date`) and `risk_assessment_details_table as rad`. MySQL may resolve ambiguously — filter behavior is unpredictable and may silently include/exclude rows incorrectly.
+
+---
+
+### [LOW] Typo in Filter Parameter Name
+
+**File:** `RiskRegisterController.php:145` / `index.blade.php:27`
+
+Parameter named `evalutionDate` (missing 'a' in "evaluation") throughout controller and view. Minor naming inconsistency, does not break functionality.
+
+---
+
+### [LOW] No Pagination
+
+Query returns all matching rows in a single unbounded result. The `ini_set("pcre.backtrack_limit", "5000000")` already present in the PDF branch suggests prior memory issues. Large risk registers will cause slow page loads and potential timeouts.
+
+---
+
+## Section 2: Risk Status Report (`/risk-status`)
+
+**Route:** `GET /risk-status` → `RiskStatusController@index`
+**View:** `resources/views/process/risk-identification/risk-status/index.blade.php`
+**Controller:** `app/Http/Controllers/RiskStatusController.php`
+
+---
+
+### [HIGH] "Not Implemented" Control Count Mislabelled as "Partially Implemented"
+
+**File:** `risk-status/index.blade.php:69`
+
+Control Status Summary widget:
+- Line 59: label "Partially Implemented" → `$controlsCount->partially_implemented_controls` ✓ correct
+- Line 69: label "Partially Implemented" → `$controlsCount->not_implemented_controls` ✗ copy-paste error
+
+"Not Implemented" count is displayed under the "Partially Implemented" label. The "Not Implemented" row is entirely absent from the UI. This directly misrepresents control implementation posture to any reader of this report.
+
+---
+
+### [HIGH] Risks Without Control Mappings Excluded from Status Report
+
+**File:** `RiskStatusController.php:47`
+
+Main status query uses `->join('risk_vs_control_table as rvc', ...)` — INNER JOIN. Risks not yet linked to any control are silently omitted from the status table and KPI counts. However `$risksCount` summary widget (lines 68-97) uses a separate query against `risk_master_table` directly, producing a different denominator. A risk can appear in "Total Risks" count but be invisible in the status table — contradicting the summary figures.
+
+---
+
+### [HIGH] No Filter, Sort, or Export Capability
+
+**File:** `risk-status/index.blade.php` (entire file)
+
+Action wrapper is empty (`<x-table.action-wrapper title="Risk Status"></x-table.action-wrapper>`). No filter by risk owner, no filter by status, no date range, no export (PDF or Excel). ISO 27001:2022 Clause 9.1 and ISO 27005:2022 §9 require monitoring and reporting outputs to be reviewable and communicable.
+
+---
+
+### [MEDIUM] Unassessed Risks Show Blank Status — Indistinguishable from Open
+
+**File:** `RiskStatusController.php:34,36`
+
+Risks without an assessment record have `COALESCE(..., 'Not Assessed')` for assessment/finding names. The `implementation_status` field will be `NULL` for these rows — rendered as a blank cell. No visual indicator distinguishes "Open" from "never assessed," which are very different compliance states.
+
+---
+
+### [MEDIUM] `implementation_status` Conflates Finding Status with Treatment Status
+
+**File:** `risk-status/index.blade.php:87` / `RiskStatusController.php:37,63`
+
+Column header is "Risk Status"; value is `rad.implementation_status`. DB values are `"Open"` and `"Close"` (not "Closed" — spelling inconsistency across the system). Users expect treatment disposition (Mitigated, Accepted, Transferred, Avoided), not a binary open/close flag. ISO 27005 treats these as distinct concepts.
+
+---
+
+## Section 3: Risk Dashboard
+
+Multiple dashboard surfaces covered below.
+
+---
+
+### [CRITICAL] `/risk-complaince-dashboard` and `/risk-owner/{owner}` Throw 500 Errors
+
+**File:** `RCDBController.php:48,101` / `routes/web.php:541-545`
+
+`RCDBController::index()` calls `view('process/18-Reporting/3-Dashboard/5-RiskComplianceDashboard', ...)`.
+`RCDBController::show()` calls `view('process/18-Reporting/3-Dashboard/5-RiskOwnerDashboard', ...)`.
+
+Neither directory nor these view files exist under `resources/views/process/`. Files only exist in `_Unused/Dashboard/`. Both routes are registered, but hitting either URL throws `ViewNotFoundException`. Risk Compliance Dashboard and Risk Owner drill-down are completely broken.
+
+---
+
+### [CRITICAL] `/control-vs-risk-dashboard` and `/risk-vs-asset-dashboard` Reference Commented-Out Controller
+
+**File:** `routes/web.php:107-128,799-801`
+
+Lines 107-128 open a block comment (`/*`) that includes imports for `DashboardController`, `MainDashboardController`, and others — dead code. Lines 799-801 reference `DashboardController::class` for routes including `controlRisksReport` and `riskAssetsReport`. Since `DashboardController` is not imported, PHP throws a class resolution error when these routes are hit. `DashboardController` only exists in `app/Http/Controllers/_Unused/`.
+
+---
+
+### [CRITICAL] Hardcoded `RSK-001` in `RCDBController::riskControls()`
+
+**File:** `RCDBController.php:178`
+
+`riskControls()` receives route-model-bound `Risk $risk`. The `$controlDetails` query correctly builds using `$risk->risk_id` for counts — but line 178 uses `->where('r.risk_id', 'RSK-001')` instead of `->where('r.risk_id', $risk->risk_id)`. Every request to `/risk-controls/{any_risk_id}` returns RSK-001's control details regardless of which risk was requested. Users are shown controls belonging to the wrong risk with no indication.
+
+---
+
+### [HIGH] Drill-Down Chain Broken at Owner Level
+
+**File:** `4-SubdomainRiskDashboard.blade.php:100` / `4-OwnerCustodiansRiskDashboard.blade.php:140-150`
+
+Intended drill-down: Domain → Subdomain → Owner → Individual Risk. Subdomain chart correctly links to `/risk-owners-compliance/{subdomainId}` on click. However `4-OwnerRiskDashboard` has its `onClick` handler entirely commented out (lines 140-149). Drill-down from "Owners Risk Status" chart to individual owner detail page is non-functional. Users reach the owner chart but cannot click through.
+
+---
+
+### [HIGH] Dashboard Uses Chart.js v2 API — Incompatible with Chart.js 3+
+
+**File:** `4-DomainRiskDashboard.blade.php`, `4-SubdomainRiskDashboard.blade.php`, `4-OwnerRiskDashboard.blade.php`, `5-RiskControlDashboard.blade.php`
+
+All dashboard charts use Chart.js 2.x API patterns removed in Chart.js 3.0:
+- `elements[0]._datasetIndex` and `elements[0]._index`
+- `chartBar.getElementAtEvent(event)`
+- `scales.yAxes`/`scales.xAxes` array format
+- `legend.labels.fontColor` and `fontSize` under `legend`
+
+If project has upgraded Chart.js to v3+, all click-based drill-down interactions silently fail — no error thrown, no navigation occurs.
+
+---
+
+### [HIGH] Risk Control Dashboard Table Empty on Load — No Server-Side Fallback
+
+**File:** `5-RiskControlDashboard.blade.php:32-36`
+
+`<x-table.tbody id="table_body">` is rendered empty on page load. Data only populated via AJAX when a chart bar is clicked. If JavaScript fails or Chart.js is misconfigured, user sees a page with a chart and permanently empty table. `$controlDetails` is computed in the controller but never passed to or used by the Blade view — it exists only for the potential AJAX response (though the method returns a view, not JSON, for non-AJAX requests).
+
+---
+
+### [MEDIUM] Route URL Has Typo
+
+**File:** `routes/web.php:542`
+
+Route is `GET /risk-complaince-dashboard` ("complaince" not "compliance"). Named route is `risk-compliance.index`. Any hardcoded links using the URL path string will silently differ from the route name.
+
+---
+
+### [MEDIUM] `_Unused` Dashboard Views Use Legacy Full-Page Layout
+
+**File:** `_Unused/Dashboard/5-RiskComplianceDashboard.blade.php:1-136`
+
+These views use old standalone HTML layout (full `<html>`, `<head>`, custom CSS from `asset('/css/...')`, boxicons CDN) rather than `@extends('layouts.app-full')`. If moved out of `_Unused` to fix the 500 error, they would render without application navigation, sidebar, and Tailwind styling — visually broken.
+
+---
+
+### [MEDIUM] Domain Dashboard Lumps "Not Assessed" into "Open" Count
+
+**File:** `OCDController.php:506-508`
+
+`riskDomain()` query counts open risks as `implementation_status = 'Open' OR IS NULL`. Unassessed risks appear identical in the chart to risks actively being remediated. Domain chart should distinguish "Open", "Closed", and "Not Assessed" as separate series.
+
+---
+
+### [LOW] Dashboard Page Titles Incorrect on All Sub-Views
+
+**File:** `4-DomainRiskDashboard.blade.php:2`, `4-SubdomainRiskDashboard.blade.php:2`, `4-OwnerRiskDashboard.blade.php:2`
+
+All three views set `@section('title', 'Overall Compliance Dashboard')`. Browser tab and any breadcrumb reading from this section shows "Overall Compliance Dashboard" regardless of which specific drill-down view the user is on.
+
+---
+
+### [LOW] Typo in PDF Template Column Header
+
+**File:** `_Unused/18-Reporting/2-MISReporting/11-RiskRegisterPDF.blade.php:398`
+
+Column header reads "Overall residaul risk rating" — should be "residual." Visible in printed/exported documents.
+
+---
+
+## ISO 27005 / NIST Alignment
+
+| Requirement | Status | Notes |
+|---|---|---|
+| ISO 27005 §8.3 — All identified risks documented | **FAIL** | INNER JOINs silently exclude incomplete risks |
+| ISO 27005 §8.4 — Risk level determined and compared to criteria | **PARTIAL** | Scores selected in query, not displayed; appetite label shown instead |
+| ISO 27005 §8.6 — Risk treatment tracked | **PARTIAL** | Control implementation status shown, not treatment plan status |
+| ISO 27005 §9 — Risk monitoring and review | **PARTIAL** | No filter/export on status report; key counts mislabelled |
+| ISO 27001:2022 Clause 6.1.2 — Risk register integrity | **FAIL** | Register excludes risks silently; PDF export broken |
+| NIST SP 800-37 RMF Step 4 — Assess controls | **PARTIAL** | Control status displayed but incorrect count labelling |
+
+---
+
+## Priority Fix Order
+
+| Priority | Finding | File | Impact |
 |---|---|---|---|
-| 1. List assessments | `GET /risk-assessments` | `index()` | Works — minor UX variable name confusion (`$controlAssessment` in Blade loop) |
-| 2. Create master | `GET/POST /risk-assessments/create` | `create()` / `store()` | Works with bugs (see below) |
-| 3. Edit master | `GET/PUT /risk-assessments/{id}/edit` | `edit()` / `update()` | Works |
-| 4. View master | `GET /risk-assessments/{id}` | `show()` | Works structurally; findings table shows blank status (BUG-01) |
-| 5. Create finding | `GET /risk-assessment-findings/create/{id}` | `create()` / `store()` | Works — AJAX control lookup functional |
-| 6. Edit finding | `GET /risk-assessment-findings/{id}/edit` | `edit()` | Broken risk filter logic (BUG-06) |
-| 7. View finding | `GET /risk-assessment-findings/{id}` | `show()` | Works |
-| 8. Delete assessment | `DELETE /risk-assessments/{id}` | `destroy()` | Works, cascades to findings |
-| 9. Risk status overview | `GET /risk-status` | `RiskStatusController::index()` | Partially works — status counts always zero (BUG-02) |
-
----
-
-## Bugs Found
-
-### Critical
-
-**BUG-01 — Status column always blank**
-- `resources/views/process/assessments/risk-assessments/show.blade.php:102`
-- Renders `$finding->risk_implementation_status` — column does not exist
-- Real column name: `implementation_status`
-- Every status cell in the findings table renders empty
-
-**BUG-02 — Closed risk counts always zero system-wide**
-- Form stores `"Open"` / `"Close"` (title-case)
-- `app/Http/Controllers/RiskStatusController.php:85` queries `"closed"` / `"open"` (lowercase)
-- `app/Http/Controllers/OCDController.php:507` queries `"Close"` (mixed-case)
-- Three locations — zero agreement — all closed-risk counts = 0 on every dashboard and summary
-
-**BUG-03 — `RiskAssessmentFinding` model has wrong primary key**
-- `app/Models/RiskAssessmentFinding.php:15-16`
-- Sets `protected $primaryKey = 'risk_assessment_id'` with `$incrementing = false`
-- `risk_assessment_id` is a foreign key, not a row identity
-- `find()`, `update()`, and route-model-binding silently operate on the wrong record or the first matching record in a group
-- Controllers use `RiskAssessmentDetail` (safe), but this model is a latent trap for any future code that imports it
-
-**BUG-04 — Auto-close logic computed but never delivered — feature is dead code**
-- `app/Http/Controllers/RiskAssessmentController.php:253-255`
-- `get_control_by_risk()` correctly computes whether all controls are implemented and sets `$status = "Close"`
-- The three lines that inject this status into the AJAX response are commented out
-- Business rule "if all controls are implemented, risk is closed" exists but never fires
-
----
-
-### High
-
-**BUG-05 — Wrong view file at `risk-assessment-findings/index.blade.php`**
-- `resources/views/process/assessments/risk-assessment-findings/index.blade.php`
-- Contains Control Assessment index content (`@section('title', 'Control Assessments Summary')`, references `route('control-assessments.index')`)
-- Currently unreachable because the index route is excluded, but dangerous if re-enabled
-
-**BUG-06 — Edit method risk filter is self-contradicting**
-- `app/Http/Controllers/RiskAssessmentFindingController.php:82-90`
-- Left-join applies `where rad.risk_finding_id = :current` AND `whereNot risk_finding_id = :current` simultaneously — mutually exclusive
-- Result: no rows match the join; `whereNull` passes everything; all risks shown instead of filtered set
-
-**BUG-07 — Due date fields: HTML `required` vs server `nullable` mismatch**
-- `resources/views/process/assessments/risk-assessment-findings/create.blade.php:159,177`
-- `corrective_action_due_date` and `preventive_action_due_date` are HTML `required` but server validates both as `nullable`
-- Browser blocks submission without dates; direct API call bypasses entirely
-
-**BUG-08 — `risk_assessment_end_date` same HTML/server mismatch**
-- `resources/views/process/assessments/risk-assessments/create.blade.php:48`
-- HTML `required`, server `nullable` — same pattern as BUG-07
-
----
-
-### Medium
-
-**BUG-09 — `risk_assessment_against` validated and displayed but no form input**
-- Validated as `nullable` in controller; displayed in `show.blade.php:64`; absent from `create.blade.php`
-- Field is always NULL — always shows `—` on detail page
-
-**BUG-10 — `maturity_level` validated but no form input**
-- `app/Http/Controllers/RiskAssessmentFindingController.php:46,107` validates `maturity_level` as `nullable`
-- No dropdown or input in `create.blade.php` — field always NULL
-
-**BUG-11 — `risk_appetite_color` stores text label on edit, hex on new record**
-- `resources/views/process/assessments/risk-assessment-findings/create.blade.php:108`
-- Hidden field pre-populated from `$riskAssessmentFinding?->risk_appetite` (text like `"High"`) on edit
-- JS on line 259 sets hex `"#FF0000"` during fresh interaction
-- Stored value is inconsistent between new and edited records
-
-**BUG-12 — Risk Status page silently hides risks with no mapped controls**
-- `app/Http/Controllers/RiskStatusController.php:47`
-- `->join('risk_vs_control_table as rvc', ...)` is an INNER JOIN
-- Any risk with no entries in `risk_vs_control_table` is invisible on the status page
-- Misleading: unmitigated open risks appear as if they do not exist
-
-**BUG-13 — Stored XSS in Risk Status view**
-- `resources/views/process/risk-identification/risk-status/index.blade.php:111-113`
-- `{!! $row->controls !!}`, `{!! $row->control_status !!}`, `{!! $row->control_owner !!}` render raw `GROUP_CONCAT` output
-- If control names or owner names contain `<script>` or `<img onerror=...>`, stored XSS executes
-
----
-
-### Low
-
-**BUG-14 — No `canWrite`/`canDelete` authorization guards in risk assessment controllers**
-- `ControlAssessmentController` calls `abort_unless(auth()->user()->canWrite(), 403)` explicitly
-- `RiskAssessmentController` and `RiskAssessmentFindingController` do not — inconsistent with established pattern
-
-**BUG-15 — Loop variable wrong name in index view**
-- `resources/views/process/assessments/risk-assessments/index.blade.php:47`
-- `@forelse ($riskAssessments as $controlAssessment)` — loop variable name is wrong, misleads readers
-
-**BUG-16 — `risk-control` POST route has no name**
-- `routes/web.php:343`
-- AJAX call in Blade uses hardcoded URL `/risk-control` — breaks silently if URL ever changes
-- Named equivalent `risk-controls.show` at line 542 exists for comparison
-
-**BUG-17 — `RiskAssessment::findings()` uses custom business ID as both FK and local key (non-standard)**
-- `app/Models/RiskAssessment.php:16`
-- `$this->hasMany(RiskAssessmentDetail::class, 'risk_assessment_id', 'risk_assessment_id')`
-- Works correctly while `risk_assessment_id` is unique, but is non-standard — document the intent
-
----
-
-## Business Rule Compliance
-
-| Business Rule | Enforced? | Evidence |
-|---|---|---|
-| Risk Assessment is prerequisite for Control Assessment | **No** | `ControlAssessmentController::store()` has no check that any `RiskAssessment` exists |
-| All controls implemented → risk is Closed | **No** | Logic computed in `get_control_by_risk()` but delivery code is commented out (lines 253-255) |
-| Verification = internal, Validation = 3rd party | **Not modeled** | No `verified_by`, `validated_by`, `verification_date`, or `validation_date` fields on either model |
-| Status options: Open, Closed, Not Applicable | **Partial** | Form offers only `Open` / `Close` — `"Not Applicable"` absent from finding status dropdown entirely |
-
----
-
-## Standards Gaps (ISO 27005:2022 / NIST SP 800-37)
-
-| Gap | Standard | Detail |
-|---|---|---|
-| No structured threat-scenario capture | ISO 27005 Cl. 8.3 | Finding links one risk via free text — no asset FK, no threat agent FK |
-| Risk appetite thresholds hardcoded in JS | ISO 27005 Cl. 8.4 | Should reference `risk_appetite_table`; threshold changes require a code deploy |
-| No residual risk calculation | ISO 27005 Cl. 8.5 | No `residual_likelihood`, `residual_impact`, `residual_score` fields anywhere |
-| No treatment plan status tracking | ISO 27001 Cl. 6.1.3 | `risk_treatment_id` FK exists but no planned date, owner, or completion date at treatment level |
-| No audit trail (`created_by`, timestamps) | NIST RMF Task P-14 | `$timestamps = false` on both models — zero record of who assessed when |
-| Risk status monitoring incomplete | ISO 27001 Cl. 9.1 | Excludes risks with no controls; no trend, no filter by owner/dept, no export |
-
----
-
-## Improvement Suggestions
-
-### High — Fix before any user-facing release
-
-1. **Fix field name** — `risk_implementation_status` → `implementation_status` in `show.blade.php:102` (1-line change; unblocks core status display)
-
-2. **Standardize status values** — pick one casing: `"Open"` / `"Closed"` / `"Not Applicable"` (title-case, past-tense "Closed"). Update: form dropdown, `RiskStatusController` SQL strings, `OCDController` SQL strings, `RCDBController`, and all chart data sources. Add `"Not Applicable"` to the dropdown (product owner requirement).
-
-3. **Re-enable auto-close suggestion** — uncomment lines 253-255 in `RiskAssessmentController::get_control_by_risk()`. Business logic is already correct; only the AJAX response delivery is disabled. Wire the returned hidden input value to pre-select the `implementation_status` dropdown via JS.
-
-4. **Fix due date HTML/server mismatch** — remove `required` attribute from `corrective_action_due_date` and `preventive_action_due_date` in `create.blade.php:159,177`, OR add `required|date` to server validation to match the HTML.
-
-5. **Fix `risk_assessment_end_date` mismatch** — remove HTML `required` or change server validation from `nullable` to `required|date|after_or_equal:risk_assessment_start_date`.
-
-6. **Add Control Assessment prerequisite guard** — in `ControlAssessmentController::store()`, add `abort_unless(RiskAssessment::exists(), 422, 'A risk assessment must exist before creating a control assessment.')`.
-
-### Medium — Fix in next sprint
-
-7. **Add `risk_assessment_against` input** to create/edit form, or remove it from validation and the show view entirely.
-
-8. **Add `maturity_level` dropdown** (suggested values: 1–5: Initial, Developing, Defined, Managed, Optimizing) to finding create/edit form, or remove it from validation.
-
-9. **Fix `risk_appetite_color` inconsistency** — drop the stored column; compute color client-side from `risk_appetite` text on display, so create and edit are always consistent.
-
-10. **INNER JOIN → LEFT JOIN** in `RiskStatusController.php:47` so risks with no mapped controls appear as unmitigated open risks rather than being invisible.
-
-11. **Escape XSS vectors** in `risk-status/index.blade.php:111-113` — replace `{!! $row->controls !!}`, `{!! $row->control_status !!}`, `{!! $row->control_owner !!}` with `{{ }}` or `{!! e(nl2br($row->controls)) !!}` if HTML line-breaks are needed.
-
-12. **Fix self-contradicting edit filter** in `RiskAssessmentFindingController::edit()` — replace the mutually-exclusive join conditions with a `whereNotIn` or `whereHas` subquery that excludes risks already assigned to other findings in the same assessment.
-
-13. **Add `canWrite`/`canDelete` guards** to `RiskAssessmentController::store()`, `update()`, `destroy()` and `RiskAssessmentFindingController::store()`, `update()`, `destroy()` to match the control assessment authorization pattern.
-
-14. **Name the `risk-control` POST route** at `routes/web.php:343` and update the hardcoded `/risk-control` URL in the Blade script block to use `route()`.
-
-### Low — Backlog / future phases
-
-15. **Add `created_by` / `assessed_by` fields** to `risk_assessment_master_table` and `risk_assessment_details_table` via migration, auto-populated from `auth()->id()` in store methods — minimum viable audit trail for ISO 27001 Clause 9.1 and NIST RMF Task P-14.
-
-16. **Add `verified_by` / `validated_by` fields** to the finding record to model the internal verification / 3rd-party validation distinction stated in business rules. Reference the `auditor_table` or `owner_table`.
-
-17. **Move risk appetite thresholds** from hardcoded JS constants to `risk_appetite_table` — fetch via API or Blade-inlined JSON so threshold changes do not require a code deploy.
-
-18. **Add residual risk fields** (`residual_likelihood`, `residual_impact`, `residual_score`) to the finding record to enable before/after comparison and comply with ISO 27005 Clause 8.5.
-
-19. **Delete or fix `RiskAssessmentFinding` model** — unused, wrong PK (`risk_assessment_id` is a FK not a row ID), dangerous latent bug for any future import.
-
-20. **Rename loop variable** `$controlAssessment` → `$riskAssessment` in `risk-assessments/index.blade.php:47`.
-
----
-
-## Quick Wins (< 30 min each, high visibility)
-
-| Fix | File | Effort |
-|---|---|---|
-| `risk_implementation_status` → `implementation_status` | `show.blade.php:102` | 1 line |
-| Add `"Not Applicable"` to status dropdown | `create.blade.php:77` | 1 line |
-| Remove HTML `required` from corrective/preventive due dates | `create.blade.php:159,177` | 2 attributes |
-| Add route name to `risk-control` POST endpoint | `routes/web.php:343` | 1 line |
-| Rename loop variable `$controlAssessment` → `$riskAssessment` | `risk-assessments/index.blade.php:47` | 1 word |
-| Escape `{!! !!}` outputs in risk-status view | `risk-status/index.blade.php:111-113` | 3 lines |
-
----
-
-## Summary
-
-**17 bugs confirmed. 3 core business rules unimplemented. 1 stored XSS. Zero audit trail.**
-
-Highest-impact single fix: **BUG-02** (standardize status string casing) — corrects all closed-risk counts across dashboards, status page, and OCD controller simultaneously.
-
-Fastest business value unlock: **BUG-04** (uncomment auto-close in `get_control_by_risk()`) — the logic is already correct; only the UI delivery is disabled. Re-enables the core feature with zero logic changes.
+| 1 | Hardcoded `RSK-001` | `RCDBController.php:178` | Wrong data served silently to all users |
+| 2 | Risk Compliance + Owner Dashboard 500 | `RCDBController.php:48,101` | Entire dashboard routes broken |
+| 3 | `DashboardController` import commented out | `routes/web.php:107-128` | Risk-vs-control and risk-vs-asset routes broken |
+| 4 | Risk Register PDF view path wrong | `RiskRegisterController.php:155` | PDF export broken |
+| 5 | PDF template body commented out | `11-RiskRegisterPDF.blade.php:408` | PDF renders empty even if path fixed |
+| 6 | "Partially Implemented" label bug | `risk-status/index.blade.php:69` | Misrepresents control posture in status report |
+| 7 | INNER JOINs exclude incomplete risks | `RiskRegisterController.php:18-30` | ISO 27005 §8.3 compliance failure |
+| 8 | Risk scores not rendered | `index.blade.php` | Scores computed but invisible to users |
+| 9 | `@forelse`/`@endforeach` mismatch | `risk-register/index.blade.php:80,127` | Empty state never shown |
+| 10 | Risk appetite color cells commented out | `index.blade.php:106,118` | Heat-map UX suppressed |
+| 11 | Owner drill-down `onClick` commented out | `4-OwnerCustodiansRiskDashboard.blade.php:140-149` | Drill-down chain broken at owner level |
+| 12 | Chart.js v2 API in v3+ environment | Multiple dashboard views | All chart click interactions silently fail |
