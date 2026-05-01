@@ -28,7 +28,7 @@
     <meta property="twitter:image" content="{{ asset('Images/Eagle_Eye_Logo.png') }}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('Images/favicon.ico') }}">
 
     <!-- External CSS -->
     <link rel="stylesheet" href="css/1-Title/1-TitleIndex.css">

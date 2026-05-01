@@ -7,7 +7,7 @@
     <title>Eagle Eye — GRC Platform</title>
     <meta name="description"
         content="Enterprise GRC platform for risk assessment, audit management, and regulatory compliance in Saudi Arabia.">
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('Images/favicon.ico') }}"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -610,6 +610,50 @@
         @keyframes hero-dot-pulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.5); }
             50%       { box-shadow: 0 0 0 5px rgba(5, 150, 105, 0); }
+        }
+
+        /* ─── Hero Announcement Strip ──────────────────── */
+        .hero-announce {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(37, 99, 235, 0.03);
+            border: 1px solid rgba(37, 99, 235, 0.13);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            max-width: 480px;
+            overflow: hidden;
+        }
+
+        .hero-announce::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #2563EB 0%, #0EA5E9 55%, transparent 100%);
+        }
+
+        .hero-announce-icon {
+            flex-shrink: 0;
+            margin-top: 2px;
+            opacity: 0.8;
+        }
+
+        .hero-announce-text {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-2);
+            line-height: 1.65;
+        }
+
+        .hero-announce-text strong {
+            font-weight: 600;
+            color: var(--navy-mid);
         }
 
         /* ─── Hero Stats Trio ─────────────────────────── */
@@ -2927,6 +2971,13 @@
                     <p class="hero-body anim-4">Eagle Eye is a Saudi product focused on Saudi Arabia, providing complete
                         regulatory compliance in the shortest possible time. Designed, developed, and rolled out under
                         the strict supervision of experienced GRC consultants.</p>
+                    <div class="hero-announce anim-5">
+                        <svg class="hero-announce-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                            <path d="M7 1L13 7L7 13L1 7L7 1Z" stroke="#2563EB" stroke-width="1.5" stroke-linejoin="round"/>
+                            <circle cx="7" cy="7" r="2" fill="#2563EB"/>
+                        </svg>
+                        <span class="hero-announce-text">Eagle Eye is now proudly part of Flexshield Solution, a subsidiary of Ethara Holding. This marks a significant strengthening of our ties with <strong><a href="https://ethraaholding.com.sa/en/" target="_blank" rel="noopener noreferrer">Ethara Holding</a></strong>. <a href="https://ethraaholding.com.sa/en/" target="_blank" rel="noopener noreferrer">https://ethraaholding.com.sa/en/</a></span>
+                    </div>
                     <div class="hero-actions anim-5">
                         <a href="/login" class="btn-primary">Enter Platform &rarr;</a>
                         <a href="#features" class="btn-ghost">Explore Features &darr;</a>

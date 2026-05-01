@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Security Posture Brief — Eagle Eye GRC</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('Images/favicon.ico') }}"> 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         *, *::before, *::after { box-sizing: border-box; }

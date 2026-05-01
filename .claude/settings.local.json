@@ -49,5 +49,9 @@
     "deny": [],
     "ask": []
   },
-  "showClearContextOnPlanAccept": true
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ],
+  "showClearContextOnPlanAccept": true,
+  "enableAllProjectMcpServers": true
 }

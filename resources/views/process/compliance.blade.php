@@ -8,6 +8,7 @@
     <meta name="description" content="Eagle Eye GRC Compliance Processes">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('/css/style.css?v=1.40') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('Images/favicon.ico') }}"> 
     <style>
         :root { --hh: 64px; }
 
