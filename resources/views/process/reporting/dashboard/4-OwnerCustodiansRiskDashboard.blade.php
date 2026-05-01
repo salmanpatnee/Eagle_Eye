@@ -111,42 +111,41 @@
                     ]
                 },
                 options: {
-
-                    legend: {
-                        display: true,
-                        labels: {
-                            fontColor: '#000', // Change legend label color here, 
-                            fontSize: 16
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#000',
+                                font: { size: 16 }
+                            }
+                        },
+                        title: {
+                            display: false,
                         }
                     },
                     scales: {
-                        yAxes: [{
+                        y: {
                             ticks: {
-                                fontColor: '#000', // Change y-axis labels color here
-                                // beginAtZero: true, 
-                                fontSize: 16
+                                color: '#000',
+                                font: { size: 16 }
                             }
-                        }],
-                        xAxes: [{
+                        },
+                        x: {
                             ticks: {
-                                fontColor: '#000', // Change x-axis labels color here, 
-                                fontSize: 16
+                                color: '#000',
+                                font: { size: 16 }
                             }
-                        }]
+                        }
                     },
-                    title: {
-                        display: false,
-                    },
-                    // onClick: function(event, elements) {
-                    //     if (elements && elements.length > 0) {
-                    //         var datasetIndex = elements[0]._datasetIndex;
-                    //         var dataIndex = elements[0]._index;
-                    //         var dataset = this.data.datasets[datasetIndex];
-                    //         var ownerId = dataset.customData[dataIndex];
-
-                    //         window.open("/risk-owner-compliance/" + ownerId, '_blank');
-                    //     }
-                    // }
+                    onClick: function(event, elements, chart) {
+                        if (elements && elements.length > 0) {
+                            var datasetIndex = elements[0].datasetIndex;
+                            var dataIndex = elements[0].index;
+                            var dataset = chart.data.datasets[datasetIndex];
+                            var ownerId = dataset.customData[dataIndex];
+                            window.open("/risk-owner-compliance/" + ownerId, '_blank');
+                        }
+                    }
                 }
             });
         }

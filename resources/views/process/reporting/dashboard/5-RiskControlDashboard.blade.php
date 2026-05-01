@@ -30,7 +30,16 @@
                     <x-table.th label="Evidences" label_ar="الأدلة" />
                 </x-table.thead>
                 <x-table.tbody id="table_body">
-
+                    @foreach ($controlDetails as $i => $row)
+                        <tr>
+                            <x-table.td>{{ $i + 1 }}</x-table.td>
+                            <x-table.td><a href="/control-assessments/{{ $row->control_assessment_id }}">{{ $row->control_id }}</a></x-table.td>
+                            <x-table.td><a href="/control-assessments/{{ $row->control_assessment_id }}">{{ $row->control_implementation_status }}</a></x-table.td>
+                            <x-table.td><a href="/owners/{{ $row->owner_id }}">{{ $row->owner_name }}</a></x-table.td>
+                            <x-table.td>{!! $row->custodians ?? '' !!}</x-table.td>
+                            <x-table.td>{!! $row->evidence ?? '-' !!}</x-table.td>
+                        </tr>
+                    @endforeach
                 </x-table.tbody>
             </x-table.table>
         </div>
@@ -105,22 +114,24 @@
                 ]
             },
             options: {
-                legend: {
-                    display: true
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    title: {
+                        display: false,
+                        text: ""
+                    }
                 },
-                title: {
-                    display: false,
-                    text: ""
-                },
-                onClick: function(event, elements) {
+                onClick: function(event, elements, chart) {
 
                     if (elements.length > 0) {
-                        const element = chartBar.getElementAtEvent(event)[0];
+                        const element = elements[0];
                         if (element) {
-                            const datasetIndex = element._datasetIndex;
-                            const dataIndex = element._index;
+                            const datasetIndex = element.datasetIndex;
+                            const dataIndex = element.index;
 
-                            const dataset = chartBar.data.datasets[datasetIndex];
+                            const dataset = chart.data.datasets[datasetIndex];
                             if (dataset && dataset.data[dataIndex]) {
                                 const dataPoint = dataset.data[dataIndex];
 

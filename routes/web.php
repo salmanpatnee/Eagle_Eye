@@ -1,78 +1,40 @@
 <?php
 
+use App\Http\Controllers\Admin\ImportController;
+use App\Http\Controllers\Admin\ImportHistoryController;
+use App\Http\Controllers\Admin\ImportMappingController;
 use App\Http\Controllers\ArtifactAttachmentController;
-use App\Http\Controllers\OrgStatusController;
-use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArtifactController;
+use App\Http\Controllers\AssetGroupController;
+use App\Http\Controllers\AssetRegisterController;
+use App\Http\Controllers\AssetSmartSearch;
+use App\Http\Controllers\AssetStatusController;
+use App\Http\Controllers\AssetSubTypeController;
+use App\Http\Controllers\AssetTypeController;
+use App\Http\Controllers\AuditeeController;
+use App\Http\Controllers\AuditFindingController;
+use App\Http\Controllers\AuditMaterController;
+use App\Http\Controllers\AuditorFormController;
+use App\Http\Controllers\AuditPlanController;
+use App\Http\Controllers\AuditPlanReportController;
+use App\Http\Controllers\BestPracticeController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CisoEducationController;
+use App\Http\Controllers\ClassificationController;
+use App\Http\Controllers\CMSController;
 use App\Http\Controllers\ControlAssessmentController;
 use App\Http\Controllers\ControlAssessmentFindingController;
-use App\Http\Controllers\RiskAssessmentController;
-use App\Http\Controllers\RiskAssessmentFindingController;
-use App\Http\Controllers\MisReportsController;
-use App\Http\Controllers\RiskTreatmentController;
-use App\Http\Controllers\RiskAssetGroupTableController;
-use App\Http\Controllers\RiskCveController;
-use App\Http\Controllers\CvssController;
-use App\Http\Controllers\VaTypeController;
-use App\Http\Controllers\VaSubTypeController;
-use App\Http\Controllers\RiskIdentificationController;
-use App\Http\Controllers\RiskMethodologyController;
-use App\Http\Controllers\RiskTypeController;
-use App\Http\Controllers\RiskSubTypeController;
-use App\Http\Controllers\RiskGroupController;
-use App\Http\Controllers\RiskKriController;
-use App\Http\Controllers\RiskKpiController;
-use App\Http\Controllers\RiskTreatmentOptionsController;
-use App\Http\Controllers\RiskAppetiteController;
-use App\Http\Controllers\RiskInherentController;
-use App\Http\Controllers\RiskAcceptanceController;
-use App\Http\Controllers\ControlController;
-use App\Http\Controllers\ControlTypeController;
-use App\Http\Controllers\AuditPlanController;
-use App\Http\Controllers\AuditMaterController;
-use App\Http\Controllers\AuditFindingController;
-use App\Http\Controllers\AuditorFormController;
-use App\Http\Controllers\AuditeeController;
-use App\Http\Controllers\EvidenceController;
-use App\Http\Controllers\OrganizationController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\SubDepartmentController;
-use App\Http\Controllers\ClassificationController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\OwnerController;
-use App\Http\Controllers\OwnerRoleController;
-use App\Http\Controllers\CustodianRoleController;
-use App\Http\Controllers\CustodianController;
-use App\Http\Controllers\BestPracticeController;
-use App\Http\Controllers\MainDomainController;
-use App\Http\Controllers\SubDomainController;
-use App\Http\Controllers\AssetRegisterController;
-use App\Http\Controllers\AssetStatusController;
-use App\Http\Controllers\AssetTypeController;
-use App\Http\Controllers\AssetSubTypeController;
-use App\Http\Controllers\AssetGroupController;
-use App\Http\Controllers\ControlSmartSearch;
-use App\Http\Controllers\TempFileUploadController;
-use App\Http\Controllers\ThreatAgentController;
-use App\Http\Controllers\ThreatAgentSubTypeController;
-use App\Http\Controllers\ThreatAgentRatingController;
-use App\Http\Controllers\ThreatAgentTypeController;
-use App\Http\Controllers\ThreatAgentVectorController;
-use App\Http\Controllers\VaMasterController;
-use App\Http\Controllers\RiskRegisterController;
-use App\Http\Controllers\RegulatoryExcelReportController;
-use App\Http\Controllers\RegulatorySummaryReportController;
-use App\Http\Controllers\ControlEvidenceController;
 use App\Http\Controllers\ControlAuditFindingController;
-use App\Http\Controllers\OCDController;
-use App\Http\Controllers\AssetSmartSearch;
-use App\Http\Controllers\AuditPlanReportController;
-use App\Http\Controllers\CisoEducationController;
-use App\Http\Controllers\CMSController;
+use App\Http\Controllers\ControlController;
+use App\Http\Controllers\ControlEvidenceController;
+use App\Http\Controllers\ControlSmartSearch;
+use App\Http\Controllers\ControlTypeController;
+use App\Http\Controllers\CustodianController;
+use App\Http\Controllers\CustodianRoleController;
+use App\Http\Controllers\CvssController;
 use App\Http\Controllers\DataUploaderController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EvidenceController;
 use App\Http\Controllers\ExceptionReportsController;
 use App\Http\Controllers\HotTopicsController;
 use App\Http\Controllers\HumanResourceController;
@@ -80,7 +42,15 @@ use App\Http\Controllers\KPICategoryController;
 use App\Http\Controllers\KPIStandardController;
 use App\Http\Controllers\KPIStandardReportController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MainDomainController;
+use App\Http\Controllers\MisReportsController;
 use App\Http\Controllers\ObjectivesController;
+use App\Http\Controllers\OCDController;
+use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\OrgStatusController;
+use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\OwnerRoleController;
 use App\Http\Controllers\PatchController;
 use App\Http\Controllers\PenTestController;
 use App\Http\Controllers\PenTestDashboardController;
@@ -92,17 +62,47 @@ use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RCDBController;
+use App\Http\Controllers\RegulatoryExcelReportController;
 use App\Http\Controllers\RegulatoryReportController;
+use App\Http\Controllers\RegulatorySummaryReportController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\RiskAcceptanceController;
+use App\Http\Controllers\RiskAppetiteController;
+use App\Http\Controllers\RiskAssessmentController;
+use App\Http\Controllers\RiskAssessmentFindingController;
+use App\Http\Controllers\RiskAssetGroupTableController;
+use App\Http\Controllers\RiskCveController;
+use App\Http\Controllers\RiskGroupController;
+use App\Http\Controllers\RiskIdentificationController;
+use App\Http\Controllers\RiskInherentController;
+use App\Http\Controllers\RiskKpiController;
+use App\Http\Controllers\RiskKriController;
+use App\Http\Controllers\RiskMethodologyController;
+use App\Http\Controllers\RiskRegisterController;
 use App\Http\Controllers\RiskStatusController;
+use App\Http\Controllers\RiskSubTypeController;
+use App\Http\Controllers\RiskTreatmentController;
+use App\Http\Controllers\RiskTreatmentOptionsController;
+use App\Http\Controllers\RiskTypeController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\SubDepartmentController;
+use App\Http\Controllers\SubDomainController;
+use App\Http\Controllers\TempFileUploadController;
 use App\Http\Controllers\ThirdPartyController;
+use App\Http\Controllers\ThreatAgentController;
+use App\Http\Controllers\ThreatAgentRatingController;
+use App\Http\Controllers\ThreatAgentSubTypeController;
+use App\Http\Controllers\ThreatAgentTypeController;
+use App\Http\Controllers\ThreatAgentVectorController;
 use App\Http\Controllers\TPTExpertsControl;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VaMasterController;
+use App\Http\Controllers\VaSubTypeController;
+use App\Http\Controllers\VaTypeController;
 use App\Http\Controllers\VulnerabilityRegisterController;
-use App\Http\Controllers\Admin\ImportController;
-use App\Http\Controllers\Admin\ImportMappingController;
-use App\Http\Controllers\Admin\ImportHistoryController;
-// use App\Http\Controllers\OptionsController;
+use Illuminate\Support\Facades\Route;
 
+// use App\Http\Controllers\OptionsController;
 
 /*
 // ------------------THIS NEEDS TO BE DELETED-------------------------
@@ -127,7 +127,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RCDBController;
 */
 
-
 Route::middleware(['guest'])->group(function () {
 
     Route::view('/', 'welcome')->name('welcome');
@@ -143,8 +142,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::view('/vciso', 'vciso')->name('vciso');
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
-
-
 
     // ------------------- INITIAL SETUP -------------------
 
@@ -206,8 +203,8 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     // ------------------- USERS -------------------
 
     Route::resource('users', UserController::class);
-        // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
-        // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
+    // Route::get('/options', [OptionsController::class, 'create'])->name('options.create');
+    // Route::patch('/options', [OptionsController::class, 'update'])->name('options.update');
 
     // ------------------- IMPORT MANAGEMENT -------------------
 
@@ -230,7 +227,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
         Route::delete('/{id}', [ImportMappingController::class, 'destroy'])->name('imports.mappings.destroy');
         Route::get('/{mapping}/download-template', [ImportMappingController::class, 'downloadTemplate'])->name('imports.mappings.downloadTemplate');
     });
-    
 
     // ------------------- THREAT MANAGEMENT -------------------
 
@@ -248,7 +244,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::resource('vulnerability-types', VaTypeController::class);
     Route::resource('vulnerability-sub-types', VaSubTypeController::class);
 
-
     // ------------------- RISK IDENTIFICATION -------------------
 
     Route::resource('risks', RiskIdentificationController::class);
@@ -264,7 +259,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::resource('risk-appetites', RiskAppetiteController::class);
     Route::resource('risk-inherents', RiskInherentController::class);
     Route::resource('risk-acceptances', RiskAcceptanceController::class);
-
 
     // ------------------- RISK TREATMENT -------------------
 
@@ -291,6 +285,7 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
 
     Route::controller(RiskStatusController::class)->group(function () {
         Route::get('/risk-status', 'index')->name('risk-status.index');
+        Route::get('/risk-status-excel', 'getRiskStatusExcel')->name('risk.status.excel');
     });
 
     // ------------------- VULNERABILITY REGISTER -------------------
@@ -316,7 +311,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
         Route::post('/evidence-list/delete-attachment', 'delete_attachment')->name('evidence.delete.attachment');
     });
 
-
     Route::controller(ControlEvidenceController::class)->group(function () {
         Route::get('/control-vs-evidence', 'controlVsEvidence')->name('control-vs-evidence.index');
         Route::get('/evidence-vs-control', 'evidenceVsControl')->name('evidence-vs-control.index');
@@ -336,15 +330,12 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
 
     Route::get('/control-smart-search', ControlSmartSearch::class)->name('control-smart-search.index');
 
-
-
     // ------------RISK ASSESSMENTS--------------
 
     Route::resource('risk-assessments', RiskAssessmentController::class);
     Route::controller(RiskAssessmentController::class)->group(function () {
         Route::post('/risk-control/', 'get_control_by_risk');
     });
-
 
     Route::resource('risk-assessment-findings', RiskAssessmentFindingController::class)->except(['index', 'create', 'store']);
     Route::controller(RiskAssessmentFindingController::class)->group(function () {
@@ -379,7 +370,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
         Route::get('/audit-finding-vs-control', 'auditFindingVsControl')->name('audit-vs-control.index');
     });
 
-
     // ------------VULNERABILITY ASSESSMENT / PENETRATION TEST TRACKING--------------
 
     Route::resource('va-pen-tests', PenTestController::class);
@@ -395,7 +385,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::resource('patches', PatchController::class);
     Route::resource('third-party', ThirdPartyController::class);
     Route::resource('tpt-experts', TPTExpertsControl::class);
-
 
     Route::controller(PenTestReportController::class)->group(function () {
         Route::get('/va-asset-vs-risk', 'assetVsRisk')->name('pen-test-asset-vs-risk.index');
@@ -548,7 +537,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
 
     Route::view('/frameworks', 'process/framework')->name('frameworks');
 
-
     // ------------ISO-27001--------------
 
     Route::view('/scope-of-isms', 'process/iso-27001/scope-of-isms');
@@ -566,7 +554,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::view('/third-party-security-framework', 'process/iso-27001/third-party-security-framework');
     Route::view('/internal-audit-27001', 'process/iso-27001/internal-audit');
     Route::view('/management-review-27001', 'process/iso-27001/management-review');
-
 
     // ------------MANAGE GRC DOMAIN RESOURCES CONTENT--------------
 
@@ -630,7 +617,6 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
         Route::get('/resource/template/{resource}', [ProcessResourceController::class, 'pdfTemplate'])->name('process.resource.template.pdf');
         Route::get('/resource/{process:process_id}/glossary/', [ProcessResourceController::class, 'glossary'])->name('process.resource.glossary');
         Route::delete('/resources/{resource}', [ProcessResourceController::class, 'destroy'])->name('process.resource.destroy');
-
 
         // ------------------Products-------------------------
 
@@ -708,8 +694,7 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     });
 });
 
-
-/* 
+/*
 // ------------------THIS NEEDS TO BE DELETED-------------------------
 
 Route::middleware(['auth'])->group(function () {
@@ -800,7 +785,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/control-vs-risk-dashboard', [DashboardController::class, 'controlRisksReport'])->name('control-vs-risk-dashboard');
     Route::get('/risk-vs-asset-dashboard', [DashboardController::class, 'riskAssetsReport'])->name('risk-vs-asset-dashboard');
 
-    
+
 
     Route::get('/cs-strategy-dashboard', function () {
         return view('process/18-Reporting/3-Dashboard/5-OCDCSGOV');

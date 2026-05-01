@@ -5,6 +5,7 @@
     <div>
         <x-table.action-wrapper title="Risk Register">
             <x-action.excel-button route_name="risk.register.excel" />
+            <x-action.pdf-button url="{{ $pdfUrl }}" />
         </x-table.action-wrapper>
 
         <form action="{{ route('risk-register.index') }}" method="GET">
@@ -69,6 +70,7 @@
                 <x-table.th label="Residual Risk Description" />
                 <x-table.th label="Residual Risk Likelihood (1-5)" />
                 <x-table.th label="Residual Risk Magnitude/Impact (1-5)" />
+                <x-table.th label="Residual Risk Score" />
                 <x-table.th label="Residual Risk Rating" />
                 <x-table.th label="Following Steps Description" />
                 <x-table.th label="Last Evaluation Date" />
@@ -103,9 +105,8 @@
                         <x-table.td>{{ $row->date_of_risk_analysis }}</x-table.td>
                         <x-table.td>{{ $row->risk_inherent_likelihood }}</x-table.td>
                         <x-table.td>{{ $row->risk_inherent_impact }}</x-table.td>
-                        {{-- <x-table.td style="background-color: {{ $row->appetite_color }};">{{ $row->risk_appetite_name }}</x-table.td> --}}
-                        <x-table.td>{{ $row->risk_appetite_name }}</x-table.td>
-                        <x-table.td>&nbsp;</x-table.td>
+                        <x-table.td style="background-color: {{ $row->appetite_color }}; color: #fff;">{{ $row->risk_appetite_name }}</x-table.td>
+                        <x-table.td>{{ $row->risk_inherent_score }}</x-table.td>
                         <x-table.td>{{ $row->risk_treatment_name }}</x-table.td>
                         <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $row->risk_treatment_description }}">{{ $row->risk_treatment_description }}</span></x-table.td>
                         <x-table.td class="list">{!! $row->control_owner !!}</x-table.td>
@@ -114,8 +115,8 @@
                         <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $row->risk_finding_description }}">{{ $row->risk_finding_description }}</span></x-table.td>
                         <x-table.td>{{ $row->risk_likelihood }}</x-table.td>
                         <x-table.td>{{ $row->risk_impact }}</x-table.td>
-                        <x-table.td>{{ $row->risk_appetite }}</x-table.td>
-                        {{-- <x-table.td style="background-color: {{ $row->risk_appetite_color }};">{{ $row->risk_appetite }}</x-table.td> --}}
+                        <x-table.td>{{ $row->risk_score }}</x-table.td>
+                        <x-table.td style="background-color: {{ $row->risk_appetite_color }}; color: #fff;">{{ $row->risk_appetite }}</x-table.td>
                         <x-table.td wrap="true">
                             <span class="line-clamp-3" title="{{ $row->preventive_action }}">{{ $row->preventive_action }}</span>
                         </x-table.td>
@@ -124,7 +125,11 @@
                             <span class="line-clamp-3" title="{{ $row->lesson_learned }}">{{ $row->lesson_learned }}</span>
                         </x-table.td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="27" class="px-4 py-8 text-center text-gray-500">No risks found.</td>
+                    </tr>
+                @endforelse
             </x-table.tbody>
         </x-table.table>
     </div>

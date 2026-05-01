@@ -7,7 +7,11 @@ use App\Models\RiskTreatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
-
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class RiskRegisterController extends Controller
 {
@@ -152,16 +156,16 @@ class RiskRegisterController extends Controller
         $risks = Risk::select('risk_id', 'risk_name')
             ->get();
 
-        $path = "process/18-Reporting/2-MISReporting";
+        $path = 'process/risk-identification/risk-register';
 
         if (request()->has('pdf')) {
             // Increase PCRE backtrack limit
-            ini_set("pcre.backtrack_limit", "5000000");
+            ini_set('pcre.backtrack_limit', '5000000');
 
             $mpdf = new Mpdf(['orientation' => 'L']);
 
             // Get the HTML content
-            $html = view("{$path}/11-RiskRegisterPDF", compact('riskRegister'))->render();
+            $html = view("{$path}/pdf", compact('riskRegister'))->render();
 
             // Split HTML into smaller chunks (e.g. 500KB each)
             $chunks = str_split($html, 500000);
@@ -171,15 +175,13 @@ class RiskRegisterController extends Controller
                 $mpdf->WriteHTML($chunk);
             }
 
-
-
             // Set the headers to prompt the file download
-            return response($mpdf->Output("Risk-Register.pdf", 'D'))
+            return response($mpdf->Output('Risk-Register.pdf', 'D'))
                 ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'attachment; filename="' . "Risk-Register.pdf" . '"');
+                ->header('Content-Disposition', 'attachment; filename="'.'Risk-Register.pdf'.'"');
         } else {
             // return $riskRegister;
-            return view("process/risk-identification/risk-register/index", compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
+            return view('process/risk-identification/risk-register/index', compact('riskRegister', 'risks', 'riskTreatments', 'riskId', 'riskTreatment', 'evalutionDate'));
         }
     }
 
@@ -199,7 +201,7 @@ class RiskRegisterController extends Controller
         copy($filePath, $outputFilePath);
 
         // Load the spreadsheet from the output file
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($outputFilePath);
+        $spreadsheet = IOFactory::load($outputFilePath);
         $sheet = $spreadsheet->getActiveSheet();
 
         // Define the headers and their corresponding data keys
@@ -216,7 +218,7 @@ class RiskRegisterController extends Controller
             'K' => 'risk_inherent_likelihood',
             'L' => 'risk_inherent_impact',
             'M' => 'risk_appetite_name',
-            'N' => '', // Empty column Risk Score from finding
+            'N' => 'risk_score',
             'O' => 'risk_treatment_name',
             'P' => 'risk_treatment_description',
             'Q' => 'control_owner',
@@ -256,8 +258,8 @@ class RiskRegisterController extends Controller
                 $sheet->getStyle($cellCoordinate)
                     ->getFont()->setName('DIN Next LT Arabic Light')->setSize(12);
 
-                $horizontalAlign = \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER;
-                $verticalAlign = \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER;
+                $horizontalAlign = Alignment::HORIZONTAL_CENTER;
+                $verticalAlign = Alignment::VERTICAL_CENTER;
 
                 $sheet->getStyle($cellCoordinate)
                     ->getAlignment()
@@ -266,8 +268,8 @@ class RiskRegisterController extends Controller
                     ->setWrapText(true);
 
                 // Add black border to the cell
-                $sheet->getStyle($cellCoordinate)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN)
-                    ->setColor(new \PhpOffice\PhpSpreadsheet\Style\Color(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_BLACK));
+                $sheet->getStyle($cellCoordinate)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN)
+                    ->setColor(new Color(Color::COLOR_BLACK));
 
                 // Set column to auto width according to content
                 $sheet->getColumnDimension($column)->setAutoSize(true);
@@ -279,7 +281,7 @@ class RiskRegisterController extends Controller
         }
 
         // Save the updated spreadsheet
-        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $writer = new Xlsx($spreadsheet);
         $writer->save($outputFilePath);
 
         // Return the file as a download and delete after sending

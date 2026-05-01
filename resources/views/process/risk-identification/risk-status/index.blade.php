@@ -5,8 +5,29 @@
 @section('content')
     <div>
         <x-table.action-wrapper title="Risk Status">
-
+            <x-action.excel-button route_name="risk.status.excel" />
         </x-table.action-wrapper>
+
+        <form action="{{ route('risk-status.index') }}" method="GET">
+            <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
+                <x-form.grid-3-col>
+                    <div>
+                        <x-form.select label="Owner" name="owner" placeholder="All Owners"
+                            :value="$owner" :data="$owners" id_key="owner_role_id" value_key="owner_name"
+                            onchange="this.form.submit()" />
+                    </div>
+                    <div>
+                        <x-form.label label="Status" for="status" />
+                        <select name="status" id="status" onchange="this.form.submit()"
+                            class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden">
+                            <option value="">All</option>
+                            <option value="Open" {{ $status === 'Open' ? 'selected' : '' }}>Open</option>
+                            <option value="Close" {{ $status === 'Close' ? 'selected' : '' }}>Close</option>
+                        </select>
+                    </div>
+                </x-form.grid-3-col>
+            </div>
+        </form>
 
         <div class="space-y-6 border-t border-gray-100 p-2 sm:p-4 mb-5">
             <x-form.grid-col>
@@ -66,7 +87,7 @@
                             </li>
                             <li
                                 class="flex items-center justify-between gap-2 border-b border-gray-200 px-3 py-2.5 text-sm text-gray-500 last:border-b-0">
-                                <span class="font-bold text-gray-800">Partially Implemented:</span>
+                                <span class="font-bold text-gray-800">Not Implemented:</span>
                                 {{ $controlsCount->not_implemented_controls }}
                             </li>
                         </ul>
