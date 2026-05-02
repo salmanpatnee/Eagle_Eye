@@ -433,7 +433,7 @@
         <!-- LEFT SIDEBAR -->
         <nav class="sidebar" id="sidebar">
             <div class="sidebar-inner">
-                <div class="sidebar-label">Navigation</div>
+                {{-- <div class="sidebar-label">Navigation</div> --}}
                 <a href="#section-initial" class="sidebar-link active" data-section="section-initial">
                     <i class='bx bxs-cog'></i> Initial Setup
                 </a>
