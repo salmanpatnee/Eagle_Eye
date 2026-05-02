@@ -224,7 +224,7 @@
         }
 
         .section-title-en {
-            font-size: 13px;
+            font-size: 20px;
             font-weight: 700;
             color: #ffffff;
             margin: 0;
@@ -233,7 +233,7 @@
             z-index: 1;
         }
         .section-title-ar {
-            font-size: 12px;
+            font-size: 20px;
             font-weight: 400;
             color: #ffffff;
             font-weight: 700;
@@ -247,8 +247,15 @@
         .card-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 28px;
             margin-bottom: 4px;
+        }
+        .card-grid--featured .card-link:first-child {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .card-grid--featured .card-link:nth-child(n+2) {
+            grid-row: 2;
         }
 
         /* ── CARD ── */
@@ -260,19 +267,17 @@
 
         .card {
             background: #fff;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #203864;
-            border-radius: 8px;
+            border: none;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             min-height: 72px;
-            overflow: hidden;
-            transition: box-shadow 0.2s ease, transform 0.18s ease, border-left-color 0.2s ease;
+            box-shadow: 0 1px 4px rgba(32,56,100,0.06);
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
         }
         .card:hover {
-            box-shadow: 0 4px 12px rgba(32,56,100,0.12);
-            transform: translateY(-2px);
-            border-left-color: #2e74b6;
+            box-shadow: 0 10px 28px rgba(32,56,100,0.18);
+            transform: translateY(-4px) scale(1.025);
         }
 
         .card-icon {
@@ -373,13 +378,13 @@
         .card--img {
             display: block;
             min-height: auto;
-            overflow: visible;
+            overflow: hidden;
         }
         .card--img img {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 4px;
+            border-radius: 14px;
         }
 
         /* Center a lone orphan in last row of 3-col grid */
@@ -442,7 +447,10 @@
                     <i class='bx bxs-file-find'></i> Evidence Management
                 </a>
                 <a href="#section-control-risk" class="sidebar-link" data-section="section-control-risk">
-                    <i class='bx bxs-check-shield'></i> Control & Risk
+                    <i class='bx bxs-check-shield'></i> Control Assessment
+                </a>
+                <a href="#section-risk-management" class="sidebar-link" data-section="section-risk-management">
+                    <i class='bx bxs-error-alt'></i> Risk Management
                 </a>
                 <a href="#section-audit" class="sidebar-link" data-section="section-audit">
                     <i class='bx bxs-calendar-check'></i> Audit Management
@@ -461,7 +469,7 @@
                 <p class="section-title-en">Initial Setup</p>
                 <p class="section-title-ar">الإعداد الأولي</p>
             </div>
-            <div class="card-grid">
+            <div class="card-grid card-grid--featured">
                 <a href="{{ route('organizations.index') }}" class="card-link">
                     <div class="card card--img">
                         <img src="{{ asset('Images/Home/Slide1.JPG') }}" alt="Initial Setup">
@@ -472,14 +480,15 @@
                         <img src="{{ asset('Images/Home/Slide2.JPG') }}" alt="Asset Register">
                     </div>
                 </a>
-                <a href="{{ route('artifacts.index') }}" class="card-link">
-                    <div class="card card--img">
-                        <img src="{{ asset('Images/Home/Slide3.JPG') }}" alt="Evidence Tracking">
-                    </div>
-                </a>
+                
                 <a href="{{ route('users.index') }}" class="card-link">
                     <div class="card card--img">
                         <img src="{{ asset('Images/Home/Slide4.JPG') }}" alt="Users">
+                    </div>
+                </a>
+                <a href="{{ route('artifacts.index') }}" class="card-link">
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide3.JPG') }}" alt="Evidence Tracking">
                     </div>
                 </a>
             </div>
@@ -538,16 +547,6 @@
                 <a href="{{ route('risk-acceptances.index') }}" class="card-link">
                     <div class="card card--img">
                         <img src="{{ asset('Images/Home/Slide14.JPG') }}" alt="Risk Acceptance">
-                    </div>
-                </a>
-                <a href="{{ route('risk-register.index') }}" class="card-link">
-                    <div class="card card--img">
-                        <img src="{{ asset('Images/Home/Slide15.JPG') }}" alt="Risk Register">
-                    </div>
-                </a>
-                <a href="{{ route('risk-status.index') }}" class="card-link">
-                    <div class="card card--img">
-                        <img src="{{ asset('Images/Home/Slide16.JPG') }}" alt="Risk Status">
                     </div>
                 </a>
             </div>
@@ -625,8 +624,8 @@
 
             <!-- ── CONTROL & RISK ASSESSMENT ── -->
             <div id="section-control-risk" class="section-header">
-                <p class="section-title-en">Control Assessment &amp; Risk Assessment</p>
-                <p class="section-title-ar">تقييم الضوابط وتقييم المخاطر</p>
+                <p class="section-title-en">Control Assessment</p>
+                <p class="section-title-ar">تقييم الضوابط</p>
             </div>
             <div class="card-grid">
                 <a href="{{ route('control-assessments.index') }}" class="card-link">
@@ -644,14 +643,27 @@
                         <img src="{{ asset('Images/Home/Slide30.JPG') }}" alt="Control Smart Search">
                     </div>
                 </a>
+            </div>
+
+            <!-- ── RISK MANAGEMENT ── -->
+            <div id="section-risk-management" class="section-header">
+                <p class="section-title-en">Risk Management</p>
+                <p class="section-title-ar">إدارة المخاطر</p>
+            </div>
+            <div class="card-grid">
                 <a href="{{ route('risk-assessments.index') }}" class="card-link">
                     <div class="card card--img">
                         <img src="{{ asset('Images/Home/Slide31.JPG') }}" alt="Risk Assessment">
                     </div>
                 </a>
-                <a href="{{ route('risks.index') }}" class="card-link">
+                <a href="{{ route('risk-register.index') }}" class="card-link">
                     <div class="card card--img">
-                        <img src="{{ asset('Images/Home/Slide32.JPG') }}" alt="Risk Listing">
+                        <img src="{{ asset('Images/Home/Slide15.JPG') }}" alt="Risk Register">
+                    </div>
+                </a>
+                <a href="{{ route('risk-status.index') }}" class="card-link">
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/Slide16.JPG') }}" alt="Risk Status">
                     </div>
                 </a>
             </div>
@@ -690,7 +702,7 @@
                 <p class="section-title-ar">تتبع تقييم الثغرات الأمنية / اختبار الاختراق</p>
             </div>
             <div class="card-grid">
-                <a href="{{ route('patches.index') }}" class="card-link">
+                <a href="{{ route('va-pen-tests.index') }}" class="card-link">
                     <div class="card card--img">
                         <img src="{{ asset('Images/Home/Slide37.JPG') }}" alt="VA-Pen Test Open Issues">
                     </div>
@@ -735,7 +747,7 @@
         });
 
         // IntersectionObserver — highlight active sidebar link on scroll
-        const sectionIds = ['section-initial','section-grc','section-reporting','section-evidence','section-control-risk','section-audit','section-vapt'];
+        const sectionIds = ['section-initial','section-grc','section-reporting','section-evidence','section-control-risk','section-risk-management','section-audit','section-vapt'];
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
