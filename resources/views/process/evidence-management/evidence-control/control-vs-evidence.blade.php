@@ -11,7 +11,7 @@
 
             <x-action.button label="Control vs Evidence" label_ar="الضوابط مقابل الأدلة" route_name="control-vs-evidence.index"
                 disabled class="opacity-75" />
-            <x-action.button label="Evidence vs Control" label_ar="المخاطر مقابل الضوابط"
+            <x-action.button label="Evidence vs Control" label_ar="الأدلة مقابل الضوابط"
                 route_name="evidence-vs-control.index" />
 
         </x-table.action-wrapper>
