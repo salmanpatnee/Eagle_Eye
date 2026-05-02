@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
 
 class ControlMaster extends Model
@@ -11,7 +12,9 @@ class ControlMaster extends Model
     use HasFactory;
 
     protected $table = 'control_master_table';
+
     protected $guarded = [];
+
     public $timestamps = false;
 
     public function setIsParentControlAttribute($value)
@@ -183,7 +186,6 @@ class ControlMaster extends Model
         );
     }
 
-
     public function domain()
     {
         return $this->belongsTo(Domain::class, 'main_domain_id', 'main_domain_id');
@@ -197,6 +199,12 @@ class ControlMaster extends Model
     public function findings()
     {
         return $this->belongsToMany(AuditFinding::class, 'audit_finding_vs_control_table', 'control_id', 'audit_finding_id', 'control_id', 'audit_finding_id');
+    }
+
+    public function evidences(): BelongsToMany
+    {
+        return $this->belongsToMany(Evidence::class, 'evidence_vs_control_table', 'control_id', 'evidence_id', 'control_id', 'evidence_id')
+            ->withPivot('evidence_id', 'control_id');
     }
 
     public function children()
