@@ -44,14 +44,20 @@
       "Bash(composer update *)",
       "Bash(./vendor/bin/phpunit *)",
       "mcp__laravel-boost__database-schema",
-      "mcp__laravel-boost__application-info"
+      "mcp__laravel-boost__application-info",
+      "mcp__laravel-boost__get-absolute-url",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\salmanabdul.ghani\\\\Herd\\\\grc\" -Directory)",
+      "Bash(Select-Object Name)",
+      "mcp__laravel-boost__database-query",
+      "Bash(Test-Path *)",
+      "Bash(Get-ChildItem *)"
     ],
     "deny": [],
     "ask": []
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "laravel-boost"
   ],
-  "showClearContextOnPlanAccept": true,
-  "enableAllProjectMcpServers": true
+  "showClearContextOnPlanAccept": true
 }
