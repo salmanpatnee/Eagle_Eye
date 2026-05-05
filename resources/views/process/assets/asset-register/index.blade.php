@@ -37,37 +37,38 @@
             </div>
         </form>
 
-        <x-table.table>
-            <x-table.thead>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Asset ID" label_ar="رمز الأصول" />
-                <x-table.th label="Asset Name" label_ar="الاسم الأصول" />
-                <x-table.th label="Asset Description" label_ar="وصف الأصول" />
-                <x-table.th label="Categories" label_ar="اسم الفئة" />
-                <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
-                @foreach ($assets as $asset)
-                    <tr>
-                        <x-table.td> <x-table.serial :loop="$loop" :paginator="$assets" /></x-table.td>
-                        <x-table.td>{{ $asset->asset_id }}</x-table.td>
-                        <x-table.td wrap="true">{{ $asset->asset_name }}</x-table.td>
-                        <x-table.td wrap="true">
-                            <span class="line-clamp-3" title="{{ $asset->asset_description }}">{{ $asset->asset_description }}</span>
-                        </x-table.td>
-                        <x-table.td>
-                            <x-table-list :data="$asset->categories" id_key="" value_key="category_name" />
-                        </x-table.td>
-                        <x-table.td action_col="true">
-                            <x-action.view route_name="assets.show" param="{{ $asset->id }}" />
-                            <x-action.edit route_name="assets.edit" param="{{ $asset->id }}" />
-                            <x-action.delete route_name="assets.destroy" param="{{ $asset->id }}" />
-                        </x-table.td>
-                    </tr>
-                @endforeach
-            </x-table.tbody>
-        </x-table.table>
-
+        <div class="overflow-auto" style="max-height: calc(100vh - 200px);">
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="S.No" label_ar="رقم" />
+                    <x-table.th label="Asset ID" label_ar="رمز الأصول" />
+                    <x-table.th label="Asset Name" label_ar="الاسم الأصول" />
+                    <x-table.th label="Asset Description" label_ar="وصف الأصول" />
+                    <x-table.th label="Categories" label_ar="اسم الفئة" />
+                    <x-table.th label="Action" label_ar="إجراء " />
+                </x-table.thead>
+                <x-table.tbody>
+                    @foreach ($assets as $asset)
+                        <tr>
+                            <x-table.td> <x-table.serial :loop="$loop" :paginator="$assets" /></x-table.td>
+                            <x-table.td>{{ $asset->asset_id }}</x-table.td>
+                            <x-table.td wrap="true">{{ $asset->asset_name }}</x-table.td>
+                            <x-table.td wrap="true">
+                                <span class="line-clamp-3" title="{{ $asset->asset_description }}">{{ $asset->asset_description }}</span>
+                            </x-table.td>
+                            <x-table.td>
+                                <x-table-list :data="$asset->categories" id_key="" value_key="category_name" />
+                            </x-table.td>
+                            <x-table.td action_col="true">
+                                <x-action.view route_name="assets.show" param="{{ $asset->id }}" />
+                                <x-action.edit route_name="assets.edit" param="{{ $asset->id }}" />
+                                <x-action.delete route_name="assets.destroy" param="{{ $asset->id }}" />
+                            </x-table.td>
+                        </tr>
+                    @endforeach
+                </x-table.tbody>
+            </x-table.table>
+        </div>
         <x-pagination>
             {{ $assets->links() }}
         </x-pagination>

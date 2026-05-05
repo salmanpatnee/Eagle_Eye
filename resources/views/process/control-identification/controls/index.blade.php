@@ -34,36 +34,38 @@
             </div>
         </form>
 
-        <x-table.table>
-            <x-table.thead>
-                <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Control ID" label_ar="رمز الضوابط" />
-                <x-table.th label="Control Name" label_ar="اسم الضوابط" />
-                <x-table.th label="Owner" label_ar="اسم مالك الضوابط" />
-                <x-table.th label="Risks" label_ar="المخاطر" />
-                <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
-                @foreach ($controls as $control)
-                    <tr>
-                        <x-table.td>
-                            <x-table.serial :loop="$loop" :paginator="$controls" />
-                        </x-table.td>
-                        <x-table.td>{{ $control->control_id }}</x-table.td>
-                        <x-table.td wrap="true">{{ $control->control_name }}</x-table.td>
-                        <x-table.td>{{ $control?->owner?->owner_name }}</x-table.td>
-                        <x-table.td wrap="true">
-                            <x-table-list :data="$control->risks" id_key="" value_key="risk_name" />
-                        </x-table.td>
-                        <x-table.td action_col="true">
-                            <x-action.view route_name="controls.show" param="{{ $control->id }}" />
-                            <x-action.edit route_name="controls.edit" param="{{ $control->id }}" />
-                            <x-action.delete route_name="controls.destroy" param="{{ $control->id }}" />
-                        </x-table.td>
-                    </tr>
-                @endforeach
-            </x-table.tbody>
-        </x-table.table>
+        <div class="overflow-auto" style="max-height: calc(100vh - 200px);">
+            <x-table.table>
+                <x-table.thead>
+                    <x-table.th label="S.No" label_ar="رقم" />
+                    <x-table.th label="Control ID" label_ar="رمز الضوابط" />
+                    <x-table.th label="Control Name" label_ar="اسم الضوابط" />
+                    <x-table.th label="Owner" label_ar="اسم مالك الضوابط" />
+                    <x-table.th label="Risks" label_ar="المخاطر" />
+                    <x-table.th label="Action" label_ar="إجراء " />
+                </x-table.thead>
+                <x-table.tbody>
+                    @foreach ($controls as $control)
+                        <tr>
+                            <x-table.td>
+                                <x-table.serial :loop="$loop" :paginator="$controls" />
+                            </x-table.td>
+                            <x-table.td>{{ $control->control_id }}</x-table.td>
+                            <x-table.td wrap="true">{{ $control->control_name }}</x-table.td>
+                            <x-table.td>{{ $control?->owner?->owner_name }}</x-table.td>
+                            <x-table.td wrap="true">
+                                <x-table-list :data="$control->risks" id_key="" value_key="risk_name" />
+                            </x-table.td>
+                            <x-table.td action_col="true">
+                                <x-action.view route_name="controls.show" param="{{ $control->id }}" />
+                                <x-action.edit route_name="controls.edit" param="{{ $control->id }}" />
+                                <x-action.delete route_name="controls.destroy" param="{{ $control->id }}" />
+                            </x-table.td>
+                        </tr>
+                    @endforeach
+                </x-table.tbody>
+            </x-table.table>
+        </div>
         <x-pagination>
             {{ $controls->links() }}
         </x-pagination>
