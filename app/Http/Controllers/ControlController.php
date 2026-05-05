@@ -13,7 +13,7 @@ class ControlController extends Controller
 {
     public function index(Request $request)
     {
-        $control = $request->input('control') ?? null;
+        $control = $request->input('control') ?? [];
         $owner = $request->input('owner') ?? null;
         $risk = $request->input('risk') ?? null;
         $bestPractice = $request->input('bestPractice') ?? null;
@@ -30,7 +30,7 @@ class ControlController extends Controller
             ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
             ->with('risks')
             ->when($control, function ($query, $control) {
-                $query->where('control_master_table.control_id', $control);
+                $query->whereIn('control_master_table.control_id', $control);
             })->when(
                 $bestPractice,
                 function ($query, $bestPractice) {

@@ -6,7 +6,7 @@
         $yesNoOptions = ['Yes', 'No'];
     @endphp
     <div>
-        <x-table.action-wrapper title="{{ isset($artifact) ? 'Update' : 'New' }} Attachment">
+        <x-table.action-wrapper title="{{ isset($artifact) ? 'Update' : 'New' }} Artifact">
             <x-action.button label="View" label_ar="منظر" route_name="artifacts.index" />
         </x-table.action-wrapper>
 
@@ -47,12 +47,7 @@
 
                     </div>
                 </x-form.grid-col>
-                <div>
-
-                    <x-form.label label="File Attachment" label_ar="إرفاق ملفات" for="fileAttachment" />
-                    <input type="file" class="filepond" name="fileAttachment" multiple credits="false"
-                        id="fileAttachment" {{ !isset($artifact?->id) ? 'required' : '' }}>
-                </div>
+               
             </div>
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
@@ -67,6 +62,22 @@
                     </div>
                 </x-form.grid-col>
             </div>
+            <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
+                <x-form.grid-col>
+                    <div>
+                     <x-form.select label="Artifact Type" label_ar="نوع المرفقات" name="artifact_type" :custom_data="['Document', 'Screenshot']"
+                            :value="$artifact?->artifact_type ?? old('artifact_type', 'Document')" />
+                    </div>
+                </x-form.grid-col>
+            </div>
+
+             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
+
+                    <x-form.label label="File Attachment" label_ar="إرفاق ملفات" for="fileAttachment" />
+                    <input type="file" class="filepond" name="fileAttachment" multiple credits="false"
+                        id="fileAttachment" {{ !isset($artifact?->id) ? 'required' : '' }}>
+                </div>
+
             <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                 <x-form.grid-col>
                     <div>
@@ -165,7 +176,7 @@
                     </div>
                 </x-form.grid-col>
                 <div class="flex justify-end">
-                    <x-form.submit label="Attachment" label_ar="المرفق" :isUpdate="$artifact?->id" />
+                    <x-form.submit label="Artifact" label_ar="المرفق" :isUpdate="$artifact?->id" />
                 </div>
             </div>
         </form>

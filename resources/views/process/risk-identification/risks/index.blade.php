@@ -13,21 +13,24 @@
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
                 <x-form.grid-3-col>
                     <div>
-                        <x-form.select label="Risk" label_ar="المخاطر" name="risk" placeholder="Select Risk"
-                            :data="$riskNames" id_key="risk_id" value_key="risk_name" onchange="this.form.submit()"
+                        <x-form.multiselect label="Risk" label_ar="المخاطر" name="risk[]"
+                            :data="$riskNames" id_key="risk_id" value_key="risk_name"
                             :value="$risk" />
                     </div>
                     <div>
                         <x-form.select label="Risk Group" label_ar="مجموعة المخاطر" name="group"
                             placeholder="Select Risk Group" :value="$group" :data="$riskGroups" id_key="risk_group_id"
-                            value_key="risk_group_name" onchange="this.form.submit()" />
+                            value_key="risk_group_name" />
                     </div>
                     <div>
                         <x-form.select label="Owner" label_ar="صاحب الضوابط" name="owner" placeholder="Select Owner"
-                            :value="$owner" :data="$owners" id_key="owner_role_id" value_key="owner_name"
-                            onchange="this.form.submit()" />
+                            :value="$owner" :data="$owners" id_key="owner_role_id" value_key="owner_name" />
                     </div>
                 </x-form.grid-3-col>
+                <div class="flex justify-center gap-3">
+                    <button class="action-btn text-center justify-center">Filter Risks</button>
+                    <a href="{{ route('risks.index') }}" class="action-btn text-center justify-center">Clear Filters</a>
+                </div>
             </div>
         </form>
 

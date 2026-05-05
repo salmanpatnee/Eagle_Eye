@@ -42,6 +42,12 @@
                 </x-info-col>
             </x-info-row>
 
+             <x-info-row>
+                <x-info-col label="Artifact Type" label_ar="نوع المرفقات">
+                    {{ $artifact->artifact_type ?? '—' }}
+                </x-info-col>
+            </x-info-row>
+
             <x-info-row>
                 <x-info-col label="Asset Exclusively Related to Critical Assets?"
                     label_ar="الأصول المرتبطة حصرا بالأصول الحساسة؟">

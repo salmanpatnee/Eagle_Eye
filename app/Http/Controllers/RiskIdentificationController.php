@@ -14,7 +14,7 @@ class RiskIdentificationController extends Controller
 
     public function index(Request $request)
     {
-        $risk = $request->input('risk') ?? null;
+        $risk = $request->input('risk') ?? [];
         $owner = $request->input('owner') ?? null;
         $group = $request->input('group') ?? null;
 
@@ -25,7 +25,7 @@ class RiskIdentificationController extends Controller
         $risks = Risk::select('id', 'risk_id', 'risk_name', 'owner_id', 'risk_group_id')
             ->with('owner', 'group', 'kris', 'kpis')
             ->when($risk, function ($query, $risk) {
-                $query->where('risk_master_table.risk_id', $risk);
+                $query->whereIn('risk_master_table.risk_id', $risk);
             })->when($group, function ($query, $group) {
                 $query->where('risk_master_table.risk_group_id', $group);
             })->when($owner, function ($query, $owner) {

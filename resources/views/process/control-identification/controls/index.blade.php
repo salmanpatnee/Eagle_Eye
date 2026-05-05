@@ -13,21 +13,24 @@
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
                 <x-form.grid-3-col>
                     <div>
-                        <x-form.select label="Controls" label_ar="الضوابط" name="control" placeholder="Select Control"
-                            :data="$controlNames" id_key="control_id" value_key="control_name" onchange="this.form.submit()"
+                        <x-form.multiselect label="Controls" label_ar="الضوابط" name="control[]"
+                            :data="$controlNames" id_key="control_id" value_key="control_name"
                             :value="$control" />
                     </div>
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="bestPractice"
                             placeholder="Select Best Practice" :value="$bestPractice" :data="$bestPractices"
-                            id_key="best_practices_id" value_key="best_practices_name" onchange="this.form.submit()" />
+                            id_key="best_practices_id" value_key="best_practices_name" />
                     </div>
                     <div>
                         <x-form.select label="Risk" label_ar="المخاطر" name="risk" placeholder="Select Risk"
-                            :value="$risk" :data="$risks" id_key="risk_id" value_key="risk_name"
-                            onchange="this.form.submit()" />
+                            :value="$risk" :data="$risks" id_key="risk_id" value_key="risk_name" />
                     </div>
                 </x-form.grid-3-col>
+                <div class="flex justify-center gap-3">
+                    <button class="action-btn text-center justify-center">Filter Controls</button>
+                    <a href="{{ route('controls.index') }}" class="action-btn text-center justify-center">Clear Filters</a>
+                </div>
             </div>
         </form>
 
