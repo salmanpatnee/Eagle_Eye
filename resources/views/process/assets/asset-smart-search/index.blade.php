@@ -42,8 +42,8 @@
             </div>
         </form>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="280" min-width="1100px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Asset ID" label_ar="رمز الأصول" />
                 <x-table.th label="Asset Name" label_ar="اسم الأصول" />
@@ -52,8 +52,8 @@
                 <x-table.th label="Asset Sub-Type" label_ar="النوع الفرعي للأصول" />
                 <x-table.th label="Exclusive Category" label_ar="فئة حصرية" />
                 <x-table.th label="Location" label_ar=" موقع الأصول" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($result as $asset)
                     <tr>
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$result" /></x-table.td>
@@ -82,8 +82,8 @@
                         <x-table.td> {{ $asset->location_name }} </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
 
         <x-pagination>
             {{ $result->links() }}

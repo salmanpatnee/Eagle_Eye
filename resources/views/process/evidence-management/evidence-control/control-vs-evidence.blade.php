@@ -45,34 +45,31 @@
 
 
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="280">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Control ID" label_ar="رمز الضوابط" />
                 <x-table.th label="Control Name" label_ar="اسم الضوابط" />
                 <x-table.th label="Evidences" label_ar="الأدلة" />
                 <x-table.th label="Artifacts" label_ar="المقتنيات" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($controlEvidence as $row)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td>
-                            <a href="{{ route('controls.show', $row->id) }}">
-                                {{ $row->control_id }}
-                            </a>
+                            <a href="{{ route('controls.show', $row->id) }}">{{ $row->control_id }}</a>
                         </x-table.td>
-                        <x-table.td wrap="true"> {{ $row->control_name }}</x-table.td>
-                        <x-table.td> {!! $row->evidences !!}</x-table.td>
-                        <x-table.td> {!! $row->artifacts !!}</x-table.td>
-
+                        <x-table.td min-width="250px" max-width="400px">{{ $row->control_name }}</x-table.td>
+                        <x-table.td min-width="200px">{!! $row->evidences !!}</x-table.td>
+                        <x-table.td min-width="200px">{!! $row->artifacts !!}</x-table.td>
                     </tr>
                 @empty
                     <tr>
                         <td colspan="5" class="px-4 py-6 text-center text-gray-500">No controls with linked evidence found.</td>
                     </tr>
                 @endforelse
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection

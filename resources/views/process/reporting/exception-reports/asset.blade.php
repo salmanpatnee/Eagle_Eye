@@ -18,8 +18,8 @@
 
 
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="1100px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Asset ID" label_ar="رمز الأصول" />
                 <x-table.th label="Asset Name" label_ar="اسم الأصول" />
@@ -28,8 +28,8 @@
                 <x-table.th label="Custodians" label_ar="اسم الوصي" />
                 <x-table.th label="Risks" label_ar="المخاطر" />
                 <x-table.th label="Controls" label_ar="الضوابط" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($report as $row)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
@@ -42,8 +42,8 @@
                         <x-table.td> {!! $row->controls !!}</x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
 
 
     </div>

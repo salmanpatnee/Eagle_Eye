@@ -26,96 +26,26 @@
             </div>
         </form>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="250" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Risk ID" label_ar="رمز المخاطر" />
                 <x-table.th label="Risk Name" label_ar="اسم المخاطر" />
                 <x-table.th label="Control Name" label_ar="اسم الضوابط" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($riskTreatments as $riskTreatment)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td><a href="{{ route('risks.show', $riskTreatment->id) }}"
                                 target="_blank">{{ $riskTreatment->risk_id }}</a></x-table.td>
-                        <x-table.td wrap="true">{{ $riskTreatment->risk_name }}</x-table.td>
-                        <x-table.td >
+                        <x-table.td min-width="200px" max-width="400px">{{ $riskTreatment->risk_name }}</x-table.td>
+                        <x-table.td min-width="200px">
                             <x-table-list :data="$riskTreatment->controls" id_key="control_id" value_key="control_name" />
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection
-
-
-{{-- <!DOCTYPE html>
-<html lang="en">
-
-
-<body style="background-color: #f6f6f6">
- 
- 
-    <div class="tablearea">
-        <table class="table">
-            <thead class="tablehead">
-                <tr>
-                    <th>
-                        <p>رمز</p>
-                        <p>S.No</p>
-                    </th>
-                    <th>
-                        <p>رمز المخاطر</p>
-                        <p>Risk ID</p>
-                    </th>
-                    <th>
-                        <p>اسم المخاطر</p>
-                        <p>Risk Name</p>
-                    </th>
-                    <th>
-                        <p>اسم الضوابط</p>
-                        <p>Control Name</p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="tablebody">
-                @forelse ($riskTreatments as $riskTreatment)
-                    <tr>
-                        <td class="text-center">
-                            {{ $loop->index + 1 }}
-                        </td>
-                        <td>
-                            <a href="{{ route('risks.show', $riskTreatment->risk_id) }}" target="_blank"
-                                class="text-dark">
-                                {{ $riskTreatment->risk_id }}
-                            </a>
-                        </td>
-                        <td>{{ $riskTreatment->risk_name }} </td>
-                        <td>
-                            @foreach ($riskTreatment->controls as $control)
-                                <p>
-                                    <a href="{{ route('controls.show', $control->control_id) }}" target="_blank"
-                                        class="text-dark">
-                                        {{ $control->control_id }} - {{ $control->control_name }}
-                                    </a>
-                                </p>
-                            @endforeach
-                        </td>
-                    </tr>
-                @empty
-                    <div class="alert alert-error">
-                        <p>No results were found.</p>
-                    </div>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-</body> --}}

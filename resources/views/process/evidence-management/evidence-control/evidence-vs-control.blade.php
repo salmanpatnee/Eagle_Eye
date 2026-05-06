@@ -45,37 +45,33 @@
 
 
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="280">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Evidence ID" label_ar="رمز الأدلة" />
                 <x-table.th label="Evidence Name" label_ar="اسم الأدلة" />
                 <x-table.th label="Controls" label_ar="الضوابط" />
                 <x-table.th label="Artifacts" label_ar="المقتنيات" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($evidenceControl as $row)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td>
-                            <a href="{{ route('evidences.show', $row->id) }}">
-                                {{ $row->evidence_id }}
-                            </a>
+                            <a href="{{ route('evidences.show', $row->id) }}">{{ $row->evidence_id }}</a>
                         </x-table.td>
-                        <x-table.td wrap="true">
-                            <a href="{{ route('evidences.show', $row->id) }}">
-                                {{ $row->evidence_name }}
-                            </a>
+                        <x-table.td min-width="200px" max-width="350px">
+                            <a href="{{ route('evidences.show', $row->id) }}">{{ $row->evidence_name }}</a>
                         </x-table.td>
-                        <x-table.td wrap="true"> {!! $row->controls !!}</x-table.td>
-                        <x-table.td> {!! $row->artifacts ?? '' !!}</x-table.td>
+                        <x-table.td min-width="250px">{!! $row->controls !!}</x-table.td>
+                        <x-table.td min-width="200px">{!! $row->artifacts ?? '' !!}</x-table.td>
                     </tr>
                 @empty
                     <tr>
                         <td colspan="5" class="px-4 py-6 text-center text-gray-500">No evidence with linked controls found.</td>
                     </tr>
                 @endforelse
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection

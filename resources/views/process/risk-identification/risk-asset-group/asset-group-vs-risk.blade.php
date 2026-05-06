@@ -27,26 +27,26 @@
             </div>
         </form>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="250" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Asset Group ID" label_ar="رمز مجموعة الأصول" />
                 <x-table.th label="Asset Group Name" label_ar="اسم مجموعة الأصول" />
                 <x-table.th label="Risk" label_ar="المخاطر" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($riskassetgroup as $row)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td><a href="{{ route('asset-groups.show', $row->id) }}"
                                 target="_blank">{{ $row->asset_group_id }}</a></x-table.td>
-                        <x-table.td>{{ $row->asset_group_name }}</x-table.td>
-                        <x-table.td>
+                        <x-table.td min-width="200px" max-width="400px">{{ $row->asset_group_name }}</x-table.td>
+                        <x-table.td min-width="200px">
                             <x-table-list :data="$row->risks" id_key="risk_id" value_key="risk_name" />
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection

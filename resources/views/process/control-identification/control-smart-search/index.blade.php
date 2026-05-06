@@ -52,8 +52,8 @@
             </div>
         </form>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="300" min-width="1100px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Sub-Domain" label_ar="المكون الفرعي" />
                 <x-table.th label="Domain" label_ar="المكون الأساسي" />
@@ -62,22 +62,26 @@
                 <x-table.th label="Category" label_ar="فئة" />
                 <x-table.th label="Classification" label_ar="التصنيف" />
                 <x-table.th label="Control" label_ar=" الضوابط" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($controls as $control)
                     <tr>
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$controls" /></x-table.td>
-                        <x-table.td> {{ $control->sub_domain_name }}</x-table.td>
-                        <x-table.td> {{ $control->main_domain_name }}</x-table.td>
-                        <x-table.td> {{ $control->best_practices_name }}</x-table.td>
-                        <x-table.td> {{ $control->control_type_name }}</x-table.td>
-                        <x-table.td> {{ $control->category_name }}</x-table.td>
-                        <x-table.td> {{ $control->classification_name }}</x-table.td>
-                        <x-table.td> {{ $control->control_id }} - {{ $control->control_name }}</x-table.td>
+                        <x-table.td>{{ $control->sub_domain_name }}</x-table.td>
+                        <x-table.td>{{ $control->main_domain_name }}</x-table.td>
+                        <x-table.td>{{ $control->best_practices_name }}</x-table.td>
+                        <x-table.td>{{ $control->control_type_name }}</x-table.td>
+                        <x-table.td>{{ $control->category_name }}</x-table.td>
+                        <x-table.td>{{ $control->classification_name }}</x-table.td>
+                        <x-table.td min-width="450px" max-width="700px">{{ $control->control_id }} - {{ $control->control_name }}</x-table.td>
                     </tr>
-                @endforeach
-            </x-table.tbody>
-        </x-table.table>
+                @empty
+                    <tr>
+                        <td colspan="8" class="px-3 py-6 text-center text-gray-500">No controls found.</td>
+                    </tr>
+                @endforelse
+            </x-slot:body>
+        </x-table.scroll-table>
 
         <x-pagination>
             {{ $controls->links() }}

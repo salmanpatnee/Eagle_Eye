@@ -17,8 +17,8 @@
         </x-table.action-wrapper>
 
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="1100px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Risk ID" label_ar="رمز المخاطر" />
                 <x-table.th label="Risk Name" label_ar="اسم المخاطر" />
@@ -26,21 +26,21 @@
                 <x-table.th label="Owner" label_ar="اسم صاحب" />
                 <x-table.th label="Custodians" label_ar="اسم الوصي" />
                 <x-table.th label="Controls" label_ar="الضوابط" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($report as $row)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td> <a href="{{ route('risks.show', $row->rid) }}">{{ $row->risk_id }}</a></x-table.td>
-                        <x-table.td wrap="true"> {{ $row->risk_name }}</x-table.td>
+                        <x-table.td min-width="350px" max-width="500px"> {{ $row->risk_name }}</x-table.td>
                         <x-table.td> {{ $row->status }}</x-table.td>
-                        <x-table.td wrap="true"> <a href="{{ route('owners.show', $row->oid) }}">{{ $row->owner_name }}</a></x-table.td>
-                        <x-table.td> {!! $row->custodian_links !!}</x-table.td>
-                        <x-table.td> {!! $row->control_links !!}</x-table.td>
+                        <x-table.td min-width="210px"> <a href="{{ route('owners.show', $row->oid) }}">{{ $row->owner_name }}</a></x-table.td>
+                        <x-table.td min-width="200px" max-width="500px">{!! str_replace('<br>', '<br class="my-0.5">', $row->custodian_links) !!}</x-table.td>
+                        <x-table.td min-width="400px" max-width="700px">{!! str_replace('<br>', '<div class="my-2"></div>', $row->control_links) !!}</x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
 
 
     </div>

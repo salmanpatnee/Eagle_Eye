@@ -7,15 +7,15 @@
             <x-action.pdf-button route_name="mis-cloud-control-assets.index" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" />
                 <x-table.th label="Control ID" label_ar="رمز الضوابط" />
                 <x-table.th label="Control Name" label_ar="اسم الضوابط" />
                 <x-table.th label="Maturity Level" label_ar="مستوى النضج" />
-            </x-table.thead>
+            </x-slot:head>
 
-            <x-table.tbody>
+            <x-slot:body>
 
                 @forelse ($result as $row)
                     <tr>
@@ -29,7 +29,7 @@
                         <x-table.td>{{ $row->maturity_level }}</x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection

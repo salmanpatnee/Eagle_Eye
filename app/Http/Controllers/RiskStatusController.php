@@ -32,9 +32,9 @@ class RiskStatusController extends Controller
                 ra.risk_assessment_start_date,
                 COALESCE(CONCAT(rad.risk_finding_id, ' - ', rad.risk_finding_name), 'Not Assessed') AS findings,
                 rad.implementation_status,
-                GROUP_CONCAT(DISTINCT CONCAT(c.control_id, ' - ', c.control_name) ORDER BY c.control_id SEPARATOR '<br>') AS controls,
-                GROUP_CONCAT(DISTINCT CONCAT(c.control_id, ' - ', COALESCE(latest_cad.control_implementation_status, 'Not Implemented')) ORDER BY c.control_id SEPARATOR '<br>') AS control_status,
-                GROUP_CONCAT(DISTINCT CONCAT(c.control_id, ' - ', ow.owner_name) ORDER BY c.control_id SEPARATOR '<br>') AS control_owner
+                GROUP_CONCAT(DISTINCT CONCAT(c.control_id, ' - ', c.control_name) ORDER BY c.control_id SEPARATOR '<br><br>') AS controls,
+                GROUP_CONCAT(DISTINCT COALESCE(latest_cad.control_implementation_status, 'Not Implemented') ORDER BY c.control_id SEPARATOR '<br>') AS control_status,
+                GROUP_CONCAT(DISTINCT CONCAT(c.control_id, ' - ', ow.owner_name) ORDER BY c.control_id SEPARATOR '<br><br>') AS control_owner
             ")
             ->join('owner_table as o', 'r.owner_id', '=', 'o.owner_role_id')
             ->leftJoinSub($latestAssessments, 'rad', function ($join) {

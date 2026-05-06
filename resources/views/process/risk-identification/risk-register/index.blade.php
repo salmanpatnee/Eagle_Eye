@@ -46,8 +46,8 @@
             </div>
         </form>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="250" min-width="2800px">
+            <x-slot:head>
                 <x-table.th label="S.No" />
                 <x-table.th label="Risk Identifier" />
                 <x-table.th label="Scope" />
@@ -75,30 +75,26 @@
                 <x-table.th label="Following Steps Description" />
                 <x-table.th label="Last Evaluation Date" />
                 <x-table.th label="Comment" />
-            </x-table.thead>
-
-            <x-table.tbody>
-
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($riskRegister as $row)
                     <tr>
-                        <x-table.td class="text-center">
-                            {{ $loop->index + 1 }}
-                        </x-table.td>
-                        <x-table.td >
+                        <x-table.td class="text-center">{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td>
                             <a href="{{ route('risks.show', $row->riskid) }}" target="_blank">
                                 {{ $row->risk_id }}
                             </a>
                         </x-table.td>
-                        <x-table.td wrap="true" class="list">{!! $row->categories !!}</x-table.td>
-                        <x-table.td wrap="true">{{ $row->owner_name }}</x-table.td>
+                        <x-table.td min-width="200px" max-width="300px" class="list">{!! $row->categories !!}</x-table.td>
+                        <x-table.td min-width="180px" max-width="250px">{{ $row->owner_name }}</x-table.td>
                         <x-table.td>{{ $row->risk_assessment_start_date }}</x-table.td>
-                        <x-table.td wrap="true">
+                        <x-table.td min-width="300px" max-width="450px">
                             <span class="line-clamp-3" title="{{ $row->risk_description }}">{{ $row->risk_description }}</span>
                         </x-table.td>
                         <x-table.td wrap="true">
                             <span class="line-clamp-3" title="{{ $row->remarks }}">{{ $row->remarks }}</span>
                         </x-table.td>
-                        <x-table.td wrap="true" class="list">{!! $row->agents !!}</x-table.td>
+                        <x-table.td min-width="200px" max-width="350px" class="list">{!! $row->agents !!}</x-table.td>
                         <x-table.td wrap="true">
                             <span class="line-clamp-3" title="{{ $row->risk_assessment_description }}">{{ $row->risk_assessment_description }}</span>
                         </x-table.td>
@@ -130,7 +126,7 @@
                         <td colspan="27" class="px-4 py-8 text-center text-gray-500">No risks found.</td>
                     </tr>
                 @endforelse
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection

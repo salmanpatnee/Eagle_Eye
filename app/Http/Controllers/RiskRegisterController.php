@@ -61,15 +61,15 @@ class RiskRegisterController extends Controller
                 'rt.risk_treatment_description',
                 'app.risk_appetite_name',
                 'app.risk_appetite_color as appetite_color',
-                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/controls/', co.id, '\"><span>', co.control_id, ' - ', ow.owner_name, '</span></a><br>') SEPARATOR '') as control_owner"),
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"/controls/', co.id, '\"><span>', co.control_id, ' - ', ow.owner_name, '</span></a><br><br>') SEPARATOR '') as control_owner"),
                 DB::raw('GROUP_CONCAT(
-                    DISTINCT CONCAT("<span>", 
+                    DISTINCT CONCAT("<span>",
                         IF(
-                            latest_status.control_implementation_status IS NOT NULL, 
-                            CONCAT(co.control_id, " - ", latest_status.control_implementation_status), 
+                            latest_status.control_implementation_status IS NOT NULL,
+                            CONCAT(co.control_id, " - ", latest_status.control_implementation_status),
                             CONCAT(co.control_id, " - ", "not implemented")
-                        ), 
-                        "</span><br>"
+                        ),
+                        "</span><br><br>"
                     ) SEPARATOR "") as status'),
                 'rad.corrective_action_due_date',
                 'rad.risk_finding_description',

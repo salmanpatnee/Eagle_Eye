@@ -7,17 +7,17 @@
             <x-action.pdf-button route_name="mis-payment-assets.index" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" />
                 <x-table.th label="Asset ID" label_ar="رمز الأصول" />
                 <x-table.th label="Asset Name" label_ar="اسم الأصول" />
                 <x-table.th label="Asset Group Name" label_ar="اسم مجموعة الأصول" />
                 <x-table.th label="Asset Type Name" label_ar="اسم نوع الأصل" />
                 <x-table.th label="Location" label_ar="اسم الموقع" />
-            </x-table.thead>
+            </x-slot:head>
 
-            <x-table.tbody>
+            <x-slot:body>
 
                 @forelse ($result as $row)
                     <tr>
@@ -35,7 +35,7 @@
                         <x-table.td>{{ $row->location_name }}</x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection

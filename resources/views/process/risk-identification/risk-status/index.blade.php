@@ -97,8 +97,8 @@
             </x-form.grid-col>
         </div>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="350" min-width="1200px">
+            <x-slot:head>
                 <x-table.th label="S.No" />
                 <x-table.th label="Risk" />
                 <x-table.th label="Risk Owner" />
@@ -109,32 +109,27 @@
                 <x-table.th label="Controls" />
                 <x-table.th label="Control Implementation Status" />
                 <x-table.th label="Control Owner Name" />
-
-            </x-table.thead>
-
-            <x-table.tbody>
-
+            </x-slot:head>
+            <x-slot:body>
                 @foreach ($riskStatus as $row)
                     <tr>
-                        <x-table.td class="text-center">
-                            {{ $loop->index + 1 }}
-                        </x-table.td>
-                        <x-table.td wrap="true">
+                        <x-table.td class="text-center">{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td min-width="350px" max-width="500px">
                             <a href="{{ route('risks.show', $row->rid) }}" target="_blank" class="text-dark">
                                 {{ $row->risk }}
                             </a>
                         </x-table.td>
-                        <x-table.td wrap="true">{{ $row->risk_owner }}</x-table.td>
+                        <x-table.td min-width="150px" max-width="200px">{{ $row->risk_owner }}</x-table.td>
                         <x-table.td>{{ $row->risk_assessment }}</x-table.td>
                         <x-table.td>{{ $row->risk_assessment_start_date }}</x-table.td>
                         <x-table.td>{{ $row->findings }}</x-table.td>
                         <x-table.td>{{ $row->implementation_status }}</x-table.td>
-                        <x-table.td >{!! $row->controls !!}</x-table.td>
-                        <x-table.td>{!! $row->control_status !!}</x-table.td>
-                        <x-table.td>{!! $row->control_owner !!}</x-table.td>
+                        <x-table.td min-width="300px">{!! $row->controls !!}</x-table.td>
+                        <x-table.td min-width="180px">{!! $row->control_status !!}</x-table.td>
+                        <x-table.td min-width="250px">{!! $row->control_owner !!}</x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection

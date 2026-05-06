@@ -146,6 +146,8 @@ class ExceptionReportsController extends Controller
             "risk_payment" => "Payment Risks"
         ];
 
+        DB::statement('SET SESSION group_concat_max_len = 100000');
+
         $report = DB::table('risk_master_table AS rm')
             ->distinct()
             // Join with risk_vs_control_table to link risks with controls
