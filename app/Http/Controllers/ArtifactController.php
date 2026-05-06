@@ -38,10 +38,12 @@ class ArtifactController extends Controller
             ->distinct()
             ->get();
 
-        $categories = Category::select('id', 'category_id', 'category_name')
-            ->distinct()
-            ->orderBy('category_name')
+            $categories = Category::select('id', 'category_id', 'category_name')
+            ->orderByRaw('CAST(SUBSTRING_INDEX(category_id, "-", 1) AS UNSIGNED)')
+            ->orderByRaw('CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(category_id, "-", -1), ".", 1) AS UNSIGNED)')
+            ->orderByRaw('SUBSTRING_INDEX(category_id, ".", -1)')
             ->get();
+
 
 
         return view('process/evidence-management/artifacts/create', compact('classifications', 'categories', 'artifact'));
