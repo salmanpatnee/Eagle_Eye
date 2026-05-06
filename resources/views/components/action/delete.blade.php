@@ -21,8 +21,7 @@
         <div class="flex items-center justify-center min-h-screen">
             <div @click.away="open = false" class="relative bg-white rounded-lg shadow-lg p-6 w-full max-w-xs z-60">
                 <h2 class="text-lg font-semibold text-gray-800 mb-2">Are you sure?</h2>
-                <p class="text-sm text-gray-600 mb-4">Do you really want to delete this item? This action cannot be
-                    undone.</p>
+                <p class="text-sm text-gray-600 mb-4 whitespace-normal">Do you really want to delete this item? This action cannot be undone.</p>
                 <div class="flex justify-end gap-2">
                     <button type="button" @click="open = false"
                         class="px-3 py-1.5 rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 transition">
