@@ -567,7 +567,7 @@
                         <img src="{{ asset('Images/Home/Slide18.JPG') }}" alt="NCA Regulatory Reporting">
                     </div>
                 </a>
-                <a href="{{ route('sama-regulatory-report.show') }}" class="card-link">
+                <a href="/dashboard" class="card-link">
                     <div class="card card--img">
                         <img src="{{ asset('Images/Home/Slide19.JPG') }}" alt="SAMA Regulatory Reporting">
                     </div>
@@ -577,7 +577,7 @@
                         <img src="{{ asset('Images/Home/Slide23.JPG') }}" alt="MIS Reporting">
                     </div>
                 </a>
-                <a href="/dashboard" class="card-link">
+                <a href="{{ route('sama-regulatory-report.show') }}" class="card-link">
                     <div class="card card--img">
                         <img src="{{ asset('Images/Home/Slide20.JPG') }}" alt="Dashboard">
                     </div>
