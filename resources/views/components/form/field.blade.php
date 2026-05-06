@@ -11,5 +11,5 @@
 
 <x-form.label label="{{ $label }}" label_ar="{{ $label_ar }}" for="{{ $name }}" />
 <x-form.input name="{{ $name }}" required="{{ $required }}" readonly="{{ $readonly }}"
-    placeholder="{{ $placeholder }}" value="{{ $value }}" type="{{ $type }}" />
+    placeholder="{{ $placeholder }}" :value="$value" type="{{ $type }}" />
 <x-form.error name="{{ $name }}" />
