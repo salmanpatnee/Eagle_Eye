@@ -7,21 +7,20 @@
             <x-action.button label="Add Department" label_ar="قسم إضافة" route_name="departments.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Department ID" label_ar="رمز القسم" />
                 <x-table.th label="Department Name" label_ar="اسم القسم" />
                 <x-table.th label="Location Name" label_ar="اسم الموقع" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @foreach ($departments as $department)
                     <tr>
-                        <x-table.td> <x-table.serial :loop="$loop" :paginator="$departments" /></x-table.td>
+                        <x-table.td><x-table.serial :loop="$loop" :paginator="$departments" /></x-table.td>
                         <x-table.td>{{ $department->department_id }}</x-table.td>
-                        <x-table.td>{{ $department->department_name }}</x-table.td>
+                        <x-table.td min-width="200px" max-width="400px">{{ $department->department_name }}</x-table.td>
                         <x-table.td>{{ $department->location->location_name }}</x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="departments.show" param="{{ $department->id }}" />
@@ -30,13 +29,12 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
 
         <x-pagination>
             {{ $departments->links() }}
         </x-pagination>
-
 
     </div>
 @endsection

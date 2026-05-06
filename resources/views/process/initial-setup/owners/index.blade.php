@@ -8,22 +8,21 @@
             <x-action.button label="Upload Owners" label_ar="تحميل صاحب" route_name="upload.owner.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="1100px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Owner ID" label_ar="رمز صاحب" />
                 <x-table.th label="Owner Name" label_ar="اسم صاحب" />
                 <x-table.th label="Owner Role" label_ar="دور الصاحب" />
                 <x-table.th label="Department Name" label_ar="اسم قسم" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @foreach ($owners as $owner)
                     <tr>
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$owners" /></x-table.td>
                         <x-table.td>{{ $owner->owner_id }}</x-table.td>
-                        <x-table.td>{{ $owner->owner_name }}</x-table.td>
+                        <x-table.td min-width="200px" max-width="400px">{{ $owner->owner_name }}</x-table.td>
                         <x-table.td>{{ $owner->owner_role_id }}</x-table.td>
                         <x-table.td>{{ $owner->department_id }}</x-table.td>
                         <x-table.td action_col="true">
@@ -33,13 +32,12 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
 
         <x-pagination>
             {{ $owners->links() }}
         </x-pagination>
-
 
     </div>
 @endsection

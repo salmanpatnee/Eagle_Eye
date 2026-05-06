@@ -8,22 +8,21 @@
             <x-action.button label="Add Sub-Domains" label_ar="إضافة المكون الفرعي" route_name="sub-domains.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Sub-Domain ID" label_ar="رمز المكون الفرعي" />
                 <x-table.th label="Sub-Domain Name" label_ar="اسم المكون الفرعي" />
                 <x-table.th label="Main Domain Name" label_ar="اسم المكون الأساسي" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @foreach ($subDomains as $subDomain)
                     <tr>
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$subDomains" /></x-table.td>
                         <x-table.td>{{ $subDomain->sub_domain_id }}</x-table.td>
-                        <x-table.td>{{ $subDomain->sub_domain_name }}</x-table.td>
+                        <x-table.td min-width="200px" max-width="400px">{{ $subDomain->sub_domain_name }}</x-table.td>
                         <x-table.td>{{ $subDomain->domain->main_domain_id }}</x-table.td>
-
                         <x-table.td action_col="true">
                             <x-action.view route_name="sub-domains.show" param="{{ $subDomain->id }}" />
                             <x-action.edit route_name="sub-domains.edit" param="{{ $subDomain->id }}" />
@@ -31,8 +30,8 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
 
         <x-pagination>
             {{ $subDomains->links() }}

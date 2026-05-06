@@ -8,20 +8,20 @@
             <x-action.button label="Add Category" label_ar="إضافة الفئة" route_name="categories.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Category ID" label_ar="رمز الفئة" />
                 <x-table.th label="Category Name" label_ar="اسم الفئة" />
                 <x-table.th label="Category Source" label_ar="مصدر الفئة" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @foreach ($categories as $category)
                     <tr>
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$categories" /></x-table.td>
                         <x-table.td>{{ $category->category_id }}</x-table.td>
-                        <x-table.td>{{ $category->category_name }}</x-table.td>
+                        <x-table.td min-width="200px" max-width="400px">{{ $category->category_name }}</x-table.td>
                         <x-table.td>{{ $category->Category_source }}</x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="categories.show" param="{{ $category->category_id }}" />
@@ -30,8 +30,8 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
         <x-pagination>
             {{ $categories->links() }}
         </x-pagination>
