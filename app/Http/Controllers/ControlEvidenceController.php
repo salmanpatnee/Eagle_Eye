@@ -21,6 +21,7 @@ class ControlEvidenceController extends Controller
         $controlId = $request->input('control_id') ?? null;
 
         $practices = BestPractice::select('id', 'best_practices_id', 'best_practices_name')
+            ->orderBy('sort_order')
             ->get();
 
         if ($bestPracticeId != '') {
@@ -128,7 +129,9 @@ class ControlEvidenceController extends Controller
         $subDomainId = $request->input('subdomain') ?? null;
         $controlId = $request->input('control_id') ?? null;
 
-        $practices = BestPractice::select('id', 'best_practices_id', 'best_practices_name')->get();
+        $practices = BestPractice::select('id', 'best_practices_id', 'best_practices_name')
+            ->orderBy('sort_order')
+            ->get();
 
         if ($bestPracticeId != '') {
             $domains = Domain::join('best_practice_vs_domain_table as bvd', 'domain_table.main_domain_id', '=', 'bvd.main_domain_id')
@@ -191,7 +194,8 @@ class ControlEvidenceController extends Controller
                 $query->where('c.control_id', $controlId);
             })
             ->groupBy('e.id', 'e.evidence_id', 'e.evidence_name')
-            ->orderBy('e.evidence_name') // Adjust ordering as needed
+            ->orderBy(DB::raw('MIN(b.sort_order)'))
+            ->orderBy('e.evidence_name')
             ->get();
 
         if (request()->has('pdf')) {
