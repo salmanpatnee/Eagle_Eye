@@ -1,0 +1,70 @@
+﻿# OUs
+dn: ou=Users,dc=company,dc=com
+objectClass: organizationalUnit
+ou: Users
+
+dn: ou=Groups,dc=company,dc=com
+objectClass: organizationalUnit
+ou: Groups
+
+# Groups
+dn: cn=EagleEye-Admins,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: EagleEye-Admins
+member: cn=admin,dc=company,dc=com
+
+dn: cn=EagleEye-Managers,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: EagleEye-Managers
+member: cn=admin,dc=company,dc=com
+
+dn: cn=EagleEye-Users,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: EagleEye-Users
+member: cn=admin,dc=company,dc=com
+
+dn: cn=EagleEye-Viewers,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: EagleEye-Viewers
+member: cn=admin,dc=company,dc=com
+
+# Users
+dn: uid=testadmin,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+objectClass: extensibleObject
+uid: testadmin
+cn: Test Admin
+sn: Admin
+givenName: Test
+mail: testadmin@company.com
+userPassword: Password123!
+
+dn: uid=testmanager,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+objectClass: extensibleObject
+uid: testmanager
+cn: Test Manager
+sn: Manager
+givenName: Test
+mail: testmanager@company.com
+userPassword: Password123!
+
+dn: uid=testuser,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+objectClass: extensibleObject
+uid: testuser
+cn: Test User
+sn: User
+givenName: Test
+mail: testuser@company.com
+userPassword: Password123!
+
+dn: uid=testviewer,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+objectClass: extensibleObject
+uid: testviewer
+cn: Test Viewer
+sn: Viewer
+givenName: Test
+mail: testviewer@company.com
+userPassword: Password123!

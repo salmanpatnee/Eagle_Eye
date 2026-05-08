@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'guid',
+        'domain',
+        'is_active',
     ];
 
     /**
@@ -50,11 +54,23 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
-    public function role() {
+    public function role()
+    {
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
     }
 
-    public function canWrite(): bool   { return in_array($this->role_id, [1, 2, 3]); }
-    public function canDelete(): bool  { return in_array($this->role_id, [1, 2]); }
-    public function canManageOrganizations(): bool { return $this->role_id === 1; }
+    public function canWrite(): bool
+    {
+        return in_array($this->role_id, [1, 2, 3]);
+    }
+
+    public function canDelete(): bool
+    {
+        return in_array($this->role_id, [1, 2]);
+    }
+
+    public function canManageOrganizations(): bool
+    {
+        return $this->role_id === 1;
+    }
 }

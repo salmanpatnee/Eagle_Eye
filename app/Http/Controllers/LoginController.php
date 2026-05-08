@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Option;
-use Carbon\Carbon;
+use App\Exceptions\Ldap\LdapAuthFailedException;
+use App\Exceptions\Ldap\LdapConnectionException;
+use App\Exceptions\Ldap\LdapGroupNotFoundException;
+use App\Exceptions\Ldap\LdapUserNotFoundException;
+use App\Models\User;
+use App\Services\LdapAuthService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
+    public function __construct(private LdapAuthService $ldap) {}
+
     public function create()
     {
         return view('auth.login');
@@ -16,27 +23,68 @@ class LoginController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'username'  => 'required|string',
-            'password'  => 'required'
+            'username' => 'required|string',
+            'password' => 'required',
         ]);
 
-        if (!auth()->attempt($attributes)) {
+        $localUser = User::where('username', $attributes['username'])->first();
+
+        // Local admin fallback — only user id=1 with no domain may use password auth
+        if ($localUser && is_null($localUser->domain) && $localUser->id === 1) {
+            if (! Auth::attempt($attributes)) {
+                throw ValidationException::withMessages([
+                    'username' => 'Your provided credentials could not be verified.',
+                ]);
+            }
+
+            session()->regenerate();
+
+            return redirect(route('org-status.index'))->with('success', 'Welcome Back!');
+        }
+
+        // Block existing local (non-admin) accounts that have no domain
+        if ($localUser && is_null($localUser->domain)) {
             throw ValidationException::withMessages([
-                'username' => 'Your provided credentials could not be verified.'
+                'username' => 'Local accounts are disabled. Please use your Active Directory credentials.',
             ]);
         }
 
-        // $systemExpiryDate = Option::select('value')->where('key', 'system_expired_at')->first();
-        // $todaysDate = Carbon::today();
+        // LDAP authentication
+        if (config('app.ldap_enabled', env('LDAP_ENABLED', false))) {
+            return $this->authenticateViaLdap($attributes['username'], $attributes['password']);
+        }
 
-        // // Bypass expiration check if the user is a superadmin (id = 1)
-        // if (Carbon::parse($systemExpiryDate->value)->lt($todaysDate) && auth()->user()->id !== 1) {
-        //     auth()->logout();
-        //     throw ValidationException::withMessages([
-        //         'username' => 'Your system trial has expired.'
-        //     ]);
-        // }
+        // Dev / LDAP-disabled fallback
+        if (! Auth::attempt($attributes)) {
+            throw ValidationException::withMessages([
+                'username' => 'Your provided credentials could not be verified.',
+            ]);
+        }
 
+        session()->regenerate();
+
+        return redirect(route('org-status.index'))->with('success', 'Welcome Back!');
+    }
+
+    private function authenticateViaLdap(string $username, string $password)
+    {
+        try {
+            $user = $this->ldap->authenticate($username, $password);
+        } catch (LdapGroupNotFoundException) {
+            throw ValidationException::withMessages([
+                'username' => 'Your account has no assigned role. Contact your administrator.',
+            ]);
+        } catch (LdapConnectionException) {
+            throw ValidationException::withMessages([
+                'username' => 'Directory service unavailable. Contact your administrator.',
+            ]);
+        } catch (LdapUserNotFoundException|LdapAuthFailedException) {
+            throw ValidationException::withMessages([
+                'username' => 'Your provided credentials could not be verified.',
+            ]);
+        }
+
+        Auth::login($user);
         session()->regenerate();
 
         return redirect(route('org-status.index'))->with('success', 'Welcome Back!');
