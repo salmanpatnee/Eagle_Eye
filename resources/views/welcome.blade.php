@@ -52,6 +52,101 @@
             --shadow-xl: 0 24px 64px rgba(15, 23, 42, 0.14), 0 8px 20px rgba(15, 23, 42, 0.07);
         }
 
+        /* === Dark Mode === */
+        html.dark {
+            --navy: #E2E8F0;
+            --bg-page: #0D1526;
+            --bg-white: #0F1F38;
+            --bg-alt: #0D1829;
+            --bg-blue-soft: #0F2040;
+            --blue-light: #0F2040;
+            --blue-mid: #1A3055;
+            --blue-border: rgba(59, 130, 246, 0.22);
+            --teal-light: #0D2038;
+            --amber-light: #1F1500;
+            --amber-border: rgba(217, 119, 6, 0.2);
+            --green-light: #0B1F16;
+            --text-1: #E2E8F0;
+            --text-2: #94A3B8;
+            --text-3: #64748B;
+            --border: rgba(255, 255, 255, 0.07);
+            --border-2: rgba(255, 255, 255, 0.12);
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+            --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.55);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.65);
+            --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Hardcoded bg overrides */
+        html.dark .navbar { background: #0F1F38; }
+        html.dark .hero {
+            background: linear-gradient(150deg, #0A1930 0%, #0D1F38 45%, #0F2040 100%);
+        }
+
+        /* Headings use color: var(--navy) → override for dark readability */
+        html.dark h1, html.dark h2, html.dark h3,
+        html.dark h4, html.dark h5 { color: var(--text-1); }
+
+        html.dark .blue-text { color: #60A5FA; }
+
+        /* Hamburger lines */
+        html.dark .hamburger span { background: var(--text-2); }
+        .nav-logo-light { display: none; }
+        html.dark .nav-logo-default { display: none; }
+        html.dark .nav-logo-light { display: block; }
+
+        /* ── Feature cards: same as light mode in dark ── */
+        html.dark .feature-card {
+            background: #ffffff;
+            border-color: #E2E8F0;
+        }
+        html.dark .feature-title { color: #0B2447; }
+        html.dark .feature-desc { color: #475569; }
+        html.dark .feature-icon-wrap.amber {
+            background: #FEF3C7;
+            border-color: rgba(217, 119, 6, 0.25);
+        }
+        html.dark .feature-icon-wrap.blue {
+            background: #EFF6FF;
+            border-color: rgba(37, 99, 235, 0.18);
+        }
+        html.dark .feature-icon-wrap.teal {
+            background: #E0F2FE;
+            border-color: rgba(14, 165, 233, 0.25);
+        }
+
+        /* ── CTA + Footer: pin to light-mode dark-navy appearance ── */
+        html.dark .section-cta {
+            background: linear-gradient(140deg, #0B2447 0%, #1A3F6F 60%, #0D3061 100%);
+        }
+        html.dark .btn-cta { color: #0B2447; }
+        html.dark .footer { background: #0B2447; }
+        html.dark .svg-compliant-text { fill: rgba(226,232,240,0.75); }
+        html.dark .dash-topbar-title { color: #0B2447; }
+        html.dark .dcc-title { color: #0B2447; }
+        html.dark .kpi-label { color: #475569; }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border-2);
+            background: transparent;
+            cursor: pointer;
+            color: var(--text-2);
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover {
+            color: var(--text-1);
+            background: var(--bg-alt);
+        }
+
         *,
         *::before,
         *::after {
@@ -3352,6 +3447,11 @@
             }
         }
     </style>
+    <script>
+        if (JSON.parse(localStorage.getItem('darkMode')) === true) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
 </head>
 
 <body>
@@ -3361,7 +3461,8 @@
         <div class="container">
             <div class="nav-inner">
                 <a href="/" class="nav-brand">
-                    <img src="/Images/EagleEyeLogo.png" alt="Eagle Eye Logo">
+                    <img src="/Images/EagleEyeLogo.png" alt="Eagle Eye Logo" class="nav-logo-default">
+                    <img src="/Images/EagleEyeLogoLight.png" alt="Eagle Eye Logo" class="nav-logo-light">
                     {{-- <div class="nav-brand-text">
                         <div class="brand-name">Eagle Eye</div>
                         <div class="brand-sub">GRC Platform</div>
@@ -3376,7 +3477,26 @@
                     </ul>
                     <div class="nav-indicator" id="navIndicator"></div>
                 </div>
+                <div style="display:flex;align-items:center;gap:8px;">
                 <a href="/login" class="nav-cta">Enter Platform &rarr;</a>
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <!-- Sun icon (shown when dark mode is active) -->
+                    <svg id="themeIconSun" width="18" height="18" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" style="display:none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M10 1.75a.75.75 0 0 1 .75.75v1.25a.75.75 0 0 1-1.5 0V2.5A.75.75 0 0 1 10 1.75ZM10 6.793a3.207 3.207 0 1 0 0 6.414A3.207 3.207 0 0 0 10 6.793Zm-5.5 3.207a5 5 0 1 1 10 0 5 5 0 0 1-10 0Zm9.742-6.07a.75.75 0 0 1 1.06 0l.884.884a.75.75 0 1 1-1.06 1.06l-.884-.884a.75.75 0 0 1 0-1.06ZM17.25 10a.75.75 0 0 1-.75.75h-1.25a.75.75 0 0 1 0-1.5H16.5a.75.75 0 0 1 .75.75Zm-2.758 5.93a.75.75 0 0 1-1.06 0l-.884-.884a.75.75 0 1 1 1.06-1.06l.884.884a.75.75 0 0 1 0 1.06ZM10 15.457a.75.75 0 0 1 .75.75v1.25a.75.75 0 0 1-1.5 0v-1.25a.75.75 0 0 1 .75-.75ZM4.93 15.93a.75.75 0 0 1 0-1.06l.884-.884a.75.75 0 1 1 1.06 1.06l-.884.884a.75.75 0 0 1-1.06 0ZM2.75 10a.75.75 0 0 1 .75-.75h1.25a.75.75 0 0 1 0 1.5H3.5A.75.75 0 0 1 2.75 10ZM5.814 4.93a.75.75 0 0 1 0 1.06l-.884.884a.75.75 0 0 1-1.06-1.06l.884-.884a.75.75 0 0 1 1.06 0Z"
+                            fill="currentColor" />
+                    </svg>
+                    <!-- Moon icon (shown when light mode is active) -->
+                    <svg id="themeIconMoon" width="18" height="18" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.455 11.97a7.5 7.5 0 0 1-9.425-9.425 7.501 7.501 0 1 0 9.425 9.425Z"
+                            fill="currentColor" />
+                    </svg>
+                </button>
+                </div>
                 <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
@@ -3527,6 +3647,7 @@
                                     fill="#34D399">100%</text>
                                 <text x="120" y="131" text-anchor="middle" font-family="'DM Sans', sans-serif"
                                     font-size="10" font-weight="600" fill="rgba(11,36,71,0.52)"
+                                    class="svg-compliant-text"
                                     letter-spacing="2.8">FULLY COMPLIANT</text>
                                 <text x="120" y="150" text-anchor="middle" font-family="'JetBrains Mono', monospace"
                                     font-size="8.5" fill="rgba(5,150,105,0.72)" letter-spacing="1.5">GRC VERIFIED
@@ -4912,6 +5033,34 @@
                 });
             });
         });
+
+        // Dark mode toggle
+        (function() {
+            var html = document.documentElement;
+            var btn = document.getElementById('themeToggle');
+            var sunIcon = document.getElementById('themeIconSun');
+            var moonIcon = document.getElementById('themeIconMoon');
+
+            function applyTheme(dark) {
+                if (dark) {
+                    html.classList.add('dark');
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                } else {
+                    html.classList.remove('dark');
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                }
+                localStorage.setItem('darkMode', JSON.stringify(dark));
+            }
+
+            // Re-sync icon state from whatever early script set on <html>
+            applyTheme(html.classList.contains('dark'));
+
+            btn.addEventListener('click', function() {
+                applyTheme(!html.classList.contains('dark'));
+            });
+        })();
     </script>
 
     <!-- Elfsight AI Chatbot | Eagle Eye GRC -->
