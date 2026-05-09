@@ -32,6 +32,7 @@ use App\Http\Controllers\ControlTypeController;
 use App\Http\Controllers\CustodianController;
 use App\Http\Controllers\CustodianRoleController;
 use App\Http\Controllers\CvssController;
+use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\DataUploaderController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EvidenceController;
@@ -168,6 +169,10 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     // Custodian Data Uploader
     Route::get('/upload-custodians', [DataUploaderController::class, 'createCustodian'])->name('upload.custodians.create');
     Route::post('/upload-custodians', [DataUploaderController::class, 'uploadCustodian'])->name('upload.custodians.store');
+
+    Route::get('/database-backup', [DatabaseBackupController::class, 'download'])
+        ->middleware('admin')
+        ->name('database-backup.download');
 
     // ------------------- ASSET REGISTRATION -------------------
 
