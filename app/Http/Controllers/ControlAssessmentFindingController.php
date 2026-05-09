@@ -176,9 +176,9 @@ class ControlAssessmentFindingController extends Controller
                 $artifact_name = $id != $row->evidence_id ? $row->artifact_name : '';
 
                 $html .= "<tr>";
-                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/evidences/" . e($ev_db_id) . "'>" . e($evidence_id) . "</a></span></td>";
-                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'>" . e($evidence_name) . "</span></td>";
-                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/artifacts/" . e($row->id) . "'>".e($artifact_name)."</a></span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block dark:text-white font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/evidences/" . e($ev_db_id) . "'>" . e($evidence_id) . "</a></span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block dark:text-white font-medium text-gray-700 text-theme-sm'>" . e($evidence_name) . "</span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block dark:text-white font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/artifacts/" . e($row->id) . "'>".e($artifact_name)."</a></span></td>";
                 $html .= "</tr>";
                 $id = $row->evidence_id;
             }
