@@ -54,10 +54,24 @@
                 {{ $controlAssessmentFinding->control_maturity_justification ?? '—' }}
             </x-info-col-lg>
 
-            <x-info-col-lg label="Control Assessment Remarks" label_ar="ملاحظات">
+            <x-info-col-lg label="Control Assessment Remarks/Root Cause Analysis" label_ar="ملاحظات تقييم الضوابط الرقابية / تحليل السبب الجذري">
                 {{ $controlAssessmentFinding->remarks ?? '—' }}
             </x-info-col-lg>
 
+             <x-info-row>
+                <x-info-col label="Auditee Name" label_ar="الشخص الذي يتم التدقيق عليه">
+                    {{ $controlAssessmentFinding->control_auditee_name ?? '—' }}
+                </x-info-col>
+                <x-info-col label="Auditee Department" label_ar="القسم الذي يتم التدقيق عليه">
+                    {{ $controlAssessmentFinding->control_auditee_department }}
+                </x-info-col>
+            </x-info-row>
+
+            <x-info-row>
+                <x-info-col label="Auditee System" label_ar="تم تدقيق النظام">
+                    {{ $controlAssessmentFinding->control_auditee_system ?? '—' }}
+                </x-info-col>
+            </x-info-row>
 
             <x-info-row>
                 <x-info-col label="Corrective Action" label_ar="إجراءات التصحيح">
@@ -77,20 +91,7 @@
                 </x-info-col>
             </x-info-row>
 
-            <x-info-row>
-                <x-info-col label="Auditee Name" label_ar="الشخص الذي يتم التدقيق عليه">
-                    {{ $controlAssessmentFinding->control_auditee_name ?? '—' }}
-                </x-info-col>
-                <x-info-col label="Auditee Department" label_ar="القسم الذي يتم التدقيق عليه">
-                    {{ $controlAssessmentFinding->control_auditee_department }}
-                </x-info-col>
-            </x-info-row>
-
-            <x-info-row>
-                <x-info-col label="Auditee System" label_ar="تم تدقيق النظام">
-                    {{ $controlAssessmentFinding->control_auditee_system ?? '—' }}
-                </x-info-col>
-            </x-info-row>
+           
 
             <x-info-col-lg label="Lesson Learned" label_ar="الدرس المستفاد">
                 {{ $controlAssessmentFinding->lesson_learned ?? '—' }}

@@ -146,14 +146,17 @@ class ControlAssessmentFindingController extends Controller
             ->join('evidence_table AS ev', 'eva.evidence_id', '=', 'ev.evidence_id')
             ->join('evidence_vs_control_table AS evc', 'ev.evidence_id', '=', 'evc.evidence_id')
             ->join('artifact_table AS at', 'eva.artifact_id', '=', 'at.artifact_id')
+            ->join('control_master_table AS cm', 'evc.control_id', '=', 'cm.control_id')
             ->where('evc.control_id', '=', $request->selectedValue)
             ->orderBy('ev.evidence_id')
-            ->select('ev.evidence_id', 'ev.evidence_name', 'at.id', 'ev.id as ev_db_id')
+            ->select('ev.evidence_id', 'ev.evidence_name', 'at.id', 'at.artifact_name', 'ev.id as ev_db_id', 'cm.control_description')
             ->get();
 
+        // logger()->info('Evidence retrieval results', ['results' => $results]);
         if (count($results)) {
 
-            $html = "<div class='max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar'><table class='text-white w-full min-w-[970px]'>";
+            $html = "<div class='border control_description mb-4 p-3 rounded bg-blue-50'><b>Control Description:</b> " . e($results[0]->control_description) . "</div>";
+            $html .= "<div class='max-w-full overflow-x-auto lg:overflow-visible custom-scrollbar'><table class='text-white w-full min-w-[970px]'>";
             $html .= "<thead class='bg-brand-950 border-brand-500 border-y text-left'>";
             $html .= "<tr>";
             $html .= "<th class='px-3 py-3 whitespace-nowrap'><span class='block'>Evidence ID</span></th>";
@@ -170,11 +173,12 @@ class ControlAssessmentFindingController extends Controller
                 $ev_db_id = $id != $row->evidence_id ? $row->ev_db_id : '';
                 $evidence_id = $id != $row->evidence_id ? $row->evidence_id : '';
                 $evidence_name = $id != $row->evidence_id ? $row->evidence_name : '';
+                $artifact_name = $id != $row->evidence_id ? $row->artifact_name : '';
 
                 $html .= "<tr>";
                 $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/evidences/" . e($ev_db_id) . "'>" . e($evidence_id) . "</a></span></td>";
                 $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'>" . e($evidence_name) . "</span></td>";
-                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/artifacts/" . e($row->id) . "'>View</a></span></td>";
+                $html .= "<td class='px-3 py-3 whitespace-nowrap'><span class='block font-medium text-gray-700 text-theme-sm'><a target='_blank' href='/artifacts/" . e($row->id) . "'>".e($artifact_name)."</a></span></td>";
                 $html .= "</tr>";
                 $id = $row->evidence_id;
             }

@@ -66,16 +66,19 @@
                     </div>
 
                     <div>
-                        <x-form.multiselect label="Categories" label_ar="اسم الفئة" name="categories[]" :value="$selectedCategoryIds"
+                        <x-form.multiselect label="Categories" label_ar="اسم الفئة" show_key="true" name="categories[]" :value="$selectedCategoryIds"
                             :data="$categories" id_key="category_id" value_key="category_name" required="true" />
                     </div>
                 </x-form.grid-col>
 
                 <div id="evidence_loading" class="hidden text-sm text-gray-500 py-2">Loading evidence...</div>
                 <div id="evidenve_vs_control_content">
-                    <div class="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-500">
-                        <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <div
+                        class="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-500">
+                        <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         Select a control above to load its associated evidence.
                     </div>
@@ -116,44 +119,9 @@
                     :value="$controlAssessmentFinding?->control_maturity_justification ??
                         old('control_maturity_justification')" />
 
-                <x-form.textarea-field label="Control Assessment Remarks" label_ar="ملاحظات تقييم الضوابط" name="remarks"
-                    placeholder="Enter Control Assessment Remarks" :value="$controlAssessmentFinding?->remarks ?? old('remarks')" />
-
-                <x-form.grid-col>
-                    <div>
-                        <x-form.field label="Corrective Action" label_ar="إجراءات التصحيح" name="corrective_action"
-                            placeholder="Enter Corrective Action" :value="$controlAssessmentFinding?->corrective_action ?? old('corrective_action')" />
-                    </div>
-                    <div>
-                        <x-form.label label="Corrective Action Due Date" label_ar="تاريخ استحقاق إجراءات التصحيح"
-                            for="corrective_action_due_date" />
-                        <div class="relative">
-                            <input type="date" id="corrective_action_due_date" name="corrective_action_due_date" required
-                                value="{{ old('corrective_action_due_date', $controlAssessmentFinding?->corrective_action_due_date) }}"
-                                class="input-field" onclick="this.showPicker()" />
-                            <x-icons.calendar />
-                        </div>
-                        <x-form.error name="corrective_action_due_date" />
-                    </div>
-                </x-form.grid-col>
-
-                <x-form.grid-col>
-                    <div>
-                        <x-form.field label="Preventive Action" label_ar="إجراءات الوقائي" name="preventive_action"
-                            placeholder="Enter Preventive Action" :value="$controlAssessmentFinding?->preventive_action ?? old('preventive_action')" />
-                    </div>
-                    <div>
-                        <x-form.label label="Preventive Action Due Date" label_ar="تاريخ استحقاق إجراءات الوقائي"
-                            for="preventive_action_due_date" />
-                        <div class="relative">
-                            <input type="date" id="preventive_action_due_date" name="preventive_action_due_date" required
-                                value="{{ old('preventive_action_due_date', $controlAssessmentFinding?->preventive_action_due_date) }}"
-                                class="input-field" onclick="this.showPicker()" />
-                            <x-icons.calendar />
-                        </div>
-                        <x-form.error name="preventive_action_due_date" />
-                    </div>
-                </x-form.grid-col>
+                <x-form.textarea-field label="Control Assessment Remarks/Root Cause Analysis"
+                    label_ar="ملاحظات تقييم الضوابط الرقابية / تحليل السبب الجذري" name="remarks"
+                    placeholder="Enter Control Assessment Remarks/Root Cause Analysis" :value="$controlAssessmentFinding?->remarks ?? old('remarks')" />
 
                 <x-form.grid-col>
                     <div>
@@ -177,9 +145,45 @@
 
                     </div>
                 </x-form.grid-col>
+               
+                <x-form.grid-col>
+                    <div>
+                        <x-form.field label="Corrective Action" label_ar="إجراءات التصحيح" name="corrective_action"
+                            placeholder="Enter Corrective Action" :value="$controlAssessmentFinding?->corrective_action ?? old('corrective_action', 'None')" />
+                    </div>
+                    <div>
+                        <x-form.label label="Corrective Action Due Date" label_ar="تاريخ استحقاق إجراءات التصحيح"
+                            for="corrective_action_due_date" />
+                        <div class="relative">
+                            <input type="date" id="corrective_action_due_date" name="corrective_action_due_date"
+                                value="{{ old('corrective_action_due_date', $controlAssessmentFinding?->corrective_action_due_date) }}"
+                                class="input-field" onclick="this.showPicker()" />
+                            <x-icons.calendar />
+                        </div>
+                        <x-form.error name="corrective_action_due_date" />
+                    </div>
+                </x-form.grid-col>
+
+                <x-form.grid-col>
+                    <div>
+                        <x-form.field label="Preventive Action" label_ar="إجراءات الوقائي" name="preventive_action"
+                            placeholder="Enter Preventive Action" :value="$controlAssessmentFinding?->preventive_action ?? old('preventive_action', 'None')" />
+                    </div>
+                    <div>
+                        <x-form.label label="Preventive Action Due Date" label_ar="تاريخ استحقاق إجراءات الوقائي"
+                            for="preventive_action_due_date" />
+                        <div class="relative">
+                            <input type="date" id="preventive_action_due_date" name="preventive_action_due_date"
+                                value="{{ old('preventive_action_due_date', $controlAssessmentFinding?->preventive_action_due_date) }}"
+                                class="input-field" onclick="this.showPicker()" />
+                            <x-icons.calendar />
+                        </div>
+                        <x-form.error name="preventive_action_due_date" />
+                    </div>
+                </x-form.grid-col>
 
                 <x-form.textarea-field label="Lesson Learned" label_ar="الدرس المستفاد" name="lesson_learned"
-                    placeholder="Enter Lesson Learned" :value="$controlAssessmentFinding?->lesson_learned ?? old('lesson_learned')" />
+                    placeholder="Enter Lesson Learned" :value="$controlAssessmentFinding?->lesson_learned ?? old('lesson_learned', 'None')" />
 
 
             </div>
