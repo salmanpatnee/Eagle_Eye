@@ -524,9 +524,9 @@
                 <a href="#section-audit" class="sidebar-link" data-section="section-audit">
                     <i class='bx bxs-calendar-check'></i> Audit Management
                 </a>
-                <a href="#section-vapt" class="sidebar-link" data-section="section-vapt">
+                {{-- <a href="#section-vapt" class="sidebar-link" data-section="section-vapt">
                     <i class='bx bxs-bug-alt'></i> VA / Pen Testing
-                </a>
+                </a> --}}
             </div>
         </nav>
 
@@ -766,7 +766,7 @@
             </div>
 
             <!-- ── VA / PEN TESTING ── -->
-            <div id="section-vapt" class="section-header">
+            {{-- <div id="section-vapt" class="section-header">
                 <p class="section-title-en">Vulnerability Assessment / Penetration Test Tracking</p>
                 <p class="section-title-ar">تتبع تقييم الثغرات الأمنية / اختبار الاختراق</p>
             </div>
@@ -791,7 +791,7 @@
                         <img src="{{ asset('Images/Home/Slide40.JPG') }}" alt="Vulnerability Register">
                     </div>
                 </a>
-            </div>
+            </div> --}}
 
         </main>
     </div>
