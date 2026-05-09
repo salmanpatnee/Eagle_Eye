@@ -10,7 +10,7 @@
                 {{ $head }}
             </tr>
         </thead>
-        <tbody class="divide-y divide-gray-200">
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
             {{ $body }}
         </tbody>
     </table>

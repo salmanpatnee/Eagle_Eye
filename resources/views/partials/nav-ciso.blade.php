@@ -12,9 +12,9 @@
                 <a href="{{ route('vciso') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
-                            <img class="dark:hidden w-10" src="{{ asset('Images/logo/EagleEyeLogo.png') }}"
+                            <img class="dark:brightness-0 dark:invert w-10" src="{{ asset('Images/logo/EagleEyeLogo.png') }}"
                                 alt="Logo" />
-                            <span class="dark:hidden text-2xl font-semibold">Eagle Eye</span>
+                            <span class="text-2xl font-semibold dark:text-white">Eagle Eye</span>
                         </span>
                     </span>
                     <img class="logo-icon" :class="sidebarToggle ? 'lg:block mt-10 w-20' : 'hidden'"
@@ -42,7 +42,7 @@
             </button>
             <!-- Hamburger Toggle BTN -->
             <a href="{{ route('vciso') }}" class="lg:hidden">
-                <img class="dark:hidden w-12" src="{{ asset('Images/logo/EagleEyeLogo.png') }}" alt="Logo" />
+                <img class="dark:brightness-0 dark:invert w-12" src="{{ asset('Images/logo/EagleEyeLogo.png') }}" alt="Logo" />
             </a>
             <!-- Application nav menu button -->
             <button
@@ -62,6 +62,7 @@
             class="shadow-theme-md w-full items-center justify-between gap-4 px-5 py-4 lg:flex lg:justify-end lg:px-0 lg:shadow-none">
             <div class="2xsm:gap-3 flex items-center gap-2">
                 <!-- Dark Mode Toggler -->
+                @include('partials.theme-switcher')
                 <!-- Notification Menu Area -->
             </div>
             <!-- User Area -->

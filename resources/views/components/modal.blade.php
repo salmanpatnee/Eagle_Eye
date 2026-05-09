@@ -2,14 +2,14 @@
 
 <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-content dark:bg-gray-800 dark:border-gray-700">
+            <div class="modal-header dark:border-gray-700">
+                <button type="button" class="close dark:text-gray-400" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="{{$id}}Label">{{$title}}</h4>
+                <h4 class="modal-title dark:text-white" id="{{$id}}Label">{{$title}}</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body dark:text-gray-300">
                 @foreach ($data as $row)
                     <div class="checkbox">
                         <label>
@@ -24,8 +24,8 @@
                     </div>
                 @endforeach
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">{{$title}}</button>
+            <div class="modal-footer dark:border-gray-700">
+                <button type="button" class="btn btn-dark dark:bg-gray-600 dark:border-gray-500" data-dismiss="modal">{{$title}}</button>
             </div>
         </div>
     </div>

@@ -365,6 +365,47 @@
             border-radius: 14px;
         }
 
+        /* ── DARK MODE ── */
+        body.dark {
+            background: #111827;
+            color: #e5e7eb;
+        }
+        body.dark .sidebar {
+            background: #1f2937;
+            border-color: #374151;
+        }
+        body.dark .sidebar-label { color: #6b7280; }
+        body.dark .sidebar-link { color: #9ca3af; }
+        body.dark .sidebar-link i { color: #6b7280; }
+        body.dark .sidebar-link:hover { background: #374151; color: #f9fafb; }
+        body.dark .sidebar-link:hover i { color: #f9fafb; }
+        body.dark .sidebar-link.active {
+            background: #1e3a5f;
+            color: #fff;
+            border-left-color: #5ba3d9;
+        }
+        body.dark .sidebar-link.active i { color: #5ba3d9; }
+        body.dark .card { background: #1f2937; }
+        body.dark .sidebar-backdrop { background: rgba(0,0,0,0.55); }
+
+        /* ── THEME TOGGLE BUTTON ── */
+        #themeToggleBtn {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        #themeToggleBtn:hover { background: rgba(255,255,255,0.22); }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
             .card-grid { grid-template-columns: repeat(2, 1fr); }
@@ -435,6 +476,9 @@
             </a>
         </div>
         <div class="header-right">
+            <button id="themeToggleBtn" aria-label="Toggle dark mode">
+                <i id="themeToggleIcon" class='bx bx-moon'></i>
+            </button>
             @include('partials.roles')
             <div>
                 <a href="" onclick="document.querySelector('#logout-form').submit(); return false;">
@@ -751,6 +795,23 @@
 
         </main>
     </div>
+
+    <script>
+        // Dark mode — sync with app-wide localStorage key
+        (function () {
+            var isDark = JSON.parse(localStorage.getItem('darkMode') || 'false');
+            function applyDark(dark) {
+                document.body.classList.toggle('dark', dark);
+                document.getElementById('themeToggleIcon').className = dark ? 'bx bx-sun' : 'bx bx-moon';
+            }
+            applyDark(isDark);
+            document.getElementById('themeToggleBtn').addEventListener('click', function () {
+                isDark = !document.body.classList.contains('dark');
+                localStorage.setItem('darkMode', JSON.stringify(isDark));
+                applyDark(isDark);
+            });
+        })();
+    </script>
 
     <script>
         // Hamburger toggle
