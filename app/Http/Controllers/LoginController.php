@@ -42,8 +42,8 @@ class LoginController extends Controller
             return redirect(route('org-status.index'))->with('success', 'Welcome Back!');
         }
 
-        // Block existing local (non-admin) accounts that have no domain
-        if ($localUser && is_null($localUser->domain)) {
+        // Block existing local (non-admin) accounts that have no domain — only when LDAP is active
+        if (config('app.ldap_enabled', env('LDAP_ENABLED', false)) && $localUser && is_null($localUser->domain)) {
             throw ValidationException::withMessages([
                 'username' => 'Local accounts are disabled. Please use your Active Directory credentials.',
             ]);
