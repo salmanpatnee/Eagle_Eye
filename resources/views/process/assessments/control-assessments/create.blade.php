@@ -113,7 +113,7 @@
                 </x-form.grid-col>
             </div>
 
-            <div class="flex justify-end">
+            <div class="flex justify-end p-3 pt-0 ">
                 <x-form.submit label="Control Assessment" label_ar="المرفق" :isUpdate="$controlAssessment?->id" />
             </div>
         </form>

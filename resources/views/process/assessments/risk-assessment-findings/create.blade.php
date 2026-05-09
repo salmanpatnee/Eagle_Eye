@@ -185,7 +185,7 @@
 
             </div>
 
-            <div class="flex justify-end gap-3">
+            <div class="flex justify-end gap-3 p-3 pt-0">
                 <x-form.submit label="Risk Assessment Finding" label_ar="تقييم المخاطر نتائج نتائج" :isUpdate="$riskAssessmentFinding?->id" />
                 @if (!$riskAssessmentFinding?->id)
                     <button type="submit" name="submit" value="exit" class="submit-btn">

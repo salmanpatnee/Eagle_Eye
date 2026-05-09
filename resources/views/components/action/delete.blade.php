@@ -7,7 +7,7 @@
 <div x-data="{ open: false }" class="inline-block">
     <!-- Delete Button -->
     <button type="button" title="Delete" @click="open = true"
-        class="inline-flex items-center justify-center p-1.5 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-600 transition-colors">
+        class="inline-flex items-center justify-center p-1.5 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-600 transition-colors dark:text-gray-200 dark:hover:bg-red-900/20 dark:hover:text-red-400">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="w-4 h-4">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -19,9 +19,9 @@
     <div x-show="open" x-cloak class="fixed inset-0 z-50 bg-black/[0.6]">
         <!-- Removed overlay color div here -->
         <div class="flex items-center justify-center min-h-screen">
-            <div @click.away="open = false" class="relative bg-white rounded-lg shadow-lg p-6 w-full max-w-xs z-60">
-                <h2 class="text-lg font-semibold text-gray-800 mb-2">Are you sure?</h2>
-                <p class="text-sm text-gray-600 mb-4 whitespace-normal">Do you really want to delete this item? This action cannot be undone.</p>
+            <div @click.away="open = false" class="dark:bg-gray-900 dark:border-gray-800 relative bg-white rounded-lg shadow-lg p-6 w-full max-w-xs z-60">
+                <h2 class="dark:text-white text-lg font-semibold text-gray-800 mb-2">Are you sure?</h2>
+                <p class="dark:text-white text-sm text-gray-600 mb-4 whitespace-normal">Do you really want to delete this item? This action cannot be undone.</p>
                 <div class="flex justify-end gap-2">
                     <button type="button" @click="open = false"
                         class="px-3 py-1.5 rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 transition">

@@ -19,7 +19,7 @@
                     <div>
                         <x-form.label label="Status" for="status" />
                         <select name="status" id="status" onchange="this.form.submit()"
-                            class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden">
+                            class="dark:border-gray-800 dark:bg-gray-900 dark:text-white shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden">
                             <option value="">All</option>
                             <option value="Open" {{ $status === 'Open' ? 'selected' : '' }}>Open</option>
                             <option value="Close" {{ $status === 'Close' ? 'selected' : '' }}>Close</option>

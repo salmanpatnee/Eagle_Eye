@@ -27,7 +27,7 @@
                         <div class="relative">
                             <input type="date" id="evalutionDate" name="evalutionDate"
                                 value="{{ old('evalutionDate', $evalutionDate) }}"
-                                class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden"
+                                class="dark:text-white dark:border-gray-800 dark:bg-gray-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden"
                                 onclick="this.showPicker()" onchange="this.form.submit()" />
                             <span
                                 class="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 dark:text-gray-400">
@@ -123,7 +123,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="27" class="px-4 py-8 text-center text-gray-500">No risks found.</td>
+                        <td colspan="27" class="px-4 py-8 text-center text-gray-500 dark:text-gray-400">No risks found.</td>
                     </tr>
                 @endforelse
             </x-slot:body>

@@ -114,7 +114,7 @@
 
             </div>
 
-            <div class="flex justify-end">
+            <div class="flex justify-end p-3 pt-0">
                 <x-form.submit label="Audit" label_ar="المرفق" :isUpdate="$auditAssessment?->id" />
             </div>
         </form>

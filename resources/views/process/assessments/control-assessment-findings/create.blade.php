@@ -188,7 +188,7 @@
 
             </div>
 
-            <div class="flex justify-end gap-3">
+            <div class="flex justify-end gap-3 p-3 pt-0">
                 <x-form.submit label="Control Assessment Finding" label_ar="تقييم الضوابط نتائج نتائج"
                     :isUpdate="$controlAssessmentFinding?->id" />
                 @if (!$controlAssessmentFinding?->id)

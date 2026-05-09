@@ -18,20 +18,20 @@
     <select id="{{ $name }}" name="{{ $name }}" @if ($required) required @endif
         {{ $attributes->merge([
             'class' =>
-                'shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10  h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden',
+                'dark:border-gray-800 dark:bg-gray-900 dark:text-white shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10  h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden',
         ]) }}>
         <option value="" class="text-gray-700">
             Select Option
         </option>
         @if (count($custom_data))
             @foreach ($custom_data as $row)
-                <option value="{{ $row }}" class="text-gray-700"
+                <option value="{{ $row }}" class="text-gray-700 dark:text-white"
                     @if (old($name, $value) == $row) selected @endif>
                     {{ $row }}</option>
             @endforeach
         @else
             @foreach ($data as $row)
-                <option value="{{ $row->$id_key }}" class="text-gray-700"
+                <option value="{{ $row->$id_key }}" class="text-gray-700 dark:text-white"
                     @if (old($name, $value) == $row->$id_key) selected @endif>
                     @if ($hide_keys)
                         {{ $row->$value_key }}

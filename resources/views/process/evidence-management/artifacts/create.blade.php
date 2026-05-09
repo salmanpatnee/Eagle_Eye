@@ -37,7 +37,7 @@
                         <div class="relative">
                             <input type="date" id="artifact_creation_date" name="artifact_creation_date" required
                                 value="{{ old('artifact_creation_date', $artifact?->artifact_creation_date) }}"
-                                class="input-field" onclick="this.showPicker()" />
+                                class=" input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
                         </div>
                     </div>
@@ -74,7 +74,7 @@
              <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
 
                     <x-form.label label="File Attachment" label_ar="إرفاق ملفات" for="fileAttachment" />
-                    <input type="file" class="filepond" name="fileAttachment" multiple credits="false"
+                    <input type="file" class="dark:border-gray-800 dark:bg-gray-900 dark:text-white filepond" name="fileAttachment" multiple credits="false"
                         id="fileAttachment" {{ !isset($artifact?->id) ? 'required' : '' }}>
                 </div>
 

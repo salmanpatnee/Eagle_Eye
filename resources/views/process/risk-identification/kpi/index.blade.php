@@ -10,15 +10,15 @@
         </x-table.action-wrapper>
 
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="280" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="KPI ID" label_ar="رمز مؤشرات الأداء الرئيسية" />
                 <x-table.th label="KPI Name" label_ar="اسم مؤشرات الأداء الرئيسية" />
                 <x-table.th label="KPI Value" label_ar="قيمة مؤشرات الأداء الرئيسية" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
+           </x-slot:head>
+           <x-slot:body>
                 @foreach ($keyPerformanceIndicators as $keyPerformanceIndicator)
                     <tr>
                         <x-table.td>
@@ -38,8 +38,10 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+                </x-slot:body>
+        </x-table.scroll-table>
+
+
         <x-pagination>
             {{ $keyPerformanceIndicators->links() }}
         </x-pagination>

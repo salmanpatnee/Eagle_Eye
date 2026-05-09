@@ -11,15 +11,15 @@
         </x-table.action-wrapper>
 
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="280" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Risk Sub-Type ID" label_ar="رمز النوع الفرعي للمخاطر" />
                 <x-table.th label="Risk Sub-Type Name" label_ar="اسم النوع الفرعي للمخاطر" />
                 <x-table.th label="Risk Sub-Type Description" label_ar="وصف النوع الفرعي للمخاطر" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
+        </x-slot:head>
+            <x-slot:body>
                 @foreach ($riskSubTypes as $riskSubType)
                     <tr>
                         <x-table.td>
@@ -37,8 +37,8 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+     </x-table.scroll-table>
         <x-pagination>
             {{ $riskSubTypes->links() }}
         </x-pagination>

@@ -197,7 +197,7 @@
 
             </div>
 
-            <div class="flex justify-end gap-3">
+            <div class="flex justify-end gap-3 p-3 pt-0">
                 <x-form.submit label="Audit Finding" label_ar="العثور على نتائج" :isUpdate="$auditFinding?->id" />
                 @if (!$auditFinding?->id)
                     <button type="submit" name="submit" value="exit" class="submit-btn">

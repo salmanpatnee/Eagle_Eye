@@ -6,8 +6,8 @@
 ])
 
 <label @if ($for) for="{{ $for }}" @endif
-    class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1.5">
-    <span class="font-bold sm:order-1 sm:text-right sm:w-auto text-left w-full">
+    class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1.5 dark:text-white">
+    <span class="font-bold sm:order-1 sm:w-auto text-left w-full">
         {{ $label }}
         @if ($required)
             <span class="text-red-500">*</span>

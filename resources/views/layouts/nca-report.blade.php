@@ -152,7 +152,7 @@
 
                         @yield('actions')
                         <div
-                            class="relative max-w-full overflow-x-auto   rounded-lg border border-gray-200 bg-white pt-4 dark:border-gray-800 dark:bg-white/[0.03]">
+                            class="relative max-w-full overflow-x-auto   rounded-lg border border-gray-200 bg-white pt-4 dark:border-gray-800 dark:bg-white">
                             <header class="text-center my-12 mb-5   ">
                                 @if ($organizationData)
                                     <img src="{{ asset('storage/' . $organizationData?->organization_logo) }}"

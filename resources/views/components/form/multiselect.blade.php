@@ -20,7 +20,7 @@
     <select id="{{ $name }}" name="{{ $name }}" multiple @if ($required) required @endif
         {{ $attributes->merge([
             'class' =>
-                'multiselect shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10  h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden',
+                'multiselect shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10  h-11 w-full appearance-none rounded-lg border border-gray-300 dark:border-gray-800 bg-transparent bg-none dark:bg-gray-900 px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden',
         ]) }}>
         <option value="" class="text-gray-700">
             Select Option

@@ -18,7 +18,7 @@
             </x-table.thead>
             <x-table.tbody>
                 @foreach ($kpiCategories as $kpiCategory)
-                    <tr>
+                    <tr class="hover:bg-gray-50 dark:hover:bg-white/[0.03]">
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$kpiCategories" /></x-table.td>
                         <x-table.td>{{ $kpiCategory->kpi_id }}</x-table.td>
                         <x-table.td>{{ $kpiCategory->kpi_name }}</x-table.td>

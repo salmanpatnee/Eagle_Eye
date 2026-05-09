@@ -32,8 +32,8 @@
             </div>
         </div>
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">الأصول الحرجة</span>
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">الأصول الحرجة</span>
             <span>Critical Assets</span>
         </h2>
         <div class="col-span-12 space-y-6 xl:col-span-7 mb-6">
@@ -53,8 +53,8 @@
             </div>
         </div>
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">الأصول الحساسة</span>
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">الأصول الحساسة</span>
             Cloud Assets
         </h2>
 
@@ -76,8 +76,8 @@
         </div>
 
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">أصول العمل عن بعد</span>
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">أصول العمل عن بعد</span>
             Telework Assets
         </h2>
 
@@ -100,8 +100,8 @@
 
 
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">أصول التواصل الاجتماعي
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">أصول التواصل الاجتماعي
             </span>
             Social Media Assets
         </h2>
@@ -126,8 +126,8 @@
 
 
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">أصول خصوصية البيانات
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">أصول خصوصية البيانات
             </span>
             Data Privacy Assets
         </h2>
@@ -150,8 +150,8 @@
         </div>
 
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">معلومات تحديد الهوية الشخصية الأصول
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">معلومات تحديد الهوية الشخصية الأصول
             </span>
             Personally Identifiable Information Assets
         </h2>
@@ -174,8 +174,8 @@
         </div>
 
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">أصول الدفع
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">أصول الدفع
             </span>
             Payment Assets
         </h2>
@@ -199,8 +199,8 @@
 
 
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">معيار أمان بيانات صناعة بطاقات الدفع أصول
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">معيار أمان بيانات صناعة بطاقات الدفع أصول
             </span>
             Payment Card Industry Data Security Standard Assets
         </h2>
@@ -226,8 +226,8 @@
 
 
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">أصول التجارة الإلكترونية
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">أصول التجارة الإلكترونية
             </span>
             E-Commerce Assets
         </h2>
@@ -251,8 +251,8 @@
 
 
 
-        <h2 class="report-head flex flex-col sm:flex-row sm:items-center gap-1">
-            <span class="font-bold" lang="ar" dir="rtl">الأصول المصرفية الإلكترونية
+        <h2 class="report-head flex flex-col dark:text-white sm:flex-row sm:items-center gap-1">
+            <span class="font-bold dark:text-white" lang="ar" dir="rtl">الأصول المصرفية الإلكترونية
             </span>
             E-Banking Assets
         </h2>

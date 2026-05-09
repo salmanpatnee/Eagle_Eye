@@ -1,4 +1,4 @@
-<div class="mb-4 rounded-xl border border-success-500 bg-success-50 p-4">
+<div class="dark:bg-gray-900 mb-4 rounded-xl border border-success-500 bg-success-50 p-4">
     <div class="flex items-start gap-3">
         <div class="-mt-0.5 text-success-500">
             <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -10,11 +10,11 @@
         </div>
 
         <div>
-            <h4 class="mb-1 text-sm font-semibold text-gray-800">
+            <h4 class="mb-1 text-sm font-semibold text-gray-800 dark:text-white dark:text-white">
                 Success
             </h4>
 
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-gray-500 dark:text-white">
                 {{ $slot }}
             </p>
         </div>

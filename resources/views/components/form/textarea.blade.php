@@ -12,5 +12,5 @@
 <textarea id="{{ $name }}" name="{{ $name }}" rows="{{ $rows }}"
     @if ($required) required @endif placeholder="{{ $placeholder }}"
     {{ $attributes->merge([
-        'class' => "bg-transparent border border-gray-300 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 placeholder:text-gray-400 px-4 py-2.5 rounded-lg shadow-theme-xs text-gray-800 text-sm w-full $class",
+        'class' => "dark:border-gray-800 dark:bg-gray-900 dark:text-white bg-transparent border border-gray-300 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 placeholder:text-gray-400 px-4 py-2.5 rounded-lg shadow-theme-xs text-gray-800 text-sm w-full $class",
     ]) }}>{!! $html ? trim(old($name, $value)) : e(trim(old($name, $value))) !!}</textarea>

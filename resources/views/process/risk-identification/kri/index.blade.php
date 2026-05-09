@@ -9,16 +9,15 @@
             <x-action.button label="Add KRI" label_ar="إضافة مؤشرات المخاطر الرئيسية" route_name="kris.create" />
         </x-table.action-wrapper>
 
-
-        <x-table.table>
-            <x-table.thead>
+ <x-table.scroll-table height-offset="280" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="KRI ID" label_ar="رمز مؤشرات المخاطر الرئيسية" />
                 <x-table.th label="KRI Name" label_ar="اسم مؤشرات المخاطر الرئيسية" />
                 <x-table.th label="KRI Value" label_ar="قيمة مؤشرات المخاطر الرئيسية" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
+ </x-slot:head>
+            <x-slot:body>
                 @foreach ($keyRiskIndicators as $keyRiskIndicator)
                     <tr>
                         <x-table.td>
@@ -38,8 +37,8 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+                </x-slot:body>
+        </x-table.scroll-table>
         <x-pagination>
             {{ $keyRiskIndicators->links() }}
         </x-pagination>

@@ -66,7 +66,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-4 py-6 text-center text-gray-500">No controls with linked evidence found.</td>
+                        <td colspan="5" class="px-4 py-6 text-center text-gray-500 dark:text-gray-400">No controls with linked evidence found.</td>
                     </tr>
                 @endforelse
             </x-slot:body>

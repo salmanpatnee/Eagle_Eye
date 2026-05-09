@@ -33,7 +33,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-4 py-6 text-center text-gray-500">No findings found.</td>
+                        <td colspan="6" class="px-4 py-6 text-center text-gray-500 dark:text-gray-400">No findings found.</td>
                     </tr>
                 @endforelse
             </x-table.tbody>

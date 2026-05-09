@@ -77,7 +77,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="px-3 py-6 text-center text-gray-500">No controls found.</td>
+                        <td colspan="8" class="px-3 py-6 text-center text-gray-500 dark:text-gray-400">No controls found.</td>
                     </tr>
                 @endforelse
             </x-slot:body>

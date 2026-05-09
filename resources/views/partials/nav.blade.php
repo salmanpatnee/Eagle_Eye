@@ -12,7 +12,7 @@
                 <a href="{{ route('compliance') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
-                            <img class="dark:brightness-0 dark:invert w-10" src="{{ asset('Images/logo/EagleEyeLogo.png') }}"
+                            <img class=" w-10" src="{{ asset('Images/logo/EagleEyeLogo.png') }}"
                                 alt="Logo" />
                             <span class="text-2xl font-semibold dark:text-white">Eagle Eye</span>
                         </span>
@@ -70,7 +70,7 @@
                 <div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
                     <a class="flex items-center text-gray-700 dark:text-gray-400" href="#"
                         @click.prevent="dropdownOpen = ! dropdownOpen">
-                        <span class="mr-3 h-11 w-11 overflow-hidden ">
+                        <span class="dark:invert dark:brightness-100 mr-3 h-11 w-11 overflow-hidden ">
                             <img src="{{ asset('Images/user/Admin.png') }}" alt="User" />
                         </span>
                         <span class="text-theme-sm mr-1 block font-medium">

@@ -11,7 +11,7 @@
 
 
 
-        <div class="border-gray-100 border-t p-3">
+        <div class="border-gray-100 dark:border-gray-700 border-t p-3">
             <x-info-row>
                 <x-info-col label="Control Assessment ID" label_ar="رمز تقييم الضوابط">
                     {{ $controlAssessment->control_assessment_id }}
@@ -79,17 +79,17 @@
             </x-info-row>
 
         </div>
-        <div class="px-4 py-4 border-t border-gray-100 space-y-3">
+        <div class="px-4 py-4 border-t border-gray-100 dark:border-gray-700 space-y-3">
             {{-- 4 Implementation Status Stats --}}
             <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {{-- Implemented --}}
-                <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden">
                     <div class="h-1 bg-success-500"></div>
                     <div class="px-4 py-3">
                         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1">Implemented</p>
-                        <p class="text-3xl font-bold text-gray-800">{{ $findingStats['implemented'] }}</p>
+                        <p class="text-3xl font-bold text-gray-800 dark:text-white">{{ $findingStats['implemented'] }}</p>
                         <div class="mt-2 flex items-center gap-2">
-                            <div class="h-1.5 flex-1 rounded-full bg-gray-100 overflow-hidden">
+                            <div class="h-1.5 flex-1 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
                                 <div class="h-full bg-success-500 rounded-full" style="width: {{ $totalControls > 0 ? round($findingStats['implemented'] / $totalControls * 100) : 0 }}%"></div>
                             </div>
                             <span class="text-xs text-gray-400 shrink-0">{{ $totalControls > 0 ? round($findingStats['implemented'] / $totalControls * 100) : 0 }}%</span>
@@ -98,13 +98,13 @@
                 </div>
 
                 {{-- Partially Implemented --}}
-                <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden">
                     <div class="h-1 bg-warning-400"></div>
                     <div class="px-4 py-3">
                         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1">Partial</p>
-                        <p class="text-3xl font-bold text-gray-800">{{ $findingStats['partially_implemented'] }}</p>
+                        <p class="text-3xl font-bold text-gray-800 dark:text-white">{{ $findingStats['partially_implemented'] }}</p>
                         <div class="mt-2 flex items-center gap-2">
-                            <div class="h-1.5 flex-1 rounded-full bg-gray-100 overflow-hidden">
+                            <div class="h-1.5 flex-1 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
                                 <div class="h-full bg-warning-400 rounded-full" style="width: {{ $totalControls > 0 ? round($findingStats['partially_implemented'] / $totalControls * 100) : 0 }}%"></div>
                             </div>
                             <span class="text-xs text-gray-400 shrink-0">{{ $totalControls > 0 ? round($findingStats['partially_implemented'] / $totalControls * 100) : 0 }}%</span>
@@ -113,13 +113,13 @@
                 </div>
 
                 {{-- Not Implemented --}}
-                <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden">
                     <div class="h-1 bg-error-500"></div>
                     <div class="px-4 py-3">
                         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1">Not Implemented</p>
-                        <p class="text-3xl font-bold text-gray-800">{{ $findingStats['not_implemented'] }}</p>
+                        <p class="text-3xl font-bold text-gray-800 dark:text-white">{{ $findingStats['not_implemented'] }}</p>
                         <div class="mt-2 flex items-center gap-2">
-                            <div class="h-1.5 flex-1 rounded-full bg-gray-100 overflow-hidden">
+                            <div class="h-1.5 flex-1 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
                                 <div class="h-full bg-error-500 rounded-full" style="width: {{ $totalControls > 0 ? round($findingStats['not_implemented'] / $totalControls * 100) : 0 }}%"></div>
                             </div>
                             <span class="text-xs text-gray-400 shrink-0">{{ $totalControls > 0 ? round($findingStats['not_implemented'] / $totalControls * 100) : 0 }}%</span>
@@ -128,13 +128,13 @@
                 </div>
 
                 {{-- Not Applicable --}}
-                <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden">
                     <div class="h-1 bg-gray-400"></div>
                     <div class="px-4 py-3">
                         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1">Not Applicable</p>
-                        <p class="text-3xl font-bold text-gray-800">{{ $findingStats['not_applicable'] }}</p>
+                        <p class="text-3xl font-bold text-gray-800 dark:text-white">{{ $findingStats['not_applicable'] }}</p>
                         <div class="mt-2 flex items-center gap-2">
-                            <div class="h-1.5 flex-1 rounded-full bg-gray-100 overflow-hidden">
+                            <div class="h-1.5 flex-1 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
                                 <div class="h-full bg-gray-400 rounded-full" style="width: {{ $totalControls > 0 ? round($findingStats['not_applicable'] / $totalControls * 100) : 0 }}%"></div>
                             </div>
                             <span class="text-xs text-gray-400 shrink-0">{{ $totalControls > 0 ? round($findingStats['not_applicable'] / $totalControls * 100) : 0 }}%</span>
@@ -144,7 +144,7 @@
             </div>
 
             {{-- Assessment Progress --}}
-            <div class="bg-white rounded-xl border border-gray-100 shadow-sm px-4 py-3">
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm px-4 py-3">
                 <div class="flex items-center justify-between mb-2">
                     <span class="text-xs font-semibold uppercase tracking-widest text-gray-400">Assessment Progress</span>
                     <div class="flex items-center gap-2">
@@ -163,10 +163,10 @@
                                 Complete
                             </span>
                         @endif
-                        <span class="text-sm font-bold text-gray-700">{{ $completionPercent }}%</span>
+                        <span class="text-sm font-bold text-gray-700 dark:text-gray-200">{{ $completionPercent }}%</span>
                     </div>
                 </div>
-                <div class="h-2 rounded-full bg-gray-100 overflow-hidden">
+                <div class="h-2 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
                     <div class="h-full rounded-full bg-brand-500 transition-all duration-500" style="width: {{ $completionPercent }}%"></div>
                 </div>
                 <div class="mt-2 flex items-center justify-between text-xs text-gray-400">
@@ -186,7 +186,7 @@
                 </x-table.thead>
                 <x-table.tbody>
                     @foreach ($controlAssessment->findings as $finding)
-                        <tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-white/[0.03]">
                             <x-table.td> {{ $loop->index + 1 }}</x-table.td>
                             <x-table.td>
                                 {{ $finding->control_finding_id }}

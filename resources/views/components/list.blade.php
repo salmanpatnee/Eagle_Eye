@@ -7,11 +7,11 @@
     'route_param_key' => 'id',
 ])
 
-<div class="rounded-lg border border-gray-200 bg-white sm:w-fit">
+<div class="bg-white border border-gray-200 dark:bg-gray-900 rounded-lg">
     <ul class="flex flex-col">
         @forelse ($data as $item)
             <li
-                class="flex items-center gap-2 border-b border-gray-200 px-3 py-2.5 text-base text-left font-medium text-gray-600 last:border-b-0">
+                class=" dark:border-gray-800 flex items-center gap-2 border-b border-gray-200 px-3 py-2.5 text-base text-left font-medium text-gray-600 last:border-b-0">
                 @if ($route_name)
                     <a href="{{ route($route_name, $item[$route_param_key] ?? ($item->{$route_param_key} ?? null)) }}" class="text-brand-600 hover:underline">
                 @endif

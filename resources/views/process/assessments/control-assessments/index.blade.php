@@ -61,7 +61,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-3 py-6 text-center text-gray-500">No control assessments found.</td>
+                        <td colspan="6" class="px-3 py-6 text-center text-gray-500 dark:text-gray-400">No control assessments found.</td>
                     </tr>
                 @endforelse
             </x-slot:body>

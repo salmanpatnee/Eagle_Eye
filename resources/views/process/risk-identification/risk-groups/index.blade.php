@@ -10,14 +10,14 @@
         </x-table.action-wrapper>
 
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="280" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Risk Group ID" label_ar="رمز مجموعة المخاطر" />
                 <x-table.th label="Risk Group Name" label_ar="اسم مجموعة المخاطر" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
+        </x-slot:head>
+            <x-slot:body>
                 @foreach ($riskGroups as $riskGroup)
                     <tr>
                         <x-table.td>
@@ -34,8 +34,8 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+     </x-table.scroll-table>
         <x-pagination>
             {{ $riskGroups->links() }}
         </x-pagination>
