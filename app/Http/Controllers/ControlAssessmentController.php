@@ -20,15 +20,31 @@ class ControlAssessmentController extends Controller
         $controlAssessmentId = request('control_assessment_id');
         $controlId = request('control_id');
         $startEndDate = request('start_end_date');
+        $status = request('status');
 
         $controlAssessments = ControlAssessment::with('findings')
             ->withCount('findings')
             ->select(
                 'id',
                 'control_assessment_id',
-                'control_assessment_name'
+                'control_assessment_name',
+                'best_practices_id'
             )
             ->selectRaw("CONCAT(DATE_FORMAT(control_assessment_start_date, '%d %b %Y'), ' - ', DATE_FORMAT(control_assessment_end_date, '%d %b %Y')) as start_end_date")
+            ->selectSub(
+                DB::table('control_master_table as c')
+                    ->join('control_master_table_vs_best_practice_table as cmp', 'c.control_id', '=', 'cmp.control_id')
+                    ->whereColumn('cmp.best_practice_id', 'control_assessment_master_table.best_practices_id')
+                    ->where('c.is_parent_control', 'No')
+                    ->whereNotExists(function ($q) {
+                        $q->select(DB::raw(1))
+                            ->from('control_assessment_details_table as cadt')
+                            ->whereColumn('cadt.control_id', 'c.control_id')
+                            ->whereColumn('cadt.control_assessment_id', 'control_assessment_master_table.control_assessment_id');
+                    })
+                    ->selectRaw('COUNT(*)'),
+                'remaining_controls_count'
+            )
             ->when($controlAssessmentId, function ($query) use ($controlAssessmentId) {
                 return $query->where('control_assessment_id', $controlAssessmentId);
             })
@@ -40,20 +56,50 @@ class ControlAssessmentController extends Controller
             ->when($startEndDate, function ($query) use ($startEndDate) {
                 $query->where(function ($q) use ($startEndDate) {
                     $q->where('control_assessment_start_date', $startEndDate)
-                      ->orWhere('control_assessment_end_date', $startEndDate);
+                        ->orWhere('control_assessment_end_date', $startEndDate);
                 });
             })
+            ->when($status === 'completed', function ($query) {
+                $query->whereRaw(
+                    '(SELECT COUNT(*) FROM control_master_table c
+                      INNER JOIN control_master_table_vs_best_practice_table cmp ON c.control_id = cmp.control_id
+                      WHERE cmp.best_practice_id = control_assessment_master_table.best_practices_id
+                      AND c.is_parent_control = "No"
+                      AND NOT EXISTS (
+                          SELECT 1 FROM control_assessment_details_table cadt
+                          WHERE cadt.control_id = c.control_id
+                          AND cadt.control_assessment_id = control_assessment_master_table.control_assessment_id
+                      )) = 0'
+                );
+            })
+            ->when($status === 'in-progress', function ($query) {
+                $query->whereRaw(
+                    '(SELECT COUNT(*) FROM control_master_table c
+                      INNER JOIN control_master_table_vs_best_practice_table cmp ON c.control_id = cmp.control_id
+                      WHERE cmp.best_practice_id = control_assessment_master_table.best_practices_id
+                      AND c.is_parent_control = "No"
+                      AND NOT EXISTS (
+                          SELECT 1 FROM control_assessment_details_table cadt
+                          WHERE cadt.control_id = c.control_id
+                          AND cadt.control_assessment_id = control_assessment_master_table.control_assessment_id
+                      )) > 0'
+                );
+            })
             ->paginate(20);
-
 
         $assessments = ControlAssessment::selectRaw("DISTINCT CONCAT(control_assessment_id, ' - ', control_assessment_name) as name, control_assessment_id")
             ->get();
 
-        $controls = ControlMaster::selectRaw("DISTINCT control_master_table.control_id, control_master_table.control_name")
+        $controls = ControlMaster::selectRaw('DISTINCT control_master_table.control_id, control_master_table.control_name')
             ->join('control_assessment_details_table', 'control_master_table.control_id', '=', 'control_assessment_details_table.control_id')
             ->get();
 
-        return view('process/assessments/control-assessments/index', compact('controlAssessments', 'assessments', 'controls', 'controlAssessmentId', 'controlId', 'startEndDate'));
+        $statusOptions = [
+            (object) ['status_id' => 'completed',   'status_text' => 'Completed'],
+            (object) ['status_id' => 'in-progress',  'status_text' => 'In-Progress'],
+        ];
+
+        return view('process/assessments/control-assessments/index', compact('controlAssessments', 'assessments', 'controls', 'controlAssessmentId', 'controlId', 'startEndDate', 'status', 'statusOptions'));
     }
 
     public function show(ControlAssessment $controlAssessment)
@@ -74,10 +120,10 @@ class ControlAssessmentController extends Controller
 
         $findings = $controlAssessment->findings;
         $findingStats = [
-            'implemented'          => $findings->where('control_implementation_status', 'Implemented')->count(),
+            'implemented' => $findings->where('control_implementation_status', 'Implemented')->count(),
             'partially_implemented' => $findings->where('control_implementation_status', 'Partially Implemented')->count(),
-            'not_implemented'      => $findings->where('control_implementation_status', 'Not Implemented')->count(),
-            'not_applicable'       => $findings->where('control_implementation_status', 'Not Applicable')->count(),
+            'not_implemented' => $findings->where('control_implementation_status', 'Not Implemented')->count(),
+            'not_applicable' => $findings->where('control_implementation_status', 'Not Applicable')->count(),
         ];
         $totalControls = $remainingControlsCount + $findings->count();
         $completionPercent = $totalControls > 0 ? round(($findings->count() / $totalControls) * 100) : 0;
@@ -161,6 +207,7 @@ class ControlAssessmentController extends Controller
         }
 
         $controlAssessment->delete();
+
         return redirect(route('control-assessments.index'))->with('success', 'Control Assessment deleted successfully.');
     }
 }

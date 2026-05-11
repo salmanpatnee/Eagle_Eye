@@ -10,7 +10,7 @@
 
         <form action="{{ route('control-assessments.index') }}" method="GET">
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
-                <x-form.grid-3-col>
+                <x-form.grid-4-col>
                     <div>
                         <x-form.select label="Control Assessments" label_ar="تقييم الضوابط" name="control_assessment_id"
                             :value="$controlAssessmentId" :data="$assessments" id_key="control_assessment_id" value_key="name"
@@ -21,6 +21,12 @@
                             :data="$controls" id_key="control_id" value_key="control_name" onchange="this.form.submit()" />
                     </div>
                     <div>
+                        <x-form.select label="Status" label_ar="الحالة" name="status"
+                            :value="$status" :data="$statusOptions"
+                            id_key="status_id" value_key="status_text" 
+                            onchange="this.form.submit()" hide_keys="true"/>
+                    </div>
+                    <div>
                         <x-form.label label="Date" label_ar="تاريخ" for="start_end_date" />
                         <div class="relative">
                             <input type="date" id="start_end_date" name="start_end_date"
@@ -29,7 +35,8 @@
                             <x-icons.calendar />
                         </div>
                     </div>
-                </x-form.grid-3-col>
+                    
+                </x-form.grid-4-col>
             </div>
         </form>
 
@@ -40,6 +47,7 @@
                 <x-table.th label="Assessment Name" label_ar="اسم تقييم الضوابط" />
                 <x-table.th label="Start and End Date" label_ar="تاريخ بدءانتهاء" />
                 <x-table.th label="No of Control Assessed" label_ar="عدد الضوابط التي تم تقييمها" />
+                <x-table.th label="Status" label_ar="الحالة" />
                 <x-table.th label="Action" label_ar="إجراء " />
             </x-slot:head>
             <x-slot:body>
@@ -52,8 +60,13 @@
                         <x-table.td min-width="250px">{{ $controlAssessment->control_assessment_name }}</x-table.td>
                         <x-table.td>{{ $controlAssessment->start_end_date }}</x-table.td>
                         <x-table.td>{{ $controlAssessment->findings->count() }}</x-table.td>
+                        <x-table.td>
+                            <x-status-badge :status="$controlAssessment->remaining_controls_count === 0 ? 'completed' : 'in-progress'" />
+                        </x-table.td>
                         <x-table.td action_col="true">
-                            <x-action.add route_name="control-assessment-findings.create" param="{{ $controlAssessment->id }}" />
+                            @if ($controlAssessment->remaining_controls_count > 0)
+                                <x-action.add route_name="control-assessment-findings.create" param="{{ $controlAssessment->id }}" />
+                            @endif
                             <x-action.view route_name="control-assessments.show" param="{{ $controlAssessment->id }}" />
                             <x-action.edit route_name="control-assessments.edit" param="{{ $controlAssessment->id }}" />
                             <x-action.delete route_name="control-assessments.destroy" param="{{ $controlAssessment->id }}" />
@@ -61,7 +74,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-3 py-6 text-center text-gray-500 dark:text-gray-400">No control assessments found.</td>
+                        <td colspan="7" class="px-3 py-6 text-center text-gray-500 dark:text-gray-400">No control assessments found.</td>
                     </tr>
                 @endforelse
             </x-slot:body>

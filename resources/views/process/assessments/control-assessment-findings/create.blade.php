@@ -37,6 +37,13 @@
             </x-info-row>
         </div>
         <h1 class="text-2xl text-center bg-brand-950 text-white py-2 font-medium">Control Assessment Finding</h1>
+        @if (!$controlAssessmentFinding && $controls->isEmpty())
+            <div class="m-6 rounded-lg border border-green-200 bg-green-50 px-6 py-8 text-center">
+                <p class="text-lg font-semibold text-green-700">All Controls Assessed</p>
+                <p class="mt-1 text-sm text-green-600">All controls in this assessment have been evaluated.</p>
+                <a href="{{ route('control-assessments.index') }}" class="mt-4 inline-block text-sm text-green-700 underline">Back to Assessments</a>
+            </div>
+        @else
         <form
             action="{{ isset($controlAssessmentFinding) ? route('control-assessment-findings.update', $controlAssessmentFinding->id) : route('control-assessment-findings.store', $controlAssessment->id) }}"
             method="POST">
@@ -201,6 +208,7 @@
 
             </div>
         </form>
+        @endif
     </div>
 @endsection
 

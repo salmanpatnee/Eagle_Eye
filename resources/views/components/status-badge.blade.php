@@ -10,6 +10,10 @@ switch ($status) {
         $statusClasses = 'bg-green-50 text-green-700 ring-green-600/20';
         $statusText = 'Completed';
         break;
+    case 'in-progress':
+        $statusClasses = 'bg-blue-50 text-blue-700 ring-blue-600/20';
+        $statusText = 'In-Progress';
+        break;
     case 'processing':
         $statusClasses = 'bg-blue-50 text-blue-700 ring-blue-600/20';
         $statusText = 'Processing';
