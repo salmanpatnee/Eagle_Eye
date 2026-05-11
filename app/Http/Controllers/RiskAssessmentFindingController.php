@@ -24,7 +24,7 @@ class RiskAssessmentFindingController extends Controller
 
     public function create(RiskAssessment $riskAssessment, Request $request)
     {
-        $riskAssessment->load(['location', 'auditor', 'classification']);
+        $riskAssessment->load(['location', 'auditor', 'classification', 'controlAssessments']);
         $riskAssessmentFinding = null;
         $risks = Risk::select('id', 'risk_id', 'risk_name')->get();
         $treatments = RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')->get();
@@ -73,6 +73,7 @@ class RiskAssessmentFindingController extends Controller
     {
 
         $riskAssessment = $riskAssessmentFinding->riskAssessment;
+        $riskAssessment->load('controlAssessments');
 
         $takenRiskIds = RiskAssessmentDetail::where('risk_assessment_id', $riskAssessmentFinding->risk_assessment_id)
             ->where('id', '!=', $riskAssessmentFinding->id)

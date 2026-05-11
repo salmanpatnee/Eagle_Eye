@@ -22,8 +22,13 @@
             </x-info-row>
 
             <x-info-row>
-                <x-info-col label="Location Name" label_ar="اسم الموقع">
-                    {{ $riskAssessment->location?->location_name ?? '—' }}
+                <x-info-col label="Control Assessments" label_ar="تقييمات الضوابط">
+                    <x-list
+                        :data="$riskAssessment->controlAssessments"
+                        id_key="control_assessment_id"
+                        value_key="control_assessment_name"
+                        empty_message="No control assessments linked."
+                    />
                 </x-info-col>
                 <x-info-col label="Classification Name" label_ar="اسم التصنيف">
                     {{ $riskAssessment->classification?->classification_name ?? '—' }}
@@ -149,7 +154,7 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.field label="Corrective Action" label_ar="إجراءات التصحيح" name="corrective_action"
-                            placeholder="Enter Corrective Action" :value="$riskAssessmentFinding?->corrective_action ?? old('corrective_action')" />
+                            placeholder="Enter Corrective Action" :value="$riskAssessmentFinding?->corrective_action ?? old('corrective_action', 'None')" />
                     </div>
                     <div>
                         <x-form.label label="Corrective Action Due Date" label_ar="تاريخ استحقاق إجراءات التصحيح"
@@ -166,7 +171,7 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.field label="Preventive Action" label_ar="إجراءات الوقائي" name="preventive_action"
-                            placeholder="Enter Preventive Action" :value="$riskAssessmentFinding?->preventive_action ?? old('preventive_action')" />
+                            placeholder="Enter Preventive Action" :value="$riskAssessmentFinding?->preventive_action ?? old('preventive_action', 'None')" />
                     </div>
                     <div>
                         <x-form.label label="Preventive Action Due Date" label_ar="تاريخ استحقاق إجراءات الوقائي"
@@ -181,7 +186,7 @@
                 </x-form.grid-col>
 
                 <x-form.textarea-field label="Lesson Learned" label_ar="الدرس المستفاد" name="lesson_learned"
-                    placeholder="Enter Lesson Learned" :value="$riskAssessmentFinding?->lesson_learned ?? old('lesson_learned')" />
+                    placeholder="Enter Lesson Learned" :value="$riskAssessmentFinding?->lesson_learned ?? old('lesson_learned', 'None')" />
 
             </div>
 
@@ -216,7 +221,9 @@
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     data: {
-                        selectedValue: selectedValue
+                        selectedValue: selectedValue,
+                        risk_assessment_id: '{{ $riskAssessment->risk_assessment_id }}',
+                        _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
                         $("#risk_conrol_status").html(response);

@@ -32,6 +32,40 @@
 
                 <x-form.grid-col>
                     <div>
+                        <x-form.multiselect label="Control Assessments" label_ar="تقييمات الضوابط"
+                            name="control_assessment_ids[]" :data="$completedControlAssessments" id_key="control_assessment_id"
+                            value_key="control_assessment_name" required="true" show_key="true" :value="$riskAssessment?->controlAssessments
+                                ?->pluck('control_assessment_id')
+                                ?->toArray() ?? old('control_assessment_ids', [])"
+                            :disabled="isset($riskAssessment)" />
+                        @if (isset($riskAssessment))
+                            <p class="mt-1 text-xs text-gray-500">Control assessment selection is locked after creation.</p>
+                        @endif
+                    </div>
+                    <div>
+                        <x-form.select label="Location Name" label_ar="اسم الموقع" name="location_id" :value="$riskAssessment?->location_id ?? old('location_id')"
+                            :data="$locations" id_key="location_id" value_key="location_name" required="true" />
+                    </div>
+
+
+                </x-form.grid-col>
+
+                <x-form.grid-col>
+                    <div>
+                        <x-form.select label="Classification" label_ar="التصنيف" name="classification_id" :value="$riskAssessment?->classification_id ?? old('classification_id')"
+                            :data="$classifications" id_key="classification_id" value_key="classification_name" required="true" />
+                    </div>
+                    <div>
+                        <x-form.select label="Auditor Name" label_ar="اسم مدقق" name="auditor_id" :value="$riskAssessment?->auditor_id ?? old('auditor_id')"
+                            :data="$auditors" id_key="auditor_id" value_key="auditor_name" required="true" />
+                    </div>
+
+
+                </x-form.grid-col>
+
+
+                <x-form.grid-col>
+                    <div>
                         <x-form.label label="Risk Assessment Start Date" label_ar="تاريخ بدء تقييم المخاطر"
                             for="risk_assessment_start_date" />
                         <div class="relative">
@@ -81,28 +115,8 @@
                 <x-form.textarea-field label="Risk Assessing Entity" label_ar="ضوابط تقييم الجهة"
                     name="risk_assessing_entity" placeholder="Enter Risk Assessing Entity" :value="$riskAssessment?->risk_assessing_entity ?? old('risk_assessing_entity')" />
 
-                <x-form.grid-col>
-                    <div>
-                        <x-form.select label="Location Name" label_ar="اسم الموقع" name="location_id" :value="$riskAssessment?->location_id ?? old('location_id')"
-                            :data="$locations" id_key="location_id" value_key="location_name" required="true" />
-                    </div>
-                    <div>
-                        <x-form.select label="Classification" label_ar="التصنيف" name="classification_id" :value="$riskAssessment?->classification_id ?? old('classification_id')"
-                            :data="$classifications" id_key="classification_id" value_key="classification_name" required="true" />
-                    </div>
 
-                </x-form.grid-col>
 
-                <x-form.grid-col>
-                    <div>
-                        <x-form.select label="Auditor Name" label_ar="اسم مدقق" name="auditor_id" :value="$riskAssessment?->auditor_id ?? old('auditor_id')"
-                            :data="$auditors" id_key="auditor_id" value_key="auditor_name" required="true" />
-                    </div>
-                    <div>
-
-                    </div>
-
-                </x-form.grid-col>
             </div>
 
             <div class="flex justify-end">
