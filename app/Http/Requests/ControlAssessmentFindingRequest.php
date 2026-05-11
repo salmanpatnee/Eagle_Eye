@@ -24,15 +24,7 @@ class ControlAssessmentFindingRequest extends FormRequest
      */
     public function rules()
     {
-        $controlAssessmentFindingId = $this->route('control_assessment_finding')?->id;
-
-        return [
-            'control_finding_id' => [
-                'required',
-                Rule::unique('control_assessment_details_table', 'control_finding_id')
-                    ->ignore($controlAssessmentFindingId),
-            ],
-
+        $rules = [
             'control_finding_name' => 'required',
             'control_id' => 'required',
             'categories' => 'nullable',
@@ -49,7 +41,16 @@ class ControlAssessmentFindingRequest extends FormRequest
             'control_auditee_name' => 'nullable',
             'control_auditee_department' => 'nullable',
             'control_auditee_system' => 'nullable',
-            'lesson_learned' => 'nullable'
+            'lesson_learned' => 'nullable',
         ];
+
+        if ($this->isMethod('POST')) {
+            $rules['control_finding_id'] = [
+                'required',
+                Rule::unique('control_assessment_details_table', 'control_finding_id'),
+            ];
+        }
+
+        return $rules;
     }
 }

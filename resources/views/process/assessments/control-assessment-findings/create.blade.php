@@ -56,7 +56,8 @@
                     <div>
                         <x-form.field label="Control Assessment Finding ID" label_ar="رمز تقييم الضوابط نتائج"
                             name="control_finding_id" required="true" placeholder="Enter Control Assessment Finding ID"
-                            :value="$controlAssessmentFinding?->control_finding_id ?? old('control_finding_id')" />
+                            :value="$controlAssessmentFinding?->control_finding_id ?? old('control_finding_id')"
+                            :readonly="$controlAssessmentFinding !== null" />
                     </div>
                     <div>
                         <x-form.field label="Control Assessment Finding Name" label_ar="اسم تقييم الضوابط نتائج"

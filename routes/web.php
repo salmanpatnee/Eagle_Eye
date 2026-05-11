@@ -323,6 +323,8 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
 
     // ------------------- CONTROL ASSESSMENT -------------------
 
+    Route::post('control-assessments/{controlAssessment}/replicate', [ControlAssessmentController::class, 'replicate'])
+        ->name('control-assessments.replicate');
     Route::resource('control-assessments', ControlAssessmentController::class);
     Route::resource('control-assessment-findings', ControlAssessmentFindingController::class)->except(['index', 'create', 'store']);
     Route::controller(ControlAssessmentFindingController::class)->group(function () {

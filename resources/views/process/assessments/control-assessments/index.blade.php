@@ -66,6 +66,8 @@
                         <x-table.td action_col="true">
                             @if ($controlAssessment->remaining_controls_count > 0)
                                 <x-action.add route_name="control-assessment-findings.create" param="{{ $controlAssessment->id }}" />
+                            @else
+                                <x-action.replicate :route="route('control-assessments.replicate', $controlAssessment->id)" />
                             @endif
                             <x-action.view route_name="control-assessments.show" param="{{ $controlAssessment->id }}" />
                             <x-action.edit route_name="control-assessments.edit" param="{{ $controlAssessment->id }}" />

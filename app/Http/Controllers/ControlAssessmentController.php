@@ -195,6 +195,33 @@ class ControlAssessmentController extends Controller
         return redirect(route('control-assessments.index'))->with('success', 'Control Assessment updated successfully.');
     }
 
+    public function replicate(ControlAssessment $controlAssessment, Request $request)
+    {
+        abort_unless(auth()->user()->canWrite(), 403);
+
+        $request->validate([
+            'control_assessment_id' => 'required|unique:control_assessment_master_table,control_assessment_id',
+            'control_assessment_name' => 'required|string',
+            'control_assessment_description' => 'nullable|string',
+        ]);
+
+        $newAssessment = $controlAssessment->replicate();
+        $newAssessment->control_assessment_id = $request->control_assessment_id;
+        $newAssessment->control_assessment_name = $request->control_assessment_name;
+        $newAssessment->control_assessment_description = $request->control_assessment_description;
+        $newAssessment->save();
+
+        $controlAssessment->load('findings');
+        foreach ($controlAssessment->findings as $finding) {
+            $newFinding = $finding->replicate();
+            $newFinding->control_assessment_id = $newAssessment->control_assessment_id;
+            $newFinding->save();
+        }
+
+        return redirect(route('control-assessments.edit', $newAssessment->id))
+            ->with('success', 'Assessment replicated successfully.');
+    }
+
     public function destroy(ControlAssessment $controlAssessment)
     {
         abort_unless(auth()->user()->canDelete(), 403);

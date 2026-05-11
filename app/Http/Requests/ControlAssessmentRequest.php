@@ -24,12 +24,7 @@ class ControlAssessmentRequest extends FormRequest
      */
     public function rules()
     {
-        $controlAssessmentId = $this->route('controlAssessment');
-
-        return [
-            'control_assessment_id' => ['required', 
-                Rule::unique('control_assessment_master_table', 'control_assessment_id')
-                ->ignore($controlAssessmentId, 'control_assessment_id'),],
+        $rules = [
             'control_assessment_name' => 'required',
             'control_assessment_description' => 'nullable',
             'control_assessment_start_date' => 'required',
@@ -44,5 +39,14 @@ class ControlAssessmentRequest extends FormRequest
             'auditor_id' => 'required',
             'classification_id' => 'required',
         ];
+
+        if ($this->isMethod('POST')) {
+            $rules['control_assessment_id'] = [
+                'required',
+                Rule::unique('control_assessment_master_table', 'control_assessment_id'),
+            ];
+        }
+
+        return $rules;
     }
 }
