@@ -367,7 +367,9 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     // ------------AUDIT ASSESSMENTS--------------
 
     Route::resource('audit-assessments', AuditMaterController::class);
-    Route::resource('audit-findings', AuditFindingController::class)->except(['index', 'create', 'store']);
+    Route::post('audit-assessments/{auditAssessment}/replicate', [AuditMaterController::class, 'replicate'])->name('audit-assessments.replicate');
+    Route::post('audit-assessments/{auditAssessment}/complete', [AuditMaterController::class, 'complete'])->name('audit-assessments.complete');
+    Route::resource('audit-findings', AuditFindingController::class)->except(['create', 'store']);
     Route::controller(AuditFindingController::class)->group(function () {
         Route::get('/audit-findings/create/{auditAssessment}', 'create')->name('audit-findings.create');
         Route::post('/audit-findings/{auditAssessment}', 'store')->name('audit-findings.store');

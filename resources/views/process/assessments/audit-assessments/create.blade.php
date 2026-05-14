@@ -6,6 +6,19 @@
     <div>
         <x-table.action-wrapper title="{{ isset($auditAssessment) ? 'Update' : 'New' }} Audit">
             <x-action.button label="View" label_ar="منظر" route_name="audit-assessments.index" />
+            @if (isset($auditAssessment) && $auditAssessment->status !== 'Completed')
+                @auth
+                    @if (auth()->user()->canWrite())
+                        <form action="{{ route('audit-assessments.complete', $auditAssessment->id) }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="submit-btn bg-success-600 hover:bg-success-700">
+                                <span class="inline mx-2">Mark as Completed</span>
+                                <span class="inline text-xs font-semibold leading-tight" dir="rtl" lang="ar">إغلاق المراجعة</span>
+                            </button>
+                        </form>
+                    @endif
+                @endauth
+            @endif
         </x-table.action-wrapper>
 
         <form

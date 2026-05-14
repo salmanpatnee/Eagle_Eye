@@ -139,14 +139,13 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.field label="Corrective Action" label_ar="إجراءات التصحيح" name="corrective_action"
-                            placeholder="Enter Corrective Action" :value="$auditFinding?->corrective_action ?? old('corrective_action')" />
+                            placeholder="Enter Corrective Action" :value="$auditFinding?->corrective_action ?? old('corrective_action', 'None')" />
                     </div>
                     <div>
                         <x-form.label label="Corrective Action Due Date" label_ar="تاريخ استحقاق إجراءات التصحيح"
                             for="corrective_action_due_date" />
                         <div class="relative">
                             <input type="date" id="corrective_action_due_date" name="corrective_action_due_date"
-                                required
                                 value="{{ old('corrective_action_due_date', $auditFinding?->corrective_action_due_date) }}"
                                 class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
@@ -157,14 +156,13 @@
                 <x-form.grid-col>
                     <div>
                         <x-form.field label="Preventive Action" label_ar="إجراءات الوقائي" name="preventive_action"
-                            placeholder="Enter Preventive Action" :value="$auditFinding?->preventive_action ?? old('preventive_action')" />
+                            placeholder="Enter Preventive Action" :value="$auditFinding?->preventive_action ?? old('preventive_action', 'None')" />
                     </div>
                     <div>
                         <x-form.label label="Preventive Action Due Date" label_ar="تاريخ استحقاق إجراءات الوقائي"
                             for="preventive_action_due_date" />
                         <div class="relative">
                             <input type="date" id="preventive_action_due_date" name="preventive_action_due_date"
-                                required
                                 value="{{ old('preventive_action_due_date', $auditFinding?->preventive_action_due_date) }}"
                                 class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
@@ -182,7 +180,7 @@
                         <x-form.label label="Closure Expected Date" label_ar="تاريخ الإغلاق المتوقع"
                             for="closure_expected_date" />
                         <div class="relative">
-                            <input type="date" id="closure_expected_date" name="closure_expected_date" required
+                            <input type="date" id="closure_expected_date" name="closure_expected_date"
                                 value="{{ old('closure_expected_date', $auditFinding?->closure_expected_date) }}"
                                 class="input-field" onclick="this.showPicker()" />
                             <x-icons.calendar />
@@ -192,7 +190,7 @@
 
 
                 <x-form.textarea-field label="Lesson Learned" label_ar="الدرس المستفاد" name="lesson_learned"
-                    placeholder="Enter Lesson Learned" :value="$auditFinding?->lesson_learned ?? old('lesson_learned')" />
+                    placeholder="Enter Lesson Learned" :value="$auditFinding?->lesson_learned ?? old('lesson_learned', 'None')" />
 
 
             </div>
@@ -204,6 +202,10 @@
                         <span class="inline mx-2">Save and Exit</span>
                         <span class="inline text-xs font-semibold leading-tight " dir="rtl" lang="ar">حفظ
                             والخروج</span>
+                    </button>
+                    <button type="submit" name="submit" value="complete" class="submit-btn bg-success-600 hover:bg-success-700">
+                        <span class="inline mx-2">Add and Mark as Completed</span>
+                        <span class="inline text-xs font-semibold leading-tight" dir="rtl" lang="ar">إضافة وإغلاق</span>
                     </button>
                 @endif
 

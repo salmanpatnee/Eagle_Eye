@@ -18,6 +18,30 @@ use Illuminate\Support\Facades\DB;
 
 class AuditFindingController extends Controller
 {
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+        $status = $request->input('status');
+        $auditId = $request->input('audit_id');
+
+        $findings = AuditFinding::query()
+            ->with(['audit'])
+            ->when($search, fn ($q) => $q->where(function ($q) use ($search) {
+                $q->where('audit_finding_id', 'LIKE', "%{$search}%")
+                    ->orWhere('audit_finding_name', 'LIKE', "%{$search}%");
+            }))
+            ->when($status, fn ($q) => $q->where('audit_finding_status', $status))
+            ->when($auditId, fn ($q) => $q->where('audit_id', $auditId))
+            ->paginate(20)
+            ->withQueryString();
+
+        $auditNames = Audit::selectRaw("DISTINCT CONCAT(audit_id, ' - ', audit_name) as name, audit_id")->get();
+        $statuses = AuditFinding::STATUSES;
+
+        return view('process/assessments/audit-assessment-findings/index',
+            compact('findings', 'search', 'status', 'auditId', 'auditNames', 'statuses'));
+    }
+
     public function show(AuditFinding $auditFinding)
     {
         $auditFinding->load('categories', 'controls', 'audit', 'domain', 'auditee', 'department', 'owner', 'custodians', 'assets', 'assetsGroups');
@@ -41,8 +65,8 @@ class AuditFindingController extends Controller
         $owners = Owner::select('owner_name', 'owner_role_id')->get();
         $custodians = Custodian::select('custodian_role_id', 'custodian_role_title')->distinct()->get();
 
-        $controls  = $controls->filter(function ($control) use ($assessedControlIds) {
-            return !$assessedControlIds->contains($control->control_id);
+        $controls = $controls->filter(function ($control) use ($assessedControlIds) {
+            return ! $assessedControlIds->contains($control->control_id);
         });
 
         $categories = Category::select('id', 'category_id', 'category_name')
@@ -108,6 +132,13 @@ class AuditFindingController extends Controller
         $auditFinding->assets()->attach($assets ?? []);
         $auditFinding->assetsGroups()->attach($assetsGroups ?? []);
 
+        if ($request->input('submit') === 'complete') {
+            $auditAssessment->status = 'Completed';
+            $auditAssessment->save();
+
+            return redirect(route('audit-assessments.index'))
+                ->with('success', 'Finding added and Audit Assessment marked as Completed.');
+        }
 
         if ($request->input('submit') === 'exit') {
             return redirect(route('audit-assessments.index'))->with('success', 'Audit Finding created successfully.');
@@ -115,7 +146,6 @@ class AuditFindingController extends Controller
 
         return redirect()->back();
     }
-
 
     public function edit(AuditFinding $auditFinding, Request $request)
     {
@@ -147,7 +177,7 @@ class AuditFindingController extends Controller
     public function update(AuditFinding $auditFinding, Request $request)
     {
         $attributes = $request->validate([
-            'audit_finding_id' => ['required', 'unique:audit_findings_table,audit_finding_id,' . $auditFinding->id],
+            'audit_finding_id' => ['required', 'unique:audit_findings_table,audit_finding_id,'.$auditFinding->id],
             'audit_finding_name' => ['required'],
             'audit_finding_description' => ['nullable'],
             'categories' => ['required'],

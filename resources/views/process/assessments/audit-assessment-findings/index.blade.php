@@ -1,101 +1,68 @@
 @extends('layouts.app-full')
-@section('title', 'Control Assessments Summary')
-@section('title_ar', 'ملخص تقييم الضوابط')
+@section('title', 'Audit Findings')
+@section('title_ar', 'نتائج المراجعة')
 @section('content')
     <div>
-        <x-table.action-wrapper title="Control Assessments Summary">
-            <x-action.button label="Add Control Assessment" label_ar="إضافة تقييم الضوابط"
-                route_name="control-assessments.create" />
+        <x-table.action-wrapper title="Audit Findings">
         </x-table.action-wrapper>
 
-        <form action="{{ route('control-assessments.index') }}" method="GET">
+        <form action="{{ route('audit-findings.index') }}" method="GET">
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
                 <x-form.grid-3-col>
                     <div>
-                        <x-form.select label="Control Assessments" label_ar="تقييم الضوابط" name="control_assessment_id"
-                            :value="$controlAssessmentId" :data="$assessments" id_key="control_assessment_id" value_key="name"
+                        <x-form.select label="Audit Assessment" label_ar="تقييم المراجعة" name="audit_id"
+                            :value="$auditId" :data="$auditNames" id_key="audit_id" value_key="name"
+                            onchange="this.form.submit()" hide_keys="true" />
+                    </div>
+                    <div>
+                        <x-form.select label="Status" label_ar="الحالة" name="status" :value="$status"
+                            :custom_data="$statuses"
                             onchange="this.form.submit()" />
                     </div>
                     <div>
-                        <x-form.select label="Controls" label_ar="الضوابط" name="control_id" :value="$controlId"
-                            :data="$controls" id_key="control_id" value_key="control_name" onchange="this.form.submit()" />
-                    </div>
-                    <div>
-                        <x-form.label label="Date" label_ar="تاريخ" for="start_end_date" />
-                        <div class="relative">
-                            <input type="date" id="start_end_date" name="start_end_date"
-                                value="{{ old('start_end_date', $startEndDate) }}" class="input-field"
-                                onclick="this.showPicker()" onchange="this.form.submit()" />
-                            <x-icons.calendar />
-                        </div>
+                        <x-form.label label="Search" label_ar="بحث" for="search" />
+                        <input type="text" id="search" name="search" value="{{ $search }}"
+                            placeholder="Finding ID or Name" class="input-field" />
                     </div>
                 </x-form.grid-3-col>
             </div>
         </form>
 
-        <x-table.table>
-            <x-table.thead>
-                <tr>
-                    <x-table.th label="S.No" label_ar="رقم" />
-                    <x-table.th label="Assessment ID" label_ar="رمز تقييم الضوابط" />
-                    <x-table.th label="Assessment Name" label_ar="اسم تقييم الضوابط" />
-                    <x-table.th label="Start and End Date" label_ar="تاريخ بدءانتهاء" />
-                    <x-table.th label="Control Assessed" label_ar="تقييم الرقابة" />
-                    <x-table.th label="Action" label_ar="إجراء " />
-                </tr>
-            </x-table.thead>
-            <x-table.tbody>
-                @forelse ($controlAssessments as $controlAssessment)
+        <x-table.scroll-table>
+            <x-slot:head>
+                <x-table.th label="S.No" label_ar="رقم" />
+                <x-table.th label="Finding ID" label_ar="رمز النتيجة" />
+                <x-table.th label="Finding Name" label_ar="اسم النتيجة" />
+                <x-table.th label="Audit" label_ar="المراجعة" />
+                <x-table.th label="Status" label_ar="الحالة" />
+                <x-table.th label="Action" label_ar="إجراء" />
+            </x-slot:head>
+            <x-slot:body>
+                @forelse ($findings as $finding)
                     <tr>
                         <x-table.td>
-                            <x-table.serial :loop="$loop" :paginator="$controlAssessments" />
+                            <x-table.serial :loop="$loop" :paginator="$findings" />
                         </x-table.td>
-                        <x-table.td>
-                            <a href="{{ route('control-assessments.show', $controlAssessment->id) }}">
-                                {{ $controlAssessment->control_assessment_id }}
-                            </a>
-                        </x-table.td>
-                        <x-table.td>
-                            {{ $controlAssessment->control_assessment_name }}
-                        </x-table.td>
-                        <x-table.td>
-                            {{ $controlAssessment->start_end_date }}
-                        </x-table.td>
-                        <x-table.td>
-
-                            <ul class="flex flex-col gap-1.5">
-                                @forelse ($controlAssessment->findings as $finding)
-                                    <li class="border-b border-gray-200 flex items-center last:border-b-0">
-                                        <span>
-                                            <a
-                                                href="{{ route('control-assessment-findings.show', $finding->id) }}">{{ $finding->control_id }}</a>
-                                        </span>
-                                    </li>
-                                @empty
-                                    <li
-                                        class="flex items-center gap-2 border-b border-gray-200 px-3 py-2.5 text-base text-left font-medium text-gray-600 last:border-b-0">
-                                        -
-                                    </li>
-                                @endforelse
-                            </ul>
-                            {{-- <x-table-list :data="$controlAssessment->findings" id_key="" value_key="control_finding_id" /> --}}
-                        </x-table.td>
+                        <x-table.td>{{ $finding->audit_finding_id }}</x-table.td>
+                        <x-table.td>{{ $finding->audit_finding_name }}</x-table.td>
+                        <x-table.td>{{ $finding->audit?->audit_name }}</x-table.td>
+                        <x-table.td>{{ $finding->audit_finding_status }}</x-table.td>
                         <x-table.td action_col="true">
-                            <x-action.add route_name="control-assessment-findings.create"
-                                param="{{ $controlAssessment->control_assessment_id }}" />
-                            <x-action.view route_name="control-assessments.show" param="{{ $controlAssessment->id }}" />
-                            <x-action.edit route_name="control-assessments.edit" param="{{ $controlAssessment->id }}" />
-                            <x-action.delete route_name="control-assessments.destroy"
-                                param="{{ $controlAssessment->id }}" />
+                            <x-action.view route_name="audit-findings.show" param="{{ $finding->id }}" />
+                            <x-action.edit route_name="audit-findings.edit" param="{{ $finding->id }}" />
+                            <x-action.delete route_name="audit-findings.destroy" param="{{ $finding->id }}" />
                         </x-table.td>
-
                     </tr>
-                @endforeach
-            </x-table.tbody>
-        </x-table.table>
+                @empty
+                    <tr>
+                        <td colspan="6" class="px-3 py-6 text-center text-gray-500 dark:text-gray-400">No findings found.</td>
+                    </tr>
+                @endforelse
+            </x-slot:body>
+        </x-table.scroll-table>
 
         <x-pagination>
-            {{ $controlAssessments->links() }}
+            {{ $findings->links() }}
         </x-pagination>
 
     </div>
