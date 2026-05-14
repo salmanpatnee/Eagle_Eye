@@ -18,8 +18,9 @@ class RiskAssessmentController extends Controller
         $riskAssessmentId = request('risk_assessment_id');
         $riskId = request('risk_id');
         $startEndDate = request('start_end_date');
+        $status = request('status');
 
-        $riskAssessments = RiskAssessment::withCount('findings')
+        $riskAssessments = RiskAssessment::query()
             ->select(
                 'id',
                 'risk_assessment_id',
@@ -28,10 +29,24 @@ class RiskAssessmentController extends Controller
                 'risk_assessment_end_date'
             )
             ->selectRaw("CONCAT(
-                IFNULL(DATE_FORMAT(risk_assessment_start_date, '%d %b %Y'), 'N/A'), 
-                ' - ', 
+                IFNULL(DATE_FORMAT(risk_assessment_start_date, '%d %b %Y'), 'N/A'),
+                ' - ',
                 IFNULL(DATE_FORMAT(risk_assessment_end_date, '%d %b %Y'), 'N/A')
              ) as start_end_date")
+            ->selectSub(
+                DB::table('risk_assessment_details_table as rad')
+                    ->whereColumn('rad.risk_assessment_id', 'risk_assessment_master_table.risk_assessment_id')
+                    ->selectRaw('COUNT(*)'),
+                'findings_count'
+            )
+            ->selectSub(
+                DB::table('risk_assessment_vs_control_assessment_table as ra_ca')
+                    ->whereColumn('ra_ca.risk_assessment_id', 'risk_assessment_master_table.risk_assessment_id')
+                    ->join('control_assessment_details_table as cad', 'cad.control_assessment_id', '=', 'ra_ca.control_assessment_id')
+                    ->join('risk_vs_control_table as rvc', 'rvc.control_id', '=', 'cad.control_id')
+                    ->selectRaw('COUNT(DISTINCT rvc.risk_id)'),
+                'scoped_risks_count'
+            )
             ->when($riskAssessmentId, function ($query) use ($riskAssessmentId) {
                 return $query->where('risk_assessment_id', $riskAssessmentId);
             })
@@ -46,6 +61,38 @@ class RiskAssessmentController extends Controller
                         ->orWhere('risk_assessment_end_date', $startEndDate);
                 });
             })
+            ->when($status === 'completed', function ($query) {
+                $query->whereRaw(
+                    '(SELECT COUNT(*) FROM risk_assessment_details_table rad
+                      WHERE rad.risk_assessment_id = risk_assessment_master_table.risk_assessment_id)
+                     >= (SELECT COUNT(DISTINCT rvc.risk_id)
+                          FROM risk_assessment_vs_control_assessment_table ra_ca
+                          JOIN control_assessment_details_table cad ON cad.control_assessment_id = ra_ca.control_assessment_id
+                          JOIN risk_vs_control_table rvc ON rvc.control_id = cad.control_id
+                          WHERE ra_ca.risk_assessment_id = risk_assessment_master_table.risk_assessment_id)
+                     AND (SELECT COUNT(DISTINCT rvc.risk_id)
+                          FROM risk_assessment_vs_control_assessment_table ra_ca
+                          JOIN control_assessment_details_table cad ON cad.control_assessment_id = ra_ca.control_assessment_id
+                          JOIN risk_vs_control_table rvc ON rvc.control_id = cad.control_id
+                          WHERE ra_ca.risk_assessment_id = risk_assessment_master_table.risk_assessment_id) > 0'
+                );
+            })
+            ->when($status === 'in-progress', function ($query) {
+                $query->whereRaw(
+                    '(SELECT COUNT(*) FROM risk_assessment_details_table rad
+                      WHERE rad.risk_assessment_id = risk_assessment_master_table.risk_assessment_id)
+                     < (SELECT COUNT(DISTINCT rvc.risk_id)
+                         FROM risk_assessment_vs_control_assessment_table ra_ca
+                         JOIN control_assessment_details_table cad ON cad.control_assessment_id = ra_ca.control_assessment_id
+                         JOIN risk_vs_control_table rvc ON rvc.control_id = cad.control_id
+                         WHERE ra_ca.risk_assessment_id = risk_assessment_master_table.risk_assessment_id)
+                     OR (SELECT COUNT(DISTINCT rvc.risk_id)
+                          FROM risk_assessment_vs_control_assessment_table ra_ca
+                          JOIN control_assessment_details_table cad ON cad.control_assessment_id = ra_ca.control_assessment_id
+                          JOIN risk_vs_control_table rvc ON rvc.control_id = cad.control_id
+                          WHERE ra_ca.risk_assessment_id = risk_assessment_master_table.risk_assessment_id) = 0'
+                );
+            })
             ->paginate(20);
 
         $riskAssessmentNames = RiskAssessment::selectRaw("DISTINCT CONCAT(risk_assessment_id, ' - ', risk_assessment_name) as name, risk_assessment_id")
@@ -56,14 +103,59 @@ class RiskAssessmentController extends Controller
             ->join('risk_vs_control_table as rvc', 'r.risk_id', '=', 'rvc.risk_id')
             ->get();
 
-        return view('process/assessments/risk-assessments/index', compact('riskAssessments', 'riskAssessmentNames', 'riskNames', 'riskAssessmentId', 'riskId', 'startEndDate'));
+        $statusOptions = [
+            (object) ['status_id' => 'completed',   'status_text' => 'Completed'],
+            (object) ['status_id' => 'in-progress', 'status_text' => 'In-Progress'],
+        ];
+
+        return view('process/assessments/risk-assessments/index', compact('riskAssessments', 'riskAssessmentNames', 'riskNames', 'riskAssessmentId', 'riskId', 'startEndDate', 'status', 'statusOptions'));
     }
 
     public function show(RiskAssessment $riskAssessment)
     {
-        $riskAssessment->load('location', 'auditor', 'classification', 'findings');
+        $search = request('search');
+        $status = request('status');
 
-        return view('process/assessments/risk-assessments/show', compact('riskAssessment'));
+        $paginatedFindings = $riskAssessment->findings()
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($q) use ($search) {
+                    $q->where('risk_finding_name', 'LIKE', "%{$search}%")
+                        ->orWhere('risk_finding_id', 'LIKE', "%{$search}%");
+                });
+            })
+            ->when($status, fn ($q) => $q->where('implementation_status', $status))
+            ->paginate(20)
+            ->withQueryString();
+
+        if (request()->ajax()) {
+            return view('process/assessments/risk-assessments/_findings-table', compact('paginatedFindings'));
+        }
+
+        $riskAssessment->load(['location', 'auditor', 'classification', 'findings']);
+
+        $findings = $riskAssessment->findings;
+        $findingStats = [
+            'open' => $findings->where('implementation_status', 'Open')->count(),
+            'close' => $findings->where('implementation_status', 'Close')->count(),
+        ];
+        $totalFindings = $findings->count();
+        $completionPercent = $totalFindings > 0 ? round(($findingStats['close'] / $totalFindings) * 100) : 0;
+
+        $scopedRisksCount = DB::table('risk_assessment_vs_control_assessment_table as ra_ca')
+            ->where('ra_ca.risk_assessment_id', $riskAssessment->risk_assessment_id)
+            ->join('control_assessment_details_table as cad', 'cad.control_assessment_id', '=', 'ra_ca.control_assessment_id')
+            ->join('risk_vs_control_table as rvc', 'rvc.control_id', '=', 'cad.control_id')
+            ->distinct()
+            ->count('rvc.risk_id');
+
+        $riskCoveragePercent = $scopedRisksCount > 0
+            ? min(100, round(($totalFindings / $scopedRisksCount) * 100))
+            : 0;
+
+        return view('process/assessments/risk-assessments/show', compact(
+            'riskAssessment', 'findingStats', 'totalFindings', 'completionPercent',
+            'scopedRisksCount', 'riskCoveragePercent', 'paginatedFindings'
+        ));
     }
 
     public function create(Request $request)
@@ -169,6 +261,38 @@ class RiskAssessmentController extends Controller
         $riskAssessment->update($attributes);
 
         return redirect(route('risk-assessments.index'))->with('success', 'Risk Assessment updated successfully.');
+    }
+
+    public function replicate(RiskAssessment $riskAssessment, Request $request)
+    {
+        abort_unless(auth()->user()->canWrite(), 403);
+
+        $request->validate([
+            'risk_assessment_id' => 'required|unique:risk_assessment_master_table,risk_assessment_id',
+            'risk_assessment_name' => 'required|string',
+            'risk_assessment_description' => 'nullable|string',
+        ]);
+
+        $newAssessment = $riskAssessment->replicate();
+        $newAssessment->risk_assessment_id = $request->risk_assessment_id;
+        $newAssessment->risk_assessment_name = $request->risk_assessment_name;
+        $newAssessment->risk_assessment_description = $request->risk_assessment_description;
+        $newAssessment->save();
+
+        $riskAssessment->load('controlAssessments');
+        $newAssessment->controlAssessments()->attach(
+            $riskAssessment->controlAssessments->pluck('control_assessment_id')->toArray()
+        );
+
+        $riskAssessment->load('findings');
+        foreach ($riskAssessment->findings as $finding) {
+            $newFinding = $finding->replicate();
+            $newFinding->risk_assessment_id = $newAssessment->risk_assessment_id;
+            $newFinding->save();
+        }
+
+        return redirect(route('risk-assessments.edit', $newAssessment->id))
+            ->with('success', 'Risk Assessment replicated successfully.');
     }
 
     public function destroy(RiskAssessment $riskAssessment)

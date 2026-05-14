@@ -8,6 +8,7 @@ use App\Models\RiskAssessmentDetail;
 use App\Models\RiskTreatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class RiskAssessmentFindingController extends Controller
 {
@@ -26,7 +27,22 @@ class RiskAssessmentFindingController extends Controller
     {
         $riskAssessment->load(['location', 'auditor', 'classification', 'controlAssessments']);
         $riskAssessmentFinding = null;
-        $risks = Risk::select('id', 'risk_id', 'risk_name')->get();
+
+        $takenRiskIds = RiskAssessmentDetail::where('risk_assessment_id', $riskAssessment->risk_assessment_id)
+            ->pluck('risk_id');
+
+        $selectedCaIds = DB::table('risk_assessment_vs_control_assessment_table')
+            ->where('risk_assessment_id', $riskAssessment->risk_assessment_id)
+            ->pluck('control_assessment_id');
+
+        $risks = Risk::select('risk_master_table.id', 'risk_master_table.risk_id', 'risk_master_table.risk_name')
+            ->join('risk_vs_control_table as rvc', 'rvc.risk_id', '=', 'risk_master_table.risk_id')
+            ->join('control_assessment_details_table as cad', 'cad.control_id', '=', 'rvc.control_id')
+            ->whereIn('cad.control_assessment_id', $selectedCaIds)
+            ->whereNotIn('risk_master_table.risk_id', $takenRiskIds)
+            ->distinct()
+            ->get();
+
         $treatments = RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')->get();
 
         return view('process/assessments/risk-assessment-findings/create', compact('risks', 'riskAssessment', 'treatments', 'riskAssessmentFinding'));
@@ -35,7 +51,8 @@ class RiskAssessmentFindingController extends Controller
     public function store(RiskAssessment $riskAssessment, Request $request)
     {
         $attributes = $request->validate([
-            'risk_finding_id' => ['required', 'unique:risk_assessment_details_table'],
+            'risk_finding_id' => ['required', Rule::unique('risk_assessment_details_table', 'risk_finding_id')
+                ->where('risk_assessment_id', $riskAssessment->risk_assessment_id)],
             'risk_treatment_id' => ['required'],
             'risk_finding_name' => 'required',
             'risk_finding_description' => 'nullable',
@@ -79,8 +96,16 @@ class RiskAssessmentFindingController extends Controller
             ->where('id', '!=', $riskAssessmentFinding->id)
             ->pluck('risk_id');
 
-        $risks = Risk::select('id', 'risk_id', 'risk_name')
-            ->whereNotIn('risk_id', $takenRiskIds)
+        $selectedCaIds = DB::table('risk_assessment_vs_control_assessment_table')
+            ->where('risk_assessment_id', $riskAssessment->risk_assessment_id)
+            ->pluck('control_assessment_id');
+
+        $risks = Risk::select('risk_master_table.id', 'risk_master_table.risk_id', 'risk_master_table.risk_name')
+            ->join('risk_vs_control_table as rvc', 'rvc.risk_id', '=', 'risk_master_table.risk_id')
+            ->join('control_assessment_details_table as cad', 'cad.control_id', '=', 'rvc.control_id')
+            ->whereIn('cad.control_assessment_id', $selectedCaIds)
+            ->whereNotIn('risk_master_table.risk_id', $takenRiskIds)
+            ->distinct()
             ->get();
 
         $treatments = RiskTreatment::select('risk_treatment_id', 'risk_treatment_name')->get();
@@ -92,7 +117,9 @@ class RiskAssessmentFindingController extends Controller
     {
 
         $attributes = $request->validate([
-            'risk_finding_id' => ['required', 'unique:risk_assessment_details_table,risk_finding_id,'.$riskAssessmentFinding->id],
+            'risk_finding_id' => ['required', Rule::unique('risk_assessment_details_table', 'risk_finding_id')
+                ->ignore($riskAssessmentFinding->id)
+                ->where('risk_assessment_id', $riskAssessmentFinding->risk_assessment_id)],
             'risk_treatment_id' => ['required'],
             'risk_finding_name' => 'required',
             'risk_finding_description' => 'nullable',

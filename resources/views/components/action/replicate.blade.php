@@ -1,4 +1,10 @@
-@props(['route'])
+@props([
+    'route',
+    'id_field'          => 'control_assessment_id',
+    'name_field'        => 'control_assessment_name',
+    'description_field' => 'control_assessment_description',
+    'id_placeholder'    => 'e.g. CA-Q2-2025',
+])
 
 @auth
     @if (auth()->user()->canWrite())
@@ -22,21 +28,21 @@
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     Assessment ID <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" name="control_assessment_id" required
-                                    class="input-field" placeholder="e.g. CA-Q2-2025" />
+                                <input type="text" name="{{ $id_field }}" required
+                                    class="input-field" placeholder="{{ $id_placeholder }}" />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     Assessment Name <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" name="control_assessment_name" required
+                                <input type="text" name="{{ $name_field }}" required
                                     class="input-field" placeholder="Enter assessment name" />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     Description
                                 </label>
-                                <textarea name="control_assessment_description" rows="3"
+                                <textarea name="{{ $description_field }}" rows="3"
                                     class="input-field" placeholder="Optional description"></textarea>
                             </div>
                             <div class="flex justify-end gap-3 pt-2">
