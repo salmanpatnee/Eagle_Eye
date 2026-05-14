@@ -175,39 +175,81 @@
                 </div>
             </div>
         </div>
-        <div>
-            <x-table.table>
-                <x-table.thead>
-                    <x-table.th label="S.No" label_ar="رقم" />
-                    <x-table.th label="Finding ID" label_ar="رمز العثور على" />
-                    <x-table.th label="Finding Name" label_ar="اسم العثور على" />
-                    <x-table.th label="Control Implementation Status" label_ar="حالة تنفيذ الضوابط" />
-                    <x-table.th label="Action" label_ar="إجراء " />
-                </x-table.thead>
-                <x-table.tbody>
-                    @foreach ($controlAssessment->findings as $finding)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-white/[0.03]">
-                            <x-table.td> {{ $loop->index + 1 }}</x-table.td>
-                            <x-table.td>
-                                {{ $finding->control_finding_id }}
-                            </x-table.td>
-                            <x-table.td>
-                                {{ $finding->control_finding_name }}
-                            </x-table.td>
-                            <x-table.td>
-                                {{ $finding->control_implementation_status }}
-                            </x-table.td>
-                            <x-table.td action_col="true">
-
-                                <x-action.view route_name="control-assessment-findings.show" param="{{ $finding->id }}" />
-                                <x-action.edit route_name="control-assessment-findings.edit" param="{{ $finding->id }}" />
-                                <x-action.delete route_name="control-assessment-findings.destroy"
-                                    param="{{ $finding->id }}" />
-                            </x-table.td>
-                        </tr>
-                    @endforeach
-                </x-table.tbody>
-            </x-table.table>
+        <div class="border-t border-gray-100 p-2 sm:p-6">
+            <x-form.grid-3-col>
+                <div>
+                    <x-form.field name="search" label="Search" label_ar="بحث"
+                        placeholder="Search by ID or name…" :value="request('search')" />
+                </div>
+                <div>
+                    <x-form.select name="status" label="Status" label_ar="الحالة"
+                        :custom_data="['Implemented', 'Partially Implemented', 'Not Implemented', 'Not Applicable']"
+                        :value="request('status')" />
+                </div>
+                <div class="flex items-end">
+                    <button id="findings-clear" class="action-btn text-center justify-center">Clear Filters</button>
+                </div>
+            </x-form.grid-3-col>
+        </div>
+        <div id="findings-wrapper">
+            @include('process/assessments/control-assessments/_findings-table')
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    function fetchFindings(url) {
+        const wrapper = document.getElementById('findings-wrapper');
+        wrapper.style.opacity = '0.5';
+        wrapper.style.pointerEvents = 'none';
+
+        fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+            .then(function (r) { return r.text(); })
+            .then(function (html) {
+                wrapper.innerHTML = html;
+                wrapper.style.opacity = '';
+                wrapper.style.pointerEvents = '';
+                if (window.Alpine) { Alpine.initTree(wrapper); }
+                (wrapper.querySelector('thead') || wrapper).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            })
+            .catch(function () {
+                wrapper.style.opacity = '';
+                wrapper.style.pointerEvents = '';
+            });
+    }
+
+    function buildUrl(page) {
+        const params = new URLSearchParams(window.location.search);
+        params.set('page', page || 1);
+        params.set('search', document.getElementById('search').value);
+        const status = document.getElementById('status').value;
+        if (status) { params.set('status', status); } else { params.delete('status'); }
+        return window.location.pathname + '?' + params.toString();
+    }
+
+    document.getElementById('findings-wrapper').addEventListener('click', function (e) {
+        const link = e.target.closest('a');
+        if (!link || !link.href.includes('page=')) return;
+        e.preventDefault();
+        const page = new URL(link.href).searchParams.get('page');
+        fetchFindings(buildUrl(page));
+    });
+
+    let debounceTimer;
+    document.getElementById('search').addEventListener('input', function () {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(function () { fetchFindings(buildUrl(1)); }, 300);
+    });
+
+    document.getElementById('status').addEventListener('change', function () {
+        fetchFindings(buildUrl(1));
+    });
+
+    document.getElementById('findings-clear').addEventListener('click', function () {
+        document.getElementById('search').value = '';
+        document.getElementById('status').value = '';
+        fetchFindings(window.location.pathname);
+    });
+</script>
+@endpush

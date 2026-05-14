@@ -104,6 +104,24 @@ class ControlAssessmentController extends Controller
 
     public function show(ControlAssessment $controlAssessment)
     {
+        $search = request('search');
+        $status = request('status');
+
+        $paginatedFindings = $controlAssessment->findings()
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($q) use ($search) {
+                    $q->where('control_finding_name', 'LIKE', "%{$search}%")
+                        ->orWhere('control_finding_id', 'LIKE', "%{$search}%");
+                });
+            })
+            ->when($status, fn ($q) => $q->where('control_implementation_status', $status))
+            ->paginate(20)
+            ->withQueryString();
+
+        if (request()->ajax()) {
+            return view('process/assessments/control-assessments/_findings-table', compact('paginatedFindings'));
+        }
+
         $controlAssessment->load(['bestPractice', 'location', 'auditor', 'classification', 'findings']);
 
         $remainingControlsCount = DB::table('control_master_table as c')
@@ -128,7 +146,7 @@ class ControlAssessmentController extends Controller
         $totalControls = $remainingControlsCount + $findings->count();
         $completionPercent = $totalControls > 0 ? round(($findings->count() / $totalControls) * 100) : 0;
 
-        return view('process/assessments/control-assessments/show', compact('controlAssessment', 'remainingControlsCount', 'findingStats', 'totalControls', 'completionPercent'));
+        return view('process/assessments/control-assessments/show', compact('controlAssessment', 'remainingControlsCount', 'findingStats', 'totalControls', 'completionPercent', 'paginatedFindings'));
     }
 
     public function create()

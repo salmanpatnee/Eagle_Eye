@@ -342,6 +342,7 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::resource('risk-assessments', RiskAssessmentController::class);
     Route::controller(RiskAssessmentController::class)->group(function () {
         Route::post('/risk-control/', 'get_control_by_risk');
+        Route::post('risk-assessments/{riskAssessment}/replicate', 'replicate')->name('risk-assessments.replicate');
     });
 
     Route::resource('risk-assessment-findings', RiskAssessmentFindingController::class)->except(['index', 'create', 'store']);
