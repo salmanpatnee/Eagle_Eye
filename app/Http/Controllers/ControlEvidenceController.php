@@ -73,7 +73,7 @@ class ControlEvidenceController extends Controller
 
                 DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"".$baseUrl."evidences/', e.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', e.evidence_name, '</a>') SEPARATOR '<br>') AS evidences"),
 
-                DB::raw("GROUP_CONCAT(CONCAT('<a href=\"".$baseUrl."artifacts/', a.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts")
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"".$baseUrl."artifacts/', a.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts")
             )
 
             ->when($bestPracticeId, function ($query, $bestPracticeId) {
