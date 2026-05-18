@@ -41,8 +41,9 @@ class RiskTreatmentController extends Controller
             ->when($riskId, function ($query, $riskId) {
                 $query->where('risk_master_table.risk_id', $riskId);
             })
-            ->get();
+            ->paginate(20);
 
+        $riskTreatments->appends(['risk' => $riskId, 'control' => $controlId]);
 
         return view('process/risk-identification/risk-treatment/risk-vs-control', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
     }
@@ -74,9 +75,9 @@ class RiskTreatmentController extends Controller
             ->when($controlId, function ($query, $controlId) {
                 $query->where('control_master_table.control_id', $controlId);
             })
-            ->get();
+            ->paginate(20);
 
-
+        $riskTreatments->appends(['risk' => $riskId, 'control' => $controlId]);
 
         return view('process/risk-identification/risk-treatment/control-vs-risk', compact('riskTreatments', 'controls', 'risks', 'riskId', 'controlId'));
     }

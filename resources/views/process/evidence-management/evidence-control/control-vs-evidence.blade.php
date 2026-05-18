@@ -56,7 +56,7 @@
             <x-slot:body>
                 @forelse ($controlEvidence as $row)
                     <tr>
-                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td><x-table.serial :loop="$loop" :paginator="$controlEvidence" /></x-table.td>
                         <x-table.td>
                             <a href="{{ route('controls.show', $row->id) }}">{{ $row->control_id }}</a>
                         </x-table.td>
@@ -71,5 +71,9 @@
                 @endforelse
             </x-slot:body>
         </x-table.scroll-table>
+
+        <x-pagination>
+            {{ $controlEvidence->links() }}
+        </x-pagination>
     </div>
 @endsection

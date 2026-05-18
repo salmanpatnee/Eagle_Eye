@@ -36,13 +36,13 @@ class ControlSmartSearch extends Controller
         $controlIds = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
             ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
             ->orderControls()
-            ->select('control_master_table.control_id', 'control_master_table.control_name')
+            ->select('control_master_table.control_id', 'control_master_table.control_name', 'b.best_practices_id')
             ->get();
 
         $classifications    = Classification::select('id', 'classification_id', 'classification_name')->get();
         $categories         = Category::select('id', 'category_id', 'category_name')->get();
         $types              = ControlType::select('id', 'control_type_id', 'control_type_name')->get();
-        $practices          = BestPractice::select('id', 'best_practices_id', 'best_practices_name')->get();
+        $practices          = BestPractice::select('id', 'best_practices_id', 'best_practices_name')->orderBy('sort_order')->get();
         $domains            = Domain::select('id', 'main_domain_id', 'main_domain_name')->get();
         $subDomains         = SubDomain::select('id', 'sub_domain_id', 'sub_domain_name')->get();
 

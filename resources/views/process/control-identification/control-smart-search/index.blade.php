@@ -36,7 +36,7 @@
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="practice" :value="$practice"
                             :data="$practices" id_key="best_practices_id" value_key="best_practices_name"
-                            onchange="this.form.submit()" hide_keys="true" />
+                            onchange="this.form.submit()" />
                     </div>
                     <div>
                         <x-form.select label="Main Domains" label_ar="المكون الأساسي" name="domain" :value="$domain"

@@ -30,10 +30,11 @@ class RiskAssetGroupTableController extends Controller
                 }
             }])
             ->when($assetGroupId, function ($query, $assetGroupId) {
-                $query->where('asset_group_table.asset_group_id', $assetGroupId); // Apply filtering by asset group if provided
+                $query->where('asset_group_table.asset_group_id', $assetGroupId);
             })
-            ->get();
+            ->paginate(20);
 
+        $riskassetgroup->appends(['risk' => $riskId, 'assetGroup' => $assetGroupId]);
 
         return view('process/risk-identification/risk-asset-group/asset-group-vs-risk', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
     }
@@ -60,8 +61,9 @@ class RiskAssetGroupTableController extends Controller
             ->when($riskId, function ($query, $riskId) {
                 $query->where('risk_master_table.risk_id', $riskId);
             })
-            ->get();
+            ->paginate(20);
 
+        $riskassetgroup->appends(['risk' => $riskId, 'assetGroup' => $assetGroupId]);
 
         return view('process/risk-identification/risk-asset-group/risk-vs-asset-group', compact('riskassetgroup', 'risks', 'assetGroups', 'riskId', 'assetGroupId'));
     }

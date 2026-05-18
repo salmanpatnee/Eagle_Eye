@@ -56,7 +56,7 @@ class ControlEvidenceController extends Controller
 
         DB::statement('SET SESSION group_concat_max_len = 1000000');
 
-        $controlEvidence = DB::table('evidence_vs_control_table AS evc')
+        $controlQuery = DB::table('evidence_vs_control_table AS evc')
             ->join('control_master_table AS c', 'evc.control_id', '=', 'c.control_id')
             ->join('evidence_table AS e', 'evc.evidence_id', '=', 'e.evidence_id')
             ->join('control_master_table_vs_best_practice_table AS cvb', 'cvb.control_id', '=', 'c.control_id')
@@ -92,10 +92,11 @@ class ControlEvidenceController extends Controller
             ->orderBy(DB::raw("CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 3), '-', -1) AS UNSIGNED)"))
             ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 4), '-', -1) AS UNSIGNED), 0)"))
             ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 5), '-', -1) AS UNSIGNED), 0)"))
-            ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 6), '-', -1) AS UNSIGNED), 0)"))
-            ->get();
+            ->orderBy(DB::raw("COALESCE(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(c.control_id, '-', 6), '-', -1) AS UNSIGNED), 0)"));
 
         if (request()->has('pdf')) {
+
+            $controlEvidence = $controlQuery->get();
 
             $mpdf = new Mpdf([
                 'orientation' => 'L',
@@ -109,11 +110,18 @@ class ControlEvidenceController extends Controller
 
             $mpdf->WriteHTML($html);
 
-            // Set the headers to prompt the file download
             return response($mpdf->Output('Control-vs-Evidence.pdf', 'D'))
                 ->header('Content-Type', 'application/pdf')
                 ->header('Content-Disposition', 'attachment; filename="'.'Control-vs-Evidence.pdf'.'"');
         } else {
+
+            $controlEvidence = $controlQuery->paginate(20);
+            $controlEvidence->appends([
+                'practice'   => $bestPracticeId,
+                'domain'     => $domainId,
+                'subdomain'  => $subDomainId,
+                'control_id' => $controlId,
+            ]);
 
             return view(
                 'process/evidence-management/evidence-control/control-vs-evidence',

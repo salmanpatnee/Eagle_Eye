@@ -37,7 +37,7 @@
             <x-slot:body>
                 @forelse ($riskassetgroup as $row)
                     <tr>
-                        <x-table.td>{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td><x-table.serial :loop="$loop" :paginator="$riskassetgroup" /></x-table.td>
                         <x-table.td><a href="{{ route('risks.show', $row->id) }}"
                                 target="_blank">{{ $row->risk_id }}</a></x-table.td>
                         <x-table.td min-width="200px" max-width="400px">{{ $row->risk_name }}</x-table.td>
@@ -48,5 +48,9 @@
                 @endforeach
             </x-slot:body>
         </x-table.scroll-table>
+
+        <x-pagination>
+            {{ $riskassetgroup->links() }}
+        </x-pagination>
     </div>
 @endsection

@@ -3,7 +3,7 @@
 @section('title_ar', 'مؤشرات الأداء الرئيسية المتاحة مع المراجع')
 @section('content')
     <div>
-        <x-table.action-wrapper title="Available KPIs with References">
+        <x-table.action-wrapper :title="$kpiStandardsReport->category_name">
         </x-table.action-wrapper>
 
         <form action="{{ route('kpi-standards-report.show', $kpiStandardsReport->category_id) }}" method="GET">

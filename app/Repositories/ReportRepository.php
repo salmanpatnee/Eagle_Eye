@@ -68,7 +68,7 @@ class ReportRepository
     public function getBestPracticeData()
     {
         return BestPractice::from('best_practice_table AS bp')
-            ->select('bp.best_practices_name', DB::raw('COUNT(cad.control_implementation_status) AS controls_implemented'))
+            ->select('bp.best_practices_name', 'bp.sort_order', DB::raw('COUNT(cad.control_implementation_status) AS controls_implemented'))
             ->leftJoin('control_master_table_vs_best_practice_table AS cvb', 'bp.best_practices_id', '=', 'cvb.best_practice_id')
             ->leftJoin('control_master_table AS cm', 'cvb.control_id', '=', 'cm.control_id')
             ->leftJoin('control_assessment_details_table AS cad', 'cm.control_id', '=', 'cad.control_id')
@@ -76,8 +76,9 @@ class ReportRepository
                 $query->where('cad.control_implementation_status', 'Implemented')
                     ->orWhereNull('cad.control_implementation_status');
             })
-            ->whereIn('bp.best_practices_id', ['NCA-ECC-2018', 'NCA-CSCC-2019', 'NCA-CCC-2020', 'NCA-TCC-2021', 'NCA-OSMACC-2021', 'NCA-DCC-2022', 'SAMA-CSF-2017'])
-            ->groupBy('bp.best_practices_name')
+            ->whereIn('bp.best_practices_id', ['NCA-ECC-2024', 'NCA-CSCC-2019', 'NCA-CCC-2020', 'NCA-TCC-2021', 'NCA-OSMACC-2021', 'NCA-DCC-2022', 'SAMA-CSF-2017', 'NCA-ECC-2018'])
+            ->groupBy('bp.best_practices_name', 'bp.sort_order')
+            ->orderBy('bp.sort_order')
             ->get();
     }
 
