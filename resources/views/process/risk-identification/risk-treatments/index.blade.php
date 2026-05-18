@@ -5,8 +5,8 @@
 @section('content')
     <div>
 
-        <x-table.action-wrapper title="All Treatment Options">
-            <x-action.button label="Add Treatment Option" label_ar="إضافة خيارات علاج المخاطر"
+        <x-table.action-wrapper title="All Risk Treatment Options">
+            <x-action.button label="Add Risk Treatment Option" label_ar="إضافة خيارات علاج المخاطر"
                 route_name="risk-treatment-options.create" />
         </x-table.action-wrapper>
 

@@ -31,6 +31,9 @@
                             value_key="audit_finding_name" onchange="this.form.submit()" />
                     </div>
                 </x-form.grid-col>
+                <div class="flex justify-center">
+                    <a href="{{ route('audit-vs-control.index') }}" class="action-btn text-center justify-center">Clear Filters</a>
+                </div>
             </div>
         </form>
 

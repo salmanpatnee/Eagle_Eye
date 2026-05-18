@@ -15,7 +15,7 @@
                     <div>
                         <x-form.multiselect label="Controls" label_ar="الضوابط" name="control[]"
                             :data="$controlNames" id_key="control_id" value_key="control_name"
-                            :value="$control" />
+                            :value="$control" :show_key="true" />
                     </div>
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="bestPractice"

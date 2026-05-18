@@ -31,7 +31,7 @@ class RiskIdentificationController extends Controller
             })->when($owner, function ($query, $owner) {
                 $query->where('risk_master_table.owner_id', $owner);
             })
-            ->paginate(20);
+            ->paginate(20)->withQueryString();
 
 
 

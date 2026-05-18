@@ -27,7 +27,7 @@ class AssetRegisterController extends Controller
                 $query->whereHas('categories', function ($query) use ($category) {
                     $query->whereIn('category_table.category_id', $category);
                 });
-            })->paginate(20);
+            })->paginate(20)->withQueryString();
 
 
 

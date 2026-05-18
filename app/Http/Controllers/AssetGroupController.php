@@ -13,7 +13,7 @@ class AssetGroupController extends Controller
 
     public function index()
     {
-        $assetGroups = AssetGroup::with('owner', 'classification')->paginate(20);
+        $assetGroups = AssetGroup::with('classification')->paginate(20);
         return view('process/assets/asset-groups/index', compact('assetGroups'));
     }
 

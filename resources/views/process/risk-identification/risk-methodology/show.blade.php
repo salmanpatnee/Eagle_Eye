@@ -13,7 +13,7 @@
                 <img src="{{ asset('storage/' . $organization->organization_logo) }}" alt="Organization Logo" width="250"
                     class="mb-6 mx-auto">
             @endif
-            <p class="text-lg font-bold text-gray-900 mb-0 rtl:text-right" lang="ar" dir="rtl">
+            <p class="text-lg font-bold text-gray-900 mb-0" lang="ar" dir="rtl">
                 {{ $organization->organization_name_arabic }}</p>
             <p class="text-lg font-bold text-gray-900 mb-0">{{ $organization->organization_name_english }}</p>
             @if ($riskMethodology->risk_methodology_id == 'RM-001')

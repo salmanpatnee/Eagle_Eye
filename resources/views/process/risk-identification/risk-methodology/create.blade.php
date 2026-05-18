@@ -1,4 +1,7 @@
 @extends('layouts.risk')
+@section('sidebar-menu-items')
+    <x-sidebar-menu-item route_name="risk-methodology.index" label_ar="منهجية المخاطر" label="Risk Methodology" />
+@endsection
 @section('title', 'Risk Methodology')
 @section('title_ar', 'منهجية المخاطر')
 @section('content')

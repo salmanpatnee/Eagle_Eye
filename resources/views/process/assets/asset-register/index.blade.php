@@ -30,9 +30,9 @@
                             value_key="category_name" onchange="this.form.submit()" /> --}}
                     </div>
                 </x-form.grid-col>
-                <div class="text-center">
+                <div class="flex justify-center gap-3">
                     <button class="action-btn text-center justify-center">Filter Assets</button>
-                   
+                    <a href="{{ route('assets.index') }}" class="action-btn text-center justify-center">Clear Filters</a>
                 </div>
             </div>
         </form>

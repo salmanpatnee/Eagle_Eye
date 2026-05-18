@@ -36,7 +36,8 @@ class ControlSmartSearch extends Controller
         $controlIds = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
             ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
             ->orderControls()
-            ->pluck('control_master_table.control_id');
+            ->select('control_master_table.control_id', 'control_master_table.control_name')
+            ->get();
 
         $classifications    = Classification::select('id', 'classification_id', 'classification_name')->get();
         $categories         = Category::select('id', 'category_id', 'category_name')->get();

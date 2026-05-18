@@ -37,7 +37,7 @@
                     </div>
                     <div>
                         <x-form.select label="Controls" label_ar="الضوابط" name="control_id" :value="$controlId"
-                            :custom_data="$controlIds" onchange="this.form.submit()" />
+                            :data="$controlIds" id_key="control_id" value_key="control_name" onchange="this.form.submit()" />
                     </div>
                 </x-form.grid-4-col>
             </div>

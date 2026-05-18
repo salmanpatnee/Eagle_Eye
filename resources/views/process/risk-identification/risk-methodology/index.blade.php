@@ -1,4 +1,7 @@
 @extends('layouts.risk')
+@section('sidebar-menu-items')
+    <x-sidebar-menu-item route_name="risk-methodology.index" label_ar="منهجية المخاطر" label="Risk Methodology" />
+@endsection
 @section('title', 'Risk Methodology')
 @section('title_ar', 'منهجية المخاطر')
 @section('content')
@@ -8,15 +11,15 @@
             <x-action.button label="Add Methodology" label_ar="إضافة منهجية المخاطر" route_name="risk-methodology.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Risk Methodology ID" label_ar="رمز منهجية المخاطر" />
                 <x-table.th label="Risk Methodology Name" label_ar="الاسم منهجية المخاطر" />
                 <x-table.th label="Risk Methodology Source" label_ar="مصدر منهجية المخاطر" />
                 <x-table.th label="Action" label_ar="إجراء" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @foreach ($riskMethodologies as $riskMethodology)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
@@ -31,7 +34,7 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection

@@ -49,7 +49,8 @@ class ControlEvidenceController extends Controller
             ->when($bestPracticeId, function ($query, $bestPracticeId) {
                 $query->where('b.best_practices_id', $bestPracticeId);
             })->orderControls()
-            ->pluck('control_master_table.control_id');
+            ->select('control_master_table.control_id', 'control_master_table.control_name')
+            ->get();
 
         $baseUrl = config('app.url');
 
@@ -158,7 +159,8 @@ class ControlEvidenceController extends Controller
             ->when($bestPracticeId, function ($query, $bestPracticeId) {
                 $query->where('b.best_practices_id', $bestPracticeId);
             })->orderControls()
-            ->pluck('control_master_table.control_id');
+            ->select('control_master_table.control_id', 'control_master_table.control_name')
+            ->get();
 
         $baseUrl = config('app.url');
         DB::statement('SET SESSION group_concat_max_len = 1000000');

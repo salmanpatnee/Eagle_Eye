@@ -46,7 +46,7 @@ class ControlController extends Controller
             })
             ->orderControls()
             // ->get();
-            ->paginate(100);
+            ->paginate(100)->withQueryString();
 
         // return $controls;
         return view('process/control-identification/controls/index', compact('controls', 'controlNames', 'risks', 'owners', 'bestPractices', 'control', 'owner', 'risk', 'bestPractice'));

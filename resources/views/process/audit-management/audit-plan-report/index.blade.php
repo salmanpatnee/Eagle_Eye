@@ -30,6 +30,9 @@
                     </div>
 
                 </x-form.grid-col>
+                <div class="flex justify-center">
+                    <a href="{{ route('audit-plan-report.index') }}" class="action-btn text-center justify-center">Clear Filters</a>
+                </div>
             </div>
         </form>
 

@@ -15,7 +15,7 @@
                     <div>
                         <x-form.multiselect label="Risk" label_ar="المخاطر" name="risk[]"
                             :data="$riskNames" id_key="risk_id" value_key="risk_name"
-                            :value="$risk" />
+                            :value="$risk" :show_key="true" />
                     </div>
                     <div>
                         <x-form.select label="Risk Group" label_ar="مجموعة المخاطر" name="group"

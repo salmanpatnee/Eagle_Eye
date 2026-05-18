@@ -10,7 +10,7 @@
 
         <form action="{{ route('risk-status.index') }}" method="GET">
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
-                <x-form.grid-3-col>
+                <div class="max-w-2xl mx-auto grid grid-cols-1 gap-6 lg:grid-cols-2">
                     <div>
                         <x-form.select label="Owner" name="owner" placeholder="All Owners"
                             :value="$owner" :data="$owners" id_key="owner_role_id" value_key="owner_name"
@@ -25,7 +25,10 @@
                             <option value="Close" {{ $status === 'Close' ? 'selected' : '' }}>Close</option>
                         </select>
                     </div>
-                </x-form.grid-3-col>
+                </div>
+                <div class="flex justify-center">
+                    <a href="{{ route('risk-status.index') }}" class="action-btn text-center justify-center">Clear Filters</a>
+                </div>
             </div>
         </form>
 

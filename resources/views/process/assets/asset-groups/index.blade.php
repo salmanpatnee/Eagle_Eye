@@ -14,7 +14,7 @@
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Asset Group ID" label_ar="رمز مجموعة الأصول" />
                 <x-table.th label="Asset Group Name" label_ar="الاسم مجموعة الأصول" />
-                <x-table.th label="Owner" label_ar="اسم صاحب" />
+                {{-- <x-table.th label="Owner" label_ar="اسم صاحب" /> --}}
                 <x-table.th label="Classification" label_ar="اسم التصنيف" />
                 <x-table.th label="Action" label_ar="إجراء " />
             </x-slot:head>
@@ -24,7 +24,7 @@
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$assetGroups" /></x-table.td>
                         <x-table.td>{{ $assetGroup->asset_group_id }}</x-table.td>
                         <x-table.td min-width="200px" max-width="400px">{{ $assetGroup->asset_group_name }}</x-table.td>
-                        <x-table.td>{{ $assetGroup?->owner?->owner_name }}</x-table.td>
+                        {{-- <x-table.td>{{ $assetGroup?->owner?->owner_name }}</x-table.td> --}}
                         <x-table.td>{{ $assetGroup->classification->classification_name }}</x-table.td>
                         <x-table.td action_col="true">
                             <x-action.view route_name="asset-groups.show" param="{{ $assetGroup->id }}" />
