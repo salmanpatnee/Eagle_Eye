@@ -1,6 +1,11 @@
-@extends('layouts.app-full')
+﻿@extends('layouts.app-full')
 @section('title', 'Control Assessment')
 @section('title_ar', 'تقييم الضوابط')
+@section('parent_url', route('control-assessments.index'))
+@if(isset($controlAssessment))
+    @section('parent_title', 'Control Assessments Summary')
+    @section('breadcrumb_title', $controlAssessment->control_assessment_name)
+@endif
 @section('content')
 
     <div>

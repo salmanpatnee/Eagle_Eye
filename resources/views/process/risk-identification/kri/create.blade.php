@@ -1,6 +1,11 @@
-@extends('layouts.risk')
+﻿@extends('layouts.risk')
 @section('title', 'Key Risk Indicators')
 @section('title_ar', 'مؤشرات المخاطر الرئيسية')
+@section('parent_url', route('kris.index'))
+@if(isset($kri))
+    @section('parent_title', 'Key Risk Indicators')
+    @section('breadcrumb_title', $kri->key_risk_indicator_id)
+@endif
 
 @section('content')
     <div>

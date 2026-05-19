@@ -1,6 +1,9 @@
 @extends('layouts.control')
 @section('title', 'Control Definition')
 @section('title_ar', 'تعريف الضوابط')
+@section('parent_title', 'Control Definition')
+@section('parent_url', route('controls.index'))
+@section('breadcrumb_title', $control->control_id)
 
 @section('content')
     <div>

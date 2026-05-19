@@ -1,6 +1,11 @@
-@extends('process/initial-setup/layout/app')
+﻿@extends('process/initial-setup/layout/app')
 @section('title', 'Custodian Roles')
 @section('title_ar', 'دور الوصي')
+@section('parent_url', route('custodian-roles.index'))
+@if(isset($custodianRole))
+    @section('parent_title', 'Custodian Roles')
+    @section('breadcrumb_title', $custodianRole->custodian_role_title)
+@endif
 @section('content')
     @php
         $options = ['System', 'Application', 'Other'];

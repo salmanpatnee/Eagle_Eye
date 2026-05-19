@@ -1,6 +1,9 @@
 @extends('layouts.app-full')
 @section('title', 'Audit Assessments Summary')
 @section('title_ar', 'ملخص تقييم مراجعة')
+@section('parent_title', 'Audit Summary')
+@section('parent_url', route('audit-assessments.index'))
+@section('breadcrumb_title', $auditAssessment->audit_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Audit Assessment">

@@ -1,6 +1,11 @@
-@extends('layouts.asset')
+﻿@extends('layouts.asset')
 @section('title', 'Asset Status Definition')
 @section('title_ar', 'تعريف حالة الأصول')
+@section('parent_url', route('asset-status.index'))
+@if(isset($assetStatus))
+    @section('parent_title', 'Asset Status Definition')
+    @section('breadcrumb_title', $assetStatus->asset_current_status)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $assetStatus?->id ? 'Update' : 'New' }} Asset Status">

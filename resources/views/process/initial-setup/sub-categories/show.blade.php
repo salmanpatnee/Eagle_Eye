@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Sub-Category Definition')
 @section('title_ar', 'تعريف الفئة الفرعية الفرعية')
+@section('parent_title', 'Sub-Category Definition')
+@section('parent_url', route('sub-categories.index'))
+@section('breadcrumb_title', $subCategory->sub_category_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Sub-Category Details">

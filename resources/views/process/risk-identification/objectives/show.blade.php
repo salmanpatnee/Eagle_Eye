@@ -1,6 +1,9 @@
 @extends('layouts.risk')
 @section('title', 'Objectives')
 @section('title_ar', 'أهداف')
+@section('parent_title', 'Objectives')
+@section('parent_url', route('objectives.index'))
+@section('breadcrumb_title', $objective->objective_id)
 
 @section('content')
     <div>

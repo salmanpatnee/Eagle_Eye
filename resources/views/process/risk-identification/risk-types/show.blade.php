@@ -1,6 +1,9 @@
 @extends('layouts.risk')
 @section('title', 'Risk Types')
 @section('title_ar', 'النوع للمخاطر')
+@section('parent_title', 'Risk Types')
+@section('parent_url', route('risk-types.index'))
+@section('breadcrumb_title', $riskType->risk_type_name)
 
 @section('content')
     <div>

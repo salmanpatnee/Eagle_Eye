@@ -1,6 +1,9 @@
 @extends('layouts.app-full')
 @section('title', 'Available KPIs with References')
 @section('title_ar', 'مؤشرات الأداء الرئيسية المتاحة مع المراجع')
+@section('parent_title', 'Available KPIs with References')
+@section('parent_url', route('kpi-standards-report.index'))
+@section('breadcrumb_title', $kpiStandardsReport->category_name)
 @section('content')
     <div>
         <x-table.action-wrapper :title="$kpiStandardsReport->category_name">

@@ -1,6 +1,11 @@
-@extends('layouts.evidence')
+﻿@extends('layouts.evidence')
 @section('title', 'Evidence Management')
 @section('title_ar', 'إدارة الأدلة')
+@section('parent_url', route('evidences.index'))
+@if(isset($evidence))
+    @section('parent_title', 'Evidence Management')
+    @section('breadcrumb_title', $evidence->evidence_name)
+@endif
 @section('content')
     @php
         $yesNoOptions = ['Yes', 'No'];

@@ -20,6 +20,7 @@ class RiskAssessmentFindingController extends Controller
 
     public function show(RiskAssessmentDetail $riskAssessmentFinding)
     {
+        $riskAssessmentFinding->load('riskAssessment');
         return view('process/assessments/risk-assessment-findings/show', compact('riskAssessmentFinding'));
     }
 

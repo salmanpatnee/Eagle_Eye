@@ -1,6 +1,11 @@
-@extends('process/initial-setup/layout/app')
+﻿@extends('process/initial-setup/layout/app')
 @section('title', 'Main Domains')
 @section('title_ar', 'المكون الأساسي')
+@section('parent_url', route('domains.index'))
+@if(isset($domain))
+    @section('parent_title', 'Main Domains')
+    @section('breadcrumb_title', $domain->main_domain_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $domain?->id ? 'Update' : 'New' }} Domain">

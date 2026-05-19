@@ -1,6 +1,9 @@
 @extends('layouts.risk')
 @section('title', 'Key Performance Indicators')
 @section('title_ar', 'مؤشرات الأداء الرئيسية')
+@section('parent_title', 'Key Performance Indicators')
+@section('parent_url', route('kpis.index'))
+@section('breadcrumb_title', $kpi->key_performance_indicatory_id)
 
 @section('content')
     <div>

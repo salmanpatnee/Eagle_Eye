@@ -1,6 +1,11 @@
-@extends('layouts.risk-appetite')
+﻿@extends('layouts.risk-appetite')
 @section('title', 'Risk Appetite')
 @section('title_ar', 'الرغبة في المخاطرة')
+@section('parent_url', route('risk-appetites.index'))
+@if(isset($risk_appetite))
+    @section('parent_title', 'Risk Appetite')
+    @section('breadcrumb_title', $risk_appetite->risk_appetite_name)
+@endif
 
 @section('content')
     <div>

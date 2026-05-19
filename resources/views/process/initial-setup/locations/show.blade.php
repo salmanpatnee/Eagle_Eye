@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Location Setup')
 @section('title_ar', 'إعداد الموقع')
+@section('parent_title', 'Location Setup')
+@section('parent_url', route('locations.index'))
+@section('breadcrumb_title', $location->location_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Location Details">

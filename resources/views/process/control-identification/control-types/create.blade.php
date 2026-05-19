@@ -1,6 +1,11 @@
-@extends('layouts.control')
+﻿@extends('layouts.control')
 @section('title', 'Control Type')
 @section('title_ar', 'نوع الضوابط')
+@section('parent_url', route('control-types.index'))
+@if(isset($controlType))
+    @section('parent_title', 'Control Type')
+    @section('breadcrumb_title', $controlType->control_type_name)
+@endif
 
 @section('content')
 

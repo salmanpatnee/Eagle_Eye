@@ -1,6 +1,9 @@
 @extends('layouts/kpi')
 @section('title', 'KPI Categories')
 @section('title_ar', 'مؤشرات الأداء الرئيسية')
+@section('parent_title', 'KPI Categories')
+@section('parent_url', route('kpi-categories.index'))
+@section('breadcrumb_title', $kpiCategory->kpi_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="KPI Category Details">

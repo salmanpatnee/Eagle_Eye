@@ -1,6 +1,9 @@
 @extends('layouts.threat')
 @section('title', 'Threat Agent Vectors')
 @section('title_ar', 'ناقل وكيل التهديد')
+@section('parent_title', 'Threat Agent Vectors')
+@section('parent_url', route('threat-agent-vectors.index'))
+@section('breadcrumb_title', $threatAgentVector->threat_agent_vector_name)
 
 @section('content')
     <div>

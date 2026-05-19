@@ -1,6 +1,9 @@
 @extends('layouts.app-full')
 @section('title', 'Control Assessment')
 @section('title_ar', 'تقييم الضوابط')
+@section('parent_title', 'Control Assessments Summary')
+@section('parent_url', route('control-assessments.index'))
+@section('breadcrumb_title', $controlAssessment->control_assessment_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Control Assessment">

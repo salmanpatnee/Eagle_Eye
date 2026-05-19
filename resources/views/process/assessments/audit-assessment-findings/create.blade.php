@@ -1,6 +1,13 @@
-@extends('layouts.app-full')
+﻿@extends('layouts.app-full')
 @section('title', 'Audit Findings')
 @section('title_ar', 'العثور على')
+@section('parent_url', route('audit-assessments.index'))
+@section('parent_title', 'Audit Summary')
+@section('parent2_url', route('audit-assessments.show', $auditAssessment))
+@section('parent2_title', $auditAssessment->audit_name)
+@if(isset($auditFinding))
+    @section('breadcrumb_title', $auditFinding->audit_finding_name)
+@endif
 @section('content')
 
     <div>

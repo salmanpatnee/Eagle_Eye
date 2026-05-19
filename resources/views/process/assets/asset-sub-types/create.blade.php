@@ -1,6 +1,11 @@
-@extends('layouts.asset')
+﻿@extends('layouts.asset')
 @section('title', 'Asset Sub-Type Definition')
 @section('title_ar', 'تعريف النوع الفرعي الأصل')
+@section('parent_url', route('asset-sub-types.index'))
+@if(isset($assetSubType))
+    @section('parent_title', 'Asset Sub-Type Definition')
+    @section('breadcrumb_title', $assetSubType->asset_sub_type_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $assetSubType?->id ? 'Update' : 'New' }} Asset Sub-Type">

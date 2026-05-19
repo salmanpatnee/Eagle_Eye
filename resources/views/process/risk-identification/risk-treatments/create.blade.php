@@ -1,6 +1,11 @@
-@extends('layouts.risk')
+﻿@extends('layouts.risk')
 @section('title', 'Risk Treatment Options')
 @section('title_ar', 'خيارات علاج المخاطر')
+@section('parent_url', route('risk-treatment-options.index'))
+@if(isset($riskTreatmentOption))
+    @section('parent_title', 'Risk Treatment Options')
+    @section('breadcrumb_title', $riskTreatmentOption->risk_treatment_name)
+@endif
 
 @section('content')
     <div>

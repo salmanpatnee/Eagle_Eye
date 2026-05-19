@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Organization Setup')
 @section('title_ar', 'إعداد الجهة')
+@section('parent_title', 'Organization Setup')
+@section('parent_url', route('organizations.index'))
+@section('breadcrumb_title', $organization->organization_name_english)
 @section('content')
     <div>
         <x-table.action-wrapper title="Organization Details">

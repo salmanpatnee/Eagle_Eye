@@ -1,6 +1,11 @@
-@extends('process/initial-setup/layout/app')
+﻿@extends('process/initial-setup/layout/app')
 @section('title', 'Organization Departments')
 @section('title_ar', 'القسم الجهة')
+@section('parent_url', route('departments.index'))
+@if(isset($department))
+    @section('parent_title', 'Organization Departments')
+    @section('breadcrumb_title', $department->department_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $department?->id ? 'Update' : 'New' }} Department">

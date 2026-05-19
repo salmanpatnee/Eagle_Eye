@@ -1,6 +1,11 @@
-@extends('layouts.audit')
+﻿@extends('layouts.audit')
 @section('title', 'Auditor Information')
 @section('title_ar', 'معلومات المراجع')
+@section('parent_url', route('auditors.index'))
+@if(isset($auditor))
+    @section('parent_title', 'Auditor Information')
+    @section('breadcrumb_title', $auditor->auditor_first_name . ' ' . $auditor->auditor_last_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $auditor?->id ? 'Update' : 'New' }} Auditor">

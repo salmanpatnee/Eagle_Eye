@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Owner Registration')
 @section('title_ar', 'تسجيل صاحب')
+@section('parent_title', 'Owner Registration')
+@section('parent_url', route('owners.index'))
+@section('breadcrumb_title', $owner->owner_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Owner Details">

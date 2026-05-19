@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Custodian Roles')
 @section('title_ar', 'دور الوصي')
+@section('parent_title', 'Custodian Roles')
+@section('parent_url', route('custodian-roles.index'))
+@section('breadcrumb_title', $custodianRole->custodian_role_title)
 @section('content')
     <div>
         <x-table.action-wrapper title="Custodian Role Details">

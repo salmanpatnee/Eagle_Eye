@@ -1,6 +1,8 @@
 @extends('layouts.risk-acceptance')
 @section('title', 'Risk Acceptance')
 @section('title_ar', 'قبول المخاطر')
+@section('parent_title', 'Risk Acceptance')
+@section('parent_url', route('risk-acceptances.index'))
 
 @section('content')
     <div>

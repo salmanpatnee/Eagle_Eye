@@ -1,6 +1,11 @@
-@extends('layouts.app-full')
+﻿@extends('layouts.app-full')
 @section('title', 'Risk Assessment')
 @section('title_ar', 'تقييم المخاطر')
+@section('parent_url', route('risk-assessments.index'))
+@if(isset($riskAssessment))
+    @section('parent_title', 'Risk Assessments Summary')
+    @section('breadcrumb_title', $riskAssessment->risk_assessment_name)
+@endif
 @section('content')
 
     <div>

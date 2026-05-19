@@ -1,6 +1,11 @@
-@extends('process/initial-setup/layout/app')
+﻿@extends('process/initial-setup/layout/app')
 @section('title', 'Owner Role Details')
 @section('title_ar', 'دور الصاحب')
+@section('parent_url', route('owner-roles.index'))
+@if(isset($ownerRole))
+    @section('parent_title', 'Owner Role Details')
+    @section('breadcrumb_title', $ownerRole->owner_role_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $ownerRole?->id ? 'Update' : 'New' }} Owner">

@@ -1,6 +1,9 @@
 @extends('layouts.risk')
 @section('title', 'Key Risk Indicators')
 @section('title_ar', 'مؤشرات المخاطر الرئيسية')
+@section('parent_title', 'Key Risk Indicators')
+@section('parent_url', route('kris.index'))
+@section('breadcrumb_title', $kri->key_risk_indicator_id)
 
 @section('content')
     <div>

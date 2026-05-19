@@ -1,6 +1,11 @@
-@extends('process/initial-setup/layout/app')
+﻿@extends('process/initial-setup/layout/app')
 @section('title', 'Category Definition')
 @section('title_ar', 'تعريف الفئة ')
+@section('parent_url', route('categories.index'))
+@if(isset($category))
+    @section('parent_title', 'Category Definition')
+    @section('breadcrumb_title', $category->category_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $category?->id ? 'Update' : 'New' }} Category">

@@ -1,6 +1,9 @@
 @extends('layouts.asset')
 @section('title', 'Asset Registration')
 @section('title_ar', 'تسجيل الأصول')
+@section('parent_title', 'Asset Registration')
+@section('parent_url', route('assets.index'))
+@section('breadcrumb_title', $asset->asset_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Asset Details">

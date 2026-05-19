@@ -1,6 +1,9 @@
 @extends('layouts.app-full')
 @section('title', 'Risk Assessment')
 @section('title_ar', 'تقييم المخاطر')
+@section('parent_title', 'Risk Assessments Summary')
+@section('parent_url', route('risk-assessments.index'))
+@section('breadcrumb_title', $riskAssessment->risk_assessment_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Risk Assessment">

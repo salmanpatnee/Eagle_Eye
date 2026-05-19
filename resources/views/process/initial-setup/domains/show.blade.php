@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Main Domains')
 @section('title_ar', 'المكون الأساسي')
+@section('parent_title', 'Main Domains')
+@section('parent_url', route('domains.index'))
+@section('breadcrumb_title', $domain->main_domain_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Main Domain Details">

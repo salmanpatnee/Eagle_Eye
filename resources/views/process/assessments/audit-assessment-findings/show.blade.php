@@ -1,6 +1,11 @@
 @extends('layouts.app-full')
 @section('title', 'Audit Findings')
 @section('title_ar', 'العثور على')
+@section('parent_title', 'Audit Summary')
+@section('parent_url', route('audit-assessments.index'))
+@section('parent2_title', $auditFinding->audit->audit_name)
+@section('parent2_url', route('audit-assessments.show', $auditFinding->audit))
+@section('breadcrumb_title', $auditFinding->audit_finding_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Audit Findings">

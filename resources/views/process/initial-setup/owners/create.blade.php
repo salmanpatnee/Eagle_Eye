@@ -1,6 +1,11 @@
-@extends('process/initial-setup/layout/app')
+﻿@extends('process/initial-setup/layout/app')
 @section('title', 'Owner Registration')
 @section('title_ar', 'تسجيل صاحب')
+@section('parent_url', route('owners.index'))
+@if(isset($owner))
+    @section('parent_title', 'Owner Registration')
+    @section('breadcrumb_title', $owner->owner_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $owner?->id ? 'Update' : 'New' }} Owner">

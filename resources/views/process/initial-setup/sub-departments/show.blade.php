@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Organization Sub-Departments')
 @section('title_ar', 'القسم الفرعي في الجهة')
+@section('parent_title', 'Organization Sub-Departments')
+@section('parent_url', route('sub-departments.index'))
+@section('breadcrumb_title', $subDepartment->sub_department_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Sub-Department Details">

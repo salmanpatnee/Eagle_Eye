@@ -1,6 +1,11 @@
-@extends('layouts.user')
+﻿@extends('layouts.user')
 @section('title', 'Users')
 @section('title_ar', 'المستخدم')
+@section('parent_url', route('users.index'))
+@if(isset($user))
+    @section('parent_title', 'Users')
+    @section('breadcrumb_title', $user->first_name . ' ' . $user->last_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $user?->id ? 'Update' : 'New' }} User">

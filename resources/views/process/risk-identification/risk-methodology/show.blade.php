@@ -1,6 +1,9 @@
 @extends('layouts.app-full')
 @section('title', 'Risk Methodology')
 @section('title_ar', 'منهجية المخاطر')
+@section('parent_title', 'Risk Methodology')
+@section('parent_url', route('risk-methodology.index'))
+@section('breadcrumb_title', $riskMethodology->risk_methodology_name)
 @section('content')
 
     <x-table.action-wrapper title="">

@@ -1,6 +1,9 @@
 @extends('layouts.asset')
 @section('title', 'Asset Type Definition')
 @section('title_ar', 'تعريف نوع الأصل')
+@section('parent_title', 'Asset Type Definition')
+@section('parent_url', route('asset-types.index'))
+@section('breadcrumb_title', $assetType->asset_type_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Asset Type Details">

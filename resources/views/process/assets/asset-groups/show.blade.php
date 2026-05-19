@@ -1,6 +1,9 @@
 @extends('layouts.asset-group')
 @section('title', 'Asset Groups')
 @section('title_ar', 'مجموعة مجموعة الأصول')
+@section('parent_title', 'Asset Groups')
+@section('parent_url', route('asset-groups.index'))
+@section('breadcrumb_title', $assetGroup->asset_group_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Asset Group Details">

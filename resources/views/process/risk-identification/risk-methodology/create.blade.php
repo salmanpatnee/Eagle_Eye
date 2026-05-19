@@ -1,9 +1,14 @@
-@extends('layouts.risk')
+﻿@extends('layouts.risk')
 @section('sidebar-menu-items')
     <x-sidebar-menu-item route_name="risk-methodology.index" label_ar="منهجية المخاطر" label="Risk Methodology" />
 @endsection
 @section('title', 'Risk Methodology')
 @section('title_ar', 'منهجية المخاطر')
+@section('parent_url', route('risk-methodology.index'))
+@if(isset($riskMethodology))
+    @section('parent_title', 'Risk Methodology')
+    @section('breadcrumb_title', $riskMethodology->risk_methodology_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="New Methodology">

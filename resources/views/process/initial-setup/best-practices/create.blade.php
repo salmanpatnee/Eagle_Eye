@@ -1,6 +1,11 @@
-@extends('process/initial-setup/layout/app')
+﻿@extends('process/initial-setup/layout/app')
 @section('title', 'Best Practices Definition')
 @section('title_ar', 'تعريف أفضل الممارسات')
+@section('parent_url', route('best-practices.index'))
+@if(isset($bestPractice))
+    @section('parent_title', 'Best Practices Definition')
+    @section('breadcrumb_title', $bestPractice->best_practices_name)
+@endif
 @section('content')
     @php
         $yesNoOptions = ['Yes', 'No'];

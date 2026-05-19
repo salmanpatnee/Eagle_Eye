@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Classification Definition')
 @section('title_ar', 'تعريف التصنيف')
+@section('parent_title', 'Classification Definition')
+@section('parent_url', route('classifications.index'))
+@section('breadcrumb_title', $classification->classification_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Classification Details">

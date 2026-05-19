@@ -1,6 +1,9 @@
 @extends('layouts.audit')
 @section('title', 'Auditee Information')
 @section('title_ar', 'معلومات التدقيق')
+@section('parent_title', 'Auditee Information')
+@section('parent_url', route('auditees.index'))
+@section('breadcrumb_title', $auditee->auditee_first_name . ' ' . $auditee->auditee_last_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Auditee Details">

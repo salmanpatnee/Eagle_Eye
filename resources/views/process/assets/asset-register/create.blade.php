@@ -1,6 +1,11 @@
-@extends('layouts.asset')
+﻿@extends('layouts.asset')
 @section('title', 'Asset Registration')
 @section('title_ar', 'تسجيل الأصول')
+@section('parent_url', route('assets.index'))
+@if(isset($asset))
+    @section('parent_title', 'Asset Registration')
+    @section('breadcrumb_title', $asset->asset_name)
+@endif
 @section('content')
     @php
         $ratingOptions = [1, 2, 3, 4, 5];

@@ -1,6 +1,11 @@
-@extends('process/initial-setup/layout/app')
+﻿@extends('process/initial-setup/layout/app')
 @section('title', 'Location Setup')
 @section('title_ar', 'إعداد الموقع')
+@section('parent_url', route('locations.index'))
+@if(isset($location))
+    @section('parent_title', 'Location Setup')
+    @section('breadcrumb_title', $location->location_name)
+@endif
 @section('content')
     <div>
         <x-table.action-wrapper title="{{ $location?->id ? 'Update' : 'New' }} Location">

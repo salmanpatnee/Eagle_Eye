@@ -1,6 +1,8 @@
 @extends('layouts.risk-appetite')
 @section('title', 'Risk Inherent')
 @section('title_ar', 'المخاطر الكامنة')
+@section('parent_title', 'Risk Inherent')
+@section('parent_url', route('risk-inherents.index'))
 
 @section('content')
     <div>

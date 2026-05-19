@@ -1,6 +1,11 @@
-@extends('layouts.asset-group')
+﻿@extends('layouts.asset-group')
 @section('title', 'Asset Groups')
 @section('title_ar', 'مجموعة الأصول')
+@section('parent_url', route('asset-groups.index'))
+@if(isset($assetGroup))
+    @section('parent_title', 'Asset Groups')
+    @section('breadcrumb_title', $assetGroup->asset_group_name)
+@endif
 @section('content')
     @php
         $ratingOptions = [1, 2, 3, 4, 5];

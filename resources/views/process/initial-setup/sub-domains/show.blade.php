@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Sub-Domains Setup')
 @section('title_ar', 'إعداد المكون الفرعي')
+@section('parent_title', 'Sub-Domains Setup')
+@section('parent_url', route('sub-domains.index'))
+@section('breadcrumb_title', $subDomain->sub_domain_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Sub-Domain Details">

@@ -1,6 +1,11 @@
-@extends('layouts.control')
+﻿@extends('layouts.control')
 @section('title', 'KPI Standards')
 @section('title_ar', 'معيار مؤشرات الأداء الرئيسية')
+@section('parent_url', route('kpi-standards.index'))
+@if(isset($kpiStandard))
+    @section('parent_title', 'KPI Standards')
+    @section('breadcrumb_title', $kpiStandard->kpi_name)
+@endif
 
 @section('content')
 

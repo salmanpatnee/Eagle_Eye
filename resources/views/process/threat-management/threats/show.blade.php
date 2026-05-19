@@ -1,6 +1,9 @@
 @extends('layouts.threat')
 @section('title', 'Threat Agents')
 @section('title_ar', 'وكلاء التهديد')
+@section('parent_title', 'Threat Agents')
+@section('parent_url', route('threat-agents.index'))
+@section('breadcrumb_title', $threatAgent->threat_agent_name)
 
 @section('content')
     <div>

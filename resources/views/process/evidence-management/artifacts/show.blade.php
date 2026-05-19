@@ -1,6 +1,9 @@
 @extends('layouts.artifact')
 @section('title', 'Artifact Management')
 @section('title_ar', 'إدارة المقتنيات')
+@section('parent_title', 'Artifact Management')
+@section('parent_url', route('artifacts.index'))
+@section('breadcrumb_title', $artifact->artifact_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Artifact Details">

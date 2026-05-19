@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Best Practices Definition')
 @section('title_ar', 'تعريف أفضل الممارسات')
+@section('parent_title', 'Best Practices Definition')
+@section('parent_url', route('best-practices.index'))
+@section('breadcrumb_title', $bestPractice->best_practices_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Best Practices Details">

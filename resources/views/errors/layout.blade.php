@@ -18,13 +18,8 @@
 
         {{-- Heading --}}
         <h1 class="mt-7 mb-3 text-3xl font-bold text-gray-800 dark:text-white/90 sm:text-4xl">
-            @yield('error_heading', 'Something Went Wrong')
+            Please press back button to continue.
         </h1>
-
-        {{-- Message --}}
-        <p class="mb-9 max-w-sm text-sm leading-relaxed text-gray-500 dark:text-gray-400 sm:text-base">
-            @yield('error_message', 'An unexpected error occurred.')
-        </p>
 
         {{-- Divider --}}
         <div class="mb-9 h-px w-16 bg-gray-200 dark:bg-gray-700"></div>

@@ -1,6 +1,11 @@
-@extends('layouts.artifact')
+﻿@extends('layouts.artifact')
 @section('title', 'Attachment Management')
 @section('title_ar', 'إدارة المرفقات')
+@section('parent_url', route('artifacts.index'))
+@if(isset($artifact))
+    @section('parent_title', 'Artifact Management')
+    @section('breadcrumb_title', $artifact->artifact_name)
+@endif
 @section('content')
     @php
         $yesNoOptions = ['Yes', 'No'];

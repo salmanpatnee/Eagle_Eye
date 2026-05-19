@@ -1,6 +1,11 @@
-@extends('layouts.risk')
+﻿@extends('layouts.risk')
 @section('title', 'Risk Identification')
 @section('title_ar', 'تحديد المخاطر')
+@section('parent_url', route('risks.index'))
+@if(isset($risk))
+    @section('parent_title', 'Risk Identification')
+    @section('breadcrumb_title', $risk->risk_name)
+@endif
 
 @section('content')
     @php

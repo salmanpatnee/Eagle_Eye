@@ -1,6 +1,9 @@
 @extends('process/initial-setup/layout/app')
 @section('title', 'Custodian Registration')
 @section('title_ar', 'تسجيل الوصي')
+@section('parent_title', 'Custodian Registration')
+@section('parent_url', route('custodians.index'))
+@section('breadcrumb_title', $custodian->custodian_name_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Custodian Details">

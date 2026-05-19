@@ -1,6 +1,11 @@
-@extends('layouts.control')
+﻿@extends('layouts.control')
 @section('title', 'Control Definition')
 @section('title_ar', 'تعريف الضوابط')
+@section('parent_url', route('controls.index'))
+@if(isset($control))
+    @section('parent_title', 'Control Definition')
+    @section('breadcrumb_title', $control->control_id)
+@endif
 
 @section('content')
     @php

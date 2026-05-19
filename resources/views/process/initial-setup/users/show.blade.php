@@ -1,6 +1,9 @@
 @extends('layouts.user')
 @section('title', 'Users')
 @section('title_ar', 'المستخدم')
+@section('parent_title', 'Users')
+@section('parent_url', route('users.index'))
+@section('breadcrumb_title', $user->first_name . ' ' . $user->last_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="User Details">

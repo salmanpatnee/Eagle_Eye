@@ -1,6 +1,9 @@
 @extends('layouts/cms')
 @section('title', 'Process')
 @section('title_ar', 'العملية')
+@section('parent_title', 'Process')
+@section('parent_url', route('cms.index'))
+@section('breadcrumb_title', $process->title)
 @section('content')
     <div>
         <x-table.action-wrapper title="Process Details">

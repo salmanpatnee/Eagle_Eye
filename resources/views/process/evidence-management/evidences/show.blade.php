@@ -1,6 +1,9 @@
 @extends('layouts.evidence')
 @section('title', 'Evidence Management')
 @section('title_ar', 'إدارة الأدلة')
+@section('parent_title', 'Evidence Management')
+@section('parent_url', route('evidences.index'))
+@section('breadcrumb_title', $evidence->evidence_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Evidence Details">

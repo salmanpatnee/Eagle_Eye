@@ -1,6 +1,9 @@
 @extends('layouts.audit')
 @section('title', 'Audit Information')
 @section('title_ar', 'تخطيط مراجعة')
+@section('parent_title', 'Audit Information')
+@section('parent_url', route('audit-plans.index'))
+@section('breadcrumb_title', $auditPlan->audit_name)
 @section('content')
     <div>
         <x-table.action-wrapper title="Audit Plan Details">

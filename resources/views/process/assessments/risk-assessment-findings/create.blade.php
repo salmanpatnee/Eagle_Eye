@@ -1,6 +1,13 @@
-@extends('layouts.app-full')
+﻿@extends('layouts.app-full')
 @section('title', 'Risk Assessment Findings')
 @section('title_ar', 'تقييم المخاطر نتائج نتائج')
+@section('parent_url', route('risk-assessments.index'))
+@section('parent_title', 'Risk Assessments Summary')
+@section('parent2_url', route('risk-assessments.show', $riskAssessment))
+@section('parent2_title', $riskAssessment->risk_assessment_name)
+@if(isset($riskAssessmentFinding))
+    @section('breadcrumb_title', $riskAssessmentFinding->risk_finding_name)
+@endif
 @section('content')
     @php
         $ratings = ['1', '2', '3', '4', '5'];
