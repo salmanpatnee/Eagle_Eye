@@ -277,6 +277,16 @@
         <div class="card"><h3 class="card-title">SAMA Control Maturity Level Distribution</h3><canvas id="samaMaturityLevel"></canvas></div>
         <div class="card"><h3 class="card-title">Heatmap - Risk Appetite Breakdown</h3><canvas id="heatmapChart"></canvas></div>
     </div>
+
+    {{-- Section 6: Audit Findings --}}
+    <div class="dash-section">
+        <span class="dash-section-badge">06</span>
+        <span class="dash-section-title">Audit Findings</span>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 px-4 mb-6">
+        <div class="card"><h3 class="card-title">Audit Finding Status Distribution</h3><canvas id="auditFindingStatusChart"></canvas></div>
+        <div class="card"><h3 class="card-title">Audit Findings by Owner</h3><canvas id="auditFindingOwnerChart"></canvas></div>
+    </div>
 </div>
 
 @endsection
@@ -1015,5 +1025,130 @@
             buildGauge('samaNonComplianceGauge', @json($samaComplianceStatus));
             buildGauge('ncaNonComplianceGauge',  @json($eccComplianceStatus));
         })();
+    </script>
+
+    <!------------- Audit Finding Status Distribution ---------------->
+    <script>
+        const auditFindingStatus = @json($auditFindingStatus);
+        const auditFindingLabels = ['Open - Not Started', 'Open - WIP', 'Closed'];
+        const auditFindingCounts = [
+            auditFindingStatus.open_not_started ?? 0,
+            auditFindingStatus.open_wip ?? 0,
+            auditFindingStatus.closed ?? 0
+        ];
+        const auditFindingColors = ['#DC2626', '#F59E0B', '#059669'];
+
+        new Chart("auditFindingStatusChart", {
+            type: "pie",
+            data: {
+                labels: auditFindingLabels,
+                datasets: [{
+                    backgroundColor: auditFindingColors,
+                    data: auditFindingCounts
+                }]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                },
+                plugins: {
+                    labels: {
+                        render: 'percentage',
+                        showZero: false,
+                        fontSize: 14,
+                        fontColor: '#fff',
+                        arc: false,
+                        position: 'border',
+                    }
+                },
+                onClick: function(event, elements) {
+                    if (elements && elements.length > 0) {
+                        const status = auditFindingLabels[elements[0]._index];
+                        window.location.href = '/audit-findings?status=' + encodeURIComponent(status);
+                    }
+                },
+            }
+        });
+    </script>
+
+    <!------------- Audit Findings by Owner ---------------->
+    <script>
+        const auditOwnerData = @json($auditFindingOwnerData);
+
+        const auditOwnerChart = new Chart("auditFindingOwnerChart", {
+            type: "bar",
+            data: {
+                labels: auditOwnerData.owner_names,
+                datasets: [
+                    {
+                        label: 'Open - Not Started',
+                        backgroundColor: '#DC2626',
+                        data: (auditOwnerData.open_not_started ?? []).map((y, i) => ({
+                            x: auditOwnerData.owner_names[i],
+                            y,
+                            status: 'Open - Not Started'
+                        }))
+                    },
+                    {
+                        label: 'Open - WIP',
+                        backgroundColor: '#F59E0B',
+                        data: (auditOwnerData.open_wip ?? []).map((y, i) => ({
+                            x: auditOwnerData.owner_names[i],
+                            y,
+                            status: 'Open - WIP'
+                        }))
+                    },
+                    {
+                        label: 'Closed',
+                        backgroundColor: '#059669',
+                        data: (auditOwnerData.closed ?? []).map((y, i) => ({
+                            x: auditOwnerData.owner_names[i],
+                            y,
+                            status: 'Closed'
+                        }))
+                    }
+                ]
+            },
+            options: {
+                legend: {
+                    display: true
+                },
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                        ticks: {
+                            fontSize: 9,
+                            fontColor: '#64748B',
+                            lineHeight: 1.5,
+                            padding: 4
+                        }
+                    }],
+                    yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: '#64748B',
+                        }
+                    }]
+                },
+                onClick: function(event, elements) {
+                    if (elements && elements.length > 0) {
+                        const el = auditOwnerChart.getElementAtEvent(event)[0];
+                        if (el) {
+                            const d = auditOwnerChart.data.datasets[el._datasetIndex].data[el._index];
+                            window.location.href = '/audit-findings?status=' + encodeURIComponent(d.status);
+                        }
+                    }
+                },
+                plugins: {
+                    labels: {
+                        render: 'value',
+                        fontColor: '#fff',
+                        arc: false,
+                    }
+                }
+            }
+        });
     </script>
 @endpush

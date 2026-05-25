@@ -4,15 +4,14 @@ namespace App\Repositories;
 
 use App\Models\AssetGroup;
 use App\Models\BestPractice;
+use App\Models\PenTest;
 use App\Models\Risk;
 use App\Models\RiskAssessmentDetail;
-use App\Models\PenTest;
 use Illuminate\Support\Facades\DB;
 
 class ReportRepository
 {
-
-    public function getPenTestStatusDistribution(String $vaPenTestId)
+    public function getPenTestStatusDistribution(string $vaPenTestId)
     {
         return DB::table('va_pt_test_table as va')
             ->join('va_pt_test_findings_table as vaf', 'va.va_pt_test_id', '=', 'vaf.va_pt_test_id')
@@ -24,7 +23,7 @@ class ReportRepository
         ")->first();
     }
 
-    public function getPenTestSeverityDistribution(String $vaPenTestId)
+    public function getPenTestSeverityDistribution(string $vaPenTestId)
     {
         return PenTest::select(
             'no_of_findings',
@@ -37,9 +36,9 @@ class ReportRepository
             ->first();
     }
 
-    public function getEccComplianceStatus(String $bestPracticeId = 'NCA-ECC-2018')
+    public function getEccComplianceStatus(string $bestPracticeId = 'NCA-ECC-2018')
     {
-        return  DB::table('control_master_table as c')
+        return DB::table('control_master_table as c')
             ->join('control_master_table_vs_best_practice_table as cvb', 'c.control_id', '=', 'cvb.control_id')
             ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
             ->leftJoin('control_assessment_details_table as cad', function ($join) {
@@ -129,7 +128,6 @@ class ReportRepository
                     ->on('risk_assessment_details_table.id', '=', 'latest.latest_id');
             })
             ->toBase(); // Convert to base query to use in join
-
 
         return Risk::leftJoinSub($latestRiskStatus, 'latest_risk_status', function ($join) {
             $join->on('risk_master_table.risk_id', '=', 'latest_risk_status.risk_id');
@@ -317,6 +315,34 @@ class ReportRepository
         return DB::table('risk_appetite_table')
             ->selectRaw('COUNT(risk_appetite_id) as risk_appetites, risk_appetite_name')
             ->groupBy('risk_appetite_name')
+            ->get();
+    }
+
+    public function getAuditFindingStatusData()
+    {
+        return DB::table('audit_findings_table')
+            ->selectRaw("
+                COUNT(*) AS total,
+                SUM(CASE WHEN audit_finding_status = 'Open - Not Started' THEN 1 ELSE 0 END) AS open_not_started,
+                SUM(CASE WHEN audit_finding_status = 'Open - WIP' THEN 1 ELSE 0 END) AS open_wip,
+                SUM(CASE WHEN audit_finding_status = 'Closed' THEN 1 ELSE 0 END) AS closed
+            ")
+            ->first();
+    }
+
+    public function getAuditFindingOwnerData()
+    {
+        return DB::table('audit_findings_table as af')
+            ->join('owner_table as o', 'af.owner_id', '=', 'o.owner_role_id')
+            ->selectRaw("
+                o.owner_name,
+                o.owner_role_id,
+                COUNT(*) AS total,
+                SUM(CASE WHEN af.audit_finding_status = 'Open - Not Started' THEN 1 ELSE 0 END) AS open_not_started,
+                SUM(CASE WHEN af.audit_finding_status = 'Open - WIP' THEN 1 ELSE 0 END) AS open_wip,
+                SUM(CASE WHEN af.audit_finding_status = 'Closed' THEN 1 ELSE 0 END) AS closed
+            ")
+            ->groupBy('o.owner_name', 'o.owner_role_id')
             ->get();
     }
 }

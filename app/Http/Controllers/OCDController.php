@@ -5,30 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Asset;
 use App\Models\AssetGroup;
 use App\Models\AssetType;
-use Illuminate\Support\Facades\DB;
 use App\Models\BestPractice;
 use App\Models\ControlMaster;
 use App\Models\Domain;
 use App\Models\Owner;
-use App\Models\Risk;
-use App\Models\RiskAssessmentDetail;
 use App\Models\SubDomain;
 use App\Services\PresentationService;
 use App\Services\ReportService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OCDController extends Controller
 {
     protected $reportService;
-    protected $presentationService;
 
+    protected $presentationService;
 
     public function __construct(ReportService $reportService, PresentationService $presentationService)
     {
         $this->reportService = $reportService;
         $this->presentationService = $presentationService;
     }
-
 
     public function dashboard()
     {
@@ -66,15 +63,16 @@ class OCDController extends Controller
 
         $heatmap = $this->reportService->getHeatmapData();
 
-
+        $auditFindingStatus = $this->reportService->getAuditFindingStatusData();
+        $auditFindingOwnerData = $this->reportService->getAuditFindingOwnerData();
 
         return view(
             'process/reporting/dashboard/index',
-            compact('eccComplianceStatus', 'samaComplianceStatus', 'assetGroupOverview', 'bestPracticesComplainceStatus', 'ownerControlsStatus', 'assetTechData', 'evidenceSummary', 'riskStatus', 'riskVsAssetGroup', 'riskCountByTech', 'controlCountByTech', 'assetCountByTech', 'samaControlCountByTech', 'samaControlCountByMaturityLevel', 'heatmap')
+            compact('eccComplianceStatus', 'samaComplianceStatus', 'assetGroupOverview', 'bestPracticesComplainceStatus', 'ownerControlsStatus', 'assetTechData', 'evidenceSummary', 'riskStatus', 'riskVsAssetGroup', 'riskCountByTech', 'controlCountByTech', 'assetCountByTech', 'samaControlCountByTech', 'samaControlCountByMaturityLevel', 'heatmap', 'auditFindingStatus', 'auditFindingOwnerData')
         );
     }
 
-    function samaMaturityLevel(int $level)
+    public function samaMaturityLevel(int $level)
     {
 
         $controls = DB::table('best_practice_table as b')
@@ -160,7 +158,6 @@ class OCDController extends Controller
             )
             ->get();
 
-
         if (request()->wantsJson()) {
             return response()->json($controls);
         }
@@ -170,8 +167,7 @@ class OCDController extends Controller
         return $controls;
     }
 
-
-    function domain($bestPractice)
+    public function domain($bestPractice)
     {
 
         $bestPractice = BestPractice::select('best_practices_id')->where('best_practices_name', $bestPractice)
@@ -208,8 +204,6 @@ class OCDController extends Controller
             ->groupBy('d.main_domain_id', 'd.main_domain_name')
             ->get();
 
-
-
         $domain_names = $result->pluck('main_domain_name');
         $domain_ids = $result->pluck('main_domain_id');
         $countrols_count = $result->pluck('total_controls');
@@ -229,7 +223,7 @@ class OCDController extends Controller
         ));
     }
 
-    function subdomain($domainId)
+    public function subdomain($domainId)
     {
         $result = DB::table('sub_domain_table as d')
             ->join('control_master_table_vs_sub_domain_table as cvd', 'd.sub_domain_id', '=', 'cvd.sub_domain_id')
@@ -258,20 +252,18 @@ class OCDController extends Controller
             COUNT(CASE WHEN cad_latest.control_implementation_status = "Not Applicable" THEN 1 END) AS not_implemented'
                 )
             )
-            ->whereRaw("d.main_domain_id COLLATE utf8mb4_unicode_ci = ?", [$domainId])
+            ->whereRaw('d.main_domain_id COLLATE utf8mb4_unicode_ci = ?', [$domainId])
             ->groupBy('d.sub_domain_id', 'd.sub_domain_name')
             ->get();
 
-
         // return $result;
-        $sub_domain_id    = $result->pluck('sub_domain_id');
-        $subdomain_names    = $result->pluck('sub_domain_name');
+        $sub_domain_id = $result->pluck('sub_domain_id');
+        $subdomain_names = $result->pluck('sub_domain_name');
         $controls_count = $result->pluck('controls_count');
         $implemented = $result->pluck('implemented');
         $partially_implemented = $result->pluck('partially_implemented');
         $not_applicable = $result->pluck('not_applicable');
         $not_implemented = $result->pluck('not_implemented');
-
 
         return view('process/reporting/dashboard/4-SubDomainControlDashboard', compact(
             'sub_domain_id',
@@ -303,6 +295,7 @@ class OCDController extends Controller
                 $status = 'Not Applicable';
                 break;
         }
+
         return $status;
     }
 
@@ -376,12 +369,11 @@ class OCDController extends Controller
         return $controls;
     }
 
-    function ownerControls($ownerId)
+    public function ownerControls($ownerId)
     {
         $owner = DB::table('owner_table')->select('id', 'owner_name', 'owner_id')->where('owner_role_id', '=', $ownerId)->get();
 
         $status = $this->_getStatusCode();
-
 
         $recentControlAssessments = DB::table('control_assessment_details_table')
             ->select('control_id', 'control_implementation_status', 'control_assessment_id')
@@ -390,7 +382,6 @@ class OCDController extends Controller
                     ->from('control_assessment_details_table')
                     ->groupBy('control_id');
             });
-
 
         $controls = Owner::join('control_master_table as c', 'owner_table.owner_role_id', '=', 'c.owner_id')
             ->join('control_master_table_vs_custodian_role_table as cvc', 'c.control_id', '=', 'cvc.control_id')
@@ -431,10 +422,6 @@ class OCDController extends Controller
             )
             ->get();
 
-
-
-
-
         $controlsCount = Owner::join('control_master_table as c', 'owner_table.owner_role_id', '=', 'c.owner_id')
             ->join('control_master_table_vs_custodian_role_table as cvc', 'c.control_id', '=', 'cvc.control_id')
             ->join('custodian_name_table as cn', 'cvc.custodian_id', '=', 'cn.custodian_role_id')
@@ -462,22 +449,16 @@ class OCDController extends Controller
             ->groupBy('owner_table.id', 'owner_table.owner_id', 'owner_table.owner_name')
             ->get();
 
-
-
-
-
         if (request()->wantsJson()) {
             return response()->json($controls);
         }
 
         $totalControlsCount = count($controls);
 
-
-
         return view('process/reporting/dashboard/4-OwnerControlDashboard', compact('controls', 'controlsCount', 'totalControlsCount', 'ownerId', 'owner'));
     }
 
-    function riskDomain()
+    public function riskDomain()
     {
         $status = request('status');
 
@@ -489,7 +470,6 @@ class OCDController extends Controller
                 $join->on('rad.risk_id', '=', 'latest.risk_id')
                     ->on('rad.id', '=', 'latest.latest_id');
             });
-
 
         $domainRisksCount = DB::table('category_table as c')
             ->join('risk_master_table_vs_category_table as rvc', 'c.category_id', '=', 'rvc.category_id')
@@ -512,7 +492,7 @@ class OCDController extends Controller
                 if ($status === 'Open') {
                     $q->where(function ($q2) {
                         $q2->where('la.implementation_status', 'Open')
-                           ->orWhereNull('la.implementation_status');
+                            ->orWhereNull('la.implementation_status');
                     });
                 } else {
                     $q->where('la.implementation_status', $status);
@@ -520,14 +500,11 @@ class OCDController extends Controller
             })
             ->get();
 
-
-
         $domainIds = $domainRisksCount->pluck('main_domain_id');
         $domainNames = $domainRisksCount->pluck('main_domain_name');
         $totalRisks = $domainRisksCount->pluck('total_risks');
         $totalRisksOpen = $domainRisksCount->pluck('open_risks');
         $totalRisksClose = $domainRisksCount->pluck('close_risks');
-
 
         return view('process/reporting/dashboard/4-DomainRiskDashboard', compact(
             'domainIds',
@@ -539,7 +516,7 @@ class OCDController extends Controller
         ));
     }
 
-    function riskSubdomain($domainId)
+    public function riskSubdomain($domainId)
     {
         $latestAssessments = DB::table('risk_assessment_details_table as rad')
             ->select('rad.risk_id', 'rad.implementation_status')
@@ -570,13 +547,11 @@ class OCDController extends Controller
             ->groupBy('s.sub_domain_id', 's.sub_domain_name')
             ->get();
 
-
         $domainIds = $domainRisksCount->pluck('sub_domain_id');
         $domainNames = $domainRisksCount->pluck('sub_domain_name');
         $totalRisks = $domainRisksCount->pluck('total_risks');
         $totalRisksOpen = $domainRisksCount->pluck('open_risks');
         $totalRisksClose = $domainRisksCount->pluck('close_risks');
-
 
         return view('process/reporting/dashboard/4-SubdomainRiskDashboard', compact(
             'domainIds',
@@ -588,7 +563,7 @@ class OCDController extends Controller
         ));
     }
 
-    function riskOwners($subdomainId)
+    public function riskOwners($subdomainId)
     {
 
         $ownerRisksCount = DB::table('category_table as c')
@@ -623,13 +598,11 @@ class OCDController extends Controller
             ->groupBy('r.owner_id', 'o.owner_name')
             ->get();
 
-
         $ownerId = $ownerRisksCount->pluck('owner_id');
         $ownerNames = $ownerRisksCount->pluck('owner_name');
         $totalRisks = $ownerRisksCount->pluck('total_risks');
         $totalRisksOpen = $ownerRisksCount->pluck('open_risks');
         $totalRisksClose = $ownerRisksCount->pluck('closed_risks');
-
 
         return view('process/reporting/dashboard/4-OwnerRiskDashboard', compact(
             'ownerId',
@@ -640,7 +613,7 @@ class OCDController extends Controller
         ));
     }
 
-    function riskOwner($ownerId)
+    public function riskOwner($ownerId)
     {
 
         $ownerRisksCount = DB::table('category_table as c')
@@ -674,10 +647,6 @@ class OCDController extends Controller
             )
             ->groupBy('r.owner_id', 'o.owner_name')
             ->get();
-
-
-
-
 
         $risks = DB::table('category_table as c')
             ->join('risk_master_table_vs_category_table as rvc', 'c.category_id', '=', 'rvc.category_id')
@@ -735,7 +704,7 @@ class OCDController extends Controller
         ));
     }
 
-    function assetType($groupId)
+    public function assetType($groupId)
     {
         $assets = AssetType::select('asset_type_table.asset_type_id', 'asset_type_table.asset_type_name', DB::raw('COUNT(a.asset_id) as total_assets'))
             ->join('asset_register_table as a', 'asset_type_table.asset_type_id', '=', 'a.asset_type_id')
@@ -755,7 +724,7 @@ class OCDController extends Controller
         ));
     }
 
-    function domainEvidence($bestPracticeId)
+    public function domainEvidence($bestPracticeId)
     {
         $domainVsEvidence = Domain::select('domain_table.main_domain_name', 'domain_table.main_domain_id')
             ->selectRaw('COUNT(evidence_table.evidence_id) as evidence_count')
@@ -781,7 +750,7 @@ class OCDController extends Controller
         ));
     }
 
-    function subdomainEvidence($domainId)
+    public function subdomainEvidence($domainId)
     {
         $subdomainVsEvidence = SubDomain::selectRaw('DISTINCT SUBSTRING(sub_domain_table.sub_domain_name, 1, 29) as sub_domain_name')
             ->addSelect('sub_domain_table.sub_domain_id')
@@ -805,7 +774,7 @@ class OCDController extends Controller
         ));
     }
 
-    function controlEvidence($subdomainId)
+    public function controlEvidence($subdomainId)
     {
         $status = $this->_getStatusCode();
 
@@ -824,7 +793,6 @@ class OCDController extends Controller
             ->leftJoin('control_assessment_details_table AS ca', 'c.control_id', '=', 'ca.control_id')
             ->where('s.sub_domain_id', $subdomainId)
             ->first();
-
 
         $controls = ControlMaster::select(
             'control_master_table.id',
@@ -871,8 +839,6 @@ class OCDController extends Controller
             return response()->json($controls);
         }
 
-
-
         return view('process/reporting/dashboard/1-evidence/ControlDashboard', compact(
             'controls',
             'controlsCount',
@@ -880,7 +846,7 @@ class OCDController extends Controller
         ));
     }
 
-    function assetGroupRisks($assetGroupId)
+    public function assetGroupRisks($assetGroupId)
     {
         $status = request('status');
 
@@ -910,8 +876,6 @@ class OCDController extends Controller
                 DB::raw('SUM(CASE WHEN COALESCE(rad.implementation_status, "Open") != "Open" THEN 1 ELSE 0 END) AS closed_risks')
             )
             ->get();
-
-
 
         $risks = DB::table('asset_register_table as a')
             ->selectRaw('
@@ -946,7 +910,7 @@ class OCDController extends Controller
                 if ($status === 'Open') {
                     $q->where(function ($q2) {
                         $q2->where('ra.implementation_status', 'Open')
-                           ->orWhereNull('ra.implementation_status');
+                            ->orWhereNull('ra.implementation_status');
                     });
                 } else {
                     $q->where('ra.implementation_status', $status);
@@ -954,7 +918,6 @@ class OCDController extends Controller
             })
             ->groupBy('r.risk_id', 'ra.implementation_status', 'o.owner_id', 'o.owner_name', 'ra.risk_assessment_id')
             ->get();
-
 
         // return $risks;
 
@@ -975,7 +938,6 @@ class OCDController extends Controller
             ->get();
 
         $assetGroup = AssetGroup::where('asset_group_id', $assetGroupId)->first();
-
 
         $assetId = $assets->pluck('asset_id');
         $assetName = $assets->pluck('asset_name');
@@ -1001,13 +963,10 @@ class OCDController extends Controller
         $status = null;
 
         if ($statusId == 3) {
-            $status = "Close";
-        } else if ($statusId == 1) {
-            $status = "Open";
+            $status = 'Close';
+        } elseif ($statusId == 1) {
+            $status = 'Open';
         }
-
-
-
 
         $result = DB::table('asset_group_table as g')
             ->join('asset_register_table as a', 'g.asset_group_id', '=', 'a.asset_group_id')
@@ -1066,7 +1025,6 @@ class OCDController extends Controller
         COALESCE(rad.implementation_status, "Open")  AS latest_status
     ')
             ->get();
-
 
         if (request()->wantsJson()) {
             return response()->json($result);

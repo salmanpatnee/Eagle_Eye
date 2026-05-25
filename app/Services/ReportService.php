@@ -13,20 +13,20 @@ class ReportService
         $this->reportRepository = $reportRepository;
     }
 
-    public function getEccComplianceStatus(String $bestPracticeId)
+    public function getEccComplianceStatus(string $bestPracticeId)
     {
         return $this->reportRepository->getEccComplianceStatus($bestPracticeId);
     }
 
     public function getAssetGroupData()
     {
-        $assetGroups =  $this->reportRepository->getAssetGroupData();
+        $assetGroups = $this->reportRepository->getAssetGroupData();
 
         $assetGroupIds = $assetGroups->pluck('asset_group_id');
         $assetGroupLabels = $assetGroups->pluck('asset_group_name');
         $assetCounts = $assetGroups->pluck('total_assets');
 
-        return  ['assetGroupIds' => $assetGroupIds, 'assetGroupLabels' => $assetGroupLabels, 'assetCounts' => $assetCounts];
+        return ['assetGroupIds' => $assetGroupIds, 'assetGroupLabels' => $assetGroupLabels, 'assetCounts' => $assetCounts];
     }
 
     public function getBestPracticeData()
@@ -71,7 +71,7 @@ class ReportService
 
     public function getSamaControlCountByMaturityLevel()
     {
-        $samaControlCountByMaturityLevel  = $this->reportRepository->getSamaControlCountByMaturityLevel();
+        $samaControlCountByMaturityLevel = $this->reportRepository->getSamaControlCountByMaturityLevel();
 
         // Initialize arrays
         $totalControls = [0, 0, 0, 0, 0];  // Assuming levels are from 1 to 5
@@ -82,7 +82,6 @@ class ReportService
             $maturityLevel = $row->control_maturity_level;
             $totalControls[$maturityLevel - 1] = $row->total_controls;  // Store the count for the respective level
         }
-
 
         // Format the response
         return [
@@ -121,7 +120,26 @@ class ReportService
 
     public function getHeatmapData()
     {
-        $heatmap =  $this->reportRepository->getHeatmapData();
+        $heatmap = $this->reportRepository->getHeatmapData();
+
         return $heatmap->pluck('risk_appetites');
+    }
+
+    public function getAuditFindingStatusData()
+    {
+        return $this->reportRepository->getAuditFindingStatusData();
+    }
+
+    public function getAuditFindingOwnerData()
+    {
+        $data = $this->reportRepository->getAuditFindingOwnerData();
+
+        return [
+            'owner_names' => $data->pluck('owner_name'),
+            'owner_role_ids' => $data->pluck('owner_role_id'),
+            'open_not_started' => $data->pluck('open_not_started'),
+            'open_wip' => $data->pluck('open_wip'),
+            'closed' => $data->pluck('closed'),
+        ];
     }
 }
