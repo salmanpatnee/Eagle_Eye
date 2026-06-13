@@ -12,6 +12,8 @@ class LandingPageLightModeTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('<meta name="color-scheme" content="light only">', false);
+        // verify the HR section is present
+        $response->assertSee('Find certified cybersecurity professionals in the');
         // verify new Core Offerings section is present
         $response->assertSee('Core Offerings');
         // verify new gallery section defaults are present

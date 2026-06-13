@@ -93,6 +93,16 @@
                         <div class="branch-icon">🔥</div>
                         <h2 class="branch-title">Hot Topics for CISO</h2>
                     </a>
+
+                    <div class="branch-connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-node"></div>
+                    </div>
+
+                    <a href="{{ route('people.index') }}" class="branch-card people-card">
+                        <div class="branch-icon">👥</div>
+                        <h2 class="branch-title">People</h2>
+                    </a>
                 </div>
 
                 <!-- Connector lines from branches to core areas -->

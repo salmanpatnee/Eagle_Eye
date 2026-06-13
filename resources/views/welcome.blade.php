@@ -91,6 +91,42 @@
         </div>
     </section>
 
+    <!-- Find Certified Professionals Section -->
+    <section class="find-professionals-section py-16 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Text Column -->
+                <div class="text-center md:text-left">
+                    <h2 class="section-title text-center md:!text-left mb-6 capitalize">
+                        Find certified cybersecurity professionals in the <span class="hero-gradient">UK</span>
+                    </h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8 max-w-xl mx-auto md:mx-0">
+                        Connect with vetted, certified CISO-level talent across the UK. Our platform helps HR teams and
+                        recruiters source experienced cybersecurity leaders with verified credentials — ready to
+                        strengthen your organisation's security posture.
+                    </p>
+                    <div class="flex justify-center md:justify-start">
+                        <a href="{{ route('people.index') }}"
+                            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 active:scale-95">
+                            <span>Find Professionals</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Image Column -->
+                <div class="flex justify-center">
+                    <img src="{{ asset('Images/hr-professional.jpg') }}"
+                        alt="Certified cybersecurity professionals in the UK"
+                        class="w-full h-auto rounded-xl shadow-lg object-cover" />
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Core Offerings Section -->
     <section class="core-offerings-section py-10 px-6 bg-gradient-to-b from-white to-gray-50">
         <div class="max-w-7xl mx-auto">
