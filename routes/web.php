@@ -38,6 +38,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainDomainController;
 use App\Http\Controllers\NationalityController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PeoplesController;
 use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\ProcessResourceController;
@@ -51,6 +52,11 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingPageContentController::class, 'welcome'])->name('welcome');
+
+Route::get('/pricing', [PaymentController::class, 'pricing'])->name('payment.pricing');
+Route::post('/payment/paypal/create', [PaymentController::class, 'create'])->name('payment.paypal.create');
+Route::get('/payment/paypal/success', [PaymentController::class, 'success'])->name('payment.paypal.success');
+Route::get('/payment/paypal/cancel', [PaymentController::class, 'cancel'])->name('payment.paypal.cancel');
 
 Route::get('/clear', function () {
     Artisan::call('cache:clear');
@@ -66,7 +72,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'payment.access'])->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 
     Route::controller(LandingPageContentController::class)->group(function () {
@@ -166,7 +172,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'must.change.password'])->group(function () {
+Route::middleware(['auth', 'must.change.password', 'payment.access'])->group(function () {
     Route::view('/compliance', 'process/compliance')->name('compliance');
     Route::view('/vciso', 'vciso')->name('vciso');
 

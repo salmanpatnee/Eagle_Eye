@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'operator' => \App\Http\Middleware\Operator::class,
             'user' => \App\Http\Middleware\User::class,
             'must.change.password' => \App\Http\Middleware\MustChangePassword::class,
+            'payment.access' => \App\Http\Middleware\CheckPaymentAccess::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

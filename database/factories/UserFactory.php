@@ -18,12 +18,17 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
             'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => 'password', // password
             'remember_token' => Str::random(10),
+            'role_id' => 4,
+            'must_change_password' => false,
+            'payment_expires_at' => null,
+            'payment_status' => null,
         ];
     }
 

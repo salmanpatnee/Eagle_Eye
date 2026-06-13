@@ -14,6 +14,9 @@
                 <x-table.th label="Username" />
                 <x-table.th label="Email" />
                 <x-table.th label="Role" />
+                <x-table.th label="Payment Date" />
+                <x-table.th label="Expires On" />
+                <x-table.th label="Status" />
                 <x-table.th label="Action" />
             </x-table.thead>
             <x-table.tbody>
@@ -24,6 +27,17 @@
                         <x-table.td>{{ $user->username }}</x-table.td>
                         <x-table.td>{{ $user->email }}</x-table.td>
                         <x-table.td>{{ $user->role->role_name }}</x-table.td>
+                        <x-table.td>{{ $user->userPayments->sortByDesc('paid_at')->first()?->paid_at?->format('d M Y') ?? '—' }}</x-table.td>
+                        <x-table.td>{{ $user->payment_expires_at?->format('d M Y') ?? '—' }}</x-table.td>
+                        <x-table.td>
+                            @if ($user->payment_status === 'active' && $user->hasActivePayment())
+                                <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">Active</span>
+                            @elseif ($user->payment_status === 'active')
+                                <span class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800">Expired</span>
+                            @else
+                                <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">None</span>
+                            @endif
+                        </x-table.td>
 
                         <x-table.td action_col="true">
                             <x-action.view route_name="users.show" param="{{ $user->id }}" />

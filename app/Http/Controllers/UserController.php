@@ -6,19 +6,17 @@ use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
     public function index()
     {
         $users = User::whereNotIn('id', [1])
-            ->with('role')
+            ->with(['role', 'userPayments'])
             ->orderBy('first_name', 'asc')
             ->paginate(20);
-
 
         return view('process.initial-setup.users.index', compact('users'));
     }
@@ -36,10 +34,10 @@ class UserController extends Controller
         $attributes = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'username'  => 'required|min:3|max:255|unique:users,username',
-            'email'     => 'required|email|max:255|unique:users,email',
-            'password'  => 'required|min:7|max:255',
-            'role_id'  => 'required',
+            'username' => 'required|min:3|max:255|unique:users,username',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|min:7|max:255',
+            'role_id' => 'required',
         ]);
 
         User::create($attributes);
@@ -47,17 +45,18 @@ class UserController extends Controller
         return redirect(route('users.index'))->with('success', 'User added successfully.');
     }
 
-    public function show(User $user)
+    public function show(User $user): \Illuminate\View\View
     {
+        $user->load('userPayments');
+
         return view('process.initial-setup.users.show', [
-            'user'    => $user
+            'user' => $user,
         ]);
     }
 
     public function edit(User $user)
     {
         $userRoles = UserRole::select('id', 'role_name')->get();
-
 
         return view('process.initial-setup.users.create', compact('user', 'userRoles'));
     }
@@ -67,12 +66,11 @@ class UserController extends Controller
         $attributes = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'username'  => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
-            'email'     => ['required', 'min:3', 'max:255', Rule::unique('users', 'email')->ignore($user)],
-            'password'  => ['sometimes'],
-            'role_id'  => 'required',
+            'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
+            'email' => ['required', 'min:3', 'max:255', Rule::unique('users', 'email')->ignore($user)],
+            'password' => ['sometimes'],
+            'role_id' => 'required',
         ]);
-
 
         if ($attributes['password'] == null) {
             unset($attributes['password']);
@@ -86,6 +84,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
         return redirect(route('users.index'))->with('success', 'User deleted successfully.');
     }
 
@@ -107,7 +106,7 @@ class UserController extends Controller
         $is_admin = $user->role_id == 1;
 
         // If the user is not an admin and must change password, show the password update form
-        $show_password_update = !$is_admin && $user->must_change_password;
+        $show_password_update = ! $is_admin && $user->must_change_password;
 
         // Only pass the user data to the view, not user roles for non-admins
         return view('profile.edit', compact('user', 'show_password_update'));
@@ -118,7 +117,6 @@ class UserController extends Controller
      * Non-admin users can update their personal details but are restricted from
      * changing sensitive fields like email or role.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateProfile(Request $request)
@@ -129,7 +127,7 @@ class UserController extends Controller
         $is_admin = $user->role_id == 1;
 
         // Check if user must change password
-        $must_change_password = !$is_admin && $user->must_change_password;
+        $must_change_password = ! $is_admin && $user->must_change_password;
 
         // Define validation rules based on whether user must change password
         if ($must_change_password) {
@@ -137,7 +135,7 @@ class UserController extends Controller
             $attributes = $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
-                'username'  => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
+                'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
                 'current_password' => 'required',
                 'password' => [
                     'required',
@@ -147,25 +145,26 @@ class UserController extends Controller
                         $errors = [];
 
                         // Check for special character
-                        if (!preg_match('/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/', $value)) {
+                        if (! preg_match('/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/', $value)) {
                             $errors[] = 'at least one special character';
                         }
                         // Check for number
-                        if (!preg_match('/[0-9]/', $value)) {
+                        if (! preg_match('/[0-9]/', $value)) {
                             $errors[] = 'at least one number';
                         }
                         // Check that password is different from current password
                         if (Hash::check($value, $user->password)) {
                             $fail('The new password cannot be the same as your current password.');
+
                             return;
                         }
 
-                        if (!empty($errors)) {
-                            $fail('The password must contain ' . implode(' and ', $errors) . '.');
+                        if (! empty($errors)) {
+                            $fail('The password must contain '.implode(' and ', $errors).'.');
                         }
-                    }
+                    },
                 ],
-                'password_confirmation' => 'required'
+                'password_confirmation' => 'required',
             ]);
 
             // Sanitize input data
@@ -174,14 +173,14 @@ class UserController extends Controller
             $attributes['username'] = strip_tags($attributes['username']);
 
             // Verify current password
-            if (!Hash::check($attributes['current_password'], $user->password)) {
+            if (! Hash::check($attributes['current_password'], $user->password)) {
                 // Log failed password update attempt
                 Log::warning('Failed password update attempt', [
                     'user_id' => $user->id,
                     'username' => $user->username,
                     'ip_address' => $request->ip(),
                     'user_agent' => $request->userAgent(),
-                    'attempted_at' => now()
+                    'attempted_at' => now(),
                 ]);
 
                 return redirect()->back()->withErrors(['current_password' => 'The current password is incorrect.']);
@@ -209,44 +208,45 @@ class UserController extends Controller
                 'username' => $user->username,
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ]);
         } else {
             // Normal profile update (password is optional)
             $attributes = $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
-                'username'  => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
-                'password'  => [
+                'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user)],
+                'password' => [
                     'nullable',
                     'min:8',
                     'confirmed',
                     function ($attribute, $value, $fail) use ($user) {
                         // If password is being updated (not null), apply strength requirements
-                        if (!empty($value)) {
+                        if (! empty($value)) {
                             $errors = [];
 
                             // Check for special character
-                            if (!preg_match('/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/', $value)) {
+                            if (! preg_match('/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/', $value)) {
                                 $errors[] = 'at least one special character';
                             }
                             // Check for number
-                            if (!preg_match('/[0-9]/', $value)) {
+                            if (! preg_match('/[0-9]/', $value)) {
                                 $errors[] = 'at least one number';
                             }
                             // Check that password is different from current password
                             if (Hash::check($value, $user->password)) {
                                 $fail('The new password cannot be the same as your current password.');
+
                                 return;
                             }
 
-                            if (!empty($errors)) {
-                                $fail('The password must contain ' . implode(' and ', $errors) . '.');
+                            if (! empty($errors)) {
+                                $fail('The password must contain '.implode(' and ', $errors).'.');
                             }
                         }
-                    }
+                    },
                 ],
-                'password_confirmation' => 'nullable|required_with:password'
+                'password_confirmation' => 'nullable|required_with:password',
             ]);
 
             // Sanitize input data
@@ -255,7 +255,7 @@ class UserController extends Controller
             $attributes['username'] = strip_tags($attributes['username']);
 
             // Only update password if it's provided
-            if (!empty($attributes['password'])) {
+            if (! empty($attributes['password'])) {
                 $user->password = $attributes['password'];
             }
 
