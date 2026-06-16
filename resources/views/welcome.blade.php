@@ -285,19 +285,89 @@
             <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
                 @foreach ($educationResources as $item)
                     <a href="{{ route($item['route']) }}"
-                        class="offering-card group block rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        style="background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 50%, #f3e8ff 100%);">
-                        <div class="flex justify-center mb-6">
-                            <div
-                                class="w-40 h-24 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300 p-4">
-                                <img src="{{ asset('Images/' . $item['image']) }}" alt="{{ $item['title'] }}"
-                                    class="max-w-full max-h-full object-contain" />
+                        class="offering-card group relative overflow-hidden block rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-100 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gradient-to-br from-indigo-100 via-blue-50 to-purple-100 hover:from-indigo-200 hover:via-blue-100 hover:to-purple-200">
+                        <span
+                            class="pointer-events-none absolute -top-12 -right-12 w-36 h-36 bg-gradient-to-br from-blue-400/30 to-indigo-500/30 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></span>
+                        <span
+                            class="pointer-events-none absolute -bottom-12 -left-12 w-32 h-32 bg-gradient-to-tr from-purple-400/20 to-blue-400/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></span>
+                        <span
+                            class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        <div class="relative z-10">
+                            <div class="flex justify-center mb-6">
+                                <div
+                                    class="w-40 h-24 bg-white rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg ring-1 ring-indigo-100 transition-all duration-300 p-4">
+                                    <img src="{{ asset('Images/' . $item['image']) }}" alt="{{ $item['title'] }}"
+                                        class="max-w-full max-h-full object-contain" />
+                                </div>
                             </div>
+                            <h3
+                                class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
+                                {{ $item['title'] }}
+                            </h3>
                         </div>
-                        <h3
-                            class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
-                            {{ $item['title'] }}
-                        </h3>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Hot Topics Section -->
+    <section class="hot-topics-section py-10 px-6 bg-white">
+        @php
+            $hotTopics = [
+                ['title' => 'Compliance Challenges Framework Model', 'route' => 'compliance-challenges'],
+                ['title' => 'Key Performance Indicator vs Key Risk Indicator', 'route' => 'key-performance-indicator'],
+                ['title' => 'Essential KPIs & KRIs', 'route' => 'essential-kpis-kris'],
+                ['title' => 'Risk Management Methodologies', 'route' => 'risk-management-methodologies'],
+                ['title' => 'Control Assessment vs Risk Assessment', 'route' => 'control-assessment-risk-assessment'],
+                ['title' => '26 Essential Items Checklist of Awarness Topics', 'route' => '26-essential-items'],
+                ['title' => 'Enhancing Staff Knowledge & Skill', 'route' => 'enhancing-staff-knowledge'],
+                ['title' => 'Asset Inventory vs Configuration Management Database', 'route' => 'asset-inventory'],
+                ['title' => 'Essential and Practical Cryptographic Deployment', 'route' => 'essential-practical-cryptographic'],
+                ['title' => 'Data & Information', 'route' => 'data-information'],
+                ['title' => 'Selecting VA & Pen Tester', 'route' => 'selecting-va-pen-tester'],
+                ['title' => 'Incident Management vs Cybersecurity Incident Management', 'route' => 'incident-management'],
+                ['title' => 'Review vs Audit', 'route' => 'review-vs-audit'],
+            ];
+        @endphp
+
+        <div class="max-w-7xl mx-auto text-center mb-12">
+            <h2 class="section-title mb-4">
+                <span class="hero-gradient">Hot Topics</span>
+            </h2>
+            <p class="mt-2 text-lg text-gray-700 max-w-3xl mx-auto">
+                Stay updated with the most pressing cybersecurity challenges, emerging threats, and strategic insights
+                that matter to Chief Information Security Officers.
+            </p>
+        </div>
+
+        <div class="max-w-7xl mx-auto">
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                @foreach ($hotTopics as $item)
+                    <a href="{{ route($item['route']) }}"
+                        class="offering-card group relative overflow-hidden block rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-100 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gradient-to-br from-indigo-100 via-blue-50 to-purple-100 hover:from-indigo-200 hover:via-blue-100 hover:to-purple-200">
+                        <span
+                            class="pointer-events-none absolute -top-12 -right-12 w-36 h-36 bg-gradient-to-br from-blue-400/30 to-indigo-500/30 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></span>
+                        <span
+                            class="pointer-events-none absolute -bottom-12 -left-12 w-32 h-32 bg-gradient-to-tr from-purple-400/20 to-blue-400/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></span>
+                        <span
+                            class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        <div class="relative z-10">
+                            <div class="flex justify-center mb-6">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-300">
+                                    <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3
+                                class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
+                                {{ $item['title'] }}
+                            </h3>
+                        </div>
                     </a>
                 @endforeach
             </div>

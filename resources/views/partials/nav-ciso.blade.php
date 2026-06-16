@@ -9,7 +9,7 @@
             class="flex w-full items-center justify-between gap-2 border-b border-gray-200 px-3 py-1 sm:gap-4 lg:justify-normal lg:border-b-0 lg:px-0 dark:border-gray-800">
             <div :class="sidebarToggle ? 'justify-center' : 'justify-between'"
                 class="flex items-center gap-2 sidebar-header hidden lg:flex">
-                <a href="{{ route('vciso') }}">
+                <a href="{{ route('welcome') }}">
                     <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                         <span class="flex items-center space-x-2">
                             <img class="dark:hidden" src="{{ asset('Images/EuroCISOLogo.png') }}"
@@ -25,7 +25,7 @@
             <!-- Hamburger Toggle BTN -->
             
             <!-- Hamburger Toggle BTN -->
-            <a href="{{ route('vciso') }}" class="lg:hidden">
+            <a href="{{ route('welcome') }}" class="lg:hidden">
                 <img class="dark:hidden w-12" src="{{ asset('Images/EuroCISOLogo.png') }}" alt="Logo" />
             </a>
             <!-- Application nav menu button -->
