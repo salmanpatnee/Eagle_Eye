@@ -242,10 +242,10 @@ Route::middleware(['auth', 'must.change.password', 'payment.access'])->group(fun
         Route::get('/education', CisoEducationController::class)->name('ciso-education.index');
 
         Route::prefix('education')->group(function () {
-            Route::view('/applying-cissp-knowledge-in-ksa', 'ciso/ciso-education/cissp')->name('cissp');
-            Route::view('/applying-cism-knowledge-in-ksa', 'ciso/ciso-education/cism')->name('cism');
-            Route::view('/applying-cgeit-knowledge-in-ksa', 'ciso/ciso-education/cgeit')->name('cgeit');
-            Route::view('/applying-pmp-knowledge-in-ksa', 'ciso/ciso-education/pmp')->name('pmp');
+            Route::view('/applying-cissp-knowledge-in-uk', 'ciso/ciso-education/cissp')->name('cissp');
+            Route::view('/applying-cism-knowledge-in-uk', 'ciso/ciso-education/cism')->name('cism');
+            Route::view('/applying-cgeit-knowledge-in-uk', 'ciso/ciso-education/cgeit')->name('cgeit');
+            Route::view('/applying-pmp-knowledge-in-uk', 'ciso/ciso-education/pmp')->name('pmp');
             Route::view('/applying-agile-approach', 'ciso/ciso-education/agile')->name('agile');
         });
 

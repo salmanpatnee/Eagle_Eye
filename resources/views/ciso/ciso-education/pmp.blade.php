@@ -1,5 +1,5 @@
 @extends('layouts.ciso-full')
-@section('title', 'Applying PMP Knowledge in KSA')
+@section('title', 'Applying PMP Knowledge in UK')
 @section('title_ar', '')
 @section('content')
 

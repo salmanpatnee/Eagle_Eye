@@ -259,6 +259,51 @@
         </div>
     </section>
 
+    <!-- Education Resources Section -->
+    <section class="education-resources-section py-10 px-6 bg-gradient-to-b from-white to-gray-50">
+        @php
+            $educationResources = [
+                ['title' => 'Applying CISSP Knowledge in UK', 'route' => 'cissp', 'image' => 'CISSPLogo.png'],
+                ['title' => 'Applying CISM Knowledge in UK', 'route' => 'cism', 'image' => 'CISMLogo.png'],
+                ['title' => 'Applying CGEIT Knowledge in UK', 'route' => 'cgeit', 'image' => 'CGEITLogo.png'],
+                ['title' => 'Applying PMP Knowledge in UK', 'route' => 'pmp', 'image' => 'PMPLogo.png'],
+                ['title' => 'Applying Agile Approach to Your Department', 'route' => 'agile', 'image' => 'AgileLogo.png'],
+            ];
+        @endphp
+
+        <div class="max-w-7xl mx-auto text-center mb-12">
+            <h2 class="section-title mb-4">
+                CISO <span class="hero-gradient">Education &amp; Training</span>
+            </h2>
+            <p class="mt-2 text-lg text-gray-700 max-w-3xl mx-auto">
+                Enhance your knowledge and skills in information security leadership. Access comprehensive educational
+                resources, training materials, and best practices for CISO excellence.
+            </p>
+        </div>
+
+        <div class="max-w-7xl mx-auto">
+            <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+                @foreach ($educationResources as $item)
+                    <a href="{{ route($item['route']) }}"
+                        class="offering-card group block rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        style="background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 50%, #f3e8ff 100%);">
+                        <div class="flex justify-center mb-6">
+                            <div
+                                class="w-40 h-24 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300 p-4">
+                                <img src="{{ asset('Images/' . $item['image']) }}" alt="{{ $item['title'] }}"
+                                    class="max-w-full max-h-full object-contain" />
+                            </div>
+                        </div>
+                        <h3
+                            class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
+                            {{ $item['title'] }}
+                        </h3>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section class="features-section py-14 px-6 bg-gray-50">
         <div class="max-w-7xl mx-auto">
