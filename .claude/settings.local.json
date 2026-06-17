@@ -43,7 +43,8 @@
       "Bash(mkdir -p \"C:/Users/salmanabdul.ghani/.claude/skills/laravel-polymorphic-resources/references\")",
       "Bash(mkdir -p \"C:/Users/salmanabdul.ghani/.claude/skills/laravel-polymorphic-resources/scripts\")",
       "Bash(git check-ignore *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git reset *)"
     ]
   },
   "enableAllProjectMcpServers": true,

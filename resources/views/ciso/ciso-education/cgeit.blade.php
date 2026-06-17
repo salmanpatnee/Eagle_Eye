@@ -1,5 +1,5 @@
 @extends('layouts.ciso-full')
-@section('title', 'Applying CGEIT Knowledge in UK')
+@section('title', 'Applying CGEIT Knowledge in the UK')
 @section('title_ar', '')
 @section('content')
 

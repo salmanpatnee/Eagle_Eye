@@ -1,5 +1,5 @@
 @extends('layouts.ciso-full')
-@section('title', 'Applying CISSP Knowledge in UK')
+@section('title', 'Applying CISSP Knowledge in the UK')
 @section('title_ar', '')
 
 @section('content')
