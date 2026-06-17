@@ -97,8 +97,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <!-- Text Column -->
                 <div class="text-center md:text-left">
-                    <h2 class="section-title text-center md:!text-left mb-6 capitalize">
-                        Find certified cybersecurity professionals in the <span class="hero-gradient">UK</span>
+                    <h2 class="section-title text-center md:!text-left mb-6 ">
+                        Find Certified Cybersecurity Professionals in the <span class="hero-gradient">United Kingdom</span>
                     </h2>
                     <p class="text-lg text-gray-700 leading-relaxed mb-8 max-w-xl mx-auto md:mx-0">
                         Connect with vetted, certified CISO-level talent across the UK. Our platform helps HR teams and
@@ -114,6 +114,28 @@
                                     d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                             </svg>
                         </a>
+                    </div>
+                    <div
+                        class="mt-8 max-w-xl mx-auto md:mx-0 flex items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/60 px-4 py-3.5 text-left">
+                        <span
+                            class="mt-0.5 flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 shadow-sm">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
+                            </svg>
+                        </span>
+                        <div>
+                            <span
+                                class="inline-block text-[11px] font-semibold uppercase tracking-wider text-blue-700 mb-0.5">
+                                GDPR Compliant
+                            </span>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                All cybersecurity professional data is sourced from publicly available information on
+                                the internet, and no data is collected from non-public sources. The information
+                                presented is GDPR compliant.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -263,10 +285,10 @@
     <section class="education-resources-section py-10 px-6 bg-gradient-to-b from-white to-gray-50">
         @php
             $educationResources = [
-                ['title' => 'Applying CISSP Knowledge in UK', 'route' => 'cissp', 'image' => 'CISSPLogo.png'],
-                ['title' => 'Applying CISM Knowledge in UK', 'route' => 'cism', 'image' => 'CISMLogo.png'],
-                ['title' => 'Applying CGEIT Knowledge in UK', 'route' => 'cgeit', 'image' => 'CGEITLogo.png'],
-                ['title' => 'Applying PMP Knowledge in UK', 'route' => 'pmp', 'image' => 'PMPLogo.png'],
+                ['title' => 'Applying CISSP Knowledge in the UK', 'route' => 'cissp', 'image' => 'CISSPLogo.png'],
+                ['title' => 'Applying CISM Knowledge in the UK', 'route' => 'cism', 'image' => 'CISMLogo.png'],
+                ['title' => 'Applying CGEIT Knowledge in the UK', 'route' => 'cgeit', 'image' => 'CGEITLogo.png'],
+                ['title' => 'Applying PMP Knowledge in the UK', 'route' => 'pmp', 'image' => 'PMPLogo.png'],
                 ['title' => 'Applying Agile Approach to Your Department', 'route' => 'agile', 'image' => 'AgileLogo.png'],
             ];
         @endphp
