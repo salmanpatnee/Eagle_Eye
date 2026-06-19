@@ -22,9 +22,16 @@
                     </a>
                 </div>
                 <div class="flex items-center gap-4">
-                    <a href="{{ route('vciso') }}" class="btn-primary">
-                        Access Platform
-                    </a>
+                    @auth
+                        <form method="POST" action="{{ route('login.destroy') }}">
+                            @csrf
+                            <button type="submit" class="btn-primary">Logout</button>
+                        </form>
+                    @else
+                        <a href="{{ route('vciso') }}" class="btn-primary">
+                            Access Platform
+                        </a>
+                    @endauth
                     <a href="#" class="BudgetButton btn-secondary" id="headerContactButton">
                         Contact Us
                     </a>
@@ -73,6 +80,7 @@
 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 pt-8 justify-center">
+                    @guest
                     <a href="{{ route('vciso') }}"
                         class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 active:scale-95">
                         <span>Access Platform</span>
@@ -81,6 +89,7 @@
                                 d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
                     </a>
+                    @endguest
                     <a href="#"
                         class="BudgetButton inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 active:scale-95"
                         id="heroContactButton">
@@ -285,11 +294,11 @@
     <section class="education-resources-section py-10 px-6 bg-gradient-to-b from-white to-gray-50">
         @php
             $educationResources = [
-                ['title' => 'Applying CISSP Knowledge in the UK', 'route' => 'cissp', 'image' => 'CISSPLogo.png'],
-                ['title' => 'Applying CISM Knowledge in the UK', 'route' => 'cism', 'image' => 'CISMLogo.png'],
-                ['title' => 'Applying CGEIT Knowledge in the UK', 'route' => 'cgeit', 'image' => 'CGEITLogo.png'],
-                ['title' => 'Applying PMP Knowledge in the UK', 'route' => 'pmp', 'image' => 'PMPLogo.png'],
-                ['title' => 'Applying Agile Approach to Your Department', 'route' => 'agile', 'image' => 'AgileLogo.png'],
+                ['title' => 'Applying CISSP Knowledge in the UK', 'route' => 'cissp', 'image' => 'CISSP.JPG'],
+                ['title' => 'Applying CISM Knowledge in the UK', 'route' => 'cism', 'image' => 'CISM.JPG'],
+                ['title' => 'Applying CGEIT Knowledge in the UK', 'route' => 'cgeit', 'image' => 'CGEIT.JPG'],
+                ['title' => 'Applying PMP Knowledge in the UK', 'route' => 'pmp', 'image' => 'PMP.JPG'],
+                ['title' => 'Applying Agile Approach to Your Department', 'route' => 'agile', 'image' => 'Agile.JPG'],
             ];
         @endphp
 
@@ -307,26 +316,9 @@
             <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
                 @foreach ($educationResources as $item)
                     <a href="{{ route($item['route']) }}"
-                        class="offering-card group relative overflow-hidden block rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-100 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gradient-to-br from-indigo-100 via-blue-50 to-purple-100 hover:from-indigo-200 hover:via-blue-100 hover:to-purple-200">
-                        <span
-                            class="pointer-events-none absolute -top-12 -right-12 w-36 h-36 bg-gradient-to-br from-blue-400/30 to-indigo-500/30 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></span>
-                        <span
-                            class="pointer-events-none absolute -bottom-12 -left-12 w-32 h-32 bg-gradient-to-tr from-purple-400/20 to-blue-400/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></span>
-                        <span
-                            class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                        <div class="relative z-10">
-                            <div class="flex justify-center mb-6">
-                                <div
-                                    class="w-40 h-24 bg-white rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg ring-1 ring-indigo-100 transition-all duration-300 p-4">
-                                    <img src="{{ asset('Images/' . $item['image']) }}" alt="{{ $item['title'] }}"
-                                        class="max-w-full max-h-full object-contain" />
-                                </div>
-                            </div>
-                            <h3
-                                class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
-                                {{ $item['title'] }}
-                            </h3>
-                        </div>
+                        class="group block bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <img src="{{ asset('Images/education/' . $item['image']) }}" alt="{{ $item['title'] }}" class="w-full h-auto object-contain" />
+                        <span class="sr-only">{{ $item['title'] }}</span>
                     </a>
                 @endforeach
             </div>
@@ -337,19 +329,19 @@
     <section class="hot-topics-section py-10 px-6 bg-white">
         @php
             $hotTopics = [
-                ['title' => 'Compliance Challenges Framework Model', 'route' => 'compliance-challenges'],
-                ['title' => 'Key Performance Indicator vs Key Risk Indicator', 'route' => 'key-performance-indicator'],
-                ['title' => 'Essential KPIs & KRIs', 'route' => 'essential-kpis-kris'],
-                ['title' => 'Risk Management Methodologies', 'route' => 'risk-management-methodologies'],
-                ['title' => 'Control Assessment vs Risk Assessment', 'route' => 'control-assessment-risk-assessment'],
-                ['title' => '26 Essential Items Checklist of Awarness Topics', 'route' => '26-essential-items'],
-                ['title' => 'Enhancing Staff Knowledge & Skill', 'route' => 'enhancing-staff-knowledge'],
-                ['title' => 'Asset Inventory vs Configuration Management Database', 'route' => 'asset-inventory'],
-                ['title' => 'Essential and Practical Cryptographic Deployment', 'route' => 'essential-practical-cryptographic'],
-                ['title' => 'Data & Information', 'route' => 'data-information'],
-                ['title' => 'Selecting VA & Pen Tester', 'route' => 'selecting-va-pen-tester'],
-                ['title' => 'Incident Management vs Cybersecurity Incident Management', 'route' => 'incident-management'],
-                ['title' => 'Review vs Audit', 'route' => 'review-vs-audit'],
+                ['title' => 'Compliance Challenges Framework Model', 'route' => 'compliance-challenges', 'image' => 'Compliance Challenges Framework Model.JPG'],
+                ['title' => 'Key Performance Indicator vs Key Risk Indicator', 'route' => 'key-performance-indicator', 'image' => 'Key Performance Indicator vs Key Risk Indicator.JPG'],
+                ['title' => 'Essential KPIs & KRIs', 'route' => 'essential-kpis-kris', 'image' => 'Essential KPIs & KRIs.JPG'],
+                ['title' => 'Risk Management Methodologies', 'route' => 'risk-management-methodologies', 'image' => 'Risk Management Methodologies.JPG'],
+                ['title' => 'Control Assessment vs Risk Assessment', 'route' => 'control-assessment-risk-assessment', 'image' => 'Control Assessment vs Risk Assessment.JPG'],
+                ['title' => '26 Essential Items Checklist of Awarness Topics', 'route' => '26-essential-items', 'image' => '26 Essential Items Checklist of Awarness Topics.JPG'],
+                ['title' => 'Enhancing Staff Knowledge & Skill', 'route' => 'enhancing-staff-knowledge', 'image' => 'Enhancing Staff Knowledge & Skill.JPG'],
+                ['title' => 'Asset Inventory vs Configuration Management Database', 'route' => 'asset-inventory', 'image' => 'Asset Inventory vs Configuration Management Database.JPG'],
+                ['title' => 'Essential and Practical Cryptographic Deployment', 'route' => 'essential-practical-cryptographic', 'image' => 'Essential and Practical Cryptographic Deployment.JPG'],
+                ['title' => 'Data & Information', 'route' => 'data-information', 'image' => 'Data & Information.JPG'],
+                ['title' => 'Selecting VA & Pen Tester', 'route' => 'selecting-va-pen-tester', 'image' => 'Selecting VA & Pen Tester.JPG'],
+                ['title' => 'Incident Management vs Cybersecurity Incident Management', 'route' => 'incident-management', 'image' => 'Incident Management vs Cybersecurity Incident Management.JPG'],
+                ['title' => 'Review vs Audit', 'route' => 'review-vs-audit', 'image' => 'Review vs Audit.JPG'],
             ];
         @endphp
 
@@ -367,29 +359,9 @@
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($hotTopics as $item)
                     <a href="{{ route($item['route']) }}"
-                        class="offering-card group relative overflow-hidden block rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 p-8 text-center border border-indigo-100 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gradient-to-br from-indigo-100 via-blue-50 to-purple-100 hover:from-indigo-200 hover:via-blue-100 hover:to-purple-200">
-                        <span
-                            class="pointer-events-none absolute -top-12 -right-12 w-36 h-36 bg-gradient-to-br from-blue-400/30 to-indigo-500/30 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></span>
-                        <span
-                            class="pointer-events-none absolute -bottom-12 -left-12 w-32 h-32 bg-gradient-to-tr from-purple-400/20 to-blue-400/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></span>
-                        <span
-                            class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                        <div class="relative z-10">
-                            <div class="flex justify-center mb-6">
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-300">
-                                    <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3
-                                class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
-                                {{ $item['title'] }}
-                            </h3>
-                        </div>
+                        class="group block bg-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <img src="{{ asset('Images/hot_topics/' . $item['image']) }}" alt="{{ $item['title'] }}" class="w-full h-auto object-contain" />
+                        <span class="sr-only">{{ $item['title'] }}</span>
                     </a>
                 @endforeach
             </div>
@@ -504,9 +476,11 @@
             @endif
 
             <div class="flex justify-center gap-6">
+                @guest
                 <a href="{{ route('vciso') }}" class="btn-secondary group inline-flex items-center gap-3">
                     <span>Access Platform</span>
                 </a>
+                @endguest
                 <a href="#" class="BudgetButton btn-primary" id="headerContactButton">
                     Contact Us
                 </a>
