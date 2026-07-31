@@ -11,16 +11,16 @@
         </x-table.action-wrapper>
 
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table>
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="KPI Standard ID" label_ar="رمز معيار مؤشرات الأداء الرئيسية" />
                 <x-table.th label="KPI Standard Name" label_ar="اسم معيار مؤشرات الأداء الرئيسية" />
                 <x-table.th label="Category" label_ar="الفئة" />
                 <x-table.th label="Best Practice" label_ar="أفضل الممارسات" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @foreach ($kpis as $kpi)
                     <tr>
                         <x-table.td>
@@ -39,8 +39,8 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
         <x-pagination>
             {{ $kpis->links() }}
         </x-pagination>
