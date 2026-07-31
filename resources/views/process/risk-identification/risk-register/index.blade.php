@@ -48,8 +48,8 @@
 
         <x-table.scroll-table height-offset="250" min-width="2800px">
             <x-slot:head>
-                <x-table.th label="S.No" />
-                <x-table.th label="Risk Identifier" />
+                <x-table.th label="S.No" freeze="true" />
+                <x-table.th label="Risk Identifier" freeze="true" freeze-last="true" />
                 <x-table.th label="Scope" />
                 <x-table.th label="Owner" />
                 <x-table.th label="Identification Date" />
@@ -79,8 +79,8 @@
             <x-slot:body>
                 @forelse ($riskRegister as $row)
                     <tr>
-                        <x-table.td class="text-center">{{ $loop->index + 1 }}</x-table.td>
-                        <x-table.td>
+                        <x-table.td class="text-center" freeze="true">{{ $loop->index + 1 }}</x-table.td>
+                        <x-table.td freeze="true" freeze-last="true">
                             <a href="{{ route('risks.show', $row->riskid) }}" target="_blank">
                                 {{ $row->risk_id }}
                             </a>
@@ -101,7 +101,7 @@
                         <x-table.td>{{ $row->date_of_risk_analysis }}</x-table.td>
                         <x-table.td>{{ $row->risk_inherent_likelihood }}</x-table.td>
                         <x-table.td>{{ $row->risk_inherent_impact }}</x-table.td>
-                        <x-table.td style="background-color: {{ $row->appetite_color }}; color: #fff;">{{ $row->risk_appetite_name }}</x-table.td>
+                        <x-table.td class="text-center" style="background-color: {{ $row->appetite_color }}; color: #fff;">{{ $row->risk_appetite_name }}</x-table.td>
                         <x-table.td>{{ $row->risk_inherent_score }}</x-table.td>
                         <x-table.td>{{ $row->risk_treatment_name }}</x-table.td>
                         <x-table.td wrap="true"><span class="line-clamp-3" title="{{ $row->risk_treatment_description }}">{{ $row->risk_treatment_description }}</span></x-table.td>
@@ -112,7 +112,7 @@
                         <x-table.td>{{ $row->risk_likelihood }}</x-table.td>
                         <x-table.td>{{ $row->risk_impact }}</x-table.td>
                         <x-table.td>{{ $row->risk_score }}</x-table.td>
-                        <x-table.td style="background-color: {{ $row->risk_appetite_color }}; color: #fff;">{{ $row->risk_appetite }}</x-table.td>
+                        <x-table.td class="text-center" style="background-color: {{ $row->risk_appetite_color }}; color: #fff;">{{ $row->risk_appetite }}</x-table.td>
                         <x-table.td wrap="true">
                             <span class="line-clamp-3" title="{{ $row->preventive_action }}">{{ $row->preventive_action }}</span>
                         </x-table.td>

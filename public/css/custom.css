@@ -387,3 +387,21 @@ body.dark .filepond--file {
 body.dark .filepond--file-action-button {
     color: #ffffff;
 }
+
+/* Sticky frozen columns for x-table.scroll-table (see resources/views/components/table). */
+.stf-table th.stf-freeze,
+.stf-table td.stf-freeze {
+    position: sticky;
+    left: var(--stf-left, 0px);
+    z-index: 2;
+}
+
+.stf-table td.stf-freeze {
+    background-color: #ffffff;
+}
+
+.stf-table thead th.stf-freeze {
+    z-index: 20;
+    background-color: #161950;
+}
+
