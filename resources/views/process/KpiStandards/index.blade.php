@@ -13,7 +13,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('/css/6-Header/1-header.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/7-Sidebar/1-Sidebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/process/2-Table/IndividualTable.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/4-Process/2-Table/IndividualTable.css') }}">
 </head>
 
 <body>
@@ -90,40 +90,45 @@
             <div class="table-container">
 
                 <div class="ListTable">
-                    <table cellspacing="0">
-                        <tr class="table-header">
-                            <th style="padding-right: 0px;"></th>
-                            <th style="padding-right: 0px">
-                                <p class="ListHeadArbTxt">رقم</p>
-                                <p class="ListHeadEngTxt">S.No</p>
-                            </th>
-                            <th style="padding-right: 0px;">
-                                <p class="ListHeadArbTxt">رمز معيار مؤشرات الأداء الرئيسية</p>
-                                <p class="ListHeadEngTxt">KPI Standard ID</p>
-                            </th>
-                            <th style="padding-right: 100px;">
-                                <p class="ListHeadArbTxt">اسم مؤشر الأداء الرئيسية</p>
-                                <p class="ListHeadEngTxt">Category</p>
-                            </th>
+                    <table cellspacing="0" style="border-collapse: separate; border-spacing: 0;">
+                        <thead>
+                            <tr class="table-header">
+                                <th style="padding-right: 0px;"></th>
+                                <th style="padding-right: 0px">
+                                    <p class="ListHeadArbTxt">رقم</p>
+                                    <p class="ListHeadEngTxt">S.No</p>
+                                </th>
+                                <th style="padding-right: 0px;">
+                                    <p class="ListHeadArbTxt">رمز معيار مؤشرات الأداء الرئيسية</p>
+                                    <p class="ListHeadEngTxt">KPI Standard ID</p>
+                                </th>
+                                <th style="padding-right: 100px;">
+                                    <p class="ListHeadArbTxt">اسم مؤشر الأداء الرئيسية</p>
+                                    <p class="ListHeadEngTxt">Category</p>
+                                </th>
 
-                            <th style="padding-right: 100px;">
-                                <p class="ListHeadArbTxt">اسم مؤشر الأداء الرئيسية</p>
-                                <p class="ListHeadEngTxt">Best Practice</p>
-                            </th>
-                        </tr>
-                        @foreach ($kpis as $kpi)
-                            <tr>
-                                <td>
-                                    <input type="radio" name="record" class="record" value="{{ $kpi->$primaryKey }}"
-                                        required>
-                                </td>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td><a href="{{ route('kpi-standards.show', $kpi->kpi_id) }}">{{ $kpi->kpi_id }}</a>
-                                </td>
-                                <td>{{ $kpi->category->category_name }}</td>
-                                <td>{{ $kpi->bestPractice?->best_practices_name }}</td>
+                                <th style="padding-right: 100px;">
+                                    <p class="ListHeadArbTxt">اسم مؤشر الأداء الرئيسية</p>
+                                    <p class="ListHeadEngTxt">Best Practice</p>
+                                </th>
                             </tr>
-                        @endforeach
+                        </thead>
+                        <tbody>
+                            @foreach ($kpis as $kpi)
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="record" class="record"
+                                            value="{{ $kpi->$primaryKey }}" required>
+                                    </td>
+                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td><a
+                                            href="{{ route('kpi-standards.show', $kpi->kpi_id) }}">{{ $kpi->kpi_id }}</a>
+                                    </td>
+                                    <td>{{ $kpi->category->category_name }}</td>
+                                    <td>{{ $kpi->bestPractice?->best_practices_name }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
