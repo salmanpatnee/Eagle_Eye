@@ -22,7 +22,7 @@
                 continue;
             }
             offsets.push(offset);
-            offset += cell.getBoundingClientRect().width;
+            offset += Math.ceil(cell.getBoundingClientRect().width);
             lastIndex = i;
         }
 

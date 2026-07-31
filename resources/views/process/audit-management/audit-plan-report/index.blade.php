@@ -38,11 +38,11 @@
 
 
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="300" min-width="2900px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Audit ID" label_ar="رمز التدقيق" />
-                <x-table.th label="Audit Name" label_ar="اسم التدقيق" />
+                <x-table.th label="Audit ID" label_ar="رمز التدقيق" freeze="true" />
+                <x-table.th label="Audit Name" label_ar="اسم التدقيق" freeze="true" freeze-last="true" />
                 <x-table.th label="Team Responsible" label_ar="المسؤول عن الفريق" />
                 <x-table.th label="Lead Auditor" label_ar="مدقق رئيسي" />
                 <x-table.th label="Type of Audit" label_ar="نوع التدقيق" />
@@ -57,15 +57,15 @@
                 <x-table.th label="Audit End Date" label_ar="تاريخ انتهاء التدقيق" />
                 <x-table.th label="Cost" label_ar="يكلف" />
                 <x-table.th label="Comment" label_ar="كيف" />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @forelse ($auditPlans as $auditPlan)
                     <tr>
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
-                        <x-table.td>
+                        <x-table.td freeze="true">
                             <a href="{{ route('audit-plans.show', $auditPlan['id']) }}">{{ $auditPlan['audit_id'] }}</a>
                         </x-table.td>
-                        <x-table.td> {{ $auditPlan['audit_name'] }}</x-table.td>
+                        <x-table.td min-width="200px" max-width="300px" freeze="true" freeze-last="true"> {{ $auditPlan['audit_name'] }}</x-table.td>
                         <x-table.td> {{ $auditPlan['auditor_organization'] }}</x-table.td>
                         <x-table.td>
                             <a
@@ -93,7 +93,7 @@
                         <x-table.td>{{ $auditPlan['comment'] }}</x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
     </div>
 @endsection
