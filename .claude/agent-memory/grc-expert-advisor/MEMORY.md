@@ -1,2 +1,4 @@
 - [Phase 5 Risk Assessment QA Findings](project_phase5_risk_assessment.md) — confirmed bugs, model issues, status inconsistencies, missing guards from 2026-04-28 audit
 - [Risk Reports QA Findings (2026-05-01)](project_risk_reports_qa.md) — critical broken PDF/dashboard routes, hardcoded RSK-001, mislabelled controls, silent data exclusions
+- [Risk Assessment Completion Criteria](project_risk_assessment_completion.md) — current derived-status logic, gaps vs ISO 27005/NIST, and recommended completion gates
+- [Status Workflows Analysis](project_status_workflows.md) — how control_implementation_status and risk implementation_status are stored, the partial AJAX auto-suggest, and the total absence of observers/events
