@@ -8,22 +8,22 @@
             <x-action.button label="Add Best Practice" label_ar="إضافة أفضل ممارسة" route_name="best-practices.create" />
         </x-table.action-wrapper>
 
-        <x-table.table>
-            <x-table.thead>
+        <x-table.scroll-table height-offset="180" min-width="1100px">
+            <x-slot:head>
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Best Practice ID" label_ar="رمز أفضل ممارسة" />
-                <x-table.th label="Best Practice Name" label_ar="اسم أفضل ممارسة" />
+                <x-table.th label="Best Practice Name" label_ar="اسم أفضل ممارسة" freeze="true" freeze-last="true" />
                 <x-table.th label="Release Year" label_ar="سنة الإصدار" />
                 <x-table.th label="Version" label_ar="نسخة أفضل ممارسة" />
                 <x-table.th label="Best Practice Country" label_ar="بلد أفضل الممارسات" />
                 <x-table.th label="Action" label_ar="إجراء " />
-            </x-table.thead>
-            <x-table.tbody>
+            </x-slot:head>
+            <x-slot:body>
                 @foreach ($bestPractices as $bestPractice)
                     <tr>
                         <x-table.td><x-table.serial :loop="$loop" :paginator="$bestPractices" /></x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_id }}</x-table.td>
-                        <x-table.td>{{ $bestPractice->best_practices_name }}</x-table.td>
+                        <x-table.td min-width="200px" max-width="400px" freeze="true" freeze-last="true">{{ $bestPractice->best_practices_name }}</x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_release_year }}</x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_version }}</x-table.td>
                         <x-table.td>{{ $bestPractice->best_practices_country }}</x-table.td>
@@ -37,8 +37,8 @@
                         </x-table.td>
                     </tr>
                 @endforeach
-            </x-table.tbody>
-        </x-table.table>
+            </x-slot:body>
+        </x-table.scroll-table>
 
         <x-pagination>
             {{ $bestPractices->links() }}

@@ -25,7 +25,7 @@
                         <x-table.td>{{ $loop->index + 1 }}</x-table.td>
                         <x-table.td>{{ $riskMethodology->risk_methodology_id }}</x-table.td>
                         <x-table.td>{{ $riskMethodology->risk_methodology_name }}</x-table.td>
-                        <x-table.td>{{ $riskMethodology->risk_methodology_source }}</x-table.td>
+                        <x-table.td min-width="200px" max-width="400px">{{ $riskMethodology->risk_methodology_source }}</x-table.td>
 
                         <x-table.td action_col="true">
                             <x-action.view route_name="risk-methodology.show" param="{{ $riskMethodology->id }}" />
