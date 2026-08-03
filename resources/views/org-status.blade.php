@@ -146,13 +146,6 @@
         .kpi-card--green  .kpi-value { color: #047857; }
         .kpi-card--orange .kpi-value { color: #C2410C; }
 
-        .kpi-glow { position: absolute; right: -8px; top: 50%; transform: translateY(-50%); width: 70px; height: 70px; border-radius: 50%; pointer-events: none; opacity: 0.07; }
-        .kpi-card--blue   .kpi-glow { background: #2563EB; }
-        .kpi-card--red    .kpi-glow { background: #DC2626; }
-        .kpi-card--amber  .kpi-glow { background: #D97706; }
-        .kpi-card--green  .kpi-glow { background: #059669; }
-        .kpi-card--orange .kpi-glow { background: #EA580C; }
-
         /* ── CHART CARD ── */
         .chart-card {
             background: var(--surface); border: 1px solid var(--border);
@@ -299,7 +292,6 @@
                     <span class="kpi-label">Regulatory Posture</span>
                     <span class="kpi-value">{{ $dashboardData['regulatoryPosture'] }}%</span>
                 </div>
-                <div class="kpi-glow"></div>
             </div>
             <div class="kpi-card kpi-card--red">
                 <div class="kpi-pill"></div>
@@ -307,7 +299,6 @@
                     <span class="kpi-label">Critical Gaps</span>
                     <span class="kpi-value">{{ $dashboardData['criticalGaps'] }}</span>
                 </div>
-                <div class="kpi-glow"></div>
             </div>
             <div class="kpi-card kpi-card--amber">
                 <div class="kpi-pill"></div>
@@ -315,7 +306,6 @@
                     <span class="kpi-label">Risk Appetite</span>
                     <span class="kpi-value">{{ $dashboardData['riskAppetite'] }}</span>
                 </div>
-                <div class="kpi-glow"></div>
             </div>
             <div class="kpi-card kpi-card--orange">
                 <div class="kpi-pill"></div>
@@ -323,7 +313,6 @@
                     <span class="kpi-label">Open Risks</span>
                     <span class="kpi-value">{{ $dashboardData['riskSummary']['Open'] }}</span>
                 </div>
-                <div class="kpi-glow"></div>
             </div>
             <div class="kpi-card kpi-card--green">
                 <div class="kpi-pill"></div>
@@ -331,7 +320,6 @@
                     <span class="kpi-label">Effective Controls</span>
                     <span class="kpi-value">{{ $dashboardData['controlEffectiveness']['effective'] }}%</span>
                 </div>
-                <div class="kpi-glow"></div>
             </div>
         </div>
 
