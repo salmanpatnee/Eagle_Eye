@@ -21,6 +21,7 @@ Eagle Eye — Laravel 9 GRC app. Risk assessment, audit management, control eval
 - **Mass assignment**: Models use `$guarded = []` — validate request data carefully
 - **Unused code**: Archived in `_Unused/` dirs — do not delete, just ignore
 - **Views**: `resources/views/process/` for main features, `resources/views/pdf/` for PDF templates
+- **NEVER use `RefreshDatabase` in tests / never run `migrate:fresh` or `migrate:refresh`**: ~95% of tables were created outside migrations (legacy manual imports). `migrate:fresh` drops all tables and only recreates the ones tracked by migrations — this destroys data and can leave the schema broken (some migrations even reference tables, e.g. `artifact_table`, that no migration creates). Use `Illuminate\Foundation\Testing\DatabaseTransactions` instead.
 
 ## Commits
 
