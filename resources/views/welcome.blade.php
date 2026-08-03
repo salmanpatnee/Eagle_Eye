@@ -5063,11 +5063,13 @@
         })();
     </script>
 
-    <!-- Elfsight AI Chatbot | Eagle Eye GRC -->
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-    <div style="position:fixed;bottom:0;right:0;z-index:9999;line-height:0;height:0;overflow:visible;">
-        <div class="elfsight-app-92f5072d-22d7-4362-b205-051a2b087c9e" data-elfsight-app-lazy></div>
-    </div>
+    @production
+        <!-- Elfsight AI Chatbot | Eagle Eye GRC -->
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div style="position:fixed;bottom:0;right:0;z-index:9999;line-height:0;height:0;overflow:visible;">
+            <div class="elfsight-app-92f5072d-22d7-4362-b205-051a2b087c9e" data-elfsight-app-lazy></div>
+        </div>
+    @endproduction
 </body>
 
 </html>
