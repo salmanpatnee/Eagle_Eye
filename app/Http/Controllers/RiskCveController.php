@@ -29,7 +29,7 @@ class RiskCveController extends Controller
     {
         // Validation
         $attributes = $request->validate([
-            'cve_id' => 'required',
+            'cve_id' => 'required|unique:cve_table,cve_id',
             'cve_name' => 'nullable',
             'cve_number' => 'nullable',
             'cve_description' => 'nullable',

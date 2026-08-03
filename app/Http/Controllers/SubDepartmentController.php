@@ -35,7 +35,7 @@ class SubDepartmentController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'sub_department_id' => 'required',
+            'sub_department_id' => 'required|unique:sub_department_table,sub_department_id',
             'sub_department_name' => 'required',
             'sub_department_description' => 'nullable',
             'department_id' => 'required',

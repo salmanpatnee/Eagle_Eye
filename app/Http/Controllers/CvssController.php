@@ -29,7 +29,7 @@ class CvssController extends Controller
     {
         // Validation
         $attributes = $request->validate([
-            'cvss_id' => 'required',
+            'cvss_id' => 'required|unique:cvss_table,cvss_id',
             'cvss_name' => 'nullable',
             'cvss_number' => 'nullable',
             'cvss_description' => 'nullable',
