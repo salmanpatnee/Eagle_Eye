@@ -1,6 +1,6 @@
 ﻿@extends('layouts.artifact')
-@section('title', 'Attachment Management')
-@section('title_ar', 'إدارة المرفقات')
+@section('title', 'Artifact Management')
+@section('title_ar', 'إدارة المقتنيات')
 @section('parent_url', route('artifacts.index'))
 @if(isset($artifact))
     @section('parent_title', 'Artifact Management')
