@@ -11,7 +11,7 @@
         <x-table.table>
             <x-table.thead>
                 <x-table.th label="S.No" label_ar="رقم" />
-                <x-table.th label="Classification IDs" label_ar="رمز  التصنيف" />
+                <x-table.th label="Classification ID" label_ar="رمز  التصنيف" />
                 <x-table.th label="Classification Names" label_ar="اسم  التصنيف" />
                 <x-table.th label="Classification Source" label_ar="مصدر التصنيف" />
                 <x-table.th label="Action" label_ar="إجراء " />
