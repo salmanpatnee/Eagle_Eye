@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Psr\Log\LogLevel;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
@@ -56,6 +57,10 @@ class Handler extends ExceptionHandler
         // HttpExceptions with 5xx status are suppressed from report() by parent — log them explicitly
         if ($e instanceof HttpException && $e->getStatusCode() >= 500) {
             Log::error($e->getMessage(), ['exception' => $e]);
+        }
+
+        if ($e instanceof ValidationException) {
+            return parent::render($request, $e);
         }
 
         if (! config('app.debug') && ! $request->expectsJson()) {
