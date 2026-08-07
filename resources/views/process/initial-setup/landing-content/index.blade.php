@@ -14,18 +14,20 @@
                 <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
                     <h2 class="dark:text-white font-medium text-base">{{ ucfirst($landingSection->section_key) }}
                         Section</h2>
-                    @if ($landingSection->section_key !== 'hero')
+                    @if (! in_array($landingSection->section_key, ['hero', 'quote', 'cta']))
                         <x-form.grid-col-full>
                             <x-form.field label="Eyebrow" label_ar="العنوان الفرعي"
                                 name="sections[{{ $landingSection->id }}][eyebrow]" placeholder="Enter Eyebrow"
                                 :value="$landingSection->eyebrow" />
                         </x-form.grid-col-full>
                     @endif
-                    <x-form.grid-col-full>
-                        <x-form.field label="Title" label_ar="العنوان"
-                            name="sections[{{ $landingSection->id }}][title]" placeholder="Enter Title"
-                            :value="$landingSection->title" />
-                    </x-form.grid-col-full>
+                    @if ($landingSection->section_key !== 'quote')
+                        <x-form.grid-col-full>
+                            <x-form.field label="Title" label_ar="العنوان"
+                                name="sections[{{ $landingSection->id }}][title]" placeholder="Enter Title"
+                                :value="$landingSection->title" />
+                        </x-form.grid-col-full>
+                    @endif
                     <x-form.grid-col-full>
                         <x-form.textarea-field label="Body" label_ar="النص"
                             name="sections[{{ $landingSection->id }}][body]" placeholder="Enter Body"

@@ -4760,11 +4760,9 @@
         <div class="container">
             <div class="why-grid">
                 <div class="reveal">
-                    <div class="why-since">Since 2023</div>
-                    <h2 class="why-heading">Built for the Saudi<br><span>Regulatory Landscape</span></h2>
-                    <p class="why-body">Eagle Eye was designed from the ground up for organizations operating in Saudi
-                        Arabia, covering their GRC needs and beyond. For boards and C-level executives, regulatory
-                        compliance is a top priority.</p>
+                    <div class="why-since">{{ $sections['why']->eyebrow ?? 'Since 2023' }}</div>
+                    <h2 class="why-heading">{!! $sections['why']->title ?? 'Built for the Saudi<br><span>Regulatory Landscape</span>' !!}</h2>
+                    <p class="why-body">{{ $sections['why']->body ?? 'Eagle Eye was designed from the ground up for organizations operating in Saudi Arabia, covering their GRC needs and beyond. For boards and C-level executives, regulatory compliance is a top priority.' }}</p>
                 </div>
                 <div class="why-items">
                     <div class="why-item reveal">
@@ -4831,9 +4829,13 @@
         <div class="container">
             <div class="testimonial-inner reveal">
                 <span class="quote-icon">&ldquo;</span>
-                <p class="quote-text">"Eagle Eye transformed how we demonstrate Regulatory Compliance to our board.
-                    What
-                    used to take weeks of spreadsheet work now takes hours."</p>
+                @if (! empty($sections['quote']->eyebrow))
+                    <div class="section-eyebrow">{{ $sections['quote']->eyebrow }}</div>
+                @endif
+                @if (! empty($sections['quote']->title))
+                    <h2 class="section-title">{!! $sections['quote']->title !!}</h2>
+                @endif
+                <p class="quote-text">{{ $sections['quote']->body ?? '"Eagle Eye transformed how we demonstrate Regulatory Compliance to our board. What used to take weeks of spreadsheet work now takes hours."' }}</p>
                 {{-- <div class="quote-attr">
                     <span>Chief Information Security Officer, Major Saudi Financial Institution</span>
                 </div> --}}
@@ -4845,10 +4847,8 @@
     <section class="section-cta">
         <div class="container">
             <div class="cta-inner">
-                <h2 class="cta-title reveal">Ready to Go Beyond GRC?</h2>
-                <p class="cta-subtitle reveal reveal-delay-1">Join organizations across the Kingdom managing
-                    compliance
-                    the smart way.</p>
+                <h2 class="cta-title reveal">{!! $sections['cta']->title ?? 'Ready to Go Beyond GRC?' !!}</h2>
+                <p class="cta-subtitle reveal reveal-delay-1">{{ $sections['cta']->body ?? 'Join organizations across the Kingdom managing compliance the smart way.' }}</p>
                 <a href="/login" class="btn-cta reveal reveal-delay-2">Enter Platform <span
                         class="arrow">&rarr;</span></a>
             </div>
