@@ -42,6 +42,7 @@ use App\Http\Controllers\HumanResourceController;
 use App\Http\Controllers\KPICategoryController;
 use App\Http\Controllers\KPIStandardController;
 use App\Http\Controllers\KPIStandardReportController;
+use App\Http\Controllers\LandingSectionController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainDomainController;
@@ -101,6 +102,7 @@ use App\Http\Controllers\VaMasterController;
 use App\Http\Controllers\VaSubTypeController;
 use App\Http\Controllers\VaTypeController;
 use App\Http\Controllers\VulnerabilityRegisterController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 // use App\Http\Controllers\OptionsController;
@@ -130,7 +132,7 @@ use App\Http\Controllers\RCDBController;
 
 Route::middleware(['guest'])->group(function () {
 
-    Route::view('/', 'welcome')->name('welcome');
+    Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
@@ -173,6 +175,9 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::get('/database-backup', [DatabaseBackupController::class, 'download'])
         ->middleware('admin')
         ->name('database-backup.download');
+
+    Route::get('landing-content', [LandingSectionController::class, 'index'])->name('landing-content.index')->middleware('admin');
+    Route::put('landing-content', [LandingSectionController::class, 'update'])->name('landing-content.update')->middleware('admin');
 
     // ------------------- ASSET REGISTRATION -------------------
 

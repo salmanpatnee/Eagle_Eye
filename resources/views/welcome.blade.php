@@ -3524,11 +3524,8 @@
                         <span class="hero-badge-dot"></span>
                         ISO 27001 &middot; NCA ECC &middot; CITC &middot; PDPL
                     </div> --}}
-                    <h1 class="hero-h1 anim-2">Out-of-the-Box<br>Regulatory Compliance, <span class="blue-text">Beyond
-                            GRC.</span></h1>
-                    <p class="hero-body anim-4">Eagle Eye is a Saudi product focused on Saudi Arabia, providing complete
-                        regulatory compliance in the shortest possible time. Designed, developed, and rolled out under
-                        the strict supervision of experienced GRC consultants.</p>
+                    <h1 class="hero-h1 anim-2">{!! $sections['hero']->title ?? 'Out-of-the-Box Regulatory Compliance, <span class="blue-text">Beyond GRC.</span>' !!}</h1>
+                    <p class="hero-body anim-4">{{ $sections['hero']->body ?? 'Eagle Eye is a Saudi product focused on Saudi Arabia, providing complete regulatory compliance in the shortest possible time. Designed, developed, and rolled out under the strict supervision of experienced GRC consultants.' }}</p>
                     <div class="hero-announce anim-5">
                         <svg class="hero-announce-icon" width="14" height="14" viewBox="0 0 14 14" fill="none"
                             aria-hidden="true">
@@ -3699,10 +3696,9 @@
         <div class="showcase-blob-2" aria-hidden="true"></div>
         <div class="container">
             <div class="section-header">
-                <div class="section-eyebrow reveal">Product Preview</div>
-                <h2 class="section-title reveal reveal-delay-1">Every Insight.<br>One Command Center.</h2>
-                <p class="section-sub reveal reveal-delay-2">Live compliance scores, risk distribution, and control
-                    status — all in one view, designed for CISOs and auditors who act on data, not guesswork.</p>
+                <div class="section-eyebrow reveal">{{ $sections['showcase']->eyebrow ?? 'Product Preview' }}</div>
+                <h2 class="section-title reveal reveal-delay-1">{!! $sections['showcase']->title ?? 'Every Insight.<br>One Command Center.' !!}</h2>
+                <p class="section-sub reveal reveal-delay-2">{{ $sections['showcase']->body ?? 'Live compliance scores, risk distribution, and control status — all in one view, designed for CISOs and auditors who act on data, not guesswork.' }}</p>
             </div>
 
             <div class="browser-frame reveal reveal-delay-2">
@@ -3974,10 +3970,9 @@
     <section class="section-infographics" id="infographics">
         <div class="container">
             <div class="section-header">
-                <div class="section-eyebrow reveal">GRC Intelligence</div>
-                <h2 class="section-title reveal reveal-delay-1">Data That Drives Decisions</h2>
-                <p class="section-sub reveal reveal-delay-2">Real-time visibility across your entire risk and
-                    compliance landscape — all from one unified platform.</p>
+                <div class="section-eyebrow reveal">{{ $sections['infographics']->eyebrow ?? 'GRC Intelligence' }}</div>
+                <h2 class="section-title reveal reveal-delay-1">{!! $sections['infographics']->title ?? 'Data That Drives Decisions' !!}</h2>
+                <p class="section-sub reveal reveal-delay-2">{{ $sections['infographics']->body ?? 'Real-time visibility across your entire risk and compliance landscape — all from one unified platform.' }}</p>
             </div>
             <div class="infographics-grid">
 
@@ -4381,10 +4376,9 @@
     <section class="section-features" id="features">
         <div class="container">
             <div class="section-header">
-                <div class="section-eyebrow reveal">Platform Capabilities</div>
-                <h2 class="section-title reveal reveal-delay-1">Everything You Need</h2>
-                <p class="section-sub reveal reveal-delay-2">One platform, every framework — purpose-built for Saudi
-                    Arabia’s complete compliance needs and beyond.</p>
+                <div class="section-eyebrow reveal">{{ $sections['features']->eyebrow ?? 'Platform Capabilities' }}</div>
+                <h2 class="section-title reveal reveal-delay-1">{!! $sections['features']->title ?? 'Everything You Need' !!}</h2>
+                <p class="section-sub reveal reveal-delay-2">{{ $sections['features']->body ?? 'One platform, every framework — purpose-built for Saudi Arabia’s complete compliance needs and beyond.' }}</p>
             </div>
             <div class="features-grid" id="modules">
 
@@ -4698,62 +4692,65 @@
     </section>
 
     <!-- ─── How It Works ─────────────────────────────── -->
+    @php $howItems = $sections['how']->meta['items'] ?? []; @endphp
     <section class="section-how" id="how">
         <div class="container">
             <div class="section-header">
-                <div class="section-eyebrow reveal">Simple Process</div>
-                <h2 class="section-title reveal reveal-delay-1">How It Works</h2>
-                <p class="section-sub reveal reveal-delay-2">Three clear steps from risk exposure to board-level
-                    confidence.</p>
+                <div class="section-eyebrow reveal">{{ $sections['how']->eyebrow ?? 'Simple Process' }}</div>
+                <h2 class="section-title reveal reveal-delay-1">{!! $sections['how']->title ?? 'How It Works' !!}</h2>
+                <p class="section-sub reveal reveal-delay-2">{{ $sections['how']->body ?? 'Three clear steps from risk exposure to board-level confidence.' }}</p>
             </div>
             <div class="steps-row">
                 <div class="step reveal">
                     <div class="step-ghost">01</div>
                     <div class="step-circle">01</div>
-                    <div class="step-title">Assess</div>
-                    <p class="step-desc">Identify assets, threats, and vulnerabilities. Score risks using quantitative
-                        and qualitative methods.</p>
+                    <div class="step-title">{{ $howItems[0]['title'] ?? 'Assess' }}</div>
+                    <p class="step-desc">{{ $howItems[0]['body'] ?? 'Identify assets, threats, and vulnerabilities. Score risks using quantitative and qualitative methods.' }}</p>
                 </div>
                 <div class="step reveal reveal-delay-2">
                     <div class="step-ghost">02</div>
                     <div class="step-circle">02</div>
-                    <div class="step-title">Control</div>
-                    <p class="step-desc">Map controls to risks and frameworks. Collect evidence, assign owners, and
-                        track implementation.</p>
+                    <div class="step-title">{{ $howItems[1]['title'] ?? 'Control' }}</div>
+                    <p class="step-desc">{{ $howItems[1]['body'] ?? 'Map controls to risks and frameworks. Collect evidence, assign owners, and track implementation.' }}</p>
                 </div>
                 <div class="step reveal reveal-delay-4">
                     <div class="step-ghost">03</div>
                     <div class="step-circle">03</div>
-                    <div class="step-title">Report</div>
-                    <p class="step-desc">Generate compliance reports, executive dashboards, and audit-ready
-                        documentation in seconds.</p>
+                    <div class="step-title">{{ $howItems[2]['title'] ?? 'Report' }}</div>
+                    <p class="step-desc">{{ $howItems[2]['body'] ?? 'Generate compliance reports, executive dashboards, and audit-ready documentation in seconds.' }}</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ─── Stats ────────────────────────────────────── -->
+    @php
+        $statItems = $sections['stats']->meta['items'] ?? [];
+        $statDefaults = [
+            ['value' => '500+', 'label' => 'Controls Mapped'],
+            ['value' => '10+', 'label' => 'Standards Covered'],
+            ['value' => '6', 'label' => 'GRC Modules'],
+            ['value' => '2', 'label' => 'Languages (AR + EN)'],
+        ];
+        $statDelays = ['', 'reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3'];
+    @endphp
     <section class="section-stats">
         <div class="container">
             <div class="stats-grid">
-                <div class="stat-item reveal">
-                    <div class="stat-num"><span class="count-stat" data-target="500" data-suffix="+">500+</span>
+                @for ($i = 0; $i < 4; $i++)
+                    @php
+                        $statValue = $statItems[$i]['value'] ?? $statDefaults[$i]['value'];
+                        $statTarget = preg_replace('/[^0-9]/', '', $statValue);
+                        $statSuffix = preg_replace('/[0-9]/', '', $statValue);
+                        $statLabel = $statItems[$i]['label'] ?? $statDefaults[$i]['label'];
+                    @endphp
+                    <div class="stat-item reveal {{ $statDelays[$i] }}">
+                        <div class="stat-num"><span class="count-stat" data-target="{{ $statTarget }}"
+                                data-suffix="{{ $statSuffix }}">{{ $statValue }}</span>
+                        </div>
+                        <div class="stat-label">{{ $statLabel }}</div>
                     </div>
-                    <div class="stat-label">Controls Mapped</div>
-                </div>
-                <div class="stat-item reveal reveal-delay-1">
-                    <div class="stat-num"><span class="count-stat" data-target="10" data-suffix="+">10+</span>
-                    </div>
-                    <div class="stat-label">Standards Covered</div>
-                </div>
-                <div class="stat-item reveal reveal-delay-2">
-                    <div class="stat-num"><span class="count-stat" data-target="6" data-suffix="">6</span></div>
-                    <div class="stat-label">GRC Modules</div>
-                </div>
-                <div class="stat-item reveal reveal-delay-3">
-                    <div class="stat-num"><span class="count-stat" data-target="2" data-suffix="">2</span></div>
-                    <div class="stat-label">Languages (AR + EN)</div>
-                </div>
+                @endfor
             </div>
         </div>
     </section>

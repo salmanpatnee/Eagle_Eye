@@ -15,4 +15,5 @@
 {{-- <x-sidebar-menu-item route_name="imports.mappings.index" label_ar="مدير الاستيراد" label="Import Manager" /> --}}
 @if(auth()->user()?->canManageOrganizations())
     <x-sidebar-menu-item route_name="database-backup.download" label_ar="نسخ احتياطي لقاعدة البيانات" label="DB Backup" />
+    <x-sidebar-menu-item route_name="landing-content.index" label_ar="محتوى الصفحة الرئيسية" label="Landing Page Content" />
 @endif
