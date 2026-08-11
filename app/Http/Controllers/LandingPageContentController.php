@@ -37,6 +37,10 @@ class LandingPageContentController extends Controller
             $data['features_image_path'] = $request->file('features_image_path')->store('landing-page', 'public');
         }
 
+        if ($request->hasFile('cyber_professionals_image_path')) {
+            $data['cyber_professionals_image_path'] = $request->file('cyber_professionals_image_path')->store('landing-page', 'public');
+        }
+
         $landingPageContent = LandingPageContent::first();
 
         if ($landingPageContent) {

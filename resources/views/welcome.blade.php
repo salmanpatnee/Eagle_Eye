@@ -106,14 +106,16 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <!-- Text Column -->
                 <div class="text-center md:text-left">
-                    <h2 class="section-title text-center md:!text-left mb-6 ">
-                        Find Certified Cybersecurity Professionals in the <span class="hero-gradient">United Kingdom</span>
-                    </h2>
-                    <p class="text-lg text-gray-700 leading-relaxed mb-8 max-w-xl mx-auto md:mx-0">
-                        Connect with vetted, certified CISO-level talent across the UK. Our platform helps HR teams and
-                        recruiters source experienced cybersecurity leaders with verified credentials — ready to
-                        strengthen your organisation's security posture.
-                    </p>
+                    @if ($landingPageContent?->cyber_professionals_title)
+                        <h2 class="section-title text-center md:!text-left mb-6 ">
+                            {!! $landingPageContent->cyber_professionals_title !!}
+                        </h2>
+                    @endif
+                    @if ($landingPageContent?->cyber_professionals_content)
+                        <div class="text-lg text-gray-700 leading-relaxed mb-8 max-w-xl mx-auto md:mx-0">
+                            {!! $landingPageContent->cyber_professionals_content !!}
+                        </div>
+                    @endif
                     <div class="flex justify-center md:justify-start">
                         <a href="{{ route('people.index') }}"
                             class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 active:scale-95">
@@ -135,24 +137,32 @@
                             </svg>
                         </span>
                         <div>
-                            <span
-                                class="inline-block text-[11px] font-semibold uppercase tracking-wider text-blue-700 mb-0.5">
-                                GDPR Compliant
-                            </span>
-                            <p class="text-sm text-gray-600 leading-relaxed">
-                                All cybersecurity professional data is sourced from publicly available information on
-                                the internet, and no data is collected from non-public sources. The information
-                                presented is GDPR compliant.
-                            </p>
+                            @if ($landingPageContent?->cyber_professionals_notice_title)
+                                <span
+                                    class="inline-block text-[11px] font-semibold uppercase tracking-wider text-blue-700 mb-0.5">
+                                    {{ $landingPageContent->cyber_professionals_notice_title }}
+                                </span>
+                            @endif
+                            @if ($landingPageContent?->cyber_professionals_notice_content)
+                                <div class="text-sm text-gray-600 leading-relaxed">
+                                    {!! $landingPageContent->cyber_professionals_notice_content !!}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
 
                 <!-- Image Column -->
                 <div class="flex justify-center">
-                    <img src="{{ asset('Images/hr-professional.jpg') }}"
-                        alt="Certified cybersecurity professionals in the UK"
-                        class="w-full h-auto rounded-xl shadow-lg object-cover" />
+                    @if ($landingPageContent?->cyber_professionals_image_path)
+                        <img src="{{ asset('storage/' . $landingPageContent->cyber_professionals_image_path) }}"
+                            alt="Certified cybersecurity professionals in the UK"
+                            class="w-full h-auto rounded-xl shadow-lg object-cover" />
+                    @else
+                        <img src="{{ asset('Images/hr-professional.jpg') }}"
+                            alt="Certified cybersecurity professionals in the UK"
+                            class="w-full h-auto rounded-xl shadow-lg object-cover" />
+                    @endif
                 </div>
             </div>
         </div>

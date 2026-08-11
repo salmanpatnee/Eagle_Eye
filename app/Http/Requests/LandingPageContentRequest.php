@@ -27,6 +27,11 @@ class LandingPageContentRequest extends FormRequest
             'benefits_right_items' => ['nullable', 'string'],
             'stats_title' => ['nullable', 'string'],
             'stats_subtitle' => ['nullable', 'string'],
+            'cyber_professionals_title' => ['nullable', 'string'],
+            'cyber_professionals_content' => ['nullable', 'string'],
+            'cyber_professionals_image_path' => ['nullable', 'file', 'image', 'max:2048'],
+            'cyber_professionals_notice_title' => ['nullable', 'string'],
+            'cyber_professionals_notice_content' => ['nullable', 'string'],
         ];
     }
 
@@ -38,6 +43,8 @@ class LandingPageContentRequest extends FormRequest
             'hero_image_path.max' => 'The hero image may not be greater than 2MB.',
             'features_image_path.image' => 'The features image must be a valid image file.',
             'features_image_path.max' => 'The features image may not be greater than 2MB.',
+            'cyber_professionals_image_path.image' => 'The cybersecurity professionals image must be a valid image file.',
+            'cyber_professionals_image_path.max' => 'The cybersecurity professionals image may not be greater than 2MB.',
         ];
     }
 }

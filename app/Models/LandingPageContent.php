@@ -22,5 +22,10 @@ class LandingPageContent extends Model
         'benefits_right_items',
         'stats_title',
         'stats_subtitle',
+        'cyber_professionals_title',
+        'cyber_professionals_content',
+        'cyber_professionals_image_path',
+        'cyber_professionals_notice_title',
+        'cyber_professionals_notice_content',
     ];
 }
