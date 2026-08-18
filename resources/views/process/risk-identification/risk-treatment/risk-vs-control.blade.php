@@ -7,6 +7,7 @@
             <x-action.button label="Risk vs Control" label_ar="الضوابط مقابل الأدلة" route_name="risk-vs-control.index"
                 disabled class="opacity-75" />
             <x-action.button label="Control vs Risk" label_ar="تقرير معالجة المخاطر" route_name="control-vs-risk.index" />
+            <x-action.button label="Risks Without Controls" route_name="risks-without-controls.index" />
         </x-table.action-wrapper>
 
         <form action="{{ route('risk-vs-control.index') }}" method="GET">

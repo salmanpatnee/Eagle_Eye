@@ -8,7 +8,17 @@ use Illuminate\Http\Request;
 
 class RiskTreatmentController extends Controller
 {
+    public function risksWithoutControls()
+    {
+        $risks = Risk::doesntHave('controls')
+            ->with(['owner', 'group', 'inherent'])
+            ->leftJoin('risk_inherent_table', 'risk_master_table.risk_inherent_id', '=', 'risk_inherent_table.risk_inherent_id')
+            ->orderByDesc('risk_inherent_table.risk_inherent_score')
+            ->select('risk_master_table.*')
+            ->paginate(20);
 
+        return view('process/risk-identification/risk-treatment/risks-without-controls', compact('risks'));
+    }
 
     public function riskVsControl(Request $request)
     {
@@ -21,12 +31,8 @@ class RiskTreatmentController extends Controller
             ->get();
         // ->pluck('control_master_table.control_id');
 
-
-
         $risks = Risk::select('risk_id', 'risk_name')
             ->get();
-
-
 
         $riskTreatments = Risk::whereHas('controls', function ($query) use ($controlId) {
             if ($controlId) {

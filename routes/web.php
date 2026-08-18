@@ -275,6 +275,7 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::prefix('risk-treatment')->controller(RiskTreatmentController::class)->group(function () {
         Route::get('/risk-vs-control', 'riskVsControl')->name('risk-vs-control.index');
         Route::get('/control-vs-risk', 'controlVsRisk')->name('control-vs-risk.index');
+        Route::get('/risks-without-controls', 'risksWithoutControls')->name('risks-without-controls.index');
     });
 
     // ------------------- RISK ON ASSET GROUP -------------------
