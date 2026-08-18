@@ -260,107 +260,118 @@
             </div>
 
             {{-- Desktop Table View (shown at md breakpoint and above) --}}
-            <div class="mt-6 border border-gray-200 overflow-auto hidden md:block" style="max-height: 450px;">
-                <!-- Data Table with Sticky Header -->
-                <div class="mt-6 border border-gray-200" style="max-height: 350px; overflow: auto;">
-                    <div>
-                        <table class="w-full" style="border-collapse: collapse; vertical-align: top;">
-                            <thead style="position: sticky; top: 0; z-index: 50;">
-                                <tr style="background-color: #00053C;">
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="width: 60px; background-color: #00053C; vertical-align: top;">S.No</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">Expert ID</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">Expert Name</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">Nationality</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">Industry</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">Organization</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">Certification</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">Expertise</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">Designation</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">Experience</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold whitespace-nowrap text-white"
-                                        style="background-color: #00053C; vertical-align: top;">LinkedIn Profile</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                @forelse ($humanResource as $row)
-                                    <tr class="hover:bg-gray-50 transition-colors duration-150">
-                                        <td class="px-4 py-3 text-center whitespace-nowrap"
-                                            style="width: 60px; vertical-align: top;">
-                                            <span
-                                                class="block font-medium text-gray-700 text-theme-sm">{{ ($humanResource->currentPage() - 1) * $humanResource->perPage() + $loop->index + 1 }}</span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span
-                                                class="block font-medium text-gray-700 text-theme-sm">{{ $row?->expert_id }}</span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span
-                                                class="block font-medium text-gray-700 text-theme-sm">{{ $row?->name }}</span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span class="block font-medium text-gray-700 text-theme-sm">
-                                                {{ isset($row?->nationality) && !is_string($row?->nationality) ? $row?->nationality->name : $row?->nationality }}
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span
-                                                class="block font-medium text-gray-700 text-theme-sm">{{ $row?->industry?->industry_name }}</span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span
-                                                class="block font-medium text-gray-700 text-theme-sm">{{ $row?->organization?->organization_name }}</span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span class="block font-medium text-gray-700 text-theme-sm">
-                                                <x-table-list :data="$row?->certifications" id_key="certification_id"
-                                                    value_key="certification_title" />
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span class="block font-medium text-gray-700 text-theme-sm">
-                                                <x-table-list :data="$row?->experties" id_key=""
-                                                    value_key="expertise_title" />
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span
-                                                class="block font-medium text-gray-700 text-theme-sm">{{ $row?->designation }}</span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span
-                                                class="block font-medium text-gray-700 text-theme-sm">{{ $row?->experience }}</span>
-                                        </td>
-                                        <td class="px-4 py-3 whitespace-nowrap" style="vertical-align: top;">
-                                            <span class="block font-medium text-gray-700 text-theme-sm">
+            <div class="mt-6 hidden md:block stf-card">
+                <div class="stf-scroll" data-stf-label="Expert directory" id="expert-resources-scroll">
+                    <table class="stf-table">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap stf-freeze"
+                                    style="width: 60px;" scope="col">S.No</th>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap stf-freeze"
+                                    scope="col">Expert Name</th>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Nationality
+                                </th>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Industry
+                                </th>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Organization
+                                </th>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Certification
+                                </th>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Expertise
+                                </th>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Designation
+                                </th>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Experience
+                                </th>
+                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">LinkedIn
+                                    Profile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($humanResource as $row)
+                                <tr>
+                                    <td class="px-4 py-3 text-center whitespace-nowrap stf-freeze"
+                                        style="width: 60px;">
+                                        <span
+                                            class="block font-medium text-gray-700 text-theme-sm">{{ ($humanResource->currentPage() - 1) * $humanResource->perPage() + $loop->index + 1 }}</span>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap stf-freeze">
+                                        <span
+                                            class="block font-medium text-gray-700 text-theme-sm">{{ $row?->name }}</span>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <span class="block font-medium text-gray-700 text-theme-sm">
+                                            {{ isset($row?->nationality) && !is_string($row?->nationality) ? $row?->nationality->name : $row?->nationality }}
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <span
+                                            class="block font-medium text-gray-700 text-theme-sm">{{ $row?->industry?->industry_name }}</span>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <span
+                                            class="block font-medium text-gray-700 text-theme-sm">{{ $row?->organization?->organization_name }}</span>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <span class="block font-medium text-gray-700 text-theme-sm">
+                                            <x-table-list :data="$row?->certifications" id_key="certification_id"
+                                                value_key="certification_title" />
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <span class="block font-medium text-gray-700 text-theme-sm">
+                                            <x-table-list :data="$row?->experties" id_key=""
+                                                value_key="expertise_title" />
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <span
+                                            class="block font-medium text-gray-700 text-theme-sm">{{ $row?->designation }}</span>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <span
+                                            class="block font-medium text-gray-700 text-theme-sm">{{ $row?->experience }}</span>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <span class="block font-medium text-gray-700 text-theme-sm">
+                                            @if ($row?->linkedin_profile)
                                                 <a style="color: blue; text-decoration: underline;"
-                                                    href="{{ $row?->linkedin_profile }}" target="_blank">
+                                                    href="{{ $row?->linkedin_profile }}" target="_blank"
+                                                    rel="noopener noreferrer">
                                                     {{ $row?->linkedin_profile }}
                                                 </a>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="12" class="px-4 py-8 text-center text-gray-500">
-                                            No expert resources found
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
+                                            @endif
+                                        </span>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="10" class="px-4 py-8 text-center text-gray-500"
+                                        style="background: var(--stf-row-bg);">
+                                        No expert resources found
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
+            @push('css')
+                <link rel="stylesheet" href="{{ asset('css/sticky-table.css') }}">
+            @endpush
+
+            @push('scripts')
+                <script type="module">
+                    import { initStickyTable } from "{{ asset('js/sticky-table-pin.js') }}";
+
+                    initStickyTable(document.getElementById('expert-resources-scroll'), {
+                        stickyBars: ['header.sticky', '.stf-breadcrumb-bar'],
+                        bottomGutter: 24,
+                        minHeight: 240,
+                    });
+                </script>
+            @endpush
 
             <x-pagination>
                 {{ $humanResource->links() }}

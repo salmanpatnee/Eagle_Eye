@@ -66,8 +66,9 @@ Route::get('/clear', function () {
 
     return response()->json(['message' => 'All caches cleared successfully.']);
 })->name('clear-cache');
+Route::post('/contact-inquiry', [LeadController::class, 'store'])->name('contact.store');
+
 Route::middleware(['guest'])->group(function () {
-    Route::post('/contact-inquiry', [LeadController::class, 'store'])->name('contact.store');
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 });

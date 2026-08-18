@@ -47,37 +47,54 @@
             </div>
         </form> --}}
 
-        {{-- <x-table.table> --}}
-        <x-table.table-sticky>
-            {{-- <x-table.thead> --}}
-            <x-table.thead-sticky>
-                <x-table.th label="S.No" />
-                <x-table.th label="Name" />
-                <x-table.th label="Organization" />
-                <x-table.th label="Industry" />
-                <x-table.th label="Designation" />
-                <x-table.th label="Action" />
-            </x-table.thead-sticky>
-            {{-- </x-table.thead> --}}
-            <x-table.tbody>
-                @foreach ($humanResource as $expert)
-                    <tr>
-                        <x-table.td> <x-table.serial :loop="$loop" :paginator="$humanResource" /></x-table.td>
-                        <x-table.td>{{ $expert->name }}</x-table.td>
-                        <x-table.td>{{ $expert->organization->organization_name ?? '' }}</x-table.td>
-                        <x-table.td>{{ $expert->industry->industry_name ?? '' }}</x-table.td>
-                        <x-table.td>{{ $expert->designation->name ?? $expert->designation }}</x-table.td>
+        <div class="mt-2 stf-card">
+            <div class="stf-scroll" data-stf-label="HR experts" id="hr-experts-scroll" style="--stf-max-height: 450px;">
+                <table class="stf-table w-full">
+                    <thead>
+                        <tr>
+                            <x-table.th label="S.No" class="stf-freeze" />
+                            <x-table.th label="Name" class="stf-freeze" />
+                            <x-table.th label="Organization" />
+                            <x-table.th label="Industry" />
+                            <x-table.th label="Designation" />
+                            <x-table.th label="Action" />
+                        </tr>
+                    </thead>
+                    <x-table.tbody>
+                        @foreach ($humanResource as $expert)
+                            <tr>
+                                <x-table.td class="stf-freeze"> <x-table.serial :loop="$loop" :paginator="$humanResource" /></x-table.td>
+                                <x-table.td class="stf-freeze">{{ $expert->name }}</x-table.td>
+                                <x-table.td>{{ $expert->organization->organization_name ?? '' }}</x-table.td>
+                                <x-table.td>{{ $expert->industry->industry_name ?? '' }}</x-table.td>
+                                <x-table.td>{{ $expert->designation->name ?? $expert->designation }}</x-table.td>
 
-                        <x-table.td action_col="true">
-                            <x-action.view route_name="hr-experts.show" param="{{ $expert->id }}" />
-                            <x-action.edit route_name="hr-experts.edit" param="{{ $expert->id }}" />
-                            <x-action.delete route_name="hr-experts.destroy" param="{{ $expert->id }}" />
-                        </x-table.td>
-                    </tr>
-                @endforeach
-            </x-table.tbody>
-        </x-table.table-sticky>
-        {{-- </x-table.table> --}}
+                                <x-table.td action_col="true">
+                                    <x-action.view route_name="hr-experts.show" param="{{ $expert->id }}" />
+                                    <x-action.edit route_name="hr-experts.edit" param="{{ $expert->id }}" />
+                                    <x-action.delete route_name="hr-experts.destroy" param="{{ $expert->id }}" />
+                                </x-table.td>
+                            </tr>
+                        @endforeach
+                    </x-table.tbody>
+                </table>
+            </div>
+        </div>
+
+        @push('css')
+            <link rel="stylesheet" href="{{ asset('css/sticky-table.css') }}">
+        @endpush
+
+        @push('scripts')
+            <script type="module">
+                import { initStickyTable } from "{{ asset('js/sticky-table-pin.js') }}";
+
+                initStickyTable(document.getElementById('hr-experts-scroll'), {
+                    stickyBars: [],
+                    fitViewport: false,
+                });
+            </script>
+        @endpush
 
         <x-pagination>
             {{ $humanResource->links() }}

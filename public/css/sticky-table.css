@@ -1,0 +1,108 @@
+/* ---------------------------------------------------------------------------
+   sticky-table.css - frozen table header + leading columns.
+   Theme by overriding the custom properties; do not add per-column
+   backgrounds (see .stf-table tbody td below for why).
+   --------------------------------------------------------------------------- */
+
+.stf-scroll {
+    --stf-row-bg: #ffffff;
+    --stf-row-hover-bg: #f8fafc;
+    --stf-head-bg: #00053c;
+    --stf-head-fg: #ffffff;
+    --stf-head-rule: rgba(201, 162, 39, .55);
+    --stf-border: #e6e9ef;
+    --stf-divider: #eef1f5;
+    --stf-shadow: rgba(0, 5, 60, .35);
+
+    overflow: auto;
+    max-height: var(--stf-max-height, 70vh);
+    /* Stop the page from taking over once the box hits its scroll end. */
+    overscroll-behavior: contain;
+}
+
+/* Radius/clipping belongs on the PARENT. An overflow:hidden between a sticky
+   cell and its scrollport silently kills position:sticky. */
+.stf-card {
+    border: 1px solid var(--stf-border, #e6e9ef);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.stf-table {
+    width: 100%;
+    /* NOT `collapse`: collapsed borders belong to the table, not the cell, so
+       they drop out from sticky headers and frozen columns while scrolling in
+       WebKit and Firefox. */
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* ---- Frozen header row ---------------------------------------------------
+   --stf-pin-top is 0 when the box's top is on screen. In nested-scroller
+   layouts sticky-table-pin.js raises it so the header rests on the bottom
+   edge of the page's sticky bar stack. Set it statically in CSS when there
+   is no nested scroller. */
+.stf-table thead th {
+    position: sticky;
+    top: var(--stf-pin-top, 0px);
+    z-index: 5;
+    background: var(--stf-head-bg);
+    color: var(--stf-head-fg);
+    border-bottom: 2px solid var(--stf-head-rule);
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* ---- Cells ---------------------------------------------------------------
+   Every td carries the opaque background, so a frozen cell can never desync
+   from row/hover/zebra state. Style row states here, never per column. */
+.stf-table tbody td {
+    background: var(--stf-row-bg);
+    border-bottom: 1px solid var(--stf-divider);
+    vertical-align: top;
+}
+
+.stf-table tbody tr:hover td {
+    background: var(--stf-row-hover-bg);
+}
+
+.stf-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ---- Frozen columns ------------------------------------------------------
+   --stf-left is the sum of the widths of the frozen columns to the left;
+   sticky-table-pin.js measures and writes it. With a single frozen column
+   the 0px fallback is already correct and no JS is needed. */
+.stf-table th.stf-freeze,
+.stf-table td.stf-freeze {
+    position: sticky;
+    left: var(--stf-left, 0px);
+    z-index: 2;
+}
+
+/* Corner cell must outrank both the header row and the frozen column. */
+.stf-table thead th.stf-freeze {
+    z-index: 6;
+}
+
+.stf-table .stf-freeze--last {
+    border-right: 1px solid var(--stf-border);
+}
+
+/* Divider shadow only once content is actually hidden underneath. */
+.stf-scroll.is-x-scrolled .stf-freeze--last {
+    box-shadow: 4px 0 6px -4px var(--stf-shadow);
+}
+
+/* Keyboard scrolling focus ring (the JS adds tabindex="0"). */
+.stf-scroll:focus-visible {
+    outline: 2px solid var(--stf-head-rule);
+    outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .stf-scroll {
+        scroll-behavior: smooth;
+    }
+}

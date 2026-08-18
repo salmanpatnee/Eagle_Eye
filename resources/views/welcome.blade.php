@@ -479,10 +479,9 @@
                 </h2>
             @endif
             @if ($landingPageContent?->stats_subtitle)
-                <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+                <div class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
                     {!! $landingPageContent->stats_subtitle !!}
-                </p>
-                {{-- </h2> --}}
+                </div>
             @endif
 
             <div class="flex justify-center gap-6">
