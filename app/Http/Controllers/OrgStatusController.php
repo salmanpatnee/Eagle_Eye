@@ -10,67 +10,63 @@ class OrgStatusController extends Controller
 
     public function __invoke()
     {
+        $controlCoverage = $this->reportService->getControlAssessmentCoverage();
+        $riskCoverage = $this->reportService->getRiskAssessmentCoverage();
+        $controlStatus = (array) $this->reportService->getControlImplementationStatus();
+        $riskStatus = (array) $this->reportService->getRiskStatusData();
+        $riskCategories = $this->reportService->getRiskCategoryBreakdown();
+        $assetGroupExposure = $this->reportService->getAssetGroupExposureRows()->take(8);
+        $controlOwners = $this->reportService->getControlOwnershipRows()->take(10);
+        $hasRiskScoreVariance = $this->reportService->riskScoresHaveVariance();
+
+        $controlsImplementedPct = $controlCoverage['assessed'] > 0
+            ? round($controlStatus['Implemented'] / $controlCoverage['assessed'] * 100)
+            : 0;
+
         $dashboardData = [
-            'regulatoryPosture' => 74,
-            'criticalGaps' => 12,
-            'riskAppetite' => 'Moderate',
+            'controlCoverage' => $controlCoverage,
+            'riskCoverage' => $riskCoverage,
+            'controlsImplementedPct' => $controlsImplementedPct,
+            'openRisks' => (int) ($riskStatus['Open'] ?? 0),
 
             'frameworks' => [
-                ['name' => 'NCA ECC 2018',  'controls' => 114, 'compliance' => 68, 'risk' => 'High'],
-                ['name' => 'SAMA CSF 2017', 'controls' => 132, 'compliance' => 81, 'risk' => 'Medium'],
-                ['name' => 'NCA CSCC 2019', 'controls' => 48, 'compliance' => 55, 'risk' => 'High'],
-                ['name' => 'NCA CCC 2020',  'controls' => 36, 'compliance' => 72, 'risk' => 'Medium'],
-                ['name' => 'NCA DCC 2022',  'controls' => 29, 'compliance' => 90, 'risk' => 'Low'],
+                ['id' => 'NCA-ECC-2018', 'name' => 'NCA ECC 2018', 'status' => (array) $this->reportService->getEccComplianceStatus('NCA-ECC-2018')],
+                ['id' => 'SAMA-CSF-2017', 'name' => 'SAMA CSF 2017', 'status' => (array) $this->reportService->getEccComplianceStatus('SAMA-CSF-2017')],
+                ['id' => 'NCA-CSCC-2019', 'name' => 'NCA CSCC 2019', 'status' => (array) $this->reportService->getEccComplianceStatus('NCA-CSCC-2019')],
+                ['id' => 'NCA-CCC-2020', 'name' => 'NCA CCC 2020', 'status' => (array) $this->reportService->getEccComplianceStatus('NCA-CCC-2020')],
+                ['id' => 'NCA-DCC-2022', 'name' => 'NCA DCC 2022', 'status' => (array) $this->reportService->getEccComplianceStatus('NCA-DCC-2022')],
             ],
 
-            'controlEffectiveness' => [
-                'effective' => 58,
-                'partiallyEffective' => 27,
-                'ineffective' => 15,
+            'controlImplementationStatus' => $controlStatus,
+
+            'riskStatus' => $riskStatus,
+
+            'riskCategories' => [
+                'labels' => $riskCategories->pluck('category_name'),
+                'counts' => $riskCategories->pluck('risk_count'),
             ],
 
-            'topRisks' => [
-                ['category' => 'Access Control',         'count' => 24],
-                ['category' => 'Data Protection',        'count' => 19],
-                ['category' => 'Third-Party Management', 'count' => 16],
-                ['category' => 'Incident Response',      'count' => 14],
-                ['category' => 'Network Security',       'count' => 11],
-                ['category' => 'Physical Security',      'count' => 8],
+            'assetGroupExposure' => [
+                'labels' => $assetGroupExposure->pluck('asset_group_name'),
+                'open' => $assetGroupExposure->pluck('open_risks'),
+                'closed' => $assetGroupExposure->pluck('closed_risks'),
+                'notYetAssessed' => $assetGroupExposure->pluck('not_yet_assessed'),
             ],
 
-            'eccCompliance' => [
-                'Compliant' => 58,
-                'Non-Compliant' => 18,
-                'Partially Compliant' => 28,
-                'Not Applicable' => 10,
+            'controlOwners' => [
+                'labels' => $controlOwners->pluck('owner_name'),
+                'implemented' => $controlOwners->pluck('implemented'),
+                'partiallyImplemented' => $controlOwners->pluck('partially_implemented'),
+                'notImplemented' => $controlOwners->pluck('not_implemented'),
+                'notApplicable' => $controlOwners->pluck('not_applicable'),
+                'notYetAssessed' => $controlOwners->pluck('not_yet_assessed'),
             ],
 
-            'samaCompliance' => [
-                'Compliant' => 72,
-                'Non-Compliant' => 24,
-                'Partially Compliant' => 22,
-                'Not Applicable' => 14,
-            ],
-
-            'riskSummary' => [
-                'Open' => 34,
-                'Closed' => 89,
-            ],
-
-            'riskHeatmap' => [
-                ['name' => 'Very High', 'data' => [1, 2, 4, 6, 8]],
-                ['name' => 'High',      'data' => [0, 1, 3, 5, 6]],
-                ['name' => 'Medium',    'data' => [0, 1, 2, 3, 4]],
-                ['name' => 'Low',       'data' => [0, 0, 1, 2, 2]],
-                ['name' => 'Very Low',  'data' => [0, 0, 0, 1, 1]],
-            ],
+            'hasRiskScoreVariance' => $hasRiskScoreVariance,
+            'riskHeatmap' => $hasRiskScoreVariance ? $this->reportService->getRiskHeatmapData() : [],
         ];
 
         return view('org-status', [
-            'eccComplianceStatus' => $this->reportService->getEccComplianceStatus('NCA-ECC-2018'),
-            'samaComplianceStatus' => $this->reportService->getEccComplianceStatus('SAMA-CSF-2017'),
-            'riskStatus' => $this->reportService->getRiskStatusData(),
-            'assetGroupOverview' => $this->reportService->getAssetGroupData(),
             'dashboardData' => $dashboardData,
         ]);
     }

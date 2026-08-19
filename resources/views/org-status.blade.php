@@ -142,7 +142,7 @@
         .kpi-value { font-size: 28px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
         .kpi-card--blue   .kpi-value { color: #1D4ED8; }
         .kpi-card--red    .kpi-value { color: #DC2626; }
-        .kpi-card--amber  .kpi-value { color: #B45309; font-size: 20px; }
+        .kpi-card--amber  .kpi-value { color: #B45309; }
         .kpi-card--green  .kpi-value { color: #047857; }
         .kpi-card--orange .kpi-value { color: #C2410C; }
 
@@ -198,6 +198,8 @@
         .risk-badge--high   { background: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
         .risk-badge--medium { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
         .risk-badge--low    { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
+        .risk-badge--unrated { background: #F1F5F9; color: #64748B; border: 1px solid #E2E8F0; }
+        :root.dark .risk-badge--unrated { background: rgba(148,163,184,0.12); color: #94A3B8; border-color: rgba(148,163,184,0.25); }
 
         /* ── GRID ROWS ── */
         .dash-row-main {
@@ -205,8 +207,12 @@
             gap: 10px; margin-bottom: 10px; height: 340px;
         }
         .dash-row-bottom {
-            display: grid; grid-template-columns: repeat(4, 1fr);
+            display: grid; grid-template-columns: repeat(3, 1fr);
             gap: 10px; margin-bottom: 10px; height: 265px;
+        }
+        .chart-card-empty {
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            height: calc(100% - 26px); color: var(--text-2); font-size: 11.5px; line-height: 1.5; padding: 0 10px;
         }
         .dash-row-main  > .chart-card,
         .dash-row-bottom > .chart-card { height: 100%; overflow: hidden; }
@@ -289,36 +295,36 @@
             <div class="kpi-card kpi-card--blue">
                 <div class="kpi-pill"></div>
                 <div class="kpi-body">
-                    <span class="kpi-label">Regulatory Posture</span>
-                    <span class="kpi-value">{{ $dashboardData['regulatoryPosture'] }}%</span>
+                    <span class="kpi-label">Control Assessment Coverage</span>
+                    <span class="kpi-value">{{ $dashboardData['controlCoverage']['coverage'] }}%</span>
                 </div>
             </div>
             <div class="kpi-card kpi-card--red">
                 <div class="kpi-pill"></div>
                 <div class="kpi-body">
-                    <span class="kpi-label">Critical Gaps</span>
-                    <span class="kpi-value">{{ $dashboardData['criticalGaps'] }}</span>
+                    <span class="kpi-label">Unassessed Controls</span>
+                    <span class="kpi-value">{{ $dashboardData['controlCoverage']['total'] - $dashboardData['controlCoverage']['assessed'] }}</span>
                 </div>
             </div>
             <div class="kpi-card kpi-card--amber">
                 <div class="kpi-pill"></div>
                 <div class="kpi-body">
-                    <span class="kpi-label">Risk Appetite</span>
-                    <span class="kpi-value">{{ $dashboardData['riskAppetite'] }}</span>
+                    <span class="kpi-label">Risk Assessment Coverage</span>
+                    <span class="kpi-value">{{ $dashboardData['riskCoverage']['coverage'] }}%</span>
                 </div>
             </div>
             <div class="kpi-card kpi-card--orange">
                 <div class="kpi-pill"></div>
                 <div class="kpi-body">
                     <span class="kpi-label">Open Risks</span>
-                    <span class="kpi-value">{{ $dashboardData['riskSummary']['Open'] }}</span>
+                    <span class="kpi-value">{{ $dashboardData['openRisks'] }}</span>
                 </div>
             </div>
             <div class="kpi-card kpi-card--green">
                 <div class="kpi-pill"></div>
                 <div class="kpi-body">
-                    <span class="kpi-label">Effective Controls</span>
-                    <span class="kpi-value">{{ $dashboardData['controlEffectiveness']['effective'] }}%</span>
+                    <span class="kpi-label">Controls Implemented</span>
+                    <span class="kpi-value">{{ $dashboardData['controlsImplementedPct'] }}%</span>
                 </div>
             </div>
         </div>
@@ -327,25 +333,32 @@
         <div class="dash-row-main">
 
             <div class="chart-card" style="overflow-x:auto">
-                <div class="chart-card-title">Regulatory Obligation Status</div>
+                <div class="chart-card-title">Framework Compliance Scorecard</div>
                 <table class="obligation-table">
                     <thead>
-                        <tr><th>Framework</th><th>Controls</th><th>Compliance</th><th>Risk</th></tr>
+                        <tr><th>Framework</th><th>Assessed</th><th>Compliance</th><th>Risk</th></tr>
                     </thead>
                     <tbody>
                         @foreach($dashboardData['frameworks'] as $fw)
+                        @php
+                            $s = $fw['status'];
+                            $total = array_sum($s);
+                            $assessed = $total - ($s['Not Yet Assessed'] ?? 0);
+                            $compliance = $assessed > 0 ? round(($s['Implemented'] ?? 0) / $assessed * 100) : 0;
+                            $risk = $assessed === 0 ? 'Unrated' : ($compliance < 50 ? 'High' : ($compliance < 80 ? 'Medium' : 'Low'));
+                        @endphp
                         <tr>
                             <td>{{ $fw['name'] }}</td>
-                            <td>{{ $fw['controls'] }}</td>
+                            <td style="white-space:nowrap;color:var(--text-2);font-size:10px">{{ $assessed }} of {{ $total }}</td>
                             <td>
                                 <div class="compliance-bar-wrap">
                                     <div class="compliance-bar-bg">
-                                        <div class="compliance-bar-fill" style="width:{{ $fw['compliance'] }}%"></div>
+                                        <div class="compliance-bar-fill" style="width:{{ $compliance }}%"></div>
                                     </div>
-                                    <span style="font-size:9.5px;color:var(--text-2);white-space:nowrap;font-variant-numeric:tabular-nums">{{ $fw['compliance'] }}%</span>
+                                    <span style="font-size:9.5px;color:var(--text-2);white-space:nowrap;font-variant-numeric:tabular-nums">{{ $compliance }}%</span>
                                 </div>
                             </td>
-                            <td><span class="risk-badge risk-badge--{{ strtolower($fw['risk']) }}">{{ $fw['risk'] }}</span></td>
+                            <td><span class="risk-badge risk-badge--{{ strtolower($risk) }}">{{ $risk }}</span></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -353,13 +366,13 @@
             </div>
 
             <div class="chart-card">
-                <div class="chart-card-title">Compliance Scorecard</div>
-                <div id="complianceScorecardChart"></div>
+                <div class="chart-card-title">Control Implementation Status</div>
+                <div id="controlStatusChart"></div>
             </div>
 
             <div class="chart-card">
-                <div class="chart-card-title">Control Effectiveness</div>
-                <div id="controlEffectivenessChart"></div>
+                <div class="chart-card-title">Risk Status</div>
+                <div id="riskChart"></div>
             </div>
 
             <div class="chart-card">
@@ -369,12 +382,18 @@
 
         </div>
 
-        {{-- Bottom 4-col row --}}
+        {{-- Bottom 3-col row --}}
         <div class="dash-row-bottom">
-            <div class="chart-card"><div class="chart-card-title">NCA ECC Compliance</div><div id="eccChart"></div></div>
-            <div class="chart-card"><div class="chart-card-title">SAMA CSF Compliance</div><div id="samaChart"></div></div>
-            <div class="chart-card"><div class="chart-card-title">Risk Status</div><div id="riskChart"></div></div>
-            <div class="chart-card"><div class="chart-card-title">Risk Heatmap — Impact × Likelihood</div><div id="riskHeatmapChart"></div></div>
+            <div class="chart-card"><div class="chart-card-title">Asset Group Risk Exposure</div><div id="assetGroupChart"></div></div>
+            <div class="chart-card"><div class="chart-card-title">Control Ownership Accountability</div><div id="ownershipChart"></div></div>
+            <div class="chart-card">
+                <div class="chart-card-title">Risk Heatmap — Impact × Likelihood</div>
+                @if($dashboardData['hasRiskScoreVariance'])
+                    <div id="riskHeatmapChart"></div>
+                @else
+                    <div class="chart-card-empty">Risk scoring has not yet been differentiated across the register — heatmap unavailable.</div>
+                @endif
+            </div>
         </div>
 
         <div class="cta-row">
@@ -434,173 +453,32 @@
             }).render();
         }
 
-        // ECC & SAMA (real DB data)
-        apexDonut('eccChart',
-            Object.keys(dd.eccCompliance),
-            Object.values(dd.eccCompliance),
-            ['#059669','#DC2626','#D97706','#94A3B8'],
+        // Control Implementation Status (5-bucket, all controls)
+        apexDonut('controlStatusChart',
+            ['Implemented', 'Partially Implemented', 'Not Implemented', 'Not Applicable', 'Not Yet Assessed'],
+            [
+                dd.controlImplementationStatus['Implemented'],
+                dd.controlImplementationStatus['Partially Implemented'],
+                dd.controlImplementationStatus['Not Implemented'],
+                dd.controlImplementationStatus['Not Applicable'],
+                dd.controlImplementationStatus['Not Yet Assessed']
+            ],
+            ['#059669', '#D97706', '#DC2626', '#94A3B8', '#475569'],
             'Controls', 210);
 
-        apexDonut('samaChart',
-            Object.keys(dd.samaCompliance),
-            Object.values(dd.samaCompliance),
-            ['#059669','#DC2626','#D97706','#94A3B8'],
-            'Controls', 210);
-
-        // Risk Status donut
-        new ApexCharts(document.getElementById('riskChart'), {
-            chart: { type: 'donut', height: 210, fontFamily: FONT, background: C_BG, foreColor: C_FG, toolbar: { show: false } },
-            series: [dd.riskSummary.Open, dd.riskSummary.Closed],
-            labels: ['Open', 'Closed'],
-            colors: ['#DC2626', '#059669'],
-            dataLabels: { enabled: false },
-            stroke: { width: 2, colors: [C_SRF] },
-            legend: {
-                position: 'bottom', fontSize: '9px', fontFamily: FONT,
-                labels: { colors: C_FG },
-                markers: { width: 6, height: 6, radius: 2 },
-                itemMargin: { horizontal: 4, vertical: 0 }, offsetY: 4,
-                formatter: function(label, opts) {
-                    return label + ' · ' + opts.w.globals.series[opts.seriesIndex];
-                }
-            },
-            tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } },
-            plotOptions: { pie: { donut: { size: '64%', labels: { show: true,
-                name:  { show: true, fontSize: '9px',  color: C_FG,  offsetY: -4 },
-                value: { show: true, fontSize: '20px', fontWeight: 800, color: C_LBL, offsetY: 4 },
-                total: { show: true, showAlways: true, label: 'Total', fontSize: '9px', fontWeight: 600, color: C_FG,
-                    formatter: function(w) {
-                        return w.globals.seriesTotals.reduce(function(a,b){return a+b;}, 0);
-                    }
-                }
-            }}}}
-        }).render();
-
-        // Risk Heatmap
-        var HM = isDark ? {
-            none:     '#334155',
-            low:      '#14532D',
-            moderate: '#78350F',
-            high:     '#7C2D12',
-            critical: '#7F1D1D',
-            label:    '#E8EDF5'
-        } : {
-            none:     '#CBD5E1',
-            low:      '#6EE7B7',
-            moderate: '#FCD34D',
-            high:     '#FB923C',
-            critical: '#F87171',
-            label:    '#1E3A5F'
-        };
-        var hmSeries = dd.riskHeatmap.map(function(row) {
-            return {
-                name: row.name,
-                data: row.data.map(function(pt) {
-                    var v = (typeof pt === 'object') ? pt.y : pt;
-                    var x = (typeof pt === 'object') ? pt.x : undefined;
-                    var mapped = (v === 0) ? 0.1 : v;
-                    return x !== undefined ? { x: x, y: mapped } : mapped;
-                })
-            };
-        });
-        new ApexCharts(document.getElementById('riskHeatmapChart'), {
-            chart: { type: 'heatmap', height: 210, fontFamily: FONT, background: C_BG, foreColor: C_FG, toolbar: { show: false } },
-            series: hmSeries,
-            xaxis: {
-                categories: ['V.Low','Low','Medium','High','V.High'],
-                labels: { style: { colors: C_FG, fontSize: '8.5px' } },
-                axisBorder: { show: false }, axisTicks: { show: false }
-            },
-            yaxis: { labels: { style: { colors: C_FG, fontSize: '8.5px' }, offsetX: -6 } },
-            dataLabels: {
-                enabled: true,
-                style: { fontSize: '9px', colors: [HM.label], fontWeight: 600 },
-                formatter: function(val) { return Math.round(val); }
-            },
-            plotOptions: { heatmap: {
-                shadeIntensity: 0, radius: 3,
-                colorScale: { ranges: [
-                    { from: 0,  to: 0.9, color: HM.none,     name: 'None'     },
-                    { from: 1,  to: 2,   color: HM.low,      name: 'Low'      },
-                    { from: 3,  to: 4,   color: HM.moderate, name: 'Moderate' },
-                    { from: 5,  to: 6,   color: HM.high,     name: 'High'     },
-                    { from: 7,  to: 99,  color: HM.critical, name: 'Critical' }
-                ]}
-            }},
-            grid: { padding: { top: -8, right: 4, bottom: 0, left: 12 } },
-            legend: {
-                show: true, position: 'top', fontSize: '8.5px', fontFamily: FONT,
-                labels: { colors: C_FG },
-                markers: { width: 7, height: 7, radius: 2 },
-                itemMargin: { horizontal: 4 }, offsetY: -2
-            },
-            tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } }
-        }).render();
-
-        // Compliance Scorecard
-        new ApexCharts(document.getElementById('complianceScorecardChart'), {
-            chart: { type: 'donut', height: 280, fontFamily: FONT, background: C_BG, foreColor: C_FG, toolbar: { show: false } },
-            series: [dd.regulatoryPosture, 100 - dd.regulatoryPosture],
-            labels: ['Compliant', 'Gap'],
-            colors: ['#2563EB', '#EF4444'],
-            dataLabels: { enabled: false },
-            stroke: { width: 2, colors: [C_SRF] },
-            legend: {
-                show: true, position: 'bottom', fontSize: '10px', fontFamily: FONT,
-                labels: { colors: C_FG },
-                markers: { width: 7, height: 7, radius: 2 },
-                itemMargin: { horizontal: 5, vertical: 0 }, offsetY: 4,
-                formatter: function(label, opts) {
-                    return label + ' · ' + opts.w.globals.series[opts.seriesIndex] + '%';
-                }
-            },
-            tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } },
-            plotOptions: { pie: { donut: { size: '60%', labels: { show: true,
-                name:  { show: true, fontSize: '10px', color: C_FG,  offsetY: -6 },
-                value: { show: true, fontSize: '28px', fontWeight: 800, color: C_LBL, offsetY: 4,
-                    formatter: function(val) { return val + '%'; }
-                },
-                total: { show: true, showAlways: true, label: 'Posture', fontSize: '10px', fontWeight: 600, color: C_FG,
-                    formatter: function() { return dd.regulatoryPosture + '%'; }
-                }
-            }}}}
-        }).render();
-
-        // Control Effectiveness
-        new ApexCharts(document.getElementById('controlEffectivenessChart'), {
-            chart: { type: 'donut', height: 280, fontFamily: FONT, background: C_BG, foreColor: C_FG, toolbar: { show: false } },
-            series: [dd.controlEffectiveness.effective, dd.controlEffectiveness.partiallyEffective, dd.controlEffectiveness.ineffective],
-            labels: ['Effective', 'Partial', 'Ineffective'],
-            colors: ['#059669', '#D97706', '#DC2626'],
-            dataLabels: { enabled: false },
-            stroke: { width: 2, colors: [C_SRF] },
-            legend: {
-                position: 'bottom', fontSize: '10px', fontFamily: FONT,
-                labels: { colors: C_FG },
-                markers: { width: 7, height: 7, radius: 2 },
-                itemMargin: { horizontal: 5, vertical: 0 }, offsetY: 4,
-                formatter: function(label, opts) {
-                    return label + ' · ' + opts.w.globals.series[opts.seriesIndex] + '%';
-                }
-            },
-            tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } },
-            plotOptions: { pie: { donut: { size: '60%', labels: { show: true,
-                name:  { show: true, fontSize: '10px', color: C_FG,  offsetY: -6 },
-                value: { show: true, fontSize: '24px', fontWeight: 800, color: C_LBL, offsetY: 4,
-                    formatter: function(val) { return val + '%'; }
-                },
-                total: { show: true, label: 'Controls', fontSize: '10px', fontWeight: 700, color: C_FG,
-                    formatter: function() { return '100%'; }
-                }
-            }}}}
-        }).render();
+        // Risk Status (Open / Closed / Not Yet Assessed)
+        apexDonut('riskChart',
+            ['Open', 'Closed', 'Not Yet Assessed'],
+            [dd.riskStatus['Open'], dd.riskStatus['Closed'], dd.riskStatus['Not Yet Assessed']],
+            ['#DC2626', '#059669', '#475569'],
+            'Risks', 210);
 
         // Top Risk Categories — horizontal bar
         new ApexCharts(document.getElementById('topRisksChart'), {
             chart: { type: 'bar', height: 280, fontFamily: FONT, background: C_BG, foreColor: C_FG, toolbar: { show: false } },
-            series: [{ name: 'Risks', data: dd.topRisks.map(function(r){ return r.count; }) }],
+            series: [{ name: 'Risks', data: dd.riskCategories.counts }],
             xaxis: {
-                categories: dd.topRisks.map(function(r){ return r.category; }),
+                categories: dd.riskCategories.labels,
                 labels: { style: { colors: C_FG, fontSize: '9.5px' } },
                 axisBorder: { show: false }, axisTicks: { show: false }
             },
@@ -613,6 +491,109 @@
             legend: { show: false },
             tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } }
         }).render();
+
+        // Asset Group Risk Exposure — stacked horizontal bar
+        new ApexCharts(document.getElementById('assetGroupChart'), {
+            chart: { type: 'bar', height: 210, stacked: true, fontFamily: FONT, background: C_BG, foreColor: C_FG, toolbar: { show: false } },
+            series: [
+                { name: 'Open', data: dd.assetGroupExposure.open },
+                { name: 'Closed', data: dd.assetGroupExposure.closed },
+                { name: 'Not Yet Assessed', data: dd.assetGroupExposure.notYetAssessed }
+            ],
+            xaxis: {
+                categories: dd.assetGroupExposure.labels,
+                labels: { style: { colors: C_FG, fontSize: '8.5px' } },
+                axisBorder: { show: false }, axisTicks: { show: false }
+            },
+            yaxis: { labels: { style: { colors: C_FG, fontSize: '8.5px' } } },
+            colors: ['#DC2626', '#059669', '#475569'],
+            plotOptions: { bar: { horizontal: true, barHeight: '65%', borderRadius: 2 } },
+            dataLabels: { enabled: false },
+            grid: { borderColor: 'rgba(15,30,80,0.07)', strokeDashArray: 3, padding: { left: 0, right: 8 } },
+            legend: { show: true, position: 'top', fontSize: '8.5px', fontFamily: FONT, labels: { colors: C_FG },
+                markers: { width: 6, height: 6, radius: 2 }, itemMargin: { horizontal: 4 }, offsetY: -2 },
+            tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } }
+        }).render();
+
+        // Control Ownership Accountability — top owners by unassessed count, stacked horizontal bar
+        new ApexCharts(document.getElementById('ownershipChart'), {
+            chart: { type: 'bar', height: 210, stacked: true, fontFamily: FONT, background: C_BG, foreColor: C_FG, toolbar: { show: false } },
+            series: [
+                { name: 'Implemented', data: dd.controlOwners.implemented },
+                { name: 'Partial', data: dd.controlOwners.partiallyImplemented },
+                { name: 'Not Implemented', data: dd.controlOwners.notImplemented },
+                { name: 'Not Applicable', data: dd.controlOwners.notApplicable },
+                { name: 'Not Yet Assessed', data: dd.controlOwners.notYetAssessed }
+            ],
+            xaxis: {
+                categories: dd.controlOwners.labels,
+                labels: { style: { colors: C_FG, fontSize: '8.5px' } },
+                axisBorder: { show: false }, axisTicks: { show: false }
+            },
+            yaxis: { labels: { style: { colors: C_FG, fontSize: '8px' } } },
+            colors: ['#059669', '#D97706', '#DC2626', '#94A3B8', '#475569'],
+            plotOptions: { bar: { horizontal: true, barHeight: '70%', borderRadius: 2 } },
+            dataLabels: { enabled: false },
+            grid: { borderColor: 'rgba(15,30,80,0.07)', strokeDashArray: 3, padding: { left: 0, right: 8 } },
+            legend: { show: true, position: 'top', fontSize: '8px', fontFamily: FONT, labels: { colors: C_FG },
+                markers: { width: 6, height: 6, radius: 2 }, itemMargin: { horizontal: 3 }, offsetY: -2 },
+            tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } }
+        }).render();
+
+        // Risk Heatmap — only rendered when the register has score variance
+        if (dd.hasRiskScoreVariance) {
+            var HM = isDark ? {
+                none:     '#334155',
+                low:      '#14532D',
+                moderate: '#78350F',
+                high:     '#7C2D12',
+                critical: '#7F1D1D',
+                label:    '#E8EDF5'
+            } : {
+                none:     '#CBD5E1',
+                low:      '#6EE7B7',
+                moderate: '#FCD34D',
+                high:     '#FB923C',
+                critical: '#F87171',
+                label:    '#1E3A5F'
+            };
+            var hmSeries = dd.riskHeatmap.map(function(row) {
+                return { name: row.name, data: row.data };
+            });
+            new ApexCharts(document.getElementById('riskHeatmapChart'), {
+                chart: { type: 'heatmap', height: 210, fontFamily: FONT, background: C_BG, foreColor: C_FG, toolbar: { show: false } },
+                series: hmSeries,
+                xaxis: {
+                    categories: ['Likelihood 1','2','3','4','5'],
+                    labels: { style: { colors: C_FG, fontSize: '8.5px' } },
+                    axisBorder: { show: false }, axisTicks: { show: false }
+                },
+                yaxis: { labels: { style: { colors: C_FG, fontSize: '8.5px' }, offsetX: -6 } },
+                dataLabels: {
+                    enabled: true,
+                    style: { fontSize: '9px', colors: [HM.label], fontWeight: 600 },
+                    formatter: function(val) { return val; }
+                },
+                plotOptions: { heatmap: {
+                    shadeIntensity: 0, radius: 3,
+                    colorScale: { ranges: [
+                        { from: 0,  to: 0,   color: HM.none,     name: 'None'     },
+                        { from: 1,  to: 3,   color: HM.low,      name: 'Low'      },
+                        { from: 4,  to: 8,   color: HM.moderate, name: 'Moderate' },
+                        { from: 9,  to: 15,  color: HM.high,     name: 'High'     },
+                        { from: 16, to: 999, color: HM.critical, name: 'Critical' }
+                    ]}
+                }},
+                grid: { padding: { top: -8, right: 4, bottom: 0, left: 12 } },
+                legend: {
+                    show: true, position: 'top', fontSize: '8.5px', fontFamily: FONT,
+                    labels: { colors: C_FG },
+                    markers: { width: 7, height: 7, radius: 2 },
+                    itemMargin: { horizontal: 4 }, offsetY: -2
+                },
+                tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } }
+            }).render();
+        }
     </script>
 
 </body>

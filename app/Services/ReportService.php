@@ -142,4 +142,44 @@ class ReportService
             'closed' => $data->pluck('closed'),
         ];
     }
+
+    public function getControlAssessmentCoverage()
+    {
+        return $this->reportRepository->getControlAssessmentCoverage();
+    }
+
+    public function getRiskAssessmentCoverage()
+    {
+        return $this->reportRepository->getRiskAssessmentCoverage();
+    }
+
+    public function getControlImplementationStatus()
+    {
+        return $this->reportRepository->getControlImplementationStatus();
+    }
+
+    public function getRiskCategoryBreakdown()
+    {
+        return $this->reportRepository->getRiskCategoryBreakdown();
+    }
+
+    public function riskScoresHaveVariance(): bool
+    {
+        return $this->reportRepository->riskScoresHaveVariance();
+    }
+
+    public function getRiskHeatmapData()
+    {
+        return $this->reportRepository->getRiskHeatmapData();
+    }
+
+    public function getAssetGroupExposureRows()
+    {
+        return $this->reportRepository->getAssetGroupRiskStatus();
+    }
+
+    public function getControlOwnershipRows()
+    {
+        return $this->reportRepository->getControlOwnersData();
+    }
 }

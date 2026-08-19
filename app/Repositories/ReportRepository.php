@@ -48,9 +48,10 @@ class ReportRepository
             ->where('b.best_practices_id', $bestPracticeId)
             ->select(
                 DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Implemented' THEN 1 END) AS 'Implemented'"),
-                DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Not Implemented' OR cad.control_implementation_status IS NULL THEN 1 END) AS 'Not Implemented'"),
+                DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Not Implemented' THEN 1 END) AS 'Not Implemented'"),
                 DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Partially Implemented' THEN 1 END) AS 'Partially Implemented'"),
-                DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Not Applicable' THEN 1 END) AS 'Not Applicable'")
+                DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Not Applicable' THEN 1 END) AS 'Not Applicable'"),
+                DB::raw("COUNT(CASE WHEN cad.control_implementation_status IS NULL THEN 1 END) AS 'Not Yet Assessed'")
             )
             ->groupBy('b.best_practices_id')
             ->first();
@@ -133,8 +134,9 @@ class ReportRepository
             $join->on('risk_master_table.risk_id', '=', 'latest_risk_status.risk_id');
         })
             // ->selectRaw('COUNT(risk_master_table.risk_id) AS total_risks')
-            ->selectRaw('SUM(CASE WHEN latest_risk_status.implementation_status IS NULL OR latest_risk_status.implementation_status = "Open" THEN 1 ELSE 0 END) AS Open')
+            ->selectRaw('SUM(CASE WHEN latest_risk_status.implementation_status = "Open" THEN 1 ELSE 0 END) AS Open')
             ->selectRaw('SUM(CASE WHEN latest_risk_status.implementation_status = "Close" THEN 1 ELSE 0 END) AS Closed')
+            ->selectRaw('SUM(CASE WHEN latest_risk_status.implementation_status IS NULL THEN 1 ELSE 0 END) AS `Not Yet Assessed`')
             ->first();
     }
 
@@ -273,12 +275,11 @@ class ReportRepository
                 DB::raw('COUNT(CASE WHEN recent_status.control_implementation_status = "Implemented" THEN 1 END) as implemented'),
                 DB::raw('COUNT(CASE WHEN recent_status.control_implementation_status = "Partially Implemented" THEN 1 END) as partially_implemented'),
                 DB::raw('COUNT(CASE WHEN recent_status.control_implementation_status = "Not Applicable" THEN 1 END) as not_applicable'),
-                DB::raw('COUNT(c.control_id) - 
-                        COUNT(CASE WHEN recent_status.control_implementation_status = "Implemented" THEN 1 END) - 
-                        COUNT(CASE WHEN recent_status.control_implementation_status = "Partially Implemented" THEN 1 END) - 
-                        COUNT(CASE WHEN recent_status.control_implementation_status = "Not Applicable" THEN 1 END) AS not_implemented')
+                DB::raw('COUNT(CASE WHEN recent_status.control_implementation_status = "Not Implemented" THEN 1 END) as not_implemented'),
+                DB::raw('COUNT(CASE WHEN recent_status.control_implementation_status IS NULL THEN 1 END) as not_yet_assessed')
             )
             ->groupBy('o.owner_role_id', 'o.owner_name')
+            ->orderByDesc('not_yet_assessed')
             ->get();
     }
 
@@ -288,8 +289,9 @@ class ReportRepository
             'a.asset_group_id',
             'a.asset_group_name',
             DB::raw('COUNT(DISTINCT rvg.risk_id) AS risk_count'),
-            DB::raw('COUNT(CASE WHEN COALESCE(rad.implementation_status, "Open") = "Open" THEN rvg.risk_id END) AS open_risks'),
-            DB::raw('COUNT(CASE WHEN rad.implementation_status = "Close" THEN rvg.risk_id END) AS closed_risks')
+            DB::raw('COUNT(CASE WHEN rad.implementation_status = "Open" THEN rvg.risk_id END) AS open_risks'),
+            DB::raw('COUNT(CASE WHEN rad.implementation_status = "Close" THEN rvg.risk_id END) AS closed_risks'),
+            DB::raw('COUNT(CASE WHEN rad.implementation_status IS NULL THEN rvg.risk_id END) AS not_yet_assessed')
         )
             ->from('asset_group_table AS a')
             ->join('risk_vs_asset_group_table AS rvg', 'a.asset_group_id', '=', 'rvg.asset_group_id')
@@ -307,6 +309,7 @@ class ReportRepository
                 'rad.risk_id'
             )
             ->groupBy('a.asset_group_id', 'a.asset_group_name')
+            ->orderByDesc('risk_count')
             ->get();
     }
 
@@ -344,5 +347,94 @@ class ReportRepository
             ")
             ->groupBy('o.owner_name', 'o.owner_role_id')
             ->get();
+    }
+
+    public function getControlAssessmentCoverage()
+    {
+        $total = DB::table('control_master_table')->count();
+        $assessed = DB::table('control_assessment_details_table')->distinct()->count('control_id');
+
+        return [
+            'total' => $total,
+            'assessed' => $assessed,
+            'coverage' => $total > 0 ? round($assessed / $total * 100) : 0,
+        ];
+    }
+
+    public function getRiskAssessmentCoverage()
+    {
+        $total = DB::table('risk_master_table')->count();
+        $assessed = DB::table('risk_master_table as r')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('risk_assessment_details_table as rad')
+                    ->whereColumn('rad.risk_id', 'r.risk_id');
+            })
+            ->count();
+
+        return [
+            'total' => $total,
+            'assessed' => $assessed,
+            'coverage' => $total > 0 ? round($assessed / $total * 100) : 0,
+        ];
+    }
+
+    public function getControlImplementationStatus()
+    {
+        return DB::table('control_master_table as c')
+            ->leftJoin('control_assessment_details_table as cad', function ($join) {
+                $join->on('c.control_id', '=', 'cad.control_id')
+                    ->whereRaw('cad.id = (SELECT MAX(id) FROM control_assessment_details_table WHERE control_id = c.control_id)');
+            })
+            ->select(
+                DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Implemented' THEN 1 END) AS 'Implemented'"),
+                DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Partially Implemented' THEN 1 END) AS 'Partially Implemented'"),
+                DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Not Implemented' THEN 1 END) AS 'Not Implemented'"),
+                DB::raw("COUNT(CASE WHEN cad.control_implementation_status = 'Not Applicable' THEN 1 END) AS 'Not Applicable'"),
+                DB::raw("COUNT(CASE WHEN cad.control_implementation_status IS NULL THEN 1 END) AS 'Not Yet Assessed'")
+            )
+            ->first();
+    }
+
+    public function getRiskCategoryBreakdown(int $limit = 8)
+    {
+        return DB::table('risk_master_table_vs_category_table as rc')
+            ->join('category_table as cat', 'rc.category_id', '=', 'cat.category_id')
+            ->select('cat.category_name', DB::raw('COUNT(DISTINCT rc.risk_id) as risk_count'))
+            ->groupBy('cat.category_id', 'cat.category_name')
+            ->orderByDesc('risk_count')
+            ->limit($limit)
+            ->get();
+    }
+
+    public function riskScoresHaveVariance(): bool
+    {
+        $distinctScores = DB::table('risk_master_table as r')
+            ->join('risk_inherent_table as ri', 'r.risk_inherent_id', '=', 'ri.risk_inherent_id')
+            ->distinct()
+            ->count(DB::raw('CONCAT(ri.risk_inherent_impact, "-", ri.risk_inherent_likelihood)'));
+
+        return $distinctScores > 1;
+    }
+
+    public function getRiskHeatmapData()
+    {
+        $rows = DB::table('risk_master_table as r')
+            ->join('risk_inherent_table as ri', 'r.risk_inherent_id', '=', 'ri.risk_inherent_id')
+            ->select('ri.risk_inherent_impact', 'ri.risk_inherent_likelihood', DB::raw('COUNT(*) as risk_count'))
+            ->groupBy('ri.risk_inherent_impact', 'ri.risk_inherent_likelihood')
+            ->get()
+            ->keyBy(fn ($row) => $row->risk_inherent_impact.'-'.$row->risk_inherent_likelihood);
+
+        $levels = [1, 2, 3, 4, 5];
+
+        return collect($levels)->reverse()->values()->map(function ($impact) use ($rows, $levels) {
+            return [
+                'name' => "Impact {$impact}",
+                'data' => collect($levels)->map(function ($likelihood) use ($rows, $impact) {
+                    return $rows->get("{$impact}-{$likelihood}")->risk_count ?? 0;
+                })->all(),
+            ];
+        })->all();
     }
 }
