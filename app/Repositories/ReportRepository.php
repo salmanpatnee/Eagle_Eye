@@ -137,6 +137,7 @@ class ReportRepository
             ->selectRaw('COUNT(CASE WHEN latest_risk_status.implementation_status = "Open" THEN 1 END) AS Open')
             ->selectRaw('COUNT(CASE WHEN latest_risk_status.implementation_status = "Close" THEN 1 END) AS Closed')
             ->selectRaw('COUNT(CASE WHEN latest_risk_status.implementation_status IS NULL THEN 1 END) AS `Not Yet Assessed`')
+            ->toBase()
             ->first();
     }
 
