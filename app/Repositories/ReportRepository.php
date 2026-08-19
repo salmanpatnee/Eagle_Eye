@@ -134,9 +134,9 @@ class ReportRepository
             $join->on('risk_master_table.risk_id', '=', 'latest_risk_status.risk_id');
         })
             // ->selectRaw('COUNT(risk_master_table.risk_id) AS total_risks')
-            ->selectRaw('SUM(CASE WHEN latest_risk_status.implementation_status = "Open" THEN 1 ELSE 0 END) AS Open')
-            ->selectRaw('SUM(CASE WHEN latest_risk_status.implementation_status = "Close" THEN 1 ELSE 0 END) AS Closed')
-            ->selectRaw('SUM(CASE WHEN latest_risk_status.implementation_status IS NULL THEN 1 ELSE 0 END) AS `Not Yet Assessed`')
+            ->selectRaw('COUNT(CASE WHEN latest_risk_status.implementation_status = "Open" THEN 1 END) AS Open')
+            ->selectRaw('COUNT(CASE WHEN latest_risk_status.implementation_status = "Close" THEN 1 END) AS Closed')
+            ->selectRaw('COUNT(CASE WHEN latest_risk_status.implementation_status IS NULL THEN 1 END) AS `Not Yet Assessed`')
             ->first();
     }
 

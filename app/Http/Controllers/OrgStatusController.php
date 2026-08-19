@@ -54,7 +54,7 @@ class OrgStatusController extends Controller
             ],
 
             'controlOwners' => [
-                'labels' => $controlOwners->pluck('owner_name'),
+                'labels' => $controlOwners->pluck('owner_name')->map(fn ($name) => preg_replace('/\s+Owner$/', '', $name)),
                 'implemented' => $controlOwners->pluck('implemented'),
                 'partiallyImplemented' => $controlOwners->pluck('partially_implemented'),
                 'notImplemented' => $controlOwners->pluck('not_implemented'),

@@ -207,8 +207,8 @@
             gap: 10px; margin-bottom: 10px; height: 340px;
         }
         .dash-row-bottom {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 10px; margin-bottom: 10px; height: 265px;
+            display: grid; grid-template-columns: 27% 42% 31%;
+            gap: 10px; margin-bottom: 10px; height: 290px;
         }
         .chart-card-empty {
             display: flex; align-items: center; justify-content: center; text-align: center;
@@ -420,31 +420,48 @@
         var dd = @json($dashboardData);
 
         // ── Compact donut factory ──────────────────────────────────────────────
+        // Zero-value slices are dropped before rendering: this ApexCharts build renders
+        // a blank/broken ring when one slice sits near 100% and others are exactly 0.
         function apexDonut(id, labels, series, colors, centerLabel, height) {
-            new ApexCharts(document.getElementById(id), {
+            var filteredLabels = [], filteredSeries = [], filteredColors = [];
+            series.forEach(function(val, i) {
+                if (Number(val) > 0) {
+                    filteredLabels.push(labels[i]);
+                    filteredSeries.push(Number(val));
+                    filteredColors.push(colors[i]);
+                }
+            });
+
+            var el = document.getElementById(id);
+            if (filteredSeries.length === 0) {
+                el.innerHTML = '<div class="chart-card-empty">No ' + (centerLabel || 'data') + ' recorded yet.</div>';
+                return;
+            }
+
+            new ApexCharts(el, {
                 chart: {
                     type: 'donut', height: height || 210,
                     fontFamily: FONT, background: C_BG, foreColor: C_FG,
                     toolbar: { show: false },
                     animations: { enabled: true, easing: 'easeinout', speed: 500 }
                 },
-                series: series, labels: labels, colors: colors,
+                series: filteredSeries, labels: filteredLabels, colors: filteredColors,
                 dataLabels: { enabled: false },
                 stroke: { width: 2, colors: [C_SRF] },
                 legend: {
-                    position: 'bottom', fontSize: '9px', fontFamily: FONT,
-                    labels: { colors: C_FG },
-                    markers: { width: 6, height: 6, radius: 2 },
-                    itemMargin: { horizontal: 4, vertical: 0 }, offsetY: 4
+                    position: 'bottom', fontSize: '11px', fontWeight: 600, fontFamily: FONT,
+                    labels: { colors: C_LBL },
+                    markers: { width: 8, height: 8, radius: 2 },
+                    itemMargin: { horizontal: 6, vertical: 2 }, offsetY: 4
                 },
                 tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } },
                 plotOptions: { pie: { donut: { size: '66%', labels: { show: true,
-                    name:  { show: true,  fontSize: '9px',  color: C_FG,  offsetY: -4 },
+                    name:  { show: true,  fontSize: '10px',  color: C_FG,  offsetY: -4 },
                     value: { show: true,  fontSize: '19px', fontWeight: 800, color: C_LBL, offsetY: 4,
                         formatter: function(val) { return val; }
                     },
                     total: { show: true, showAlways: true, label: centerLabel || 'Total',
-                        fontSize: '9px', fontWeight: 600, color: C_FG,
+                        fontSize: '10px', fontWeight: 600, color: C_LBL,
                         formatter: function(w) {
                             return w.globals.seriesTotals.reduce(function(a,b){return a+b;}, 0);
                         }
@@ -479,10 +496,10 @@
             series: [{ name: 'Risks', data: dd.riskCategories.counts }],
             xaxis: {
                 categories: dd.riskCategories.labels,
-                labels: { style: { colors: C_FG, fontSize: '9.5px' } },
+                labels: { style: { colors: C_LBL, fontSize: '10.5px' } },
                 axisBorder: { show: false }, axisTicks: { show: false }
             },
-            yaxis: { labels: { style: { colors: C_FG, fontSize: '9.5px' } } },
+            yaxis: { labels: { style: { colors: C_LBL, fontSize: '10.5px', fontWeight: 600 }, maxWidth: 160 } },
             colors: ['#2563EB'],
             fill: { type: 'gradient', gradient: { type: 'horizontal', gradientToColors: ['#0891B2'], stops: [0, 100] } },
             plotOptions: { bar: { horizontal: true, barHeight: '58%', borderRadius: 3, dataLabels: { position: 'center' } } },
@@ -502,16 +519,16 @@
             ],
             xaxis: {
                 categories: dd.assetGroupExposure.labels,
-                labels: { style: { colors: C_FG, fontSize: '8.5px' } },
+                labels: { style: { colors: C_LBL, fontSize: '9.5px' } },
                 axisBorder: { show: false }, axisTicks: { show: false }
             },
-            yaxis: { labels: { style: { colors: C_FG, fontSize: '8.5px' } } },
+            yaxis: { labels: { style: { colors: C_LBL, fontSize: '10px', fontWeight: 600 }, maxWidth: 130 } },
             colors: ['#DC2626', '#059669', '#475569'],
             plotOptions: { bar: { horizontal: true, barHeight: '65%', borderRadius: 2 } },
             dataLabels: { enabled: false },
             grid: { borderColor: 'rgba(15,30,80,0.07)', strokeDashArray: 3, padding: { left: 0, right: 8 } },
-            legend: { show: true, position: 'top', fontSize: '8.5px', fontFamily: FONT, labels: { colors: C_FG },
-                markers: { width: 6, height: 6, radius: 2 }, itemMargin: { horizontal: 4 }, offsetY: -2 },
+            legend: { show: true, position: 'top', fontSize: '10px', fontWeight: 600, fontFamily: FONT, labels: { colors: C_LBL },
+                markers: { width: 7, height: 7, radius: 2 }, itemMargin: { horizontal: 6, vertical: 2 }, offsetY: -2 },
             tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } }
         }).render();
 
@@ -527,16 +544,16 @@
             ],
             xaxis: {
                 categories: dd.controlOwners.labels,
-                labels: { style: { colors: C_FG, fontSize: '8.5px' } },
+                labels: { style: { colors: C_LBL, fontSize: '9.5px' } },
                 axisBorder: { show: false }, axisTicks: { show: false }
             },
-            yaxis: { labels: { style: { colors: C_FG, fontSize: '8px' } } },
+            yaxis: { labels: { style: { colors: C_LBL, fontSize: '10px', fontWeight: 600 }, maxWidth: 210 } },
             colors: ['#059669', '#D97706', '#DC2626', '#94A3B8', '#475569'],
             plotOptions: { bar: { horizontal: true, barHeight: '70%', borderRadius: 2 } },
             dataLabels: { enabled: false },
             grid: { borderColor: 'rgba(15,30,80,0.07)', strokeDashArray: 3, padding: { left: 0, right: 8 } },
-            legend: { show: true, position: 'top', fontSize: '8px', fontFamily: FONT, labels: { colors: C_FG },
-                markers: { width: 6, height: 6, radius: 2 }, itemMargin: { horizontal: 3 }, offsetY: -2 },
+            legend: { show: true, position: 'top', fontSize: '9.5px', fontWeight: 600, fontFamily: FONT, labels: { colors: C_LBL },
+                markers: { width: 7, height: 7, radius: 2 }, itemMargin: { horizontal: 5, vertical: 2 }, offsetY: -2 },
             tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } }
         }).render();
 
