@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\RiskAppetite;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class RiskAppetiteController extends Controller
 {
     public function index()
     {
-        $result = RiskAppetite::select('id', 'risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name')->orderBy('risk_appetite_id')->get();
+        $cells = RiskAppetite::select('id', 'risk_appetite_id', 'risk_score', 'risk_appetite_color', 'risk_appetite_name', 'risk_impact', 'risk_likelihood')
+            ->get()
+            ->keyBy(fn ($cell) => $cell->risk_impact.'-'.$cell->risk_likelihood);
         $impacts = ['Insignificant', 'Minor', 'Moderate', 'Major', 'Catastrophic'];
-        $riskAppetites = RiskAppetite::all();
 
-        return view('process.risk-identification.risk-appetites.index', compact('riskAppetites', 'result', 'impacts'));
+        return view('process.risk-identification.risk-appetites.index', compact('cells', 'impacts'));
     }
 
     public function list()
     {
         $riskAppetites = RiskAppetite::orderBy('risk_appetite_id')->paginate(20);
+
         return view('process.risk-identification.risk-appetites.list', compact('riskAppetites'));
     }
 
@@ -30,10 +33,10 @@ class RiskAppetiteController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'risk_appetite_id' => 'required',
+            'risk_appetite_id' => ['required', Rule::unique('risk_appetite_table', 'risk_appetite_id')],
             'risk_appetite_name' => 'nullable',
             'risk_appetite_description' => 'nullable',
-            'risk_likelihood' => 'nullable',
+            'risk_likelihood' => ['nullable', Rule::unique('risk_appetite_table')->where(fn ($query) => $query->where('risk_impact', $request->risk_impact))],
             'risk_impact' => 'nullable',
             'risk_score' => 'nullable',
             'risk_appetite_color' => 'nullable',
@@ -65,10 +68,10 @@ class RiskAppetiteController extends Controller
     public function update(Request $request, RiskAppetite $risk_appetite)
     {
         $attributes = $request->validate([
-            'risk_appetite_id' => 'required',
+            'risk_appetite_id' => ['required', Rule::unique('risk_appetite_table', 'risk_appetite_id')->ignore($risk_appetite->id)],
             'risk_appetite_name' => 'nullable',
             'risk_appetite_description' => 'nullable',
-            'risk_likelihood' => 'nullable',
+            'risk_likelihood' => ['nullable', Rule::unique('risk_appetite_table')->where(fn ($query) => $query->where('risk_impact', $request->risk_impact))->ignore($risk_appetite->id)],
             'risk_impact' => 'nullable',
             'risk_score' => 'nullable',
             'risk_appetite_color' => 'nullable',

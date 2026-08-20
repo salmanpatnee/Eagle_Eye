@@ -31,22 +31,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($result->chunk(5) as $chunk)
+                    @foreach (range(1, 5) as $impact)
                         <tr>
                             <td class="px-4 py-2 font-medium text-gray-700 dark:text-gray-100 border-b border-gray-200 dark:border-gray-600 align-middle">
-                                {{ $loop->index + 1 }} ({{ $impacts[$loop->index] }})
+                                {{ $impact }} ({{ $impacts[$impact - 1] }})
                             </td>
-                            @foreach ($chunk as $data)
+                            @foreach (range(1, 5) as $likelihood)
+                                @php $data = $cells->get($impact.'-'.$likelihood); @endphp
                                 <td
-                                    class="px-2 py-2 border-b border-r border-gray-200 dark:border-gray-600 align-top {{ $data->risk_appetite_color }}">
-                                    <a href="{{ route('risk-appetites.edit', $data->id) }}" class="block space-y-1 hover:opacity-80">
-                                        <p class="text-xs"><span class="font-semibold">Risk
-                                                ID:</span> {{ $data->risk_appetite_id }}</p>
-                                        <p class="text-xs"><span class="font-semibold">Risk
-                                                Name:</span> {{ $data->risk_appetite_name }}</p>
-                                        <p class="text-xs"><span class="font-semibold">Risk
-                                                Score:</span> {{ $data->risk_score }}</p>
-                                    </a>
+                                    class="px-2 py-2 border-b border-r border-gray-200 dark:border-gray-600 align-top {{ $data->risk_appetite_color ?? '' }}">
+                                    @if ($data)
+                                        <a href="{{ route('risk-appetites.edit', $data->id) }}" class="block space-y-1 hover:opacity-80">
+                                            <p class="text-xs"><span class="font-semibold">Risk
+                                                    ID:</span> {{ $data->risk_appetite_id }}</p>
+                                            <p class="text-xs"><span class="font-semibold">Risk
+                                                    Name:</span> {{ $data->risk_appetite_name }}</p>
+                                            <p class="text-xs"><span class="font-semibold">Risk
+                                                    Score:</span> {{ $data->risk_score }}</p>
+                                        </a>
+                                    @else
+                                        <p class="text-xs text-gray-400 dark:text-gray-500">Not configured</p>
+                                    @endif
                                 </td>
                             @endforeach
                         </tr>
