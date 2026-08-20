@@ -248,6 +248,10 @@
         @media (max-width: 640px) {
             .kpi-banner, .dash-row-main, .dash-row-bottom { grid-template-columns: 1fr; height: auto; }
         }
+
+        /* ── APEXCHARTS TOOLTIPS ── */
+        .apexcharts-tooltip { background: #1E293B !important; border-color: #1E293B !important; }
+        .apexcharts-tooltip * { color: #fff !important; background: transparent !important; }
     </style>
 </head>
 <body>
