@@ -422,7 +422,8 @@
         // ── Compact donut factory ──────────────────────────────────────────────
         // Zero-value slices are dropped before rendering: this ApexCharts build renders
         // a blank/broken ring when one slice sits near 100% and others are exactly 0.
-        function apexDonut(id, labels, series, colors, centerLabel, height) {
+        function apexDonut(id, labels, series, colors, centerLabel, height, valueFontSize, showName) {
+            if (showName === undefined) { showName = true; }
             var filteredLabels = [], filteredSeries = [], filteredColors = [];
             series.forEach(function(val, i) {
                 if (Number(val) > 0) {
@@ -449,15 +450,15 @@
                 dataLabels: { enabled: false },
                 stroke: { width: 2, colors: [C_SRF] },
                 legend: {
-                    position: 'bottom', fontSize: '11px', fontWeight: 600, fontFamily: FONT,
+                    position: 'bottom', fontSize: showName ? '11px' : '10px', fontWeight: 600, fontFamily: FONT,
                     labels: { colors: C_LBL },
                     markers: { width: 8, height: 8, radius: 2 },
-                    itemMargin: { horizontal: 6, vertical: 2 }, offsetY: 4
+                    itemMargin: { horizontal: 6, vertical: showName ? 2 : 1 }, offsetY: 4
                 },
                 tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } },
-                plotOptions: { pie: { donut: { size: '66%', labels: { show: true,
-                    name:  { show: true,  fontSize: '10px',  color: C_FG,  offsetY: -4 },
-                    value: { show: true,  fontSize: '19px', fontWeight: 800, color: C_LBL, offsetY: 4,
+                plotOptions: { pie: { donut: { size: showName ? '72%' : '76%', labels: { show: true,
+                    name:  { show: showName,  fontSize: '10px',  color: C_FG,  offsetY: -4 },
+                    value: { show: true,  fontSize: valueFontSize || '19px', fontWeight: 800, color: C_LBL, offsetY: 4,
                         formatter: function(val) { return val; }
                     },
                     total: { show: true, showAlways: true, label: centerLabel || 'Total',
@@ -481,7 +482,7 @@
                 dd.controlImplementationStatus['Not Yet Assessed']
             ],
             ['#059669', '#D97706', '#DC2626', '#94A3B8', '#475569'],
-            'Controls', 210);
+            'Controls', 210, '15px', false);
 
         // Risk Status (Open / Closed / Not Yet Assessed)
         apexDonut('riskChart',
@@ -491,22 +492,33 @@
             'Risks', 210);
 
         // Top Risk Categories — horizontal bar
+        // Category names are pre-truncated (not just CSS-clipped) so the y-axis gutter
+        // never has to render wider than the chart card, which was cutting long labels
+        // off on both ends inside this narrow, overflow-hidden card.
+        var topRiskFullLabels = dd.riskCategories.labels;
+        function truncateLabel(str, max) {
+            if (!str) { return str; }
+            return str.length > max ? str.slice(0, max - 1).trim() + '…' : str;
+        }
         new ApexCharts(document.getElementById('topRisksChart'), {
             chart: { type: 'bar', height: 280, fontFamily: FONT, background: C_BG, foreColor: C_FG, toolbar: { show: false } },
             series: [{ name: 'Risks', data: dd.riskCategories.counts }],
             xaxis: {
-                categories: dd.riskCategories.labels,
+                categories: topRiskFullLabels.map(function(l) { return truncateLabel(l, 20); }),
                 labels: { style: { colors: C_LBL, fontSize: '10.5px' } },
                 axisBorder: { show: false }, axisTicks: { show: false }
             },
-            yaxis: { labels: { style: { colors: C_LBL, fontSize: '10.5px', fontWeight: 600 }, maxWidth: 160 } },
+            yaxis: { labels: { align: 'left', style: { colors: C_LBL, fontSize: '10.5px', fontWeight: 600 }, maxWidth: 145 } },
             colors: ['#2563EB'],
             fill: { type: 'gradient', gradient: { type: 'horizontal', gradientToColors: ['#0891B2'], stops: [0, 100] } },
             plotOptions: { bar: { horizontal: true, barHeight: '58%', borderRadius: 3, dataLabels: { position: 'center' } } },
             dataLabels: { enabled: true, offsetX: 0, style: { fontSize: '9.5px', colors: ['#fff'], fontWeight: 700 } },
-            grid: { borderColor: 'rgba(15,30,80,0.07)', strokeDashArray: 3, padding: { left: 0, right: 8 } },
+            grid: { borderColor: 'rgba(15,30,80,0.07)', strokeDashArray: 3, padding: { left: 20, right: 8 } },
             legend: { show: false },
-            tooltip: { theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT } }
+            tooltip: {
+                theme: C_TOOLTIP, style: { fontSize: '11px', fontFamily: FONT },
+                x: { formatter: function(_, opts) { return topRiskFullLabels[opts.dataPointIndex]; } }
+            }
         }).render();
 
         // Asset Group Risk Exposure — stacked horizontal bar
@@ -522,7 +534,7 @@
                 labels: { style: { colors: C_LBL, fontSize: '9.5px' } },
                 axisBorder: { show: false }, axisTicks: { show: false }
             },
-            yaxis: { labels: { style: { colors: C_LBL, fontSize: '10px', fontWeight: 600 }, maxWidth: 130 } },
+            yaxis: { labels: { align: 'left', style: { colors: C_LBL, fontSize: '10px', fontWeight: 600 }, maxWidth: 130 } },
             colors: ['#DC2626', '#059669', '#475569'],
             plotOptions: { bar: { horizontal: true, barHeight: '65%', borderRadius: 2 } },
             dataLabels: { enabled: false },
@@ -547,7 +559,7 @@
                 labels: { style: { colors: C_LBL, fontSize: '9.5px' } },
                 axisBorder: { show: false }, axisTicks: { show: false }
             },
-            yaxis: { labels: { style: { colors: C_LBL, fontSize: '10px', fontWeight: 600 }, maxWidth: 210 } },
+            yaxis: { labels: { align: 'left', style: { colors: C_LBL, fontSize: '10px', fontWeight: 600 }, maxWidth: 210 } },
             colors: ['#059669', '#D97706', '#DC2626', '#94A3B8', '#475569'],
             plotOptions: { bar: { horizontal: true, barHeight: '70%', borderRadius: 2 } },
             dataLabels: { enabled: false },
