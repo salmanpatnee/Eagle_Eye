@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ISO27001Request;
 use App\Models\ISO27001;
 use Illuminate\Http\Request;
-use App\Models\Process;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CMS_ISO_27001Controller extends Controller
 {
     public function index()
     {
         $sections = ISO27001::select('id', 'section_id', 'title')->paginate(20);
-        
+
         return view('process/cms/iso27001/index', compact('sections'));
     }
 
@@ -19,63 +21,72 @@ class CMS_ISO_27001Controller extends Controller
     {
         $process = $iso27001;
         $process->load('resources');
-        
+
         return view('process/cms/iso27001/show', compact('process'));
     }
 
     public function create()
     {
-        $cm = null;
-        return view('process/cms/process/create', compact('cm'));
-    }
+        $section = null;
 
-    public function store(Request $request)
-    {
-        $attributes = $request->validate([
-            'process_id' => ['required', 'unique:cms_process'],
-            'title' => 'required',
-            'title_ar' => 'nullable',
-            'description' => 'nullable',
-        ]);
-
-        Process::create($attributes);
-
-        return redirect(route('cms.index'))
-            ->with('success', 'Process saved successfully.');
-    }
-
-    public function edit(Request $request, ISO27001 $iso27001)
-    {
-        $section = $iso27001;
         return view('process/cms/iso27001/create', compact('section'));
     }
 
-    public function update(Request $request, ISO27001 $iso27001)
+    public function store(ISO27001Request $request)
     {
-        $attributes = $request->validate([
-            'section_id' => ['required', 'unique:cms_iso27001,section_id,' . $iso27001->id],
-            'title' => 'required',
-            'title_ar' => 'nullable',
-            'description' => 'nullable',
-        ]);
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['title']);
+        $data['title_ar'] = $data['title_ar'] ?? '';
 
-        $iso27001->update($attributes);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('iso27001/images', 'public');
+        }
+
+        ISO27001::create($data);
 
         return redirect(route('iso27001.index'))
             ->with('success', 'Section saved successfully.');
     }
 
+    public function edit(Request $request, ISO27001 $iso27001)
+    {
+        $section = $iso27001;
+
+        return view('process/cms/iso27001/create', compact('section'));
+    }
+
+    public function update(ISO27001Request $request, ISO27001 $iso27001)
+    {
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($iso27001->image) {
+                Storage::disk('public')->delete($iso27001->image);
+            }
+            $data['image'] = $request->file('image')->store('iso27001/images', 'public');
+        }
+
+        $iso27001->update($data);
+
+        return redirect(route('iso27001.index'))
+            ->with('success', 'Section saved successfully.');
+    }
 
     public function destroy(ISO27001 $iso27001)
     {
         $iso27001->load('resources');
-        
+
         if ($iso27001->resources()->count() > 0) {
             return redirect(route('iso27001.index'))
                 ->with('error', 'Section cannot be deleted as it has resources attached to it.');
-        } else {
-            $iso27001->delete();
         }
+
+        if ($iso27001->image) {
+            Storage::disk('public')->delete($iso27001->image);
+        }
+
+        $iso27001->delete();
+
         return redirect(route('iso27001.index'))
             ->with('success', 'Section deleted successfully.');
     }

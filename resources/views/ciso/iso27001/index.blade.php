@@ -15,7 +15,7 @@
 
         <x-grid-layout
             :items="$allSections"
-            itemComponent="report-card"
+            itemComponent="content-image-card"
             routeName="iso-27001.show"
             routeParam="section_id"
             titleField="title"
