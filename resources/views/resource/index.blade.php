@@ -16,7 +16,7 @@
         @forelse($allSections as $category => $items)
             <x-content-grid-layout
                 :items="$items"
-                itemComponent="report-card"
+                itemComponent="content-image-card"
                 routeName="resource-content.show"
                 routeParam="id"
                 titleField="title"

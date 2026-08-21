@@ -15,9 +15,15 @@
 
         <x-two-column-layout>
             <x-slot:main>
-                <x-iso-content-card title="{{ $content->title }}">
-                    {{ $content->description }}
-                </x-iso-content-card>
+                @if ($content->image)
+                    <div class="rounded-xl overflow-hidden h-full flex items-start justify-center bg-gray-50">
+                        <img src="{{ asset('storage/' . $content->image) }}" alt="{{ $content->title }}" class="w-full h-auto object-contain rounded-xl" />
+                    </div>
+                @else
+                    <x-iso-content-card title="{{ $content->title }}">
+                        {{ $content->description }}
+                    </x-iso-content-card>
+                @endif
             </x-slot:main>
 
             <x-slot:sidebar>
