@@ -8,9 +8,6 @@
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
                 <x-form.grid-3-col>
                     <div>
-                        <x-form.multiselect label="Nationality" name="nationality[]" :value="$nationality" :custom_data="$nationalities" />
-                    </div>
-                    <div>
                         <x-form.multiselect label="Industry" name="industry_name[]" :value="$industry" :data="$industries"
                             id_key="industry_id" value_key="industry_name" hide_keys="true" />
                     </div>
@@ -20,13 +17,13 @@
                         <x-form.multiselect label="Certification" name="certification_title[]" :value="$certification"
                             :data="$certifications" id_key="certification_id" value_key="certification_title" show_key="true" />
                     </div>
-                </x-form.grid-3-col>
-                <x-form.grid-3-col>
-
                     <div>
                         <x-form.multiselect label="Expertise" name="expertise_title[]" :value="$expertise" :data="$experties"
                             id_key="expertise_id" value_key="expertise_title" hide_keys="true" />
                     </div>
+                </x-form.grid-3-col>
+                <x-form.grid-3-col>
+
                     <div>
                         <x-form.multiselect label="Designation" name="designation[]" :value="$designation" :custom_data="$designations" />
                     </div>
@@ -68,10 +65,9 @@
 
                     <div class="expert-empty-text">
                         <h2 class="expert-empty-heading">Select filters to view expert resources</h2>
-                        <p class="expert-empty-sub">Use nationality, industry, certification, expertise, or other filters
+                        <p class="expert-empty-sub">Use industry, certification, expertise, or other filters
                             above.</p>
                         <div class="expert-empty-chips">
-                            <span class="expert-empty-chip">Nationality</span>
                             <span class="expert-empty-chip">Industry</span>
                             <span class="expert-empty-chip">Certification</span>
                             <span class="expert-empty-chip">Expertise</span>
@@ -213,12 +209,6 @@
                         {{-- 2-column grid of labeled key/value pairs --}}
                         <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                             <div>
-                                <dt class="text-xs font-medium uppercase tracking-wide">Nationality</dt>
-                                <dd class="mt-0.5 text-gray-700">
-                                    {{ isset($row?->nationality) && !is_string($row?->nationality) ? $row?->nationality->name : $row?->nationality }}
-                                </dd>
-                            </div>
-                            <div>
                                 <dt class="text-xs font-medium uppercase tracking-wide">Industry</dt>
                                 <dd class="mt-0.5 text-gray-700">{{ $row?->industry?->industry_name }}</dd>
                             </div>
@@ -269,8 +259,6 @@
                                     style="width: 60px;" scope="col">S.No</th>
                                 <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap stf-freeze"
                                     scope="col">Expert Name</th>
-                                <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Nationality
-                                </th>
                                 <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Industry
                                 </th>
                                 <th class="px-4 py-3 text-sm font-semibold whitespace-nowrap" scope="col">Organization
@@ -298,11 +286,6 @@
                                     <td class="px-4 py-3 whitespace-nowrap stf-freeze">
                                         <span
                                             class="block font-medium text-gray-700 text-theme-sm">{{ $row?->name }}</span>
-                                    </td>
-                                    <td class="px-4 py-3 whitespace-nowrap">
-                                        <span class="block font-medium text-gray-700 text-theme-sm">
-                                            {{ isset($row?->nationality) && !is_string($row?->nationality) ? $row?->nationality->name : $row?->nationality }}
-                                        </span>
                                     </td>
                                     <td class="px-4 py-3 whitespace-nowrap">
                                         <span
@@ -346,7 +329,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="10" class="px-4 py-8 text-center text-gray-500"
+                                    <td colspan="9" class="px-4 py-8 text-center text-gray-500"
                                         style="background: var(--stf-row-bg);">
                                         No expert resources found
                                     </td>

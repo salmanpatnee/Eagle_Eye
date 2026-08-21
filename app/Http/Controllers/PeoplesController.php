@@ -14,16 +14,12 @@ class PeoplesController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $nationality = $request->input('nationality') ?? [];
         $industry = $request->input('industry_name') ?? [];
         $organization = $request->input('organization_name') ?? [];
         $certification = $request->input('certification_title') ?? [];
         $expertise = $request->input('expertise_title') ?? [];
         $designation = $request->input('designation') ?? [];
         $experience = $request->input('experience') ?? [];
-
-        $nationalities = \App\Models\Nationality::orderBy('name', 'ASC')
-            ->pluck('name');
 
         $designations = HumanResource::select('designation')
             ->distinct()
@@ -58,33 +54,13 @@ class PeoplesController extends Controller
             '20+ years',
         ]);
 
-        $filtersApplied = ! empty($nationality) || ! empty($industry) || ! empty($certification) || ! empty($expertise) || ! empty($designation) || ! empty($experience);
+        $filtersApplied = ! empty($industry) || ! empty($certification) || ! empty($expertise) || ! empty($designation) || ! empty($experience);
 
         $humanResource = null;
 
         if ($filtersApplied) {
             $humanResource = HumanResource::select('expert_id', 'organization_id', 'industry_id', 'name', 'nationality_id', 'linkedin_profile', 'designation', 'experience')
                 ->with('certifications', 'organization', 'industry', 'experties', 'nationality')
-                ->when($nationality, function ($query, $nationality) {
-                    $query->where(function ($q) use ($nationality) {
-                        $q->where(function ($subquery) use ($nationality) {
-                            if (is_array($nationality)) {
-                                $subquery->whereIn('hr_expert_master_table.nationality_id', $nationality);
-                            } else {
-                                $subquery->where('hr_expert_master_table.nationality_id', $nationality);
-                            }
-                        })
-                            ->orWhere(function ($subquery) use ($nationality) {
-                                $subquery->whereHas('nationality', function ($nationalityQuery) use ($nationality) {
-                                    if (is_array($nationality)) {
-                                        $nationalityQuery->whereIn('name', $nationality);
-                                    } else {
-                                        $nationalityQuery->where('name', $nationality);
-                                    }
-                                });
-                            });
-                    });
-                })
                 ->when($designation, function ($query, $designation) {
                     if (is_array($designation)) {
                         $query->whereIn('designation', $designation);
@@ -150,7 +126,6 @@ class PeoplesController extends Controller
                 ->paginate(200);
 
             $humanResource->appends([
-                'nationality' => $nationality,
                 'industry_name' => $industry,
                 'organization_name' => $organization,
                 'certification_title' => $certification,
@@ -162,6 +137,6 @@ class PeoplesController extends Controller
 
         $id = null;
 
-        return view('ciso.people.index', compact('id', 'filtersApplied', 'humanResource', 'nationalities', 'industries', 'certifications', 'experties', 'designations', 'nationality', 'industry', 'organization', 'certification', 'expertise', 'designation', 'experienceRanges', 'experience'));
+        return view('ciso.people.index', compact('id', 'filtersApplied', 'humanResource', 'industries', 'certifications', 'experties', 'designations', 'industry', 'organization', 'certification', 'expertise', 'designation', 'experienceRanges', 'experience'));
     }
 }
