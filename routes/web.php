@@ -38,6 +38,9 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainDomainController;
 use App\Http\Controllers\NationalityController;
+use App\Http\Controllers\Nis2ContentController;
+use App\Http\Controllers\Nis2ContentResourceController;
+use App\Http\Controllers\Nis2ContentResourcesController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PeoplesController;
 use App\Http\Controllers\ProcessController;
@@ -45,6 +48,7 @@ use App\Http\Controllers\ProcessResourceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ResourceContentController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\ResourceNis2ContentController;
 use App\Http\Controllers\SubDomainController;
 use App\Http\Controllers\TempFileUploadController;
 use App\Http\Controllers\UserController;
@@ -92,6 +96,10 @@ Route::middleware(['auth', 'payment.access'])->group(function () {
     Route::get('/contents/create-resource/{content}', [ContentResourceController::class, 'create'])->name('contents.resource.create');
     Route::post('/contents/upload-resource', [ContentResourceController::class, 'store'])->name('contents.resource.store');
 
+    Route::resource('nis2-contents', Nis2ContentController::class);
+    Route::get('/nis2-contents/create-resource/{nis2_content}', [Nis2ContentResourceController::class, 'create'])->name('nis2-contents.resource.create');
+    Route::post('/nis2-contents/upload-resource', [Nis2ContentResourceController::class, 'store'])->name('nis2-contents.resource.store');
+
     Route::resource('ciso-essential-frameworks', CisoEssentialFrameworkController::class);
     Route::get('/ciso-essential-frameworks/create-resource/{cisoEssentialFramework}', [CisoEssentialFrameworkResourceController::class, 'create'])->name('ciso-essential-frameworks.resource.create');
     Route::post('/ciso-essential-frameworks/upload-resource', [CisoEssentialFrameworkResourceController::class, 'store'])->name('ciso-essential-frameworks.resource.store');
@@ -104,6 +112,15 @@ Route::middleware(['auth', 'payment.access'])->group(function () {
     Route::get('/content/resource/{content}/videos/', [ContentResourcesController::class, 'videos'])->name('content.resource.videos');
     Route::get('/content/resource/{content}/template/', [ContentResourcesController::class, 'template'])->name('content.resource.template');
     Route::get('/content/resource/{content}/glossary/', [ContentResourcesController::class, 'glossary'])->name('content.resource.glossary');
+
+    // ------------------- Resource NIS2 Content -------------------
+    Route::get('/nis2/list', [ResourceNis2ContentController::class, 'index'])->name('resource-nis2.index');
+    Route::get('/nis2/{nis2_content}', [ResourceNis2ContentController::class, 'show'])->name('resource-nis2.show');
+
+    Route::get('/nis2/resource/{nis2_content}/checklist/', [Nis2ContentResourcesController::class, 'checklist'])->name('nis2.resource.checklist');
+    Route::get('/nis2/resource/{nis2_content}/videos/', [Nis2ContentResourcesController::class, 'videos'])->name('nis2.resource.videos');
+    Route::get('/nis2/resource/{nis2_content}/template/', [Nis2ContentResourcesController::class, 'template'])->name('nis2.resource.template');
+    Route::get('/nis2/resource/{nis2_content}/glossary/', [Nis2ContentResourcesController::class, 'glossary'])->name('nis2.resource.glossary');
 
     // ------------------- CISO Essential Framework Resource -------------------
     Route::get('/ciso-essential-framework/list', [CisoEssentialFrameworkContentController::class, 'index'])->name('ciso-essential-framework-content.index');
