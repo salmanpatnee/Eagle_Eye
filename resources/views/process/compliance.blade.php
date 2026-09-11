@@ -651,6 +651,11 @@
                         <img src="{{ asset('Images/Home/Slide20.JPG') }}" alt="Dashboard">
                     </div>
                 </a>
+                <a href="{{ route('controls-without-evidence.index') }}" class="card-link">
+                    <div class="card card--img">
+                        <img src="{{ asset('Images/Home/controls-without-evidence.png') }}" alt="controls-without-evidence">
+                    </div>
+                </a>
                 <a href="/" class="card-link">
                     <div class="card card--img">
                         <img src="{{ asset('Images/Home/Slide21.JPG') }}" alt="Cybersecurity Strategy">
