@@ -4,7 +4,7 @@
 @section('content')
 
     <x-table.action-wrapper>
-        <button type="button" data-filename="SAMA Controls Maturity Level {{ $level }} Distribution" id="print"
+        <button type="button" data-filename="SAMA Controls Maturity Level {{ $maturityLevel->display() }} Distribution" id="print"
             class="action-btn">
             <x-icons.pdf />
 
@@ -17,7 +17,7 @@
     <div id="print-area">
         <div class="grid grid-cols-1 px-4 mb-6">
             <div class="card mx-auto" style="width: 65%">
-                <h3 class="card-title">SAMA Controls Maturity Level {{ $level }} Distribution</h3>
+                <h3 class="card-title">SAMA Controls Maturity Level {{ $maturityLevel->display() }} Distribution</h3>
                 <div style="position: relative;">
                     <canvas id="chart"></canvas>
                     <!-- Loading Text -->
@@ -58,7 +58,7 @@
             const chartBar = new Chart("chart", {
                 type: "bar",
                 data: {
-                    labels: [`Maturity Level ${level}`], // Single label since it's aggregated data
+                    labels: [{{ Illuminate\Support\Js::from($maturityLevel->display()) }}], // Single label since it's aggregated data
                     datasets: [{
                             label: 'Total Controls',
                             backgroundColor: "#2196F3",

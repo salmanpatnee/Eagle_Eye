@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ControlMaturityLevel;
 use App\Models\Asset;
 use App\Models\AssetGroup;
 use App\Models\AssetType;
@@ -74,6 +75,7 @@ class OCDController extends Controller
 
     public function samaMaturityLevel(int $level)
     {
+        $maturityLevel = ControlMaturityLevel::tryFrom($level) ?? abort(404);
 
         $controls = DB::table('best_practice_table as b')
             ->join('control_assessment_master_table as ca', 'ca.best_practices_id', '=', 'b.best_practices_id')
@@ -89,7 +91,7 @@ class OCDController extends Controller
         ) AS cad2 ON cad1.control_id = cad2.control_id AND cad1.id = cad2.latest_id
     ) AS cad_latest'), 'cad.control_id', '=', 'cad_latest.control_id') // Get only latest status
             ->where('b.best_practices_id', 'SAMA-CSF-2017')
-            ->where('cad.control_maturity_level', $level)
+            ->where('cad.control_maturity_level', $maturityLevel->display())
             ->selectRaw("
         COUNT(c.control_id) AS total_controls,
         COUNT(CASE WHEN cad_latest.control_implementation_status = 'Implemented' THEN 1 END) AS implemented,
@@ -101,12 +103,14 @@ class OCDController extends Controller
 
         return view('process/reporting/dashboard/4-SAMAControlDashboard', compact(
             'controls',
-            'level'
+            'level',
+            'maturityLevel'
         ));
     }
 
     public function samaMaturityLevelDetails(int $level)
     {
+        $maturityLevel = ControlMaturityLevel::tryFrom($level) ?? abort(404);
         $status = $this->_getStatusCode();
 
         $controls = DB::table('control_master_table as c')
@@ -143,7 +147,7 @@ class OCDController extends Controller
                 DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/custodians/", ct.id, "\' >", ct.custodian_name_name, "</a>") SEPARATOR "<br>") as custodians')
                 // DB::raw('GROUP_CONCAT(DISTINCT CONCAT("<a href=\'/storage/files/", af.path, "\' >", "View Attachments", "</a>") SEPARATOR "<br>") as evidences')
             )
-            ->where('cad.control_maturity_level', $level)->where('c.control_id', 'LIKE', 'SAMA-CSF-%')
+            ->where('cad.control_maturity_level', $maturityLevel->display())->where('c.control_id', 'LIKE', 'SAMA-CSF-%')
             ->when($status, function ($query, $status) {
                 return $query->whereRaw('COALESCE(cad_latest.control_implementation_status, "Not Implemented") = ?', [$status]);
             })

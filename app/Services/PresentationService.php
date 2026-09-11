@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\ControlMaturityLevel;
 use App\Models\PenTest;
 use App\Repositories\ReportRepository;
 
@@ -14,30 +15,31 @@ class PresentationService
         $this->reportRepository = $reportRepository;
     }
 
-    public function preparePenTestStatusDistributionDataForPpt(String $vaPenTestId)
+    public function preparePenTestStatusDistributionDataForPpt(string $vaPenTestId)
     {
         $data = $this->reportRepository->getPenTestStatusDistribution($vaPenTestId);
-        $data = $data ? (array)$data : [];
+        $data = $data ? (array) $data : [];
         $colors = ['Open - WIP' => 'FFFFC107',  'Open - Not Started' => 'FFFF0000', 'Closed' => 'FF228B22'];
 
         return [
             'data' => $data,
-            'colors' => $colors
+            'colors' => $colors,
         ];
     }
 
-    public function preparePenTestSeverityDistributionDataForPpt(String $vaPenTestId)
+    public function preparePenTestSeverityDistributionDataForPpt(string $vaPenTestId)
     {
         $penTest = PenTest::where('va_pt_test_id', $vaPenTestId)->first();
 
         $penTestSeverityData = $this->reportRepository->getPenTestSeverityDistribution($vaPenTestId);
+
         return [$penTestSeverityData, $penTest];
         // $statusLabels = ['Critical', 'High', 'Medium', 'Low'];
         // $colors = ['FFFF0000', 'FFFFC107', 'FF228B22', 'FF00B050'];
 
         // $data = [];
 
-        // return $penTestSeverityData; 
+        // return $penTestSeverityData;
 
         // foreach ($statusLabels as $index => $status) {
         //     $statusKey = strtolower(str_replace(' ', '_', $status));
@@ -53,26 +55,23 @@ class PresentationService
 
         // return $data;
 
+    }
 
-        
-        
-    }   
-
-    public function prepareEccComplianceDataForPpt(String $bestPracticeId)
+    public function prepareEccComplianceDataForPpt(string $bestPracticeId)
     {
         $data = $this->reportRepository->getEccComplianceStatus($bestPracticeId);
-        $data = $data ? (array)$data : [];
+        $data = $data ? (array) $data : [];
         $colors = ['Implemented' => 'FF228B22',  'Not Implemented' => 'FFFF0000', 'Partially Implemented' => 'FFFFC107', 'Not Applicable' => 'FF9E9E9E'];
 
         return [
             'data' => $data,
-            'colors' => $colors
+            'colors' => $colors,
         ];
     }
 
     public function prepareAssetGroupDataForPpt()
     {
-        $assetGroups =  $this->reportRepository->getAssetGroupData();
+        $assetGroups = $this->reportRepository->getAssetGroupData();
 
         $data = [];
 
@@ -91,7 +90,7 @@ class PresentationService
 
     public function prepareBestPracticeDataForPpt()
     {
-        $bestPracticeData =  $this->reportRepository->getBestPracticeData();
+        $bestPracticeData = $this->reportRepository->getBestPracticeData();
 
         $data = [];
 
@@ -104,12 +103,12 @@ class PresentationService
 
     public function prepareAssetByTechDataForPpt()
     {
-        $assetByTechData =  $this->reportRepository->getAssetByTechData();
+        $assetByTechData = $this->reportRepository->getAssetByTechData();
 
         $data = [];
 
         foreach ($assetByTechData as $key => $value) {
-            $data[$key] = (string)$value;
+            $data[$key] = (string) $value;
         }
 
         return $data;
@@ -117,7 +116,7 @@ class PresentationService
 
     public function prepareEvidenceByBestPracticesForPpt()
     {
-        $evidenceSummary =  $this->reportRepository->getEvidenceByBestPractices();
+        $evidenceSummary = $this->reportRepository->getEvidenceByBestPractices();
 
         $data = [];
 
@@ -139,12 +138,12 @@ class PresentationService
 
         $data = [
             'Open' => (int) $riskStatusCount['Open'],
-            'Closed' => (int) $riskStatusCount['Closed']
+            'Closed' => (int) $riskStatusCount['Closed'],
         ];
 
         return [
             'data' => $data,
-            'colors' => $colors
+            'colors' => $colors,
         ];
     }
 
@@ -154,11 +153,11 @@ class PresentationService
 
         // Define risk labels with default values
         $formattedData = [
-            "Very Low" => "0",
-            "Low" => "0",
-            "Medium" => "0",
-            "High" => "0",
-            "Critical" => "0"
+            'Very Low' => '0',
+            'Low' => '0',
+            'Medium' => '0',
+            'High' => '0',
+            'Critical' => '0',
         ];
 
         $colors = ['Very Low' => 'FF00B050', 'Low' => 'FFA8D08D', 'Medium' => 'FFFFFF00', 'High' => 'FFFFC000', 'Critical' => 'FFFF0000'];
@@ -172,10 +171,9 @@ class PresentationService
 
         return [
             'data' => $formattedData,
-            'colors' => $colors
+            'colors' => $colors,
         ];
     }
-
 
     public function prepareRiskCountByTechForPpt()
     {
@@ -237,18 +235,14 @@ class PresentationService
     {
         $samaControlCountByMaturityLevel = $this->reportRepository->getSamaControlCountByMaturityLevel();
 
-        // Initialize an associative array with maturity levels as keys
-        $formattedData = [
-            "1" => 0,
-            "2" => 0,
-            "3" => 0,
-            "4" => 0,
-            "5" => 0
-        ];
+        // Initialize an associative array with every maturity level (0-5) as keys
+        $formattedData = collect(ControlMaturityLevel::cases())
+            ->mapWithKeys(fn ($case) => [(string) $case->value => 0])
+            ->all();
 
         // Populate the array with actual values from the query results
         foreach ($samaControlCountByMaturityLevel as $row) {
-            $maturityLevel = $row->control_maturity_level;
+            $maturityLevel = (int) $row->control_maturity_level;
             $formattedData[(string) $maturityLevel] = $row->total_controls;
         }
 
@@ -272,8 +266,9 @@ class PresentationService
                 'color' => $colors[$index],
                 'data' => $controlOwnersData->reduce(function ($carry, $owner) use ($statusKey) {
                     $carry[$owner->owner_name] = $owner->$statusKey;
+
                     return $carry;
-                }, [])
+                }, []),
             ];
         }
 
@@ -286,7 +281,6 @@ class PresentationService
         $controlOwnersData = $this->reportRepository->getAssetGroupRiskStatus();
         $statusLabels = ['Total Risks', 'Open', 'Closed'];
         $colors = ['FF2196F3', 'FFFF0000', 'FF228B2'];
-
 
         $data = [];
 
@@ -303,8 +297,9 @@ class PresentationService
                 'color' => $colors[$index],
                 'data' => $controlOwnersData->reduce(function ($carry, $assetGroup) use ($statusKey) {
                     $carry[$assetGroup['asset_group_name']] = $assetGroup[$statusKey]; // Access property dynamically
+
                     return $carry;
-                }, [])
+                }, []),
             ];
         }
 

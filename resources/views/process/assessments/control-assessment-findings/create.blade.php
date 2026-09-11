@@ -117,10 +117,10 @@
                     <div>
                         <x-form.select label="Maturity Level" label_ar="مستوى النضج" name="control_maturity_level"
                             :value="$controlAssessmentFinding?->control_maturity_level ??
-                                old(
-                                    'control_maturity_level',
-                                    $controlAssessmentFinding?->control_maturity_level ?? '1',
-                                )" :custom_data="['1', '2', '3', '4', '5']" />
+                                old('control_maturity_level', $controlAssessmentFinding?->control_maturity_level)"
+                            :custom_data="\App\Enums\ControlMaturityLevel::options()">
+                            <x-control-maturity-level-info />
+                        </x-form.select>
                     </div>
                 </x-form.grid-col>
 

@@ -13,7 +13,7 @@
     'searchable' => false,
 ])
 
-<x-form.label label="{{ $label }}" label_ar="{{ $label_ar }}" for="{{ $name }}" />
+<x-form.label label="{{ $label }}" label_ar="{{ $label_ar }}" for="{{ $name }}">{{ $slot }}</x-form.label>
 
 <div class="relative z-20 bg-transparent">
     <select id="{{ $name }}" name="{{ $name }}" @if ($required) required @endif

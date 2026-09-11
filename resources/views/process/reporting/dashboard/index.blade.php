@@ -876,6 +876,11 @@
         });
     </script>
 
+    @php
+        $samaMaturityLevelLabels = collect($samaControlCountByMaturityLevel['control_maturity_level'])
+            ->map(fn ($lvl) => \App\Enums\ControlMaturityLevel::tryFrom($lvl)?->display() ?? "Level {$lvl}")
+            ->all();
+    @endphp
     <script>
         const samaControlCountByMaturityLevel = @json($samaControlCountByMaturityLevel);
         const scc = samaControlCountByMaturityLevel.total_controls
@@ -883,11 +888,11 @@
         new Chart("samaMaturityLevel", {
             type: "bar",
             data: {
-                labels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5'],
+                labels: @json($samaMaturityLevelLabels),
                 datasets: [{
                     backgroundColor: "#2563EB",
                     data: scc,
-                    customData: [1, 2, 3, 4, 5],
+                    customData: samaControlCountByMaturityLevel.control_maturity_level,
                 }]
             },
             options: {

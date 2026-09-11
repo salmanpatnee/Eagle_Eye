@@ -12,6 +12,7 @@
         @if ($required)
             <span class="text-red-500">*</span>
         @endif
+        {{ $slot }}
     </span>
     @if (!empty($label_ar))
         <span class="font-bold sm:ml-2 sm:order-2 sm:text-right sm:w-auto text-right text-sm w-full" dir="rtl"

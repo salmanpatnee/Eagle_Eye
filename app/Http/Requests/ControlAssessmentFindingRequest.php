@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ControlMaturityLevel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -30,7 +31,7 @@ class ControlAssessmentFindingRequest extends FormRequest
             'categories' => 'nullable',
             'control_finding_description' => 'nullable',
             'control_implementation_status' => 'required',
-            'control_maturity_level' => 'required',
+            'control_maturity_level' => ['required', Rule::in(ControlMaturityLevel::options())],
             'control_implementation_details' => 'nullable',
             'control_maturity_justification' => 'nullable',
             'remarks' => 'nullable',

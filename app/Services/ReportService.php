@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\ControlMaturityLevel;
 use App\Repositories\ReportRepository;
 
 class ReportService
@@ -73,14 +74,14 @@ class ReportService
     {
         $samaControlCountByMaturityLevel = $this->reportRepository->getSamaControlCountByMaturityLevel();
 
-        // Initialize arrays
-        $totalControls = [0, 0, 0, 0, 0];  // Assuming levels are from 1 to 5
-        $controlMaturityLevels = [1, 2, 3, 4, 5];
+        // Initialize arrays covering every maturity level (0-5)
+        $controlMaturityLevels = array_map(fn ($case) => $case->value, ControlMaturityLevel::cases());
+        $totalControls = array_fill(0, count($controlMaturityLevels), 0);
 
         // Populate the totalControls array with the counts from the query results
         foreach ($samaControlCountByMaturityLevel as $row) {
-            $maturityLevel = $row->control_maturity_level;
-            $totalControls[$maturityLevel - 1] = $row->total_controls;  // Store the count for the respective level
+            $maturityLevel = (int) $row->control_maturity_level;
+            $totalControls[$maturityLevel] = $row->total_controls;  // Store the count for the respective level
         }
 
         // Format the response

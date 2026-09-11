@@ -539,8 +539,8 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
         Route::get('/controls-evidence/{subdomainId}', 'controlEvidence')->name('control-evidence.show');
         Route::get('/asset-group-risks/{assetGroupId}', 'assetGroupRisks');
         Route::get('/group-asset-risks/{asset:asset_id}', 'groupAssetRisks');
-        Route::get('/sama-maturity-level/{level}', 'samaMaturityLevel');
-        Route::get('/sama-maturity-level-details/{level}', 'samaMaturityLevelDetails');
+        Route::get('/sama-maturity-level/{level}', 'samaMaturityLevel')->where('level', '[0-5]');
+        Route::get('/sama-maturity-level-details/{level}', 'samaMaturityLevelDetails')->where('level', '[0-5]');
     });
 
     Route::controller(RCDBController::class)->group(function () {
