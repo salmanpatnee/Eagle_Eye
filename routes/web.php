@@ -325,6 +325,7 @@ Route::middleware(['auth', 'block.mutation'])->group(function () {
     Route::controller(ControlEvidenceController::class)->group(function () {
         Route::get('/control-vs-evidence', 'controlVsEvidence')->name('control-vs-evidence.index');
         Route::get('/evidence-vs-control', 'evidenceVsControl')->name('evidence-vs-control.index');
+        Route::get('/controls-without-evidence', 'controlsWithoutEvidence')->name('controls-without-evidence.index');
     });
 
     // ------------------- CONTROL ASSESSMENT -------------------

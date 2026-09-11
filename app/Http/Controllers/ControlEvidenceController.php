@@ -117,9 +117,9 @@ class ControlEvidenceController extends Controller
 
             $controlEvidence = $controlQuery->paginate(20);
             $controlEvidence->appends([
-                'practice'   => $bestPracticeId,
-                'domain'     => $domainId,
-                'subdomain'  => $subDomainId,
+                'practice' => $bestPracticeId,
+                'domain' => $domainId,
+                'subdomain' => $subDomainId,
                 'control_id' => $controlId,
             ]);
 
@@ -128,6 +128,36 @@ class ControlEvidenceController extends Controller
                 compact('controlEvidence', 'controlIds', 'practices', 'domains', 'subDomains', 'bestPracticeId', 'domainId', 'subDomainId', 'controlId')
             );
         }
+    }
+
+    public function controlsWithoutEvidence(Request $request)
+    {
+        $bestPracticeId = $request->input('practice');
+
+        $practices = BestPractice::select('id', 'best_practices_id', 'best_practices_name')
+            ->orderBy('sort_order')
+            ->get();
+
+        $controls = null;
+
+        if ($bestPracticeId) {
+            $controls = ControlMaster::join('control_master_table_vs_best_practice_table as cvb', 'control_master_table.control_id', '=', 'cvb.control_id')
+                ->join('best_practice_table as b', 'cvb.best_practice_id', '=', 'b.best_practices_id')
+                ->leftJoin('evidence_vs_control_table as evc', 'control_master_table.control_id', '=', 'evc.control_id')
+                ->where('b.best_practices_id', $bestPracticeId)
+                ->whereNull('evc.evidence_id')
+                ->with(['type', 'classification', 'owner'])
+                ->orderControls()
+                ->select('control_master_table.*')
+                ->paginate(20);
+
+            $controls->appends(['practice' => $bestPracticeId]);
+        }
+
+        return view(
+            'process/evidence-management/evidence-control/controls-without-evidence',
+            compact('controls', 'practices', 'bestPracticeId')
+        );
     }
 
     public function evidenceVsControl(Request $request)
