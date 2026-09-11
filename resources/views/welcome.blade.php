@@ -121,6 +121,7 @@
             background: linear-gradient(140deg, #0B2447 0%, #1A3F6F 60%, #0D3061 100%);
         }
         html.dark .btn-cta { color: #0B2447; }
+        html.dark .btn-cta:hover { color: #fff; }
         html.dark .footer { background: #0B2447; }
         html.dark .svg-compliant-text { fill: rgba(226,232,240,0.75); }
         html.dark .dash-topbar-title { color: #0B2447; }
