@@ -121,6 +121,23 @@ label [dir="rtl"] {
     overflow-x: hidden;
 }
 
+.select2-container--default .select2-selection--single {
+    height: 44px;
+    border-color: #d0d5dd;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: normal;
+    padding-left: 1rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 44px;
+}
+
 .ck.ck-content.ck-editor__editable {
     height: 200px;
 }
@@ -310,6 +327,10 @@ body.dark .ck.ck-input {
 
 /* Select2 dark mode */
 body.dark .select2-selection--multiple {
+    background-color: #111827 !important;
+    border-color: #1f2937 !important;
+}
+body.dark .select2-selection--single {
     background-color: #111827 !important;
     border-color: #1f2937 !important;
 }

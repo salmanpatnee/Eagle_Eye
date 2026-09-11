@@ -23,21 +23,22 @@
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="practice" :value="$bestPracticeId"
                             :data="$practices" id_key="best_practices_id" value_key="best_practices_name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Main Domains" label_ar="المكون الأساسي" name="domain" :value="$domainId"
                             :data="$domains" id_key="main_domain_id" value_key="main_domain_name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Sub Domains" label_ar="المكون الفرعي" name="subdomain" :value="$subDomainId"
                             :data="$subDomains" id_key="sub_domain_id" value_key="sub_domain_name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Controls" label_ar="الضوابط" name="control_id" :value="$controlId"
-                            :data="$controlIds" id_key="control_id" value_key="control_name" onchange="this.form.submit()" />
+                            :data="$controlIds" id_key="control_id" value_key="control_name" onchange="this.form.submit()"
+                            searchable />
                     </div>
                 </x-form.grid-4-col>
             </div>

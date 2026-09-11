@@ -48,6 +48,22 @@
                 'text-sm text-gray-800'
             );
         });
+
+        $('.searchable-select').select2({
+            width: '100%'
+        });
+
+        $('.searchable-select').on('select2:open', function() {
+            $('.select2-results__options').addClass(
+                'text-sm text-gray-800'
+            );
+        });
+
+        $('.searchable-select').on('select2:select select2:clear select2:unselect', function() {
+            this.dispatchEvent(new Event('change', {
+                bubbles: true
+            }));
+        });
     });
 </script>
 </body>
