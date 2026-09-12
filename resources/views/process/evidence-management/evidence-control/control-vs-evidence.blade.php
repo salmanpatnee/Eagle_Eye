@@ -19,7 +19,7 @@
         <form action="{{ route('control-vs-evidence.index') }}" method="GET">
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
 
-                <x-form.grid-4-col>
+                <x-form.grid-5-col>
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="practice" :value="$bestPracticeId"
                             :data="$practices" id_key="best_practices_id" value_key="best_practices_name"
@@ -40,7 +40,12 @@
                             :data="$controlIds" id_key="control_id" value_key="control_name" onchange="this.form.submit()"
                             searchable />
                     </div>
-                </x-form.grid-4-col>
+                    <div>
+                        <x-form.select label="Last Updated" label_ar="آخر تحديث للدليل" name="last_updated"
+                            :value="$lastUpdated" :data="$ageOptions" id_key="key" value_key="label" hide_keys
+                            onchange="this.form.submit()" />
+                    </div>
+                </x-form.grid-5-col>
             </div>
         </form>
 
@@ -62,7 +67,21 @@
                             <a href="{{ route('controls.show', $row->id) }}">{{ $row->control_id }}</a>
                         </x-table.td>
                         <x-table.td min-width="250px" max-width="400px">{{ $row->control_name }}</x-table.td>
-                        <x-table.td min-width="200px">{!! $row->evidences !!}</x-table.td>
+                        <x-table.td min-width="220px">
+                            @forelse (array_filter(explode('||', $row->evidences_raw ?? '')) as $evidenceItem)
+                                @php
+                                    [$evidenceRowId, $evidenceName, $evidenceUpdatedAt] = array_pad(explode('::', $evidenceItem, 3), 3, null);
+                                @endphp
+                                <div class="mb-2 last:mb-0">
+                                    <a href="{{ route('evidences.show', $evidenceRowId) }}">{{ $evidenceName }}</a>
+                                    <div class="text-xs text-gray-400 dark:text-gray-500">
+                                        {{ $evidenceUpdatedAt ? 'Updated '.\Carbon\Carbon::parse($evidenceUpdatedAt)->diffForHumans() : 'Last updated: Unknown' }}
+                                    </div>
+                                </div>
+                            @empty
+                                —
+                            @endforelse
+                        </x-table.td>
                         <x-table.td min-width="200px">{!! $row->artifacts !!}</x-table.td>
                     </tr>
                 @empty

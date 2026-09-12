@@ -129,7 +129,19 @@
                                 {{ $evidence->control_name }}
                             </td>
                             <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
-                                {!! $evidence->evidences !!}
+                                @forelse (array_filter(explode('||', $evidence->evidences_raw ?? '')) as $evidenceItem)
+                                    @php
+                                        [$evidenceRowId, $evidenceName, $evidenceUpdatedAt] = array_pad(explode('::', $evidenceItem, 3), 3, null);
+                                    @endphp
+                                    <div style="margin-bottom: 6px;">
+                                        <a href="{{ route('evidences.show', $evidenceRowId) }}" style="text-decoration: none; color: inherit;">{{ $evidenceName }}</a><br>
+                                        <span style="color: #666; font-size: 10px;">
+                                            {{ $evidenceUpdatedAt ? 'Updated '.\Carbon\Carbon::parse($evidenceUpdatedAt)->diffForHumans() : 'Last updated: Unknown' }}
+                                        </span>
+                                    </div>
+                                @empty
+                                    &mdash;
+                                @endforelse
                             </td>
                             <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
                                 {!! $evidence->artifacts !!}

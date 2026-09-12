@@ -6,6 +6,7 @@ use App\Models\BestPractice;
 use App\Models\ControlMaster;
 use App\Models\Domain;
 use App\Models\SubDomain;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
@@ -19,6 +20,9 @@ class ControlEvidenceController extends Controller
         $domains = $subDomains = [];
         $subDomainId = $request->input('subdomain') ?? null;
         $controlId = $request->input('control_id') ?? null;
+        $lastUpdated = $request->input('last_updated') ?? null;
+        $ageOptions = $this->evidenceAgeBucketOptions();
+        $ageCutoff = $this->evidenceAgeCutoff($lastUpdated);
 
         $practices = BestPractice::select('id', 'best_practices_id', 'best_practices_name')
             ->orderBy('sort_order')
@@ -72,7 +76,7 @@ class ControlEvidenceController extends Controller
                 'c.control_id',
                 'c.control_name',
 
-                DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"".$baseUrl."evidences/', e.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', e.evidence_name, '</a>') SEPARATOR '<br>') AS evidences"),
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT(e.id, '::', e.evidence_name, '::', COALESCE(e.updated_at, '')) SEPARATOR '||') AS evidences_raw"),
 
                 DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"".$baseUrl."artifacts/', a.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts")
             )
@@ -85,6 +89,10 @@ class ControlEvidenceController extends Controller
                 $query->where('s.sub_domain_id', $subDomainId);
             })->when($controlId, function ($query, $controlId) {
                 $query->where('c.control_id', $controlId);
+            })->when($ageCutoff, function ($query, $ageCutoff) {
+                $query->where(function ($q) use ($ageCutoff) {
+                    $q->whereNull('e.updated_at')->orWhere('e.updated_at', '<', $ageCutoff);
+                });
             })
             ->groupBy('c.id', 'c.control_id', 'c.control_name', 'b.sort_order')
             ->orderBy('b.sort_order')
@@ -121,11 +129,12 @@ class ControlEvidenceController extends Controller
                 'domain' => $domainId,
                 'subdomain' => $subDomainId,
                 'control_id' => $controlId,
+                'last_updated' => $lastUpdated,
             ]);
 
             return view(
                 'process/evidence-management/evidence-control/control-vs-evidence',
-                compact('controlEvidence', 'controlIds', 'practices', 'domains', 'subDomains', 'bestPracticeId', 'domainId', 'subDomainId', 'controlId')
+                compact('controlEvidence', 'controlIds', 'practices', 'domains', 'subDomains', 'bestPracticeId', 'domainId', 'subDomainId', 'controlId', 'ageOptions', 'lastUpdated')
             );
         }
     }
@@ -167,6 +176,9 @@ class ControlEvidenceController extends Controller
         $domains = $subDomains = [];
         $subDomainId = $request->input('subdomain') ?? null;
         $controlId = $request->input('control_id') ?? null;
+        $lastUpdated = $request->input('last_updated') ?? null;
+        $ageOptions = $this->evidenceAgeBucketOptions();
+        $ageCutoff = $this->evidenceAgeCutoff($lastUpdated);
 
         $practices = BestPractice::select('id', 'best_practices_id', 'best_practices_name')
             ->orderBy('sort_order')
@@ -217,6 +229,7 @@ class ControlEvidenceController extends Controller
                 'e.id',
                 'e.evidence_id',
                 'e.evidence_name',
+                'e.updated_at',
                 DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"".$baseUrl."controls/', c.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit; line-height:2em;\">', c.control_id, ' - ', c.control_name, '</a>') SEPARATOR '<br><br>') AS controls"),
 
                 DB::raw("GROUP_CONCAT(DISTINCT CONCAT('<a href=\"".$baseUrl."artifacts/', a.id, '\" target=\"_blank\" style=\"text-decoration: none; color: inherit;\">', a.artifact_name, '</a>') SEPARATOR '<br>') AS artifacts")
@@ -233,7 +246,12 @@ class ControlEvidenceController extends Controller
             ->when($controlId, function ($query, $controlId) {
                 $query->where('c.control_id', $controlId);
             })
-            ->groupBy('e.id', 'e.evidence_id', 'e.evidence_name')
+            ->when($ageCutoff, function ($query, $ageCutoff) {
+                $query->where(function ($q) use ($ageCutoff) {
+                    $q->whereNull('e.updated_at')->orWhere('e.updated_at', '<', $ageCutoff);
+                });
+            })
+            ->groupBy('e.id', 'e.evidence_id', 'e.evidence_name', 'e.updated_at')
             ->orderBy(DB::raw('MIN(b.sort_order)'))
             ->orderBy('e.evidence_name')
             ->get();
@@ -259,9 +277,28 @@ class ControlEvidenceController extends Controller
 
             return view(
                 'process/evidence-management/evidence-control/evidence-vs-control',
-                compact('evidenceControl', 'controlIds', 'practices', 'domains', 'subDomains', 'bestPracticeId', 'domainId', 'subDomainId', 'controlId')
+                compact('evidenceControl', 'controlIds', 'practices', 'domains', 'subDomains', 'bestPracticeId', 'domainId', 'subDomainId', 'controlId', 'ageOptions', 'lastUpdated')
 
             );
         }
+    }
+
+    /**
+     * @return array<int, object{key: string, label: string}>
+     */
+    private function evidenceAgeBucketOptions(): array
+    {
+        return [
+            (object) ['key' => '3m', 'label' => '3+ Months Ago'],
+            (object) ['key' => '6m', 'label' => '6+ Months Ago'],
+            (object) ['key' => '1y', 'label' => '1+ Year Ago'],
+        ];
+    }
+
+    private function evidenceAgeCutoff(?string $bucket): ?Carbon
+    {
+        $months = ['3m' => 3, '6m' => 6, '1y' => 12][$bucket] ?? null;
+
+        return $months ? now()->subMonths($months) : null;
     }
 }

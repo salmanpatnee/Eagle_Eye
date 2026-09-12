@@ -17,7 +17,9 @@ class Evidence extends Model
         'creation_date' => 'date',
     ];
 
-    public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = null;
 
     public function classification()
     {

@@ -104,6 +104,11 @@
                         </th>
                         <th
                             style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
+                            {{-- <p>آخر تحديث</p> --}}
+                            <p>Last Updated</p>
+                        </th>
+                        <th
+                            style="background-color: #203864; color: #fff; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #ddd;">
                             {{-- <p>الضوابط</p> --}}
                             <p>Controls</p>
                         </th>
@@ -126,7 +131,9 @@
                                 </a> --}}
                                 {{ $row->evidence_name }}
                             </td>
-
+                            <td style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left;">
+                                {{ $row->updated_at ? \Carbon\Carbon::parse($row->updated_at)->diffForHumans() : 'Unknown' }}
+                            </td>
 
                             <td
                                 style="border: 1px solid #000; padding: 12px; font-size: 12px; text-align: left; line-height: 2em;">

@@ -19,7 +19,7 @@
         <form action="{{ route('evidence-vs-control.index') }}" method="GET">
             <div class="space-y-6 border-t border-gray-100 p-2 sm:p-6">
 
-                <x-form.grid-4-col>
+                <x-form.grid-5-col>
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="practice" :value="$bestPracticeId"
                             :data="$practices" id_key="best_practices_id" value_key="best_practices_name"
@@ -40,7 +40,12 @@
                             :data="$controlIds" id_key="control_id" value_key="control_name" onchange="this.form.submit()"
                             searchable />
                     </div>
-                </x-form.grid-4-col>
+                    <div>
+                        <x-form.select label="Last Updated" label_ar="آخر تحديث للدليل" name="last_updated"
+                            :value="$lastUpdated" :data="$ageOptions" id_key="key" value_key="label" hide_keys
+                            onchange="this.form.submit()" />
+                    </div>
+                </x-form.grid-5-col>
             </div>
         </form>
 
@@ -51,6 +56,7 @@
                 <x-table.th label="S.No" label_ar="رقم" />
                 <x-table.th label="Evidence ID" label_ar="رمز الأدلة" />
                 <x-table.th label="Evidence Name" label_ar="اسم الأدلة" />
+                <x-table.th label="Last Updated" label_ar="آخر تحديث" />
                 <x-table.th label="Controls" label_ar="الضوابط" />
                 <x-table.th label="Artifacts" label_ar="المقتنيات" />
             </x-slot:head>
@@ -64,12 +70,15 @@
                         <x-table.td min-width="200px" max-width="350px">
                             <a href="{{ route('evidences.show', $row->id) }}">{{ $row->evidence_name }}</a>
                         </x-table.td>
+                        <x-table.td>
+                            {{ $row->updated_at ? \Carbon\Carbon::parse($row->updated_at)->diffForHumans() : 'Unknown' }}
+                        </x-table.td>
                         <x-table.td min-width="250px">{!! $row->controls !!}</x-table.td>
                         <x-table.td min-width="200px">{!! $row->artifacts ?? '' !!}</x-table.td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-4 py-6 text-center text-gray-500 dark:text-gray-400">No evidence with linked controls found.</td>
+                        <td colspan="6" class="px-4 py-6 text-center text-gray-500 dark:text-gray-400">No evidence with linked controls found.</td>
                     </tr>
                 @endforelse
             </x-slot:body>
