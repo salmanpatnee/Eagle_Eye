@@ -14,11 +14,11 @@
                     <div>
                         <x-form.select label="Control Assessments" label_ar="تقييم الضوابط" name="control_assessment_id"
                             :value="$controlAssessmentId" :data="$assessments" id_key="control_assessment_id" value_key="name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Controls" label_ar="الضوابط" name="control_id" :value="$controlId"
-                            :data="$controls" id_key="control_id" value_key="control_name" onchange="this.form.submit()" />
+                            :data="$controls" id_key="control_id" value_key="control_name" onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Status" label_ar="الحالة" name="status"

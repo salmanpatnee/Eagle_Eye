@@ -12,12 +12,12 @@
                 <x-form.grid-4-col>
                     <div>
                         <x-form.select label="Audits" label_ar="المراجعات" name="audit_id" :value="$auditId" :data="$auditNames"
-                            id_key="audit_id" value_key="name" onchange="this.form.submit()" hide_keys="true" />
+                            id_key="audit_id" value_key="name" onchange="this.form.submit()" hide_keys="true" searchable />
                     </div>
                     <div>
                         <x-form.select label="Controls" label_ar="الضوابط" name="control_id" :value="$controlId"
                             :data="$controlNames" id_key="control_id" value_key="name" onchange="this.form.submit()"
-                            hide_keys="true" />
+                            hide_keys="true" searchable />
                     </div>
                     <div>
                         <x-form.select label="Status" label_ar="الحالة" name="status" :value="$status"

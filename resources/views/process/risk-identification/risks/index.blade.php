@@ -20,11 +20,11 @@
                     <div>
                         <x-form.select label="Risk Group" label_ar="مجموعة المخاطر" name="group"
                             placeholder="Select Risk Group" :value="$group" :data="$riskGroups" id_key="risk_group_id"
-                            value_key="risk_group_name" />
+                            value_key="risk_group_name" searchable />
                     </div>
                     <div>
                         <x-form.select label="Owner" label_ar="صاحب الضوابط" name="owner" placeholder="Select Owner"
-                            :value="$owner" :data="$owners" id_key="owner_role_id" value_key="owner_name" />
+                            :value="$owner" :data="$owners" id_key="owner_role_id" value_key="owner_name" searchable />
                     </div>
                 </x-form.grid-3-col>
                 <div class="flex justify-center gap-3">

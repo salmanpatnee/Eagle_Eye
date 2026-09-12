@@ -10,16 +10,16 @@
                 <x-form.grid-3-col>
                     <div>
                         <x-form.select label="Asset Name" label_ar="اسم الأصول" name="asset_name" :value="$asset"
-                            :custom_data="$assets" onchange="this.form.submit()" />
+                            :custom_data="$assets" onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Asset Group" label_ar="مجموعة الأصول" name="asset_group_name" :value="$asset_group_name"
-                            :custom_data="$assetGroups" onchange="this.form.submit()" hide_keys="true" />
+                            :custom_data="$assetGroups" onchange="this.form.submit()" hide_keys="true" searchable />
                     </div>
                     <div>
                         <x-form.select label="Exclusive Category" label_ar="فئة حصرية" name="relation" :value="$relation"
                             :data="$categories" id_key="category_id" value_key="category_name" hide_keys="true"
-                            onchange="this.form.submit()" hide_keys="true" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
 
@@ -28,15 +28,15 @@
                 <x-form.grid-3-col>
                     <div>
                         <x-form.select label="Asset Type" label_ar="نوع الأصول" name="asset_type_name" :value="$asset_type_name"
-                            :custom_data="$assetTypes" onchange="this.form.submit()" />
+                            :custom_data="$assetTypes" onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Asset Sub Type" label_ar="النوع الفرعي للأصول" name="asset_sub_type_name"
-                            :value="$asset_sub_type_name" :custom_data="$assetSubTypes" onchange="this.form.submit()" />
+                            :value="$asset_sub_type_name" :custom_data="$assetSubTypes" onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Location" label_ar="المواقع" name="location_name" :value="$location_name"
-                            :custom_data="$locations" onchange="this.form.submit()" />
+                            :custom_data="$locations" onchange="this.form.submit()" searchable />
                     </div>
                 </x-form.grid-3-col>
             </div>

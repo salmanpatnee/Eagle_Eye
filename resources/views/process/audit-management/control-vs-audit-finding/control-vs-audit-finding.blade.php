@@ -24,12 +24,12 @@
                     <div>
                         <x-form.select label="Controls" label_ar="الضوابط" name="control_id" placeholder="Select Control"
                             :value="$controlId" :data="$controls" id_key="control_id" value_key="control_name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Findings" label_ar="بنتائج مراجعة" name="audit_finding_id"
                             placeholder="Select Findings" :value="$auditFindingId" :data="$findings" id_key="audit_finding_id"
-                            value_key="audit_finding_name" onchange="this.form.submit()" />
+                            value_key="audit_finding_name" onchange="this.form.submit()" searchable />
                     </div>
                 </x-form.grid-col>
                 <div class="flex justify-center">

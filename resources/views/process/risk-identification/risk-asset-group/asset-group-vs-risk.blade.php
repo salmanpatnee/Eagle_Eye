@@ -16,12 +16,12 @@
                     <div>
                         <x-form.select label="Asset Group" label_ar="مجموعة الأصول" name="assetGroup"
                             placeholder="Select Asset Group" :value="$assetGroupId" :data="$assetGroups" id_key="asset_group_id"
-                            value_key="asset_group_name" onchange="this.form.submit()" />
+                            value_key="asset_group_name" onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Risks" label_ar="المخاطر" name="risk" placeholder="Select Risk"
                             :value="$riskId" :data="$risks" id_key="risk_id" value_key="risk_name"
-                            onchange="this.form.submit()" :value="$riskId" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                 </x-form.grid-col>
             </div>

@@ -16,12 +16,12 @@
                     <div>
                         <x-form.select label="Risks" label_ar="المخاطر" name="risk" placeholder="Select Risk"
                             :value="$riskId" :data="$risks" id_key="risk_id" value_key="risk_name"
-                            onchange="this.form.submit()" :value="$riskId" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Controls" label_ar="الضوابط" name="control" placeholder="Select Control"
                             :value="$controlId" :data="$controls" id_key="control_id" value_key="control_name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                 </x-form.grid-col>
             </div>

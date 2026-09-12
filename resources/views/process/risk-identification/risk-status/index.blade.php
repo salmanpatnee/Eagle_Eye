@@ -14,7 +14,7 @@
                     <div>
                         <x-form.select label="Owner" name="owner" placeholder="All Owners"
                             :value="$owner" :data="$owners" id_key="owner_role_id" value_key="owner_name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.label label="Status" for="status" />

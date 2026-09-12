@@ -20,11 +20,11 @@
                     <div>
                         <x-form.select label="Best Practices" label_ar="أفضل الممارسات" name="bestPractice"
                             placeholder="Select Best Practice" :value="$bestPractice" :data="$bestPractices"
-                            id_key="best_practices_id" value_key="best_practices_name" />
+                            id_key="best_practices_id" value_key="best_practices_name" searchable />
                     </div>
                     <div>
                         <x-form.select label="Risk" label_ar="المخاطر" name="risk" placeholder="Select Risk"
-                            :value="$risk" :data="$risks" id_key="risk_id" value_key="risk_name" />
+                            :value="$risk" :data="$risks" id_key="risk_id" value_key="risk_name" searchable />
                     </div>
                 </x-form.grid-3-col>
                 <div class="flex justify-center gap-3">

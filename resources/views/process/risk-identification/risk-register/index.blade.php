@@ -14,13 +14,13 @@
                     <div>
                         <x-form.select label="Risks" label_ar="المخاطر" name="risk" placeholder="Select Risk"
                             :value="$riskId" :data="$risks" id_key="risk_id" value_key="risk_name"
-                            onchange="this.form.submit()" :value="$riskId" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Risk Treatment Action Status" label_ar="خيارات علاج المخاطر"
                             name="riskTreatment" placeholder="Select Treatment Action Status" :value="$riskTreatment"
                             :data="$riskTreatments" id_key="risk_treatment_id" value_key="risk_treatment_name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.label label="Last Evalution Date" label_ar="تاريخ التقييم الأخير" for="evalutionDate" />

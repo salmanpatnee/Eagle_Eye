@@ -13,11 +13,11 @@
                     <div>
                         <x-form.select label="Risk Assessments" label_ar="تقييم المخاطر" name="risk_assessment_id"
                             :value="$riskAssessmentId" :data="$riskAssessmentNames" id_key="risk_assessment_id" value_key="name"
-                            onchange="this.form.submit()" />
+                            onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Risks" label_ar="المخاطر" name="risk_id" :value="$riskId" :data="$riskNames"
-                            id_key="risk_id" value_key="name" onchange="this.form.submit()" />
+                            id_key="risk_id" value_key="name" onchange="this.form.submit()" searchable />
                     </div>
                     <div>
                         <x-form.select label="Status" label_ar="الحالة" name="status"
